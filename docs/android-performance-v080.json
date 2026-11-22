@@ -1,0 +1,1359 @@
+{
+  "schemaVersion": 1,
+  "measuredLocalDate": "2026-10-19",
+  "apk": {
+    "version": "0.8.0",
+    "versionCode": 9,
+    "packageName": "local.gxtodo.replica",
+    "bytes": 108571,
+    "sha256": "8fa2f6e1fbb01c5c2df6a59dbd549839017da452a139af229962a274196c05f0"
+  },
+  "environment": {
+    "hostCpu": "AMD Ryzen 9 5900X 12-Core / 24 threads",
+    "emulator": "36.1.9.0",
+    "avd": "GxTodo_QA",
+    "serial": "emulator-5580",
+    "android": "14",
+    "api": 34,
+    "abi": "x86_64",
+    "configuredRamMiB": 2048,
+    "virtualCpus": 2,
+    "gpu": "swiftshader_indirect",
+    "webView": "113.0.5672.136",
+    "display": {
+      "physical": "320x640",
+      "override": "1080x1920"
+    },
+    "cloudEditAndBackgroundExtraFlags": [
+      "-feature",
+      "-Vulkan"
+    ]
+  },
+  "scenarios": {
+    "large": {
+      "tasks": 5000,
+      "done": 4970,
+      "pending": 30,
+      "outbox": 5000,
+      "cloudConfigured": false,
+      "view": "foreground quadrant"
+    },
+    "cloud": {
+      "liveTasks": 7,
+      "deletedTasks": 1,
+      "notes": 13,
+      "tags": 1,
+      "automaticSyncForManualTrials": false
+    }
+  },
+  "smallMemorySnapshot": {
+    "at": "2026-10-18T17:24:14.899Z",
+    "serial": "emulator-5580",
+    "avd": "GxTodo_QA",
+    "packageName": "local.gxtodo.replica",
+    "memory": {
+      "processes": [
+        {
+          "pid": 4250,
+          "ppid": 329,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "pssKiB": 67265,
+          "rssKiB": 183856,
+          "swapPssKiB": 262
+        },
+        {
+          "pid": 4280,
+          "ppid": 762,
+          "uid": 99001,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "pssKiB": 66475,
+          "rssKiB": 156464,
+          "swapPssKiB": 517
+        }
+      ],
+      "pssKiB": 133740,
+      "swapPssKiB": 779
+    },
+    "cpu": {
+      "uptimeSeconds": 430.27,
+      "processes": [
+        {
+          "pid": 4250,
+          "userTicks": 21,
+          "systemTicks": 88,
+          "startTicks": 37991
+        },
+        {
+          "pid": 4280,
+          "userTicks": 14,
+          "systemTicks": 22,
+          "startTicks": 38008
+        }
+      ]
+    },
+    "network": {
+      "at": "2026-10-18T17:24:15.240Z",
+      "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 0,
+          "rxPackets": 0,
+          "txBytes": 0,
+          "txPackets": 0
+        },
+        {
+          "uid": 99001,
+          "rxBytes": 0,
+          "rxPackets": 0,
+          "txBytes": 0,
+          "txPackets": 0
+        }
+      ]
+    }
+  },
+  "foreground": [
+    {
+      "label": "5000-tasks-foreground-idle-1",
+      "at": "2026-10-18T17:33:36.593Z",
+      "serial": "emulator-5580",
+      "avd": "GxTodo_QA",
+      "packageName": "local.gxtodo.replica",
+      "requestedSeconds": 60,
+      "elapsedSeconds": 60.11,
+      "ticksPerSecond": 100,
+      "cpu": {
+        "processes": [
+          {
+            "pid": 2639,
+            "ppid": 331,
+            "uid": 10192,
+            "name": "local.gxtodo.replica",
+            "role": "app",
+            "cpuMs": 60
+          },
+          {
+            "pid": 2773,
+            "ppid": 788,
+            "uid": 99000,
+            "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+            "role": "webview-renderer",
+            "cpuMs": 200
+          }
+        ],
+        "totalMs": 260,
+        "percentOfOneCore": 0.4325403427050407
+      },
+      "network": {
+        "processes": [
+          {
+            "uid": 10192,
+            "rxBytes": 0,
+            "txBytes": 0,
+            "rxPackets": 0,
+            "txPackets": 0
+          },
+          {
+            "uid": 99000,
+            "rxBytes": 0,
+            "txBytes": 0,
+            "rxPackets": 0,
+            "txPackets": 0
+          }
+        ],
+        "totalBytes": 0,
+        "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)"
+      },
+      "memoryBefore": {
+        "processes": [
+          {
+            "pid": 2639,
+            "ppid": 331,
+            "uid": 10192,
+            "name": "local.gxtodo.replica",
+            "role": "app",
+            "pssKiB": 52235,
+            "rssKiB": 125228,
+            "swapPssKiB": 18247
+          },
+          {
+            "pid": 2773,
+            "ppid": 788,
+            "uid": 99000,
+            "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+            "role": "webview-renderer",
+            "pssKiB": 53591,
+            "rssKiB": 112812,
+            "swapPssKiB": 10242
+          }
+        ],
+        "pssKiB": 105826,
+        "swapPssKiB": 28489
+      },
+      "memoryAfter": {
+        "processes": [
+          {
+            "pid": 2639,
+            "ppid": 331,
+            "uid": 10192,
+            "name": "local.gxtodo.replica",
+            "role": "app",
+            "pssKiB": 53494,
+            "rssKiB": 123824,
+            "swapPssKiB": 21132
+          },
+          {
+            "pid": 2773,
+            "ppid": 788,
+            "uid": 99000,
+            "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+            "role": "webview-renderer",
+            "pssKiB": 42514,
+            "rssKiB": 104616,
+            "swapPssKiB": 8744
+          }
+        ],
+        "pssKiB": 96008,
+        "swapPssKiB": 29876
+      },
+      "raw": {
+        "cpuBefore": {
+          "uptimeSeconds": 55.72,
+          "processes": [
+            {
+              "pid": 2639,
+              "userTicks": 38,
+              "systemTicks": 89,
+              "startTicks": 3501
+            },
+            {
+              "pid": 2773,
+              "userTicks": 33,
+              "systemTicks": 33,
+              "startTicks": 3657
+            }
+          ]
+        },
+        "cpuAfter": {
+          "uptimeSeconds": 115.83,
+          "processes": [
+            {
+              "pid": 2639,
+              "userTicks": 40,
+              "systemTicks": 93,
+              "startTicks": 3501
+            },
+            {
+              "pid": 2773,
+              "userTicks": 42,
+              "systemTicks": 44,
+              "startTicks": 3657
+            }
+          ]
+        },
+        "networkBefore": {
+          "at": "2026-10-18T17:32:35.933Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "networkAfter": {
+          "at": "2026-10-18T17:33:36.208Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "5000-tasks-foreground-idle-2",
+      "at": "2026-10-18T17:34:37.800Z",
+      "serial": "emulator-5580",
+      "avd": "GxTodo_QA",
+      "packageName": "local.gxtodo.replica",
+      "requestedSeconds": 60,
+      "elapsedSeconds": 60.08,
+      "ticksPerSecond": 100,
+      "cpu": {
+        "processes": [
+          {
+            "pid": 2639,
+            "ppid": 331,
+            "uid": 10192,
+            "name": "local.gxtodo.replica",
+            "role": "app",
+            "cpuMs": 30
+          },
+          {
+            "pid": 2773,
+            "ppid": 788,
+            "uid": 99000,
+            "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+            "role": "webview-renderer",
+            "cpuMs": 70
+          }
+        ],
+        "totalMs": 100,
+        "percentOfOneCore": 0.16644474034620507
+      },
+      "network": {
+        "processes": [
+          {
+            "uid": 10192,
+            "rxBytes": 0,
+            "txBytes": 0,
+            "rxPackets": 0,
+            "txPackets": 0
+          },
+          {
+            "uid": 99000,
+            "rxBytes": 0,
+            "txBytes": 0,
+            "rxPackets": 0,
+            "txPackets": 0
+          }
+        ],
+        "totalBytes": 0,
+        "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)"
+      },
+      "memoryBefore": {
+        "processes": [
+          {
+            "pid": 2639,
+            "ppid": 331,
+            "uid": 10192,
+            "name": "local.gxtodo.replica",
+            "role": "app",
+            "pssKiB": 53193,
+            "rssKiB": 123824,
+            "swapPssKiB": 21132
+          },
+          {
+            "pid": 2773,
+            "ppid": 788,
+            "uid": 99000,
+            "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+            "role": "webview-renderer",
+            "pssKiB": 42514,
+            "rssKiB": 104616,
+            "swapPssKiB": 8744
+          }
+        ],
+        "pssKiB": 95707,
+        "swapPssKiB": 29876
+      },
+      "memoryAfter": {
+        "processes": [
+          {
+            "pid": 2639,
+            "ppid": 331,
+            "uid": 10192,
+            "name": "local.gxtodo.replica",
+            "role": "app",
+            "pssKiB": 53177,
+            "rssKiB": 123824,
+            "swapPssKiB": 21132
+          },
+          {
+            "pid": 2773,
+            "ppid": 788,
+            "uid": 99000,
+            "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+            "role": "webview-renderer",
+            "pssKiB": 42898,
+            "rssKiB": 105028,
+            "swapPssKiB": 8732
+          }
+        ],
+        "pssKiB": 96075,
+        "swapPssKiB": 29864
+      },
+      "raw": {
+        "cpuBefore": {
+          "uptimeSeconds": 116.99,
+          "processes": [
+            {
+              "pid": 2639,
+              "userTicks": 40,
+              "systemTicks": 93,
+              "startTicks": 3501
+            },
+            {
+              "pid": 2773,
+              "userTicks": 42,
+              "systemTicks": 44,
+              "startTicks": 3657
+            }
+          ]
+        },
+        "cpuAfter": {
+          "uptimeSeconds": 177.07,
+          "processes": [
+            {
+              "pid": 2639,
+              "userTicks": 41,
+              "systemTicks": 95,
+              "startTicks": 3501
+            },
+            {
+              "pid": 2773,
+              "userTicks": 46,
+              "systemTicks": 47,
+              "startTicks": 3657
+            }
+          ]
+        },
+        "networkBefore": {
+          "at": "2026-10-18T17:33:37.209Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "networkAfter": {
+          "at": "2026-10-18T17:34:37.441Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "networkTrials": [
+    {
+      "label": "no-change-1",
+      "status": "已补齐本次检查到的全部变化 · 17:36",
+      "outbox": 0,
+      "elapsedSeconds": 4.743,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 310,
+          "txBytes": 450,
+          "rxPackets": 2,
+          "txPackets": 2
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 310,
+      "txBytes": 450,
+      "totalBytes": 760,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:36:44.178Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 7744,
+              "rxPackets": 15,
+              "txBytes": 5675,
+              "txPackets": 71
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:36:48.921Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 8054,
+              "rxPackets": 17,
+              "txBytes": 6125,
+              "txPackets": 73
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "no-change-2",
+      "status": "已补齐本次检查到的全部变化 · 17:36",
+      "outbox": 0,
+      "elapsedSeconds": 5.681,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 310,
+          "txBytes": 450,
+          "rxPackets": 2,
+          "txPackets": 2
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 310,
+      "txBytes": 450,
+      "totalBytes": 760,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:36:48.996Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 8054,
+              "rxPackets": 17,
+              "txBytes": 6125,
+              "txPackets": 73
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:36:54.677Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 8364,
+              "rxPackets": 19,
+              "txBytes": 6575,
+              "txPackets": 75
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "no-change-3",
+      "status": "已补齐本次检查到的全部变化 · 17:36",
+      "outbox": 0,
+      "elapsedSeconds": 5.698,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 310,
+          "txBytes": 450,
+          "rxPackets": 2,
+          "txPackets": 2
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 310,
+      "txBytes": 450,
+      "totalBytes": 760,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:36:54.752Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 8364,
+              "rxPackets": 19,
+              "txBytes": 6575,
+              "txPackets": 75
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:37:00.450Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 8674,
+              "rxPackets": 21,
+              "txBytes": 7025,
+              "txPackets": 77
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "no-change-after-process-restart",
+      "status": "已补齐本次检查到的全部变化 · 17:39",
+      "outbox": 0,
+      "elapsedSeconds": 4.998,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 7262,
+          "txBytes": 2361,
+          "rxPackets": 13,
+          "txPackets": 23
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 7262,
+      "txBytes": 2361,
+      "totalBytes": 9623,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:39:55.029Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 506,
+              "rxPackets": 2,
+              "txBytes": 854,
+              "txPackets": 12
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:40:00.027Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 7768,
+              "rxPackets": 15,
+              "txBytes": 3215,
+              "txPackets": 35
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "one-title-edit-1",
+      "status": "已补齐本次检查到的全部变化 · 17:40",
+      "outbox": 0,
+      "elapsedSeconds": 4.951,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 2256,
+          "txBytes": 3281,
+          "rxPackets": 8,
+          "txPackets": 8
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 2256,
+      "txBytes": 3281,
+      "totalBytes": 5537,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:40:50.374Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 7768,
+              "rxPackets": 15,
+              "txBytes": 5735,
+              "txPackets": 71
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:40:55.325Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 10024,
+              "rxPackets": 23,
+              "txBytes": 9016,
+              "txPackets": 79
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "one-title-edit-2",
+      "status": "已补齐本次检查到的全部变化 · 17:41",
+      "outbox": 0,
+      "elapsedSeconds": 4.969,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 2256,
+          "txBytes": 3280,
+          "rxPackets": 8,
+          "txPackets": 8
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 2256,
+      "txBytes": 3280,
+      "totalBytes": 5536,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:41:36.822Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 10325,
+              "rxPackets": 24,
+              "txBytes": 10493,
+              "txPackets": 100
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:41:41.791Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 12581,
+              "rxPackets": 32,
+              "txBytes": 13773,
+              "txPackets": 108
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "one-title-edit-3",
+      "status": "已补齐本次检查到的全部变化 · 17:42",
+      "outbox": 0,
+      "elapsedSeconds": 4.946,
+      "uids": [
+        {
+          "uid": 10192,
+          "rxBytes": 2256,
+          "txBytes": 3281,
+          "rxPackets": 8,
+          "txPackets": 8
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "rxBytes": 2256,
+      "txBytes": 3281,
+      "totalBytes": 5537,
+      "raw": {
+        "before": {
+          "at": "2026-10-18T17:42:23.622Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 12581,
+              "rxPackets": 32,
+              "txBytes": 16293,
+              "txPackets": 144
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        },
+        "after": {
+          "at": "2026-10-18T17:42:28.568Z",
+          "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+          "uids": [
+            {
+              "uid": 10192,
+              "rxBytes": 14837,
+              "rxPackets": 40,
+              "txBytes": 19574,
+              "txPackets": 152
+            },
+            {
+              "uid": 99000,
+              "rxBytes": 0,
+              "rxPackets": 0,
+              "txBytes": 0,
+              "txPackets": 0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "battery": {
+    "measured": false,
+    "reason": "No physical handset energy measurement. Emulator battery values are not physical energy."
+  },
+  "excluded": [
+    {
+      "scenario": "pre-measurement meminfo diagnostic",
+      "reason": "Ordinary renderer dumpMemInfo callback crashed; use --local."
+    },
+    {
+      "scenario": "first foreground attempt",
+      "reason": "Device disappeared before endpoint sampling. No result."
+    },
+    {
+      "scenario": "first no-change UI observation",
+      "reason": "Test helper initially expected the wrong completion text. Used as warm-up, excluded from timing/traffic results."
+    },
+    {
+      "scenario": "direct emulator after valid samples",
+      "reason": "Host process ended with 0xC0000005 outside completed sample windows; retry with Vulkan disabled."
+    }
+  ],
+  "cloudEditVerification": {
+    "at": "2026-10-18T17:43:48.631Z",
+    "manifestStatus": 200,
+    "batchStatus": 200,
+    "androidHead": 5,
+    "lastUploadedTitle": "Perf-edit-3",
+    "eventCount": 1,
+    "verified": true
+  },
+  "background": {
+    "label": "cloud-background-auto-sync-enabled",
+    "at": "2026-10-18T17:49:21.777Z",
+    "serial": "emulator-5580",
+    "avd": "GxTodo_QA",
+    "packageName": "local.gxtodo.replica",
+    "requestedSeconds": 360,
+    "elapsedSeconds": 360.0799999999999,
+    "ticksPerSecond": 100,
+    "cpu": {
+      "processes": [
+        {
+          "pid": 2640,
+          "ppid": 332,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "cpuMs": 190
+        },
+        {
+          "pid": 2780,
+          "ppid": 785,
+          "uid": 99000,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "cpuMs": 170
+        }
+      ],
+      "totalMs": 360,
+      "percentOfOneCore": 0.09997778271495225
+    },
+    "network": {
+      "processes": [
+        {
+          "uid": 10192,
+          "rxBytes": 1123,
+          "txBytes": 18479,
+          "rxPackets": 6,
+          "txPackets": 265
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "totalBytes": 19602,
+      "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)"
+    },
+    "memoryBefore": {
+      "processes": [
+        {
+          "pid": 2640,
+          "ppid": 332,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "pssKiB": 67369,
+          "rssKiB": 168400,
+          "swapPssKiB": 14285
+        },
+        {
+          "pid": 2780,
+          "ppid": 785,
+          "uid": 99000,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "pssKiB": 77007,
+          "rssKiB": 156304,
+          "swapPssKiB": 6202
+        }
+      ],
+      "pssKiB": 144376,
+      "swapPssKiB": 20487
+    },
+    "memoryAfter": {
+      "processes": [
+        {
+          "pid": 2640,
+          "ppid": 332,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "pssKiB": 68483,
+          "rssKiB": 169276,
+          "swapPssKiB": 14308
+        },
+        {
+          "pid": 2780,
+          "ppid": 785,
+          "uid": 99000,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "pssKiB": 70937,
+          "rssKiB": 150132,
+          "swapPssKiB": 5808
+        }
+      ],
+      "pssKiB": 139420,
+      "swapPssKiB": 20116
+    },
+    "raw": {
+      "cpuBefore": {
+        "uptimeSeconds": 267.22,
+        "processes": [
+          {
+            "pid": 2640,
+            "userTicks": 211,
+            "systemTicks": 914,
+            "startTicks": 3679
+          },
+          {
+            "pid": 2780,
+            "userTicks": 174,
+            "systemTicks": 278,
+            "startTicks": 3794
+          }
+        ]
+      },
+      "cpuAfter": {
+        "uptimeSeconds": 627.3,
+        "processes": [
+          {
+            "pid": 2640,
+            "userTicks": 215,
+            "systemTicks": 929,
+            "startTicks": 3679
+          },
+          {
+            "pid": 2780,
+            "userTicks": 180,
+            "systemTicks": 289,
+            "startTicks": 3794
+          }
+        ]
+      },
+      "networkBefore": {
+        "at": "2026-10-18T17:43:21.025Z",
+        "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+        "uids": [
+          {
+            "uid": 10192,
+            "rxBytes": 15147,
+            "rxPackets": 42,
+            "txBytes": 22484,
+            "txPackets": 189
+          },
+          {
+            "uid": 99000,
+            "rxBytes": 0,
+            "rxPackets": 0,
+            "txBytes": 0,
+            "txPackets": 0
+          }
+        ]
+      },
+      "networkAfter": {
+        "at": "2026-10-18T17:49:21.292Z",
+        "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+        "uids": [
+          {
+            "uid": 10192,
+            "rxBytes": 16270,
+            "rxPackets": 48,
+            "txBytes": 40963,
+            "txPackets": 454
+          },
+          {
+            "uid": 99000,
+            "rxBytes": 0,
+            "rxPackets": 0,
+            "txBytes": 0,
+            "txPackets": 0
+          }
+        ]
+      }
+    }
+  },
+  "backgroundObservation": {
+    "at": "2026-10-18T17:50:15.223Z",
+    "observation": "After the 360 s window, /proc/net/tcp showed pending SYN_SENT connections attributed to UID 10192, including 172.217.115.4:443. A later check found no such sockets.",
+    "webdavDnsAtLaterCheck": [
+      "36.155.116.36",
+      "36.155.116.35"
+    ],
+    "attribution": "Not a per-request trace. Cannot attribute all measured bytes to WebDAV, WebView, retries, or connection teardown."
+  },
+  "backgroundFollowup": {
+    "label": "background-followup-after-pending-connections-disappeared",
+    "at": "2026-10-18T17:52:58.065Z",
+    "serial": "emulator-5580",
+    "avd": "GxTodo_QA",
+    "packageName": "local.gxtodo.replica",
+    "requestedSeconds": 60,
+    "elapsedSeconds": 60.07000000000005,
+    "ticksPerSecond": 100,
+    "cpu": {
+      "processes": [
+        {
+          "pid": 2640,
+          "ppid": 332,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "cpuMs": 10
+        },
+        {
+          "pid": 2780,
+          "ppid": 785,
+          "uid": 99000,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "cpuMs": 0
+        }
+      ],
+      "totalMs": 10,
+      "percentOfOneCore": 0.016647244880972186
+    },
+    "network": {
+      "processes": [
+        {
+          "uid": 10192,
+          "rxBytes": 0,
+          "txBytes": 4380,
+          "rxPackets": 0,
+          "txPackets": 63
+        },
+        {
+          "uid": 99000,
+          "rxBytes": 0,
+          "txBytes": 0,
+          "rxPackets": 0,
+          "txPackets": 0
+        }
+      ],
+      "totalBytes": 4380,
+      "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)"
+    },
+    "memoryBefore": {
+      "processes": [
+        {
+          "pid": 2640,
+          "ppid": 332,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "pssKiB": 65824,
+          "rssKiB": 149768,
+          "swapPssKiB": 29658
+        },
+        {
+          "pid": 2780,
+          "ppid": 785,
+          "uid": 99000,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "pssKiB": 70799,
+          "rssKiB": 138884,
+          "swapPssKiB": 16918
+        }
+      ],
+      "pssKiB": 136623,
+      "swapPssKiB": 46576
+    },
+    "memoryAfter": {
+      "processes": [
+        {
+          "pid": 2640,
+          "ppid": 332,
+          "uid": 10192,
+          "name": "local.gxtodo.replica",
+          "role": "app",
+          "pssKiB": 65753,
+          "rssKiB": 149596,
+          "swapPssKiB": 29770
+        },
+        {
+          "pid": 2780,
+          "ppid": 785,
+          "uid": 99000,
+          "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+          "role": "webview-renderer",
+          "pssKiB": 70803,
+          "rssKiB": 133840,
+          "swapPssKiB": 21966
+        }
+      ],
+      "pssKiB": 136556,
+      "swapPssKiB": 51736
+    },
+    "raw": {
+      "cpuBefore": {
+        "uptimeSeconds": 783.67,
+        "processes": [
+          {
+            "pid": 2640,
+            "userTicks": 215,
+            "systemTicks": 933,
+            "startTicks": 3679
+          },
+          {
+            "pid": 2780,
+            "userTicks": 180,
+            "systemTicks": 291,
+            "startTicks": 3794
+          }
+        ]
+      },
+      "cpuAfter": {
+        "uptimeSeconds": 843.74,
+        "processes": [
+          {
+            "pid": 2640,
+            "userTicks": 215,
+            "systemTicks": 934,
+            "startTicks": 3679
+          },
+          {
+            "pid": 2780,
+            "userTicks": 180,
+            "systemTicks": 291,
+            "startTicks": 3794
+          }
+        ]
+      },
+      "networkBefore": {
+        "at": "2026-10-18T17:51:57.497Z",
+        "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+        "uids": [
+          {
+            "uid": 10192,
+            "rxBytes": 16776,
+            "rxPackets": 50,
+            "txBytes": 42617,
+            "txPackets": 477
+          },
+          {
+            "uid": 99000,
+            "rxBytes": 0,
+            "rxPackets": 0,
+            "txBytes": 0,
+            "txPackets": 0
+          }
+        ]
+      },
+      "networkAfter": {
+        "at": "2026-10-18T17:52:57.715Z",
+        "source": "NetworkStatsService mAppUidStatsMap (live BPF counters)",
+        "uids": [
+          {
+            "uid": 10192,
+            "rxBytes": 16776,
+            "rxPackets": 50,
+            "txBytes": 46997,
+            "txPackets": 540
+          },
+          {
+            "uid": 99000,
+            "rxBytes": 0,
+            "rxPackets": 0,
+            "txBytes": 0,
+            "txPackets": 0
+          }
+        ]
+      }
+    }
+  },
+  "cleanup": {
+    "autoSync": false,
+    "configRestored": true,
+    "sqliteIntegrity": "ok",
+    "outbox": 0,
+    "dedicatedEmulatorStopped": true,
+    "apkUnchanged": true
+  }
+}

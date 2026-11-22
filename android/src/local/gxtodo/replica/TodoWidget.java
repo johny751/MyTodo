@@ -1,0 +1,11 @@
+package local.gxtodo.replica;
+import android.app.*;
+import android.appwidget.*;
+import android.content.*;
+import android.widget.RemoteViews;
+import org.json.*;
+public final class TodoWidget extends AppWidgetProvider {
+ @Override public void onUpdate(Context c,AppWidgetManager m,int[] ids){for(int id:ids)update(c,m,id);}
+ public static void refresh(Context c){AppWidgetManager m=AppWidgetManager.getInstance(c);for(int id:m.getAppWidgetIds(new ComponentName(c,TodoWidget.class)))update(c,m,id);}
+ static void update(Context c,AppWidgetManager m,int widget){try{String[] names={"重要 · 紧急","重要 · 不紧急","不重要 · 紧急","不重要 · 不紧急"};StringBuilder[] texts=new StringBuilder[4];int[] count=new int[4];for(int i=0;i<4;i++)texts[i]=new StringBuilder(names[i]).append("\n");JSONArray tasks,totals=null;try{AccountStore store=AccountStore.get(c);if(store.database(store.active()).initialized()){JSONObject summary=store.database(store.active()).widgetData();tasks=summary.getJSONArray("items");totals=summary.getJSONArray("counts");}else tasks=ReminderScheduler.tasks(c);}catch(Exception e){tasks=new JSONArray();}for(int i=0;i<tasks.length();i++){JSONObject t=tasks.getJSONObject(i);if(t.optBoolean("done"))continue;int q=Math.max(0,Math.min(3,t.optInt("quadrant")));count[q]++;if(count[q]<=3)texts[q].append("\n• ").append(t.optString("title").replace('\n',' '));}if(totals!=null)for(int q=0;q<4;q++)count[q]=totals.getInt(q);RemoteViews view=new RemoteViews(c.getPackageName(),c.getResources().getIdentifier("todo_widget","layout",c.getPackageName()));for(int i=0;i<4;i++){if(count[i]>3)texts[i].append("\n另有 ").append(count[i]-3).append(" 项");view.setTextViewText(c.getResources().getIdentifier("widget_q"+i,"id",c.getPackageName()),texts[i]);}view.setTextViewText(c.getResources().getIdentifier("widget_title","id",c.getPackageName()),AccountStore.get(c).activeName()+" · "+(count[0]+count[1]+count[2]+count[3])+" 项未完成");PendingIntent open=PendingIntent.getActivity(c,0,new Intent(c,MainActivity.class),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);view.setOnClickPendingIntent(c.getResources().getIdentifier("widget_root","id",c.getPackageName()),open);m.updateAppWidget(widget,view);}catch(Exception e){android.util.Log.e("GxTodoWidget","Cannot update widget",e);}}
+}

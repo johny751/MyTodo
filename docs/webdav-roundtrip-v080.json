@@ -1,0 +1,213 @@
+{
+  "status": "passed",
+  "checks": {
+    "allSixReceivedAndroidNewTaskAndEdit": true,
+    "desktopReplyConverged": true
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:10:12.660Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:10:14.851Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:10:17.159Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:10:19.449Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:10:21.745Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:10:24.052Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-1.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:26.357Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-1.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:28.660Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-1.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:30.946Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-1.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:33.255Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-1.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:35.556Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-1.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:37.848Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-2.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:40.154Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-2.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:42.454Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-2.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:44.757Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-2.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:47.103Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-2.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:49.351Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-ef6e5fe1-10e1-49de-9d37-e731d5f92889-2.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:10:51.665Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 304,
+      "at": "2026-10-18T17:10:53.952Z"
+    },
+    {
+      "method": "PUT",
+      "path": "v2/b-a52ac3bf-28ab-4800-aeab-b042a93d77e3-4.json.gz",
+      "status": 201,
+      "at": "2026-10-18T17:10:56.279Z"
+    },
+    {
+      "method": "PUT",
+      "path": "v2/manifest.json",
+      "status": 204,
+      "at": "2026-10-18T17:10:58.594Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:11:00.877Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 304,
+      "at": "2026-10-18T17:11:03.141Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:11:05.449Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:11:07.756Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:11:10.057Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:11:12.359Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/manifest.json",
+      "status": 200,
+      "at": "2026-10-18T17:11:14.652Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-a52ac3bf-28ab-4800-aeab-b042a93d77e3-4.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:11:16.945Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-a52ac3bf-28ab-4800-aeab-b042a93d77e3-4.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:11:19.255Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-a52ac3bf-28ab-4800-aeab-b042a93d77e3-4.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:11:21.555Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-a52ac3bf-28ab-4800-aeab-b042a93d77e3-4.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:11:23.845Z"
+    },
+    {
+      "method": "GET",
+      "path": "v2/b-a52ac3bf-28ab-4800-aeab-b042a93d77e3-4.json.gz",
+      "status": 200,
+      "at": "2026-10-18T17:11:26.154Z"
+    }
+  ],
+  "startedAt": "2026-10-18T17:10:08.175Z",
+  "counts": {
+    "tasks": 7,
+    "notes": 13
+  },
+  "finishedAt": "2026-10-18T17:11:26.206Z"
+}

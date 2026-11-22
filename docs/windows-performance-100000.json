@@ -1,0 +1,1 @@
+{"tasks":100000,"importAndIndexesMs":285.194,"workingSetMiB":12.219,"privateMiB":4.418,"operations":{"boardRefresh":{"p50Ms":60.773,"p95Ms":60.903},"keywordSearch":{"p50Ms":35.044,"p95Ms":37.081},"detailRead":{"p50Ms":0.057,"p95Ms":0.060},"siblingReorder":{"p50Ms":10.440,"p95Ms":16.173},"middlePage":{"p50Ms":77.970,"p95Ms":78.770}}}

@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "testedAt": "2026-10-18T17:12:20.033Z",
+  "device": "emulator-5580",
+  "avd": "GxTodo_QA",
+  "version": "0.8.0",
+  "checks": {
+    "nativeSnapshotAndBatchDownload": true,
+    "nativeInitialOutboxPreserved": true,
+    "androidUiEditReachedAllSix": true,
+    "desktopReplyReceivedByAndroid": true,
+    "allBusinessRowsEqual": true,
+    "sqliteIntegrityOk": true,
+    "outboxEmpty": true,
+    "restartPreservesFinalData": true
+  },
+  "counts": {
+    "tasks": 7,
+    "notes": 13,
+    "tags": 1,
+    "liveRows": 21
+  }
+}

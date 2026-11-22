@@ -1,0 +1,28 @@
+{
+  "version": "0.9.2",
+  "builtAt": "2026-11-13T16:15:20.308Z",
+  "exe": "C:\\Users\\adwoo\\Documents\\ChatGPT\\REA复刻项目\\dist\\GxTodo-Native-0.9.2.exe",
+  "bytes": 1345024,
+  "sha256": "779d7deeec6a655ddc40cbba7ac832dd8d42215533714b97161a77107b561e8a",
+  "publicRelease": {
+    "exe": "C:\\Users\\adwoo\\Documents\\ChatGPT\\REA复刻项目\\dist\\GxTodo-Public-0.9.2.exe",
+    "bytes": 1345024,
+    "sha256": "82ffe85bb70bcd5658e4fb508ea816e1689b8ad2c47aacd78011b9765e6bfb6f"
+  },
+  "language": "C",
+  "target": "Windows x64",
+  "nativeCoreChecks": 32,
+  "nativeAdvancedChecks": 48,
+  "detailKeyboardChecks": 48,
+  "feedbackChecks": 21,
+  "webTests": 121,
+  "feedback": {
+    "independentStorage": "%LOCALAPPDATA%/GxTodoLocal/feedback/ideas.json",
+    "taskSyncExcluded": true,
+    "webBackupCompatible": true,
+    "interopPassed": true
+  },
+  "validationDirectory": "docs/release-092-20261113",
+  "functionalSourceChanged": true,
+  "realFeedbackPointerUiTested": false
+}

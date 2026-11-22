@@ -1,0 +1,260 @@
+{
+  "version": "0.9.2",
+  "versionCode": 15,
+  "apkPath": "C:/Users/adwoo/Documents/ChatGPT/REA复刻项目/dist/gxtodo-local-0.9.2.apk",
+  "apkSha256": "2bd0826abcf50431915578c265c17ecf5379f7ef7d0c6251ac8dd13c28f009e2",
+  "certificateSha256": "14743f6a167572453cdc9770a9b65630bcf4c06eb41bca64a9627c0a04683f5d",
+  "aarVersion": "1.2.0",
+  "aarSha256": "4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade",
+  "builtAt": "2026-11-13T16:23:34.714Z",
+  "checkedAt": "2026-11-13T16:29:45.754Z",
+  "buildDirectory": "M:\\dev\\gxtodo-android-build\\build-1794587008706",
+  "provenance": {
+    "actualPackageParsed": true,
+    "priorVerificationValuesReused": false,
+    "aaptSource": "M:\\dev\\gxtodo-android-build\\build-1794587008706\\gxtodo-local-0.9.2.apk",
+    "aaptSourceMatchesDistByteForByte": true,
+    "note": "AAPT manifest/resources parsed from the ASCII-path build APK after verifying its SHA-256 equals the dist APK; the dist APK itself was hashed, signature verified, ZIP/DEX parsed, and assets compared to current source."
+  },
+  "checks": {
+    "shaMatchesExpected": true,
+    "shaMatchesReceipt": true,
+    "signatureValid": true,
+    "certificateUnchanged": true,
+    "version092": true,
+    "versionCode15": true,
+    "packageMatches": true,
+    "minSdk26": true,
+    "targetSdk34": true,
+    "feedbackComponentsNonExported": true,
+    "providerAuthority": true,
+    "providerGrantsUri": true,
+    "noPermissionsAdded": true,
+    "aarPinned": true,
+    "requiredClasses": true,
+    "assetsMatchSource": true,
+    "zipEntriesValid": true,
+    "dexIntegrity": true,
+    "hostMajor61": true,
+    "aarMajor61": true,
+    "resourceIdMatches": true
+  },
+  "passed": true,
+  "nativeDexCheck": {
+    "apkSha256": "2bd0826abcf50431915578c265c17ecf5379f7ef7d0c6251ac8dd13c28f009e2",
+    "buildArtifactSha256": "2bd0826abcf50431915578c265c17ecf5379f7ef7d0c6251ac8dd13c28f009e2",
+    "matchesBuildArtifact": true,
+    "requiredClassDefinitions": {
+      "Lcom/androidshared/feedback/FeedbackKit;": true,
+      "Lcom/androidshared/feedback/FeedbackActivity;": true,
+      "Lcom/androidshared/feedback/FeedbackFileProvider;": true,
+      "Lcom/androidshared/feedback/DefaultFeedbackStorage;": true,
+      "Lcom/androidshared/feedback/R$id;": true,
+      "Llocal/gxtodo/replica/FeedbackApplication;": true,
+      "Llocal/gxtodo/replica/FeedbackToolsActivity;": true
+    },
+    "dex": [
+      {
+        "name": "classes.dex",
+        "classDefinitions": 365,
+        "moduleVersionString": true,
+        "sha1HeaderValid": true,
+        "adler32HeaderValid": true,
+        "sha256": "66d0f98f308570b2c9cbb54a411c81042d6d9deb3212c39cdc5e7be3e8cc4845"
+      }
+    ],
+    "assets": [
+      {
+        "path": "index.html",
+        "matchesSource": true,
+        "apkSha256": "b3aad5c64bf6686305b4f703766a782e89b986724b0eb57403899e37fb8b75ba",
+        "sourceSha256": "b3aad5c64bf6686305b4f703766a782e89b986724b0eb57403899e37fb8b75ba"
+      },
+      {
+        "path": "styles.css",
+        "matchesSource": true,
+        "apkSha256": "dd8441d8ef070c3e0d23bb711d253f03727cec7b3783fca7f4bbd38e7784f33b",
+        "sourceSha256": "dd8441d8ef070c3e0d23bb711d253f03727cec7b3783fca7f4bbd38e7784f33b"
+      },
+      {
+        "path": "interaction.css",
+        "matchesSource": true,
+        "apkSha256": "3232491fd78754d6040f3db1e0359de1da9e828b7fd40d4535fb798b7b349ffa",
+        "sourceSha256": "3232491fd78754d6040f3db1e0359de1da9e828b7fd40d4535fb798b7b349ffa"
+      },
+      {
+        "path": "src/app.mjs",
+        "matchesSource": true,
+        "apkSha256": "159150182dcf28e50734f54ff9844401eda35358eb165fcaf062b535895773ae",
+        "sourceSha256": "159150182dcf28e50734f54ff9844401eda35358eb165fcaf062b535895773ae"
+      },
+      {
+        "path": "src/view-history.mjs",
+        "matchesSource": true,
+        "apkSha256": "b3b847df3ffc2f0bb5187b61265f9aecb280790d7bc885b90b8a0c1011b23e88",
+        "sourceSha256": "b3b847df3ffc2f0bb5187b61265f9aecb280790d7bc885b90b8a0c1011b23e88"
+      },
+      {
+        "path": "src/model.mjs",
+        "matchesSource": true,
+        "apkSha256": "45ba81971b389d6c14a6e0beda3818539194a6a8374490d4a51fd65820a82169",
+        "sourceSha256": "45ba81971b389d6c14a6e0beda3818539194a6a8374490d4a51fd65820a82169"
+      },
+      {
+        "path": "src/task-tree.mjs",
+        "matchesSource": true,
+        "apkSha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9",
+        "sourceSha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9"
+      },
+      {
+        "path": "src/task-editor.mjs",
+        "matchesSource": true,
+        "apkSha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad",
+        "sourceSha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad"
+      },
+      {
+        "path": "src/accounts.mjs",
+        "matchesSource": true,
+        "apkSha256": "a222c3eabc1250bb189f46f347c3e28eec1f9b2521eaede2e242f9231b43c05d",
+        "sourceSha256": "a222c3eabc1250bb189f46f347c3e28eec1f9b2521eaede2e242f9231b43c05d"
+      },
+      {
+        "path": "src/storage.mjs",
+        "matchesSource": true,
+        "apkSha256": "5083cd46eb1f90248aa5b65bd09f3b0590d4f02330d3bffe01ede63608ea84f4",
+        "sourceSha256": "5083cd46eb1f90248aa5b65bd09f3b0590d4f02330d3bffe01ede63608ea84f4"
+      },
+      {
+        "path": "src/gestures.mjs",
+        "matchesSource": true,
+        "apkSha256": "73a3a3eb7fdb8c2dbb52a5166e3421cb04411311742c22055069924ac9051499",
+        "sourceSha256": "73a3a3eb7fdb8c2dbb52a5166e3421cb04411311742c22055069924ac9051499"
+      },
+      {
+        "path": "src/compat.mjs",
+        "matchesSource": true,
+        "apkSha256": "375bc2a464504c8aef79f058a49fd8ce4f477c5666a15963300e6c996305ddf1",
+        "sourceSha256": "375bc2a464504c8aef79f058a49fd8ce4f477c5666a15963300e6c996305ddf1"
+      },
+      {
+        "path": "src/undo.mjs",
+        "matchesSource": true,
+        "apkSha256": "742ca6a0de6e1e8bc739aaa24a8737746e1b0ac063ae04d47bbff3c78015a551",
+        "sourceSha256": "742ca6a0de6e1e8bc739aaa24a8737746e1b0ac063ae04d47bbff3c78015a551"
+      },
+      {
+        "path": "src/sync-core.mjs",
+        "matchesSource": true,
+        "apkSha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a",
+        "sourceSha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a"
+      },
+      {
+        "path": "src/replica.mjs",
+        "matchesSource": true,
+        "apkSha256": "69b626227cf45f0f941a141c15d30f15ae02cc3bc8a6dd2f53dc34525498647b",
+        "sourceSha256": "69b626227cf45f0f941a141c15d30f15ae02cc3bc8a6dd2f53dc34525498647b"
+      },
+      {
+        "path": "src/delta-sync.mjs",
+        "matchesSource": true,
+        "apkSha256": "45eb7f76120a55f6cac61e15c73e2f52073b0d20302d0092389e0eb37b1a39cf",
+        "sourceSha256": "45eb7f76120a55f6cac61e15c73e2f52073b0d20302d0092389e0eb37b1a39cf"
+      },
+      {
+        "path": "src/sync-client.mjs",
+        "matchesSource": true,
+        "apkSha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274",
+        "sourceSha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274"
+      },
+      {
+        "path": "src/schedule.mjs",
+        "matchesSource": true,
+        "apkSha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b",
+        "sourceSha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b"
+      },
+      {
+        "path": "src/personal-ui.mjs",
+        "matchesSource": true,
+        "apkSha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a",
+        "sourceSha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a"
+      },
+      {
+        "path": "src/reminders.mjs",
+        "matchesSource": true,
+        "apkSha256": "b558ab3b801cc1c257df9e96b941aac841392075474419381bea69729fb5d59c",
+        "sourceSha256": "b558ab3b801cc1c257df9e96b941aac841392075474419381bea69729fb5d59c"
+      },
+      {
+        "path": "src/feedback.mjs",
+        "matchesSource": true,
+        "apkSha256": "8e1a719b18f696df7428744410b8e6643765cd709d4bf8e6cf31e26cf4386df1",
+        "sourceSha256": "8e1a719b18f696df7428744410b8e6643765cd709d4bf8e6cf31e26cf4386df1"
+      },
+      {
+        "path": "src/feedback-ui.mjs",
+        "matchesSource": true,
+        "apkSha256": "57afa887fd07479ff38f6b9e1b4d99fb094ccb7aa86de3221710a9189efe169b",
+        "sourceSha256": "57afa887fd07479ff38f6b9e1b4d99fb094ccb7aa86de3221710a9189efe169b"
+      }
+    ],
+    "badZipEntries": [],
+    "duplicateZipEntries": [],
+    "aarSha256": "4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade",
+    "aarManifestHasPermissions": false,
+    "aarFeedbackClassMajorVersion": 61,
+    "hostMainClassMajorVersion": 61
+  },
+  "manifestComponentChecks": [
+    {
+      "type": "activity",
+      "name": ".FeedbackToolsActivity",
+      "exported": "0x0",
+      "grantUriPermissions": false
+    },
+    {
+      "type": "provider",
+      "name": "com.androidshared.feedback.FeedbackFileProvider",
+      "exported": "0x0",
+      "authority": "local.gxtodo.replica.feedback.files",
+      "grantUriPermissions": true
+    },
+    {
+      "type": "activity",
+      "name": "com.androidshared.feedback.FeedbackActivity",
+      "exported": "0x0",
+      "grantUriPermissions": false
+    }
+  ],
+  "permissionChecks": {
+    "hostPermissions": [
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+      "android.permission.INTERNET",
+      "android.permission.PACKAGE_USAGE_STATS",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.RECEIVE_BOOT_COMPLETED",
+      "android.permission.SCHEDULE_EXACT_ALARM",
+      "android.permission.SYSTEM_ALERT_WINDOW"
+    ],
+    "apkPermissions": [
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+      "android.permission.INTERNET",
+      "android.permission.PACKAGE_USAGE_STATS",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.RECEIVE_BOOT_COMPLETED",
+      "android.permission.SCHEDULE_EXACT_ALARM",
+      "android.permission.SYSTEM_ALERT_WINDOW"
+    ]
+  },
+  "moduleResourceId": 2130837506,
+  "moduleResourceClass": "Compiled from \"R.java\"\r\npublic final class com.androidshared.feedback.R$id {\r\n  public static final int add_task = 2130837504;\r\n  public static final int done_count = 2130837505;\r\n  public static final int feedback_note_holder = 2130837506;\r\n  public static final int open_timer = 2130837507;\r\n  public static final int open_timer_area = 2130837508;\r\n  public static final int pending_count = 2130837509;\r\n  public static final int status_detail = 2130837510;\r\n  public static final int task_title = 2130837511;\r\n  public static final int timer_control = 2130837512;\r\n  public static final int toggle_ball = 2130837513;\r\n  public static final int tool_settings = 2130837514;\r\n  public static final int widget_q0 = 2130837515;\r\n  public static final int widget_q1 = 2130837516;\r\n  public static final int widget_q2 = 2130837517;\r\n  public static final int widget_q3 = 2130837518;\r\n  public static final int widget_root = 2130837519;\r\n  public static final int widget_title = 2130837520;\r\n  public com.androidshared.feedback.R$id();\r\n}\r\n",
+  "resourceEntries": [
+    "      spec resource 0x7f020002 local.gxtodo.replica:id/feedback_note_holder: flags=0x00000000",
+    "        resource 0x7f020002 local.gxtodo.replica:id/feedback_note_holder: t=0x12 d=0x00000000 (s=0x0008 r=0x00)"
+  ],
+  "manifestXmlTree": "N: android=http://schemas.android.com/apk/res/android\r\n  E: manifest (line=1)\r\n    A: android:versionCode(0x0101021b)=(type 0x10)0xf\r\n    A: android:versionName(0x0101021c)=\"0.9.2\" (Raw: \"0.9.2\")\r\n    A: android:compileSdkVersion(0x01010572)=(type 0x10)0x22\r\n    A: android:compileSdkVersionCodename(0x01010573)=\"14\" (Raw: \"14\")\r\n    A: package=\"local.gxtodo.replica\" (Raw: \"local.gxtodo.replica\")\r\n    A: platformBuildVersionCode=(type 0x10)0x22\r\n    A: platformBuildVersionName=(type 0x10)0xe\r\n    E: uses-permission (line=2)\r\n      A: android:name(0x01010003)=\"android.permission.INTERNET\" (Raw: \"android.permission.INTERNET\")\r\n    E: uses-permission (line=3)\r\n      A: android:name(0x01010003)=\"android.permission.POST_NOTIFICATIONS\" (Raw: \"android.permission.POST_NOTIFICATIONS\")\r\n    E: uses-permission (line=4)\r\n      A: android:name(0x01010003)=\"android.permission.RECEIVE_BOOT_COMPLETED\" (Raw: \"android.permission.RECEIVE_BOOT_COMPLETED\")\r\n    E: uses-permission (line=5)\r\n      A: android:name(0x01010003)=\"android.permission.SCHEDULE_EXACT_ALARM\" (Raw: \"android.permission.SCHEDULE_EXACT_ALARM\")\r\n    E: uses-permission (line=6)\r\n      A: android:name(0x01010003)=\"android.permission.SYSTEM_ALERT_WINDOW\" (Raw: \"android.permission.SYSTEM_ALERT_WINDOW\")\r\n    E: uses-permission (line=7)\r\n      A: android:name(0x01010003)=\"android.permission.PACKAGE_USAGE_STATS\" (Raw: \"android.permission.PACKAGE_USAGE_STATS\")\r\n    E: uses-permission (line=8)\r\n      A: android:name(0x01010003)=\"android.permission.FOREGROUND_SERVICE\" (Raw: \"android.permission.FOREGROUND_SERVICE\")\r\n    E: uses-permission (line=9)\r\n      A: android:name(0x01010003)=\"android.permission.FOREGROUND_SERVICE_SPECIAL_USE\" (Raw: \"android.permission.FOREGROUND_SERVICE_SPECIAL_USE\")\r\n    E: uses-sdk (line=10)\r\n      A: android:minSdkVersion(0x0101020c)=(type 0x10)0x1a\r\n      A: android:targetSdkVersion(0x01010270)=(type 0x10)0x22\r\n    E: queries (line=11)\r\n      E: intent (line=12)\r\n        E: action (line=12)\r\n          A: android:name(0x01010003)=\"android.intent.action.MAIN\" (Raw: \"android.intent.action.MAIN\")\r\n        E: category (line=12)\r\n          A: android:name(0x01010003)=\"android.intent.category.LAUNCHER\" (Raw: \"android.intent.category.LAUNCHER\")\r\n    E: application (line=14)\r\n      A: android:theme(0x01010000)=@0x7f040000\r\n      A: android:label(0x01010001)=\"四象限待办·本地版\" (Raw: \"四象限待办·本地版\")\r\n      A: android:icon(0x01010002)=@0x7f010000\r\n      A: android:name(0x01010003)=\".FeedbackApplication\" (Raw: \".FeedbackApplication\")\r\n      A: android:allowBackup(0x01010280)=(type 0x12)0x0\r\n      A: android:supportsRtl(0x010103af)=(type 0x12)0xffffffff\r\n      A: android:usesCleartextTraffic(0x010104ec)=(type 0x12)0x0\r\n      E: activity (line=15)\r\n        A: android:name(0x01010003)=\".MainActivity\" (Raw: \".MainActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0xffffffff\r\n        A: android:launchMode(0x0101001d)=(type 0x10)0x1\r\n        A: android:configChanges(0x0101001f)=(type 0x11)0xca0\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n        E: intent-filter (line=16)\r\n          E: action (line=16)\r\n            A: android:name(0x01010003)=\"android.intent.action.MAIN\" (Raw: \"android.intent.action.MAIN\")\r\n          E: category (line=16)\r\n            A: android:name(0x01010003)=\"android.intent.category.LAUNCHER\" (Raw: \"android.intent.category.LAUNCHER\")\r\n      E: activity (line=18)\r\n        A: android:name(0x01010003)=\".FeedbackToolsActivity\" (Raw: \".FeedbackToolsActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:launchMode(0x0101001d)=(type 0x10)0x1\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n      E: activity (line=19)\r\n        A: android:name(0x01010003)=\".AndroidToolsActivity\" (Raw: \".AndroidToolsActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:launchMode(0x0101001d)=(type 0x10)0x1\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n      E: service (line=20)\r\n        A: android:name(0x01010003)=\".AndroidCompanionService\" (Raw: \".AndroidCompanionService\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:foregroundServiceType(0x01010599)=(type 0x11)0x40000000\r\n        E: property (line=21)\r\n          A: android:name(0x01010003)=\"android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE\" (Raw: \"android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE\")\r\n          A: android:value(0x01010024)=\"Persistent personal task status, user-started focus timer, and floating task controls\" (Raw: \"Persistent personal task status, user-started focus timer, and floating task controls\")\r\n      E: receiver (line=23)\r\n        A: android:name(0x01010003)=\".CompanionAlarmReceiver\" (Raw: \".CompanionAlarmReceiver\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n      E: receiver (line=24)\r\n        A: android:name(0x01010003)=\".ReminderReceiver\" (Raw: \".ReminderReceiver\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        E: intent-filter (line=25)\r\n          E: action (line=26)\r\n            A: android:name(0x01010003)=\"android.intent.action.BOOT_COMPLETED\" (Raw: \"android.intent.action.BOOT_COMPLETED\")\r\n          E: action (line=27)\r\n            A: android:name(0x01010003)=\"android.intent.action.MY_PACKAGE_REPLACED\" (Raw: \"android.intent.action.MY_PACKAGE_REPLACED\")\r\n          E: action (line=28)\r\n            A: android:name(0x01010003)=\"android.intent.action.TIME_SET\" (Raw: \"android.intent.action.TIME_SET\")\r\n          E: action (line=29)\r\n            A: android:name(0x01010003)=\"android.intent.action.TIMEZONE_CHANGED\" (Raw: \"android.intent.action.TIMEZONE_CHANGED\")\r\n          E: action (line=30)\r\n            A: android:name(0x01010003)=\"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED\" (Raw: \"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED\")\r\n      E: receiver (line=33)\r\n        A: android:label(0x01010001)=\"四象限待办\" (Raw: \"四象限待办\")\r\n        A: android:name(0x01010003)=\".TodoWidget\" (Raw: \".TodoWidget\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        E: intent-filter (line=34)\r\n          E: action (line=34)\r\n            A: android:name(0x01010003)=\"android.appwidget.action.APPWIDGET_UPDATE\" (Raw: \"android.appwidget.action.APPWIDGET_UPDATE\")\r\n        E: meta-data (line=35)\r\n          A: android:name(0x01010003)=\"android.appwidget.provider\" (Raw: \"android.appwidget.provider\")\r\n          A: android:resource(0x01010025)=@0x7f050000\r\n      E: provider (line=38)\r\n        A: android:name(0x01010003)=\"com.androidshared.feedback.FeedbackFileProvider\" (Raw: \"com.androidshared.feedback.FeedbackFileProvider\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:authorities(0x01010018)=\"local.gxtodo.replica.feedback.files\" (Raw: \"local.gxtodo.replica.feedback.files\")\r\n        A: android:grantUriPermissions(0x0101001b)=(type 0x12)0xffffffff\r\n      E: activity (line=44)\r\n        A: android:theme(0x01010000)=@0x01030241\r\n        A: android:label(0x01010001)=\"优化意见\" (Raw: \"优化意见\")\r\n        A: android:name(0x01010003)=\"com.androidshared.feedback.FeedbackActivity\" (Raw: \"com.androidshared.feedback.FeedbackActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n",
+  "badging": "package: name='local.gxtodo.replica' versionCode='15' versionName='0.9.2' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'\r\nuses-permission: name='android.permission.INTERNET'\r\nuses-permission: name='android.permission.POST_NOTIFICATIONS'\r\nuses-permission: name='android.permission.RECEIVE_BOOT_COMPLETED'\r\nuses-permission: name='android.permission.SCHEDULE_EXACT_ALARM'\r\nuses-permission: name='android.permission.SYSTEM_ALERT_WINDOW'\r\nuses-permission: name='android.permission.PACKAGE_USAGE_STATS'\r\nuses-permission: name='android.permission.FOREGROUND_SERVICE'\r\nuses-permission: name='android.permission.FOREGROUND_SERVICE_SPECIAL_USE'\r\nsdkVersion:'26'\r\ntargetSdkVersion:'34'\r\napplication-label:'四象限待办·本地版'\r\napplication-icon-160:'res/drawable/ic_launcher.xml'\r\napplication: label='四象限待办·本地版' icon='res/drawable/ic_launcher.xml'\r\nlaunchable-activity: name='local.gxtodo.replica.MainActivity'  label='' icon=''\r\nfeature-group: label=''\r\n  uses-feature: name='android.hardware.faketouch'\r\n  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'\r\nprovides-component:'app-widget'\r\nmain\r\nother-activities\r\nother-receivers\r\nother-services\r\nsupports-screens: 'small' 'normal' 'large' 'xlarge'\r\nsupports-any-density: 'true'\r\nlocales: '--_--'\r\ndensities: '160'\r\n",
+  "signature": "Verifies\r\nVerified using v1 scheme (JAR signing): false\r\nVerified using v2 scheme (APK Signature Scheme v2): true\r\nVerified using v3 scheme (APK Signature Scheme v3): true\r\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\r\nVerified using v4 scheme (APK Signature Scheme v4): false\r\nVerified for SourceStamp: false\r\nNumber of signers: 1\r\nSigner #1 certificate DN: CN=Local Todo Development\r\nSigner #1 certificate SHA-256 digest: 14743f6a167572453cdc9770a9b65630bcf4c06eb41bca64a9627c0a04683f5d\r\nSigner #1 certificate SHA-1 digest: ded6fa214ac17ad66de842fe6ab95e51794c694d\r\nSigner #1 certificate MD5 digest: d7e0680e1058b68d61e9fe6d85b87459\r\nSigner #1 key algorithm: RSA\r\nSigner #1 key size (bits): 3072\r\nSigner #1 public key SHA-256 digest: 2fb0613ef9648085c154fa56d48985d2148ba6b73916bead8572276a57cb388b\r\nSigner #1 public key SHA-1 digest: b9576f8b04cd8f6f5a209e0c5a9efcfc55dca7ce\r\nSigner #1 public key MD5 digest: 59fd96d44de061acd260215ce4338ea4\r\n",
+  "deviceExecution": false
+}

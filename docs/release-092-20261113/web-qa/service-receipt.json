@@ -1,0 +1,7 @@
+{
+  "pid": 63052,
+  "port": 4292,
+  "dataDir": "C:\\Users\\adwoo\\Documents\\ChatGPT\\REA复刻项目\\docs\\release-092-20261113\\web-qa\\data",
+  "stopToken": "revoked-after-service-stop",
+  "stopped": true
+}

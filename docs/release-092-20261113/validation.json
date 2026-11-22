@@ -1,0 +1,324 @@
+{
+  "version": "0.9.2",
+  "androidVersionCode": 15,
+  "feedbackKitVersion": "1.2.0",
+  "updatedDate": "2026-11-14",
+  "changeSummary": [
+    "子任务开始时间采用点击添加时的北京时间，全天关闭、结束留空，分类继续继承",
+    "Android接入Feedback Kit 1.2.0与独立意见备份恢复",
+    "网页与Windows独立文字意见、状态、查找、复制及JSON备份互导"
+  ],
+  "tests": {
+    "sharedWeb": 121,
+    "feedbackWebIncluded": 7,
+    "subtaskTimeIncluded": 5,
+    "windowsCore": 32,
+    "windowsAdvanced": 48,
+    "windowsDetailKeyboard": 48,
+    "windowsFeedback": 21,
+    "webWindowsBackupInterop": {
+      "passed": true,
+      "allFieldsIdentical": true,
+      "taskDatabaseNotCreated": true
+    }
+  },
+  "packages": {
+    "application": "四象限待办·本地版",
+    "version": "0.9.2",
+    "builtAt": "2026-11-13T16:25:13.225Z",
+    "blankForNewUsers": true,
+    "sync": "Unconfigured; each user supplies their own account and app password",
+    "node": {
+      "version": "v24.19.0",
+      "architecture": "win-x64",
+      "sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+      "officialChecksumMatched": true
+    },
+    "packages": [
+      {
+        "platform": "web",
+        "archive": "GxTodo-Web-0.9.2-Windows-x64.zip",
+        "bytes": 35863727,
+        "sha256": "6609218038fcb8d59273bbfc95726198f250d39704b5ac151f2b8998efc77e00",
+        "files": [
+          {
+            "path": "index.html",
+            "bytes": 508,
+            "sha256": "b3aad5c64bf6686305b4f703766a782e89b986724b0eb57403899e37fb8b75ba"
+          },
+          {
+            "path": "interaction.css",
+            "bytes": 36039,
+            "sha256": "3232491fd78754d6040f3db1e0359de1da9e828b7fd40d4535fb798b7b349ffa"
+          },
+          {
+            "path": "launcher.cjs",
+            "bytes": 8697,
+            "sha256": "75505ba6f78fef7ba3068976423e481e79409119fa03794d88af05f528849691"
+          },
+          {
+            "path": "package.json",
+            "bytes": 133,
+            "sha256": "3b22adb00e48a25fc7f9dfc79f25c6e8cd07f61054b3c1e8c46dd8cd6b9e1bf6"
+          },
+          {
+            "path": "README.md",
+            "bytes": 3996,
+            "sha256": "5a17fba089b9f66005200765cd57a018ba075adc9f248a1189aea5f5dd54e2b6"
+          },
+          {
+            "path": "runtime/credential-helper.exe",
+            "bytes": 147968,
+            "sha256": "7f433b9b574d4593e036c9bde7d7df819ba8fd0eda92600130f7121b96155f5e"
+          },
+          {
+            "path": "runtime/Node-LICENSE.txt",
+            "bytes": 157606,
+            "sha256": "148eacf7863ef4329224a29398623077200a27194aa075569faf4a0a85566ca5"
+          },
+          {
+            "path": "runtime/node.exe",
+            "bytes": 92825416,
+            "sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237"
+          },
+          {
+            "path": "server.mjs",
+            "bytes": 5965,
+            "sha256": "974f390d16190d2394cd5845276a6d19c8ee49d01ccd8fb28da2da920c930179"
+          },
+          {
+            "path": "src/account-store.mjs",
+            "bytes": 6291,
+            "sha256": "b841a27b28bbb8a22bc750d3242bb20b1d104b4a48c16a28a9b7f2df1ec78bb1"
+          },
+          {
+            "path": "src/accounts.mjs",
+            "bytes": 713,
+            "sha256": "a222c3eabc1250bb189f46f347c3e28eec1f9b2521eaede2e242f9231b43c05d"
+          },
+          {
+            "path": "src/app.mjs",
+            "bytes": 83772,
+            "sha256": "159150182dcf28e50734f54ff9844401eda35358eb165fcaf062b535895773ae"
+          },
+          {
+            "path": "src/compat.mjs",
+            "bytes": 678,
+            "sha256": "375bc2a464504c8aef79f058a49fd8ce4f477c5666a15963300e6c996305ddf1"
+          },
+          {
+            "path": "src/delta-sync.mjs",
+            "bytes": 13883,
+            "sha256": "45eb7f76120a55f6cac61e15c73e2f52073b0d20302d0092389e0eb37b1a39cf"
+          },
+          {
+            "path": "src/feedback-ui.mjs",
+            "bytes": 8194,
+            "sha256": "57afa887fd07479ff38f6b9e1b4d99fb094ccb7aa86de3221710a9189efe169b"
+          },
+          {
+            "path": "src/feedback.mjs",
+            "bytes": 6288,
+            "sha256": "8e1a719b18f696df7428744410b8e6643765cd709d4bf8e6cf31e26cf4386df1"
+          },
+          {
+            "path": "src/gestures.mjs",
+            "bytes": 10402,
+            "sha256": "73a3a3eb7fdb8c2dbb52a5166e3421cb04411311742c22055069924ac9051499"
+          },
+          {
+            "path": "src/model.mjs",
+            "bytes": 8649,
+            "sha256": "45ba81971b389d6c14a6e0beda3818539194a6a8374490d4a51fd65820a82169"
+          },
+          {
+            "path": "src/personal-ui.mjs",
+            "bytes": 5868,
+            "sha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a"
+          },
+          {
+            "path": "src/reminders.mjs",
+            "bytes": 3350,
+            "sha256": "b558ab3b801cc1c257df9e96b941aac841392075474419381bea69729fb5d59c"
+          },
+          {
+            "path": "src/replica.mjs",
+            "bytes": 8586,
+            "sha256": "69b626227cf45f0f941a141c15d30f15ae02cc3bc8a6dd2f53dc34525498647b"
+          },
+          {
+            "path": "src/schedule.mjs",
+            "bytes": 6620,
+            "sha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b"
+          },
+          {
+            "path": "src/sqlite-store.mjs",
+            "bytes": 4250,
+            "sha256": "2b7f12e6305987efadc327b46838098a987619581cb0861c6e3dda3021319eaa"
+          },
+          {
+            "path": "src/storage.mjs",
+            "bytes": 2268,
+            "sha256": "5083cd46eb1f90248aa5b65bd09f3b0590d4f02330d3bffe01ede63608ea84f4"
+          },
+          {
+            "path": "src/sync-client.mjs",
+            "bytes": 1505,
+            "sha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274"
+          },
+          {
+            "path": "src/sync-core.mjs",
+            "bytes": 5116,
+            "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a"
+          },
+          {
+            "path": "src/sync-server.mjs",
+            "bytes": 8195,
+            "sha256": "f182650f5adc8397e1cf7e839737a9ace57f29a1d9480b658fa1dc598d7b13b1"
+          },
+          {
+            "path": "src/task-editor.mjs",
+            "bytes": 3110,
+            "sha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad"
+          },
+          {
+            "path": "src/task-tree.mjs",
+            "bytes": 1581,
+            "sha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9"
+          },
+          {
+            "path": "src/undo.mjs",
+            "bytes": 2328,
+            "sha256": "742ca6a0de6e1e8bc739aaa24a8737746e1b0ac063ae04d47bbff3c78015a551"
+          },
+          {
+            "path": "src/view-history.mjs",
+            "bytes": 2055,
+            "sha256": "b3b847df3ffc2f0bb5187b61265f9aecb280790d7bc885b90b8a0c1011b23e88"
+          },
+          {
+            "path": "start.cmd",
+            "bytes": 351,
+            "sha256": "2d04599811e3972612bc2795edab45684ca6923ecdc45c02121a86432573aefe"
+          },
+          {
+            "path": "stop.cmd",
+            "bytes": 350,
+            "sha256": "98b9f84d83f66ecea0ab70e34e5c39078f737d0ab95c07b7cbd07da9a71bf6fd"
+          },
+          {
+            "path": "styles.css",
+            "bytes": 12069,
+            "sha256": "dd8441d8ef070c3e0d23bb711d253f03727cec7b3783fca7f4bbd38e7784f33b"
+          }
+        ]
+      },
+      {
+        "platform": "android",
+        "archive": "GxTodo-Android-0.9.2.zip",
+        "bytes": 283528,
+        "sha256": "87a76b257b9da1e1fd9ede7f9022e4e0b4b5d9b798bd688dc86390f7f24eb9e6",
+        "files": [
+          {
+            "path": "使用说明.md",
+            "bytes": 3541,
+            "sha256": "4c50d09813b7b20333bcc261d6647b11f8b50125741e7a87fc0a6f7046d72a69"
+          },
+          {
+            "path": "gxtodo-local-0.9.2.apk",
+            "bytes": 289105,
+            "sha256": "2bd0826abcf50431915578c265c17ecf5379f7ef7d0c6251ac8dd13c28f009e2"
+          }
+        ]
+      },
+      {
+        "platform": "windows",
+        "archive": "GxTodo-Windows-0.9.2-x64.zip",
+        "bytes": 696633,
+        "sha256": "94584073622bce77c1eb927e40e1f8893d73b190fc36c03a4430b524d11dbe6d",
+        "files": [
+          {
+            "path": "第三方许可.md",
+            "bytes": 2916,
+            "sha256": "5e7d29d4510ab8c5d3be68de0af20ffa2c5ea09b045cedf078a4cf68a2674287"
+          },
+          {
+            "path": "使用说明.md",
+            "bytes": 3420,
+            "sha256": "c74403d7e35e68510cddf62fd42711483db8d21cbd29348e61cad66f26f68306"
+          },
+          {
+            "path": "GxTodo-Native.exe",
+            "bytes": 1345024,
+            "sha256": "82ffe85bb70bcd5658e4fb508ea816e1689b8ad2c47aacd78011b9765e6bfb6f"
+          }
+        ]
+      }
+    ],
+    "integrity": [
+      {
+        "platform": "web",
+        "files": 34,
+        "sha256": "6609218038fcb8d59273bbfc95726198f250d39704b5ac151f2b8998efc77e00",
+        "crc": true,
+        "fileHashes": true
+      },
+      {
+        "platform": "android",
+        "files": 2,
+        "sha256": "87a76b257b9da1e1fd9ede7f9022e4e0b4b5d9b798bd688dc86390f7f24eb9e6",
+        "crc": true,
+        "fileHashes": true
+      },
+      {
+        "platform": "windows",
+        "files": 3,
+        "sha256": "94584073622bce77c1eb927e40e1f8893d73b190fc36c03a4430b524d11dbe6d",
+        "crc": true,
+        "fileHashes": true
+      }
+    ]
+  },
+  "webUiVerification": {
+    "executed": false,
+    "reason": "Tabbit task-scoped CDP page creation failed; CUA in-app browser unavailable.",
+    "failureRecord": "web-qa/validation.json",
+    "logicalAndServerRegressionPassed": true
+  },
+  "windowsUiVerification": {
+    "coreNativeControlRegressionPassed": true,
+    "newFeedbackRealPointerTested": false
+  },
+  "androidDeviceVerification": {
+    "status": "passed",
+    "device": "GxTodo_QA / emulator-5580",
+    "userRedmiDeviceTouched": false,
+    "ui": "主菜单与设置入口、意见保存/状态、截图选择取消、重开持久、备份选择取消、最终覆盖安装打开Tools",
+    "storage": "实际SQLite、意见/草稿/截图/序列的备份恢复、损坏备份原数据保持、事务回滚",
+    "nonFeedbackFilesUnchanged": 31,
+    "qaOpinionRemoved": true,
+    "testComponentUninstalled": true,
+    "emulatorStopped": true,
+    "adbServerPreserved": true,
+    "receipt": "../android-feedback-092-20261113/native-ui-backup-verification.json",
+    "packageReceipt": "../android-feedback-092-20261113/native-final-package-verification.json"
+  },
+  "functionalTestsNotRun": [
+    "Web feedback real browser interactions due unavailable automation browser",
+    "Windows feedback real pointer interaction"
+  ],
+  "sleepRequest": {
+    "authorizedByUser": true,
+    "command": "timeout /t 10 /nobreak & rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
+    "runAfterAllValidationAndDelivery": true
+  },
+  "apkSha256": "2bd0826abcf50431915578c265c17ecf5379f7ef7d0c6251ac8dd13c28f009e2",
+  "completedAt": "2026-11-13T16:32:12.101Z",
+  "finalChecks": {
+    "localMarkdownLinks": 143,
+    "brokenLinks": [],
+    "apkMatchesDeviceAndFinalPackageReceipt": true,
+    "temporaryPackagingCopiesRemoved": true,
+    "emulatorStopped": true
+  }
+}

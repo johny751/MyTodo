@@ -1,0 +1,49 @@
+{
+  "scope": "web-0.9.2-isolated",
+  "dataDirectory": "C:\\Users\\adwoo\\Documents\\ChatGPT\\REA复刻项目\\docs\\release-092-20261113\\web-qa\\data",
+  "production4173Untouched": true,
+  "accountAndSubtaskTests": {
+    "tests": 12,
+    "pass": 12,
+    "fail": 0
+  },
+  "staticModules": [
+    {
+      "path": "/src/feedback.mjs",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 5467
+    },
+    {
+      "path": "/src/feedback-ui.mjs",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 6982
+    }
+  ],
+  "browserUi": {
+    "executed": false,
+    "tabbitError": "browserContext.newPage: Protocol error (Target.createTarget): Task-scoped CDP command could not be dispatched",
+    "tabbitDiagnostic": {
+      "controller": "running",
+      "ok": true,
+      "tasks": []
+    },
+    "cuaError": "Browser is not available: iab",
+    "unverified": [
+      "create/save/search/status/copy",
+      "cancel edit",
+      "export/import",
+      "reload persistence",
+      "360px narrow layout"
+    ]
+  },
+  "serviceStop": {
+    "pid": 63052,
+    "response": {
+      "stopped": true
+    },
+    "portClosed": true
+  },
+  "completedAt": "2026-11-13T16:05:55.589Z"
+}

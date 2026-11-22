@@ -1,0 +1,47 @@
+{
+  "version": "0.9.1",
+  "androidVersionCode": 14,
+  "apkSha256": "1821dba0f9dc9c6afef33d704a271776a5e446dc604ffb739bd0cc7f904e2d8c",
+  "builtAt": "2026-11-01T06:53:58.246Z",
+  "tests": {
+    "web": 109,
+    "timerModelAssertions": 73,
+    "dailyPolicyAssertions": 47,
+    "notificationControlsAssertions": 20,
+    "androidDeviceDataAssertions": 44
+  },
+  "device": {
+    "serial": "emulator-5580",
+    "avd": "GxTodo_QA",
+    "android": 14,
+    "sameSignatureUpgrade": true
+  },
+  "interactions": {
+    "taskSelection": true,
+    "rootNullParentLabel": true,
+    "clearAssociation": true,
+    "resetRetainsAssociation": true,
+    "expandedPauseResume": true,
+    "compactResume": true,
+    "minimalPauseResume": true,
+    "pausedProcessRestart": {
+      "preservedTime": true,
+      "preservedTask": true,
+      "preservedContinueNotification": true
+    },
+    "oneMinuteCompletionWithTaskTitle": true
+  },
+  "all17JavaSourcesMatchBuiltApk": true,
+  "latestLogcatAppCrashes": 0,
+  "xiaomi": {
+    "requestedModel": "REDMI K80 Pro",
+    "requestedVersion": "3.0.305.0WOMCNXM.C11",
+    "implemented": false,
+    "reason": "Official service requires app registration, App ID, signature fingerprint, approved scenario and device debug allowlist or formal permission.",
+    "officialSources": [
+      "https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2132",
+      "https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2131"
+    ],
+    "realDeviceTested": false
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "platform": "web",
+    "files": 34,
+    "sha256": "6609218038fcb8d59273bbfc95726198f250d39704b5ac151f2b8998efc77e00",
+    "crc": true,
+    "fileHashes": true
+  },
+  {
+    "platform": "android",
+    "files": 2,
+    "sha256": "87a76b257b9da1e1fd9ede7f9022e4e0b4b5d9b798bd688dc86390f7f24eb9e6",
+    "crc": true,
+    "fileHashes": true
+  },
+  {
+    "platform": "windows",
+    "files": 3,
+    "sha256": "94584073622bce77c1eb927e40e1f8893d73b190fc36c03a4430b524d11dbe6d",
+    "crc": true,
+    "fileHashes": true
+  }
+]

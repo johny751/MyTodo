@@ -1,0 +1,14 @@
+{
+  "count": 20000,
+  "importMs": 1421,
+  "singleRowEditMs": 5,
+  "readAllMs": 232,
+  "uiDiffMs": 157,
+  "outboxRows": 1,
+  "deltaFields": 1,
+  "changeJSONBytes": 241,
+  "changeGzipBytes": 200,
+  "fullStateBytes": 8487580,
+  "nodeRssMiB": 331,
+  "databaseBytes": 42151936
+}

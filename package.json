@@ -1,0 +1,17 @@
+{
+  "name": "gxtodo-local",
+  "version": "0.9.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build:android": "node scripts/build-android.mjs",
+    "android:qa": "node scripts/android-qa.mjs",
+    "build:windows": "node scripts/build-windows.mjs",
+    "package:release": "node scripts/package-release.mjs"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

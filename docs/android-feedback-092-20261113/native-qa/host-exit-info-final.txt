@@ -1,0 +1,68 @@
+ACTIVITY MANAGER PROCESS EXIT INFO (dumpsys activity exit-info)
+Last Timestamp of Persistence Into Persistent Storage: 2026-11-13 16:28:17.366
+  package: local.gxtodo.replica
+    Historical Process Exit for uid=10192
+        ApplicationExitInfo #0:
+          timestamp=2026-11-13 16:26:00.392 pid=6053 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to finished inst state=empty trace=null
+        ApplicationExitInfo #1:
+          timestamp=2026-11-13 16:25:31.412 pid=5959 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to finished inst state=empty trace=null
+        ApplicationExitInfo #2:
+          timestamp=2026-11-13 16:25:30.513 pid=5091 realUid=99001 packageUid=10192 definingUid=10134 user=0
+          process=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 reason=13 (OTHER KILLS BY SYSTEM) subreason=17 (ISOLATED NOT NEEDED) status=0
+          importance=300 pss=64MB rss=152MB description=isolated not needed state=empty trace=null
+        ApplicationExitInfo #3:
+          timestamp=2026-11-13 16:25:30.499 pid=5039 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=100 pss=78MB rss=187MB description=stop local.gxtodo.replica due to start instr state=empty trace=null
+        ApplicationExitInfo #4:
+          timestamp=2026-11-13 16:10:43.290 pid=4285 realUid=99000 packageUid=10192 definingUid=10134 user=0
+          process=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 reason=13 (OTHER KILLS BY SYSTEM) subreason=17 (ISOLATED NOT NEEDED) status=0
+          importance=300 pss=61MB rss=149MB description=isolated not needed state=empty trace=null
+        ApplicationExitInfo #5:
+          timestamp=2026-11-13 16:10:43.281 pid=4223 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=100 pss=82MB rss=203MB description=stop local.gxtodo.replica due to from pid 5024 state=empty trace=null
+        ApplicationExitInfo #6:
+          timestamp=2026-11-13 16:03:08.059 pid=1580 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=16 (PACKAGE UPDATED) subreason=0 (UNKNOWN) status=0
+          importance=125 pss=6.3MB rss=75MB description=stop local.gxtodo.replica due to installPackageLI state=empty trace=null
+        ApplicationExitInfo #7:
+          timestamp=2026-11-01 06:54:03.052 pid=4995 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to finished inst state=empty trace=null
+        ApplicationExitInfo #8:
+          timestamp=2026-11-01 06:54:02.523 pid=4907 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to from pid 4976 state=empty trace=null
+        ApplicationExitInfo #9:
+          timestamp=2026-11-01 06:53:58.034 pid=4743 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=16 (PACKAGE UPDATED) subreason=0 (UNKNOWN) status=0
+          importance=100 pss=33MB rss=122MB description=stop local.gxtodo.replica due to installPackageLI state=empty trace=null
+        ApplicationExitInfo #10:
+          timestamp=2026-11-01 06:51:54.031 pid=4659 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to finished inst state=empty trace=null
+        ApplicationExitInfo #11:
+          timestamp=2026-11-01 06:51:08.806 pid=4473 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to finished inst state=empty trace=null
+        ApplicationExitInfo #12:
+          timestamp=2026-11-01 06:50:44.205 pid=4348 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to finished inst state=empty trace=null
+        ApplicationExitInfo #13:
+          timestamp=2026-11-01 06:50:43.406 pid=4246 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 description=stop local.gxtodo.replica due to from pid 4327 state=empty trace=null
+        ApplicationExitInfo #14:
+          timestamp=2026-11-01 06:50:39.000 pid=1486 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=16 (PACKAGE UPDATED) subreason=0 (UNKNOWN) status=0
+          importance=125 pss=6.1MB rss=74MB description=stop local.gxtodo.replica due to installPackageLI state=empty trace=null
+        ApplicationExitInfo #15:
+          timestamp=2026-10-17 07:14:48.218 pid=1477 realUid=10192 packageUid=10192 definingUid=10192 user=0
+          process=local.gxtodo.replica reason=16 (PACKAGE UPDATED) subreason=0 (UNKNOWN) status=0
+          importance=400 pss=4.5MB rss=65MB description=stop local.gxtodo.replica due to installPackageLI state=empty trace=null

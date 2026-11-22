@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="48dp" android:orientation="horizontal" android:gravity="center_vertical">
+    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical">
+        <TextView android:id="@+id/pending_count" android:layout_width="match_parent" android:layout_height="24dp" android:text="待办" android:textSize="12sp" android:textColor="#25333D" android:gravity="center_vertical" android:maxLines="1" android:ellipsize="end" android:contentDescription="查看当日待办"/>
+        <TextView android:id="@+id/done_count" android:layout_width="match_parent" android:layout_height="24dp" android:text="完成" android:textSize="12sp" android:textColor="#526675" android:gravity="center_vertical" android:maxLines="1" android:ellipsize="end" android:contentDescription="查看当日完成"/>
+    </LinearLayout>
+    <TextView android:id="@+id/add_task" android:layout_width="40dp" android:layout_height="48dp" android:text="+" android:textColor="#137F72" android:textSize="27sp" android:gravity="center" android:contentDescription="添加任务"/>
+    <TextView android:id="@+id/toggle_ball" android:layout_width="52dp" android:layout_height="48dp" android:text="O 显示" android:textColor="#137F72" android:textSize="12sp" android:gravity="center" android:maxLines="1" android:contentDescription="显示或隐藏悬浮球"/>
+    <LinearLayout android:id="@+id/open_timer_area" android:layout_width="72dp" android:layout_height="48dp" android:orientation="vertical" android:gravity="center">
+        <TextView android:id="@+id/task_title" android:layout_width="match_parent" android:layout_height="18dp" android:textSize="11sp" android:textColor="#526675" android:gravity="center" android:maxLines="1" android:ellipsize="end" android:visibility="gone"/>
+        <TextView android:id="@+id/open_timer" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="番茄钟" android:textColor="#137F72" android:textSize="12sp" android:gravity="center" android:maxLines="1" android:ellipsize="end" android:contentDescription="打开番茄钟"/>
+    </LinearLayout>
+    <TextView android:id="@+id/timer_control" android:layout_width="48dp" android:layout_height="48dp" android:text="暂停" android:textColor="#137F72" android:textSize="13sp" android:gravity="center" android:maxLines="1" android:visibility="gone" android:contentDescription="暂停计时"/>
+</LinearLayout>

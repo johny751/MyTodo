@@ -1,0 +1,14 @@
+{
+  "format": "gxtodo.feedback",
+  "version": 1,
+  "ideas": [
+    {
+      "id": "interop-092",
+      "title": "子任务时间优化",
+      "body": "网页 → Windows：只记录意见，不进入任务同步。",
+      "status": "resolved",
+      "createdAt": "2026-11-13T03:00:00.000Z",
+      "updatedAt": "2026-11-13T03:01:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "version": "0.9.2",
+  "versionCode": 15,
+  "apkSha256": "72f2306ec3693fb12db9be1079846ae79bb0ba56cbc1732796eac41241ad071a",
+  "aarVersion": "1.2.0",
+  "aarSha256": "4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade",
+  "certificateSha256": "14743f6a167572453cdc9770a9b65630bcf4c06eb41bca64a9627c0a04683f5d",
+  "nativeDexCheck": {
+    "badZipEntry": null,
+    "dex": [
+      {
+        "name": "classes.dex",
+        "classDefinitions": 365,
+        "moduleVersionString": true
+      }
+    ],
+    "requiredClassDefinitions": {
+      "Lcom/androidshared/feedback/FeedbackKit;": true,
+      "Lcom/androidshared/feedback/FeedbackActivity;": true,
+      "Lcom/androidshared/feedback/FeedbackFileProvider;": true,
+      "Lcom/androidshared/feedback/DefaultFeedbackStorage;": true,
+      "Lcom/androidshared/feedback/R$id;": true,
+      "Llocal/gxtodo/replica/FeedbackApplication;": true,
+      "Llocal/gxtodo/replica/FeedbackToolsActivity;": true
+    },
+    "assets": [
+      {
+        "path": "src/app.mjs",
+        "matchesSource": true
+      },
+      {
+        "path": "src/model.mjs",
+        "matchesSource": true
+      },
+      {
+        "path": "src/feedback.mjs",
+        "matchesSource": true
+      },
+      {
+        "path": "src/feedback-ui.mjs",
+        "matchesSource": true
+      },
+      {
+        "path": "interaction.css",
+        "matchesSource": true
+      }
+    ]
+  },
+  "moduleResourceClass": "Compiled from \"R.java\"\r\npublic final class com.androidshared.feedback.R$id {\r\n  public static final int add_task = 2130837504;\r\n  public static final int done_count = 2130837505;\r\n  public static final int feedback_note_holder = 2130837506;\r\n  public static final int open_timer = 2130837507;\r\n  public static final int open_timer_area = 2130837508;\r\n  public static final int pending_count = 2130837509;\r\n  public static final int status_detail = 2130837510;\r\n  public static final int task_title = 2130837511;\r\n  public static final int timer_control = 2130837512;\r\n  public static final int toggle_ball = 2130837513;\r\n  public static final int tool_settings = 2130837514;\r\n  public static final int widget_q0 = 2130837515;\r\n  public static final int widget_q1 = 2130837516;\r\n  public static final int widget_q2 = 2130837517;\r\n  public static final int widget_q3 = 2130837518;\r\n  public static final int widget_root = 2130837519;\r\n  public static final int widget_title = 2130837520;\r\n  public com.androidshared.feedback.R$id();\r\n}\r\n",
+  "manifestXmlTree": "N: android=http://schemas.android.com/apk/res/android\r\n  E: manifest (line=1)\r\n    A: android:versionCode(0x0101021b)=(type 0x10)0xf\r\n    A: android:versionName(0x0101021c)=\"0.9.2\" (Raw: \"0.9.2\")\r\n    A: android:compileSdkVersion(0x01010572)=(type 0x10)0x22\r\n    A: android:compileSdkVersionCodename(0x01010573)=\"14\" (Raw: \"14\")\r\n    A: package=\"local.gxtodo.replica\" (Raw: \"local.gxtodo.replica\")\r\n    A: platformBuildVersionCode=(type 0x10)0x22\r\n    A: platformBuildVersionName=(type 0x10)0xe\r\n    E: uses-permission (line=2)\r\n      A: android:name(0x01010003)=\"android.permission.INTERNET\" (Raw: \"android.permission.INTERNET\")\r\n    E: uses-permission (line=3)\r\n      A: android:name(0x01010003)=\"android.permission.POST_NOTIFICATIONS\" (Raw: \"android.permission.POST_NOTIFICATIONS\")\r\n    E: uses-permission (line=4)\r\n      A: android:name(0x01010003)=\"android.permission.RECEIVE_BOOT_COMPLETED\" (Raw: \"android.permission.RECEIVE_BOOT_COMPLETED\")\r\n    E: uses-permission (line=5)\r\n      A: android:name(0x01010003)=\"android.permission.SCHEDULE_EXACT_ALARM\" (Raw: \"android.permission.SCHEDULE_EXACT_ALARM\")\r\n    E: uses-permission (line=6)\r\n      A: android:name(0x01010003)=\"android.permission.SYSTEM_ALERT_WINDOW\" (Raw: \"android.permission.SYSTEM_ALERT_WINDOW\")\r\n    E: uses-permission (line=7)\r\n      A: android:name(0x01010003)=\"android.permission.PACKAGE_USAGE_STATS\" (Raw: \"android.permission.PACKAGE_USAGE_STATS\")\r\n    E: uses-permission (line=8)\r\n      A: android:name(0x01010003)=\"android.permission.FOREGROUND_SERVICE\" (Raw: \"android.permission.FOREGROUND_SERVICE\")\r\n    E: uses-permission (line=9)\r\n      A: android:name(0x01010003)=\"android.permission.FOREGROUND_SERVICE_SPECIAL_USE\" (Raw: \"android.permission.FOREGROUND_SERVICE_SPECIAL_USE\")\r\n    E: uses-sdk (line=10)\r\n      A: android:minSdkVersion(0x0101020c)=(type 0x10)0x1a\r\n      A: android:targetSdkVersion(0x01010270)=(type 0x10)0x22\r\n    E: queries (line=11)\r\n      E: intent (line=12)\r\n        E: action (line=12)\r\n          A: android:name(0x01010003)=\"android.intent.action.MAIN\" (Raw: \"android.intent.action.MAIN\")\r\n        E: category (line=12)\r\n          A: android:name(0x01010003)=\"android.intent.category.LAUNCHER\" (Raw: \"android.intent.category.LAUNCHER\")\r\n    E: application (line=14)\r\n      A: android:theme(0x01010000)=@0x7f040000\r\n      A: android:label(0x01010001)=\"四象限待办·本地版\" (Raw: \"四象限待办·本地版\")\r\n      A: android:icon(0x01010002)=@0x7f010000\r\n      A: android:name(0x01010003)=\".FeedbackApplication\" (Raw: \".FeedbackApplication\")\r\n      A: android:allowBackup(0x01010280)=(type 0x12)0x0\r\n      A: android:supportsRtl(0x010103af)=(type 0x12)0xffffffff\r\n      A: android:usesCleartextTraffic(0x010104ec)=(type 0x12)0x0\r\n      E: activity (line=15)\r\n        A: android:name(0x01010003)=\".MainActivity\" (Raw: \".MainActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0xffffffff\r\n        A: android:launchMode(0x0101001d)=(type 0x10)0x1\r\n        A: android:configChanges(0x0101001f)=(type 0x11)0xca0\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n        E: intent-filter (line=16)\r\n          E: action (line=16)\r\n            A: android:name(0x01010003)=\"android.intent.action.MAIN\" (Raw: \"android.intent.action.MAIN\")\r\n          E: category (line=16)\r\n            A: android:name(0x01010003)=\"android.intent.category.LAUNCHER\" (Raw: \"android.intent.category.LAUNCHER\")\r\n      E: activity (line=18)\r\n        A: android:name(0x01010003)=\".FeedbackToolsActivity\" (Raw: \".FeedbackToolsActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:launchMode(0x0101001d)=(type 0x10)0x1\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n      E: activity (line=19)\r\n        A: android:name(0x01010003)=\".AndroidToolsActivity\" (Raw: \".AndroidToolsActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:launchMode(0x0101001d)=(type 0x10)0x1\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n      E: service (line=20)\r\n        A: android:name(0x01010003)=\".AndroidCompanionService\" (Raw: \".AndroidCompanionService\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:foregroundServiceType(0x01010599)=(type 0x11)0x40000000\r\n        E: property (line=21)\r\n          A: android:name(0x01010003)=\"android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE\" (Raw: \"android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE\")\r\n          A: android:value(0x01010024)=\"Persistent personal task status, user-started focus timer, and floating task controls\" (Raw: \"Persistent personal task status, user-started focus timer, and floating task controls\")\r\n      E: receiver (line=23)\r\n        A: android:name(0x01010003)=\".CompanionAlarmReceiver\" (Raw: \".CompanionAlarmReceiver\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n      E: receiver (line=24)\r\n        A: android:name(0x01010003)=\".ReminderReceiver\" (Raw: \".ReminderReceiver\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        E: intent-filter (line=25)\r\n          E: action (line=26)\r\n            A: android:name(0x01010003)=\"android.intent.action.BOOT_COMPLETED\" (Raw: \"android.intent.action.BOOT_COMPLETED\")\r\n          E: action (line=27)\r\n            A: android:name(0x01010003)=\"android.intent.action.MY_PACKAGE_REPLACED\" (Raw: \"android.intent.action.MY_PACKAGE_REPLACED\")\r\n          E: action (line=28)\r\n            A: android:name(0x01010003)=\"android.intent.action.TIME_SET\" (Raw: \"android.intent.action.TIME_SET\")\r\n          E: action (line=29)\r\n            A: android:name(0x01010003)=\"android.intent.action.TIMEZONE_CHANGED\" (Raw: \"android.intent.action.TIMEZONE_CHANGED\")\r\n          E: action (line=30)\r\n            A: android:name(0x01010003)=\"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED\" (Raw: \"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED\")\r\n      E: receiver (line=33)\r\n        A: android:label(0x01010001)=\"四象限待办\" (Raw: \"四象限待办\")\r\n        A: android:name(0x01010003)=\".TodoWidget\" (Raw: \".TodoWidget\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        E: intent-filter (line=34)\r\n          E: action (line=34)\r\n            A: android:name(0x01010003)=\"android.appwidget.action.APPWIDGET_UPDATE\" (Raw: \"android.appwidget.action.APPWIDGET_UPDATE\")\r\n        E: meta-data (line=35)\r\n          A: android:name(0x01010003)=\"android.appwidget.provider\" (Raw: \"android.appwidget.provider\")\r\n          A: android:resource(0x01010025)=@0x7f050000\r\n      E: provider (line=38)\r\n        A: android:name(0x01010003)=\"com.androidshared.feedback.FeedbackFileProvider\" (Raw: \"com.androidshared.feedback.FeedbackFileProvider\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:authorities(0x01010018)=\"local.gxtodo.replica.feedback.files\" (Raw: \"local.gxtodo.replica.feedback.files\")\r\n        A: android:grantUriPermissions(0x0101001b)=(type 0x12)0xffffffff\r\n      E: activity (line=44)\r\n        A: android:theme(0x01010000)=@0x01030241\r\n        A: android:label(0x01010001)=\"优化意见\" (Raw: \"优化意见\")\r\n        A: android:name(0x01010003)=\"com.androidshared.feedback.FeedbackActivity\" (Raw: \"com.androidshared.feedback.FeedbackActivity\")\r\n        A: android:exported(0x01010010)=(type 0x12)0x0\r\n        A: android:windowSoftInputMode(0x0101022b)=(type 0x11)0x10\r\n",
+  "resourceEntries": [
+    "      spec resource 0x7f020002 local.gxtodo.replica:id/feedback_note_holder: flags=0x00000000\r",
+    "        resource 0x7f020002 local.gxtodo.replica:id/feedback_note_holder: t=0x12 d=0x00000000 (s=0x0008 r=0x00)\r"
+  ],
+  "checkedAt": "2026-11-13T15:51:53.757Z",
+  "deviceExecution": false,
+  "manifestComponentChecks": {
+    "allFeedbackComponentsNonExported": true,
+    "providerAuthority": "local.gxtodo.replica.feedback.files",
+    "providerGrantsReadUri": true,
+    "minSdk26": true,
+    "targetSdk34": true
+  },
+  "javaClassVersions": {
+    "aarFeedbackClassMajorVersion": 61,
+    "hostMainClassMajorVersion": 61
+  },
+  "moduleResourceId": 2130837506
+}

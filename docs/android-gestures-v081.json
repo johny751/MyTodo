@@ -1,0 +1,857 @@
+{
+  "schemaVersion": 1,
+  "version": "0.8.1",
+  "versionCode": 10,
+  "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9",
+  "device": {
+    "avd": "GxTodo_QA",
+    "serial": "emulator-5580",
+    "android": 14,
+    "gpu": "swiftshader_indirect",
+    "vulkan": false
+  },
+  "automated": {
+    "total": 91,
+    "passed": 91,
+    "log": "v081-tests-final.log"
+  },
+  "checks": [
+    {
+      "name": "up swipe advances one day",
+      "passed": true,
+      "detail": [
+        {
+          "text": "2026-10-20",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        },
+        {
+          "text": "下一天 · 2026-10-20",
+          "id": "toast",
+          "bounds": "[346,1609][735,1708]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "down swipe returns previous day",
+      "passed": true,
+      "detail": [
+        {
+          "text": "2026-10-19",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "right swipe opens main menu",
+      "passed": true,
+      "detail": [
+        {
+          "text": "关闭主菜单",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "关闭主菜单",
+          "id": "",
+          "bounds": "[616,76][721,199]",
+          "checked": "false"
+        },
+        {
+          "text": "切换账号",
+          "id": "",
+          "bounds": "[0,63][735,328]",
+          "checked": "false"
+        },
+        {
+          "text": "设置",
+          "id": "",
+          "bounds": "[409,1737][496,1824]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "week header uses week navigation",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10-19",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一周",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一周",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本周",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        },
+        {
+          "text": "很重要-很紧急",
+          "id": "",
+          "bounds": "[0,189][543,992]",
+          "checked": "false"
+        },
+        {
+          "text": "在很重要-很紧急中新建任务",
+          "id": "",
+          "bounds": "[0,189][540,304]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "up swipe advances one week",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10-26",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一周",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一周",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本周",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        },
+        {
+          "text": "很重要-很紧急",
+          "id": "",
+          "bounds": "[0,189][543,992]",
+          "checked": "false"
+        },
+        {
+          "text": "在很重要-很紧急中新建任务",
+          "id": "",
+          "bounds": "[0,189][540,304]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "month header uses month navigation",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一月",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一月",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本月",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        },
+        {
+          "text": "很重要-很紧急",
+          "id": "",
+          "bounds": "[0,189][543,992]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "up swipe advances one month",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-11",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一月",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一月",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本月",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        },
+        {
+          "text": "很重要-很紧急",
+          "id": "",
+          "bounds": "[0,189][543,992]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "month heading opens native month picker",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Set month",
+          "id": "android:id/alertTitle",
+          "bounds": "[133,669][947,740]",
+          "checked": "false"
+        },
+        {
+          "text": "Oct",
+          "id": "",
+          "bounds": "[330,740][498,913]",
+          "checked": "false"
+        },
+        {
+          "text": "Nov",
+          "id": "android:id/numberpicker_input",
+          "bounds": "[330,913][498,1039]",
+          "checked": "false"
+        },
+        {
+          "text": "Dec",
+          "id": "",
+          "bounds": "[330,1039][498,1213]",
+          "checked": "false"
+        },
+        {
+          "text": "2025",
+          "id": "",
+          "bounds": "[582,740][750,913]",
+          "checked": "false"
+        },
+        {
+          "text": "2026",
+          "id": "android:id/numberpicker_input",
+          "bounds": "[582,913][750,1039]",
+          "checked": "false"
+        },
+        {
+          "text": "2027",
+          "id": "",
+          "bounds": "[582,1039][750,1213]",
+          "checked": "false"
+        },
+        {
+          "text": "CLEAR",
+          "id": "android:id/button3",
+          "bounds": "[102,1224][278,1350]",
+          "checked": "false"
+        },
+        {
+          "text": "CANCEL",
+          "id": "android:id/button2",
+          "bounds": "[607,1224][810,1350]",
+          "checked": "false"
+        },
+        {
+          "text": "SET",
+          "id": "android:id/button1",
+          "bounds": "[810,1224][978,1350]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "down swipe returns previous month",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一月",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一月",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本月",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "filter overlay blocks period swipe",
+      "passed": true,
+      "detail": [
+        {
+          "text": "2026-10",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "关闭筛选",
+          "id": "",
+          "bounds": "[950,1215][1015,1302]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "scrolling a long list does not change the date",
+      "passed": true,
+      "detail": [
+        {
+          "text": "2026-10-19",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "native list scroll changes visible tasks",
+      "passed": true,
+      "detail": {
+        "before": [
+          "编辑任务：History-task-4970",
+          "编辑任务：History-task-4971",
+          "编辑任务：History-task-4972",
+          "编辑任务：History-task-4973",
+          "编辑任务：History-task-4974",
+          "编辑任务：History-task-4975",
+          "编辑任务：History-task-4976"
+        ],
+        "after": [
+          "编辑任务：History-task-4976",
+          "编辑任务：History-task-4977",
+          "编辑任务：History-task-4978",
+          "编辑任务：History-task-4979",
+          "编辑任务：History-task-4980",
+          "编辑任务：History-task-4981"
+        ]
+      },
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "reaching the bottom does not switch periods",
+      "passed": true,
+      "detail": [
+        "编辑任务：History-task-4993",
+        "编辑任务：History-task-4994",
+        "编辑任务：History-task-4995",
+        "编辑任务：History-task-4996",
+        "编辑任务：History-task-4997",
+        "编辑任务：History-task-4998",
+        "编辑任务：History-task-4999"
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "outward swipe from actual bottom switches day and resets scroll",
+      "passed": true,
+      "detail": {
+        "date": "2026-10-20",
+        "tasks": [
+          "编辑任务：History-task-4970",
+          "编辑任务：History-task-4971",
+          "编辑任务：History-task-4972",
+          "编辑任务：History-task-4973",
+          "编辑任务：History-task-4974",
+          "编辑任务：History-task-4975",
+          "编辑任务：History-task-4976"
+        ]
+      },
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "outward swipe from top returns previous day",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Android-C · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10-19",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        },
+        {
+          "text": "上一天",
+          "id": "",
+          "bounds": "[341,70][420,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一天",
+          "id": "",
+          "bounds": "[414,70][493,178]",
+          "checked": "false"
+        },
+        {
+          "text": "今天",
+          "id": "",
+          "bounds": "[504,81][627,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "right swipe on a focused task opens menu",
+      "passed": true,
+      "detail": [
+        {
+          "text": "切换账号",
+          "id": "",
+          "bounds": "[0,63][735,328]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "long press still enters task dragging",
+      "passed": true,
+      "detail": [
+        {
+          "text": "拖动中，松开保存位置；Esc 取消",
+          "id": "toast",
+          "bounds": "[244,1609][837,1708]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "cancelled drag does not switch period or open menu",
+      "passed": true,
+      "detail": [
+        {
+          "text": "2026-10-19",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        },
+        {
+          "text": "已取消拖动",
+          "id": "toast",
+          "bounds": "[412,1609][669,1708]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0"
+    },
+    {
+      "name": "final APK starts with retained 5000-task account",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Android-C · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10-19",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        },
+        {
+          "text": "上一天",
+          "id": "",
+          "bounds": "[341,70][420,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一天",
+          "id": "",
+          "bounds": "[414,70][493,178]",
+          "checked": "false"
+        },
+        {
+          "text": "今天",
+          "id": "",
+          "bounds": "[504,81][627,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "final APK up gesture",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Android-C · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10-20",
+          "id": "selected-date",
+          "bounds": "[21,73][330,175]",
+          "checked": "false"
+        },
+        {
+          "text": "上一天",
+          "id": "",
+          "bounds": "[341,70][420,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一天",
+          "id": "",
+          "bounds": "[414,70][493,178]",
+          "checked": "false"
+        },
+        {
+          "text": "今天",
+          "id": "",
+          "bounds": "[504,81][627,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "final APK right gesture",
+      "passed": true,
+      "detail": [
+        {
+          "text": "切换账号",
+          "id": "",
+          "bounds": "[0,63][735,328]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "final APK week range and step",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-10-26",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一周",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一周",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本周",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "final APK native month selection updates header",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-11",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一月",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一月",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本月",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "final APK monthly swipe and header",
+      "passed": true,
+      "detail": [
+        {
+          "text": "Cloud-QA · 任务 · 高效ToDo 本地版",
+          "id": "",
+          "bounds": "[0,63][1080,1920]",
+          "checked": "false"
+        },
+        {
+          "text": "2026-12",
+          "id": "selected-date",
+          "bounds": "[21,70][399,178]",
+          "checked": "false"
+        },
+        {
+          "text": "上一月",
+          "id": "",
+          "bounds": "[409,70][488,178]",
+          "checked": "false"
+        },
+        {
+          "text": "下一月",
+          "id": "",
+          "bounds": "[483,70][561,178]",
+          "checked": "false"
+        },
+        {
+          "text": "本月",
+          "id": "",
+          "bounds": "[572,81][695,168]",
+          "checked": "false"
+        },
+        {
+          "text": "新建任务",
+          "id": "",
+          "bounds": "[960,68][1063,181]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "native settings explain right navigation without completion toggle",
+      "passed": true,
+      "detail": [
+        {
+          "text": "安卓主页面右滑打开主菜单；任务在详情中完成。四象限上滑到下一周期、下滑到上一周期；任务列表先滚动，到边界后再滑动切换。",
+          "id": "",
+          "bounds": "[84,504][1000,700]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    },
+    {
+      "name": "right swipe also opens menu on notes page",
+      "passed": true,
+      "detail": [
+        {
+          "text": "切换账号",
+          "id": "",
+          "bounds": "[0,63][735,328]",
+          "checked": "false"
+        }
+      ],
+      "apkSha256": "467910d4451e7da0fb83274f4d98db77d06085fd506065e86badcc83f101e5d9"
+    }
+  ],
+  "excludedAssertions": [
+    {
+      "name": "fresh outward swipe at bottom changes period and resets scroll",
+      "passed": false,
+      "detail": {
+        "date": "2026-10-19",
+        "tasks": [
+          "编辑任务：History-task-4994",
+          "编辑任务：History-task-4995",
+          "编辑任务：History-task-4996",
+          "编辑任务：History-task-4997",
+          "编辑任务：History-task-4998",
+          "编辑任务：History-task-4999"
+        ]
+      },
+      "apkSha256": "2cb181371777dcfee118bde502603eab71befd0ca3c73aa674c7b2566aa383e0",
+      "reason": "The last task being visible was initially mistaken for the list reaching its true scroll limit; bottom padding still remained. A further native scroll reached the limit, and a subsequent outward swipe passed."
+    }
+  ],
+  "candidateNote": "Detailed scroll/drag tests used the candidate identified per check. Final APK adds matching period text to the toast and help copy; final installation, day/week/month navigation, month picker, right menu and settings were rechecked.",
+  "cloudDatabase": "integrity_check\r\n---------------\r\nok             \r\nkind   total_rows  live_rows\r\n-----  ----------  ---------\r\nnotes  13          13       \r\ntags   1           1        \r\ntasks  8           7        \r\noutbox_rows\r\n-----------\r\n0\nentities 数量包含删除标记；不等同于界面活动任务数。\n",
+  "syntheticLargeAccount": {
+    "tasks": 5000,
+    "outbox": 5000,
+    "integrity": "ok"
+  },
+  "testOutputDirectory": "M:/dev/gxtodo-gesture-qa-1792379537391"
+}

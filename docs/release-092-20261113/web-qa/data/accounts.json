@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "activeId": "default",
+  "accounts": [
+    {
+      "id": "default",
+      "name": "账号 A",
+      "defaultFolder": "GxTodo",
+      "createdAt": "2026-11-13T15:57:28.228Z"
+    },
+    {
+      "id": "account-b",
+      "name": "账号 B",
+      "defaultFolder": "GxTodo-B",
+      "createdAt": "2026-11-13T15:57:28.228Z"
+    }
+  ]
+}

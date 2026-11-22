@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "settings": {
+    "swipeMenu": true,
+    "swipeComplete": true,
+    "longPressMs": 3000,
+    "undoMs": 8000
+  },
+  "tasks": [],
+  "notes": [],
+  "projects": [],
+  "tags": [],
+  "places": []
+}
