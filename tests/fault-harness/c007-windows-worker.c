@@ -122,7 +122,7 @@ static int c007_operation(DB*d,Sync*s,J*op,const char*origin,J*receipt){
     const char*name=str(op,"op");s->ok=1;d->error[0]=0;
     if(!strcmp(name,"local"))return db_local(d,get(op,"changes"),0);
     if(!strcmp(name,"remote"))return db_remote(d,get(op,"events"),*str(op,"device")?str(op,"device"):0,num(op,"index"));
-    if(!strcmp(name,"inspect")){set(receipt,"returned",db_row(d,str(op,"key")));return get(receipt,"returned")!=0;}
+    if(!strcmp(name,"inspect")){J*value=db_row(d,str(op,"key"));int ok=value!=0;set(receipt,"returned",value);return ok;}
     if(!strcmp(name,"page")){J*value=db_page(d,str(op,"after"),100);int ok=value!=0;set(receipt,"returned",value);return ok;}
     if(!strcmp(name,"outbox")){J*value=db_outbox(d,500);int ok=value!=0;set(receipt,"returned",value);return ok;}
     if(!strcmp(name,"meta")){J*value=db_meta(d);int ok=value!=0;set(receipt,"returned",value);return ok;}
