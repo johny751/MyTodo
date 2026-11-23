@@ -53,8 +53,8 @@ async function gone(directory,label){
  throw Error('Original Android process is still alive; refusing to treat forced cleanup as the requested kill');
 }
 async function stop(directory,label){await command(directory,label,['shell','am','force-stop',pkg]);await gone(directory,label+'-pid');}
-async function exportDatabase(directory,dbCase){
- const target=path.join(directory,'database');await fs.mkdir(target);const files=[];
+async function exportDatabase(directory,dbCase,leaf='database'){
+ const target=path.join(directory,leaf);await fs.mkdir(target);const files=[];
  const observe=async(label,args,options={})=>{
   const result=await command(directory,'capture-'+label,args,{...options,allowFailure:true});
   return {...result,stdout:result.text,stderr:result.stderr.toString('utf8')};
@@ -117,7 +117,7 @@ async function operation(context,operation,extra={}){
    observed.status='observed';observed.result=result;
   }
   return observed;
- }catch(error){observed.error=String(error.stack||error);if(started&&!observed.database){try{await stop(directory,'failure-stop');observed.database=await exportDatabase(directory,dbCase);}catch(capture){observed.captureError=String(capture);}}throw error;}
+ }catch(error){observed.error=String(error.stack||error);if(started&&!observed.database){try{await stop(directory,'failure-stop');observed.database=await exportDatabase(directory,dbCase,'failure-database');}catch(capture){observed.captureError=String(capture);}}throw error;}
  finally{await save(path.join(directory,'process.json'),observed);}
 }
 const empty={version:1,tasks:[],notes:[],projects:[],tags:[],places:[]};
