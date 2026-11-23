@@ -1,8 +1,8 @@
-# C0-03 72例逐项云端结果
+# C0-03 78例逐项云端结果
 
-真实运行：45112980707，attempt 1；SHA 1403b316eb6b3a7baf4942de537e274e7fb0d1a2。每格为实际命令/验证结果或明确环境/API阻塞。Android格为未执行的blocked占位，不能算测试执行。第二次run45116193790、SHA d5559d3cdd27907b9dc1805ec7e5b5056abcfabb已真实重跑，结果及失败集合相同；摘要核对全部通过，详见主报告。
+实际run45117818661、attempt1、源码d02e416f6f353eb018a72446d4851722f2f956c6。各格是实际执行/验证结果或明确blocked位置。Android全部未执行，不能计为测试通过。前两次72例报告与日志保留在Git历史132551525及主报告。负例使用共享非法字节，generate可只准备空库；合法producer事件以原wire.events为准。
 
-| 案例 | C生成 | JS生成 | C接C | JS接C | C接JS | JS接JS | C/JS比较 | Android |
+| 案例 | C生成模式 | JS生成模式 | C接C来源 | JS接C来源 | C接JS来源 | JS接JS来源 | C/JS比较 | Android |
 |---|---|---|---|---|---|---|---|---|
 | basic-note | passed | passed | passed | passed | passed | passed | passed | blocked |
 | unicode-body | passed | passed | passed | passed | passed | passed | passed | blocked |
@@ -76,3 +76,9 @@
 | cursor-int32-plus-one | passed | passed | blocked | passed | blocked | passed | blocked | blocked |
 | cursor-max-safe | passed | passed | blocked | passed | blocked | passed | blocked | blocked |
 | cursor-unsafe | passed | passed | blocked | passed | blocked | passed | blocked | blocked |
+| id-ascii-800 | passed | passed | passed | passed | passed | passed | failed | blocked |
+| id-ascii-801 | passed | passed | passed | passed | passed | passed | passed | blocked |
+| id-cjk-266 | passed | passed | passed | passed | passed | passed | failed | blocked |
+| id-cjk-267 | passed | passed | passed | passed | passed | passed | passed | blocked |
+| id-emoji-200 | passed | passed | passed | passed | passed | passed | failed | blocked |
+| id-emoji-201 | passed | passed | passed | passed | passed | passed | passed | blocked |

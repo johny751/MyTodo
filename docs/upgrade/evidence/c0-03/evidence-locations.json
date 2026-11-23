@@ -15,8 +15,15 @@
       "bytes": 3810194,
       "sha256": "44ba312e3656dc0413fa4fc46f08fafc8ab8214130d83a7fd392055388d270f8",
       "name": "c003-evidence-45116193790.zip"
+    },
+    {
+      "name": "c003-evidence-45117818661.zip",
+      "sha256": "933de0e8629b66feab0ed87dbc074a7c364b094943287df3e0380fb07e54f3c5",
+      "bytes": 4110452
     }
   ],
   "schema": "mytodo-c003-evidence-locations",
-  "currentTestedSha": "d5559d3cdd27907b9dc1805ec7e5b5056abcfabb"
+  "currentTestedSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+  "run3": "https://github.com/johny751/MyTodo/actions/runs/45117818661",
+  "suiteCases": 78
 }

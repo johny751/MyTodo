@@ -2,6 +2,8 @@
 
 日期：2026-11-23，Asia/Shanghai。**C0-03 未通过，阶段0仍未通过，D1未开始。** 本轮已经建立并在GitHub实际执行共同生产协议向量；发现的生产差异保留给C0-04，不修改协议以消除失败。Android测试APK已真实编译，但缺系统镜像，真实SQLite/WebView执行为blocked。
 
+本轮最终套件78例，最新实际run45117818661；最初两次72例结果和证据全部保留。
+
 ## 1. 提交、触发和执行身份
 
 业务分支master，默认空main未更改。本轮初始HEAD为5461714fb316ae8ad8c01b6fa0d521f72d324fd9，工作区与origin/master一致且干净。每个提交前后均按文件白名单检查，命令及真实退出码留存。用户本机不是Git仓库；没有本机项目构建、测试、SDK/Gradle缓存或应用打包。
@@ -9,7 +11,7 @@
 | 独立边界 | 提交SHA | 修改文件及原因 |
 |---|---|---|
 | CI触发规则 | `6de5f70df3f3f2b701723e77cd30c8885543408c` | `.github/workflows/phase0-baseline.yml`；将C0源码、测试、夹具及执行器加入master push路径，新增只读Android运行环境清单 |
-| 共同向量 | `bd4184dcf61e0a1bafdb56bc1e85873324cf414a` | `tests/protocol-vectors/{suite.json,README.md}`；唯一72例套件，依据现有v2文档和实现 |
+| 共同向量 | `bd4184dcf61e0a1bafdb56bc1e85873324cf414a` | `tests/protocol-vectors/{suite.json,README.md}`；初始72例套件，随后独立扩为78例，依据现有v2文档和实现 |
 | Windows适配 | `9b1e731ff16490d020e0c6a55056fd0cabd4a4e0` | `tests/protocol-harness/{windows-protocol.c,build-windows-protocol.mjs,windows-adapter-notes.md}`；真实C数据库及私有同步入口 |
 | JS适配 | `47df742a3d59e0fa4a021c39defdce2b0e9c0be6` | `tests/protocol-harness/{shared-executor.mjs,js-harness.mjs,fixture-server.mjs,js-adapter-design.md}`；真实node:sqlite及原同步函数、磁盘HTTP字节夹具 |
 | Android适配 | `f1b1b1b048f7426e9eb7505df2af5e87146c9311` | `tests/protocol-harness/android/**`，10个文件；独立测试APK、生产Java存储桥、进程重启和数据库导出入口 |
@@ -23,11 +25,11 @@
 
 ## 2. 唯一共同套件和判定
 
-72例覆盖A/a及ASCII actor排序、标点/Unicode/UTF-8与ID长度、key数量/顺序/类型、context、seq/clock/manifest/cursor整数边界、重复/乱序/缺批次、字段冲突/墓碑/迟到事件、快照及片段恢复、持久vector/clock/cursor/outbox/pending、真实SQL失败和无效输入。
+当前套件78例（原72例加6项C实际800字节边界）覆盖A/a及ASCII actor排序、标点/Unicode/UTF-8与ID长度、key数量/顺序/类型、context、seq/clock/manifest/cursor整数边界、重复/乱序/缺批次、字段冲突/墓碑/迟到事件、快照及片段恢复、持久vector/clock/cursor/outbox/pending、真实SQL失败和无效输入。
 
 `passed`=对应真实执行及其限定检查通过；`failed`=真实执行失败、状态不满足安全检查或跨端差异；`blocked`=具体环境或生产API范围无法执行；`skipped`=明确未执行；`static-reviewed`=仅源码审查。套件中的observation案例只记录真实接受/拒绝；其单端passed不能表示非法输入获协议许可。event.seq稀疏保留与batch.index缺失分开，缺中间批次调用原pull。
 
-[72例逐项结果](protocol-case-results.md)及JSON逐格标明C生成、JS生成、C接C、JS接C、C接JS、JS接JS和Android状态。负例来自明确的合成非法字节，不能声称是合法producer生成。正例的事件/记录来自生产outbox/数据库，接收方不独立模拟合并。
+[78例逐项结果](protocol-case-results.md)及JSON逐格标明C生成、JS生成、C接C、JS接C、C接JS、JS接JS和Android状态。负例来自明确的合成非法字节，不能声称是合法producer生成。部分generate模式只准备并重开空测试库；合法事件生成以原wire.events为准。负例的两来源接收位置是相同合成输入的重复执行，不能当作两个不同合法生产事件。正例的事件/记录来自生产outbox/数据库，接收方不独立模拟合并。
 
 ## 3. 三端真实路径和测试seam
 
@@ -37,7 +39,7 @@ JS：原`src/sqlite-store.mjs:createSQLiteStore`、`src/replica.mjs`及`src/delt
 
 Android：共享生产replica/delta逻辑→测试壳存储桥→原`AccountStore.sync(op=replica)`→原`ReplicaDatabase.invoke`→Android SQLite。生产Java直接编入独立applicationId `local.gxtodo.protocolharness`，不覆盖正式签名/用户数据。反射只用于fresh空测试库actor、真实连接关闭/重开、SQL trigger及raw审计。已提供force-stop/relaunch和关闭后SQLite文件导出，但本轮因环境blocked没有实际执行这些步骤。固定HTTPS的SyncStore仅由fixture HTTP测试传输壳接入合成字节，不替换业务合并算法，不宣称生产WebDAV认证通过。
 
-## 4. 两次实际结果（相同计数）
+## 4. 前两次72例实际结果（相同计数）
 
 | 实际结果范围 | passed | failed | blocked | 说明 |
 |---|---:|---:|---:|---|
@@ -51,7 +53,22 @@ Android：共享生产replica/delta逻辑→测试壳存储桥→原`AccountStor
 
 失败输入和SQL meta UPDATE/第二快照片段INSERT的before/after/reopened、真实SQLite触发器错误及进程记录均在原始结果中。当前SQL回滚及失败pull对pending/outbox的限定保全已执行；实际publish/ACK完整故障路径未执行，不能扩大为“所有失败都无提前ACK”。
 
-## 5. 已动态复现的16项差异
+
+第三次独立向量补充提交 `d02e416f6f353eb018a72446d4851722f2f956c6` 只修改suite.json与README，原72案例107056字节内容前缀SHA256保持dfcb4919afcc4596fc09684e3b8ffce75c0e46e79f3850fdfa33debbd49ce76f。Git/LF传输的78例suite SHA256为aa1e96f9b7a79fc00476ba7b3dda31f8e4cc32dd86923fed60d80fe42a275809；Windows runner检出发生CRLF转换，实际执行字节SHA256为410d4ba8dc3889abf58488e55a11024603e983ec13521d78f709fd6a75cc87a4。两种摘要分别保存，不混为同一文件字节。
+
+最新协议run：[45117818661](https://github.com/johny751/MyTodo/actions/runs/45117818661)，attempt1，被测SHA为d02e416f6f353eb018a72446d4851722f2f956c6，真实exit1、failed。原回归 [45117818711](https://github.com/johny751/MyTodo/actions/runs/45117818711) success。报告第一次文档提交132551525d6d6bda42ad06865665f1e9a1292c49仅docs/upgrade改动，其原基线run45117332400 success；不能将文档SHA当作新的协议通过结果。
+
+| 最新78例范围 | passed | failed | blocked |
+|---|---:|---:|---:|
+| Windows C模式/持久验证 | 226 | 2 | 6（C int API范围） |
+| JS模式/持久验证 | 234 | 0 | 0 |
+| Android位置 | 0 | 0 | 234（未执行） |
+| C/JS结果比较 | 190 | 38 | 6 |
+| 包含Android的比较位置 | 0 | 0 | 468（未执行） |
+
+最新9511条payload摘要全部核对匹配。原有32失败比较仍存在，新增6失败比较属于3类ID输入差异。三端兼容门槛仍未满足。
+
+## 5. 已动态复现的差异：原16类及新增3类
 
 | 案例/组 | Windows C真实结果 | JS真实结果 | 影响 |
 |---|---|---|---|
@@ -74,19 +91,37 @@ Android：共享生产replica/delta逻辑→测试壳存储桥→原`AccountStor
 
 每案例用C和JS各一来源重复，形成32项比较失败。原record.events、字段版本、conflict候选顺序与墓碑没有在导出时重新排序掩盖。快照最后一项没有SQL故障注入，不能称为“SQL失败提前ACK”；已证实的是未校验的快照进度及C整数转换错误。
 
+
+原生实际字节边界补充的六例结果（两种来源均相同）：
+
+| 案例 | UTF-8字节 / UTF-16单元 | C实际接收 | JS实际接收 | 结果 |
+|---|---|---|---|---|
+| id-ascii-800 | 800 / 800 | 接受 | 拒绝 | C完整ID持久化，重开保留；比较failed |
+| id-ascii-801 | 801 / 801 | 拒绝 | 拒绝 | 两端状态保全，比较passed |
+| id-cjk-266 | 798 / 266 | 接受 | 拒绝 | C完整中文ID持久化；比较failed |
+| id-cjk-267 | 801 / 267 | 拒绝 | 拒绝 | 两端状态保全，比较passed |
+| id-emoji-200 | 800 / 400 | 接受 | 拒绝 | C完整emoji ID持久化；比较failed |
+| id-emoji-201 | 804 / 402 | 拒绝 | 拒绝 | 两端状态保全，比较passed |
+
+接受侧实际推进vector/clock/cursor；拒绝侧保持为空。原始before/after/raw/reopened、独立进程report和SHA均保存。当前总共19类差异、38条失败比较；没有更改校验来消除它们。
+
 ## 6. 环境、命令和证据
 
 runner Windows/X64，ImageOS=win25-vs2026，ImageVersion=20261116.315.1；Node v22.23.5，node:sqlite 3.54.1。JDK Temurin17.0.21+9，API34及build-tools35.0.0；编译器路径/文件版本/SHA和各工具-version原输出在workflow/build收据中。原C builder不单独传播内部cl数字退出码，保存真实子Node构建器码和原编译输出，不把Node1编造为cl1。
 
 实际入口：`scripts/ci/c0-03.ps1`→`node tests/protocol-harness/run-matrix.mjs --output RUNNER_TEMP/c003-matrix`。每例命令为`windows-protocol.exe`或`node tests/protocol-harness/js-harness.mjs`的generate/receive/report，携带共同suite、case、独立数据库、输出、真实producer样本与loopback origin。完整argv/stdout/stderr/exit/signal均记录。Android实际编译命令为`node tests/protocol-harness/android/build-android.mjs --output-dir ...`；未运行Android存储命令。
 
-Android清单：emulatorExists=true、adbExists=true、systemImages=[]，没有booted serial/WebView。未下载镜像、不在本机补测。测试APK可编译不代表可安装产品或真实SQLite通过。后续在具备已授权镜像和WebView的GitHub runner启动测试emulator，再传明确serial执行同一72例及跨端矩阵；当前保持blocked。
+Android清单：emulatorExists=true、adbExists=true、systemImages=[]，未取得启动serial及真实WebView运行环境；没有执行WebView查询，不能断言镜像内未安装WebView。未下载镜像、不在本机补测。测试APK可编译不代表可安装产品或真实SQLite通过。后续在具备已授权镜像和WebView的GitHub runner启动测试emulator，再传明确serial执行当前同一78例及跨端矩阵；当前保持blocked。
 
 首次产物：C测试EXE SHA256 `b4de0473622d491e797f8a644904e5042ebd01beb3bdd8a56de4057849195ca0`；独立测试APK `452a41f9682bb8ba7af7df3da96be161d85c1038bf0f9a6d769a4872bf749408`。所有应用/数据库二进制留GitHub；本机仅下载3,786,781字节纯文本证据ZIP，SHA256 `b3ae2f78990cefabd8aef72a7f00059779856d0e2982cf759485270149e1ca20`。
 
 首次证据核对保留四项失败：upload-artifact默认遗漏隐藏的Android测试适配资产（主/独立两个产物），内部hash在stdout还写入时计算导致旧digest。此为证据工具问题，32项协议差异的已核验原始result不受影响。独立修复只启用隔离测试目录隐藏文件上传及把stdout交给进程退出后的外层manifest计算，不改向量/算法/期望。提交前CRLF触发git diff --check退出2，未提交；仅将两份已拥有的staged文件换为LF后恢复，原失败日志保留。
 
 证据修复提交 `d5559d3cdd27907b9dc1805ec7e5b5056abcfabb`；第二次run [45116193790](https://github.com/johny751/MyTodo/actions/runs/45116193790)，attempt1，同SHA原回归 [45116193804](https://github.com/johny751/MyTodo/actions/runs/45116193804) success。第二次矩阵仍为failed/exit1：424 passed、2 failed、222 blocked位置；比较178 passed、32 failed、438 blocked。32项失败集合与首次完全相同，没有削弱测试。8813条payload digest全部核对匹配；C测试EXE SHA256 `b84a1a97ca28e66a1b7f123111a3138d7529319bea338acc16214186ae08dd3d`，测试APK `5422d80770f70a9897a0cd05b859ef0417da025b316a37bae6816c1420087934`。第二次纯文本ZIP 3,810,194字节，SHA256 `44ba312e3656dc0413fa4fc46f08fafc8ab8214130d83a7fd392055388d270f8`。两次原日志、真实退出、产物metadata/digest、source SHA、raw/reopened和submission失败/恢复记录均保留。Actions artifact保留14天，本地纯文本留档长期保存；不能声称GitHub artifact永久可用。
+
+
+
+最新78例C测试EXE SHA256 `4b7b7de664faa607e532ecb24daefd82e461ccbe5d833d96a5729823cf4a441b`，测试APK `7bb97b84f0d67f4522ebe6dd6d2401864a1a0437c3906c0de6cfd180be963a56`，构建退出均0。纯文本证据ZIP 4,110,452字节，SHA256 `933de0e8629b66feab0ed87dbc074a7c364b094943287df3e0380fb07e54f3c5`；第三次完整source、run、日志、原始错误、payload摘要和历史提交失败/恢复记录长期保存。本轮未取得Android实际SQLite/WebView版本，不能从APK编译推断。
 
 ## 7. 收据缺口和下一步独立计划
 
@@ -95,7 +130,7 @@ Android清单：emulatorExists=true、adbExists=true、systemImages=[]，没有b
 | 顺序 | 文件范围 | 独立实现与验收 |
 |---|---|---|
 | 补齐Android运行环境 | C0-03测试runner/脚本，原Java不擅改 | 已授权的GitHub镜像/API/ABI/WebView/SQLite版本记录，真实生成、跨端接收、重开、进程重启、数据库导出；缺环境保持blocked |
-| C0-04 | `windows/database.c`、`windows/sync.c`、`src/replica.mjs`、`src/delta-sync.mjs`及共同向量 | 先确定一致actor比较、事件排序、完成实体投影后的冲突title、UTF-8/UTF-16/ID及key/context规则，再安全整数heads/cursor/pending校验；同72例三端重跑，失败不丢outbox/进度 |
+| C0-04 | `windows/database.c`、`windows/sync.c`、`src/replica.mjs`、`src/delta-sync.mjs`及共同向量 | 先确定一致actor比较、事件排序、完成实体投影后的冲突title、UTF-8/UTF-16/ID及key/context规则，再安全整数heads/cursor/pending校验；同78例三端重跑，失败不丢outbox/进度 |
 | C0-05 | `windows/sync.c`、`windows/credential-helper.c`、`src/sync-server.mjs`及合成凭据夹具 | 同一Windows runner identity真实C写→Node读/Node写→C读，旧DPAPI/新前缀、Unicode、损坏/截断格式；不使用真实账号、不得记录密码/token |
 | C0-06 | `windows/sync.c`、`src/delta-sync.mjs`及磁盘fence夹具 | 实际旧state备份、条件fence写入、guard.backup恢复与manifest发布中断；C/JS真实路径一致，不把快照测试冒充旧云迁移 |
 | C0-07 | `windows/database.c`、`windows/sync.c`及共同SQL fault入口 | prepare/step/read/meta/COMMIT错误传播；真实publish/ACK各边界失败与重启恢复。读失败不能当空数据，未成功COMMIT不得ACK/推进cursor，失败发送确认保留原批次 |

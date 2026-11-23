@@ -1,0 +1,2831 @@
+{
+  "run": {
+    "id": 45117818661,
+    "html_url": "https://github.com/johny751/MyTodo/actions/runs/45117818661",
+    "head_sha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+    "status": "completed",
+    "conclusion": "failure",
+    "run_attempt": 1,
+    "created_at": "2026-11-23T05:26:49Z",
+    "updated_at": "2026-11-23T05:29:38Z",
+    "event": "push"
+  },
+  "matrix": {
+    "status": "failed",
+    "sourceSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+    "expectedSourceSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+    "runner": {
+      "os": "Windows",
+      "arch": "X64",
+      "image": "win25-vs2026",
+      "imageVersion": "20261116.315.1",
+      "node": "v22.23.5",
+      "sqlite": "3.54.1"
+    },
+    "suiteCases": 78,
+    "executionCounts": {
+      "passed": 460,
+      "failed": 2,
+      "blocked": 240,
+      "skipped": 0,
+      "static-reviewed": 0
+    },
+    "comparisonCounts": {
+      "passed": 190,
+      "failed": 38,
+      "blocked": 474,
+      "skipped": 0,
+      "static-reviewed": 0
+    },
+    "androidBuild": {
+      "status": "passed",
+      "processExitCode": 0,
+      "apk": "D:\\a\\_temp\\c003-matrix\\build-android\\mytodo-c003-test.apk"
+    },
+    "androidEnvironment": {
+      "androidHome": "C:\\Android\\android-sdk",
+      "emulator": "C:\\Android\\android-sdk\\emulator\\emulator.exe",
+      "emulatorExists": true,
+      "adb": "C:\\Android\\android-sdk\\platform-tools\\adb.exe",
+      "adbExists": true,
+      "systemImages": [],
+      "serial": null,
+      "status": "blocked"
+    },
+    "exitCode": 1,
+    "driverError": null,
+    "failedExecutions": [
+      {
+        "id": "snapshot-cursor-unsafe--receive--windows-c--windows-c",
+        "status": "failed",
+        "executionStatus": "passed",
+        "processExitCode": 0,
+        "verification": {
+          "status": "failed",
+          "checks": [
+            {
+              "name": "result-contract",
+              "status": "passed"
+            },
+            {
+              "name": "close-reopen-full-audit",
+              "status": "passed",
+              "detail": "Same-platform metadata includes revision/dataRevision/settings/lease; object keys and row order only are canonicalized."
+            },
+            {
+              "name": "stage-contract",
+              "status": "passed"
+            },
+            {
+              "name": "wire-present",
+              "status": "passed"
+            },
+            {
+              "name": "sqlite-integrity",
+              "status": "passed"
+            },
+            {
+              "name": "stage-0-contract",
+              "status": "passed"
+            },
+            {
+              "name": "stage-0-failed-pull-obligation",
+              "status": "passed"
+            },
+            {
+              "name": "stage-0-failed-pull-cursor",
+              "status": "failed"
+            },
+            {
+              "name": "stage-1-contract",
+              "status": "passed"
+            },
+            {
+              "name": "stage-1-reopen",
+              "status": "passed"
+            },
+            {
+              "name": "stage-2-contract",
+              "status": "passed"
+            },
+            {
+              "name": "final-SQL-read-diagnostic",
+              "status": "passed",
+              "detail": {
+                "raw": [],
+                "reopened": []
+              }
+            }
+          ]
+        },
+        "restartVerification": {
+          "status": "passed",
+          "fullPersistedStateEqual": true,
+          "excludedMeta": []
+        }
+      },
+      {
+        "id": "snapshot-cursor-unsafe--receive--windows-c--javascript",
+        "status": "failed",
+        "executionStatus": "passed",
+        "processExitCode": 0,
+        "verification": {
+          "status": "failed",
+          "checks": [
+            {
+              "name": "result-contract",
+              "status": "passed"
+            },
+            {
+              "name": "close-reopen-full-audit",
+              "status": "passed",
+              "detail": "Same-platform metadata includes revision/dataRevision/settings/lease; object keys and row order only are canonicalized."
+            },
+            {
+              "name": "stage-contract",
+              "status": "passed"
+            },
+            {
+              "name": "wire-present",
+              "status": "passed"
+            },
+            {
+              "name": "sqlite-integrity",
+              "status": "passed"
+            },
+            {
+              "name": "stage-0-contract",
+              "status": "passed"
+            },
+            {
+              "name": "stage-0-failed-pull-obligation",
+              "status": "passed"
+            },
+            {
+              "name": "stage-0-failed-pull-cursor",
+              "status": "failed"
+            },
+            {
+              "name": "stage-1-contract",
+              "status": "passed"
+            },
+            {
+              "name": "stage-1-reopen",
+              "status": "passed"
+            },
+            {
+              "name": "stage-2-contract",
+              "status": "passed"
+            },
+            {
+              "name": "final-SQL-read-diagnostic",
+              "status": "passed",
+              "detail": {
+                "raw": [],
+                "reopened": []
+              }
+            }
+          ]
+        },
+        "restartVerification": {
+          "status": "passed",
+          "fullPersistedStateEqual": true,
+          "excludedMeta": []
+        }
+      }
+    ],
+    "failedComparisons": [
+      {
+        "caseId": "reversed-events",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/record/events/0/clock",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/context/producer-A",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/rows/0/record/events/0/seq",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "second"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/_deleted",
+            "right": false
+          },
+          {
+            "path": "/rows/0/record/events/0/values/createdAt",
+            "right": "2026-01-01T00:00:00Z"
+          },
+          {
+            "path": "/rows/0/record/events/1/clock",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/context/producer-A",
+            "left": 0,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/1/seq",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/values/_deleted",
+            "left": false
+          },
+          {
+            "path": "/rows/0/record/events/1/values/createdAt",
+            "left": "2026-01-01T00:00:00Z"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "right": "second"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "reversed-events",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/record/events/0/clock",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/context/producer-A",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/rows/0/record/events/0/seq",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "second"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/_deleted",
+            "right": false
+          },
+          {
+            "path": "/rows/0/record/events/0/values/createdAt",
+            "right": "2026-01-01T00:00:00Z"
+          },
+          {
+            "path": "/rows/0/record/events/1/clock",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/context/producer-A",
+            "left": 0,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/1/seq",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/values/_deleted",
+            "left": false
+          },
+          {
+            "path": "/rows/0/record/events/1/values/createdAt",
+            "left": "2026-01-01T00:00:00Z"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "right": "second"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "independent-fields",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/record/events/0/actor",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "alpha"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/color",
+            "right": "red"
+          },
+          {
+            "path": "/rows/0/record/events/1/actor",
+            "left": "a",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/color",
+            "left": "red"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "right": "alpha"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "independent-fields",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/record/events/0/actor",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "alpha"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/color",
+            "right": "red"
+          },
+          {
+            "path": "/rows/0/record/events/1/actor",
+            "left": "a",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/color",
+            "left": "red"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "right": "alpha"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "actor-A-a",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/device",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/value",
+            "left": "upper",
+            "right": "lower"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/device",
+            "left": "a",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/value",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/data/body",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/record/events/0/actor",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "upper",
+            "right": "lower"
+          },
+          {
+            "path": "/rows/0/record/events/1/actor",
+            "left": "a",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "left": "lower",
+            "right": "upper"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "actor-A-a",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/device",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/value",
+            "left": "upper",
+            "right": "lower"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/device",
+            "left": "a",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/value",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/data/body",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/record/events/0/actor",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "upper",
+            "right": "lower"
+          },
+          {
+            "path": "/rows/0/record/events/1/actor",
+            "left": "a",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "left": "lower",
+            "right": "upper"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "actor-A-a-reverse",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/data/body",
+            "left": "lower",
+            "right": "upper"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "actor-A-a-reverse",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "lower",
+            "right": "upper"
+          },
+          {
+            "path": "/rows/0/data/body",
+            "left": "lower",
+            "right": "upper"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "actor-hyphen-ascii",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "4",
+            "right": "2"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/device",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/value",
+            "left": "0",
+            "right": "3"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/device",
+            "left": "A-",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/value",
+            "left": "1",
+            "right": "0"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/2/device",
+            "left": "A0",
+            "right": "a-"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/2/value",
+            "left": "2",
+            "right": "4"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/3/device",
+            "left": "a",
+            "right": "A-"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/3/value",
+            "left": "3",
+            "right": "1"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/4/device",
+            "left": "a-",
+            "right": "A0"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/4/value",
+            "left": "4",
+            "right": "2"
+          },
+          {
+            "path": "/rows/0/data/body",
+            "left": "4",
+            "right": "2"
+          },
+          {
+            "path": "/rows/0/record/events/0/actor",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "0",
+            "right": "3"
+          },
+          {
+            "path": "/rows/0/record/events/1/actor",
+            "left": "A-",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "left": "1",
+            "right": "0"
+          },
+          {
+            "path": "/rows/0/record/events/2/actor",
+            "left": "A0",
+            "right": "a-"
+          },
+          {
+            "path": "/rows/0/record/events/2/values/body",
+            "left": "2",
+            "right": "4"
+          },
+          {
+            "path": "/rows/0/record/events/3/actor",
+            "left": "a",
+            "right": "A-"
+          },
+          {
+            "path": "/rows/0/record/events/3/values/body",
+            "left": "3",
+            "right": "1"
+          },
+          {
+            "path": "/rows/0/record/events/4/actor",
+            "left": "a-",
+            "right": "A0"
+          },
+          {
+            "path": "/rows/0/record/events/4/values/body",
+            "left": "4",
+            "right": "2"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "actor-hyphen-ascii",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "4",
+            "right": "2"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/device",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/0/value",
+            "left": "0",
+            "right": "3"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/device",
+            "left": "A-",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/1/value",
+            "left": "1",
+            "right": "0"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/2/device",
+            "left": "A0",
+            "right": "a-"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/2/value",
+            "left": "2",
+            "right": "4"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/3/device",
+            "left": "a",
+            "right": "A-"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/3/value",
+            "left": "3",
+            "right": "1"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/4/device",
+            "left": "a-",
+            "right": "A0"
+          },
+          {
+            "path": "/rows/0/conflicts/0/values/4/value",
+            "left": "4",
+            "right": "2"
+          },
+          {
+            "path": "/rows/0/data/body",
+            "left": "4",
+            "right": "2"
+          },
+          {
+            "path": "/rows/0/record/events/0/actor",
+            "left": "A",
+            "right": "a"
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "left": "0",
+            "right": "3"
+          },
+          {
+            "path": "/rows/0/record/events/1/actor",
+            "left": "A-",
+            "right": "A"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "left": "1",
+            "right": "0"
+          },
+          {
+            "path": "/rows/0/record/events/2/actor",
+            "left": "A0",
+            "right": "a-"
+          },
+          {
+            "path": "/rows/0/record/events/2/values/body",
+            "left": "2",
+            "right": "4"
+          },
+          {
+            "path": "/rows/0/record/events/3/actor",
+            "left": "a",
+            "right": "A-"
+          },
+          {
+            "path": "/rows/0/record/events/3/values/body",
+            "left": "3",
+            "right": "1"
+          },
+          {
+            "path": "/rows/0/record/events/4/actor",
+            "left": "a-",
+            "right": "A0"
+          },
+          {
+            "path": "/rows/0/record/events/4/values/body",
+            "left": "4",
+            "right": "2"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "tombstone-late-old",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/record/events/0/clock",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/context/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/seq",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/values/_deleted",
+            "left": true
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "right": "old"
+          },
+          {
+            "path": "/rows/0/record/events/1/clock",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/context/A",
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/1/seq",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "left": "old"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/_deleted",
+            "right": true
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "tombstone-late-old",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/record/events/0/clock",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/context/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/seq",
+            "left": 2,
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/0/values/_deleted",
+            "left": true
+          },
+          {
+            "path": "/rows/0/record/events/0/values/body",
+            "right": "old"
+          },
+          {
+            "path": "/rows/0/record/events/1/clock",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/context/A",
+            "right": 1
+          },
+          {
+            "path": "/rows/0/record/events/1/seq",
+            "left": 1,
+            "right": 2
+          },
+          {
+            "path": "/rows/0/record/events/1/values/body",
+            "left": "old"
+          },
+          {
+            "path": "/rows/0/record/events/1/values/_deleted",
+            "right": true
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "tombstone-concurrent-edit",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "late edit",
+            "right": "probe"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "tombstone-concurrent-edit",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/rows/0/conflicts/0/title",
+            "left": "late edit",
+            "right": "probe"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-ascii-201",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-ascii-201",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "key-three-items",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 0,
+            "right": 1
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "right": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "right": 1
+          },
+          {
+            "path": "/rows/0",
+            "right": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "probe"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"probe\",\"extra\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"probe\",\"extra\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "key-three-items",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 0,
+            "right": 1
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "right": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "right": 1
+          },
+          {
+            "path": "/rows/0",
+            "right": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "probe"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"probe\",\"extra\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"probe\",\"extra\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "context-number",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 0,
+            "right": 1
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "right": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "right": 1
+          },
+          {
+            "path": "/rows/0",
+            "right": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "probe"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"probe\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": 7,
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"probe\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "context-number",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 0,
+            "right": 1
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "right": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "right": 1
+          },
+          {
+            "path": "/rows/0",
+            "right": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "probe"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"probe\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": 7,
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"probe\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-unsafe",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-unsafe",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-heads-array",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-heads-array",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-empty-actor",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-empty-actor",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-empty-epoch",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "manifest-empty-epoch",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "prepare-int32-overflow",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": false,
+        "differences": [
+          {
+            "path": "/meta/pending/body/index",
+            "left": -2147483648,
+            "right": 2147483648
+          },
+          {
+            "path": "/meta/pending/index",
+            "left": -2147483648,
+            "right": 2147483648
+          },
+          {
+            "path": "/meta/pending/path",
+            "left": "v2/b-receiver-R--2147483648.json.gz",
+            "right": "v2/b-receiver-R-2147483648.json.gz"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": "{\"format\":\"gxtodo-batch\",\"epoch\":\"c0-03-epoch\",\"device\":\"receiver-R\",\"index\":-2147483648,\"events\":[{\"key\":\"[\\\"notes\\\",\\\"offline\\\"]\",\"values\":{\"body\":\"pending\",\"createdAt\":\"2026-01-01T00:00:00Z\",\"_deleted\":false},\"actor\":\"receiver-R\",\"seq\":1,\"clock\":1,\"context\":{\"receiver-R\":0}}]}",
+        "rightPendingBody": "{\"format\":\"gxtodo-batch\",\"epoch\":\"c0-03-epoch\",\"device\":\"receiver-R\",\"index\":2147483648,\"events\":[{\"key\":\"[\\\"notes\\\",\\\"offline\\\"]\",\"values\":{\"body\":\"pending\",\"createdAt\":\"2026-01-01T00:00:00Z\",\"_deleted\":false},\"actor\":\"receiver-R\",\"seq\":1,\"clock\":1,\"context\":{\"receiver-R\":0}}]}"
+      },
+      {
+        "caseId": "prepare-int32-overflow",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": true,
+        "wireEventsAndPendingBytesEqual": false,
+        "differences": [
+          {
+            "path": "/meta/pending/body/index",
+            "left": -2147483648,
+            "right": 2147483648
+          },
+          {
+            "path": "/meta/pending/index",
+            "left": -2147483648,
+            "right": 2147483648
+          },
+          {
+            "path": "/meta/pending/path",
+            "left": "v2/b-receiver-R--2147483648.json.gz",
+            "right": "v2/b-receiver-R-2147483648.json.gz"
+          }
+        ],
+        "stageDifferences": [],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": "{\"format\":\"gxtodo-batch\",\"epoch\":\"c0-03-epoch\",\"device\":\"receiver-R\",\"index\":-2147483648,\"events\":[{\"key\":\"[\\\"notes\\\",\\\"offline\\\"]\",\"values\":{\"body\":\"pending\",\"createdAt\":\"2026-01-01T00:00:00Z\",\"_deleted\":false},\"actor\":\"receiver-R\",\"seq\":1,\"clock\":1,\"context\":{\"receiver-R\":0}}]}",
+        "rightPendingBody": "{\"format\":\"gxtodo-batch\",\"epoch\":\"c0-03-epoch\",\"device\":\"receiver-R\",\"index\":2147483648,\"events\":[{\"key\":\"[\\\"notes\\\",\\\"offline\\\"]\",\"values\":{\"body\":\"pending\",\"createdAt\":\"2026-01-01T00:00:00Z\",\"_deleted\":false},\"actor\":\"receiver-R\",\"seq\":1,\"clock\":1,\"context\":{\"receiver-R\":0}}]}"
+      },
+      {
+        "caseId": "snapshot-cursor-unsafe",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "failed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "snapshot-cursor-unsafe",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "failed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": true,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": false,
+            "right": true
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-ascii-800",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-ascii-800",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-cjk-266",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-cjk-266",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\u4e2d\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-emoji-200",
+        "mode": "receive",
+        "source": "windows-c",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      },
+      {
+        "caseId": "id-emoji-200",
+        "mode": "receive",
+        "source": "javascript",
+        "left": "windows-c",
+        "right": "javascript",
+        "status": "failed",
+        "leftExecutionStatus": "passed",
+        "rightExecutionStatus": "passed",
+        "semanticEqual": false,
+        "stageAcceptanceEqual": false,
+        "wireEventsAndPendingBytesEqual": true,
+        "differences": [
+          {
+            "path": "/meta/clock",
+            "left": 1,
+            "right": 0
+          },
+          {
+            "path": "/meta/cursors/wire-A",
+            "left": 1
+          },
+          {
+            "path": "/meta/vector/A",
+            "left": 1
+          },
+          {
+            "path": "/rows/0",
+            "left": {
+              "conflicts": [],
+              "data": {
+                "body": "A",
+                "id": "\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00"
+              },
+              "deleted": false,
+              "key": "[\"notes\",\"\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\"]",
+              "record": {
+                "events": [
+                  {
+                    "actor": "A",
+                    "clock": 1,
+                    "context": {},
+                    "seq": 1,
+                    "values": {
+                      "_deleted": false,
+                      "body": "A"
+                    }
+                  }
+                ],
+                "key": "[\"notes\",\"\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\"]"
+              }
+            }
+          }
+        ],
+        "stageDifferences": [
+          {
+            "path": "/0/accepted",
+            "left": true,
+            "right": false
+          }
+        ],
+        "excludedCrossPlatformMeta": [
+          "revision",
+          "dataRevision",
+          "settings",
+          "lease",
+          "cachedManifest"
+        ],
+        "preserved": [
+          "record.events array order",
+          "conflicts array order",
+          "conflict value array order",
+          "tombstones",
+          "vector",
+          "clock",
+          "cursors",
+          "outbox",
+          "pending.body bytes"
+        ],
+        "leftPendingBody": null,
+        "rightPendingBody": null
+      }
+    ]
+  },
+  "artifactDigests": [
+    {
+      "id": 14792727211,
+      "name": "c003-protocol-45117818661-1",
+      "digest": "sha256:5d64014c7a54d1bd07037f9f92c417a88ca09a67e91de3e6cef502d8e7311f41",
+      "size": 5710552
+    },
+    {
+      "id": 14792585910,
+      "name": "c003-smoke-windows-c-45117818661-1",
+      "digest": "sha256:98cc0e39acf7d34c2d46af8938b2c01f339f314d7d03e7387baa260cfaf8896c",
+      "size": 559173
+    },
+    {
+      "id": 14792377215,
+      "name": "c003-smoke-javascript-45117818661-1",
+      "digest": "sha256:3b9da08a5746d3b5ca9bfef3902459edbdf9f8e097e56de9a1a830ed33b987d3",
+      "size": 10702
+    },
+    {
+      "id": 14792262754,
+      "name": "c003-smoke-android-45117818661-1",
+      "digest": "sha256:de11e248fa176cabeabe1143d324f797d9dd10c5ac40675cf723909231cf7264",
+      "size": 582558
+    }
+  ],
+  "payloadVerification": {
+    "count": 9511,
+    "status": "passed",
+    "mismatches": []
+  },
+  "cloudPayloadDirectory": "/tmp/mytodo-c003-payload-45117818661-3qjhc1iu",
+  "evidenceDirectory": "/tmp/mytodo-c003-evidence-45117818661-675dc07n"
+}
