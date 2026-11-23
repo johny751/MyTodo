@@ -1,7 +1,10 @@
 /* Credential-only console adapter. Links the actual windows/sync.c functions.
  * Never writes plaintext credentials to stdout, stderr, command lines or files. */
 #include "../../windows/native.h"
+/* Hide the CRT POSIX alias which conflicts with the production JSON dup(). */
+#define dup c005_crt_dup
 #include <io.h>
+#undef dup
 #include <fcntl.h>
 #define INPUT_LIMIT (256*1024)
 static int cloud(void){wchar_t v[16];return GetEnvironmentVariableW(L"GITHUB_ACTIONS",v,16)&&!wcscmp(v,L"true");}
