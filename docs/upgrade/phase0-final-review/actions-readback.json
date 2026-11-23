@@ -1,0 +1,920 @@
+[
+  {
+    "requestedRun": 45101481375,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T02:39:45Z",
+      "databaseId": 45101481375,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "status": "completed",
+      "updatedAt": "2026-11-23T02:41:14Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45101481375",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45112980707,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T04:37:37Z",
+      "databaseId": 45112980707,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1403b316eb6b3a7baf4942de537e274e7fb0d1a2",
+      "status": "completed",
+      "updatedAt": "2026-11-23T04:40:35Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45112980707",
+      "workflowName": "MyTodo C0-03 real production protocol vectors"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45116193790,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T05:11:20Z",
+      "databaseId": 45116193790,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "d5559d3cdd27907b9dc1805ec7e5b5056abcfabb",
+      "status": "completed",
+      "updatedAt": "2026-11-23T05:13:53Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45116193790",
+      "workflowName": "MyTodo C0-03 real production protocol vectors"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45117818661,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T05:26:49Z",
+      "databaseId": 45117818661,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+      "status": "completed",
+      "updatedAt": "2026-11-23T05:29:38Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45117818661",
+      "workflowName": "MyTodo C0-03 real production protocol vectors"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45132468377,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T07:37:33Z",
+      "databaseId": 45132468377,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "473ba126524a41ec1be0ffee8bbe1121cb44c12a",
+      "status": "completed",
+      "updatedAt": "2026-11-23T07:37:59Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45132468377",
+      "workflowName": "MyTodo C0-04 Android environment preflight"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45133421860,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T07:45:30Z",
+      "databaseId": 45133421860,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "ed0ce330f0ac6ab2ef282119df2e6daa5c7b0802",
+      "status": "completed",
+      "updatedAt": "2026-11-23T07:47:10Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45133421860",
+      "workflowName": "MyTodo C0-04 Android environment preflight"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45134179988,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T07:51:49Z",
+      "databaseId": 45134179988,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "0b42f7295b2450c9ff20174f6c1da4822efa9529",
+      "status": "completed",
+      "updatedAt": "2026-11-23T07:55:51Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45134179988",
+      "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45137698063,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T08:19:32Z",
+      "databaseId": 45137698063,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "0dcf37d6692f7fc7b0b3b3f0138a2be733a9bff5",
+      "status": "completed",
+      "updatedAt": "2026-11-23T08:33:37Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45137698063",
+      "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45140238501,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T08:38:20Z",
+      "databaseId": 45140238501,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "56a2cf19ddb4758044e1cdb76bc53ab78aa46cbc",
+      "status": "completed",
+      "updatedAt": "2026-11-23T08:52:17Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45140238501",
+      "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45153269614,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T10:07:58Z",
+      "databaseId": 45153269614,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "6d1449e4063f5944398c19bbda372b8369a5ce7c",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:09:00Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45153269614",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45153999774,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T10:12:46Z",
+      "databaseId": 45153999774,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "fad9d823ca054612ebb0e4539cca8d92dcabaec2",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:13:52Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45153999774",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45154587045,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T10:16:29Z",
+      "databaseId": 45154587045,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "2114f152e23b432dbf2df798464094c116bb57e1",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:17:34Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45154587045",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45155116261,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T10:19:58Z",
+      "databaseId": 45155116261,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "e761c493857706fbf61dac87bed7a3709eee64b9",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:20:54Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45155116261",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45157015901,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T10:32:23Z",
+      "databaseId": 45157015901,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "2e211fa743dca2f0ad67005f5977d69ede7963fa",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:33:21Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45157015901",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45158226148,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T10:40:19Z",
+      "databaseId": 45158226148,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:41:14Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45158226148",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45158226161,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T10:40:19Z",
+      "databaseId": 45158226161,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:41:49Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45158226161",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45158226276,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T10:40:19Z",
+      "databaseId": 45158226276,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+      "status": "completed",
+      "updatedAt": "2026-11-23T10:54:39Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45158226276",
+      "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45161953954,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T11:05:25Z",
+      "databaseId": 45161953954,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "bdfa69a6f97942f4bc4e3effe5cd224392b78412",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:16:39Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45161953954",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45164223526,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T11:19:54Z",
+      "databaseId": 45164223526,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:31:06Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45164223526",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45164373911,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T11:20:51Z",
+      "databaseId": 45164373911,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "a7e309e5059b4027c4dcf302d0e718d942bb233e",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:26:51Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45164373911",
+      "workflowName": "MyTodo C0-06 Android internal migration interruption"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45166586294,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T11:35:36Z",
+      "databaseId": 45166586294,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "40b0d84c07d6489583ff44e15f94cb2b2c2e6262",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:35:49Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45166586294",
+      "workflowName": "MyTodo C0-06 snapshot bootstrap and edit CAS"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45168301803,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T11:47:16Z",
+      "databaseId": 45168301803,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "25a2b080351ded5c8daab66a427ef8019f19c25b",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:53:03Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45168301803",
+      "workflowName": "MyTodo C0-06 Android internal migration interruption"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45168648555,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:49:38Z",
+      "databaseId": 45168648555,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "32e21eb69764dfa99227439b7727f0553205e5ca",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:04:24Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45168648555",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45168648565,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T11:49:38Z",
+      "databaseId": 45168648565,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "32e21eb69764dfa99227439b7727f0553205e5ca",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:51:08Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45168648565",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45168648612,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:49:38Z",
+      "databaseId": 45168648612,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "32e21eb69764dfa99227439b7727f0553205e5ca",
+      "status": "completed",
+      "updatedAt": "2026-11-23T11:50:46Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45168648612",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45169951082,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:58:32Z",
+      "databaseId": 45169951082,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "8ce0a047ec14925e08072129e4fd13b372e2e084",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:01:51Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45169951082",
+      "workflowName": "MyTodo Android failed-file observation verification"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45170150057,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:59:56Z",
+      "databaseId": 45170150057,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:06:30Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45170150057",
+      "workflowName": "MyTodo C0-06 Android internal migration interruption"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45170150060,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:59:56Z",
+      "databaseId": 45170150060,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:13:35Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45170150060",
+      "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45170150066,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:59:56Z",
+      "databaseId": 45170150066,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:01:28Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45170150066",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45170150079,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:59:56Z",
+      "databaseId": 45170150079,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:15:40Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45170150079",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45170150092,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T11:59:56Z",
+      "databaseId": 45170150092,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "status": "completed",
+      "updatedAt": "2026-11-23T12:02:10Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45170150092",
+      "workflowName": "MyTodo C0-06 snapshot bootstrap and edit CAS"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45180141745,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T13:03:30Z",
+      "databaseId": 45180141745,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "4a8dd94f7fbceeb0583c37cc7aefdb29e9937691",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:32:40Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45180141745",
+      "workflowName": "MyTodo C0-07 real transaction and publication recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45180939841,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "cancelled",
+      "createdAt": "2026-11-23T13:08:24Z",
+      "databaseId": 45180939841,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "342464b0fa97989de981afffca22732907110544",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:22:28Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45180939841",
+      "workflowName": "MyTodo C0-07 real transaction and publication recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45183273190,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T13:22:27Z",
+      "databaseId": 45183273190,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "feb0dca3a56ca8cc83d118d1b828b8f69ec768d2",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:43:24Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45183273190",
+      "workflowName": "MyTodo C0-07 real transaction and publication recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305164,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T13:40:48Z",
+      "databaseId": 45186305164,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:44:22Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305164",
+      "workflowName": "MyTodo C0-03 real production protocol vectors"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305173,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T13:40:48Z",
+      "databaseId": 45186305173,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:42:27Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305173",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305189,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T13:40:48Z",
+      "databaseId": 45186305189,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:53:17Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305189",
+      "workflowName": "MyTodo C0-07 real transaction and publication recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305196,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T13:40:48Z",
+      "databaseId": 45186305196,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:54:17Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305196",
+      "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305230,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T13:40:48Z",
+      "databaseId": 45186305230,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:52:14Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305230",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305386,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T13:40:48Z",
+      "databaseId": 45186305386,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:41:40Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305386",
+      "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305462,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T13:40:49Z",
+      "databaseId": 45186305462,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:45:34Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305462",
+      "workflowName": "MyTodo C0-06 Android internal migration interruption"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45186305576,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T13:40:49Z",
+      "databaseId": 45186305576,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "status": "completed",
+      "updatedAt": "2026-11-23T13:43:06Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45186305576",
+      "workflowName": "MyTodo C0-06 snapshot bootstrap and edit CAS"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45190559178,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:06:02Z",
+      "databaseId": 45190559178,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:19:09Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45190559178",
+      "workflowName": "MyTodo C0-07 real transaction and publication recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45190559425,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:06:02Z",
+      "databaseId": 45190559425,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:07:26Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45190559425",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45194185184,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:26:15Z",
+      "databaseId": 45194185184,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:33:06Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45194185184",
+      "workflowName": "MyTodo C0-06 Android internal migration interruption"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45194185293,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:26:15Z",
+      "databaseId": 45194185293,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:27:43Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45194185293",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45194185453,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-11-23T14:26:15Z",
+      "databaseId": 45194185453,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:37:37Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45194185453",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45199684912,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:56:50Z",
+      "databaseId": 45199684912,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:58:23Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45199684912",
+      "workflowName": "MyTodo phase 0 cloud baseline"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45199685003,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:56:50Z",
+      "databaseId": 45199685003,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "status": "completed",
+      "updatedAt": "2026-11-23T15:07:52Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45199685003",
+      "workflowName": "MyTodo C0-06 actual legacy recovery"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45199685144,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:56:50Z",
+      "databaseId": 45199685144,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "status": "completed",
+      "updatedAt": "2026-11-23T14:59:07Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45199685144",
+      "workflowName": "MyTodo C0-06 snapshot bootstrap and edit CAS"
+    },
+    "error": ""
+  },
+  {
+    "requestedRun": 45199685578,
+    "queryExit": 0,
+    "receipt": {
+      "attempt": 1,
+      "conclusion": "success",
+      "createdAt": "2026-11-23T14:56:51Z",
+      "databaseId": 45199685578,
+      "event": "push",
+      "headBranch": "master",
+      "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "status": "completed",
+      "updatedAt": "2026-11-23T15:03:29Z",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45199685578",
+      "workflowName": "MyTodo C0-06 Android internal migration interruption"
+    },
+    "error": ""
+  }
+]

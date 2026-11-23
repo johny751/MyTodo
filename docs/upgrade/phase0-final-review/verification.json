@@ -1,0 +1,3565 @@
+{
+  "schema": "mytodo-phase0-final-review",
+  "schemaVersion": 1,
+  "reviewDate": "2026-11-24",
+  "timeZone": "Asia/Shanghai",
+  "repository": "johny751/MyTodo",
+  "branch": "master",
+  "reviewedMasterSha": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+  "treeSha": "e7db82447dd94cfc2881e0c91191099a7b14ff44",
+  "scope": [
+    "C0-03",
+    "C0-04",
+    "C0-05",
+    "C0-06",
+    "C0-07",
+    "production source and CI",
+    "sync and persistence safety",
+    "Android stability",
+    "D1 entry recommendation"
+  ],
+  "acceptance": "qualified-technical-evidence",
+  "ownerApproved": false,
+  "d1Started": false,
+  "decision": {
+    "recommendation": "CONDITIONAL-GO",
+    "approved": false,
+    "allowedOnlyAfterExplicitOwnerApproval": [
+      "D1-01 contract and design",
+      "D1-02 explicit columns on isolated synthetic fixtures after contract review",
+      "D1-03/04/08 design and isolated synthetic fixture preparation"
+    ],
+    "withheld": [
+      "production backups and migration writers",
+      "D1-05/06/07 and full D1-08",
+      "real-account and production data changes",
+      "LAN + WebDAV delivery activation",
+      "cross-target ACK garbage collection",
+      "attachment transfer",
+      "signed release"
+    ],
+    "entryConditions": [
+      "owner scope and rollback record",
+      "verify no material divergence from reviewed source",
+      "cloud-only synthetic isolation"
+    ],
+    "expansionConditions": [
+      "same-db Android and first-attempt diagnostics with owner-reviewed evidence",
+      "#1 closure or documented residual-risk acceptance before formal release",
+      "T15/T16 with consistent backup, repeat-safe migration and unknown-schema rejection",
+      "Windows delayed-response lease takeover verification",
+      "per-target ACK and snapshot recovery tests before dual channel"
+    ],
+    "details": "d1-entry-decision.md"
+  },
+  "executedNewProjectTests": false,
+  "newManuallyTriggeredActionsRuns": [],
+  "localProjectBuildTestPackage": false,
+  "method": [
+    "remote master and Git tree from Codespaces",
+    "414 source/report blobs recomputed locally and in Codespaces",
+    "existing Actions metadata read back without triggering runs",
+    "existing acceptance and independent raw receipts reviewed",
+    "source and policy findings from static review"
+  ],
+  "sourceArchive": {
+    "sha256": "02a7070226f8ca9ae67ce426b7073520574a692612f6aa56f4c3e63fffe24f25",
+    "bytes": 4763620,
+    "trackedPaths": 743,
+    "verifiedBlobCount": 414,
+    "upgradeDocFiles": 182,
+    "treeLedger": "source-identity.json",
+    "treeLedgerSha256": "41f4e8f40d6a4c28c7f40e375e4e5a22ce9f20fb24bbf1f634d1aae445aaf023"
+  },
+  "actionsReadback": {
+    "path": "actions-readback.json",
+    "sha256": "3fd9a2ec4f6a14ecbb3183e2afd5f7ccd3463fc29a46bf109b81e2038a9acafe",
+    "retrieved": 51,
+    "conclusions": {
+      "cancelled": 1,
+      "failure": 23,
+      "success": 27
+    },
+    "stageRunIdsMatched": 42,
+    "meaning": "API records from existing runs. Conclusions are not project test counts or collector status.",
+    "reviewedCommitQuery": {
+      "commit": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+      "command": "gh run list --repo johny751/MyTodo --commit <reviewedMasterSha> --limit 20 --json databaseId,headSha,workflowName,status,conclusion",
+      "result": []
+    }
+  },
+  "comparator": {
+    "basis": "All tracked path, mode and blob tuples compared independently of selected archived text subset.",
+    "refs": [
+      {
+        "ref": "035c3143",
+        "commit": "035c3143ccffd98e98ecc9c58114c4ce9b011a91",
+        "tree": "f5a69d44e17e2684a7d0f163f873cc145810a46f",
+        "allDifferences": 137,
+        "nonDocumentationDifferences": [
+          ".github/workflows/android-observation-evidence.yml",
+          ".github/workflows/c0-04-protocol.yml",
+          ".github/workflows/c0-05-credentials.yml",
+          ".github/workflows/c0-06-android-interruption.yml",
+          ".github/workflows/c0-06-bootstrap.yml",
+          ".github/workflows/c0-06-migration.yml",
+          ".github/workflows/c0-07-fault-recovery.yml",
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "src/sync-server.mjs",
+          "tests/android-observation/verify-remote-file-evidence.mjs",
+          "tests/c006/README.md",
+          "tests/c006/android-kill/android-kill-entry.mjs",
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/android-kill/prepare-android-kill.mjs",
+          "tests/c006/bootstrap/js-worker.mjs",
+          "tests/c006/bootstrap/runner.mjs",
+          "tests/c006/c006-harness/android-entry.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/c006/c006-harness/fixture-server.mjs",
+          "tests/c006/c006-harness/js-worker.mjs",
+          "tests/c006/c006-harness/prepare-android.mjs",
+          "tests/c006/c006-harness/runner.mjs",
+          "tests/c006/c006-harness/seal-evidence.mjs",
+          "tests/c006/c006-harness/summarize.mjs",
+          "tests/c006/windows/README.md",
+          "tests/c006/windows/build-native.mjs",
+          "tests/c006/windows/migration-native.c",
+          "tests/c006/windows/native-runner.mjs",
+          "tests/c006/windows/workflow-snippet.yml",
+          "tests/credential-harness/build-credentials.mjs",
+          "tests/credential-harness/run-credentials.mjs",
+          "tests/credential-harness/windows-credentials.c",
+          "tests/fault-harness/android/C007CommitObserver.java",
+          "tests/fault-harness/android/C007Faults.java",
+          "tests/fault-harness/android/c007-android-entry.mjs",
+          "tests/fault-harness/android/c007-android-worker.mjs",
+          "tests/fault-harness/android/prepare-c007-android.mjs",
+          "tests/fault-harness/build-c007-windows.mjs",
+          "tests/fault-harness/c007-evidence.mjs",
+          "tests/fault-harness/c007-js-worker.mjs",
+          "tests/fault-harness/c007-same-db-controller.mjs",
+          "tests/fault-harness/c007-sql-faults.mjs",
+          "tests/fault-harness/c007-windows-worker.c",
+          "tests/fault-harness/make-c007-network-scenarios.mjs",
+          "tests/fault-harness/make-c007-scenario.mjs",
+          "tests/fault-harness/run-c007-suite.mjs",
+          "tests/protocol-harness/android/remote-file-evidence.mjs",
+          "tests/protocol-harness/android/run-android.mjs",
+          "windows/credential-helper.c",
+          "windows/database.c",
+          "windows/sync.c"
+        ],
+        "productionDifferences": [
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "src/sync-server.mjs",
+          "windows/credential-helper.c",
+          "windows/database.c",
+          "windows/sync.c"
+        ]
+      },
+      {
+        "ref": "56a2cf19",
+        "commit": "56a2cf19ddb4758044e1cdb76bc53ab78aa46cbc",
+        "tree": "c3726cb8e7873fd29d9e8e5de2426d4109addb15",
+        "allDifferences": 141,
+        "nonDocumentationDifferences": [
+          ".github/workflows/android-observation-evidence.yml",
+          ".github/workflows/c0-04-protocol.yml",
+          ".github/workflows/c0-05-credentials.yml",
+          ".github/workflows/c0-06-android-interruption.yml",
+          ".github/workflows/c0-06-bootstrap.yml",
+          ".github/workflows/c0-06-migration.yml",
+          ".github/workflows/c0-07-fault-recovery.yml",
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "src/sync-server.mjs",
+          "tests/android-observation/verify-remote-file-evidence.mjs",
+          "tests/c006/README.md",
+          "tests/c006/android-kill/android-kill-entry.mjs",
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/android-kill/prepare-android-kill.mjs",
+          "tests/c006/bootstrap/js-worker.mjs",
+          "tests/c006/bootstrap/runner.mjs",
+          "tests/c006/c006-harness/android-entry.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/c006/c006-harness/fixture-server.mjs",
+          "tests/c006/c006-harness/js-worker.mjs",
+          "tests/c006/c006-harness/prepare-android.mjs",
+          "tests/c006/c006-harness/runner.mjs",
+          "tests/c006/c006-harness/seal-evidence.mjs",
+          "tests/c006/c006-harness/summarize.mjs",
+          "tests/c006/windows/README.md",
+          "tests/c006/windows/build-native.mjs",
+          "tests/c006/windows/migration-native.c",
+          "tests/c006/windows/native-runner.mjs",
+          "tests/c006/windows/workflow-snippet.yml",
+          "tests/credential-harness/build-credentials.mjs",
+          "tests/credential-harness/run-credentials.mjs",
+          "tests/credential-harness/windows-credentials.c",
+          "tests/fault-harness/android/C007CommitObserver.java",
+          "tests/fault-harness/android/C007Faults.java",
+          "tests/fault-harness/android/c007-android-entry.mjs",
+          "tests/fault-harness/android/c007-android-worker.mjs",
+          "tests/fault-harness/android/prepare-c007-android.mjs",
+          "tests/fault-harness/build-c007-windows.mjs",
+          "tests/fault-harness/c007-evidence.mjs",
+          "tests/fault-harness/c007-js-worker.mjs",
+          "tests/fault-harness/c007-same-db-controller.mjs",
+          "tests/fault-harness/c007-sql-faults.mjs",
+          "tests/fault-harness/c007-windows-worker.c",
+          "tests/fault-harness/make-c007-network-scenarios.mjs",
+          "tests/fault-harness/make-c007-scenario.mjs",
+          "tests/fault-harness/run-c007-suite.mjs",
+          "tests/protocol-harness/android/remote-file-evidence.mjs",
+          "tests/protocol-harness/android/run-android.mjs",
+          "windows/credential-helper.c",
+          "windows/database.c",
+          "windows/sync.c"
+        ],
+        "productionDifferences": [
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "src/sync-server.mjs",
+          "windows/credential-helper.c",
+          "windows/database.c",
+          "windows/sync.c"
+        ]
+      },
+      {
+        "ref": "648f5508",
+        "commit": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "tree": "37b2bcf441ba03f3700f0479e7a31c1ba56d5987",
+        "allDifferences": 130,
+        "nonDocumentationDifferences": [
+          ".github/workflows/android-observation-evidence.yml",
+          ".github/workflows/c0-06-android-interruption.yml",
+          ".github/workflows/c0-06-bootstrap.yml",
+          ".github/workflows/c0-06-migration.yml",
+          ".github/workflows/c0-07-fault-recovery.yml",
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "tests/android-observation/verify-remote-file-evidence.mjs",
+          "tests/c006/README.md",
+          "tests/c006/android-kill/android-kill-entry.mjs",
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/android-kill/prepare-android-kill.mjs",
+          "tests/c006/bootstrap/js-worker.mjs",
+          "tests/c006/bootstrap/runner.mjs",
+          "tests/c006/c006-harness/android-entry.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/c006/c006-harness/fixture-server.mjs",
+          "tests/c006/c006-harness/js-worker.mjs",
+          "tests/c006/c006-harness/prepare-android.mjs",
+          "tests/c006/c006-harness/runner.mjs",
+          "tests/c006/c006-harness/seal-evidence.mjs",
+          "tests/c006/c006-harness/summarize.mjs",
+          "tests/c006/windows/README.md",
+          "tests/c006/windows/build-native.mjs",
+          "tests/c006/windows/migration-native.c",
+          "tests/c006/windows/native-runner.mjs",
+          "tests/c006/windows/workflow-snippet.yml",
+          "tests/fault-harness/android/C007CommitObserver.java",
+          "tests/fault-harness/android/C007Faults.java",
+          "tests/fault-harness/android/c007-android-entry.mjs",
+          "tests/fault-harness/android/c007-android-worker.mjs",
+          "tests/fault-harness/android/prepare-c007-android.mjs",
+          "tests/fault-harness/build-c007-windows.mjs",
+          "tests/fault-harness/c007-evidence.mjs",
+          "tests/fault-harness/c007-js-worker.mjs",
+          "tests/fault-harness/c007-same-db-controller.mjs",
+          "tests/fault-harness/c007-sql-faults.mjs",
+          "tests/fault-harness/c007-windows-worker.c",
+          "tests/fault-harness/make-c007-network-scenarios.mjs",
+          "tests/fault-harness/make-c007-scenario.mjs",
+          "tests/fault-harness/run-c007-suite.mjs",
+          "tests/protocol-harness/android/remote-file-evidence.mjs",
+          "tests/protocol-harness/android/run-android.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ],
+        "productionDifferences": [
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ]
+      },
+      {
+        "ref": "43cce5d5",
+        "commit": "43cce5d58335df33f3e77b5d6b649fabab05d280",
+        "tree": "665e2a9ead172bc01afeb73ed07d2a5c001bf022",
+        "allDifferences": 127,
+        "nonDocumentationDifferences": [
+          ".github/workflows/android-observation-evidence.yml",
+          ".github/workflows/c0-06-android-interruption.yml",
+          ".github/workflows/c0-06-bootstrap.yml",
+          ".github/workflows/c0-06-migration.yml",
+          ".github/workflows/c0-07-fault-recovery.yml",
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "tests/android-observation/verify-remote-file-evidence.mjs",
+          "tests/c006/README.md",
+          "tests/c006/android-kill/android-kill-entry.mjs",
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/android-kill/prepare-android-kill.mjs",
+          "tests/c006/bootstrap/js-worker.mjs",
+          "tests/c006/bootstrap/runner.mjs",
+          "tests/c006/c006-harness/android-entry.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/c006/c006-harness/fixture-server.mjs",
+          "tests/c006/c006-harness/js-worker.mjs",
+          "tests/c006/c006-harness/prepare-android.mjs",
+          "tests/c006/c006-harness/runner.mjs",
+          "tests/c006/c006-harness/seal-evidence.mjs",
+          "tests/c006/c006-harness/summarize.mjs",
+          "tests/c006/windows/README.md",
+          "tests/c006/windows/build-native.mjs",
+          "tests/c006/windows/migration-native.c",
+          "tests/c006/windows/native-runner.mjs",
+          "tests/c006/windows/workflow-snippet.yml",
+          "tests/fault-harness/android/C007CommitObserver.java",
+          "tests/fault-harness/android/C007Faults.java",
+          "tests/fault-harness/android/c007-android-entry.mjs",
+          "tests/fault-harness/android/c007-android-worker.mjs",
+          "tests/fault-harness/android/prepare-c007-android.mjs",
+          "tests/fault-harness/build-c007-windows.mjs",
+          "tests/fault-harness/c007-evidence.mjs",
+          "tests/fault-harness/c007-js-worker.mjs",
+          "tests/fault-harness/c007-same-db-controller.mjs",
+          "tests/fault-harness/c007-sql-faults.mjs",
+          "tests/fault-harness/c007-windows-worker.c",
+          "tests/fault-harness/make-c007-network-scenarios.mjs",
+          "tests/fault-harness/make-c007-scenario.mjs",
+          "tests/fault-harness/run-c007-suite.mjs",
+          "tests/protocol-harness/android/remote-file-evidence.mjs",
+          "tests/protocol-harness/android/run-android.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ],
+        "productionDifferences": [
+          "src/delta-sync.mjs",
+          "src/sqlite-store.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ]
+      },
+      {
+        "ref": "1b9c41fb",
+        "commit": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "tree": "7ba91a533640877df7163a94440b5e3dc7b228b1",
+        "allDifferences": 97,
+        "nonDocumentationDifferences": [
+          ".github/workflows/c0-07-fault-recovery.yml",
+          "src/sqlite-store.mjs",
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/fault-harness/android/C007CommitObserver.java",
+          "tests/fault-harness/android/C007Faults.java",
+          "tests/fault-harness/android/c007-android-entry.mjs",
+          "tests/fault-harness/android/c007-android-worker.mjs",
+          "tests/fault-harness/android/prepare-c007-android.mjs",
+          "tests/fault-harness/build-c007-windows.mjs",
+          "tests/fault-harness/c007-evidence.mjs",
+          "tests/fault-harness/c007-js-worker.mjs",
+          "tests/fault-harness/c007-same-db-controller.mjs",
+          "tests/fault-harness/c007-sql-faults.mjs",
+          "tests/fault-harness/c007-windows-worker.c",
+          "tests/fault-harness/make-c007-network-scenarios.mjs",
+          "tests/fault-harness/make-c007-scenario.mjs",
+          "tests/fault-harness/run-c007-suite.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ],
+        "productionDifferences": [
+          "src/sqlite-store.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ]
+      },
+      {
+        "ref": "a0ad1940",
+        "commit": "a0ad1940be5dfe3d74b940fcbe864d8e30f93021",
+        "tree": "bef435265c979bf7f47377e85f62ee5b1d98cada",
+        "allDifferences": 83,
+        "nonDocumentationDifferences": [
+          ".github/workflows/c0-07-fault-recovery.yml",
+          "src/sqlite-store.mjs",
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/fault-harness/android/C007CommitObserver.java",
+          "tests/fault-harness/android/C007Faults.java",
+          "tests/fault-harness/android/c007-android-entry.mjs",
+          "tests/fault-harness/android/c007-android-worker.mjs",
+          "tests/fault-harness/android/prepare-c007-android.mjs",
+          "tests/fault-harness/build-c007-windows.mjs",
+          "tests/fault-harness/c007-evidence.mjs",
+          "tests/fault-harness/c007-js-worker.mjs",
+          "tests/fault-harness/c007-same-db-controller.mjs",
+          "tests/fault-harness/c007-sql-faults.mjs",
+          "tests/fault-harness/c007-windows-worker.c",
+          "tests/fault-harness/make-c007-network-scenarios.mjs",
+          "tests/fault-harness/make-c007-scenario.mjs",
+          "tests/fault-harness/run-c007-suite.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ],
+        "productionDifferences": [
+          "src/sqlite-store.mjs",
+          "windows/database.c",
+          "windows/sync.c"
+        ]
+      },
+      {
+        "ref": "f9ca0f1a",
+        "commit": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "tree": "3afa80354b3c964077372c85802fefa4c1d25e24",
+        "allDifferences": 64,
+        "nonDocumentationDifferences": [
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/c006-harness/android-runner.mjs",
+          "tests/fault-harness/c007-windows-worker.c"
+        ],
+        "productionDifferences": []
+      },
+      {
+        "ref": "de7ce40c",
+        "commit": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "tree": "4a96252ba4a82a1ead641562ebed602865cc2616",
+        "allDifferences": 63,
+        "nonDocumentationDifferences": [
+          "tests/c006/android-kill/android-kill-runner.mjs",
+          "tests/c006/c006-harness/android-runner.mjs"
+        ],
+        "productionDifferences": []
+      },
+      {
+        "ref": "edfde91e",
+        "commit": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "tree": "fb049b2f4e9806f7b3b7418c631c2d3f6271e54f",
+        "allDifferences": 62,
+        "nonDocumentationDifferences": [
+          "tests/c006/c006-harness/android-runner.mjs"
+        ],
+        "productionDifferences": []
+      },
+      {
+        "ref": "19ceea62",
+        "commit": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "tree": "2094f5168cccdf635b1b6c33ae41855a12bb6666",
+        "allDifferences": 61,
+        "nonDocumentationDifferences": [],
+        "productionDifferences": []
+      },
+      {
+        "ref": "bc3f44d1",
+        "commit": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+        "tree": "e7db82447dd94cfc2881e0c91191099a7b14ff44",
+        "allDifferences": 0,
+        "nonDocumentationDifferences": [],
+        "productionDifferences": []
+      }
+    ],
+    "currentProductionEqualsF9De7And19ce": true,
+    "currentMasterHasDirectNewTestRun": false,
+    "keyFiles": [
+      {
+        "path": "windows/native.h",
+        "blobSha1": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "sha256": "cf06ccd5ac6c9c60698f5981330b431686c372fa7c96e90d49e8967b6c11d381"
+      },
+      {
+        "path": "windows/database.c",
+        "blobSha1": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+        "sha256": "17c980cca5c5f3a8ff7f02eebd73a29719ea00c1576323eb0b5b1a39348e5840"
+      },
+      {
+        "path": "windows/sync.c",
+        "blobSha1": "208144931154968925d6bf41ba3bba49606c534b",
+        "sha256": "23ca036978d47a56580613eb02f88844b4368138773728b3c3d8369d8b220467"
+      },
+      {
+        "path": "windows/storage.c",
+        "blobSha1": "a94c587132e8a42138aa86eea6de08a0d15b800e",
+        "sha256": "2483aa5b2fb6502ff1dbf323e64bfc12c026432d2eece93b43d4df96f95a4456"
+      },
+      {
+        "path": "windows/credential-helper.c",
+        "blobSha1": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "sha256": "c2c22a775d6f14a021b12cadb022a604e219e591ebc46090335c752f9b17ee5a"
+      },
+      {
+        "path": "windows/operations.c",
+        "blobSha1": "530ddd597625fa89c7656c9e8b33428f531853e4",
+        "sha256": "61f02a521236d09786d1dbe2f4305c96d0f1be62cdee1cb833e9944b60afc483"
+      },
+      {
+        "path": "windows/main.c",
+        "blobSha1": "9938c4c938e81c39377ccf31f8103a15fd1ef7d7",
+        "sha256": "b4dd54756f2b05d5d8c04f978d452e2b831dacd23ded72450a811ec72d2aca77"
+      },
+      {
+        "path": "windows/vendor/sqlite3.c",
+        "blobSha1": "0b227f0e604da5fa4e26186b6eb4b7ac2a88e732",
+        "sha256": "254d5579c10ae6a7425ddd055abbdecc5d7b7e6b473ddf28729cd831f25bbd8d"
+      },
+      {
+        "path": "windows/vendor/sqlite3.h",
+        "blobSha1": "33dbec2c09b18d173d707a22049808d20df93e93",
+        "sha256": "61ded34ca2ddf50ad19cf5c55f595db775350be22d09efa5cda359caf2ee93b0"
+      },
+      {
+        "path": "server.mjs",
+        "blobSha1": "fc914ff40a44b5f22b7523b847298953429d6e54",
+        "sha256": "974f390d16190d2394cd5845276a6d19c8ee49d01ccd8fb28da2da920c930179"
+      },
+      {
+        "path": "package.json",
+        "blobSha1": "aff72e9b38f3387a50f189caa8a2debdf5efbf83",
+        "sha256": "cec7f06c05c5180bd000a8d0e20fd22da0faaf305aaf930af01a46e96630b9a3"
+      },
+      {
+        "path": "src/account-store.mjs",
+        "blobSha1": "c9c7df956ef233f2a8c0253ed3b055f998432e2b",
+        "sha256": "b841a27b28bbb8a22bc750d3242bb20b1d104b4a48c16a28a9b7f2df1ec78bb1"
+      },
+      {
+        "path": "src/accounts.mjs",
+        "blobSha1": "bb015b7214328e643c28e21688f7d46e4da70677",
+        "sha256": "a222c3eabc1250bb189f46f347c3e28eec1f9b2521eaede2e242f9231b43c05d"
+      },
+      {
+        "path": "src/app.mjs",
+        "blobSha1": "c2d02c82c9fb890acfbfbf71a3ecc0eb56e1fb69",
+        "sha256": "159150182dcf28e50734f54ff9844401eda35358eb165fcaf062b535895773ae"
+      },
+      {
+        "path": "src/compat.mjs",
+        "blobSha1": "39bf45a26825a263659190ff4538df63c1e26a0a",
+        "sha256": "375bc2a464504c8aef79f058a49fd8ce4f477c5666a15963300e6c996305ddf1"
+      },
+      {
+        "path": "src/delta-sync.mjs",
+        "blobSha1": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "sha256": "c6c9511314ee3b03aa28a708cfef10006b58a1f74ee24eb5b6fc6feb5a80dad5"
+      },
+      {
+        "path": "src/model.mjs",
+        "blobSha1": "7141bde098d4bd709939de5786133a32a1598c78",
+        "sha256": "837f10b5b1486e3be7f276cc8c00758afd420c9d49537b28d3d96341f1bf8c97"
+      },
+      {
+        "path": "src/replica.mjs",
+        "blobSha1": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "sha256": "f589a1e49e9e4c770ee9904fbd0c511332d52f0fb1f1f980cfb93885376a9f92"
+      },
+      {
+        "path": "src/sqlite-store.mjs",
+        "blobSha1": "a4325116f184312ddae822ca56f178eb57aaec40",
+        "sha256": "0f398ec44f2d3ded1c3a1db9adcc7235e150558cf7f58e9a3853770d0f713344"
+      },
+      {
+        "path": "src/storage.mjs",
+        "blobSha1": "5bfb179f05e867ef573b52268224986ac5416761",
+        "sha256": "5083cd46eb1f90248aa5b65bd09f3b0590d4f02330d3bffe01ede63608ea84f4"
+      },
+      {
+        "path": "src/sync-client.mjs",
+        "blobSha1": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "sha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274"
+      },
+      {
+        "path": "src/sync-core.mjs",
+        "blobSha1": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a"
+      },
+      {
+        "path": "src/sync-server.mjs",
+        "blobSha1": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "sha256": "d46cb1454c69e15f6e82cd5187ab0c55b46f590024f311b5f34f0d1f635365ba"
+      },
+      {
+        "path": "android/AndroidManifest.xml",
+        "blobSha1": "299bf79b96bb63868b8a3841924315c2d197df1c",
+        "sha256": "eb8c26e489e3d541d1aa4b56be08901136de409b6714478f626f06c0c7916508"
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/AccountStore.java",
+        "blobSha1": "55bb03bf353bfbb37bde96e78d84b63a50dc53d4",
+        "sha256": "cd1128d50a4a1a5283d41bf7ac5daddac9e974d77304d67da950bf282ff11a20"
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/MainActivity.java",
+        "blobSha1": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "sha256": "6f7acc6c8c2bdd89e079d05d2845747dc7b972883b9ed4749443d534992922e0"
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+        "blobSha1": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "sha256": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663"
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/SyncStore.java",
+        "blobSha1": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "sha256": "c73a7cac4c3f48d13cf1b0ef60504c06a4d891963226ddfa9bbf5c65dc80934e"
+      },
+      {
+        "path": "scripts/build-android.mjs",
+        "blobSha1": "a0be5c2047c68f0bdaf7e5b8234481e75f140f32",
+        "sha256": "341feb8191f067cd7c3844c55b2cf40cfb198f5fc6c93910492de9783c89234d"
+      },
+      {
+        "path": "scripts/build-credential-helper.mjs",
+        "blobSha1": "184997a12f0a3996273deab962906cfffdc1caf5",
+        "sha256": "5b193779666b7686e55b301c76ceb68282b1a8edf9926694f3e0a32093002812"
+      },
+      {
+        "path": "scripts/build-windows.mjs",
+        "blobSha1": "f8d478e2b5b0be6591d39def7f2bdb1b76afd51b",
+        "sha256": "a9199dc51822c2a12d6823f23417286c82525c36243d94d00130a94044d93693"
+      },
+      {
+        "path": "scripts/package-release.mjs",
+        "blobSha1": "3ba93ada1cba6acd149ed12faffe4ef8de89e8ff",
+        "sha256": "34d93807335fb776f25be3aefdf36abc0ed19ff9aa8879d4d3779f7b446b5d41"
+      },
+      {
+        "path": "scripts/verify-webdav.mjs",
+        "blobSha1": "38334ad702fa5830190e4c8e4b8807c3a09e2146",
+        "sha256": "aaa317ca3ce68215c90d2a95f05cb4c37ad734db3f15d2e539d880e50463fc58"
+      },
+      {
+        "path": ".github/workflows/android-observation-evidence.yml",
+        "blobSha1": "3e548f7d58be4ecfe7639a9ba15e277f9573e432",
+        "sha256": "39cd73646f336a67f0b400629d6a481d8cab8ed52897182fa800b68811d57542"
+      },
+      {
+        "path": ".github/workflows/c0-03-protocol.yml",
+        "blobSha1": "e06766136a8f3ea05b26e31257cc0e52e71f8b67",
+        "sha256": "70c0de326efc7a6ee642b0c5d5131119767c744fc969b04040cf9b38884d4503"
+      },
+      {
+        "path": ".github/workflows/c0-04-android-preflight.yml",
+        "blobSha1": "9841b17ca7e66f8ea813a423a8848cb070a4df8b",
+        "sha256": "1ecaf284caa50e22023ac659b22b8405b0a5b7cd8c14b97b8235c7677362e2ac"
+      },
+      {
+        "path": ".github/workflows/c0-04-protocol.yml",
+        "blobSha1": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "sha256": "dfbc7daffa4781ca70fa2f82ab3365789c22bf5f95365a97af726f492c36f1d0"
+      },
+      {
+        "path": ".github/workflows/c0-05-credentials.yml",
+        "blobSha1": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "sha256": "43426672685fd4b476d71dd3c841e436283b8d7f8b8ec20193dd4f49c14fed40"
+      },
+      {
+        "path": ".github/workflows/c0-06-android-interruption.yml",
+        "blobSha1": "e97cb34a0b85ffe6ea12c693603aad409946d5a9",
+        "sha256": "90c2b42e261c1b189c664f96553f5cbeb629589ae64be789c8c8f936d8905e0b"
+      },
+      {
+        "path": ".github/workflows/c0-06-bootstrap.yml",
+        "blobSha1": "6b6dc8cb12ff93de40d6c099d9bf144db6b54371",
+        "sha256": "624ba053b710aafef92458b4a351513a3805ae8c31302df1030a9f01967f7d9a"
+      },
+      {
+        "path": ".github/workflows/c0-06-migration.yml",
+        "blobSha1": "166864d813410829cfb3338a8260579865a20c5f",
+        "sha256": "fce1491ba5950686db14db17f5e0b456294ac54135dadf1399bd6eb8391b90c5"
+      },
+      {
+        "path": ".github/workflows/c0-07-fault-recovery.yml",
+        "blobSha1": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6",
+        "sha256": "fe7e104a02dcf9319f67a2406d9fb971fc5f3e1b295cbcaf72e629b59b733a9b"
+      },
+      {
+        "path": ".github/workflows/phase0-baseline.yml",
+        "blobSha1": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "sha256": "d2b2e63db3ecd154359b48d0ae0a2b2dc670b56ab3ed9fc1d47746a1fbf4707f"
+      }
+    ]
+  },
+  "verifiedMasterEvidenceFileReferences": 31,
+  "phaseRecords": [
+    {
+      "phase": "C0-03",
+      "acceptanceStatus": "accepted-with-qualifications-via-c0-04",
+      "historicalDirectFailurePreserved": true,
+      "coverage": "Common 78-vector protocol baseline closure with C0-04.",
+      "directAdoptionEvidence": [
+        "C003-C004-45140238501-attempt1"
+      ],
+      "publishedReportCommits": [
+        "505f17611e7dfc6a9726388a9ccaade589e60a1c",
+        "b805c39cb6f3ab78f0da0f14b49627e401781b1c"
+      ],
+      "evidencePaths": [
+        "docs/upgrade/protocol-compatibility.md",
+        "docs/upgrade/protocol-case-results.md",
+        "docs/upgrade/protocol-case-results.json",
+        "docs/upgrade/evidence/c0-03/compact-summary-45117818661.json",
+        "docs/upgrade/c0-04-status.md",
+        "docs/upgrade/evidence/c0-03/compact-summary-45112980707.json",
+        "docs/upgrade/evidence/c0-03/compact-summary-45116193790.json",
+        "docs/upgrade/evidence/c0-03/evidence-locations.json"
+      ],
+      "independenceAndLimits": "Original per-case evidence compared against the C0-04 closure. No separate new C0-03 green run or Android storage execution at d02e. Historical API and environment blocks retained.",
+      "runs": [
+        {
+          "runId": "45112980707",
+          "sourceSha": "1403b316eb6b3a7baf4942de537e274e7fb0d1a2",
+          "role": "original 72-vector failure",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45112980707",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 426,
+            "passed": 424,
+            "failed": 2,
+            "blocked": 222,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 210,
+            "passed": 178,
+            "failed": 32,
+            "blocked": 438,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": null,
+            "complete": null,
+            "commandExitCodes": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "qualification": "Original retrieval commands succeeded; 4 archived payload mismatches across 8,814 indexed digests."
+          },
+          "retries": null,
+          "inputVectors": 72,
+          "testExitCode": 1,
+          "androidCasesExecuted": 0,
+          "androidWrapperExitCode": 78,
+          "androidActionsParentExitCode": 1
+        },
+        {
+          "runId": "45116193790",
+          "sourceSha": "d5559d3cdd27907b9dc1805ec7e5b5056abcfabb",
+          "role": "72-vector evidence repair, execution left failing",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45116193790",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 426,
+            "passed": 424,
+            "failed": 2,
+            "blocked": 222,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 210,
+            "passed": 178,
+            "failed": 32,
+            "blocked": 438,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": null,
+            "complete": null,
+            "commandExitCodes": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "qualification": "Original retrieval commands succeeded; 8,813 payload digests matched."
+          },
+          "retries": null,
+          "inputVectors": 72,
+          "testExitCode": 1,
+          "androidCasesExecuted": 0,
+          "androidWrapperExitCode": 78,
+          "androidActionsParentExitCode": 1
+        },
+        {
+          "runId": "45117818661",
+          "sourceSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+          "role": "last standalone 78-vector baseline",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45117818661",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 462,
+            "passed": 460,
+            "failed": 2,
+            "blocked": 240,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 228,
+            "passed": 190,
+            "failed": 38,
+            "blocked": 474,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": null,
+            "complete": null,
+            "commandExitCodes": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "qualification": "Original retrieval commands succeeded; 9,511 payload digests matched."
+          },
+          "retries": null,
+          "inputVectors": 78,
+          "testExitCode": 1,
+          "windows": {
+            "passed": 226,
+            "failed": 2,
+            "apiBlocked": 6
+          },
+          "javascript": {
+            "passed": 234
+          },
+          "android": {
+            "executed": 0,
+            "environmentBlocked": 234
+          },
+          "desktopComparisons": {
+            "performed": 228,
+            "passed": 190,
+            "failed": 38,
+            "blocked": 6,
+            "skipped": 0
+          },
+          "androidRelatedComparisonsBlocked": 468,
+          "androidWrapperExitCode": 78,
+          "androidActionsParentExitCode": 1
+        }
+      ],
+      "masterEvidenceIdentities": [
+        {
+          "path": "docs/upgrade/protocol-compatibility.md",
+          "gitBlob": "42fa964fe7ef5eaea6faa6e011633c77dc17da7f",
+          "sha256": "435f98a1884f4a56231b5f812ecf2e45342b56f1ecb9661b9352a247832a61c7",
+          "bytes": 18538
+        },
+        {
+          "path": "docs/upgrade/protocol-case-results.md",
+          "gitBlob": "e41e41db59c0924645b98f2ba985577ead77b63c",
+          "sha256": "6bddb4e7942a70e02dd260a3f2f55212c224d841c0b160776a1e9208b4b4512a",
+          "bytes": 7871
+        },
+        {
+          "path": "docs/upgrade/protocol-case-results.json",
+          "gitBlob": "29d0bad9cb42eec7697fcb687d3d7ee5675a9fdd",
+          "sha256": "86af3c7e803466fb23f8bcc54aa265e662c0b660bf4acb17bd7d710f4d31b3ff",
+          "bytes": 19807
+        },
+        {
+          "path": "docs/upgrade/evidence/c0-03/compact-summary-45117818661.json",
+          "gitBlob": "a942c11847ae084284c1c8b6a81f5ab2aa893083",
+          "sha256": "3debb5bd11b1d3ad9354be0e05e53033a978ead033b47aa3d22aa58c4fe58604",
+          "bytes": 106976
+        },
+        {
+          "path": "docs/upgrade/c0-04-status.md",
+          "gitBlob": "f109841f50ee7ec4f4aea0fd16b00f4e3feeb3a4",
+          "sha256": "4caa263a67060d0d1bf36c4c813fd5ebc91ffdc8488ea019920c06a0d12002c3",
+          "bytes": 10150
+        },
+        {
+          "path": "docs/upgrade/evidence/c0-03/compact-summary-45112980707.json",
+          "gitBlob": "508f7d44284970c0812364d789337a636e73f541",
+          "sha256": "e7c768c2e3b0ba5aedae24009e0cf371a4b70876b62642bfa22b8826e8bf1adb",
+          "bytes": 66789
+        },
+        {
+          "path": "docs/upgrade/evidence/c0-03/compact-summary-45116193790.json",
+          "gitBlob": "3d2f0ffdfa0a3fcad0e67b24f46421b45c722540",
+          "sha256": "c6c51ad8a1a273bc0c084f5d1790f4dacd5136aeb725172fdb6f01fb6829a372",
+          "bytes": 65565
+        },
+        {
+          "path": "docs/upgrade/evidence/c0-03/evidence-locations.json",
+          "gitBlob": "795a77ab22fbd2473af561628a6edfa09cb521ab",
+          "sha256": "359783896b1a9386071ecf09ea294500507758ef3557ebc0d3109a1764be963b",
+          "bytes": 1010
+        }
+      ]
+    },
+    {
+      "phase": "C0-04",
+      "acceptanceStatus": "accepted-with-qualifications",
+      "publishedReportCommits": [
+        "035c3143ccffd98e98ecc9c58114c4ce9b011a91"
+      ],
+      "evidencePaths": [
+        "docs/upgrade/c0-04-status.md",
+        "docs/upgrade/c0-04-case-results.md",
+        "docs/upgrade/android-cloud-environment.md",
+        "docs/upgrade/c0-04-protocol-rules.md"
+      ],
+      "independenceAndLimits": "Cross-checked outcome grid, SQLite persistence and real wire producer attribution. Controlled fixture/harness path only. Four first crashes are real even though final result cells are green; retry new DB does not recover original DB.",
+      "runs": [
+        {
+          "runId": "45132468377",
+          "sourceSha": "473ba126524a41ec1be0ffee8bbe1121cb44c12a",
+          "role": "Android environment preflight",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45132468377",
+          "execution": null,
+          "comparisons": null,
+          "collector": null,
+          "retries": null,
+          "wrapperExitCode": 78
+        },
+        {
+          "runId": "45133421860",
+          "sourceSha": "ed0ce330f0ac6ab2ef282119df2e6daa5c7b0802",
+          "role": "Android environment preflight",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45133421860",
+          "execution": null,
+          "comparisons": null,
+          "collector": null,
+          "retries": null,
+          "wrapperExitCode": 78,
+          "emulatorExitCode": 127
+        },
+        {
+          "runId": "45134179988",
+          "sourceSha": "0b42f7295b2450c9ff20174f6c1da4822efa9529",
+          "role": "desktop partial / Android blocked",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45134179988",
+          "execution": {
+            "unit": "desktop-protocol-execution-position",
+            "executed": 468,
+            "passed": 468,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 234,
+            "passed": 234,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": null,
+            "complete": null,
+            "commandExitCodes": [],
+            "qualification": "4 artifacts, 5,204 evidence rows rehashed in Codespaces."
+          },
+          "retries": null,
+          "androidStageExitCode": 78,
+          "completeStageExitCode": 78
+        },
+        {
+          "runId": "45137698063",
+          "sourceSha": "0dcf37d6692f7fc7b0b3b3f0138a2be733a9bff5",
+          "role": "first actual three-platform attempt",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45137698063",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 933,
+            "passed": 931,
+            "failed": 2,
+            "blocked": 0,
+            "skipped": 3
+          },
+          "comparisons": {
+            "performed": 933,
+            "passed": 929,
+            "failed": 4,
+            "blocked": 0,
+            "skipped": 3
+          },
+          "collector": {
+            "exitCode": null,
+            "complete": null,
+            "commandExitCodes": [],
+            "qualification": "18 artifacts with 14,838 indexed files rehashed in Codespaces."
+          },
+          "retries": {
+            "firstCrash": 2,
+            "newDbMainRetries": null,
+            "sameDbRestartRetries": null
+          },
+          "testExitCode": 1
+        },
+        {
+          "runId": "45140238501",
+          "sourceSha": "56a2cf19ddb4758044e1cdb76bc53ab78aa46cbc",
+          "role": "C0-03 closure and C0-04 direct final matrix",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45140238501",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": null,
+            "complete": null,
+            "commandExitCodes": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "qualification": "Legacy collector had per-command exits only. 15,547 producer digests verified across 18 artifacts in Codespaces."
+          },
+          "retries": {
+            "firstCrash": 4,
+            "newDbMainRetries": 3,
+            "sameDbRestartRetries": 1
+          },
+          "sharedEvidenceId": "C003-C004-45140238501-attempt1",
+          "runAttempt": 1,
+          "testExitCode": 0,
+          "inputVectors": 78,
+          "producerLineage": 702,
+          "androidSameDbReopenAndExportAudit": 312
+        }
+      ],
+      "masterEvidenceIdentities": [
+        {
+          "path": "docs/upgrade/c0-04-status.md",
+          "gitBlob": "f109841f50ee7ec4f4aea0fd16b00f4e3feeb3a4",
+          "sha256": "4caa263a67060d0d1bf36c4c813fd5ebc91ffdc8488ea019920c06a0d12002c3",
+          "bytes": 10150
+        },
+        {
+          "path": "docs/upgrade/c0-04-case-results.md",
+          "gitBlob": "5d0958d0245dc8a9e0941122ebd8b878ac6e5806",
+          "sha256": "71050df40830a13c0101bcf516db70cf441159aac8d41c9e59ee64282045a62d",
+          "bytes": 48597
+        },
+        {
+          "path": "docs/upgrade/android-cloud-environment.md",
+          "gitBlob": "6369d7ba9e6c9bef4021802d37921ae1b78f85d4",
+          "sha256": "12d54186390d470da101ccd4be3a6f7b145a712748812f12a5ef0febebf06964",
+          "bytes": 5639
+        },
+        {
+          "path": "docs/upgrade/c0-04-protocol-rules.md",
+          "gitBlob": "d04c051df97ade931810ab3bd69b6e9f7dd15e9b",
+          "sha256": "430856df7ed35e5d600898c523e61f58b19a92c9e3d6bd17f661c878bf9839c6",
+          "bytes": 3195
+        }
+      ]
+    },
+    {
+      "phase": "C0-05",
+      "acceptanceStatus": "accepted-with-qualifications",
+      "publishedReportCommits": [
+        "43cce5d58335df33f3e77b5d6b649fabab05d280",
+        "d3ba93cbb6b31c6544c23b333da1453c91ee1256"
+      ],
+      "evidencePaths": [
+        "docs/upgrade/c0-05-report.md",
+        "docs/upgrade/c0-05-case-results.json",
+        "docs/upgrade/c0-05-verification.json",
+        "docs/upgrade/c0-05-case-results.md"
+      ],
+      "independenceAndLimits": "Real same-user Windows DPAPI; independent evidence confirms bidirectional practical credential IO and retained file on error. Node negative catch classification not fully differentiated. No real WebDAV network. Test and collector verdicts remain separate.",
+      "runs": [
+        {
+          "runId": "45153269614",
+          "sourceSha": "6d1449e4063f5944398c19bbda372b8369a5ce7c",
+          "role": "test fixture build failure",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45153269614",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 0,
+            "passed": 0,
+            "failed": 0,
+            "blocked": 22,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "blockReason": "Test translation unit C2040; no case executed."
+        },
+        {
+          "runId": "45153999774",
+          "sourceSha": "fad9d823ca054612ebb0e4539cca8d92dcabaec2",
+          "role": "red baseline",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45153999774",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 2,
+            "failed": 20,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "productBehaviorFailedCases": 19,
+          "fixtureFailedCases": 1
+        },
+        {
+          "runId": "45154587045",
+          "sourceSha": "2114f152e23b432dbf2df798464094c116bb57e1",
+          "role": "production credential fix",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45154587045",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 21,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "fixtureFailedCases": 1
+        },
+        {
+          "runId": "45155116261",
+          "sourceSha": "e761c493857706fbf61dac87bed7a3709eee64b9",
+          "role": "fixture stderr diagnostic",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45155116261",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 21,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "fixtureFailedCases": 1
+        },
+        {
+          "runId": "45157015901",
+          "sourceSha": "2e211fa743dca2f0ad67005f5977d69ede7963fa",
+          "role": "PowerShell fixture correction",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45157015901",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 22,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45158226148",
+          "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+          "role": "final DPAPI validation",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45158226148",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 22,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "testExitCode": 0,
+          "subprocesses": 55,
+          "expectedWriteRejections": 14,
+          "networkRequests": 0
+        },
+        {
+          "runId": "45158226161",
+          "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+          "role": "same-source baseline",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45158226161",
+          "execution": {
+            "unit": "shared-JS-TAP-test",
+            "executed": 121,
+            "passed": 121,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 5,
+            "qualification": "Five missing recursive manifest receipts; four named artifacts verified by actual cloud bytes."
+          },
+          "retries": null,
+          "threePlatformBuild": true,
+          "androidHostAssertions": [
+            73,
+            47,
+            20
+          ],
+          "androidApk": "unsigned"
+        },
+        {
+          "runId": "45158226276",
+          "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+          "role": "same-source C003/C004 protocol regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45158226276",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": {
+            "firstCrash": 2,
+            "newDbMainRetries": 2,
+            "sameDbRestartRetries": 0
+          },
+          "producerRowsRehashedInCloud": 15530,
+          "localArchiveRowsRehashed": 13367
+        }
+      ],
+      "localSupplementalEvidence": [
+        {
+          "evidenceKind": "independent-local-archive-audit",
+          "filename": "c0-05-independent-audit.md",
+          "sha256": "0f2faea5230e9b4277196bcaa8086d9b600d1c47ad46e4d87087c18014afe565",
+          "publishedInReviewedMaster": false
+        }
+      ],
+      "masterEvidenceIdentities": [
+        {
+          "path": "docs/upgrade/c0-05-report.md",
+          "gitBlob": "68e3e573a79e5ac79903efb87259e1e853403f12",
+          "sha256": "be96268acf02c6c57b69b259a1a88562007a7f79fd219047f6cee7da32185027",
+          "bytes": 7515
+        },
+        {
+          "path": "docs/upgrade/c0-05-case-results.json",
+          "gitBlob": "92df4d8f4b75ab920469f3c86e59bf26fd4c5b87",
+          "sha256": "17e26ffe75d08f660329d34e887d7604fbe69178f319298d9fe23e7351c684aa",
+          "bytes": 24809
+        },
+        {
+          "path": "docs/upgrade/c0-05-verification.json",
+          "gitBlob": "39414e519a72bc23b656f3bf61311140c285dfbb",
+          "sha256": "503de900ea1f324d978574445d5c7e3721566653fe589b0c5d9c9e6e87882660",
+          "bytes": 19680
+        },
+        {
+          "path": "docs/upgrade/c0-05-case-results.md",
+          "gitBlob": "fb9bed304b092e36ac376c03ccffe3b2c541d7ff",
+          "sha256": "522a48466cdd1e27cbd3779ae78aa3e9e03198156d825eff8b76cd5199a3efaa",
+          "bytes": 2633
+        }
+      ]
+    },
+    {
+      "phase": "C0-06",
+      "acceptanceStatus": "accepted-with-documented-evidence-qualifications",
+      "publishedReportCommits": [
+        "a0ad1940be5dfe3d74b940fcbe864d8e30f93021"
+      ],
+      "evidencePaths": [
+        "docs/upgrade/c0-06/reports/README.md",
+        "docs/upgrade/c0-06/reports/c0-06-report.md",
+        "docs/upgrade/c0-06/reports/c0-06-verification.json",
+        "docs/upgrade/c0-06/reports/c0-06-case-results.json",
+        "docs/upgrade/c0-06/audit/final-core-evidence-review.md",
+        "docs/upgrade/c0-06/audit/final-kill-evidence-review.md",
+        "docs/upgrade/c0-06/audit/final-matrix-evidence-review.md",
+        "docs/upgrade/c0-06/audit/latest-evidence-review.md"
+      ],
+      "independenceAndLimits": "Same-db A26 and new isolated-db A30 are two independent scenario contracts. Native suite kill terminates JS producer, not native C. Windows C has no v1 importer. Synthetic stores only; process-death copy is not an atomic crash-time snapshot.",
+      "runs": [
+        {
+          "runId": "45161953954",
+          "sourceSha": "bdfa69a6f97942f4bc4e3effe5cd224392b78412",
+          "role": "first red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45161953954",
+          "execution": {
+            "unit": "reported-scenario-row",
+            "executed": 83,
+            "passed": 51,
+            "failed": 32,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 20,
+            "qualification": null
+          },
+          "retries": null,
+          "androidExportAuditContractStops": 6
+        },
+        {
+          "runId": "45164223526",
+          "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+          "role": "export contract corrected red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45164223526",
+          "execution": {
+            "unit": "reported-scenario-row",
+            "executed": 83,
+            "passed": 55,
+            "failed": 28,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 20,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45164373911",
+          "sourceSha": "a7e309e5059b4027c4dcf302d0e718d942bb233e",
+          "role": "old Android internal kill red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45164373911",
+          "execution": {
+            "unit": "scenario",
+            "executed": 2,
+            "passed": 1,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45168301803",
+          "sourceSha": "25a2b080351ded5c8daab66a427ef8019f19c25b",
+          "role": "reliable capture red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45168301803",
+          "execution": {
+            "unit": "scenario",
+            "executed": 2,
+            "passed": 1,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45166586294",
+          "sourceSha": "40b0d84c07d6489583ff44e15f94cb2b2c2e6262",
+          "role": "bootstrap red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45166586294",
+          "execution": {
+            "unit": "scenario",
+            "executed": 4,
+            "passed": 0,
+            "failed": 4,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45168648565",
+          "sourceSha": "32e21eb69764dfa99227439b7727f0553205e5ca",
+          "role": "old baseline regression",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45168648565",
+          "execution": {
+            "unit": "shared-JS-TAP-test",
+            "executed": 121,
+            "passed": 120,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 5,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45170150079",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "role": "final migration core",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45170150079",
+          "execution": {
+            "unit": "scenario",
+            "executed": 83,
+            "passed": 83,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 24,
+            "qualification": "Excluded synthetic credential fixtures."
+          },
+          "retries": {
+            "firstCrash": 1,
+            "newDbMainRetries": 0,
+            "sameDbRestartRetries": 1
+          },
+          "jsScenarios": 59,
+          "nativeSuiteScenarios": 18,
+          "androidScenarios": 6,
+          "androidFinalOperationOutputs": 24
+        },
+        {
+          "runId": "45170150057",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "role": "final Android internal kill",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45170150057",
+          "execution": {
+            "unit": "scenario",
+            "executed": 2,
+            "passed": 2,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": {
+            "firstCrash": 0,
+            "newDbMainRetries": 0,
+            "sameDbRestartRetries": 0
+          },
+          "targetSigkills": 2
+        },
+        {
+          "runId": "45170150092",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "role": "final bootstrap/CAS",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45170150092",
+          "execution": {
+            "unit": "scenario",
+            "executed": 4,
+            "passed": 4,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45170150066",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "role": "final baseline",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45170150066",
+          "execution": {
+            "unit": "shared-JS-TAP-test",
+            "executed": 121,
+            "passed": 121,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 5,
+            "qualification": "Five missing recursive seals; four cloud named binaries independently rehashed."
+          },
+          "retries": null,
+          "threePlatformBuild": true,
+          "androidHostAssertions": [
+            73,
+            47,
+            20
+          ],
+          "windowsAssertions": {
+            "self": 32,
+            "advanced": 48,
+            "feedback": 21,
+            "detailKey": 48
+          },
+          "androidApk": "unsigned"
+        },
+        {
+          "runId": "45170150060",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "role": "final protocol regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45170150060",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": {
+            "firstCrash": 3,
+            "newDbMainRetries": 2,
+            "sameDbRestartRetries": 1
+          },
+          "producerLineage": 702
+        },
+        {
+          "runId": "45168648612",
+          "sourceSha": "32e21eb69764dfa99227439b7727f0553205e5ca",
+          "role": "byte-qualified DPAPI regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45168648612",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 22,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null
+        },
+        {
+          "runId": "45169951082",
+          "sourceSha": "8ce0a047ec14925e08072129e4fd13b372e2e084",
+          "role": "observation helper targeted validation",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45169951082",
+          "execution": {
+            "unit": "helper-scenario",
+            "executed": 10,
+            "passed": 10,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "physicalCrashRecoveryClaimed": false
+        }
+      ],
+      "masterEvidenceIdentities": [
+        {
+          "path": "docs/upgrade/c0-06/reports/README.md",
+          "gitBlob": "c8e9c8e9f177843230e4b60afbcd7d9a74bdbcb7",
+          "sha256": "b1636e9932682f5fff063ecf5f68f56e368a9f5aca64c5dddd693532c2aa12a0",
+          "bytes": 3029
+        },
+        {
+          "path": "docs/upgrade/c0-06/reports/c0-06-report.md",
+          "gitBlob": "83a449e48065f2fc7f110d3f078711a5ac7dbee5",
+          "sha256": "9fa651824b1ad74e58eca0e24a75d552e9b8f3a40576a13df61f8fbe1b57203c",
+          "bytes": 12156
+        },
+        {
+          "path": "docs/upgrade/c0-06/reports/c0-06-verification.json",
+          "gitBlob": "f586cf45e9ba3d0020ae4e4e4e62482a2f9229bf",
+          "sha256": "120f05b70adfbab0347d2fd046da5b0cb133e76519e7125b788f8ab3f29ebeab",
+          "bytes": 20895
+        },
+        {
+          "path": "docs/upgrade/c0-06/reports/c0-06-case-results.json",
+          "gitBlob": "5415d19b4a1b88bf3d72a8aac6123e923479c00c",
+          "sha256": "f3e921cc6ce626222696a6ca3fff18c05e37398c44886bf34c2b41fd8650a5af",
+          "bytes": 74638
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/final-core-evidence-review.md",
+          "gitBlob": "1bbf814ed21dd8a16900aa5692e98b7810289c73",
+          "sha256": "b07693a1e8d4df08190534a875f200cece5d7e72a272963179a14c9843e9de3f",
+          "bytes": 10548
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/final-kill-evidence-review.md",
+          "gitBlob": "a0b6b9c4162e578c55bed71516d7992b133e8ca3",
+          "sha256": "13bb10bd18ed768e754a7a8eeafffb46872f4d4792e9a93de1325c196da35871",
+          "bytes": 7506
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/final-matrix-evidence-review.md",
+          "gitBlob": "31103672a2b66c9b46671f3306ee3148f06d1b49",
+          "sha256": "7ec177b62d48d6312c51425193a75b830989549e74393490c2dcf254e3538ba4",
+          "bytes": 11473
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/latest-evidence-review.md",
+          "gitBlob": "3cd529a51173f6a111c5acbd091189e120545fd8",
+          "sha256": "695667c714d7200978cf7fe16cfa585032b9731d637e6182ed909668ba173dd9",
+          "bytes": 10002
+        }
+      ]
+    },
+    {
+      "phase": "C0-07",
+      "acceptanceStatus": "accepted-with-qualifications",
+      "productionFixSourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "publishedReportCommits": [
+        "bc3f44d1e76a988dbe269edcf1c606eebec37293"
+      ],
+      "evidencePaths": [
+        "docs/upgrade/c0-07-report.md",
+        "docs/upgrade/c0-07-case-results.json",
+        "docs/upgrade/c0-07-verification.json",
+        "docs/upgrade/c0-07-provenance.json",
+        "docs/upgrade/c0-07-final-independent-review.md",
+        "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md",
+        "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md"
+      ],
+      "independenceAndLimits": "Three-platform fault suite execution passed. Frozen collector requires complete transfer for recordedRunPassed; its false value remains. Android issue stays open; synthetic HTTP and SQLite process fault runs do not demonstrate service sign-off or physical durability.",
+      "runs": [
+        {
+          "runId": "45180141745",
+          "sourceSha": "4a8dd94f7fbceeb0583c37cc7aefdb29e9937691",
+          "role": "first fault red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45180141745",
+          "execution": {
+            "unit": "check",
+            "executed": 1644,
+            "passed": 1597,
+            "failed": 47,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "scenariosInPlan": 30,
+          "hostAttempts": 141,
+          "androidSeedOnlyAttempts": 10,
+          "recordedRunPassed": false
+        },
+        {
+          "runId": "45180939841",
+          "sourceSha": "342464b0fa97989de981afffca22732907110544",
+          "role": "queue replaced fixture run",
+          "conclusion": "cancelled",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45180939841",
+          "execution": {
+            "unit": "scenario",
+            "executed": 0,
+            "passed": 0,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": null,
+          "retries": null,
+          "jobs": 0
+        },
+        {
+          "runId": "45183273190",
+          "sourceSha": "feb0dca3a56ca8cc83d118d1b828b8f69ec768d2",
+          "role": "strengthened probes red",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45183273190",
+          "execution": {
+            "unit": "check",
+            "executed": 2299,
+            "passed": 2266,
+            "failed": 33,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 114,
+            "qualification": "Binary data in text archive excluded."
+          },
+          "retries": null,
+          "scenarios": 30,
+          "attempts": 187,
+          "recordedRunPassed": false
+        },
+        {
+          "runId": "45186305189",
+          "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+          "role": "production fix, measurement failure remains",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45186305189",
+          "execution": {
+            "unit": "check",
+            "executed": 2299,
+            "passed": 2296,
+            "failed": 3,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 114,
+            "qualification": "Binary data in text archive excluded."
+          },
+          "retries": null,
+          "scenarios": 30,
+          "attempts": 187,
+          "recordedRunPassed": false
+        },
+        {
+          "runId": "45190559178",
+          "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+          "role": "direct final fault execution",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45190559178",
+          "execution": {
+            "unit": "check",
+            "executed": 2299,
+            "passed": 2299,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 114,
+            "qualification": "Binary data in text archive excluded."
+          },
+          "retries": {
+            "firstCrash": 0,
+            "newDbMainRetries": 0,
+            "sameDbRestartRetries": 0
+          },
+          "scenarios": 30,
+          "attempts": 187,
+          "ordinaryResults": 178,
+          "expectedExitResults": 9,
+          "freshProcessAudits": 187,
+          "recordedRunPassed": false,
+          "runtimeExecutionPassed": true,
+          "byPlatform": [
+            {
+              "platform": "node",
+              "scenarios": 10,
+              "attempts": 56,
+              "checks": 620
+            },
+            {
+              "platform": "windows-c",
+              "scenarios": 10,
+              "attempts": 76,
+              "checks": 1027
+            },
+            {
+              "platform": "android",
+              "scenarios": 10,
+              "attempts": 55,
+              "checks": 652,
+              "expectedSigkills": 3,
+              "sameDbReopens": 55
+            }
+          ]
+        },
+        {
+          "runId": "45186305462",
+          "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+          "role": "historical Android internal kill failure",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45186305462",
+          "execution": {
+            "unit": "scenario",
+            "executed": 2,
+            "passed": 1,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 7,
+            "qualification": "Preserve original collection state."
+          },
+          "retries": {
+            "firstCrash": 1,
+            "newDbMainRetries": 0,
+            "sameDbRestartRetries": 0
+          },
+          "qualification": "A26 initialize dependency death before target internal kill."
+        },
+        {
+          "runId": "45194185453",
+          "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+          "role": "historical core false-retry path",
+          "conclusion": "failure",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45194185453",
+          "execution": {
+            "unit": "scenario",
+            "executed": 83,
+            "passed": 82,
+            "failed": 1,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 24,
+            "qualification": "Synthetic credential fixture exclusions retained."
+          },
+          "retries": {
+            "firstCrash": 1,
+            "newDbMainRetries": 1,
+            "sameDbRestartRetries": 0
+          },
+          "qualification": "A27 switch to new DB did not prove original recovery; original lease still busy on next operation."
+        },
+        {
+          "runId": "45199685003",
+          "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+          "role": "C006 selected-DB core regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45199685003",
+          "execution": {
+            "unit": "scenario",
+            "executed": 83,
+            "passed": 83,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 24,
+            "qualification": "Excluded synthetic credential fixtures remain unread."
+          },
+          "retries": {
+            "firstCrash": 1,
+            "newDbMainRetries": 0,
+            "sameDbRestartRetries": 1
+          },
+          "operationAttempts": 408,
+          "androidOperationAttempts": 24,
+          "totalAndroidInstrumentationAttempts": 49,
+          "failedAndroidInstrumentationAttempts": 1,
+          "staticEvidenceAudits": {
+            "original": {
+              "assertions": 1365,
+              "failedAssertions": 1,
+              "auditPassed": false
+            },
+            "androidDeep": {
+              "assertions": 3544,
+              "stabilityIssues": 1
+            },
+            "nodeNative": {
+              "assertions": 2948,
+              "failedAssertions": 0
+            }
+          }
+        },
+        {
+          "runId": "45199685578",
+          "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+          "role": "C006 Android two internal interruptions",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45199685578",
+          "execution": {
+            "unit": "scenario",
+            "executed": 2,
+            "passed": 2,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 16,
+            "qualification": "Excluded binary material; original collector remains incomplete."
+          },
+          "retries": {
+            "firstCrash": 0,
+            "newDbMainRetries": 0,
+            "sameDbRestartRetries": 0
+          },
+          "targetSigkills": 2
+        },
+        {
+          "runId": "45199685144",
+          "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+          "role": "C006 bootstrap/CAS regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45199685144",
+          "execution": {
+            "unit": "scenario",
+            "executed": 4,
+            "passed": 4,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "childOperations": 23,
+          "targetSigkills": 1
+        },
+        {
+          "runId": "45199684912",
+          "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+          "role": "three-platform baseline",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45199684912",
+          "execution": {
+            "unit": "shared-JS-TAP-test",
+            "executed": 121,
+            "passed": 121,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 1,
+            "complete": false,
+            "issueCount": 5,
+            "qualification": "Five missing recursive manifests remain. Four named cloud artifacts independently rehashed."
+          },
+          "retries": null,
+          "threePlatformBuild": true,
+          "androidHostAssertions": [
+            73,
+            47,
+            20
+          ],
+          "windowsAssertions": {
+            "self": 32,
+            "advanced": 48,
+            "feedback": 21,
+            "detailKey": 48
+          },
+          "androidApk": "unsigned"
+        },
+        {
+          "runId": "45186305386",
+          "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+          "role": "DPAPI regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45186305386",
+          "execution": {
+            "unit": "credential-case",
+            "executed": 22,
+            "passed": 22,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": null,
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": null,
+          "subprocesses": 55,
+          "expectedWriteRejections": 14,
+          "networkRequests": 0
+        },
+        {
+          "runId": "45186305196",
+          "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+          "role": "protocol-matrix regression",
+          "conclusion": "success",
+          "evidenceKind": "historical-github-actions-execution",
+          "url": "https://github.com/johny751/MyTodo/actions/runs/45186305196",
+          "execution": {
+            "unit": "protocol-execution-position",
+            "executed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "comparisons": {
+            "performed": 936,
+            "passed": 936,
+            "failed": 0,
+            "blocked": 0,
+            "skipped": 0
+          },
+          "collector": {
+            "exitCode": 0,
+            "complete": true,
+            "issueCount": 0,
+            "qualification": null
+          },
+          "retries": {
+            "firstCrash": 7,
+            "newDbMainRetries": 5,
+            "sameDbRestartRetries": 2
+          },
+          "producerLineage": 702,
+          "androidInstrumentationAttempts": 631
+        }
+      ],
+      "masterEvidenceIdentities": [
+        {
+          "path": "docs/upgrade/c0-07-report.md",
+          "gitBlob": "2c66343bad697516f5141a434c5cd9b6c68af333",
+          "sha256": "1843a56aff6a431b1894c34e5ad7fa70183625031dedd1709521894b86fd35b9",
+          "bytes": 15240
+        },
+        {
+          "path": "docs/upgrade/c0-07-case-results.json",
+          "gitBlob": "076f79caea8793e4823244d0f21b83635d62b75c",
+          "sha256": "ef67ebc649ee69957c51ba6fff0c1d0a9cd16fbb47d842839612342d1effd66d",
+          "bytes": 178856
+        },
+        {
+          "path": "docs/upgrade/c0-07-verification.json",
+          "gitBlob": "0eb8932fb40f0b30775b7ee53741380a68fc1614",
+          "sha256": "654759c37a545b5a39b3da70cad268152f998ecf644eb63a5a764c88d6b1a20f",
+          "bytes": 82614
+        },
+        {
+          "path": "docs/upgrade/c0-07-provenance.json",
+          "gitBlob": "c046d37001f9bdddc0ef383faf0eff68e64471a0",
+          "sha256": "740b98659799f71ba54883fa7e10f37e77fe6eb7c7b854fd283ad07662c1d141",
+          "bytes": 86916
+        },
+        {
+          "path": "docs/upgrade/c0-07-final-independent-review.md",
+          "gitBlob": "aee8eab0f3558e4016cde56f1e6043831b785337",
+          "sha256": "aeb2092d27120c072e53124c7063fa2c13704868592b798324d19598efe264f6",
+          "bytes": 7499
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md",
+          "gitBlob": "239050f0d3a680020ec95ad174af80ecda19392f",
+          "sha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+          "bytes": 11355
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md",
+          "gitBlob": "15432ca93271b7ef684b29c820efe931966c9c1d",
+          "sha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+          "bytes": 9474
+        }
+      ]
+    }
+  ],
+  "sync": {
+    "schema": "mytodo.phase0.sync-safety",
+    "reviewDate": "2026-11-24",
+    "timeZone": "Asia/Shanghai",
+    "reviewedMasterSha": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+    "method": "static-source-review-and-historical-cloud-evidence-cross-reference",
+    "executedNewProjectTests": false,
+    "findings": [
+      {
+        "id": "S0-ACK-ISOLATION",
+        "status": "not-implemented",
+        "materiality": "hard-gate-for-lan-dual-delivery",
+        "current": "Existing WebDAV uses a single account-local outbox, scope, epoch, pending and cursor map. ACK deletes rows through the persisted through marker in the same transaction as clearing pending and advancing cursor. No LAN ACK path or independent target delivery state found.",
+        "risk": "Reusing current global deletion for a second target can remove the only local replay payload while another target is pending. No observed live two-target data loss is claimed.",
+        "source": [
+          "src/replica.mjs:9",
+          "src/delta-sync.mjs:202-213",
+          "src/delta-sync.mjs:257-275",
+          "src/sqlite-store.mjs:22-34",
+          "windows/sync.c:169-199",
+          "windows/sync.c:235-252",
+          "android/src/local/gxtodo/replica/ReplicaDatabase.java:31-36"
+        ],
+        "required": "Persist authenticated per-target obligations and receipts plus immutable replay bytes and a stable cross-channel batch identity. Gate all ACK/rebind/GC paths, include both ACK orders, repeated and stale ACK, restart and WAN-isolated replay, missing or damaged payload, setting changes and target revocation."
+      },
+      {
+        "id": "S0-PUBLISH-PULL",
+        "status": "implemented-in-current-webdav-path",
+        "current": "SQLite pending commit precedes immutable conditional PUT, matching body is required on path collision, manifest uses strong ETag CAS, and ACK follows cloud publication. Received events and contiguous cursor commit together. Snapshot parts commit separately and cursor is advanced after all parts validate.",
+        "source": [
+          "src/delta-sync.mjs:25-57",
+          "src/delta-sync.mjs:214-290",
+          "src/replica.mjs:126-139",
+          "windows/sync.c:87-168",
+          "windows/sync.c:200-252",
+          "windows/database.c:337-338"
+        ],
+        "historicalRuns": [
+          45190559178,
+          45199685003
+        ],
+        "limits": [
+          "synthetic WebDAV HTTP service",
+          "no proof against unauthorized server modification",
+          "no arbitrary physical power loss or fsync evidence",
+          "historical malformed or nonmatching recovery state must fail closed"
+        ]
+      },
+      {
+        "id": "S0-LEASE-HANDOFF-C",
+        "status": "static-risk-not-runtime-confirmed",
+        "materiality": "gate-before-native-sync-concurrency-or-production-migration",
+        "current": "Windows renews and checks the current lease token before sending a request. Post-I/O native ACK, pull apply and manifest cache mutations have no equivalent token check in their mutation transaction.",
+        "risk": "Delayed response across expiry and competing acquisition may let old session mutate pending or cursor under newer session. Evidence does not establish data loss or reproduction.",
+        "source": [
+          "windows/sync.c:67-74",
+          "windows/sync.c:217-218",
+          "windows/sync.c:235-247",
+          "windows/sync.c:395-423",
+          "src/delta-sync.mjs:310-321"
+        ],
+        "required": "Cloud-only interleaving with delayed response, takeover, new pending and scope/epoch transition. Validate token and matching context in native mutation transaction or demonstrate equivalent fence. For isolated D1 work keep all sync and competing access outside migration windows."
+      },
+      {
+        "id": "S0-MERGE-MIXED",
+        "status": "implemented-for-supported-wire-contract-with-qualified-test-evidence",
+        "current": "C and shared JS use deterministic field ordering, actor/seq and causality. Android executes the shared JS logic against Java SQLite. Retained contradictory fields at the same event identity are rejected. Existing v2 shape remains compatible with valid legacy batches.",
+        "source": [
+          "src/replica.mjs:38-103",
+          "windows/database.c:120-334",
+          "docs/upgrade/c0-04-protocol-rules.md"
+        ],
+        "historicalRuns": [
+          45140238501,
+          45186305196
+        ],
+        "limits": [
+          "finite vector coverage",
+          "no unbounded or independent multi-target replay/dedup ledger",
+          "new kinds must await explicit compatibility gate",
+          "no arbitrary historical binary or live mixed-version fleet claim"
+        ]
+      },
+      {
+        "id": "S0-LEGACY-REJOIN",
+        "status": "implemented-with-platform-boundaries",
+        "current": "Shared JS migration preserves immutable v1 backup, commit marker, tombstones and initial retained snapshot before manifest publication. Windows rejects an unfinished legacy backup migration; a supported JS/Android migrator must finish first. Fresh-actor snapshot restore and same-original-database lease-expiry recovery have distinct scoped evidence.",
+        "source": [
+          "src/delta-sync.mjs:87-213",
+          "src/sync-core.mjs:30-40",
+          "windows/sync.c:266-354",
+          "windows/storage.c:34-47",
+          "docs/upgrade/c0-06/reports/c0-06-report.md",
+          "docs/upgrade/c0-07-report.md"
+        ],
+        "historicalRuns": [
+          45170150057,
+          45199685578
+        ],
+        "limits": [
+          "no automatic repair of historical broken empty manifest",
+          "unpublished changes require original disk or consistent backup",
+          "no device registry or revocation ledger",
+          "no cloning a running WAL replica to a fresh actor",
+          "original database recovery cannot be inferred from a new dbCase retry"
+        ]
+      },
+      {
+        "id": "S0-REAL-ENV-AND-ATTACHMENTS",
+        "status": "unimplemented-or-unverified",
+        "current": "No generic attachment entity/store/transport and no production LAN discovery, pairing or transport found. Existing loopback HTTP, WebDAV gzip transport, and JSON business export do not satisfy these capabilities.",
+        "source": [
+          "server.mjs:63",
+          "src/replica.mjs:3-9",
+          "android/AndroidManifest.xml",
+          "docs/upgrade/08-development-task-gates.md",
+          "docs/upgrade/09-phase-one-entry-plan.md"
+        ],
+        "required": "T15/T16 and complete backup/restore before live migration, T03/T05/T08/T09/T10 for LAN and concurrent delivery, T14 for independent verified content. Real provider, physical devices, signed upgrade, power loss, long offline and attachment release gates need their relevant cloud/authorized test surroundings."
+      }
+    ],
+    "sourceTree": "e7db82447dd94cfc2881e0c91191099a7b14ff44",
+    "remoteMasterVerifiedAtRead": true,
+    "verifiedSourceBlobs": [
+      {
+        "path": "android/AndroidManifest.xml",
+        "gitBlob": "299bf79b96bb63868b8a3841924315c2d197df1c",
+        "bytes": 3342,
+        "sha256": "eb8c26e489e3d541d1aa4b56be08901136de409b6714478f626f06c0c7916508",
+        "lines": 38
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/AccountStore.java",
+        "gitBlob": "55bb03bf353bfbb37bde96e78d84b63a50dc53d4",
+        "bytes": 7525,
+        "sha256": "cd1128d50a4a1a5283d41bf7ac5daddac9e974d77304d67da950bf282ff11a20",
+        "lines": 50
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/MainActivity.java",
+        "gitBlob": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "bytes": 16353,
+        "sha256": "6f7acc6c8c2bdd89e079d05d2845747dc7b972883b9ed4749443d534992922e0",
+        "lines": 206
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+        "gitBlob": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "bytes": 10845,
+        "sha256": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663",
+        "lines": 79
+      },
+      {
+        "path": "android/src/local/gxtodo/replica/SyncStore.java",
+        "gitBlob": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "bytes": 9967,
+        "sha256": "c73a7cac4c3f48d13cf1b0ef60504c06a4d891963226ddfa9bbf5c65dc80934e",
+        "lines": 72
+      },
+      {
+        "path": "docs/sync-v2.md",
+        "gitBlob": "ba685b059bba83f30044dd76307ef19c6743c15b",
+        "bytes": 6518,
+        "sha256": "19279c9f5341c961a8e782d6e5ccd13d41f5e89652c2a78ee2e95216f4ddb951",
+        "lines": 58
+      },
+      {
+        "path": "docs/sync.md",
+        "gitBlob": "8544a7d636381a798a84e11813d39ec211c1e44a",
+        "bytes": 5492,
+        "sha256": "5f0758df4c2e5bae2ff367ad3ac1b39b5f0bbb0f7ce62f261bba253f6b9fe9ea",
+        "lines": 55
+      },
+      {
+        "path": "docs/upgrade/07-development-standards.md",
+        "gitBlob": "63b3c34f2d48bd38890c7313de52c623f3b61ba8",
+        "bytes": 13892,
+        "sha256": "3cd202b93ee685a274b504d0915813719a2ccefd6e026caeac8b4c0cec99a3b9",
+        "lines": 90
+      },
+      {
+        "path": "docs/upgrade/08-development-task-gates.md",
+        "gitBlob": "5556a1f50f9a7bd306cef0f32e667b4156b224e2",
+        "bytes": 30631,
+        "sha256": "adaf84d0fe0e3aa812c7cf4e132ba9a17994355a249bf7367242fe2da4ab7f5f",
+        "lines": 143
+      },
+      {
+        "path": "docs/upgrade/09-phase-one-entry-plan.md",
+        "gitBlob": "1bc918191edbdc9284f78c5850f982c1da011aa5",
+        "bytes": 17434,
+        "sha256": "a0703b9aadbdfa030e681073bbd1ba276b33e5cd46642c59a9380531b04cf787",
+        "lines": 91
+      },
+      {
+        "path": "docs/upgrade/c0-04-protocol-rules.md",
+        "gitBlob": "d04c051df97ade931810ab3bd69b6e9f7dd15e9b",
+        "bytes": 3195,
+        "sha256": "430856df7ed35e5d600898c523e61f58b19a92c9e3d6bd17f661c878bf9839c6",
+        "lines": 17
+      },
+      {
+        "path": "docs/upgrade/c0-06/reports/c0-06-report.md",
+        "gitBlob": "83a449e48065f2fc7f110d3f078711a5ac7dbee5",
+        "bytes": 12156,
+        "sha256": "9fa651824b1ad74e58eca0e24a75d552e9b8f3a40576a13df61f8fbe1b57203c",
+        "lines": 83
+      },
+      {
+        "path": "docs/upgrade/c0-07-report.md",
+        "gitBlob": "2c66343bad697516f5141a434c5cd9b6c68af333",
+        "bytes": 15240,
+        "sha256": "1843a56aff6a431b1894c34e5ad7fa70183625031dedd1709521894b86fd35b9",
+        "lines": 89
+      },
+      {
+        "path": "server.mjs",
+        "gitBlob": "fc914ff40a44b5f22b7523b847298953429d6e54",
+        "bytes": 5965,
+        "sha256": "974f390d16190d2394cd5845276a6d19c8ee49d01ccd8fb28da2da920c930179",
+        "lines": 63
+      },
+      {
+        "path": "src/delta-sync.mjs",
+        "gitBlob": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "bytes": 21936,
+        "sha256": "c6c9511314ee3b03aa28a708cfef10006b58a1f74ee24eb5b6fc6feb5a80dad5",
+        "lines": 321
+      },
+      {
+        "path": "src/replica.mjs",
+        "gitBlob": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "bytes": 10973,
+        "sha256": "f589a1e49e9e4c770ee9904fbd0c511332d52f0fb1f1f980cfb93885376a9f92",
+        "lines": 141
+      },
+      {
+        "path": "src/sqlite-store.mjs",
+        "gitBlob": "a4325116f184312ddae822ca56f178eb57aaec40",
+        "bytes": 4505,
+        "sha256": "0f398ec44f2d3ded1c3a1db9adcc7235e150558cf7f58e9a3853770d0f713344",
+        "lines": 40
+      },
+      {
+        "path": "src/sync-client.mjs",
+        "gitBlob": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "bytes": 1505,
+        "sha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274",
+        "lines": 9
+      },
+      {
+        "path": "src/sync-core.mjs",
+        "gitBlob": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "bytes": 5116,
+        "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a",
+        "lines": 41
+      },
+      {
+        "path": "src/sync-server.mjs",
+        "gitBlob": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "bytes": 8413,
+        "sha256": "d46cb1454c69e15f6e82cd5187ab0c55b46f590024f311b5f34f0d1f635365ba",
+        "lines": 27
+      },
+      {
+        "path": "windows/database.c",
+        "gitBlob": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+        "bytes": 27857,
+        "sha256": "17c980cca5c5f3a8ff7f02eebd73a29719ea00c1576323eb0b5b1a39348e5840",
+        "lines": 348
+      },
+      {
+        "path": "windows/storage.c",
+        "gitBlob": "a94c587132e8a42138aa86eea6de08a0d15b800e",
+        "bytes": 11750,
+        "sha256": "2483aa5b2fb6502ff1dbf323e64bfc12c026432d2eece93b43d4df96f95a4456",
+        "lines": 67
+      },
+      {
+        "path": "windows/sync.c",
+        "gitBlob": "208144931154968925d6bf41ba3bba49606c534b",
+        "bytes": 35249,
+        "sha256": "23ca036978d47a56580613eb02f88844b4368138773728b3c3d8369d8b220467",
+        "lines": 425
+      }
+    ],
+    "masterLedgerSha256": "41f4e8f40d6a4c28c7f40e375e4e5a22ce9f20fb24bbf1f634d1aae445aaf023",
+    "snapshotArchiveSha256": "02a7070226f8ca9ae67ce426b7073520574a692612f6aa56f4c3e63fffe24f25"
+  },
+  "android": {
+    "schema": "mytodo-phase0-android-static-risk-review",
+    "date": "2026-11-24",
+    "timeZone": "Asia/Shanghai",
+    "masterSha": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+    "origin": "Repository evidence, existing GitHub Actions artifacts and authenticated Codespaces issue read",
+    "additionalProjectTestsExecuted": false,
+    "issue": {
+      "number": 1,
+      "state": "OPEN",
+      "closedAt": null,
+      "updatedAt": "2026-11-23T12:39:03Z",
+      "url": "https://github.com/johny751/MyTodo/issues/1",
+      "confirmedBy": "Codespaces gh issue view",
+      "closureAuthorized": false
+    },
+    "rawReceiptRecount": [
+      {
+        "runId": "45154587042",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45154587042",
+        "sourceSha": "2114f152e23b432dbf2df798464094c116bb57e1",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 3,
+        "sameDbCaseRetries": 1,
+        "newDbCaseRetries": 2,
+        "collector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "source": {
+            "path": "outputs/c0-05/evidence/45154587042/collection-summary.json",
+            "bytes": 3607,
+            "sha256": "4a9066036609fd008668dd3b501ea34c58b19e1c9c549ceab4df02b825de4d15"
+          }
+        },
+        "failures": [
+          {
+            "case": "actor-invalid-punctuation--generate--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "actor-invalid-punctuation--generate--android",
+            "finalDatabase": "actor-invalid-punctuation--generate--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              7614,
+              7820
+            ],
+            "receipt": {
+              "path": "outputs/c0-05/evidence/45154587042/artifacts/c004-android-shard-3-45154587042-1/cases/actor-invalid-punctuation--generate--android/result.json.receipt.json",
+              "bytes": 20603,
+              "sha256": "6fbfb793c175fb1dd0bb2156caf9abba54922c55cfa2a9dea1022043e542cc37"
+            }
+          },
+          {
+            "case": "key-array-type--receive--android--javascript",
+            "stage": "restart",
+            "attempt": 1,
+            "firstDatabase": "key-array-type--receive--android--javascript",
+            "finalDatabase": "key-array-type--receive--android--javascript",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": true,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9171,
+              9570
+            ],
+            "receipt": {
+              "path": "outputs/c0-05/evidence/45154587042/artifacts/c004-android-shard-6-45154587042-1/cases/key-array-type--receive--android--javascript/result.json.receipt.json",
+              "bytes": 20613,
+              "sha256": "4579a0bfe5757da27ed61d94a94aa6f47df6dc1a61d56a961751f9270aa509a9"
+            }
+          },
+          {
+            "case": "key-malformed--receive--android--windows-c",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "key-malformed--receive--android--windows-c",
+            "finalDatabase": "key-malformed--receive--android--windows-c-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9000,
+              9208
+            ],
+            "receipt": {
+              "path": "outputs/c0-05/evidence/45154587042/artifacts/c004-android-shard-7-45154587042-1/cases/key-malformed--receive--android--windows-c/result.json.receipt.json",
+              "bytes": 20522,
+              "sha256": "02b5c8fb4e370a50c59822321d89581b65c5a11861b2dfc905d91cc36171a391"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45158226276",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45158226276",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 2,
+        "sameDbCaseRetries": 0,
+        "newDbCaseRetries": 2,
+        "collector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "source": {
+            "path": "outputs/c0-05/evidence/45158226276/collection-summary.json",
+            "bytes": 3607,
+            "sha256": "fa9b8fe52bada8909af0e59cc48df00440e397bec31111567104943d41d7a116"
+          }
+        },
+        "failures": [
+          {
+            "case": "id-empty--generate--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "id-empty--generate--android",
+            "finalDatabase": "id-empty--generate--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9188,
+              9483
+            ],
+            "receipt": {
+              "path": "outputs/c0-05/evidence/45158226276/artifacts/c004-android-shard-2-45158226276-1/cases/id-empty--generate--android/result.json.receipt.json",
+              "bytes": 20025,
+              "sha256": "8e24dcc96ed16be679ea459cb9e9d120eef79fadee5dc8ff755f44cf17063af3"
+            }
+          },
+          {
+            "case": "key-array-type--receive--android--javascript",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "key-array-type--receive--android--javascript",
+            "finalDatabase": "key-array-type--receive--android--javascript-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9361,
+              9551
+            ],
+            "receipt": {
+              "path": "outputs/c0-05/evidence/45158226276/artifacts/c004-android-shard-6-45158226276-1/cases/key-array-type--receive--android--javascript/result.json.receipt.json",
+              "bytes": 20589,
+              "sha256": "2413d86d11efb7400dfbd1862a4a4c98b9da5ec02ab94f96808382804851d786"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45161452258",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45161452258",
+        "sourceSha": "3ed91b240e98f69ceed851a22663c6a949d6ebfe",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 2,
+        "sameDbCaseRetries": 0,
+        "newDbCaseRetries": 2,
+        "collector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "source": {
+            "path": "outputs/android-stability/evidence/45161452258/collection-summary.json",
+            "bytes": 3619,
+            "sha256": "2e4ff5bfc2a9cb285b649a115ed30d0b9befd59555e0e2bb776c8db4c8d81fda"
+          }
+        },
+        "failures": [
+          {
+            "case": "tombstone-late-old--receive--android--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "tombstone-late-old--receive--android--android",
+            "finalDatabase": "tombstone-late-old--receive--android--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              7488,
+              7693
+            ],
+            "receipt": {
+              "path": "outputs/android-stability/evidence/45161452258/artifacts/c004-android-shard-4-45161452258-1/cases/tombstone-late-old--receive--android--android/result.json.receipt.json",
+              "bytes": 31051,
+              "sha256": "2057b4b463f1ee5a3ef7a7705cb2e4faea2dd6428205dc11283d82baa4df075e"
+            }
+          },
+          {
+            "case": "id-ascii-200--receive--android--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "id-ascii-200--receive--android--android",
+            "finalDatabase": "id-ascii-200--receive--android--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              8670,
+              8886
+            ],
+            "receipt": {
+              "path": "outputs/android-stability/evidence/45161452258/artifacts/c004-android-shard-5-45161452258-1/cases/id-ascii-200--receive--android--android/result.json.receipt.json",
+              "bytes": 30721,
+              "sha256": "baf8e91280640a5ad0b940d37334e6fbd5c59f95b17fdcbc8050362ea767d866"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45170150079",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45170150079",
+        "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 1,
+        "sameDbCaseRetries": 1,
+        "newDbCaseRetries": 0,
+        "collector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "source": {
+            "path": "outputs/c0-06/evidence/45170150079/collection-summary.json",
+            "bytes": 5779,
+            "sha256": "213cc4700ab7190250ed5e4e07d9e6a4430960bc36ed893abc5daa038ae052cb"
+          }
+        },
+        "failures": [
+          {
+            "case": "C006-A27-manifest-fail",
+            "stage": "restart",
+            "attempt": 1,
+            "firstDatabase": "C006-A27-manifest-fail-observer",
+            "finalDatabase": "C006-A27-manifest-fail-observer",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": true,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9526,
+              10264
+            ],
+            "receipt": {
+              "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-android-45170150079-1/cases/C006-A27-manifest-fail/output-5.json.receipt.json",
+              "bytes": 79135,
+              "sha256": "b2b72f450ac1992000258489e37cc1cd582e2819490b8e53553460b0378d5ee3"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45170150060",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45170150060",
+        "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 3,
+        "sameDbCaseRetries": 1,
+        "newDbCaseRetries": 2,
+        "collector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "source": {
+            "path": "outputs/c0-06/evidence/45170150060/collection-summary.json",
+            "bytes": 3620,
+            "sha256": "a92684764b4ec5b598f2a138f7dc57cbe2d3fca198a138b7e3e194f220aa79e7"
+          }
+        },
+        "failures": [
+          {
+            "case": "actor-invalid-punctuation--receive--android--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "actor-invalid-punctuation--receive--android--android",
+            "finalDatabase": "actor-invalid-punctuation--receive--android--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              8765,
+              8903
+            ],
+            "receipt": {
+              "path": "outputs/c0-06/evidence/45170150060/artifacts/c004-android-shard-3-45170150060-1/cases/actor-invalid-punctuation--receive--android--android/result.json.receipt.json",
+              "bytes": 45935,
+              "sha256": "31840dd5cdb79756596efaaa15c6e8bce91de7f6112e1cfd1a583b46c2c474cb"
+            }
+          },
+          {
+            "case": "key-swapped--receive--android--javascript",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "key-swapped--receive--android--javascript",
+            "finalDatabase": "key-swapped--receive--android--javascript-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9918,
+              10069
+            ],
+            "receipt": {
+              "path": "outputs/c0-06/evidence/45170150060/artifacts/c004-android-shard-5-45170150060-1/cases/key-swapped--receive--android--javascript/result.json.receipt.json",
+              "bytes": 37723,
+              "sha256": "99d1c774a7d42be8391d2a714a14068a38a5900682ffb4099905ffd4052316a6"
+            }
+          },
+          {
+            "case": "id-ascii-201--generate--android",
+            "stage": "restart",
+            "attempt": 1,
+            "firstDatabase": "id-ascii-201--generate--android",
+            "finalDatabase": "id-ascii-201--generate--android",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": true,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              7131,
+              7768
+            ],
+            "receipt": {
+              "path": "outputs/c0-06/evidence/45170150060/artifacts/c004-android-shard-6-45170150060-1/cases/id-ascii-201--generate--android/result.json.receipt.json",
+              "bytes": 39746,
+              "sha256": "b8fd2050c5883b7bd8b325197455e0e909612c7516f91b7849aa0151676de583"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45186305196",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45186305196",
+        "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 7,
+        "sameDbCaseRetries": 2,
+        "newDbCaseRetries": 5,
+        "collector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "source": {
+            "path": "outputs/c0-07/evidence/45186305196/collection-summary.json",
+            "bytes": 3620,
+            "sha256": "ee21619bc8f0d79afd1b65487f0352398828e0466da1ec24a5d9d9f97cb08348"
+          }
+        },
+        "failures": [
+          {
+            "case": "id-cjk-67--receive--android--javascript",
+            "stage": "restart",
+            "attempt": 1,
+            "firstDatabase": "id-cjk-67--receive--android--javascript",
+            "finalDatabase": "id-cjk-67--receive--android--javascript",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": true,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              8885,
+              9461
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-0-45186305196-1/cases/id-cjk-67--receive--android--javascript/result.json.receipt.json",
+              "bytes": 40204,
+              "sha256": "27d4cc045bb1558d2cc2e1bb1f513782df605cd08638b31c1def8dba1faf6437"
+            }
+          },
+          {
+            "case": "id-emoji-100--generate--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "id-emoji-100--generate--android",
+            "finalDatabase": "id-emoji-100--generate--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9016,
+              9156
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-1-45186305196-1/cases/id-emoji-100--generate--android/result.json.receipt.json",
+              "bytes": 46924,
+              "sha256": "e58e7a68e03be63935ad9f971b78f73bacec9952a8bfd742166057a86d1c0d29"
+            }
+          },
+          {
+            "case": "actor-length-81--generate--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "actor-length-81--generate--android",
+            "finalDatabase": "actor-length-81--generate--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              8013,
+              8139
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-2-45186305196-1/cases/actor-length-81--generate--android/result.json.receipt.json",
+              "bytes": 44738,
+              "sha256": "3b3c5a37b0b3f0ab4f65582435a795fcdc27121741851198cd30add8c7699405"
+            }
+          },
+          {
+            "case": "actor-invalid-punctuation--generate--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "actor-invalid-punctuation--generate--android",
+            "finalDatabase": "actor-invalid-punctuation--generate--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              7924,
+              8114
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-3-45186305196-1/cases/actor-invalid-punctuation--generate--android/result.json.receipt.json",
+              "bytes": 37899,
+              "sha256": "872f4fc20dab9c2075f7554442e87e01359ac4d3a9eabfc30b49693b37441574"
+            }
+          },
+          {
+            "case": "key-one-item--receive--android--windows-c",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "key-one-item--receive--android--windows-c",
+            "finalDatabase": "key-one-item--receive--android--windows-c-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9579,
+              9733
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-4-45186305196-1/cases/key-one-item--receive--android--windows-c/result.json.receipt.json",
+              "bytes": 45196,
+              "sha256": "dce130ddb8cf0328f401660ced38959a3b9a06ef28e16f5cba99935a22dc8917"
+            }
+          },
+          {
+            "case": "key-array-type--generate--android",
+            "stage": "restart",
+            "attempt": 1,
+            "firstDatabase": "key-array-type--generate--android",
+            "finalDatabase": "key-array-type--generate--android",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": true,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              8623,
+              9308
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-6-45186305196-1/cases/key-array-type--generate--android/result.json.receipt.json",
+              "bytes": 39864,
+              "sha256": "9cf3f74f317fd919b1eb1f4e7a9ae6acd1bcc70a2f5c8e197b5584919c0b0b88"
+            }
+          },
+          {
+            "case": "id-cjk-66--receive--android--android",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "id-cjk-66--receive--android--android",
+            "finalDatabase": "id-cjk-66--receive--android--android-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              8611,
+              8780
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45186305196/artifacts/c004-android-shard-7-45186305196-1/cases/id-cjk-66--receive--android--android/result.json.receipt.json",
+              "bytes": 37450,
+              "sha256": "81b829fdd9c786ac100ba489a957e6e5daf40c8970c307398b68f4ee6b7a0833"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45194185453",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45194185453",
+        "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "attempt": 1,
+        "githubConclusion": "failure",
+        "unexpectedFirstAttempts": 1,
+        "sameDbCaseRetries": 0,
+        "newDbCaseRetries": 1,
+        "collector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "source": {
+            "path": "outputs/c0-07/evidence/45194185453/collection-summary.json",
+            "bytes": 5777,
+            "sha256": "67c73eb191bedb64c24abcb261d148c28c5332f97ee92ac3b7fca534b1cbbb69"
+          }
+        },
+        "failures": [
+          {
+            "case": "C006-A27-manifest-fail",
+            "stage": "main",
+            "attempt": 1,
+            "firstDatabase": "C006-A27-manifest-fail",
+            "finalDatabase": "C006-A27-manifest-fail-retry-2",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": false,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9042,
+              9196
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45194185453/artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.receipt.json",
+              "bytes": 77663,
+              "sha256": "62e6b415f849f22c245c0981f3c53018a67111c58f8e1bb2a3fafe35e26cb74d"
+            }
+          }
+        ]
+      },
+      {
+        "runId": "45199685003",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45199685003",
+        "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "attempt": 1,
+        "githubConclusion": "success",
+        "unexpectedFirstAttempts": 1,
+        "sameDbCaseRetries": 1,
+        "newDbCaseRetries": 0,
+        "collector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "source": {
+            "path": "outputs/c0-07/evidence/45199685003/collection-summary.json",
+            "bytes": 5778,
+            "sha256": "b2f6f142a46b5378f92a63b4d81ec6c035b536296c17a222e1fc1a6dd7e13c0f"
+          }
+        },
+        "failures": [
+          {
+            "case": "C006-A27-manifest-fail",
+            "stage": "restart",
+            "attempt": 1,
+            "firstDatabase": "C006-A27-manifest-fail-observer",
+            "finalDatabase": "C006-A27-manifest-fail-observer",
+            "firstAdbExitCode": 0,
+            "firstInstrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "sameDbCase": true,
+            "receiptStatus": "passed",
+            "restartComparison": "passed",
+            "processIds": [
+              9613,
+              10258
+            ],
+            "receipt": {
+              "path": "outputs/c0-07/evidence/45199685003/artifacts/c006-android-45199685003-1/cases/C006-A27-manifest-fail/output-5.json.receipt.json",
+              "bytes": 71783,
+              "sha256": "3342cb595f93ee0adba37337d52400610cca554f9fae3751ba7be0383226a2e4"
+            }
+          }
+        ]
+      }
+    ],
+    "earlier": {
+      "c003": {
+        "runId": "45117818661",
+        "sourceSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+        "androidBlocked": 234,
+        "androidExecuted": 0
+      },
+      "firstC004": {
+        "runId": "45137698063",
+        "sourceSha": "0dcf37d6692f7fc7b0b3b3f0138a2be733a9bff5",
+        "unexpectedFirstAttempts": 2,
+        "matrixExited": 1,
+        "caseModes": [
+          "actor-invalid-punctuation generate restart",
+          "tombstone-concurrent-edit receive Android main"
+        ],
+        "rootCauseEstablished": false
+      },
+      "finalC004": {
+        "runId": "45140238501",
+        "sourceSha": "56a2cf19ddb4758044e1cdb76bc53ab78aa46cbc",
+        "unexpectedFirstAttempts": 4,
+        "newDbCaseRetries": 3,
+        "sameDbCaseRetries": 1,
+        "evidenceLevel": "historical report + producer manifest + old runner behavior, no raw local failure receipts",
+        "rootCauseEstablished": false
+      },
+      "firstC007": {
+        "runId": "45180141745",
+        "sourceSha": "4a8dd94f7fbceeb0583c37cc7aefdb29e9937691",
+        "timedOutSeedAttempts": 10,
+        "failedChecks": 20,
+        "unexpectedCrashCount": null,
+        "businessCompleted": 0
+      }
+    },
+    "testedSameDb": {
+      "c006Dedicated": {
+        "runId": "45199685578",
+        "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "total": 2,
+        "passed": 2,
+        "deliberateSigkill": 2,
+        "unexpectedFirstAttempts": 0,
+        "A26": "same dbCase/path/actor after real lease expiry; six retained events each published once",
+        "A30": "new observer isolates prior DB; read-only snapshot takeover; not same original database recovery",
+        "collectorExitCode": 1,
+        "evidenceComplete": false
+      },
+      "c007": {
+        "runId": "45190559178",
+        "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "androidAttempts": 55,
+        "sameDbReopens": 55,
+        "androidChecks": 652,
+        "deliberateSigkill": 3,
+        "unexpectedMainCrashesObserved": 0,
+        "collectorExitCode": 1,
+        "evidenceComplete": false,
+        "binaryStdoutExclusions": 114
+      }
+    },
+    "invalidPreservation": {
+      "runId": "45161452258",
+      "mislabelledFiles": 14,
+      "mislabelledMainDbBytes": [
+        112,
+        106
+      ],
+      "originalDbRecoveryProven": false
+    },
+    "observationFix": {
+      "original": {
+        "runId": "45168051257",
+        "sourceSha": "2ca6da3649a771efabcbc190ebbe4a8e62b83499",
+        "executed": 10,
+        "passed": 10,
+        "collectorExitCode": 1,
+        "evidenceComplete": false
+      },
+      "sealed": {
+        "runId": "45169951082",
+        "sourceSha": "8ce0a047ec14925e08072129e4fd13b372e2e084",
+        "executed": 10,
+        "passed": 10,
+        "producerRows": 240,
+        "collectorExitCode": 0,
+        "evidenceComplete": true
+      },
+      "source": "https://github.com/johny751/MyTodo/issues/1#issuecomment-7101431544"
+    },
+    "mechanism": {
+      "immediateCorrelatedSystemTrace": [
+        "45186305196:7 attempts",
+        "45194185453:A27 main",
+        "45199685003:A27 observer restart"
+      ],
+      "exitInfoOnly": [
+        "45170150060:3 attempts",
+        "45186305462:A26 initialize"
+      ],
+      "upstreamTriggerEstablished": false,
+      "productionDeviceGeneralizationEstablished": false
+    },
+    "limitations": [
+      "first attempt failures retained independently of logical result",
+      "same-db final reopen differs from replay of an exported crash artifact",
+      "diagnostic file copies follow process stop and are not an atomic crash-time snapshot",
+      "cloud receipt and indexed text do not constitute local binary rehash",
+      "collector success differs from business success",
+      "no real production device stability or signed APK upgrade evidence"
+    ],
+    "localReviewEvidence": [
+      {
+        "path": "prior-project-outputs/c0-04/evidence/45140238501/github-run.json",
+        "bytes": 31616,
+        "sha256": "caadd7706323ae6eb66890f4ab42c2597cc50c88c0cc10839c965a272d9aba1e"
+      },
+      {
+        "path": "work/android-stability.md",
+        "bytes": 11043,
+        "sha256": "48bbfe09d12e7881f14cec459cb8f6b898bf9808e28ebe6385089886206ea759"
+      },
+      {
+        "path": "outputs/android-stability/issue-comment-receipt.json",
+        "bytes": 216,
+        "sha256": "1133ff870fbfdd90ca7094d37ac4a1c1f3a2d2cd73468f81e38411916d465f42"
+      },
+      {
+        "path": "outputs/android-stability/issue-update.md",
+        "bytes": 3724,
+        "sha256": "c0980edf0df249b192fb83ea5808607145b80ff707482c57f68977fa3b3a8821"
+      },
+      {
+        "path": "outputs/c0-06/final-matrix-evidence-review.md",
+        "bytes": 11473,
+        "sha256": "7ec177b62d48d6312c51425193a75b830989549e74393490c2dcf254e3538ba4"
+      },
+      {
+        "path": "outputs/c0-06/final-core-evidence-review.md",
+        "bytes": 10548,
+        "sha256": "b07693a1e8d4df08190534a875f200cece5d7e72a272963179a14c9843e9de3f"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c006-edf-a27-diagnosis.md",
+        "bytes": 9474,
+        "sha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c006-19ce-core-android-final-review.md",
+        "bytes": 11355,
+        "sha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c006-19ce-kill-final-review.md",
+        "bytes": 7574,
+        "sha256": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c007-de7-android-final-review.md",
+        "bytes": 8478,
+        "sha256": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c007-f9-matrix-android-crash-review.md",
+        "bytes": 9687,
+        "sha256": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c007-f9-c006-a26-failure-review.md",
+        "bytes": 10324,
+        "sha256": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316"
+      },
+      {
+        "path": "outputs/c0-07/reports/c0-07-evidence/c007-first-red-android-review.md",
+        "bytes": 7306,
+        "sha256": "bea7a8ffb66271fd65fe31d9cebdaa3cf446ff132ab0a0bdfcfb71a070906224"
+      }
+    ],
+    "masterReadEvidence": {
+      "commit": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+      "tree": "e7db82447dd94cfc2881e0c91191099a7b14ff44",
+      "archiveSha256": "02a7070226f8ca9ae67ce426b7073520574a692612f6aa56f4c3e63fffe24f25",
+      "sourceManifestSha256": "41f4e8f40d6a4c28c7f40e375e4e5a22ce9f20fb24bbf1f634d1aae445aaf023",
+      "issue": {
+        "closedAt": null,
+        "comments": [
+          {
+            "url": "https://github.com/johny751/MyTodo/issues/1#issuecomment-7099447451",
+            "createdAt": "2026-11-23T11:19:29Z",
+            "authorAssociation": "OWNER"
+          },
+          {
+            "url": "https://github.com/johny751/MyTodo/issues/1#issuecomment-7101431544",
+            "createdAt": "2026-11-23T12:39:03Z",
+            "authorAssociation": "OWNER"
+          }
+        ],
+        "number": 1,
+        "state": "OPEN",
+        "title": "Android instrumentation intermittent crashes: preserve failed original databases",
+        "updatedAt": "2026-11-23T12:39:03Z",
+        "url": "https://github.com/johny751/MyTodo/issues/1"
+      },
+      "pathBlobReadback": [
+        {
+          "path": "docs/upgrade/c0-04-status.md",
+          "gitBlob": "f109841f50ee7ec4f4aea0fd16b00f4e3feeb3a4",
+          "bytes": 10150,
+          "sha256": "4caa263a67060d0d1bf36c4c813fd5ebc91ffdc8488ea019920c06a0d12002c3"
+        },
+        {
+          "path": "docs/upgrade/c0-05-report.md",
+          "gitBlob": "68e3e573a79e5ac79903efb87259e1e853403f12",
+          "bytes": 7515,
+          "sha256": "be96268acf02c6c57b69b259a1a88562007a7f79fd219047f6cee7da32185027"
+        },
+        {
+          "path": "docs/upgrade/c0-05-verification.json",
+          "gitBlob": "39414e519a72bc23b656f3bf61311140c285dfbb",
+          "bytes": 19680,
+          "sha256": "503de900ea1f324d978574445d5c7e3721566653fe589b0c5d9c9e6e87882660"
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/final-core-evidence-review.md",
+          "gitBlob": "1bbf814ed21dd8a16900aa5692e98b7810289c73",
+          "bytes": 10548,
+          "sha256": "b07693a1e8d4df08190534a875f200cece5d7e72a272963179a14c9843e9de3f"
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/final-kill-evidence-review.md",
+          "gitBlob": "a0b6b9c4162e578c55bed71516d7992b133e8ca3",
+          "bytes": 7506,
+          "sha256": "13bb10bd18ed768e754a7a8eeafffb46872f4d4792e9a93de1325c196da35871"
+        },
+        {
+          "path": "docs/upgrade/c0-06/audit/final-matrix-evidence-review.md",
+          "gitBlob": "31103672a2b66c9b46671f3306ee3148f06d1b49",
+          "bytes": 11473,
+          "sha256": "7ec177b62d48d6312c51425193a75b830989549e74393490c2dcf254e3538ba4"
+        },
+        {
+          "path": "docs/upgrade/c0-06/reports/c0-06-verification.json",
+          "gitBlob": "f586cf45e9ba3d0020ae4e4e4e62482a2f9229bf",
+          "bytes": 20895,
+          "sha256": "120f05b70adfbab0347d2fd046da5b0cb133e76519e7125b788f8ab3f29ebeab"
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md",
+          "gitBlob": "239050f0d3a680020ec95ad174af80ecda19392f",
+          "bytes": 11355,
+          "sha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c"
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-final-review.md",
+          "gitBlob": "383f72c77ec248ff23c6e1ed9b05c966853098a1",
+          "bytes": 7574,
+          "sha256": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2"
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md",
+          "gitBlob": "15432ca93271b7ef684b29c820efe931966c9c1d",
+          "bytes": 9474,
+          "sha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647"
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-a26-failure-review.md",
+          "gitBlob": "1f974212ffee2922e32758cfd3136cdc788557b9",
+          "bytes": 10324,
+          "sha256": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316"
+        },
+        {
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-android-crash-review.md",
+          "gitBlob": "831511df5d683334e281381f6911e07146285844",
+          "bytes": 9687,
+          "sha256": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e"
+        },
+        {
+          "path": "docs/upgrade/c0-07-final-independent-review.md",
+          "gitBlob": "aee8eab0f3558e4016cde56f1e6043831b785337",
+          "bytes": 7499,
+          "sha256": "aeb2092d27120c072e53124c7063fa2c13704868592b798324d19598efe264f6"
+        },
+        {
+          "path": "docs/upgrade/c0-07-verification.json",
+          "gitBlob": "0eb8932fb40f0b30775b7ee53741380a68fc1614",
+          "bytes": 82614,
+          "sha256": "654759c37a545b5a39b3da70cad268152f998ecf644eb63a5a764c88d6b1a20f"
+        },
+        {
+          "path": "docs/upgrade/protocol-compatibility.md",
+          "gitBlob": "42fa964fe7ef5eaea6faa6e011633c77dc17da7f",
+          "bytes": 18538,
+          "sha256": "435f98a1884f4a56231b5f812ecf2e45342b56f1ecb9661b9352a247832a61c7"
+        },
+        {
+          "path": "tests/c006/android-kill/android-kill-runner.mjs",
+          "gitBlob": "44714750a50db2056954ff57aa2df6e7d3f14d64",
+          "bytes": 23284,
+          "sha256": "792a609c5897131f26574f39b93008da20bbaeefc26fb65aef5783b60d19b8f0"
+        },
+        {
+          "path": "tests/c006/c006-harness/android-runner.mjs",
+          "gitBlob": "e9e69cea5a4ef1c939ac7c0325e534b6fe89c5e0",
+          "bytes": 7788,
+          "sha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a"
+        },
+        {
+          "path": "tests/protocol-harness/android/remote-file-evidence.mjs",
+          "gitBlob": "ebe9c4b9a4639d238c87c097f89a57fc9ccdf36a",
+          "bytes": 7679,
+          "sha256": "41613ce991718a0c1cf03f2f7747d43598e5b0ab3cf081f811e0d3af08a0c350"
+        },
+        {
+          "path": "tests/protocol-harness/android/run-android.mjs",
+          "gitBlob": "76d3da1a5a8e6ced2c2c32623982d7c073158d48",
+          "bytes": 24192,
+          "sha256": "96d48dc0ee6f81d77da76284b4ee68b5b38c572c230d4ae9512c6b2bceb8cfba"
+        }
+      ]
+    },
+    "latestDistinctCases": {
+      "f9A26": {
+        "runId": "45186305462",
+        "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "passed": 1,
+        "failed": 1,
+        "unplannedInitializeTermination": 1,
+        "originalDbAndSidecarsMissing": 4,
+        "targetBoundaryReachedForA26": false,
+        "secondaryCaptureError": "EEXIST",
+        "collectorExitCode": 1,
+        "evidenceComplete": false
+      },
+      "edf": {
+        "runId": "45194185453",
+        "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "corePassed": 82,
+        "coreTotal": 83,
+        "firstPid": 8502,
+        "newDbCaseRetry": true,
+        "originalDbBackOnThirdOperation": true,
+        "busyUntilLeaseExpiry": true,
+        "originalLeaseExpiryRecoveryExecuted": false
+      },
+      "expectedKillPrimary": {
+        "runId": "45170150057",
+        "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "passed": 2,
+        "total": 2,
+        "collectorExitCode": 0,
+        "evidenceComplete": true,
+        "inventoryRows": 859
+      },
+      "latestA27": {
+        "runId": "45199685003",
+        "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "corePassed": 83,
+        "coreTotal": 83,
+        "actualAndroidOperations": 24,
+        "instrumentationInvocations": 49,
+        "successfulInstrumentationInvocations": 48,
+        "unexpectedFirstAttemptFailures": 1,
+        "observerFirstPid": 9801,
+        "observerSameDatabaseSuccessPid": 10258,
+        "semanticAuditChecks": 3544,
+        "historicalFailedNoCrashChecks": 1,
+        "collectorExitCode": 1,
+        "evidenceComplete": false
+      }
+    }
+  },
+  "releaseLimitations": [
+    "real Nutstore and authorized private WebDAV",
+    "Windows and Android physical device installation, upgrade and endurance",
+    "production-signed APK in-place upgrade",
+    "LAN discovery and independent delivery",
+    "power loss and hardware fsync",
+    "multi-device contention and extended offline restore",
+    "attachment content, delivery and integrity",
+    "full T01-T16 product acceptance"
+  ],
+  "publication": {
+    "reviewedParent": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+    "scope": "docs/upgrade/phase0-final-review only",
+    "proof": "final commit is reported outside frozen documents"
+  }
+}
