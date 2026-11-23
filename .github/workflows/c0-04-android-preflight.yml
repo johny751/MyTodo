@@ -20,6 +20,7 @@ jobs:
     env:
       EXPECTED_SOURCE_SHA: ${{ github.sha }}
       MYTODO_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_ANDROID_PULSE_INSTALL: '1'
       MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
     steps:
       - name: Checkout exact preflight definition

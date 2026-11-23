@@ -56,6 +56,7 @@ jobs:
     timeout-minutes: 120
     env:
       MYTODO_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_ANDROID_PULSE_INSTALL: '1'
       MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
     steps:
       - name: Checkout exact protocol source

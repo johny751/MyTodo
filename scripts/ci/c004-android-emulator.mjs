@@ -173,6 +173,21 @@ async function start() {
       [`--sdk_root=${sdk}`, '--channel=0', '--install', ...packages], { timeout: 540_000 });
   }
   if (!await readable(emulator, constants.X_OK)) throw new Blocked('The requested SDK emulator package did not provide its executable.');
+  // Ubuntu 24.04 runners can omit the PulseAudio client library required even with -no-audio.
+  const libpulse = '/usr/lib/x86_64-linux-gnu/libpulse.so.0';
+  receipt.hostPackages = {libpulsePresent: await readable(libpulse), installAllowed: process.env.MYTODO_ANDROID_PULSE_INSTALL === '1'};
+  if (!receipt.hostPackages.libpulsePresent) {
+    if (!receipt.hostPackages.installAllowed) throw new Blocked('Missing libpulse.so.0 in installed-only host dependency mode.');
+    const ubuntuSources = '/etc/apt/sources.list.d/ubuntu.sources';
+    if (!await readable(ubuntuSources)) throw new Blocked('The Ubuntu runner has no official ubuntu.sources file.');
+    const aptOptions = ['-o', `Dir::Etc::sourcelist=${ubuntuSources}`, '-o', 'Dir::Etc::sourceparts=-'];
+    await requireCommand('update-official-ubuntu-package-index', 'sudo', ['-n', 'apt-get', ...aptOptions, 'update'], {timeout:180_000});
+    await requireCommand('install-host-libpulse0', 'sudo',
+      ['-n','apt-get',...aptOptions,'install','-y','--no-install-recommends','libpulse0'], {timeout:240_000});
+    if (!await readable(libpulse)) throw new Blocked('libpulse0 installation did not provide libpulse.so.0.');
+  }
+  receipt.hostPackages.libpulse = await describeFile(libpulse);
+  receipt.hostPackages.libpulsePackage = await requireCommand('libpulse0-version','dpkg-query',['-W','libpulse0']);
   const emulatorPropertiesPath = path.join(sdk, 'emulator', 'source.properties');
   if (!await readable(emulatorPropertiesPath)) throw new Blocked('The SDK emulator package does not provide source.properties.');
   const emulatorProperties = await readFile(emulatorPropertiesPath, 'utf8');
