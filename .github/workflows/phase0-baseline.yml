@@ -6,8 +6,17 @@
         "master"
       ],
       "paths": [
-        ".github/workflows/phase0-baseline.yml",
-        "scripts/ci/phase0-baseline.ps1"
+        ".github/workflows/**",
+        "scripts/ci/**",
+        "scripts/build-*.mjs",
+        "windows/**",
+        "src/**",
+        "android/**",
+        "tests/**",
+        "package.json",
+        "docs/sync-v2.md",
+        "docs/webdav-sync-implementation-guide.md",
+        "docs/upgrade/protocol-compatibility.md"
       ]
     },
     "workflow_dispatch": {
@@ -283,6 +292,29 @@
             "path": "${{ runner.temp }}/mytodo-phase0-android/",
             "retention-days": 14,
             "if-no-files-found": "error"
+          }
+        }
+      ]
+    },
+    "android-runtime-inventory": {
+      "name": "C0-03 Android runtime inventory (not protocol pass)",
+      "runs-on": "windows-latest",
+      "timeout-minutes": 5,
+      "steps": [
+        {
+          "name": "Inventory preinstalled Android runtime; no downloads",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n$root = Join-Path $env:RUNNER_TEMP 'c003-android-runtime-inventory'\nNew-Item -ItemType Directory -Path $root -Force | Out-Null\n$sdk = $env:ANDROID_HOME\n$emulator = if ($sdk) { Join-Path $sdk 'emulator/emulator.exe' } else { '' }\n$adb = if ($sdk) { Join-Path $sdk 'platform-tools/adb.exe' } else { '' }\n$images = @()\nif ($sdk -and (Test-Path -LiteralPath (Join-Path $sdk 'system-images'))) {\n foreach ($api in Get-ChildItem -LiteralPath (Join-Path $sdk 'system-images') -Directory) {\n  foreach ($tag in Get-ChildItem -LiteralPath $api.FullName -Directory) {\n   foreach ($abi in Get-ChildItem -LiteralPath $tag.FullName -Directory) {\n    $properties = Join-Path $abi.FullName 'source.properties'\n    $images += @{ path=$abi.FullName; api=$api.Name; tag=$tag.Name; abi=$abi.Name; sourceProperties=if(Test-Path -LiteralPath $properties){Get-Content -LiteralPath $properties -Raw}else{$null}; hasSystemImage=(Test-Path -LiteralPath (Join-Path $abi.FullName 'system.img')) }\n   }\n  }\n }\n}\n$readyCandidates = @($images | Where-Object { $_.hasSystemImage })\n$emulatorExists = [bool]($emulator -and (Test-Path -LiteralPath $emulator))\n$adbExists = [bool]($adb -and (Test-Path -LiteralPath $adb))\n$state = if($emulatorExists -and $adbExists -and $readyCandidates.Count){'static-reviewed'}else{'blocked'}\n@{runUrl=(\"$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID\");sourceSha=$env:GITHUB_SHA;runner=@{os=$env:RUNNER_OS;arch=$env:RUNNER_ARCH;imageOS=$env:ImageOS;imageVersion=$env:ImageVersion};androidHome=$sdk;emulator=$emulator;emulatorExists=$emulatorExists;adb=$adb;adbExists=$adbExists;systemImages=$images;state=$state;realAndroidSQLiteTestsExecuted=$false;reason=if($state -eq 'blocked'){'Preinstalled emulator, adb or actual system image is missing. No dependency download attempted.'}else{'Local component inventory only; boot, WebView and production SQLite execution still required.'};downloadsAttempted=$false} | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $root 'inventory.json') -Encoding utf8\nGet-Content -LiteralPath (Join-Path $root 'inventory.json')\n"
+        },
+        {
+          "name": "Keep actual environment inventory",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "c003-android-inventory-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/c003-android-runtime-inventory/",
+            "if-no-files-found": "error",
+            "retention-days": 14
           }
         }
       ]
