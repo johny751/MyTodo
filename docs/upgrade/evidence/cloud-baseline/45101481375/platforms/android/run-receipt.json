@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "mode": "Android",
+  "expectedSourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "repository": "johny751/MyTodo",
+  "event": "push",
+  "runId": "45101481375",
+  "runAttempt": "1",
+  "runUrl": "https://github.com/johny751/MyTodo/actions/runs/45101481375",
+  "workflowSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "workflowRef": "johny751/MyTodo/.github/workflows/phase0-baseline.yml@refs/heads/master",
+  "triggerSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "sourceRoot": "D:\\a\\MyTodo\\MyTodo",
+  "actualSourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "initialGitStatus": "",
+  "sourceVerified": true,
+  "runner": {
+    "name": "GitHub Actions 1000000008",
+    "os": "Windows",
+    "arch": "X64",
+    "imageOS": "win25-vs2026",
+    "imageVersion": "20261116.315.1",
+    "toolCache": "C:\\hostedtoolcache\\windows"
+  },
+  "toolPathsAndVersions": {
+    "android-build-tools": {
+      "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0",
+      "version": "35.0.0"
+    },
+    "jdk17-jar": {
+      "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\jar.exe",
+      "version": "jar 17.0.21"
+    },
+    "aapt2": {
+      "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt2.exe",
+      "version": "not reported by installed file"
+    },
+    "node": {
+      "path": "C:\\Program Files\\nodejs\\node.exe",
+      "version": "v22.23.5"
+    },
+    "aapt": {
+      "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+      "version": "Android Asset Packaging Tool, v0.2-11948202"
+    },
+    "git": {
+      "path": "C:\\Program Files\\Git\\bin\\git.exe",
+      "version": "2.56.1.windows.1"
+    },
+    "jdk17-javac": {
+      "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\javac.exe",
+      "version": "javac 17.0.21"
+    },
+    "jdk17-java": {
+      "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+      "version": "openjdk version \"17.0.21\" 2026-10-20\r\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\r\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)"
+    },
+    "android-api34": {
+      "path": "C:\\Android\\android-sdk\\platforms\\android-34\\android.jar",
+      "version": "API34 installed platform"
+    },
+    "zipalign": {
+      "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\zipalign.exe",
+      "version": "build-tools directory 35.0.0"
+    },
+    "d8": {
+      "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\lib\\d8.jar",
+      "version": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go/r8bot (luci-r8-custom-ci-archive-0-77gl))"
+    }
+  },
+  "startedAt": "2026-11-23T02:40:27.8970244Z",
+  "finishedAt": "2026-11-23T02:41:04.290178Z",
+  "updatedAt": "2026-11-23T02:41:05.2520743Z",
+  "jobStatus": "success",
+  "priorJobStatus": "success",
+  "failureCategory": null,
+  "failureReason": null,
+  "requiredItemsComplete": true,
+  "requiredArtifactsComplete": true,
+  "evidenceErrors": [],
+  "artifacts": [
+    {
+      "name": "MyTodo-unsigned.apk",
+      "kind": "android-unsigned-apk",
+      "buildCase": "android-build",
+      "path": "D:\\a\\_temp\\mytodo-phase0-android\\MyTodo-unsigned.apk",
+      "present": true,
+      "producedThisRun": true,
+      "bytes": 278600,
+      "sha256": "4f29d64f3920673cb81c8f309859691190629c378d38e50eb8ba8055e453ed69",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "buildStartedAt": "2026-11-23T02:40:40.9343142Z",
+      "buildFinishedAt": "2026-11-23T02:41:04.1508221Z",
+      "validationStatus": "success",
+      "absence": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "source-head",
+      "kind": "source",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:28.0493656Z",
+      "finishedAt": "2026-11-23T02:40:28.1955548Z",
+      "durationMs": 139,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+      "arguments": [
+        "rev-parse",
+        "--verify",
+        "HEAD"
+      ],
+      "processId": 6292,
+      "execution": "native-process",
+      "stdoutLog": "source-head.stdout.log",
+      "stderrLog": "source-head.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "source-status",
+      "kind": "source",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:28.2280785Z",
+      "finishedAt": "2026-11-23T02:40:28.3038405Z",
+      "durationMs": 72,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+      "arguments": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "processId": 1632,
+      "execution": "native-process",
+      "stdoutLog": "source-status.stdout.log",
+      "stderrLog": "source-status.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "source-verify",
+      "kind": "validation",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:28.3197202Z",
+      "finishedAt": "2026-11-23T02:40:28.3407793Z",
+      "durationMs": 16,
+      "exitCode": 0,
+      "executable": null,
+      "arguments": [],
+      "processId": null,
+      "execution": "powershell-validation-or-packaging",
+      "stdoutLog": "source-verify.stdout.log",
+      "stderrLog": "source-verify.stderr.log",
+      "timeoutMs": null,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "source-inputs",
+      "kind": "validation",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:28.3457575Z",
+      "finishedAt": "2026-11-23T02:40:28.3630037Z",
+      "durationMs": 13,
+      "exitCode": 0,
+      "executable": null,
+      "arguments": [],
+      "processId": null,
+      "execution": "powershell-validation-or-packaging",
+      "stdoutLog": "source-inputs.stdout.log",
+      "stderrLog": "source-inputs.stderr.log",
+      "timeoutMs": null,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "tool-preflight",
+      "kind": "preflight",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:28.3675135Z",
+      "finishedAt": "2026-11-23T02:40:32.8691781Z",
+      "durationMs": 4469,
+      "exitCode": 0,
+      "executable": null,
+      "arguments": [],
+      "processId": null,
+      "execution": "powershell-validation-or-packaging",
+      "stdoutLog": "tool-preflight.stdout.log",
+      "stderrLog": "tool-preflight.stderr.log",
+      "timeoutMs": null,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "java-version",
+      "kind": "tool-probe",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:29.2036876Z",
+      "finishedAt": "2026-11-23T02:40:30.3224328Z",
+      "durationMs": 1113,
+      "exitCode": 0,
+      "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+      "arguments": [
+        "-version"
+      ],
+      "processId": 6656,
+      "execution": "native-process",
+      "stdoutLog": "java-version.stdout.log",
+      "stderrLog": "java-version.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "javac-version",
+      "kind": "tool-probe",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:30.3433568Z",
+      "finishedAt": "2026-11-23T02:40:31.1639292Z",
+      "durationMs": 816,
+      "exitCode": 0,
+      "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\javac.exe",
+      "arguments": [
+        "-version"
+      ],
+      "processId": 6896,
+      "execution": "native-process",
+      "stdoutLog": "javac-version.stdout.log",
+      "stderrLog": "javac-version.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "jar-version",
+      "kind": "tool-probe",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:31.1771602Z",
+      "finishedAt": "2026-11-23T02:40:31.4475419Z",
+      "durationMs": 267,
+      "exitCode": 0,
+      "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\jar.exe",
+      "arguments": [
+        "--version"
+      ],
+      "processId": 5536,
+      "execution": "native-process",
+      "stdoutLog": "jar-version.stdout.log",
+      "stderrLog": "jar-version.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "aapt-version",
+      "kind": "tool-probe",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:31.5369082Z",
+      "finishedAt": "2026-11-23T02:40:31.6823511Z",
+      "durationMs": 142,
+      "exitCode": 0,
+      "executable": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+      "arguments": [
+        "version"
+      ],
+      "processId": 5008,
+      "execution": "native-process",
+      "stdoutLog": "aapt-version.stdout.log",
+      "stderrLog": "aapt-version.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "aapt2-version",
+      "kind": "tool-probe",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:31.6994264Z",
+      "finishedAt": "2026-11-23T02:40:31.9525291Z",
+      "durationMs": 250,
+      "exitCode": 0,
+      "executable": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt2.exe",
+      "arguments": [
+        "version"
+      ],
+      "processId": 7596,
+      "execution": "native-process",
+      "stdoutLog": "aapt2-version.stdout.log",
+      "stderrLog": "aapt2-version.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "d8-version",
+      "kind": "tool-probe",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:31.9661687Z",
+      "finishedAt": "2026-11-23T02:40:32.8597288Z",
+      "durationMs": 891,
+      "exitCode": 0,
+      "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+      "arguments": [
+        "-cp",
+        "C:\\Android\\android-sdk\\build-tools\\35.0.0\\lib\\d8.jar",
+        "com.android.tools.r8.D8",
+        "--version"
+      ],
+      "processId": 8124,
+      "execution": "native-process",
+      "stdoutLog": "d8-version.stdout.log",
+      "stderrLog": "d8-version.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-pomodoro-tests",
+      "kind": "test",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:32.8737788Z",
+      "finishedAt": "2026-11-23T02:40:37.2599251Z",
+      "durationMs": 4383,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "arguments": [
+        "tests/android/run-pomodoro-tests.mjs"
+      ],
+      "processId": 7908,
+      "execution": "native-process",
+      "stdoutLog": "android-pomodoro-tests.stdout.log",
+      "stderrLog": "android-pomodoro-tests.stderr.log",
+      "timeoutMs": 120000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-daily-tests",
+      "kind": "test",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:37.2640093Z",
+      "finishedAt": "2026-11-23T02:40:39.2715603Z",
+      "durationMs": 2005,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "arguments": [
+        "tests/android/run-daily-tests.mjs"
+      ],
+      "processId": 7696,
+      "execution": "native-process",
+      "stdoutLog": "android-daily-tests.stdout.log",
+      "stderrLog": "android-daily-tests.stderr.log",
+      "timeoutMs": 120000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-notification-controls-tests",
+      "kind": "test",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:39.278126Z",
+      "finishedAt": "2026-11-23T02:40:40.8969938Z",
+      "durationMs": 1615,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "arguments": [
+        "tests/android/run-notification-controls-tests.mjs"
+      ],
+      "processId": 1392,
+      "execution": "native-process",
+      "stdoutLog": "android-notification-controls-tests.stdout.log",
+      "stderrLog": "android-notification-controls-tests.stderr.log",
+      "timeoutMs": 120000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-adapter",
+      "kind": "validation",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:40.9027099Z",
+      "finishedAt": "2026-11-23T02:40:40.9304084Z",
+      "durationMs": 25,
+      "exitCode": 0,
+      "executable": null,
+      "arguments": [],
+      "processId": null,
+      "execution": "powershell-validation-or-packaging",
+      "stdoutLog": "android-adapter.stdout.log",
+      "stderrLog": "android-adapter.stderr.log",
+      "timeoutMs": null,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-build",
+      "kind": "build",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:40.9343142Z",
+      "finishedAt": "2026-11-23T02:41:04.1508221Z",
+      "durationMs": 23214,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "arguments": [
+        "D:\\a\\MyTodo\\MyTodo\\scripts\\.phase0-unsigned-38f851fc42e44d7fa0f806630e4843e5.mjs"
+      ],
+      "processId": 8052,
+      "execution": "native-process",
+      "stdoutLog": "android-build.stdout.log",
+      "stderrLog": "android-build.stderr.log",
+      "timeoutMs": 600000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-badging",
+      "kind": "inspect",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:41:04.1813481Z",
+      "finishedAt": "2026-11-23T02:41:04.2393974Z",
+      "durationMs": 56,
+      "exitCode": 0,
+      "executable": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+      "arguments": [
+        "dump",
+        "badging",
+        "D:\\a\\_temp\\mytodo-phase0-android\\MyTodo-unsigned.apk"
+      ],
+      "processId": 4936,
+      "execution": "native-process",
+      "stdoutLog": "android-badging.stdout.log",
+      "stderrLog": "android-badging.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "android-manifest-check",
+      "kind": "validation",
+      "required": true,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:41:04.2437296Z",
+      "finishedAt": "2026-11-23T02:41:04.2629588Z",
+      "durationMs": 17,
+      "exitCode": 0,
+      "executable": null,
+      "arguments": [],
+      "processId": null,
+      "execution": "powershell-validation-or-packaging",
+      "stdoutLog": "android-manifest-check.stdout.log",
+      "stderrLog": "android-manifest-check.stderr.log",
+      "timeoutMs": null,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    },
+    {
+      "id": "node-candidate-1",
+      "kind": "tool-probe",
+      "required": false,
+      "status": "passed",
+      "startedAt": "2026-11-23T02:40:28.4699577Z",
+      "finishedAt": "2026-11-23T02:40:29.140002Z",
+      "durationMs": 664,
+      "exitCode": 0,
+      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "arguments": [
+        "--version"
+      ],
+      "processId": 5096,
+      "execution": "native-process",
+      "stdoutLog": "node-candidate-1.stdout.log",
+      "stderrLog": "node-candidate-1.stderr.log",
+      "timeoutMs": 30000,
+      "failureCategory": null,
+      "reason": null,
+      "captureIncomplete": false
+    }
+  ],
+  "testSummary": null,
+  "androidAdapter": {
+    "sourceScriptSha256": "a9f4ac2c6da729ec49247aba858a430fd48ff71a8fcfd1c59a40251b091a9ee8",
+    "adapterSha256": "7fa37b7cd6123d9d7263b0a8bbef0a81b55034e8043358e58e7f36134480c9b9",
+    "signingBoundaryUnique": true,
+    "signingPerformed": false
+  },
+  "androidManifest": {
+    "applicationId": "local.gxtodo.replica",
+    "versionCode": "15",
+    "versionName": "0.9.2",
+    "unsigned": true
+  },
+  "limitations": [
+    "Cloud compile/test baseline only",
+    "No real user databases or credentials",
+    "No real network sync or three-platform interoperability test",
+    "Android APK is unsigned and is not install/upgrade evidence",
+    "Web package excludes Node runtime and DPAPI helper",
+    "APK Git/time/history UI is not implemented by this CI script"
+  ]
+}

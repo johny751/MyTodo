@@ -16,7 +16,7 @@
 | P2 当前统计差异 | dashboard.c:3 vs schedule.mjs:30 | Windows逾期用start、JS用end或start，需明确共同规则及带起止时间fixture |
 | P2 静态性能风险 | MainActivity:129–135、158–165 | 共用无界单线程executor、UI回调大文件IO；实际云/设备测量后修，不宣称已实测卡顿 |
 | P1 发布环境缺口 | build-android:10–16/60–69；package-release:21–29/42 | 精确SDK35/API34、原签名、官方Node24/runtime/hash/license；unsigned与Web源码包不能冒充正式三包 |
-| P2 验证基础缺口 | 现有测试主要JS/mock及原生自测 | 尚无本轮云基线、C/JS互操作、真实Android桥接/LAN/附件验证；历史数字不顶替当前测试 |
+| P2 验证基础缺口 | 现有测试主要JS/mock及原生自测 | 本轮三端原构建/已有自测已在GitHub成功；C/JS/Android生产存储互操作、真机桥接/LAN/附件仍未验证，历史数字不替代本轮证据 |
 
 保留Windows C/Win32、Android Java+WebView、Node/原生JS及WebDAV v2。当前没有证据支持大规模换栈；新增模块按08/09小步实施，公共接口由主Agent统一。
 

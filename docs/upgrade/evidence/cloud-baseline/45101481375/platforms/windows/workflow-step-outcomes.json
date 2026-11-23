@@ -1,0 +1,9 @@
+{
+  "expectedSourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "definitionCheckout": "success",
+  "sourceCheckout": "success",
+  "executorCopy": "success",
+  "priorJobStatus": "success",
+  "workflowSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "baseline": "success"
+}

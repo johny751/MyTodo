@@ -1,0 +1,17 @@
+[
+  {
+    "name": "MyTodo-unsigned.apk",
+    "kind": "android-unsigned-apk",
+    "buildCase": "android-build",
+    "path": "D:\\a\\_temp\\mytodo-phase0-android\\MyTodo-unsigned.apk",
+    "present": true,
+    "producedThisRun": true,
+    "bytes": 278600,
+    "sha256": "4f29d64f3920673cb81c8f309859691190629c378d38e50eb8ba8055e453ed69",
+    "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "buildStartedAt": "2026-11-23T02:40:40.9343142Z",
+    "buildFinishedAt": "2026-11-23T02:41:04.1508221Z",
+    "validationStatus": "success",
+    "absence": null
+  }
+]

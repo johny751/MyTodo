@@ -2,7 +2,7 @@
 
 日期：2026-11-23，Asia/Shanghai。依据为master ZIP提交注释 `5480c88c806cf1c366ec998b0ba627543d63233a` 的真实源码及01/02/03审计。以下是实施计划，不是已经完成的功能/测试清单。现有路径已在源码核对；标“计划新增”的文件当前不存在，最终职责和公共设计由主Agent审核。表内未带目录的Android Java类名均位于已确认的 `android/src/local/gxtodo/replica/` 包目录，不是任意路径通配。
 
-用户最新要求：编译、测试、打包全部在GitHub执行；不再安排本地构建、测试或新探针。当前CI草稿为 `outputs/github-ci/phase0-baseline.yml`；尚无实际GitHub提交或Actions运行，本文件不将其标为通过。历史README记录和此前本地内存探针不作为云端基线。
+用户最新要求：编译、测试、打包全部在GitHub执行；不再安排本地构建、测试或新探针。CI已提交master，原有三端构建/测试已在[run 45101481375](https://github.com/johny751/MyTodo/actions/runs/45101481375)实际成功，逐项证据见[12 云端基线记录](12-cloud-baseline-20261123.md)。共同协议向量与下述独立兼容修复仍未完成；历史README记录和此前本地内存探针不作为本轮云端基线。
 
 主Agent已审定保留 `meta/entities/outbox`、既有任务结构和WebDAV v2核心。本轮只完成审计/计划，不修改业务源码。具体DDL、事务内部接口及新实体同步映射在实现前由主Agent审核；这不是未决产品需求，不再向用户重复确认已定需求。阶段1编号和新增路径以 `09-phase-one-entry-plan.md` 为唯一来源。
 
@@ -25,7 +25,7 @@
 | ID | 任务及现有/新增文件范围 | 依赖 | 风险 | 验收 |
 |---|---|---|---|---|
 | C0-01 | 云端源码与Git基线：README、package.json、scripts/build-windows.mjs、build-android.mjs、package-release.mjs；记录Codespaces/checkout的HEAD、分支和staged/unstaged/untracked | 可读云端仓库；master | ZIP不含Git历史；工作区可能有未提交变更 | 源码SHA、Git状态、工具版本和调用入口可复核；不覆盖用户变更；逐文件与审计基线对应 |
-| C0-02 | 三端Actions基线。计划新增 `.github/workflows/phase0-baseline.yml`，草稿在outputs/github-ci；用原Windows/Android脚本及tests/*.test.mjs，不先本地编译 | C0-01，工作流可提交/运行 | 默认main空；预装SDK版本不匹配；签名缺失 | 实际run URL/提交/runner/日志/退出码/产物hash；Windows核心自测、共享JS及Java计时测试分别记录。Android unsigned只证明编译，不能冒充可覆盖安装发布APK；Web源包与Node运行时便携包区分 |
+| C0-02 | 三端Actions原有基线已执行。已新增 `.github/workflows/phase0-baseline.yml` 与 `scripts/ci/phase0-baseline.ps1`，run 45101481375；用原Windows/Android脚本及tests/*.test.mjs，未本地编译 | C0-01，工作流可提交/运行 | 默认main空、后续业务改动触发路径尚需扩展；签名缺失 | 本轮实际run/提交/runner/日志/退出码/产物hash见12；Windows原生自测、共享JS及Java计时测试成功。Android unsigned只证明编译，不能冒充可覆盖安装发布APK；Web源包与Node运行时便携包区分；C0-03及以后尚未完成 |
 | C0-03 | Windows C/JS/Android Java共同协议夹具：已有tests/delta-sync.test.mjs、sync-transport.test.mjs、windows/selftest.c；计划新增 `tests/protocol-vectors/*.json`、`tests/protocol-compat.test.mjs`、`windows/protocol-test.c`、`tests/android/protocol/ReplicaProtocolVectorTest.java`；Android harness接原ReplicaDatabase/AccountStore生产存储桥 | C0-02；云端Android SQLite执行环境 | 相同wire格式不等于相同投影；现C自测未走HTTP；Java计时测试未验证SQLite/生产桥 | 同组向量通过三种实际实现应用/持久化/重启/导出，比较规范化投影、墓碑、冲突、outbox/meta和游标；覆盖Unicode、数字、乱序、重复、快照片段、无效批次原子拒绝；C/JS/Java各有实际云run/日志，不只执行模拟算法或JS mock |
 | C0-04 | 确定排序/校验兼容修复：src/replica.mjs:39–44、windows/database.c:13–20、src/delta-sync.mjs:9、windows/sync.c:16/21/22/24；同步更新docs/sync-v2.md及实现指南 | C0-03；主Agent审核公共规则；独立commit | localeCompare/strcmp不同；key/context/id长度差异；C游标int和安全整数边界 | A/a及ASCII标点排序一致；key恰好两项、context类型、ID编码长度、整数边界一致；已有合法身份可继续；无效数据不写半批或推进游标；该commit相关三种实际存储向量云test及审查记录齐备 |
 | C0-05 | 凭据双向兼容：windows/sync.c:5/6、windows/credential-helper.c、src/sync-server.mjs:8/13、tests/web-launcher.test.mjs；计划新增合成C/Node互读夹具 | C0-02；独立commit，与C0-04/06/07分开 | Node gx-dpapi-v1:UTF8/hex格式C未识别；不能更换真实凭据或暴露密码 | 云端Windows验证C旧格式→Node、新Node→C、重保存/损坏文件；合成密码不进日志，原配置失败时不覆盖；Android Keystore不降级；该commit相关云test及审查记录齐备 |

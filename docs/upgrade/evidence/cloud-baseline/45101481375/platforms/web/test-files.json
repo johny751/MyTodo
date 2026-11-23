@@ -1,0 +1,19 @@
+[
+  "tests/accounts.test.mjs",
+  "tests/completion-day.test.mjs",
+  "tests/delta-sync.test.mjs",
+  "tests/feedback.test.mjs",
+  "tests/import-official.test.mjs",
+  "tests/interaction.test.mjs",
+  "tests/model.test.mjs",
+  "tests/native-storage.test.mjs",
+  "tests/navigation-gestures.test.mjs",
+  "tests/schedule.test.mjs",
+  "tests/subtask-time.test.mjs",
+  "tests/sync-transport.test.mjs",
+  "tests/task-editor-enter.test.mjs",
+  "tests/task-tree.test.mjs",
+  "tests/undo-sync.test.mjs",
+  "tests/view-history.test.mjs",
+  "tests/web-launcher.test.mjs"
+]

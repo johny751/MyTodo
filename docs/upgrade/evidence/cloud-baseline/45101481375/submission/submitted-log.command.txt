@@ -1,0 +1,1 @@
+git -C /workspaces/MyTodo log -2 --format=fuller 

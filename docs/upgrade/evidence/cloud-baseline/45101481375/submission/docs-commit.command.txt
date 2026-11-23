@@ -1,0 +1,1 @@
+git -C /workspaces/MyTodo commit -m docs:\ formalize\ phase\ 0\ upgrade\ standards\ and\ entry\ gates 

@@ -1,0 +1,15 @@
+docs/upgrade/00-project-audit.md
+docs/upgrade/01-current-architecture.md
+docs/upgrade/02-existing-database.md
+docs/upgrade/03-existing-sync-audit.md
+docs/upgrade/04-existing-feature-inventory.md
+docs/upgrade/05-build-and-test-baseline.md
+docs/upgrade/06-upgrade-risks.md
+docs/upgrade/07-development-standards.md
+docs/upgrade/08-development-task-gates.md
+docs/upgrade/09-phase-one-entry-plan.md
+docs/upgrade/10-three-platform-ci-plan.md
+docs/upgrade/11-acceptance-execution-status.md
+docs/upgrade/evidence/source-preservation.json
+docs/upgrade/evidence/source-snapshot-manifest.json
+docs/upgrade/evidence/source-tree.txt

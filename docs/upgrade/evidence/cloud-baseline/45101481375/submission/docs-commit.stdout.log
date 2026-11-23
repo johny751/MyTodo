@@ -1,0 +1,17 @@
+[master 4c2edfc] docs: formalize phase 0 upgrade standards and entry gates
+ 15 files changed, 3437 insertions(+)
+ create mode 100644 docs/upgrade/00-project-audit.md
+ create mode 100644 docs/upgrade/01-current-architecture.md
+ create mode 100644 docs/upgrade/02-existing-database.md
+ create mode 100644 docs/upgrade/03-existing-sync-audit.md
+ create mode 100644 docs/upgrade/04-existing-feature-inventory.md
+ create mode 100644 docs/upgrade/05-build-and-test-baseline.md
+ create mode 100644 docs/upgrade/06-upgrade-risks.md
+ create mode 100644 docs/upgrade/07-development-standards.md
+ create mode 100644 docs/upgrade/08-development-task-gates.md
+ create mode 100644 docs/upgrade/09-phase-one-entry-plan.md
+ create mode 100644 docs/upgrade/10-three-platform-ci-plan.md
+ create mode 100644 docs/upgrade/11-acceptance-execution-status.md
+ create mode 100644 docs/upgrade/evidence/source-preservation.json
+ create mode 100644 docs/upgrade/evidence/source-snapshot-manifest.json
+ create mode 100644 docs/upgrade/evidence/source-tree.txt

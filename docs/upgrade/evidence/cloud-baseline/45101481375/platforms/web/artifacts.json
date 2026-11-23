@@ -1,0 +1,32 @@
+[
+  {
+    "name": "WebCredentialHelper.exe",
+    "kind": "windows-dpapi-helper",
+    "buildCase": "helper-build",
+    "path": "D:\\a\\_temp\\mytodo-phase0-web\\WebCredentialHelper.exe",
+    "present": true,
+    "producedThisRun": true,
+    "bytes": 148992,
+    "sha256": "6e7bb1df5ccf21c92ab3ec0b1973f58efb2ee9224733f9403b72d5994120818d",
+    "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "buildStartedAt": "2026-11-23T02:40:27.5389716Z",
+    "buildFinishedAt": "2026-11-23T02:40:34.1264549Z",
+    "validationStatus": "success",
+    "absence": null
+  },
+  {
+    "name": "MyTodo-web-source.zip",
+    "kind": "web-source-zip",
+    "buildCase": "web-package",
+    "path": "D:\\a\\_temp\\mytodo-phase0-web\\MyTodo-web-source.zip",
+    "present": true,
+    "producedThisRun": true,
+    "bytes": 98428,
+    "sha256": "8ea45445a7ab9bcf6b65fb295e1f88ae958524037f9991e011502b7b21ee8dc0",
+    "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "buildStartedAt": "2026-11-23T02:40:56.0959139Z",
+    "buildFinishedAt": "2026-11-23T02:40:56.1631293Z",
+    "validationStatus": "success",
+    "absence": null
+  }
+]

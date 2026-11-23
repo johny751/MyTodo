@@ -1,0 +1,1117 @@
+Freeze source SHA	Set up job	﻿2026-11-23T02:39:49.2225265Z Current runner version: '2.338.2'
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2293850Z ##[group]Runner Image Provisioner
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2295630Z Hosted Compute Agent
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2296534Z Version: 20261111.635
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2297800Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2298996Z Build Date: 2026-11-11T01:49:01Z
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2300269Z Worker ID: {d2b2ec41-8af6-4d79-8696-db344200f7e1}
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2301390Z Region: eastus
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2302154Z Cloud: Azure
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2303052Z ##[endgroup]
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2305338Z ##[group]Operating System
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2306333Z Microsoft Windows Server 2025
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2307291Z 10.0.26100
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2308145Z Datacenter
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2309139Z ##[endgroup]
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2310187Z ##[group]Runner Image
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2311200Z Image: windows-2025-vs2026
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2312135Z Version: 20261116.315.1
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2314059Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2317892Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2319566Z ##[endgroup]
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2321287Z ##[group]GITHUB_TOKEN Permissions
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2323800Z Contents: read
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2324694Z Metadata: read
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2325596Z ##[endgroup]
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2328938Z Secret source: Actions
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2330600Z Cache mode: write
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2331686Z Prepare workflow directory
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2854061Z Prepare all required actions
+Freeze source SHA	Set up job	2026-11-23T02:39:49.2926265Z Getting action download info
+Freeze source SHA	Set up job	2026-11-23T02:39:49.4854401Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+Freeze source SHA	Set up job	2026-11-23T02:39:49.6709673Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Freeze source SHA	Set up job	2026-11-23T02:39:50.0463367Z Complete job name: Freeze source SHA
+Freeze source SHA	Initialize source-resolution evidence	﻿2026-11-23T02:39:50.2061872Z ##[group]Run $ErrorActionPreference = 'Stop'
+Freeze source SHA	Initialize source-resolution evidence	2026-11-23T02:39:50.2062813Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Freeze source SHA	Initialize source-resolution evidence	2026-11-23T02:39:50.2063615Z ^[[36;1m$evidence = Join-Path $env:RUNNER_TEMP 'mytodo-phase0-resolve'^[[0m
+Freeze source SHA	Initialize source-resolution evidence	2026-11-23T02:39:50.2064588Z ^[[36;1mNew-Item -ItemType Directory -Path $evidence -Force | Out-Null^[[0m
+Freeze source SHA	Initialize source-resolution evidence	2026-11-23T02:39:50.2067626Z ^[[36;1m@{repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=("$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID");workflowSha=$env:GITHUB_SHA;status='not_run';sourceSha=$null;exitCode=$null;startedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'source-resolution.json') -Encoding utf8^[[0m
+Freeze source SHA	Initialize source-resolution evidence	2026-11-23T02:39:50.2389831Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Freeze source SHA	Initialize source-resolution evidence	2026-11-23T02:39:50.2391197Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	﻿2026-11-23T02:39:51.1319916Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1321616Z with:
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1322555Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1323816Z   persist-credentials: false
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1324878Z   repository: johny751/MyTodo
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1333966Z   token: ***
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1334827Z   ssh-strict: true
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1335710Z   ssh-user: git
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1336859Z   clean: true
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1337904Z   sparse-checkout-cone-mode: true
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1338992Z   fetch-depth: 1
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1339853Z   fetch-tags: false
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1340729Z   show-progress: true
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1341620Z   lfs: false
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1342438Z   submodules: false
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1343357Z   set-safe-directory: true
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.1344329Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:51.9954361Z Syncing repository: johny751/MyTodo
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5183335Z ##[group]Getting Git version info
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5184544Z Working directory is 'D:\a\MyTodo\MyTodo'
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5185444Z [command]"C:\Program Files\Git\bin\git.exe" version
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5185797Z git version 2.56.1.windows.1
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5186659Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5190953Z Temporarily overriding HOME='D:\a\_temp\197b6dab-8448-424e-a973-91ffe6f30631' before making global git config changes
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5192126Z Adding repository directory to the temporary git global config as a safe directory
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5193194Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5195425Z Deleting the contents of 'D:\a\MyTodo\MyTodo'
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5196444Z ##[group]Initializing the repository
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5197226Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\MyTodo\MyTodo
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5198080Z Initialized empty Git repository in D:/a/MyTodo/MyTodo/.git/
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5200170Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/johny751/MyTodo
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5211320Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5212111Z ##[group]Disabling automatic garbage collection
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5212861Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5214918Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5215290Z ##[group]Setting up auth
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5215746Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:52.5217010Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:53.8065274Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:53.8505599Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:54.4776387Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:54.5396605Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:54.5450987Z ##[group]Fetching the repository
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:54.5623065Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.1880125Z From https://github.com/johny751/MyTodo
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.1882511Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2076902Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2087096Z ##[group]Determining the checkout info
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2088730Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2090224Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2441483Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2829780Z ##[group]Checking out the ref
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.2839827Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7145927Z Note: switching to '06a269b965c0c92c0e818effba5546986dd3242d'.
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7168025Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7169620Z You are in 'detached HEAD' state. You can look around, make experimental
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7170946Z changes and commit them, and you can discard any commits you make in this
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7180097Z state without impacting any branches by switching back to a branch.
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7193662Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7311666Z If you want to create a new branch to retain commits you create, you may
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7348777Z do so (now or later) by using -c with the switch command. Example:
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7529978Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7574466Z   git switch -c <new-branch-name>
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7617475Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7674174Z Or undo this operation with:
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7680972Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:56.7699484Z   git switch -
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5724253Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5724735Z Turn off this advice by setting config variable advice.detachedHead to false
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5725304Z 
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5725636Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5727206Z ##[endgroup]
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5728149Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5728795Z 06a269b965c0c92c0e818effba5546986dd3242d
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5730044Z ##[group]Removing auth
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5730818Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5733122Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5735826Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5736801Z http.https://github.com/.extraheader
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.5738192Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:57.6049334Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Freeze source SHA	Checkout requested source ref	2026-11-23T02:39:58.2224184Z ##[endgroup]
+Freeze source SHA	Freeze and verify one complete source SHA	﻿2026-11-23T02:39:58.2583349Z ##[group]Run $ErrorActionPreference = 'Stop'
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2583802Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2584220Z ^[[36;1m$evidence = Join-Path $env:RUNNER_TEMP 'mytodo-phase0-resolve'^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2584690Z ^[[36;1m$receiptPath = Join-Path $evidence 'source-resolution.json'^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2585216Z ^[[36;1m$receipt = Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json -AsHashtable^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2585666Z ^[[36;1m$receipt.status = 'running'^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2586081Z ^[[36;1m$receipt | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2586496Z ^[[36;1mtry {^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2586829Z ^[[36;1m  $head = & git rev-parse --verify HEAD 2> (Join-Path $evidence 'head.stderr.log')^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2587234Z ^[[36;1m  $headExit = $LASTEXITCODE^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2587654Z ^[[36;1m  $head | Set-Content -LiteralPath (Join-Path $evidence 'head.stdout.log') -Encoding utf8^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2588163Z ^[[36;1m  $receipt.exitCode = $headExit^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2588740Z ^[[36;1m  if ($headExit -ne 0 -or "$head".Trim() -notmatch '^[a-fA-F0-9]{40}$') { throw 'Source ref did not resolve to a complete commit SHA.' }^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2589316Z ^[[36;1m  $sha = "$head".Trim().ToLowerInvariant()^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2589827Z ^[[36;1m  $status = & git status --porcelain=v1 --untracked-files=all 2> (Join-Path $evidence 'status.stderr.log')^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2649372Z ^[[36;1m  $statusExit = $LASTEXITCODE^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2650230Z ^[[36;1m  $status | Set-Content -LiteralPath (Join-Path $evidence 'status.stdout.log') -Encoding utf8^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2653882Z ^[[36;1m  $receipt.statusExitCode = $statusExit^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2654728Z ^[[36;1m  if ($statusExit -ne 0 -or "$status".Trim()) { throw 'Source checkout is not pristine.' }^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2655519Z ^[[36;1m  $receipt.sourceSha = $sha^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2655992Z ^[[36;1m  $receipt.status = 'success'^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2656742Z ^[[36;1m  "sha=$sha" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2657773Z ^[[36;1m} catch {^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2658214Z ^[[36;1m  $receipt.status = 'failure'^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2658724Z ^[[36;1m  $receipt.reason = $_.Exception.Message^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2659204Z ^[[36;1m  throw^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2659523Z ^[[36;1m} finally {^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2660018Z ^[[36;1m  $receipt.finishedAt = [DateTime]::UtcNow.ToString('o')^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2660888Z ^[[36;1m  $receipt | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2661632Z ^[[36;1m}^[[0m
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2739011Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Freeze source SHA	Freeze and verify one complete source SHA	2026-11-23T02:39:58.2739373Z ##[endgroup]
+Freeze source SHA	Finalize source-resolution receipt	﻿2026-11-23T02:39:59.4232750Z ##[group]Run $ErrorActionPreference = 'Stop'
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4233212Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4233597Z ^[[36;1m$evidence = Join-Path $env:RUNNER_TEMP 'mytodo-phase0-resolve'^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4234090Z ^[[36;1mNew-Item -ItemType Directory -Path $evidence -Force | Out-Null^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4234520Z ^[[36;1m$path = Join-Path $evidence 'source-resolution.json'^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4235864Z ^[[36;1m$receipt = if (Test-Path -LiteralPath $path) { Get-Content -LiteralPath $path -Raw | ConvertFrom-Json -AsHashtable } else { @{repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;workflowSha=$env:GITHUB_SHA;sourceSha=$null;exitCode=$null;status='failure';reason='Initialization did not complete.'} }^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4237264Z ^[[36;1m$receipt.checkoutOutcome = $env:CHECKOUT_OUTCOME^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4237624Z ^[[36;1m$receipt.resolveOutcome = $env:RESOLVE_OUTCOME^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4238061Z ^[[36;1mif ($env:CHECKOUT_OUTCOME -ne 'success' -or $env:RESOLVE_OUTCOME -ne 'success') {^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4238519Z ^[[36;1m  $receipt.status = 'failure'^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4239066Z ^[[36;1m  if (-not $receipt.reason) { $receipt.reason = 'Checkout or SHA resolution did not complete; platform jobs cannot run.' }^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4239818Z ^[[36;1m}^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4240085Z ^[[36;1m$receipt.finishedAt = [DateTime]::UtcNow.ToString('o')^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4240547Z ^[[36;1m$receipt | ConvertTo-Json | Set-Content -LiteralPath $path -Encoding utf8^[[0m
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4312953Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4313297Z env:
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4313486Z   CHECKOUT_OUTCOME: success
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4314002Z   RESOLVE_OUTCOME: success
+Freeze source SHA	Finalize source-resolution receipt	2026-11-23T02:39:59.4314220Z ##[endgroup]
+Freeze source SHA	Save source-resolution evidence	﻿2026-11-23T02:40:00.0424752Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0425515Z with:
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0425830Z   name: phase0-source-45101481375-1
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0426299Z   path: D:\a\_temp/mytodo-phase0-resolve/
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0426749Z   retention-days: 14
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0427096Z   if-no-files-found: error
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0427500Z   compression-level: 6
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0428140Z   overwrite: false
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0428486Z   include-hidden-files: false
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.0428879Z ##[endgroup]
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.2844671Z (node:1588) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.2855579Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.3199712Z With the provided path, there will be 4 files uploaded
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.3271046Z Artifact name is valid!
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.3297100Z Root directory input is valid!
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.4883882Z Beginning upload of artifact content to blob storage
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.5164972Z (node:1588) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.5391583Z Uploaded bytes 844
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.5586944Z Finished uploading artifact content to blob storage!
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.5588264Z SHA256 digest of uploaded artifact zip is 82bb008b333afeca38d34021a13ecbea6770e00b734066dc5e525ce8e2cbda16
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.5589397Z Finalizing artifact upload
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.8917041Z Artifact phase0-source-45101481375-1.zip successfully finalized. Artifact ID 14785871416
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.8918970Z Artifact phase0-source-45101481375-1 has been successfully uploaded! Final size is 844 bytes. Artifact ID is 14785871416
+Freeze source SHA	Save source-resolution evidence	2026-11-23T02:40:00.8942271Z Artifact download URL: https://github.com/johny751/MyTodo/actions/runs/45101481375/artifacts/14785871416
+Freeze source SHA	Post Checkout requested source ref	﻿2026-11-23T02:40:00.9314632Z Post job cleanup.
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1480148Z [command]"C:\Program Files\Git\bin\git.exe" version
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1488367Z git version 2.56.1.windows.1
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1584868Z Temporarily overriding HOME='D:\a\_temp\6abf344d-3670-442e-a29e-aadbaad03d50' before making global git config changes
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1589884Z Adding repository directory to the temporary git global config as a safe directory
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1593632Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1620050Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1649367Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1661356Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Freeze source SHA	Post Checkout requested source ref	2026-11-23T02:40:02.1667803Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Freeze source SHA	Complete job	﻿2026-11-23T02:40:02.7157074Z Evaluate and set job outputs
+Freeze source SHA	Complete job	2026-11-23T02:40:02.7164446Z Set output 'source-sha'
+Freeze source SHA	Complete job	2026-11-23T02:40:02.7166941Z Cleaning up orphan processes
+Freeze source SHA	Complete job	2026-11-23T02:40:02.7302216Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Web and shared JavaScript tests	Set up job	﻿2026-11-23T02:40:07.1426716Z Current runner version: '2.338.2'
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1489314Z ##[group]Runner Image Provisioner
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1490564Z Hosted Compute Agent
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1491444Z Version: 20261111.635
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1492437Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1493562Z Build Date: 2026-11-11T01:49:01Z
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1494655Z Worker ID: {8c9538cf-e920-4abd-b691-0305ed169306}
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1495759Z Region: westus
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1496555Z Cloud: Azure
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1497435Z ##[endgroup]
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1499466Z ##[group]Operating System
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1500588Z Microsoft Windows Server 2025
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1501692Z 10.0.26100
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1502531Z Datacenter
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1503733Z ##[endgroup]
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1504683Z ##[group]Runner Image
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1505644Z Image: windows-2025-vs2026
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1506638Z Version: 20261116.315.1
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1508715Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1512285Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1513994Z ##[endgroup]
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1515952Z ##[group]GITHUB_TOKEN Permissions
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1518346Z Contents: read
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1519373Z Metadata: read
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1520221Z ##[endgroup]
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1523192Z Secret source: Actions
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1525086Z Cache mode: write
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.1526225Z Prepare workflow directory
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.2301224Z Prepare all required actions
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.2414932Z Getting action download info
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.6127400Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:07.7546708Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Web and shared JavaScript tests	Set up job	2026-11-23T02:40:08.1164648Z Complete job name: Web and shared JavaScript tests
+Web and shared JavaScript tests	Checkout reviewed CI definition	﻿2026-11-23T02:40:08.3143545Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3145155Z with:
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3145753Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3146530Z   persist-credentials: false
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3147174Z   repository: johny751/MyTodo
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3152768Z   token: ***
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3153330Z   ssh-strict: true
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3153825Z   ssh-user: git
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3154252Z   clean: true
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3154708Z   sparse-checkout-cone-mode: true
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3155257Z   fetch-depth: 1
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3155701Z   fetch-tags: false
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3156170Z   show-progress: true
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3156636Z   lfs: false
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3157056Z   submodules: false
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3157533Z   set-safe-directory: true
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3158319Z env:
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3158904Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3159625Z   BASELINE_MODE: Web
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:08.3160118Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9831665Z Syncing repository: johny751/MyTodo
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9834500Z ##[group]Getting Git version info
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9834951Z Working directory is 'D:\a\MyTodo\MyTodo'
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9836998Z [command]"C:\Program Files\Git\bin\git.exe" version
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9838193Z git version 2.56.1.windows.1
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9842013Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9856189Z Temporarily overriding HOME='D:\a\_temp\2b71f50d-1650-4055-b32f-d554eadd504f' before making global git config changes
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9857833Z Adding repository directory to the temporary git global config as a safe directory
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9859183Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9862629Z Deleting the contents of 'D:\a\MyTodo\MyTodo'
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9866911Z ##[group]Initializing the repository
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9867841Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\MyTodo\MyTodo
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9868859Z Initialized empty Git repository in D:/a/MyTodo/MyTodo/.git/
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9870786Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/johny751/MyTodo
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9872758Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9873616Z ##[group]Disabling automatic garbage collection
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9874495Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9876599Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9877372Z ##[group]Setting up auth
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9878310Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:09.9881047Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0901596Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:11.1454866Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:11.7532028Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:11.7950291Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:11.7973528Z ##[group]Fetching the repository
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:11.7997097Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.0427944Z From https://github.com/johny751/MyTodo
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.0429258Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.0506084Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.0509586Z ##[group]Determining the checkout info
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.0510636Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.0517647Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1080494Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1481538Z ##[group]Checking out the ref
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1493636Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6093778Z Note: switching to '06a269b965c0c92c0e818effba5546986dd3242d'.
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6096453Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6109901Z You are in 'detached HEAD' state. You can look around, make experimental
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6111139Z changes and commit them, and you can discard any commits you make in this
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6119506Z state without impacting any branches by switching back to a branch.
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6126516Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6128261Z If you want to create a new branch to retain commits you create, you may
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6130010Z do so (now or later) by using -c with the switch command. Example:
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6131032Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6141786Z   git switch -c <new-branch-name>
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6142934Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6170473Z Or undo this operation with:
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6195217Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6222619Z   git switch -
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6247850Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6268018Z Turn off this advice by setting config variable advice.detachedHead to false
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6278924Z 
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6298070Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6367409Z ##[endgroup]
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6944247Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7308879Z 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7355362Z ##[group]Removing auth
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7372373Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7795106Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:15.3802139Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:15.4154971Z http.https://github.com/.extraheader
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:15.4203179Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:15.4606180Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Web and shared JavaScript tests	Checkout reviewed CI definition	2026-11-23T02:40:16.1161717Z ##[endgroup]
+Web and shared JavaScript tests	Copy executor outside the source checkout	﻿2026-11-23T02:40:16.1609662Z ##[group]Run $ErrorActionPreference = 'Stop'
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.1610206Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.1610812Z ^[[36;1mif ($env:EXPECTED_SOURCE_SHA -notmatch '^[a-fA-F0-9]{40}$') { throw 'Frozen source SHA is missing.' }^[[0m
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.1611516Z ^[[36;1m$target = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'^[[0m
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.1612291Z ^[[36;1mCopy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'scripts/ci/phase0-baseline.ps1') -Destination $target^[[0m
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.1613912Z ^[[36;1m(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256') -Encoding utf8^[[0m
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2301894Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2302588Z env:
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2303057Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2303654Z   BASELINE_MODE: Web
+Web and shared JavaScript tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2304116Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	﻿2026-11-23T02:40:16.9246274Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9246766Z with:
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9247008Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9247339Z   persist-credentials: false
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9247602Z   clean: true
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9247816Z   repository: johny751/MyTodo
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9250613Z   token: ***
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9250826Z   ssh-strict: true
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9251040Z   ssh-user: git
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9251266Z   sparse-checkout-cone-mode: true
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9251535Z   fetch-depth: 1
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9251740Z   fetch-tags: false
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9251954Z   show-progress: true
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9252175Z   lfs: false
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9252367Z   submodules: false
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9252602Z   set-safe-directory: true
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9252834Z env:
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9253103Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9253466Z   BASELINE_MODE: Web
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:16.9253718Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0494540Z Syncing repository: johny751/MyTodo
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0498946Z ##[group]Getting Git version info
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0499731Z Working directory is 'D:\a\MyTodo\MyTodo'
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.1605285Z [command]"C:\Program Files\Git\bin\git.exe" version
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.2170373Z git version 2.56.1.windows.1
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.2345522Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.2388086Z Temporarily overriding HOME='D:\a\_temp\e13433da-2473-4276-b65b-5aee0c7eb4e7' before making global git config changes
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.2394364Z Adding repository directory to the temporary git global config as a safe directory
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.2408880Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3027830Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get remote.origin.url
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3398791Z https://github.com/johny751/MyTodo
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3458889Z ##[group]Removing previously created refs, to avoid conflicts
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3468986Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3867862Z HEAD
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.4580808Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.4596488Z [command]"C:\Program Files\Git\bin\git.exe" submodule status
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.1598546Z ##[group]Cleaning the repository
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.1609785Z [command]"C:\Program Files\Git\bin\git.exe" clean -ffdx
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.2063568Z [command]"C:\Program Files\Git\bin\git.exe" reset --hard HEAD
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0800006Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0847328Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0852274Z ##[group]Disabling automatic garbage collection
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0864832Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.1261748Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.1262548Z ##[group]Setting up auth
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.1274882Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.1678384Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.8037835Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.8436758Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.4775475Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.5357410Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.5361578Z ##[group]Fetching the repository
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.5375855Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.9827708Z From https://github.com/johny751/MyTodo
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.9828683Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.9885200Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.9886036Z ##[group]Determining the checkout info
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.9887019Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.9897723Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0362242Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0767869Z ##[group]Checking out the ref
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0779102Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1192893Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1252630Z ##[endgroup]
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1843043Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2213175Z 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2259563Z ##[group]Removing auth
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2270595Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2657535Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.8860432Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.9223020Z http.https://github.com/.extraheader
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.9271924Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.9706015Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Web and shared JavaScript tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.5673083Z ##[endgroup]
+Web and shared JavaScript tests	Run cloud-only baseline executor	﻿2026-11-23T02:40:23.6048225Z ##[group]Run $ErrorActionPreference = 'Stop'
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6048690Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6049368Z ^[[36;1m& (Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1') -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA^[[0m
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6050004Z ^[[36;1mexit $LASTEXITCODE^[[0m
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6123968Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6124385Z env:
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6124685Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6125077Z   BASELINE_MODE: Web
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6125308Z ##[endgroup]
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:24.3965732Z source-head: passed exit=0 durationMs=91
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:24.4742385Z source-status: passed exit=0 durationMs=58
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:24.5031459Z source-verify: passed exit=0
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:24.5143388Z source-inputs: passed exit=0
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:25.3134204Z node-candidate-1: passed exit=0 durationMs=677
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:25.6705007Z msvc-inventory: passed exit=0 durationMs=306
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:25.7721081Z tool-preflight: passed exit=0
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:27.5379240Z node-sqlite: passed exit=0 durationMs=1758
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:34.1296190Z helper-build: passed exit=0 durationMs=6585
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:34.1687651Z helper-test-copy: passed exit=0
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:56.0642583Z shared-js-tests: passed exit=0 durationMs=21879
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:56.0957385Z shared-test-summary: passed exit=0
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:56.1655137Z web-package: passed exit=0
+Web and shared JavaScript tests	Run cloud-only baseline executor	2026-11-23T02:40:56.1804055Z Evidence directory: D:\a\_temp\mytodo-phase0-web
+Web and shared JavaScript tests	Finalize evidence even after failure	﻿2026-11-23T02:40:56.2251007Z ##[group]Run $ErrorActionPreference = 'Stop'
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2251477Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2252001Z ^[[36;1m$evidence = Join-Path $env:RUNNER_TEMP ('mytodo-phase0-' + $env:BASELINE_MODE.ToLowerInvariant())^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2252644Z ^[[36;1mNew-Item -ItemType Directory -Path $evidence -Force | Out-Null^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2254273Z ^[[36;1m@{definitionCheckout=$env:DEFINITION_OUTCOME;executorCopy=$env:EXECUTOR_OUTCOME;sourceCheckout=$env:SOURCE_OUTCOME;baseline=$env:BASELINE_OUTCOME;priorJobStatus=$env:PRIOR_JOB_STATUS;workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'workflow-step-outcomes.json') -Encoding utf8^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2255906Z ^[[36;1m$hashPath = Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256'^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2256620Z ^[[36;1mif (Test-Path -LiteralPath $hashPath) { Copy-Item -LiteralPath $hashPath -Destination (Join-Path $evidence 'executor.sha256') }^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2257585Z ^[[36;1m$executor = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2258586Z ^[[36;1mif (Test-Path -LiteralPath $executor) {^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2259693Z ^[[36;1m  & $executor -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA -FinalizeOnly -PriorJobStatus $env:PRIOR_JOB_STATUS^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2260930Z ^[[36;1m  exit $LASTEXITCODE^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2261266Z ^[[36;1m}^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2263783Z ^[[36;1m@{mode=$env:BASELINE_MODE;repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=("$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID");workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA;actualSourceSha=$null;sourceVerified=$false;jobStatus='failure';failureCategory='source';failureReason='Reviewed executor was not copied; no build or test ran.';exitCode=$null;cases=@();artifacts=@();requiredItemsComplete=$false;requiredArtifactsComplete=$false;finishedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'run-receipt.json') -Encoding utf8^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2268132Z ^[[36;1mif ($env:PRIOR_JOB_STATUS -eq 'success') { exit 1 }^[[0m
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2344780Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2345355Z env:
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2345780Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2346145Z   BASELINE_MODE: Web
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2346363Z   PRIOR_JOB_STATUS: success
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2346607Z   DEFINITION_OUTCOME: success
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2346843Z   EXECUTOR_OUTCOME: success
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2347079Z   SOURCE_OUTCOME: success
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2347302Z   BASELINE_OUTCOME: success
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.2347518Z ##[endgroup]
+Web and shared JavaScript tests	Finalize evidence even after failure	2026-11-23T02:40:56.9690744Z Finalized Web evidence: success
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	﻿2026-11-23T02:40:57.0564595Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0565112Z with:
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0565384Z   name: phase0-web-45101481375-1
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0588906Z   path: D:\a\_temp/mytodo-phase0-web/
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0589383Z   retention-days: 14
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0589821Z   if-no-files-found: error
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0590271Z   compression-level: 6
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0590678Z   overwrite: false
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0591040Z   include-hidden-files: false
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0591516Z env:
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0592031Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0592676Z   BASELINE_MODE: Web
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.0593072Z ##[endgroup]
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.3288468Z (node:5908) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.3291046Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.4006529Z With the provided path, there will be 65 files uploaded
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.4007730Z Artifact name is valid!
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.4008155Z Root directory input is valid!
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.7536704Z Beginning upload of artifact content to blob storage
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:57.8957319Z (node:5908) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.4404016Z Uploaded bytes 297325
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.5224282Z Finished uploading artifact content to blob storage!
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.5225699Z SHA256 digest of uploaded artifact zip is ed63608fc7a20e5173d28b7fea960beacc574363960f0441fd3a91da8a0b3f7c
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.5226834Z Finalizing artifact upload
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.9619071Z Artifact phase0-web-45101481375-1.zip successfully finalized. Artifact ID 14786090186
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.9628835Z Artifact phase0-web-45101481375-1 has been successfully uploaded! Final size is 297325 bytes. Artifact ID is 14786090186
+Web and shared JavaScript tests	Save logs, receipts and this run artifacts	2026-11-23T02:40:58.9631289Z Artifact download URL: https://github.com/johny751/MyTodo/actions/runs/45101481375/artifacts/14786090186
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	﻿2026-11-23T02:40:58.9932771Z Post job cleanup.
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.4129965Z [command]"C:\Program Files\Git\bin\git.exe" version
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.4676939Z git version 2.56.1.windows.1
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.4873187Z Temporarily overriding HOME='D:\a\_temp\fc854eb3-6e4e-451e-a20a-8e64a78bae0f' before making global git config changes
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.4926262Z Adding repository directory to the temporary git global config as a safe directory
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.4951002Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.5507626Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:40:59.6143510Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:00.5641836Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Web and shared JavaScript tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:00.6223586Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	﻿2026-11-23T02:41:01.5534897Z Post job cleanup.
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.7883235Z [command]"C:\Program Files\Git\bin\git.exe" version
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.8279432Z git version 2.56.1.windows.1
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.8366495Z Temporarily overriding HOME='D:\a\_temp\7a95d43b-9643-4560-8542-97272f098539' before making global git config changes
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.8367956Z Adding repository directory to the temporary git global config as a safe directory
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.8378804Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.8866576Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:01.9563834Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:02.6036990Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Web and shared JavaScript tests	Post Checkout reviewed CI definition	2026-11-23T02:41:02.6454912Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Web and shared JavaScript tests	Complete job	﻿2026-11-23T02:41:03.3091549Z Cleaning up orphan processes
+Web and shared JavaScript tests	Complete job	2026-11-23T02:41:03.3329775Z Terminate orphan process: pid (7912) (vctip)
+Web and shared JavaScript tests	Complete job	2026-11-23T02:41:03.3460646Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Android unsigned build and Java tests	Set up job	﻿2026-11-23T02:40:07.3054405Z Current runner version: '2.338.2'
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3128060Z ##[group]Runner Image Provisioner
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3129793Z Hosted Compute Agent
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3130773Z Version: 20261111.635
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3131908Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3133090Z Build Date: 2026-11-11T01:49:01Z
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3134082Z Worker ID: {fd23760b-92d3-489f-bc2d-bd244498d6b0}
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3135255Z Region: westus2
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3136077Z Cloud: Azure
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3136990Z ##[endgroup]
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3139164Z ##[group]Operating System
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3140324Z Microsoft Windows Server 2025
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3141354Z 10.0.26100
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3142153Z Datacenter
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3142998Z ##[endgroup]
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3144136Z ##[group]Runner Image
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3145197Z Image: windows-2025-vs2026
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3146533Z Version: 20261116.315.1
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3148422Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3152138Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3153797Z ##[endgroup]
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3155743Z ##[group]GITHUB_TOKEN Permissions
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3158674Z Contents: read
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3159636Z Metadata: read
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3160492Z ##[endgroup]
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3165859Z Secret source: Actions
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3167469Z Cache mode: write
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.3168969Z Prepare workflow directory
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.4110013Z Prepare all required actions
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.4209712Z Getting action download info
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.8008402Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:07.9482923Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Android unsigned build and Java tests	Set up job	2026-11-23T02:40:08.4135122Z Complete job name: Android unsigned build and Java tests
+Android unsigned build and Java tests	Checkout reviewed CI definition	﻿2026-11-23T02:40:08.7134559Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7137801Z with:
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7138762Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7140042Z   persist-credentials: false
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7141110Z   repository: johny751/MyTodo
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7152591Z   token: ***
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7153466Z   ssh-strict: true
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7154187Z   ssh-user: git
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7154897Z   clean: true
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7155618Z   sparse-checkout-cone-mode: true
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7156565Z   fetch-depth: 1
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7157362Z   fetch-tags: false
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7158210Z   show-progress: true
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7159041Z   lfs: false
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7159823Z   submodules: false
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7160718Z   set-safe-directory: true
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7162411Z env:
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7163583Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7165146Z   BASELINE_MODE: Android
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:08.7166241Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0548355Z Syncing repository: johny751/MyTodo
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0551652Z ##[group]Getting Git version info
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0552505Z Working directory is 'D:\a\MyTodo\MyTodo'
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0553821Z [command]"C:\Program Files\Git\bin\git.exe" version
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0554508Z git version 2.56.1.windows.1
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0556467Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0564552Z Temporarily overriding HOME='D:\a\_temp\56686772-a455-4391-93b6-2ff14be67984' before making global git config changes
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0565947Z Adding repository directory to the temporary git global config as a safe directory
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0567209Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0573365Z Deleting the contents of 'D:\a\MyTodo\MyTodo'
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0574122Z ##[group]Initializing the repository
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0574574Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\MyTodo\MyTodo
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0575179Z Initialized empty Git repository in D:/a/MyTodo/MyTodo/.git/
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0576242Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/johny751/MyTodo
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0577357Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0577975Z ##[group]Disabling automatic garbage collection
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0578471Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0579477Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0579971Z ##[group]Setting up auth
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0581961Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.0583954Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.7912499Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:11.8445380Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:12.8487178Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:12.9057307Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:12.9118399Z ##[group]Fetching the repository
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:12.9130417Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:14.9385033Z From https://github.com/johny751/MyTodo
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:14.9388147Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:14.9467545Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:14.9472540Z ##[group]Determining the checkout info
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:14.9473969Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:14.9492455Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.0199680Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.0768676Z ##[group]Checking out the ref
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.0802237Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5766852Z Note: switching to '06a269b965c0c92c0e818effba5546986dd3242d'.
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5782577Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5783667Z You are in 'detached HEAD' state. You can look around, make experimental
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5800935Z changes and commit them, and you can discard any commits you make in this
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5805092Z state without impacting any branches by switching back to a branch.
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5807110Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5808507Z If you want to create a new branch to retain commits you create, you may
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5814765Z do so (now or later) by using -c with the switch command. Example:
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5841922Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5844134Z   git switch -c <new-branch-name>
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5844684Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5844969Z Or undo this operation with:
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5845347Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5845595Z   git switch -
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5845870Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5846305Z Turn off this advice by setting config variable advice.detachedHead to false
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5846991Z 
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5847603Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5952824Z ##[endgroup]
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.6574235Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.7056988Z 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.7125892Z ##[group]Removing auth
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.7140197Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:15.7840718Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:16.6689752Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:16.7152273Z http.https://github.com/.extraheader
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:16.7279176Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:16.7813531Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Android unsigned build and Java tests	Checkout reviewed CI definition	2026-11-23T02:40:17.6639625Z ##[endgroup]
+Android unsigned build and Java tests	Copy executor outside the source checkout	﻿2026-11-23T02:40:17.7032088Z ##[group]Run $ErrorActionPreference = 'Stop'
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7032743Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7033338Z ^[[36;1mif ($env:EXPECTED_SOURCE_SHA -notmatch '^[a-fA-F0-9]{40}$') { throw 'Frozen source SHA is missing.' }^[[0m
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7034009Z ^[[36;1m$target = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'^[[0m
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7034726Z ^[[36;1mCopy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'scripts/ci/phase0-baseline.ps1') -Destination $target^[[0m
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7035920Z ^[[36;1m(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256') -Encoding utf8^[[0m
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7732591Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7733158Z env:
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7733543Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7734009Z   BASELINE_MODE: Android
+Android unsigned build and Java tests	Copy executor outside the source checkout	2026-11-23T02:40:17.7734462Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	﻿2026-11-23T02:40:18.6642374Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6642864Z with:
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6643088Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6643395Z   persist-credentials: false
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6643637Z   clean: true
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6643855Z   repository: johny751/MyTodo
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6646480Z   token: ***
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6646694Z   ssh-strict: true
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6646912Z   ssh-user: git
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6647135Z   sparse-checkout-cone-mode: true
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6647395Z   fetch-depth: 1
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6647590Z   fetch-tags: false
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6647808Z   show-progress: true
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6648234Z   lfs: false
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6648455Z   submodules: false
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6648654Z   set-safe-directory: true
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6648872Z env:
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6649114Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6649456Z   BASELINE_MODE: Android
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.6649732Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.8466236Z Syncing repository: johny751/MyTodo
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.8470954Z ##[group]Getting Git version info
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.8471917Z Working directory is 'D:\a\MyTodo\MyTodo'
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.9649167Z [command]"C:\Program Files\Git\bin\git.exe" version
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0307573Z git version 2.56.1.windows.1
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0527026Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0591037Z Temporarily overriding HOME='D:\a\_temp\faa5a723-4db1-42de-aa43-69fd26d392e7' before making global git config changes
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0616169Z Adding repository directory to the temporary git global config as a safe directory
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.0639480Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.1294192Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get remote.origin.url
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.1968786Z https://github.com/johny751/MyTodo
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2117832Z ##[group]Removing previously created refs, to avoid conflicts
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2130493Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2871706Z HEAD
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.3903254Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.3917477Z [command]"C:\Program Files\Git\bin\git.exe" submodule status
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.2503068Z ##[group]Cleaning the repository
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.2517911Z [command]"C:\Program Files\Git\bin\git.exe" clean -ffdx
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.3092639Z [command]"C:\Program Files\Git\bin\git.exe" reset --hard HEAD
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2309566Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2374757Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2381584Z ##[group]Disabling automatic garbage collection
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2399562Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2919970Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2920975Z ##[group]Setting up auth
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.2936468Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:21.3462402Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1751417Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2276913Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.0918468Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.1772963Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.1805857Z ##[group]Fetching the repository
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.1842053Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:24.9878397Z From https://github.com/johny751/MyTodo
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:24.9880778Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:24.9953844Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:24.9954728Z ##[group]Determining the checkout info
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:24.9956155Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:24.9970833Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.0544756Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.1042163Z ##[group]Checking out the ref
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.1056787Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.1567220Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.1640631Z ##[endgroup]
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.2173666Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.2639088Z 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.2704201Z ##[group]Removing auth
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.2718887Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:25.3226964Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:26.1457636Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:26.1882327Z http.https://github.com/.extraheader
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:26.1945308Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:26.2449959Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Android unsigned build and Java tests	Checkout the same frozen source SHA	2026-11-23T02:40:27.1016175Z ##[endgroup]
+Android unsigned build and Java tests	Run cloud-only baseline executor	﻿2026-11-23T02:40:27.1468729Z ##[group]Run $ErrorActionPreference = 'Stop'
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1469282Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1470033Z ^[[36;1m& (Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1') -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA^[[0m
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1470725Z ^[[36;1mexit $LASTEXITCODE^[[0m
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1563377Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1563885Z env:
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1564221Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1564634Z   BASELINE_MODE: Android
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:27.1564906Z ##[endgroup]
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:28.8159747Z source-head: passed exit=0 durationMs=139
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:28.8161068Z source-status: passed exit=0 durationMs=72
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:28.8161714Z source-verify: passed exit=0
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:28.8162710Z source-inputs: passed exit=0
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:29.8342683Z node-candidate-1: passed exit=0 durationMs=664
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:30.3295489Z java-version: passed exit=0 durationMs=1113
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:31.1689807Z javac-version: passed exit=0 durationMs=816
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:31.4539826Z jar-version: passed exit=0 durationMs=267
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:31.6945353Z aapt-version: passed exit=0 durationMs=142
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:31.9570040Z aapt2-version: passed exit=0 durationMs=250
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:32.8647003Z d8-version: passed exit=0 durationMs=891
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:32.8716915Z tool-preflight: passed exit=0
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:37.2631457Z android-pomodoro-tests: passed exit=0 durationMs=4383
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:39.2762400Z android-daily-tests: passed exit=0 durationMs=2005
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:40.9013875Z android-notification-controls-tests: passed exit=0 durationMs=1615
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:40:40.9332159Z android-adapter: passed exit=0
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:41:04.1544586Z android-build: passed exit=0 durationMs=23214
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:41:04.2428529Z android-badging: passed exit=0 durationMs=56
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:41:04.2665271Z android-manifest-check: passed exit=0
+Android unsigned build and Java tests	Run cloud-only baseline executor	2026-11-23T02:41:04.2939864Z Evidence directory: D:\a\_temp\mytodo-phase0-android
+Android unsigned build and Java tests	Finalize evidence even after failure	﻿2026-11-23T02:41:04.3521142Z ##[group]Run $ErrorActionPreference = 'Stop'
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3521715Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3522341Z ^[[36;1m$evidence = Join-Path $env:RUNNER_TEMP ('mytodo-phase0-' + $env:BASELINE_MODE.ToLowerInvariant())^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3523116Z ^[[36;1mNew-Item -ItemType Directory -Path $evidence -Force | Out-Null^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3524994Z ^[[36;1m@{definitionCheckout=$env:DEFINITION_OUTCOME;executorCopy=$env:EXECUTOR_OUTCOME;sourceCheckout=$env:SOURCE_OUTCOME;baseline=$env:BASELINE_OUTCOME;priorJobStatus=$env:PRIOR_JOB_STATUS;workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'workflow-step-outcomes.json') -Encoding utf8^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3527122Z ^[[36;1m$hashPath = Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256'^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3527956Z ^[[36;1mif (Test-Path -LiteralPath $hashPath) { Copy-Item -LiteralPath $hashPath -Destination (Join-Path $evidence 'executor.sha256') }^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3528844Z ^[[36;1m$executor = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3529291Z ^[[36;1mif (Test-Path -LiteralPath $executor) {^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3529998Z ^[[36;1m  & $executor -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA -FinalizeOnly -PriorJobStatus $env:PRIOR_JOB_STATUS^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3531588Z ^[[36;1m  exit $LASTEXITCODE^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3531814Z ^[[36;1m}^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3534579Z ^[[36;1m@{mode=$env:BASELINE_MODE;repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=("$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID");workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA;actualSourceSha=$null;sourceVerified=$false;jobStatus='failure';failureCategory='source';failureReason='Reviewed executor was not copied; no build or test ran.';exitCode=$null;cases=@();artifacts=@();requiredItemsComplete=$false;requiredArtifactsComplete=$false;finishedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'run-receipt.json') -Encoding utf8^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3537309Z ^[[36;1mif ($env:PRIOR_JOB_STATUS -eq 'success') { exit 1 }^[[0m
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3622545Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3623029Z env:
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3623357Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3623758Z   BASELINE_MODE: Android
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3624017Z   PRIOR_JOB_STATUS: success
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3624292Z   DEFINITION_OUTCOME: success
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3624562Z   EXECUTOR_OUTCOME: success
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3624818Z   SOURCE_OUTCOME: success
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3625074Z   BASELINE_OUTCOME: success
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:04.3625338Z ##[endgroup]
+Android unsigned build and Java tests	Finalize evidence even after failure	2026-11-23T02:41:05.2783610Z Finalized Android evidence: success
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	﻿2026-11-23T02:41:05.3854026Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3854703Z with:
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3854963Z   name: phase0-android-45101481375-1
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3855287Z   path: D:\a\_temp/mytodo-phase0-android/
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3855618Z   retention-days: 14
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3855855Z   if-no-files-found: error
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3856101Z   compression-level: 6
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3856352Z   overwrite: false
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3856567Z   include-hidden-files: false
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3856804Z env:
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3857088Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3857427Z   BASELINE_MODE: Android
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.3857647Z ##[endgroup]
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.6927431Z (node:7048) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.6930453Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.7582031Z With the provided path, there will be 46 files uploaded
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.7583321Z Artifact name is valid!
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.7583883Z Root directory input is valid!
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.1314607Z Beginning upload of artifact content to blob storage
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.2639073Z (node:7048) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.8272195Z Uploaded bytes 291284
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.9053374Z Finished uploading artifact content to blob storage!
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.9056019Z SHA256 digest of uploaded artifact zip is bbc176b071512fe5243d0b8c28e30db987e92ec042b21e02e6a6851848c72046
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.9060575Z Finalizing artifact upload
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:07.3396052Z Artifact phase0-android-45101481375-1.zip successfully finalized. Artifact ID 14785597920
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:07.3398420Z Artifact phase0-android-45101481375-1 has been successfully uploaded! Final size is 291284 bytes. Artifact ID is 14785597920
+Android unsigned build and Java tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:07.3414156Z Artifact download URL: https://github.com/johny751/MyTodo/actions/runs/45101481375/artifacts/14785597920
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	﻿2026-11-23T02:41:07.3943434Z Post job cleanup.
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.6656205Z [command]"C:\Program Files\Git\bin\git.exe" version
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.7284354Z git version 2.56.1.windows.1
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.8009831Z Temporarily overriding HOME='D:\a\_temp\ce02a4c4-823f-464b-92c5-577209f9aebf' before making global git config changes
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.8017943Z Adding repository directory to the temporary git global config as a safe directory
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.8030997Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.8597911Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.9099608Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:08.7263934Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Android unsigned build and Java tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:08.7818565Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	﻿2026-11-23T02:41:09.6490593Z Post job cleanup.
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:09.9421523Z [command]"C:\Program Files\Git\bin\git.exe" version
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.0033364Z git version 2.56.1.windows.1
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.0180749Z Temporarily overriding HOME='D:\a\_temp\be57b52a-6222-4aa2-84ec-9624dbf168f0' before making global git config changes
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.0216169Z Adding repository directory to the temporary git global config as a safe directory
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.0217469Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.0738896Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.1276584Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:10.9861103Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Android unsigned build and Java tests	Post Checkout reviewed CI definition	2026-11-23T02:41:11.0389233Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Android unsigned build and Java tests	Complete job	﻿2026-11-23T02:41:11.9631121Z Cleaning up orphan processes
+Android unsigned build and Java tests	Complete job	2026-11-23T02:41:12.0031726Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Windows native build and self-tests	Set up job	﻿2026-11-23T02:40:06.9539252Z Current runner version: '2.338.2'
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9600403Z ##[group]Runner Image Provisioner
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9601672Z Hosted Compute Agent
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9602619Z Version: 20261111.635
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9603659Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9604821Z Build Date: 2026-11-11T01:49:01Z
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9606401Z Worker ID: {abe073ad-e8a2-4cb7-9d56-d5dce6b3ccea}
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9607602Z Region: westus2
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9608440Z Cloud: Azure
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9609283Z ##[endgroup]
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9611320Z ##[group]Operating System
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9612365Z Microsoft Windows Server 2025
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9613391Z 10.0.26100
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9614163Z Datacenter
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9614994Z ##[endgroup]
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9615871Z ##[group]Runner Image
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9617139Z Image: windows-2025-vs2026
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9618287Z Version: 20261116.315.1
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9620349Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9623788Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9625982Z ##[endgroup]
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9627879Z ##[group]GITHUB_TOKEN Permissions
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9630386Z Contents: read
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9631312Z Metadata: read
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9632226Z ##[endgroup]
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9635018Z Secret source: Actions
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9637418Z Cache mode: write
+Windows native build and self-tests	Set up job	2026-11-23T02:40:06.9638542Z Prepare workflow directory
+Windows native build and self-tests	Set up job	2026-11-23T02:40:07.0384309Z Prepare all required actions
+Windows native build and self-tests	Set up job	2026-11-23T02:40:07.0460149Z Getting action download info
+Windows native build and self-tests	Set up job	2026-11-23T02:40:07.3966730Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+Windows native build and self-tests	Set up job	2026-11-23T02:40:07.5356149Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Windows native build and self-tests	Set up job	2026-11-23T02:40:07.8873915Z Complete job name: Windows native build and self-tests
+Windows native build and self-tests	Checkout reviewed CI definition	﻿2026-11-23T02:40:08.0509070Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0510314Z with:
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0510761Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0511329Z   persist-credentials: false
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0511806Z   repository: johny751/MyTodo
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0515564Z   token: ***
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0515949Z   ssh-strict: true
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0516346Z   ssh-user: git
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0516718Z   clean: true
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0517117Z   sparse-checkout-cone-mode: true
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0517597Z   fetch-depth: 1
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0517989Z   fetch-tags: false
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0518384Z   show-progress: true
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0518792Z   lfs: false
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0519154Z   submodules: false
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0519555Z   set-safe-directory: true
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0520208Z env:
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0520710Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0521332Z   BASELINE_MODE: Windows
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:08.0521784Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7580305Z Syncing repository: johny751/MyTodo
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7583182Z ##[group]Getting Git version info
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7584971Z Working directory is 'D:\a\MyTodo\MyTodo'
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7587340Z [command]"C:\Program Files\Git\bin\git.exe" version
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7588736Z git version 2.56.1.windows.1
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7593372Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7599665Z Temporarily overriding HOME='D:\a\_temp\625cbad4-bb77-4b5f-b532-3f5d9671db2c' before making global git config changes
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7602093Z Adding repository directory to the temporary git global config as a safe directory
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7604460Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7611842Z Deleting the contents of 'D:\a\MyTodo\MyTodo'
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7613629Z ##[group]Initializing the repository
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7615398Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\MyTodo\MyTodo
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7616940Z Initialized empty Git repository in D:/a/MyTodo/MyTodo/.git/
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7621083Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/johny751/MyTodo
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7625906Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7628230Z ##[group]Disabling automatic garbage collection
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7630416Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7635825Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7637991Z ##[group]Setting up auth
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7640339Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:09.7647292Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:10.6202935Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:10.6604557Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:11.4291067Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:11.4728745Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:11.4754440Z ##[group]Fetching the repository
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:11.4773504Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1245668Z From https://github.com/johny751/MyTodo
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1246905Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1302197Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1328846Z ##[group]Determining the checkout info
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1350527Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1375632Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.1806033Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.2235443Z ##[group]Checking out the ref
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.2258802Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6804167Z Note: switching to '06a269b965c0c92c0e818effba5546986dd3242d'.
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6805733Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6806399Z You are in 'detached HEAD' state. You can look around, make experimental
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6807567Z changes and commit them, and you can discard any commits you make in this
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6808712Z state without impacting any branches by switching back to a branch.
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6809445Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6810301Z If you want to create a new branch to retain commits you create, you may
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6811435Z do so (now or later) by using -c with the switch command. Example:
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6812132Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6812525Z   git switch -c <new-branch-name>
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6813044Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6813369Z Or undo this operation with:
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6813884Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6814201Z   git switch -
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6814601Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6815124Z Turn off this advice by setting config variable advice.detachedHead to false
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6815928Z 
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6816636Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.6922588Z ##[endgroup]
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7338826Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7692403Z 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7737997Z ##[group]Removing auth
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.7747528Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:14.8143112Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:15.4878058Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5223538Z http.https://github.com/.extraheader
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5278332Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:15.5677131Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Windows native build and self-tests	Checkout reviewed CI definition	2026-11-23T02:40:16.1777496Z ##[endgroup]
+Windows native build and self-tests	Copy executor outside the source checkout	﻿2026-11-23T02:40:16.2179366Z ##[group]Run $ErrorActionPreference = 'Stop'
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2179817Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2180320Z ^[[36;1mif ($env:EXPECTED_SOURCE_SHA -notmatch '^[a-fA-F0-9]{40}$') { throw 'Frozen source SHA is missing.' }^[[0m
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2180900Z ^[[36;1m$target = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'^[[0m
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2181562Z ^[[36;1mCopy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'scripts/ci/phase0-baseline.ps1') -Destination $target^[[0m
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2182592Z ^[[36;1m(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256') -Encoding utf8^[[0m
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2904426Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2904859Z env:
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2905137Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2905483Z   BASELINE_MODE: Windows
+Windows native build and self-tests	Copy executor outside the source checkout	2026-11-23T02:40:16.2905742Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	﻿2026-11-23T02:40:17.0060775Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0061230Z with:
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0061442Z   ref: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0061732Z   persist-credentials: false
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0061955Z   clean: true
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0062144Z   repository: johny751/MyTodo
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0064538Z   token: ***
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0064725Z   ssh-strict: true
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0064909Z   ssh-user: git
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0065104Z   sparse-checkout-cone-mode: true
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0065342Z   fetch-depth: 1
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0065518Z   fetch-tags: false
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0065705Z   show-progress: true
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0065891Z   lfs: false
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0066069Z   submodules: false
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0066259Z   set-safe-directory: true
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0066454Z env:
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0066695Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0067022Z   BASELINE_MODE: Windows
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.0067251Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.1514679Z Syncing repository: johny751/MyTodo
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.1518858Z ##[group]Getting Git version info
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.1519625Z Working directory is 'D:\a\MyTodo\MyTodo'
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.2620883Z [command]"C:\Program Files\Git\bin\git.exe" version
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3023009Z git version 2.56.1.windows.1
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3085713Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3110669Z Temporarily overriding HOME='D:\a\_temp\5358406a-05b5-4b0f-8a47-b89ad6e88117' before making global git config changes
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3112297Z Adding repository directory to the temporary git global config as a safe directory
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3124278Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3530904Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get remote.origin.url
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3871705Z https://github.com/johny751/MyTodo
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3924886Z ##[group]Removing previously created refs, to avoid conflicts
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.3935674Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.4439020Z HEAD
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.5193949Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:17.5213535Z [command]"C:\Program Files\Git\bin\git.exe" submodule status
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.2915008Z ##[group]Cleaning the repository
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.2926688Z [command]"C:\Program Files\Git\bin\git.exe" clean -ffdx
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:18.3352688Z [command]"C:\Program Files\Git\bin\git.exe" reset --hard HEAD
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2444616Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2492559Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2497056Z ##[group]Disabling automatic garbage collection
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.2509900Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.3102706Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.3123944Z ##[group]Setting up auth
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.3348941Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:19.3582738Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.0035225Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.0448543Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.6463554Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.6865940Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.6870236Z ##[group]Fetching the repository
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:20.6883472Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0121433Z From https://github.com/johny751/MyTodo
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0122581Z  * branch            06a269b965c0c92c0e818effba5546986dd3242d -> FETCH_HEAD
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0176957Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0177713Z ##[group]Determining the checkout info
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0178950Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0190191Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.0803070Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1207993Z ##[group]Checking out the ref
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1217681Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1619100Z HEAD is now at 06a269b ci: add cloud-only phase 0 build and test evidence
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.1674358Z ##[endgroup]
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2082924Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2676383Z 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2818157Z ##[group]Removing auth
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.2821145Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.3201557Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.9370501Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.9733954Z http.https://github.com/.extraheader
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:22.9783773Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.0201864Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Windows native build and self-tests	Checkout the same frozen source SHA	2026-11-23T02:40:23.6415055Z ##[endgroup]
+Windows native build and self-tests	Run cloud-only baseline executor	﻿2026-11-23T02:40:23.6618691Z ##[group]Run $ErrorActionPreference = 'Stop'
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6619119Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6619741Z ^[[36;1m& (Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1') -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA^[[0m
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6620300Z ^[[36;1mexit $LASTEXITCODE^[[0m
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6691552Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6691900Z env:
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6692156Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6692482Z   BASELINE_MODE: Windows
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:23.6692680Z ##[endgroup]
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:24.4475128Z source-head: passed exit=0 durationMs=84
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:24.5175122Z source-status: passed exit=0 durationMs=53
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:24.5454355Z source-verify: passed exit=0
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:24.5537851Z source-inputs: passed exit=0
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:25.3807029Z node-candidate-1: passed exit=0 durationMs=754
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:25.6799528Z msvc-inventory: passed exit=0 durationMs=249
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:40:25.8121410Z tool-preflight: passed exit=0
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:41:01.5799761Z windows-build: passed exit=0 durationMs=35760
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:41:01.6924156Z windows-self-test: passed exit=0 durationMs=60
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:41:03.1703858Z windows-advanced-test: passed exit=0 durationMs=1439
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:41:03.2195698Z windows-feedback-test: passed exit=0 durationMs=42
+Windows native build and self-tests	Run cloud-only baseline executor	2026-11-23T02:41:03.2372220Z Evidence directory: D:\a\_temp\mytodo-phase0-windows
+Windows native build and self-tests	Finalize evidence even after failure	﻿2026-11-23T02:41:03.2839960Z ##[group]Run $ErrorActionPreference = 'Stop'
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2840405Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2840913Z ^[[36;1m$evidence = Join-Path $env:RUNNER_TEMP ('mytodo-phase0-' + $env:BASELINE_MODE.ToLowerInvariant())^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2841513Z ^[[36;1mNew-Item -ItemType Directory -Path $evidence -Force | Out-Null^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2843258Z ^[[36;1m@{definitionCheckout=$env:DEFINITION_OUTCOME;executorCopy=$env:EXECUTOR_OUTCOME;sourceCheckout=$env:SOURCE_OUTCOME;baseline=$env:BASELINE_OUTCOME;priorJobStatus=$env:PRIOR_JOB_STATUS;workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'workflow-step-outcomes.json') -Encoding utf8^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2844814Z ^[[36;1m$hashPath = Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256'^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2845502Z ^[[36;1mif (Test-Path -LiteralPath $hashPath) { Copy-Item -LiteralPath $hashPath -Destination (Join-Path $evidence 'executor.sha256') }^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2846201Z ^[[36;1m$executor = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2846572Z ^[[36;1mif (Test-Path -LiteralPath $executor) {^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2847209Z ^[[36;1m  & $executor -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA -FinalizeOnly -PriorJobStatus $env:PRIOR_JOB_STATUS^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2847804Z ^[[36;1m  exit $LASTEXITCODE^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2848008Z ^[[36;1m}^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2850415Z ^[[36;1m@{mode=$env:BASELINE_MODE;repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=("$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID");workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA;actualSourceSha=$null;sourceVerified=$false;jobStatus='failure';failureCategory='source';failureReason='Reviewed executor was not copied; no build or test ran.';exitCode=$null;cases=@();artifacts=@();requiredItemsComplete=$false;requiredArtifactsComplete=$false;finishedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'run-receipt.json') -Encoding utf8^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2853789Z ^[[36;1mif ($env:PRIOR_JOB_STATUS -eq 'success') { exit 1 }^[[0m
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2921922Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2922266Z env:
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2922521Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2922949Z   BASELINE_MODE: Windows
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2923317Z   PRIOR_JOB_STATUS: success
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2923565Z   DEFINITION_OUTCOME: success
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2923782Z   EXECUTOR_OUTCOME: success
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2923996Z   SOURCE_OUTCOME: success
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2924206Z   BASELINE_OUTCOME: success
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:03.2924416Z ##[endgroup]
+Windows native build and self-tests	Finalize evidence even after failure	2026-11-23T02:41:04.0226488Z Finalized Windows evidence: success
+Windows native build and self-tests	Save logs, receipts and this run artifacts	﻿2026-11-23T02:41:04.1188678Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1189156Z with:
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1189354Z   name: phase0-windows-45101481375-1
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1189640Z   path: D:\a\_temp/mytodo-phase0-windows/
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1189901Z   retention-days: 14
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1190104Z   if-no-files-found: error
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1213124Z   compression-level: 6
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1213552Z   overwrite: false
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1213876Z   include-hidden-files: false
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1214263Z env:
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1214709Z   EXPECTED_SOURCE_SHA: 06a269b965c0c92c0e818effba5546986dd3242d
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1215264Z   BASELINE_MODE: Windows
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.1215582Z ##[endgroup]
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.3439816Z (node:6088) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.3441364Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.3983701Z With the provided path, there will be 30 files uploaded
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.3984973Z Artifact name is valid!
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.3985516Z Root directory input is valid!
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.8051514Z Beginning upload of artifact content to blob storage
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:04.9119449Z (node:6088) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.9917279Z Uploaded bytes 698025
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.9917828Z Finished uploading artifact content to blob storage!
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.9918831Z SHA256 digest of uploaded artifact zip is abc6d84342d5805f977c9b2af4147bfc783c3272e636e5979d736dd6cd29ff67
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:05.9919882Z Finalizing artifact upload
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.0370951Z Artifact phase0-windows-45101481375-1.zip successfully finalized. Artifact ID 14785692480
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.0372522Z Artifact phase0-windows-45101481375-1 has been successfully uploaded! Final size is 698025 bytes. Artifact ID is 14785692480
+Windows native build and self-tests	Save logs, receipts and this run artifacts	2026-11-23T02:41:06.0387098Z Artifact download URL: https://github.com/johny751/MyTodo/actions/runs/45101481375/artifacts/14785692480
+Windows native build and self-tests	Post Checkout the same frozen source SHA	﻿2026-11-23T02:41:06.0675624Z Post job cleanup.
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0209077Z [command]"C:\Program Files\Git\bin\git.exe" version
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0209671Z git version 2.56.1.windows.1
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0212647Z Temporarily overriding HOME='D:\a\_temp\7a778b5f-81b2-4c1e-bab3-668d2f1706d3' before making global git config changes
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0213841Z Adding repository directory to the temporary git global config as a safe directory
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0214918Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0216533Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.0219056Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.7650959Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Windows native build and self-tests	Post Checkout the same frozen source SHA	2026-11-23T02:41:07.7653841Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Windows native build and self-tests	Post Checkout reviewed CI definition	﻿2026-11-23T02:41:07.7876357Z Post job cleanup.
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.0174654Z [command]"C:\Program Files\Git\bin\git.exe" version
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.0760650Z git version 2.56.1.windows.1
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.1341614Z Temporarily overriding HOME='D:\a\_temp\c8428692-3927-4e44-b18f-9dfa7a80bfcc' before making global git config changes
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.1367478Z Adding repository directory to the temporary git global config as a safe directory
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.1401445Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\MyTodo\MyTodo
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.1717513Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.2120013Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.8489802Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Windows native build and self-tests	Post Checkout reviewed CI definition	2026-11-23T02:41:08.8888988Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Windows native build and self-tests	Complete job	﻿2026-11-23T02:41:09.5364392Z Cleaning up orphan processes
+Windows native build and self-tests	Complete job	2026-11-23T02:41:09.5602721Z Terminate orphan process: pid (3024) (vctip)
+Windows native build and self-tests	Complete job	2026-11-23T02:41:09.5717224Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

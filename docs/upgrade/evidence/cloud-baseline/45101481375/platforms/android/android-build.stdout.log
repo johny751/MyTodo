@@ -1,0 +1,36 @@
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+AndroidManifest.xml
+res/drawable/ic_launcher.xml
+res/drawable/ic_notification.xml
+res/layout/notification_status.xml
+res/layout/notification_status_expanded.xml
+res/layout/todo_widget.xml
+res/xml/todo_widget_info.xml
+resources.arsc
+classes.dex
+assets/
+assets/index.html
+assets/interaction.css
+assets/src/
+assets/src/accounts.mjs
+assets/src/app.mjs
+assets/src/compat.mjs
+assets/src/delta-sync.mjs
+assets/src/feedback-ui.mjs
+assets/src/feedback.mjs
+assets/src/gestures.mjs
+assets/src/model.mjs
+assets/src/personal-ui.mjs
+assets/src/reminders.mjs
+assets/src/replica.mjs
+assets/src/schedule.mjs
+assets/src/storage.mjs
+assets/src/sync-client.mjs
+assets/src/sync-core.mjs
+assets/src/task-editor.mjs
+assets/src/task-tree.mjs
+assets/src/undo.mjs
+assets/src/view-history.mjs
+assets/styles.css
+Unsigned compile baseline: D:\a\_temp\mytodo-phase0-android\MyTodo-unsigned.apk

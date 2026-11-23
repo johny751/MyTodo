@@ -1,0 +1,17 @@
+[
+  {
+    "name": "MyTodo-phase0.exe",
+    "kind": "windows-exe",
+    "buildCase": "windows-build",
+    "path": "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+    "present": true,
+    "producedThisRun": true,
+    "bytes": 1320448,
+    "sha256": "4ffe46f52f68de49d04beb059d6b36e635c863b0ec501ea9565d828beecd32b5",
+    "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "buildStartedAt": "2026-11-23T02:40:25.812589Z",
+    "buildFinishedAt": "2026-11-23T02:41:01.5760238Z",
+    "validationStatus": "success",
+    "absence": null
+  }
+]

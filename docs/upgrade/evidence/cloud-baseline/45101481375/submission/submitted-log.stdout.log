@@ -1,0 +1,15 @@
+commit 06a269b965c0c92c0e818effba5546986dd3242d
+Author:     johny751 <65437162+johny751@users.noreply.github.com>
+AuthorDate: Mon Nov 23 02:39:38 2026 +0000
+Commit:     johny751 <65437162+johny751@users.noreply.github.com>
+CommitDate: Mon Nov 23 02:39:38 2026 +0000
+
+    ci: add cloud-only phase 0 build and test evidence
+
+commit 4c2edfc833d2c14146c9f9cdd3bf9c9b51de1f31
+Author:     johny751 <65437162+johny751@users.noreply.github.com>
+AuthorDate: Mon Nov 23 02:39:33 2026 +0000
+Commit:     johny751 <65437162+johny751@users.noreply.github.com>
+CommitDate: Mon Nov 23 02:39:33 2026 +0000
+
+    docs: formalize phase 0 upgrade standards and entry gates

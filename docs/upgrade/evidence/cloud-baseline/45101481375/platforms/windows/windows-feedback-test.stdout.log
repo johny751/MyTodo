@@ -1,0 +1,22 @@
+PASS feedback isolated store opens
+PASS another process cannot overlap feedback editor
+PASS new opinion persists with generated title
+PASS empty title derives first line
+PASS opinions survive store restart
+PASS edit status persists
+PASS newer import updates same opinion id
+PASS older import cannot overwrite newer version
+PASS same-time conflict keeps new-id copy
+PASS reimport does not duplicate conflict content
+PASS invalid imported status rejected
+PASS failed import leaves in-memory data unchanged
+PASS failed import leaves persisted data unchanged
+PASS duplicate ids rejected atomically
+PASS invalid calendar timestamp rejected
+PASS blank opinion not persisted
+PASS search matches all terms
+PASS failed atomic replace is reported
+PASS failed atomic replace preserves memory
+PASS failed atomic replace preserves old file
+PASS delete persists independently of tasks
+{"checks":21,"failures":0}

@@ -1,0 +1,152 @@
+[
+  {
+    "path": "BASELINE-README.txt",
+    "bytes": 403,
+    "sha256": "ca6a0b86c3959d24e69445b43f79ceaa8fa06eeda2861ddbebb9aad6cb886f68"
+  },
+  {
+    "path": "index.html",
+    "bytes": 510,
+    "sha256": "eb0517e36ab98788fbe495a6460f93143ea60f95cd90d94dd120eebc9643f105"
+  },
+  {
+    "path": "interaction.css",
+    "bytes": 36221,
+    "sha256": "006561151f11dd92dfded4e57948907776b71a203e94f54417f5530bab113780"
+  },
+  {
+    "path": "launcher.cjs",
+    "bytes": 8830,
+    "sha256": "b70150e256bba01e85cb7fe8818335372f28acfd16caef41382405bf21bc1d08"
+  },
+  {
+    "path": "package.json",
+    "bytes": 462,
+    "sha256": "b58ab319b8554e573c02a4286a3b0a6e9f5bf0e9472f68f1a313e778b6136afa"
+  },
+  {
+    "path": "README.md",
+    "bytes": 14730,
+    "sha256": "aa6d6a841a8fcae8007f4f2cc77d3f01921c079336335ec972336f61dbb244b6"
+  },
+  {
+    "path": "server.mjs",
+    "bytes": 6028,
+    "sha256": "decda257fa50fda442b399e15b9d38d9257d7597969a54b6b5b405f2c2e982b7"
+  },
+  {
+    "path": "src/account-store.mjs",
+    "bytes": 6370,
+    "sha256": "f62788b325b5778a97a026b9660dd7e498879363ce54d2736b4428f6dba9c4f5"
+  },
+  {
+    "path": "src/accounts.mjs",
+    "bytes": 721,
+    "sha256": "6372192c7889b8bc70da20e39755e0fecc1d3f09753681be706f75fe81bddb9b"
+  },
+  {
+    "path": "src/app.mjs",
+    "bytes": 84074,
+    "sha256": "9483f7ba889167e0175d55d900c1de38f309eaf11d01a6fd4101d750a9b90f84"
+  },
+  {
+    "path": "src/compat.mjs",
+    "bytes": 682,
+    "sha256": "9ce6f0c4e57ac91b2e1430a925a53b5163e4544f56c6daa580fd64112ab86d0e"
+  },
+  {
+    "path": "src/delta-sync.mjs",
+    "bytes": 14013,
+    "sha256": "cfa37dc9cb7be3f872e8c921373015933027e9fe8098250561484455f0ba2f4e"
+  },
+  {
+    "path": "src/feedback-ui.mjs",
+    "bytes": 8241,
+    "sha256": "16ecde2c56f6c837439450696f3645b243473e5a3ce2c40a58531447e7da763d"
+  },
+  {
+    "path": "src/feedback.mjs",
+    "bytes": 6370,
+    "sha256": "72b0096bc832e9b62362476fa158e0e1b2391c6684654393e93eeb0e5a392dd5"
+  },
+  {
+    "path": "src/gestures.mjs",
+    "bytes": 10488,
+    "sha256": "49b05833103275384668fdfd09eae8de6ba2b1611abdb78b0a3fab58c33d54a0"
+  },
+  {
+    "path": "src/model.mjs",
+    "bytes": 8736,
+    "sha256": "09e21a8756c68d315eb89ab8989b9700ab56c8eeb58aa776ad796459860aa91e"
+  },
+  {
+    "path": "src/personal-ui.mjs",
+    "bytes": 5875,
+    "sha256": "1473bcacc3cd5b569f775f19d0a6ffc70563520a05c100325dd50e8c5d4da095"
+  },
+  {
+    "path": "src/reminders.mjs",
+    "bytes": 3363,
+    "sha256": "0c59d40d8969097afbdcfc2e92db895090859298b65613a1a5a5430cebd6f82e"
+  },
+  {
+    "path": "src/replica.mjs",
+    "bytes": 8677,
+    "sha256": "5bad335f2e132ab6eaf6f83e9ab03c41a9d6182ea9ec37481bdb764fe1f435ed"
+  },
+  {
+    "path": "src/schedule.mjs",
+    "bytes": 6650,
+    "sha256": "52f4bb03314edacfb590cb8c1314e2ec01f6dfce192c349c467694f7f51b3dee"
+  },
+  {
+    "path": "src/sqlite-store.mjs",
+    "bytes": 4285,
+    "sha256": "e247e904604db7778439cc008b6189498bcdda4f94f42eb25a6fd775ddd9f383"
+  },
+  {
+    "path": "src/storage.mjs",
+    "bytes": 2293,
+    "sha256": "ecc4c3f68328173b8631e0238e03538ac72c34dc8148f6965d07f6519e704d1a"
+  },
+  {
+    "path": "src/sync-client.mjs",
+    "bytes": 1514,
+    "sha256": "46db6901c3c39bf8c49c977911732999b2e2b63ca6a16a63a441535575b57abf"
+  },
+  {
+    "path": "src/sync-core.mjs",
+    "bytes": 5157,
+    "sha256": "80250a91f483e1ffa3dc9b415dd9fc80a857dd79adc62013c199b6dc5947d52a"
+  },
+  {
+    "path": "src/sync-server.mjs",
+    "bytes": 8222,
+    "sha256": "69a95c998d2a6b4eef989e97d3b31dab3d70d18ad9d0a44de525376f9a7ddc31"
+  },
+  {
+    "path": "src/task-editor.mjs",
+    "bytes": 3153,
+    "sha256": "832090bc01607fe7f6f3521386ffdf247576addaeeb47aa89aaba2892f5fadee"
+  },
+  {
+    "path": "src/task-tree.mjs",
+    "bytes": 1597,
+    "sha256": "bc9d7a21359f33cf67c5e483305f151807755419b12866c7e1052f9a2f9948d3"
+  },
+  {
+    "path": "src/undo.mjs",
+    "bytes": 2352,
+    "sha256": "c50554cd010f1fb169b82f60458dbfc91b27419abdd8a14f76b790c7848b3654"
+  },
+  {
+    "path": "src/view-history.mjs",
+    "bytes": 2082,
+    "sha256": "df3436734a1e0c684428beb6ded23517291863ba12e4933d0d95920ec7275787"
+  },
+  {
+    "path": "styles.css",
+    "bytes": 12070,
+    "sha256": "cbc88982a4375ee15c8d2e383b2bc8ee800c5393b66a9494bb1de6721bfdfbca"
+  }
+]

@@ -1,0 +1,14 @@
+phase0-baseline.yml: OK
+phase0-baseline.ps1: OK
+ .github/workflows/phase0-baseline.yml | 291 ++++++++++++++++
+ scripts/ci/phase0-baseline.ps1        | 631 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 922 insertions(+)
+[master 06a269b] ci: add cloud-only phase 0 build and test evidence
+ 2 files changed, 922 insertions(+)
+ create mode 100644 .github/workflows/phase0-baseline.yml
+ create mode 100644 scripts/ci/phase0-baseline.ps1
+CI commit: 06a269b965c0c92c0e818effba5546986dd3242d
+Actions: https://github.com/johny751/MyTodo/actions
+Cloud transfer/evidence directory retained: /tmp/mytodo-phase0-ci.dESBMiuF
+master push triggers the workflow; default main is unchanged.
+Android baseline is unsigned; Web baseline is a source package.

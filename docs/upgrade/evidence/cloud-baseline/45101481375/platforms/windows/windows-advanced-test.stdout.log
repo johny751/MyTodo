@@ -1,0 +1,100 @@
+PASS open advanced test database
+PASS initialize native indexes
+PASS create advanced fixture
+PASS create advanced fixture
+PASS create advanced fixture
+PASS move down one sibling
+PASS move up one sibling
+PASS move to another quadrant
+PASS insert before first sibling
+PASS create advanced fixture
+PASS create advanced fixture
+PASS child order spans child quadrants
+PASS reject cross-level reorder
+PASS complete with undo capture
+PASS later independent edit
+PASS apply selective undo
+PASS undo preserves subsequent fields
+PASS NFKC case-insensitive keyword AND
+PASS search combines parent and descendant text
+PASS edit indexed descendant
+PASS descendant edit invalidates parent search
+PASS AND rejects missing term
+PASS search includes task state
+PASS create project
+PASS reject duplicate project name
+PASS assign category
+PASS rename project
+PASS rename updates task association
+PASS archive project
+PASS active project filter
+PASS archived project filter
+PASS complete weekday recurrence
+PASS weekday rule ignores stale weekend picks
+PASS reopen reminder task
+PASS reopening restores reminder
+PASS reject invalid repeat until
+PASS fractional weight, complex reminder, weekly default, inline categories
+PASS detail keyboard: create isolated task fixture
+PASS detail keyboard: edit retains Enter before dialog default-button handling
+PASS detail keyboard: title
+PASS detail keyboard: native multiline character dispatch inserts one newline
+PASS detail keyboard: edit retains Enter before dialog default-button handling
+PASS detail keyboard: notes
+PASS detail keyboard: native multiline character dispatch inserts one newline
+PASS detail keyboard: edit retains Enter before dialog default-button handling
+PASS detail keyboard: review
+PASS detail keyboard: native multiline character dispatch inserts one newline
+PASS detail keyboard: edit retains Enter before dialog default-button handling
+PASS detail keyboard: place
+PASS detail keyboard: native multiline character dispatch inserts one newline
+PASS detail keyboard: quick child Enter inserts newline
+PASS detail keyboard: text Enter creates no child and does not persist task
+PASS detail keyboard: formatted edit retains single-line value on Enter
+PASS detail keyboard: formatted edit retains single-line value on Enter
+PASS detail keyboard: formatted edit retains single-line value on Enter
+PASS detail keyboard: formatted edit retains single-line value on Enter
+PASS detail keyboard: formatted edit retains single-line value on Enter
+PASS detail keyboard: formatted edit retains single-line value on Enter
+PASS detail keyboard: date and numeric Enter never saves the whole record
+PASS detail keyboard: project and tag Enter confirms selection without newline
+PASS detail keyboard: project and tag Enter confirms selection without newline
+PASS detail keyboard: project and tag Enter does not persist the task
+PASS detail keyboard: IME candidate Enter does not add newline or save
+PASS detail keyboard: Enter after IME composition inserts newline
+PASS detail keyboard: Ctrl Enter is a newline and does not save
+PASS detail keyboard: Shift Enter is a newline and does not save
+PASS detail keyboard: quick and place controls have space for multiline editing
+PASS detail keyboard: independent Save button is visible and labelled
+PASS detail keyboard: independent quick child Add button is labelled
+PASS detail keyboard: explicit button keyboard activation stays with dialog handling
+PASS detail keyboard: Save remains inside the fixed visible header
+PASS detail keyboard: multiline quick editor and Add button do not overlap
+PASS detail keyboard: place editor and existing-place selector fit their row
+PASS detail keyboard: scroll brings the multiline place input fully into view
+PASS detail keyboard: scroll brings the quick multiline input fully into view
+PASS detail keyboard: capture actual native basic detail layout
+PASS detail keyboard: capture actual native multiline quick editor
+PASS detail keyboard: capture actual native multiline review layout
+PASS detail keyboard: Add button persists exactly one child and clears its draft
+PASS detail keyboard: child newline survives SQLite persistence
+PASS detail keyboard: Save button persists all multiline task fields
+PASS detail keyboard: LF business text displays as native multiline text
+PASS detail keyboard: note Enter adds newline without saving
+PASS detail keyboard: note Ctrl Enter retains the separate note save shortcut
+PASS detail keyboard: Close button keeps existing draft autosave behavior
+{"detailKeyChecks":48,"detailKeyFailures":0}
+PASS detail unchanged save, Unicode edit, quick add, pending child draft
+PASS detail save and navigation regression
+PASS detail, category, zoom and deleted record navigation
+PASS create isolated local account
+PASS reject duplicate account name
+PASS reject duplicate sync directory
+PASS rename local account
+PASS reinitialize indexes without duplicate cache
+PASS empty global search has no results
+PASS search before deletion
+PASS delete indexed task
+PASS deleted search record invalidated
+PASS advanced SQLite integrity
+{"checks":48,"failures":0}

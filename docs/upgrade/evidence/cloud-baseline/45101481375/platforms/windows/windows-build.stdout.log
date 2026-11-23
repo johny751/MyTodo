@@ -1,0 +1,41 @@
+
+main.c
+util.c
+database.c
+tasks.c
+sync.c
+gui.c
+theme.c
+task-menu.c
+storage.c
+storage-test.c
+query.c
+operations.c
+detail.c
+dialogs.c
+feedback.c
+dashboard.c
+catalog.c
+selftest.c
+advanced-test.c
+profile.c
+Generating Code...
+Compiling...
+visual-test.c
+repaint-test.c
+drag-test.c
+cJSON.c
+sqlite3.c
+zutil.c
+adler32.c
+crc32.c
+deflate.c
+trees.c
+inflate.c
+inftrees.c
+inffast.c
+compress.c
+Generating Code...
+   Creating library D:\a\_temp\mytodo-phase0-windows\MyTodo-phase0.lib and object D:\a\_temp\mytodo-phase0-windows\MyTodo-phase0.exp
+
+{"exe":"D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe","bytes":1320448,"publicRelease":true,"version":"0.9.2"}

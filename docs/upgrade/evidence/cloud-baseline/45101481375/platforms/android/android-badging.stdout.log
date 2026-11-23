@@ -1,0 +1,27 @@
+package: name='local.gxtodo.replica' versionCode='15' versionName='0.9.2' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.POST_NOTIFICATIONS'
+uses-permission: name='android.permission.RECEIVE_BOOT_COMPLETED'
+uses-permission: name='android.permission.SCHEDULE_EXACT_ALARM'
+uses-permission: name='android.permission.SYSTEM_ALERT_WINDOW'
+uses-permission: name='android.permission.PACKAGE_USAGE_STATS'
+uses-permission: name='android.permission.FOREGROUND_SERVICE'
+uses-permission: name='android.permission.FOREGROUND_SERVICE_SPECIAL_USE'
+sdkVersion:'26'
+targetSdkVersion:'34'
+application-label:'四象限待办·本地版'
+application-icon-160:'res/drawable/ic_launcher.xml'
+application: label='四象限待办·本地版' icon='res/drawable/ic_launcher.xml'
+launchable-activity: name='local.gxtodo.replica.MainActivity'  label='' icon=''
+feature-group: label=''
+  uses-feature: name='android.hardware.faketouch'
+  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'
+provides-component:'app-widget'
+main
+other-activities
+other-receivers
+other-services
+supports-screens: 'small' 'normal' 'large' 'xlarge'
+supports-any-density: 'true'
+locales: '--_--'
+densities: '160'

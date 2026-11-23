@@ -1,0 +1,42 @@
+{
+  "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "applicationId": "local.gxtodo.replica",
+  "version": "0.9.2",
+  "versionCode": "15",
+  "unsigned": true,
+  "buildDirectory": "D:\\a\\_temp\\mytodo-phase0-android-build\\build-1795401641080",
+  "assets": [
+    "index.html",
+    "styles.css",
+    "interaction.css",
+    "src/app.mjs",
+    "src/view-history.mjs",
+    "src/model.mjs",
+    "src/task-tree.mjs",
+    "src/task-editor.mjs",
+    "src/accounts.mjs",
+    "src/storage.mjs",
+    "src/gestures.mjs",
+    "src/compat.mjs",
+    "src/undo.mjs",
+    "src/sync-core.mjs",
+    "src/replica.mjs",
+    "src/delta-sync.mjs",
+    "src/sync-client.mjs",
+    "src/schedule.mjs",
+    "src/personal-ui.mjs",
+    "src/reminders.mjs",
+    "src/feedback.mjs",
+    "src/feedback-ui.mjs"
+  ],
+  "feedback": {
+    "version": "1.2.0",
+    "aarSha256": "4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade"
+  },
+  "dexFiles": [
+    "classes.dex"
+  ],
+  "sha256": "4f29d64f3920673cb81c8f309859691190629c378d38e50eb8ba8055e453ed69",
+  "packageCompletedAt": "2026-11-23T02:41:04.058Z",
+  "note": "Compile and package baseline only. No signing key is read or generated."
+}

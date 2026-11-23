@@ -1,0 +1,3178 @@
+{
+  "schemaVersion": 1,
+  "collectedAtUtc": "2026-11-23T02:51:55.839076+00:00",
+  "collectorEnvironment": "authorized GitHub Codespaces; evidence collection only; no build/test re-execution",
+  "repository": "johny751/MyTodo",
+  "sourceBranch": "master",
+  "initialHead": "5480c88c806cf1c366ec998b0ba627543d63233a",
+  "documentationCommit": "4c2edfc833d2c14146c9f9cdd3bf9c9b51de1f31",
+  "ciCommit": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+  "run": {
+    "id": 45101481375,
+    "run_attempt": 1,
+    "name": "MyTodo phase 0 cloud baseline",
+    "html_url": "https://github.com/johny751/MyTodo/actions/runs/45101481375",
+    "status": "completed",
+    "conclusion": "success",
+    "event": "push",
+    "head_sha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "created_at": "2026-11-23T02:39:45Z",
+    "updated_at": "2026-11-23T02:41:14Z",
+    "run_started_at": "2026-11-23T02:39:45Z"
+  },
+  "cloudBaselineStatus": "success",
+  "stage0Status": "not_passed_protocol_preconditions_pending",
+  "pending": [
+    "C0-03 shared vectors against Windows C, JavaScript, Android production storage",
+    "C0-04 event ordering/input validation/integer boundaries",
+    "C0-05 C/Node synthetic credential interoperability",
+    "C0-06 old-cloud migration/fence recovery interoperability",
+    "C0-07 database error propagation/fault injection",
+    "D1 entry only after compatibility gates"
+  ],
+  "protocolInteroperabilityVerified": false,
+  "businessCodeModified": false,
+  "submittedFiles": [
+    ".github/workflows/phase0-baseline.yml",
+    "docs/upgrade/00-project-audit.md",
+    "docs/upgrade/01-current-architecture.md",
+    "docs/upgrade/02-existing-database.md",
+    "docs/upgrade/03-existing-sync-audit.md",
+    "docs/upgrade/04-existing-feature-inventory.md",
+    "docs/upgrade/05-build-and-test-baseline.md",
+    "docs/upgrade/06-upgrade-risks.md",
+    "docs/upgrade/07-development-standards.md",
+    "docs/upgrade/08-development-task-gates.md",
+    "docs/upgrade/09-phase-one-entry-plan.md",
+    "docs/upgrade/10-three-platform-ci-plan.md",
+    "docs/upgrade/11-acceptance-execution-status.md",
+    "docs/upgrade/evidence/source-preservation.json",
+    "docs/upgrade/evidence/source-snapshot-manifest.json",
+    "docs/upgrade/evidence/source-tree.txt",
+    "scripts/ci/phase0-baseline.ps1"
+  ],
+  "jobs": [
+    {
+      "id": 137453105293,
+      "run_id": 45101481375,
+      "workflow_name": "MyTodo phase 0 cloud baseline",
+      "head_branch": "master",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45101481375",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgANfwjQ",
+      "head_sha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/137453105293",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45101481375/job/137453105293",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-23T02:39:46Z",
+      "started_at": "2026-11-23T02:39:48Z",
+      "completed_at": "2026-11-23T02:40:03Z",
+      "name": "Freeze source SHA",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-23T02:39:49Z",
+          "completed_at": "2026-11-23T02:39:50Z"
+        },
+        {
+          "name": "Initialize source-resolution evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-23T02:39:50Z",
+          "completed_at": "2026-11-23T02:39:51Z"
+        },
+        {
+          "name": "Checkout requested source ref",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-23T02:39:51Z",
+          "completed_at": "2026-11-23T02:39:58Z"
+        },
+        {
+          "name": "Freeze and verify one complete source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-23T02:39:58Z",
+          "completed_at": "2026-11-23T02:39:59Z"
+        },
+        {
+          "name": "Finalize source-resolution receipt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-23T02:39:59Z",
+          "completed_at": "2026-11-23T02:40:00Z"
+        },
+        {
+          "name": "Save source-resolution evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-23T02:40:00Z",
+          "completed_at": "2026-11-23T02:40:00Z"
+        },
+        {
+          "name": "Post Checkout requested source ref",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-23T02:40:00Z",
+          "completed_at": "2026-11-23T02:40:02Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-23T02:40:02Z",
+          "completed_at": "2026-11-23T02:40:02Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/137453105293",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000000007,
+      "runner_name": "GitHub Actions 1000000007",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 137453188137,
+      "run_id": 45101481375,
+      "workflow_name": "MyTodo phase 0 cloud baseline",
+      "head_branch": "master",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45101481375",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgANk0KQ",
+      "head_sha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/137453188137",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45101481375/job/137453188137",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-23T02:40:03Z",
+      "started_at": "2026-11-23T02:40:05Z",
+      "completed_at": "2026-11-23T02:41:05Z",
+      "name": "Web and shared JavaScript tests",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-23T02:40:07Z",
+          "completed_at": "2026-11-23T02:40:08Z"
+        },
+        {
+          "name": "Checkout reviewed CI definition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-23T02:40:08Z",
+          "completed_at": "2026-11-23T02:40:16Z"
+        },
+        {
+          "name": "Copy executor outside the source checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-23T02:40:16Z",
+          "completed_at": "2026-11-23T02:40:16Z"
+        },
+        {
+          "name": "Checkout the same frozen source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-23T02:40:16Z",
+          "completed_at": "2026-11-23T02:40:23Z"
+        },
+        {
+          "name": "Run cloud-only baseline executor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-23T02:40:23Z",
+          "completed_at": "2026-11-23T02:40:56Z"
+        },
+        {
+          "name": "Finalize evidence even after failure",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-23T02:40:56Z",
+          "completed_at": "2026-11-23T02:40:57Z"
+        },
+        {
+          "name": "Save logs, receipts and this run artifacts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-23T02:40:57Z",
+          "completed_at": "2026-11-23T02:40:58Z"
+        },
+        {
+          "name": "Post Checkout the same frozen source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-23T02:40:58Z",
+          "completed_at": "2026-11-23T02:41:01Z"
+        },
+        {
+          "name": "Post Checkout reviewed CI definition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-11-23T02:41:01Z",
+          "completed_at": "2026-11-23T02:41:03Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-11-23T02:41:03Z",
+          "completed_at": "2026-11-23T02:41:03Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/137453188137",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000000010,
+      "runner_name": "GitHub Actions 1000000010",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 137453188221,
+      "run_id": 45101481375,
+      "workflow_name": "MyTodo phase 0 cloud baseline",
+      "head_branch": "master",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45101481375",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgANk0fQ",
+      "head_sha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/137453188221",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45101481375/job/137453188221",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-23T02:40:03Z",
+      "started_at": "2026-11-23T02:40:05Z",
+      "completed_at": "2026-11-23T02:41:14Z",
+      "name": "Android unsigned build and Java tests",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-23T02:40:07Z",
+          "completed_at": "2026-11-23T02:40:08Z"
+        },
+        {
+          "name": "Checkout reviewed CI definition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-23T02:40:08Z",
+          "completed_at": "2026-11-23T02:40:17Z"
+        },
+        {
+          "name": "Copy executor outside the source checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-23T02:40:17Z",
+          "completed_at": "2026-11-23T02:40:18Z"
+        },
+        {
+          "name": "Checkout the same frozen source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-23T02:40:18Z",
+          "completed_at": "2026-11-23T02:40:27Z"
+        },
+        {
+          "name": "Run cloud-only baseline executor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-23T02:40:27Z",
+          "completed_at": "2026-11-23T02:41:04Z"
+        },
+        {
+          "name": "Finalize evidence even after failure",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-23T02:41:04Z",
+          "completed_at": "2026-11-23T02:41:05Z"
+        },
+        {
+          "name": "Save logs, receipts and this run artifacts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-23T02:41:05Z",
+          "completed_at": "2026-11-23T02:41:07Z"
+        },
+        {
+          "name": "Post Checkout the same frozen source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-23T02:41:07Z",
+          "completed_at": "2026-11-23T02:41:09Z"
+        },
+        {
+          "name": "Post Checkout reviewed CI definition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-11-23T02:41:09Z",
+          "completed_at": "2026-11-23T02:41:11Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-11-23T02:41:11Z",
+          "completed_at": "2026-11-23T02:41:12Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/137453188221",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000000008,
+      "runner_name": "GitHub Actions 1000000008",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 137453188225,
+      "run_id": 45101481375,
+      "workflow_name": "MyTodo phase 0 cloud baseline",
+      "head_branch": "master",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45101481375",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgANk0gQ",
+      "head_sha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/137453188225",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45101481375/job/137453188225",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-23T02:40:03Z",
+      "started_at": "2026-11-23T02:40:05Z",
+      "completed_at": "2026-11-23T02:41:11Z",
+      "name": "Windows native build and self-tests",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-23T02:40:06Z",
+          "completed_at": "2026-11-23T02:40:07Z"
+        },
+        {
+          "name": "Checkout reviewed CI definition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-23T02:40:07Z",
+          "completed_at": "2026-11-23T02:40:16Z"
+        },
+        {
+          "name": "Copy executor outside the source checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-23T02:40:16Z",
+          "completed_at": "2026-11-23T02:40:16Z"
+        },
+        {
+          "name": "Checkout the same frozen source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-23T02:40:16Z",
+          "completed_at": "2026-11-23T02:40:23Z"
+        },
+        {
+          "name": "Run cloud-only baseline executor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-23T02:40:23Z",
+          "completed_at": "2026-11-23T02:41:03Z"
+        },
+        {
+          "name": "Finalize evidence even after failure",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-23T02:41:03Z",
+          "completed_at": "2026-11-23T02:41:04Z"
+        },
+        {
+          "name": "Save logs, receipts and this run artifacts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-23T02:41:04Z",
+          "completed_at": "2026-11-23T02:41:06Z"
+        },
+        {
+          "name": "Post Checkout the same frozen source SHA",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-23T02:41:06Z",
+          "completed_at": "2026-11-23T02:41:07Z"
+        },
+        {
+          "name": "Post Checkout reviewed CI definition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-11-23T02:41:07Z",
+          "completed_at": "2026-11-23T02:41:09Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-11-23T02:41:09Z",
+          "completed_at": "2026-11-23T02:41:09Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/137453188225",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000000009,
+      "runner_name": "GitHub Actions 1000000009",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ],
+  "platforms": [
+    {
+      "mode": "Windows",
+      "status": "success",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "workflowSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "workflowRef": "johny751/MyTodo/.github/workflows/phase0-baseline.yml@refs/heads/master",
+      "triggerSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "runner": {
+        "name": "GitHub Actions 1000000009",
+        "os": "Windows",
+        "arch": "X64",
+        "imageOS": "win25-vs2026",
+        "imageVersion": "20261116.315.1",
+        "toolCache": "C:\\hostedtoolcache\\windows"
+      },
+      "toolPathsAndVersions": {
+        "git": {
+          "path": "C:\\Program Files\\Git\\bin\\git.exe",
+          "version": "2.56.1.windows.1"
+        },
+        "vswhere": {
+          "path": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+          "version": "3.1.7.39155"
+        },
+        "windows-rc": {
+          "path": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe",
+          "version": "10.0.26100.0"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "version": "v22.23.5"
+        },
+        "windows-sdk": {
+          "path": "C:/Program Files (x86)/Windows Kits/10",
+          "version": "10.0.26100.0"
+        },
+        "msvc-cl": {
+          "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025\\bin\\Hostx64\\x64\\cl.exe",
+          "version": "14.52.37025"
+        }
+      },
+      "startedAt": "2026-11-23T02:40:24.2362355Z",
+      "finishedAt": "2026-11-23T02:41:03.2349529Z",
+      "cases": [
+        {
+          "id": "source-head",
+          "kind": "source",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.346104Z",
+          "finishedAt": "2026-11-23T02:40:24.4340814Z",
+          "durationMs": 84,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+          "arguments": [
+            "rev-parse",
+            "--verify",
+            "HEAD"
+          ],
+          "processId": 2148,
+          "execution": "native-process",
+          "stdoutLog": "source-head.stdout.log",
+          "stderrLog": "source-head.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-status",
+          "kind": "source",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.4574993Z",
+          "finishedAt": "2026-11-23T02:40:24.5129445Z",
+          "durationMs": 53,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+          "arguments": [
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all"
+          ],
+          "processId": 2228,
+          "execution": "native-process",
+          "stdoutLog": "source-status.stdout.log",
+          "stderrLog": "source-status.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-verify",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.5242293Z",
+          "finishedAt": "2026-11-23T02:40:24.5405178Z",
+          "durationMs": 13,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "source-verify.stdout.log",
+          "stderrLog": "source-verify.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-inputs",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.5445587Z",
+          "finishedAt": "2026-11-23T02:40:24.5510446Z",
+          "durationMs": 3,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "source-inputs.stdout.log",
+          "stderrLog": "source-inputs.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "tool-preflight",
+          "kind": "preflight",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.5540982Z",
+          "finishedAt": "2026-11-23T02:40:25.8074119Z",
+          "durationMs": 1251,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "tool-preflight.stdout.log",
+          "stderrLog": "tool-preflight.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "msvc-inventory",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:25.4230734Z",
+          "finishedAt": "2026-11-23T02:40:25.6752983Z",
+          "durationMs": 249,
+          "exitCode": 0,
+          "executable": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+          "arguments": [
+            "-all",
+            "-products",
+            "*",
+            "-format",
+            "json"
+          ],
+          "processId": 1872,
+          "execution": "native-process",
+          "stdoutLog": "msvc-inventory.stdout.log",
+          "stderrLog": "msvc-inventory.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "windows-build",
+          "kind": "build",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:25.812589Z",
+          "finishedAt": "2026-11-23T02:41:01.5760238Z",
+          "durationMs": 35760,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "scripts/build-windows.mjs",
+            "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+            "--public-release"
+          ],
+          "processId": 4940,
+          "execution": "native-process",
+          "stdoutLog": "windows-build.stdout.log",
+          "stderrLog": "windows-build.stderr.log",
+          "timeoutMs": 480000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "windows-self-test",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:41:01.6254935Z",
+          "finishedAt": "2026-11-23T02:41:01.6889973Z",
+          "durationMs": 60,
+          "exitCode": 0,
+          "executable": "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+          "arguments": [
+            "--data-dir",
+            "D:\\a\\_temp\\mytodo-phase0-windows-self-test-2376b3326b0f41bdb657226994de31fa",
+            "--self-test"
+          ],
+          "processId": 6980,
+          "execution": "native-process",
+          "stdoutLog": "windows-self-test.stdout.log",
+          "stderrLog": "windows-self-test.stderr.log",
+          "timeoutMs": 120000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false,
+          "dataDirectory": "D:\\a\\_temp\\mytodo-phase0-windows-self-test-2376b3326b0f41bdb657226994de31fa"
+        },
+        {
+          "id": "windows-advanced-test",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:41:01.6940096Z",
+          "finishedAt": "2026-11-23T02:41:03.1364091Z",
+          "durationMs": 1439,
+          "exitCode": 0,
+          "executable": "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+          "arguments": [
+            "--data-dir",
+            "D:\\a\\_temp\\mytodo-phase0-windows-advanced-test-fcab7234f7d14782862a42edd96f6c60",
+            "--advanced-test"
+          ],
+          "processId": 5632,
+          "execution": "native-process",
+          "stdoutLog": "windows-advanced-test.stdout.log",
+          "stderrLog": "windows-advanced-test.stderr.log",
+          "timeoutMs": 120000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false,
+          "dataDirectory": "D:\\a\\_temp\\mytodo-phase0-windows-advanced-test-fcab7234f7d14782862a42edd96f6c60"
+        },
+        {
+          "id": "windows-feedback-test",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:41:03.1719823Z",
+          "finishedAt": "2026-11-23T02:41:03.2166665Z",
+          "durationMs": 42,
+          "exitCode": 0,
+          "executable": "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+          "arguments": [
+            "--data-dir",
+            "D:\\a\\_temp\\mytodo-phase0-windows-feedback-test-1f453c9715ba4c8faa7bb9fe801b96bb",
+            "--feedback-test"
+          ],
+          "processId": 2404,
+          "execution": "native-process",
+          "stdoutLog": "windows-feedback-test.stdout.log",
+          "stderrLog": "windows-feedback-test.stderr.log",
+          "timeoutMs": 120000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false,
+          "dataDirectory": "D:\\a\\_temp\\mytodo-phase0-windows-feedback-test-1f453c9715ba4c8faa7bb9fe801b96bb"
+        },
+        {
+          "id": "node-candidate-1",
+          "kind": "tool-probe",
+          "required": false,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.6136491Z",
+          "finishedAt": "2026-11-23T02:40:25.3720477Z",
+          "durationMs": 754,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "--version"
+          ],
+          "processId": 8188,
+          "execution": "native-process",
+          "stdoutLog": "node-candidate-1.stdout.log",
+          "stderrLog": "node-candidate-1.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        }
+      ],
+      "testSummary": null,
+      "androidManifest": null,
+      "nativeTestStdoutExcerpts": [
+        {
+          "case": "windows-self-test",
+          "stdoutLog": "platforms/windows/windows-self-test.stdout.log",
+          "stdoutSha256": "5aacdd0bb8e266b046f4e5613462ca14c27fb2ca6a3899e48511dae7323ef92e",
+          "last6000Characters": "PASS open isolated database\r\nPASS create task transaction and outbox\r\nPASS Unicode persistence\r\nPASS apply remote with cursor\r\nPASS duplicate remote replay\r\nPASS invalid batch rolls back\r\nPASS failed batch cursor unchanged\r\nPASS causal local edit\r\nPASS merge concurrent same field\r\nPASS preserve field conflict\r\nPASS resolve conflict with full vector\r\nPASS resolution removes conflict\r\nPASS configure monthly repeat\r\nPASS complete repeating task\r\nPASS generate exactly one next instance\r\nPASS repeat completion is idempotent\r\nPASS no duplicate recurrence\r\nPASS January 31 clamps to February 28\r\nPASS complete February recurrence\r\nPASS monthly anchor does not drift\r\nPASS create nested task\r\nPASS delete parent and descendants\r\nPASS descendant tombstone retained\r\nPASS late offline edit applied safely\r\nPASS late edit does not resurrect\r\nPASS SQLite integrity\r\nPASS outbox durable\r\nPASS reopen database\r\nPASS tombstone survives restart\r\nPASS invalid calendar date rejected\r\nPASS Beijing date parsing\r\nPASS double precision roundtrip\r\n{\"checks\":32,\"failures\":0}\r\n",
+          "decoding": "UTF-8 with replacement for invalid bytes; original bytes retained. No assertion count inferred."
+        },
+        {
+          "case": "windows-advanced-test",
+          "stdoutLog": "platforms/windows/windows-advanced-test.stdout.log",
+          "stdoutSha256": "600a75c4441c9d15ef0915bca610273228cec9df0d6418e51669429763d059e6",
+          "last6000Characters": "PASS open advanced test database\r\nPASS initialize native indexes\r\nPASS create advanced fixture\r\nPASS create advanced fixture\r\nPASS create advanced fixture\r\nPASS move down one sibling\r\nPASS move up one sibling\r\nPASS move to another quadrant\r\nPASS insert before first sibling\r\nPASS create advanced fixture\r\nPASS create advanced fixture\r\nPASS child order spans child quadrants\r\nPASS reject cross-level reorder\r\nPASS complete with undo capture\r\nPASS later independent edit\r\nPASS apply selective undo\r\nPASS undo preserves subsequent fields\r\nPASS NFKC case-insensitive keyword AND\r\nPASS search combines parent and descendant text\r\nPASS edit indexed descendant\r\nPASS descendant edit invalidates parent search\r\nPASS AND rejects missing term\r\nPASS search includes task state\r\nPASS create project\r\nPASS reject duplicate project name\r\nPASS assign category\r\nPASS rename project\r\nPASS rename updates task association\r\nPASS archive project\r\nPASS active project filter\r\nPASS archived project filter\r\nPASS complete weekday recurrence\r\nPASS weekday rule ignores stale weekend picks\r\nPASS reopen reminder task\r\nPASS reopening restores reminder\r\nPASS reject invalid repeat until\r\nPASS fractional weight, complex reminder, weekly default, inline categories\r\nPASS detail keyboard: create isolated task fixture\r\nPASS detail keyboard: edit retains Enter before dialog default-button handling\r\nPASS detail keyboard: title\r\nPASS detail keyboard: native multiline character dispatch inserts one newline\r\nPASS detail keyboard: edit retains Enter before dialog default-button handling\r\nPASS detail keyboard: notes\r\nPASS detail keyboard: native multiline character dispatch inserts one newline\r\nPASS detail keyboard: edit retains Enter before dialog default-button handling\r\nPASS detail keyboard: review\r\nPASS detail keyboard: native multiline character dispatch inserts one newline\r\nPASS detail keyboard: edit retains Enter before dialog default-button handling\r\nPASS detail keyboard: place\r\nPASS detail keyboard: native multiline character dispatch inserts one newline\r\nPASS detail keyboard: quick child Enter inserts newline\r\nPASS detail keyboard: text Enter creates no child and does not persist task\r\nPASS detail keyboard: formatted edit retains single-line value on Enter\r\nPASS detail keyboard: formatted edit retains single-line value on Enter\r\nPASS detail keyboard: formatted edit retains single-line value on Enter\r\nPASS detail keyboard: formatted edit retains single-line value on Enter\r\nPASS detail keyboard: formatted edit retains single-line value on Enter\r\nPASS detail keyboard: formatted edit retains single-line value on Enter\r\nPASS detail keyboard: date and numeric Enter never saves the whole record\r\nPASS detail keyboard: project and tag Enter confirms selection without newline\r\nPASS detail keyboard: project and tag Enter confirms selection without newline\r\nPASS detail keyboard: project and tag Enter does not persist the task\r\nPASS detail keyboard: IME candidate Enter does not add newline or save\r\nPASS detail keyboard: Enter after IME composition inserts newline\r\nPASS detail keyboard: Ctrl Enter is a newline and does not save\r\nPASS detail keyboard: Shift Enter is a newline and does not save\r\nPASS detail keyboard: quick and place controls have space for multiline editing\r\nPASS detail keyboard: independent Save button is visible and labelled\r\nPASS detail keyboard: independent quick child Add button is labelled\r\nPASS detail keyboard: explicit button keyboard activation stays with dialog handling\r\nPASS detail keyboard: Save remains inside the fixed visible header\r\nPASS detail keyboard: multiline quick editor and Add button do not overlap\r\nPASS detail keyboard: place editor and existing-place selector fit their row\r\nPASS detail keyboard: scroll brings the multiline place input fully into view\r\nPASS detail keyboard: scroll brings the quick multiline input fully into view\r\nPASS detail keyboard: capture actual native basic detail layout\r\nPASS detail keyboard: capture actual native multiline quick editor\r\nPASS detail keyboard: capture actual native multiline review layout\r\nPASS detail keyboard: Add button persists exactly one child and clears its draft\r\nPASS detail keyboard: child newline survives SQLite persistence\r\nPASS detail keyboard: Save button persists all multiline task fields\r\nPASS detail keyboard: LF business text displays as native multiline text\r\nPASS detail keyboard: note Enter adds newline without saving\r\nPASS detail keyboard: note Ctrl Enter retains the separate note save shortcut\r\nPASS detail keyboard: Close button keeps existing draft autosave behavior\r\n{\"detailKeyChecks\":48,\"detailKeyFailures\":0}\r\nPASS detail unchanged save, Unicode edit, quick add, pending child draft\r\nPASS detail save and navigation regression\r\nPASS detail, category, zoom and deleted record navigation\r\nPASS create isolated local account\r\nPASS reject duplicate account name\r\nPASS reject duplicate sync directory\r\nPASS rename local account\r\nPASS reinitialize indexes without duplicate cache\r\nPASS empty global search has no results\r\nPASS search before deletion\r\nPASS delete indexed task\r\nPASS deleted search record invalidated\r\nPASS advanced SQLite integrity\r\n{\"checks\":48,\"failures\":0}\r\n",
+          "decoding": "UTF-8 with replacement for invalid bytes; original bytes retained. No assertion count inferred."
+        },
+        {
+          "case": "windows-feedback-test",
+          "stdoutLog": "platforms/windows/windows-feedback-test.stdout.log",
+          "stdoutSha256": "820351bc3d819823dfaf818f7a55b836589c12eae20804167e0f368e268c5c5d",
+          "last6000Characters": "PASS feedback isolated store opens\r\nPASS another process cannot overlap feedback editor\r\nPASS new opinion persists with generated title\r\nPASS empty title derives first line\r\nPASS opinions survive store restart\r\nPASS edit status persists\r\nPASS newer import updates same opinion id\r\nPASS older import cannot overwrite newer version\r\nPASS same-time conflict keeps new-id copy\r\nPASS reimport does not duplicate conflict content\r\nPASS invalid imported status rejected\r\nPASS failed import leaves in-memory data unchanged\r\nPASS failed import leaves persisted data unchanged\r\nPASS duplicate ids rejected atomically\r\nPASS invalid calendar timestamp rejected\r\nPASS blank opinion not persisted\r\nPASS search matches all terms\r\nPASS failed atomic replace is reported\r\nPASS failed atomic replace preserves memory\r\nPASS failed atomic replace preserves old file\r\nPASS delete persists independently of tasks\r\n{\"checks\":21,\"failures\":0}\r\n",
+          "decoding": "UTF-8 with replacement for invalid bytes; original bytes retained. No assertion count inferred."
+        }
+      ],
+      "limitations": [
+        "Cloud compile/test baseline only",
+        "No real user databases or credentials",
+        "No real network sync or three-platform interoperability test",
+        "Android APK is unsigned and is not install/upgrade evidence",
+        "Web package excludes Node runtime and DPAPI helper",
+        "APK Git/time/history UI is not implemented by this CI script"
+      ]
+    },
+    {
+      "mode": "Web",
+      "status": "success",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "workflowSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "workflowRef": "johny751/MyTodo/.github/workflows/phase0-baseline.yml@refs/heads/master",
+      "triggerSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "runner": {
+        "name": "GitHub Actions 1000000010",
+        "os": "Windows",
+        "arch": "X64",
+        "imageOS": "win25-vs2026",
+        "imageVersion": "20261116.315.1",
+        "toolCache": "C:\\hostedtoolcache\\windows"
+      },
+      "toolPathsAndVersions": {
+        "vswhere": {
+          "path": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+          "version": "3.1.7.39155"
+        },
+        "windows-sdk": {
+          "path": "C:/Program Files (x86)/Windows Kits/10",
+          "version": "10.0.26100.0"
+        },
+        "msvc-cl": {
+          "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025\\bin\\Hostx64\\x64\\cl.exe",
+          "version": "14.52.37025"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "version": "v22.23.5"
+        },
+        "git": {
+          "path": "C:\\Program Files\\Git\\bin\\git.exe",
+          "version": "2.56.1.windows.1"
+        }
+      },
+      "startedAt": "2026-11-23T02:40:24.1768462Z",
+      "finishedAt": "2026-11-23T02:40:56.1783953Z",
+      "cases": [
+        {
+          "id": "source-head",
+          "kind": "source",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.2836758Z",
+          "finishedAt": "2026-11-23T02:40:24.3794353Z",
+          "durationMs": 91,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+          "arguments": [
+            "rev-parse",
+            "--verify",
+            "HEAD"
+          ],
+          "processId": 6552,
+          "execution": "native-process",
+          "stdoutLog": "source-head.stdout.log",
+          "stderrLog": "source-head.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-status",
+          "kind": "source",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.40995Z",
+          "finishedAt": "2026-11-23T02:40:24.4705457Z",
+          "durationMs": 58,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+          "arguments": [
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all"
+          ],
+          "processId": 4716,
+          "execution": "native-process",
+          "stdoutLog": "source-status.stdout.log",
+          "stderrLog": "source-status.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-verify",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.4819989Z",
+          "finishedAt": "2026-11-23T02:40:24.4984854Z",
+          "durationMs": 13,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "source-verify.stdout.log",
+          "stderrLog": "source-verify.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-inputs",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.5034573Z",
+          "finishedAt": "2026-11-23T02:40:24.5113985Z",
+          "durationMs": 5,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "source-inputs.stdout.log",
+          "stderrLog": "source-inputs.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "tool-preflight",
+          "kind": "preflight",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.5146313Z",
+          "finishedAt": "2026-11-23T02:40:25.7677479Z",
+          "durationMs": 1250,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "tool-preflight.stdout.log",
+          "stderrLog": "tool-preflight.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "msvc-inventory",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:25.3558858Z",
+          "finishedAt": "2026-11-23T02:40:25.6664187Z",
+          "durationMs": 306,
+          "exitCode": 0,
+          "executable": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+          "arguments": [
+            "-latest",
+            "-products",
+            "*",
+            "-requires",
+            "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+            "-format",
+            "json"
+          ],
+          "processId": 1192,
+          "execution": "native-process",
+          "stdoutLog": "msvc-inventory.stdout.log",
+          "stderrLog": "msvc-inventory.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "node-sqlite",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:25.772735Z",
+          "finishedAt": "2026-11-23T02:40:27.5337726Z",
+          "durationMs": 1758,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "--input-type=module",
+            "-e",
+            "import {DatabaseSync} from 'node:sqlite'; const d=new DatabaseSync(':memory:'); console.log(d.prepare('select sqlite_version() as version').get()); d.close();"
+          ],
+          "processId": 1080,
+          "execution": "native-process",
+          "stdoutLog": "node-sqlite.stdout.log",
+          "stderrLog": "node-sqlite.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "helper-build",
+          "kind": "build",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:27.5389716Z",
+          "finishedAt": "2026-11-23T02:40:34.1264549Z",
+          "durationMs": 6585,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "scripts/build-credential-helper.mjs",
+            "D:\\a\\_temp\\mytodo-phase0-web\\WebCredentialHelper.exe"
+          ],
+          "processId": 8100,
+          "execution": "native-process",
+          "stdoutLog": "helper-build.stdout.log",
+          "stderrLog": "helper-build.stderr.log",
+          "timeoutMs": 180000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "helper-test-copy",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:34.1574685Z",
+          "finishedAt": "2026-11-23T02:40:34.1663696Z",
+          "durationMs": 6,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "helper-test-copy.stdout.log",
+          "stderrLog": "helper-test-copy.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "shared-js-tests",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:34.1806595Z",
+          "finishedAt": "2026-11-23T02:40:56.0617588Z",
+          "durationMs": 21879,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "--test",
+            "--test-reporter=tap",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\accounts.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\completion-day.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\delta-sync.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\feedback.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\import-official.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\interaction.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\model.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\native-storage.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\navigation-gestures.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\schedule.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\subtask-time.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\sync-transport.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\task-editor-enter.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\task-tree.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\undo-sync.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\view-history.test.mjs",
+            "D:\\a\\MyTodo\\MyTodo\\tests\\web-launcher.test.mjs"
+          ],
+          "processId": 728,
+          "execution": "native-process",
+          "stdoutLog": "shared-js-tests.stdout.log",
+          "stderrLog": "shared-js-tests.stderr.log",
+          "timeoutMs": 600000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "shared-test-summary",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:56.0653705Z",
+          "finishedAt": "2026-11-23T02:40:56.0926309Z",
+          "durationMs": 25,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "shared-test-summary.stdout.log",
+          "stderrLog": "shared-test-summary.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "web-package",
+          "kind": "package",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:56.0959139Z",
+          "finishedAt": "2026-11-23T02:40:56.1631293Z",
+          "durationMs": 65,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "web-package.stdout.log",
+          "stderrLog": "web-package.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "node-candidate-1",
+          "kind": "tool-probe",
+          "required": false,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:24.574101Z",
+          "finishedAt": "2026-11-23T02:40:25.2900757Z",
+          "durationMs": 677,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "--version"
+          ],
+          "processId": 4440,
+          "execution": "native-process",
+          "stdoutLog": "node-candidate-1.stdout.log",
+          "stderrLog": "node-candidate-1.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        }
+      ],
+      "testSummary": {
+        "skipped": 0,
+        "fail": 0,
+        "tests": 121
+      },
+      "androidManifest": null,
+      "nativeTestStdoutExcerpts": [],
+      "limitations": [
+        "Cloud compile/test baseline only",
+        "No real user databases or credentials",
+        "No real network sync or three-platform interoperability test",
+        "Android APK is unsigned and is not install/upgrade evidence",
+        "Web package excludes Node runtime and DPAPI helper",
+        "APK Git/time/history UI is not implemented by this CI script"
+      ]
+    },
+    {
+      "mode": "Android",
+      "status": "success",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "workflowSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "workflowRef": "johny751/MyTodo/.github/workflows/phase0-baseline.yml@refs/heads/master",
+      "triggerSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "runner": {
+        "name": "GitHub Actions 1000000008",
+        "os": "Windows",
+        "arch": "X64",
+        "imageOS": "win25-vs2026",
+        "imageVersion": "20261116.315.1",
+        "toolCache": "C:\\hostedtoolcache\\windows"
+      },
+      "toolPathsAndVersions": {
+        "android-build-tools": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0",
+          "version": "35.0.0"
+        },
+        "jdk17-jar": {
+          "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\jar.exe",
+          "version": "jar 17.0.21"
+        },
+        "aapt2": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt2.exe",
+          "version": "not reported by installed file"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "version": "v22.23.5"
+        },
+        "aapt": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+          "version": "Android Asset Packaging Tool, v0.2-11948202"
+        },
+        "git": {
+          "path": "C:\\Program Files\\Git\\bin\\git.exe",
+          "version": "2.56.1.windows.1"
+        },
+        "jdk17-javac": {
+          "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\javac.exe",
+          "version": "javac 17.0.21"
+        },
+        "jdk17-java": {
+          "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+          "version": "openjdk version \"17.0.21\" 2026-10-20\r\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\r\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)"
+        },
+        "android-api34": {
+          "path": "C:\\Android\\android-sdk\\platforms\\android-34\\android.jar",
+          "version": "API34 installed platform"
+        },
+        "zipalign": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\zipalign.exe",
+          "version": "build-tools directory 35.0.0"
+        },
+        "d8": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\lib\\d8.jar",
+          "version": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go/r8bot (luci-r8-custom-ci-archive-0-77gl))"
+        }
+      },
+      "startedAt": "2026-11-23T02:40:27.8970244Z",
+      "finishedAt": "2026-11-23T02:41:04.290178Z",
+      "cases": [
+        {
+          "id": "source-head",
+          "kind": "source",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:28.0493656Z",
+          "finishedAt": "2026-11-23T02:40:28.1955548Z",
+          "durationMs": 139,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+          "arguments": [
+            "rev-parse",
+            "--verify",
+            "HEAD"
+          ],
+          "processId": 6292,
+          "execution": "native-process",
+          "stdoutLog": "source-head.stdout.log",
+          "stderrLog": "source-head.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-status",
+          "kind": "source",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:28.2280785Z",
+          "finishedAt": "2026-11-23T02:40:28.3038405Z",
+          "durationMs": 72,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\Git\\bin\\git.exe",
+          "arguments": [
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all"
+          ],
+          "processId": 1632,
+          "execution": "native-process",
+          "stdoutLog": "source-status.stdout.log",
+          "stderrLog": "source-status.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-verify",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:28.3197202Z",
+          "finishedAt": "2026-11-23T02:40:28.3407793Z",
+          "durationMs": 16,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "source-verify.stdout.log",
+          "stderrLog": "source-verify.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "source-inputs",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:28.3457575Z",
+          "finishedAt": "2026-11-23T02:40:28.3630037Z",
+          "durationMs": 13,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "source-inputs.stdout.log",
+          "stderrLog": "source-inputs.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "tool-preflight",
+          "kind": "preflight",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:28.3675135Z",
+          "finishedAt": "2026-11-23T02:40:32.8691781Z",
+          "durationMs": 4469,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "tool-preflight.stdout.log",
+          "stderrLog": "tool-preflight.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "java-version",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:29.2036876Z",
+          "finishedAt": "2026-11-23T02:40:30.3224328Z",
+          "durationMs": 1113,
+          "exitCode": 0,
+          "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+          "arguments": [
+            "-version"
+          ],
+          "processId": 6656,
+          "execution": "native-process",
+          "stdoutLog": "java-version.stdout.log",
+          "stderrLog": "java-version.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "javac-version",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:30.3433568Z",
+          "finishedAt": "2026-11-23T02:40:31.1639292Z",
+          "durationMs": 816,
+          "exitCode": 0,
+          "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\javac.exe",
+          "arguments": [
+            "-version"
+          ],
+          "processId": 6896,
+          "execution": "native-process",
+          "stdoutLog": "javac-version.stdout.log",
+          "stderrLog": "javac-version.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "jar-version",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:31.1771602Z",
+          "finishedAt": "2026-11-23T02:40:31.4475419Z",
+          "durationMs": 267,
+          "exitCode": 0,
+          "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\jar.exe",
+          "arguments": [
+            "--version"
+          ],
+          "processId": 5536,
+          "execution": "native-process",
+          "stdoutLog": "jar-version.stdout.log",
+          "stderrLog": "jar-version.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "aapt-version",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:31.5369082Z",
+          "finishedAt": "2026-11-23T02:40:31.6823511Z",
+          "durationMs": 142,
+          "exitCode": 0,
+          "executable": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+          "arguments": [
+            "version"
+          ],
+          "processId": 5008,
+          "execution": "native-process",
+          "stdoutLog": "aapt-version.stdout.log",
+          "stderrLog": "aapt-version.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "aapt2-version",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:31.6994264Z",
+          "finishedAt": "2026-11-23T02:40:31.9525291Z",
+          "durationMs": 250,
+          "exitCode": 0,
+          "executable": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt2.exe",
+          "arguments": [
+            "version"
+          ],
+          "processId": 7596,
+          "execution": "native-process",
+          "stdoutLog": "aapt2-version.stdout.log",
+          "stderrLog": "aapt2-version.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "d8-version",
+          "kind": "tool-probe",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:31.9661687Z",
+          "finishedAt": "2026-11-23T02:40:32.8597288Z",
+          "durationMs": 891,
+          "exitCode": 0,
+          "executable": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+          "arguments": [
+            "-cp",
+            "C:\\Android\\android-sdk\\build-tools\\35.0.0\\lib\\d8.jar",
+            "com.android.tools.r8.D8",
+            "--version"
+          ],
+          "processId": 8124,
+          "execution": "native-process",
+          "stdoutLog": "d8-version.stdout.log",
+          "stderrLog": "d8-version.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-pomodoro-tests",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:32.8737788Z",
+          "finishedAt": "2026-11-23T02:40:37.2599251Z",
+          "durationMs": 4383,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "tests/android/run-pomodoro-tests.mjs"
+          ],
+          "processId": 7908,
+          "execution": "native-process",
+          "stdoutLog": "android-pomodoro-tests.stdout.log",
+          "stderrLog": "android-pomodoro-tests.stderr.log",
+          "timeoutMs": 120000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-daily-tests",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:37.2640093Z",
+          "finishedAt": "2026-11-23T02:40:39.2715603Z",
+          "durationMs": 2005,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "tests/android/run-daily-tests.mjs"
+          ],
+          "processId": 7696,
+          "execution": "native-process",
+          "stdoutLog": "android-daily-tests.stdout.log",
+          "stderrLog": "android-daily-tests.stderr.log",
+          "timeoutMs": 120000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-notification-controls-tests",
+          "kind": "test",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:39.278126Z",
+          "finishedAt": "2026-11-23T02:40:40.8969938Z",
+          "durationMs": 1615,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "tests/android/run-notification-controls-tests.mjs"
+          ],
+          "processId": 1392,
+          "execution": "native-process",
+          "stdoutLog": "android-notification-controls-tests.stdout.log",
+          "stderrLog": "android-notification-controls-tests.stderr.log",
+          "timeoutMs": 120000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-adapter",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:40.9027099Z",
+          "finishedAt": "2026-11-23T02:40:40.9304084Z",
+          "durationMs": 25,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "android-adapter.stdout.log",
+          "stderrLog": "android-adapter.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-build",
+          "kind": "build",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:40.9343142Z",
+          "finishedAt": "2026-11-23T02:41:04.1508221Z",
+          "durationMs": 23214,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "D:\\a\\MyTodo\\MyTodo\\scripts\\.phase0-unsigned-38f851fc42e44d7fa0f806630e4843e5.mjs"
+          ],
+          "processId": 8052,
+          "execution": "native-process",
+          "stdoutLog": "android-build.stdout.log",
+          "stderrLog": "android-build.stderr.log",
+          "timeoutMs": 600000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-badging",
+          "kind": "inspect",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:41:04.1813481Z",
+          "finishedAt": "2026-11-23T02:41:04.2393974Z",
+          "durationMs": 56,
+          "exitCode": 0,
+          "executable": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+          "arguments": [
+            "dump",
+            "badging",
+            "D:\\a\\_temp\\mytodo-phase0-android\\MyTodo-unsigned.apk"
+          ],
+          "processId": 4936,
+          "execution": "native-process",
+          "stdoutLog": "android-badging.stdout.log",
+          "stderrLog": "android-badging.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "android-manifest-check",
+          "kind": "validation",
+          "required": true,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:41:04.2437296Z",
+          "finishedAt": "2026-11-23T02:41:04.2629588Z",
+          "durationMs": 17,
+          "exitCode": 0,
+          "executable": null,
+          "arguments": [],
+          "processId": null,
+          "execution": "powershell-validation-or-packaging",
+          "stdoutLog": "android-manifest-check.stdout.log",
+          "stderrLog": "android-manifest-check.stderr.log",
+          "timeoutMs": null,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        },
+        {
+          "id": "node-candidate-1",
+          "kind": "tool-probe",
+          "required": false,
+          "status": "passed",
+          "startedAt": "2026-11-23T02:40:28.4699577Z",
+          "finishedAt": "2026-11-23T02:40:29.140002Z",
+          "durationMs": 664,
+          "exitCode": 0,
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "arguments": [
+            "--version"
+          ],
+          "processId": 5096,
+          "execution": "native-process",
+          "stdoutLog": "node-candidate-1.stdout.log",
+          "stderrLog": "node-candidate-1.stderr.log",
+          "timeoutMs": 30000,
+          "failureCategory": null,
+          "reason": null,
+          "captureIncomplete": false
+        }
+      ],
+      "testSummary": null,
+      "androidManifest": {
+        "applicationId": "local.gxtodo.replica",
+        "versionCode": "15",
+        "versionName": "0.9.2",
+        "unsigned": true
+      },
+      "nativeTestStdoutExcerpts": [
+        {
+          "case": "android-pomodoro-tests",
+          "stdoutLog": "platforms/android/android-pomodoro-tests.stdout.log",
+          "stdoutSha256": "c9c669c2d6529bbd391428554ff6449f7b8ae423e1c7a872f84d6527989d5621",
+          "last6000Characters": "PomodoroClock: 73 assertions passed\n",
+          "decoding": "UTF-8 with replacement for invalid bytes; original bytes retained. No assertion count inferred."
+        },
+        {
+          "case": "android-daily-tests",
+          "stdoutLog": "platforms/android/android-daily-tests.stdout.log",
+          "stdoutSha256": "fc3c6f6a1232634ccf378a913d7c95c0ccac9208df9d2e21c311fbe59f361c80",
+          "last6000Characters": "DailyTaskPolicy: 47 assertions passed\n",
+          "decoding": "UTF-8 with replacement for invalid bytes; original bytes retained. No assertion count inferred."
+        },
+        {
+          "case": "android-notification-controls-tests",
+          "stdoutLog": "platforms/android/android-notification-controls-tests.stdout.log",
+          "stdoutSha256": "1490c328d13da475c243cd3ce9eeba9484abcc73085af75d093afca4a0b4b58d",
+          "last6000Characters": "Notification timer controls: 20 assertions passed\n",
+          "decoding": "UTF-8 with replacement for invalid bytes; original bytes retained. No assertion count inferred."
+        }
+      ],
+      "limitations": [
+        "Cloud compile/test baseline only",
+        "No real user databases or credentials",
+        "No real network sync or three-platform interoperability test",
+        "Android APK is unsigned and is not install/upgrade evidence",
+        "Web package excludes Node runtime and DPAPI helper",
+        "APK Git/time/history UI is not implemented by this CI script"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "mode": "Windows",
+      "name": "MyTodo-phase0.exe",
+      "kind": "windows-exe",
+      "bytes": 1320448,
+      "sha256": "4ffe46f52f68de49d04beb059d6b36e635c863b0ec501ea9565d828beecd32b5",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "producedThisRun": true,
+      "downloadedPayloadVerified": true,
+      "buildCase": "windows-build",
+      "receipt": "platforms/windows/run-receipt.json"
+    },
+    {
+      "mode": "Web",
+      "name": "WebCredentialHelper.exe",
+      "kind": "windows-dpapi-helper",
+      "bytes": 148992,
+      "sha256": "6e7bb1df5ccf21c92ab3ec0b1973f58efb2ee9224733f9403b72d5994120818d",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "producedThisRun": true,
+      "downloadedPayloadVerified": true,
+      "buildCase": "helper-build",
+      "receipt": "platforms/web/run-receipt.json"
+    },
+    {
+      "mode": "Web",
+      "name": "MyTodo-web-source.zip",
+      "kind": "web-source-zip",
+      "bytes": 98428,
+      "sha256": "8ea45445a7ab9bcf6b65fb295e1f88ae958524037f9991e011502b7b21ee8dc0",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "producedThisRun": true,
+      "downloadedPayloadVerified": true,
+      "buildCase": "web-package",
+      "receipt": "platforms/web/run-receipt.json"
+    },
+    {
+      "mode": "Android",
+      "name": "MyTodo-unsigned.apk",
+      "kind": "android-unsigned-apk",
+      "bytes": 278600,
+      "sha256": "4f29d64f3920673cb81c8f309859691190629c378d38e50eb8ba8055e453ed69",
+      "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+      "producedThisRun": true,
+      "downloadedPayloadVerified": true,
+      "buildCase": "android-build",
+      "receipt": "platforms/android/run-receipt.json"
+    }
+  ],
+  "sourceResolution": {
+    "sourceSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "repository": "johny751/MyTodo",
+    "startedAt": "2026-11-23T02:39:50.8536068Z",
+    "exitCode": 0,
+    "status": "success",
+    "workflowSha": "06a269b965c0c92c0e818effba5546986dd3242d",
+    "runId": "45101481375",
+    "runUrl": "https://github.com/johny751/MyTodo/actions/runs/45101481375",
+    "runAttempt": "1",
+    "statusExitCode": 0,
+    "finishedAt": "2026-11-23T02:39:59.9422639Z",
+    "checkoutOutcome": "success",
+    "resolveOutcome": "success"
+  },
+  "submission": {
+    "commands": [
+      {
+        "step": "remote-origin-read",
+        "startedUtc": "2026-11-23T02:39:29Z",
+        "finishedUtc": "2026-11-23T02:39:29Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "preflight-branch",
+        "startedUtc": "2026-11-23T02:39:29Z",
+        "finishedUtc": "2026-11-23T02:39:29Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "preflight-head",
+        "startedUtc": "2026-11-23T02:39:29Z",
+        "finishedUtc": "2026-11-23T02:39:29Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "preflight-status",
+        "startedUtc": "2026-11-23T02:39:29Z",
+        "finishedUtc": "2026-11-23T02:39:29Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "preflight-clean",
+        "startedUtc": "2026-11-23T02:39:29Z",
+        "finishedUtc": "2026-11-23T02:39:29Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "preflight-fetch",
+        "startedUtc": "2026-11-23T02:39:29Z",
+        "finishedUtc": "2026-11-23T02:39:31Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "preflight-remote-head",
+        "startedUtc": "2026-11-23T02:39:31Z",
+        "finishedUtc": "2026-11-23T02:39:31Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "gh-location",
+        "startedUtc": "2026-11-23T02:39:31Z",
+        "finishedUtc": "2026-11-23T02:39:31Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "github-auth",
+        "startedUtc": "2026-11-23T02:39:31Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "transfer-sha256",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "installer-syntax",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-00-project-audit-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-01-current-architecture-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-02-existing-database-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-03-existing-sync-audit-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-04-existing-feature-inventory-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-05-build-and-test-baseline-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-06-upgrade-risks-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-07-development-standards-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-08-development-task-gates-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-09-phase-one-entry-plan-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-10-three-platform-ci-plan-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-11-acceptance-execution-status-md",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-evidence-source-snapshot-manifest-json",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-evidence-source-tree-txt",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "copy-docs-upgrade-evidence-source-preservation-json",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "docs-add",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "docs-staged-list",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "docs-staged-stat",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:33Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "docs-commit",
+        "startedUtc": "2026-11-23T02:39:33Z",
+        "finishedUtc": "2026-11-23T02:39:34Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "docs-head",
+        "startedUtc": "2026-11-23T02:39:34Z",
+        "finishedUtc": "2026-11-23T02:39:34Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "docs-push",
+        "startedUtc": "2026-11-23T02:39:34Z",
+        "finishedUtc": "2026-11-23T02:39:37Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "post-docs-clean",
+        "startedUtc": "2026-11-23T02:39:37Z",
+        "finishedUtc": "2026-11-23T02:39:37Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "ci-install",
+        "startedUtc": "2026-11-23T02:39:37Z",
+        "finishedUtc": "2026-11-23T02:39:41Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "ci-head",
+        "startedUtc": "2026-11-23T02:39:41Z",
+        "finishedUtc": "2026-11-23T02:39:41Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "final-status",
+        "startedUtc": "2026-11-23T02:39:41Z",
+        "finishedUtc": "2026-11-23T02:39:41Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "submitted-files",
+        "startedUtc": "2026-11-23T02:39:41Z",
+        "finishedUtc": "2026-11-23T02:39:41Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "submitted-log",
+        "startedUtc": "2026-11-23T02:39:41Z",
+        "finishedUtc": "2026-11-23T02:39:41Z",
+        "exitCode": "0"
+      },
+      {
+        "step": "actions-runs",
+        "startedUtc": "2026-11-23T02:39:41Z",
+        "finishedUtc": "2026-11-23T02:39:42Z",
+        "exitCode": "1"
+      }
+    ],
+    "originalStatus": "failed exit=1",
+    "workflowNameLookup": {
+      "step": "actions-runs",
+      "startedUtc": "2026-11-23T02:39:41Z",
+      "finishedUtc": "2026-11-23T02:39:42Z",
+      "exitCode": "1"
+    },
+    "recoveryExplanation": "The workflow-name lookup returned HTTP 404 because phase0-baseline.yml is absent from default main. Original exit 1/log is preserved; later API capture identifies this master push run and completed successful jobs. This is a query failure, not a build result."
+  },
+  "actionsLog": {
+    "path": "actions-full.log",
+    "bytes": 172522,
+    "sha256": "5395d11543314bacafd2f655d18f83806e391c73e82b381c1d6a12cf16d426c5"
+  },
+  "limitations": [
+    "No new application build/test was run by this collector.",
+    "Android unsigned APK is compile/package evidence, not install/upgrade evidence.",
+    "Web source ZIP is not the portable release or a GitHub Pages deployment.",
+    "No actual LAN/WebDAV network, protocol interoperability, migration, UI/device or T01-T16 acceptance pass is claimed.",
+    "Text archive excludes binaries, business databases and authentication-status logs.",
+    "Case execution distinguishes actual native-process exits from PowerShell validation/packaging result codes."
+  ],
+  "textFiles": [
+    {
+      "path": "platforms/windows/artifacts.json",
+      "bytes": 569,
+      "sha256": "49557aef9792b10d83ce56fcdb70c5d00e58aa154ac95fa69c3cac1955d360a6"
+    },
+    {
+      "path": "platforms/windows/case-results.json",
+      "bytes": 7807,
+      "sha256": "fb7fa79118948c789a4d48c17552c96cf0106dd861929e739877f5a03bc3a54e"
+    },
+    {
+      "path": "platforms/windows/executor.sha256",
+      "bytes": 66,
+      "sha256": "cf307ae96a28cae1eb19984cc722a8aa17a3954aace0afc98a6329302540de8b"
+    },
+    {
+      "path": "platforms/windows/msvc-inventory.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/msvc-inventory.stdout.log",
+      "bytes": 2705,
+      "sha256": "ad00363519f3d44609acf95f999c170acfe950f293517143c978bf3e47a199ad"
+    },
+    {
+      "path": "platforms/windows/node-candidate-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/node-candidate-1.stdout.log",
+      "bytes": 10,
+      "sha256": "6aff48828de66fbac1ebde4c0c96dd197aa1013dc9964508988344265818e783"
+    },
+    {
+      "path": "platforms/windows/run-receipt.json",
+      "bytes": 11528,
+      "sha256": "7d40d960ab03f1b6bb1bf620e6dff9033e179c526918dfe0c51e9399c1f0efba"
+    },
+    {
+      "path": "platforms/windows/source-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/source-head.stdout.log",
+      "bytes": 41,
+      "sha256": "7f20346373d2ce5113d3ed7e9275184832b2e54053ad2ccb5a97335f91a9926b"
+    },
+    {
+      "path": "platforms/windows/source-inputs.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/source-inputs.stdout.log",
+      "bytes": 56,
+      "sha256": "8bf8c48537ab5d0cbe43615b090628bcaa54f6ff0ba21cba8b6c0ce353ca9ef0"
+    },
+    {
+      "path": "platforms/windows/source-status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/source-status.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/source-verify.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/source-verify.stdout.log",
+      "bytes": 56,
+      "sha256": "5cf5e4f886cad95a58ab6cc417214188eade4f771401263769800076caec8b01"
+    },
+    {
+      "path": "platforms/windows/tool-preflight.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/tool-preflight.stdout.log",
+      "bytes": 57,
+      "sha256": "fc04612e814f1253ba54a967d01f8c9d7e9abe66b3ffc4401778454bba7ab9df"
+    },
+    {
+      "path": "platforms/windows/windows-advanced-test.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/windows-advanced-test.stdout.log",
+      "bytes": 5195,
+      "sha256": "600a75c4441c9d15ef0915bca610273228cec9df0d6418e51669429763d059e6"
+    },
+    {
+      "path": "platforms/windows/windows-build.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/windows-build.stdout.log",
+      "bytes": 690,
+      "sha256": "221540aba59005a469a09de658ed252c067dde413935f1ab0c584953d2d1091e"
+    },
+    {
+      "path": "platforms/windows/windows-feedback-test.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/windows-feedback-test.stdout.log",
+      "bytes": 920,
+      "sha256": "820351bc3d819823dfaf818f7a55b836589c12eae20804167e0f368e268c5c5d"
+    },
+    {
+      "path": "platforms/windows/windows-self-test.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/windows/windows-self-test.stdout.log",
+      "bytes": 1061,
+      "sha256": "5aacdd0bb8e266b046f4e5613462ca14c27fb2ca6a3899e48511dae7323ef92e"
+    },
+    {
+      "path": "platforms/windows/workflow-step-outcomes.json",
+      "bytes": 291,
+      "sha256": "abc27c10920013bf5c0a30ab130e72a28b97ac2f376e81073d3871ac5a625bff"
+    },
+    {
+      "path": "platforms/web/artifacts.json",
+      "bytes": 1155,
+      "sha256": "864507ebbe5f1b325e9f936b739cd399dd40bcf2c9ee299179321978b8efca66"
+    },
+    {
+      "path": "platforms/web/case-results.json",
+      "bytes": 9504,
+      "sha256": "bc55794d8db932b9d19b6cc7d69a7ab06d0989496c3d201020413ee68b39d304"
+    },
+    {
+      "path": "platforms/web/executor.sha256",
+      "bytes": 66,
+      "sha256": "cf307ae96a28cae1eb19984cc722a8aa17a3954aace0afc98a6329302540de8b"
+    },
+    {
+      "path": "platforms/web/helper-build.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/helper-build.stdout.log",
+      "bytes": 107,
+      "sha256": "b7fc0e42fcbca1cb13d63cd5f31bf9acbf2d1b89f44cd9eff7f6d111bc42140f"
+    },
+    {
+      "path": "platforms/web/helper-test-copy.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/helper-test-copy.stdout.log",
+      "bytes": 59,
+      "sha256": "5caaf2511236e211091f506de756dfb74614795bd4ae55e246745921506b5dfb"
+    },
+    {
+      "path": "platforms/web/msvc-inventory.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/msvc-inventory.stdout.log",
+      "bytes": 2705,
+      "sha256": "ad00363519f3d44609acf95f999c170acfe950f293517143c978bf3e47a199ad"
+    },
+    {
+      "path": "platforms/web/node-candidate-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/node-candidate-1.stdout.log",
+      "bytes": 10,
+      "sha256": "6aff48828de66fbac1ebde4c0c96dd197aa1013dc9964508988344265818e783"
+    },
+    {
+      "path": "platforms/web/node-sqlite.stderr.log",
+      "bytes": 168,
+      "sha256": "4417981c48727d3866659ddc5945edd6093af5dcdf56de5761df8765337cc4af"
+    },
+    {
+      "path": "platforms/web/node-sqlite.stdout.log",
+      "bytes": 47,
+      "sha256": "d33477407e93697040c88e2e287ad0bf8b94882769b25d2ba8cfd4958eb3e45a"
+    },
+    {
+      "path": "platforms/web/run-receipt.json",
+      "bytes": 13838,
+      "sha256": "c29a9303dcd9b3987519a8b277e502230691b3fb12697d199a36d4c3454c47cb"
+    },
+    {
+      "path": "platforms/web/shared-js-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/shared-js-tests.stdout.log",
+      "bytes": 26833,
+      "sha256": "c063412da5a3ec3fa503698cbf2e4c83bf8da85830d1dfc9c4256f5adcb21ce4"
+    },
+    {
+      "path": "platforms/web/shared-test-summary.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/shared-test-summary.stdout.log",
+      "bytes": 62,
+      "sha256": "6ce6af973869d0d1487583d9745c4afd836f48c6b262a4b38f09f2410c37af08"
+    },
+    {
+      "path": "platforms/web/source-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/source-head.stdout.log",
+      "bytes": 41,
+      "sha256": "7f20346373d2ce5113d3ed7e9275184832b2e54053ad2ccb5a97335f91a9926b"
+    },
+    {
+      "path": "platforms/web/source-inputs.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/source-inputs.stdout.log",
+      "bytes": 56,
+      "sha256": "8bf8c48537ab5d0cbe43615b090628bcaa54f6ff0ba21cba8b6c0ce353ca9ef0"
+    },
+    {
+      "path": "platforms/web/source-status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/source-status.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/source-verify.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/source-verify.stdout.log",
+      "bytes": 56,
+      "sha256": "5cf5e4f886cad95a58ab6cc417214188eade4f771401263769800076caec8b01"
+    },
+    {
+      "path": "platforms/web/test-files.json",
+      "bytes": 574,
+      "sha256": "aa482cd2297a333eaf38aeaac74141e21d27d12c1e15358b7d6f3995a9d35c04"
+    },
+    {
+      "path": "platforms/web/tool-preflight.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/tool-preflight.stdout.log",
+      "bytes": 57,
+      "sha256": "fc04612e814f1253ba54a967d01f8c9d7e9abe66b3ffc4401778454bba7ab9df"
+    },
+    {
+      "path": "platforms/web/web-file-manifest.json",
+      "bytes": 4370,
+      "sha256": "d51a70c3efa306fd3890a9ef8ced004ef51754147514b1acb5fe1a7c811ef2b6"
+    },
+    {
+      "path": "platforms/web/web-package.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/web/web-package.stdout.log",
+      "bytes": 54,
+      "sha256": "70b6e1367602649c06cd9a1ecd423166516560068a46aa93a5319d5d400f4e0c"
+    },
+    {
+      "path": "platforms/web/web-source/BASELINE-README.txt",
+      "bytes": 403,
+      "sha256": "ca6a0b86c3959d24e69445b43f79ceaa8fa06eeda2861ddbebb9aad6cb886f68"
+    },
+    {
+      "path": "platforms/web/web-source/package.json",
+      "bytes": 462,
+      "sha256": "b58ab319b8554e573c02a4286a3b0a6e9f5bf0e9472f68f1a313e778b6136afa"
+    },
+    {
+      "path": "platforms/web/workflow-step-outcomes.json",
+      "bytes": 291,
+      "sha256": "475fc5af5d16b06c1afe5b1f06408e3ccabdceabb78df1ea8652d83de920fbfa"
+    },
+    {
+      "path": "platforms/android/aapt-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/aapt-version.stdout.log",
+      "bytes": 45,
+      "sha256": "1dbfa3044bf8dbc7712afd99168d1349ac8fbe89af6750a371b82d647847111c"
+    },
+    {
+      "path": "platforms/android/aapt2-version.stderr.log",
+      "bytes": 51,
+      "sha256": "13d98679f634324538d119fdb1c9d18b85e9844ceb3b1bec8e2e29752c65fa5e"
+    },
+    {
+      "path": "platforms/android/aapt2-version.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-adapter.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-adapter.stdout.log",
+      "bytes": 58,
+      "sha256": "89eb6db1529a68cfa6b383db37c5de1742bf7f0c36e85247519a6e14a83af9fe"
+    },
+    {
+      "path": "platforms/android/android-badging.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-badging.stdout.log",
+      "bytes": 1392,
+      "sha256": "b777144c4a26432b3d60e8ce4bdd1d0d9ff9d8ad703c62859ebe6c34046ce4e0"
+    },
+    {
+      "path": "platforms/android/android-build-details.json",
+      "bytes": 1178,
+      "sha256": "31faebc3f39ff6d5a4c5df9fcfee068f8cd15c0542b7ba0226ff754ae9abdf1e"
+    },
+    {
+      "path": "platforms/android/android-build.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-build.stdout.log",
+      "bytes": 1007,
+      "sha256": "af0d7f8110003e649ef56825c6329e3a24541d9c9325f011b2e90cc70b4dab11"
+    },
+    {
+      "path": "platforms/android/android-daily-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-daily-tests.stdout.log",
+      "bytes": 38,
+      "sha256": "fc3c6f6a1232634ccf378a913d7c95c0ccac9208df9d2e21c311fbe59f361c80"
+    },
+    {
+      "path": "platforms/android/android-manifest-check.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-manifest-check.stdout.log",
+      "bytes": 65,
+      "sha256": "dec79fc996f9b3cec97bc205ea7e3b94400e50e2c2601cfedac2f8136e45be74"
+    },
+    {
+      "path": "platforms/android/android-notification-controls-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-notification-controls-tests.stdout.log",
+      "bytes": 50,
+      "sha256": "1490c328d13da475c243cd3ce9eeba9484abcc73085af75d093afca4a0b4b58d"
+    },
+    {
+      "path": "platforms/android/android-pomodoro-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/android-pomodoro-tests.stdout.log",
+      "bytes": 36,
+      "sha256": "c9c669c2d6529bbd391428554ff6449f7b8ae423e1c7a872f84d6527989d5621"
+    },
+    {
+      "path": "platforms/android/artifacts.json",
+      "bytes": 582,
+      "sha256": "d5b6772a48c27132082a689eab04f0de245d2d404cf4d00b151862b61a536090"
+    },
+    {
+      "path": "platforms/android/case-results.json",
+      "bytes": 12477,
+      "sha256": "7345808cf77fa3d3a1ad097a67db9c4f4950e6372aac58c3c05e56c309acbd49"
+    },
+    {
+      "path": "platforms/android/d8-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/d8-version.stdout.log",
+      "bytes": 112,
+      "sha256": "062ca7c57b2606f05704e4219bc8f712ed3c060947d15d17a1e0a6291e642c1c"
+    },
+    {
+      "path": "platforms/android/executor.sha256",
+      "bytes": 66,
+      "sha256": "cf307ae96a28cae1eb19984cc722a8aa17a3954aace0afc98a6329302540de8b"
+    },
+    {
+      "path": "platforms/android/jar-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/jar-version.stdout.log",
+      "bytes": 13,
+      "sha256": "8d26a9af211d7c64a29ef68e4a98096fa6dc9ffd39716ab8623a1bf6f2df3d7a"
+    },
+    {
+      "path": "platforms/android/java-version.stderr.log",
+      "bytes": 186,
+      "sha256": "e24910f0cae845fa4e2bd3d114e78a6e78d7f60de583f2c7a0042489aa6d7b19"
+    },
+    {
+      "path": "platforms/android/java-version.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/javac-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/javac-version.stdout.log",
+      "bytes": 15,
+      "sha256": "3af59910a6fb2de4f0b21998192a76ed62b7099345e836380aae41764a4f39da"
+    },
+    {
+      "path": "platforms/android/node-candidate-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/node-candidate-1.stdout.log",
+      "bytes": 10,
+      "sha256": "6aff48828de66fbac1ebde4c0c96dd197aa1013dc9964508988344265818e783"
+    },
+    {
+      "path": "platforms/android/run-receipt.json",
+      "bytes": 17957,
+      "sha256": "9d4dd9086e292386d6958dd46ce20ac364572f6aa5929e8ec0ee27df7e02e13f"
+    },
+    {
+      "path": "platforms/android/source-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/source-head.stdout.log",
+      "bytes": 41,
+      "sha256": "7f20346373d2ce5113d3ed7e9275184832b2e54053ad2ccb5a97335f91a9926b"
+    },
+    {
+      "path": "platforms/android/source-inputs.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/source-inputs.stdout.log",
+      "bytes": 56,
+      "sha256": "8bf8c48537ab5d0cbe43615b090628bcaa54f6ff0ba21cba8b6c0ce353ca9ef0"
+    },
+    {
+      "path": "platforms/android/source-status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/source-status.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/source-verify.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/source-verify.stdout.log",
+      "bytes": 56,
+      "sha256": "5cf5e4f886cad95a58ab6cc417214188eade4f771401263769800076caec8b01"
+    },
+    {
+      "path": "platforms/android/tool-preflight.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "platforms/android/tool-preflight.stdout.log",
+      "bytes": 57,
+      "sha256": "fc04612e814f1253ba54a967d01f8c9d7e9abe66b3ffc4401778454bba7ab9df"
+    },
+    {
+      "path": "platforms/android/workflow-step-outcomes.json",
+      "bytes": 291,
+      "sha256": "f205a76709b16ca0642cf57b6290457b1d2443aa1ec39db577603c5da0dd6289"
+    },
+    {
+      "path": "source-resolution/head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source-resolution/head.stdout.log",
+      "bytes": 42,
+      "sha256": "56dae6b328ed2e9d58059002f7b939e5821fb7e4ea144237c305db4095d1adae"
+    },
+    {
+      "path": "source-resolution/source-resolution.json",
+      "bytes": 516,
+      "sha256": "a7b99db6a05cfd6b190bb0a47ce064d8f6ab42dc49f84a7b7309e1c0c12c9b4a"
+    },
+    {
+      "path": "source-resolution/status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/actions-runs.command.txt",
+      "bytes": 238,
+      "sha256": "9ad64af1c59d41ea1dae1804a434aaf5e70ef2156b0f39fad8639f91e7561e64"
+    },
+    {
+      "path": "submission/actions-runs.stderr.log",
+      "bytes": 156,
+      "sha256": "2d3b7aec834370c1ee76a9bff301eb15824b951308fee1a9464d47c1357ee51c"
+    },
+    {
+      "path": "submission/actions-runs.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/ci-commit-sha.txt",
+      "bytes": 41,
+      "sha256": "7f20346373d2ce5113d3ed7e9275184832b2e54053ad2ccb5a97335f91a9926b"
+    },
+    {
+      "path": "submission/ci-head.command.txt",
+      "bytes": 51,
+      "sha256": "84d6be72b92472b259f55a4a10703ed1371114401284e249d28fe473180bf06a"
+    },
+    {
+      "path": "submission/ci-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/ci-head.stdout.log",
+      "bytes": 41,
+      "sha256": "7f20346373d2ce5113d3ed7e9275184832b2e54053ad2ccb5a97335f91a9926b"
+    },
+    {
+      "path": "submission/ci-install.command.txt",
+      "bytes": 129,
+      "sha256": "5723b41898f06e504db920cda9b74e99766708c5d83e0897d81cce026a938832"
+    },
+    {
+      "path": "submission/ci-install.stderr.log",
+      "bytes": 160,
+      "sha256": "b496aac9cd759f5d0c3034e1b1cddbc4115597513067beaa2512b6e4804732b5"
+    },
+    {
+      "path": "submission/ci-install.stdout.log",
+      "bytes": 744,
+      "sha256": "235f8c9ddf26b73a261b351de63def9c133d9a26b15ef5dbdfecabbe12578f32"
+    },
+    {
+      "path": "submission/command-results.tsv",
+      "bytes": 2793,
+      "sha256": "88026c316f3ed26a35c38005753cbc566775e2e400a00847a758bcc0eb4a1c20"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-00-project-audit-md.command.txt",
+      "bytes": 143,
+      "sha256": "31baa295789b79e5e674e353d2e17f23edfbc29ee5a752c96ffff74005691e10"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-00-project-audit-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-00-project-audit-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-01-current-architecture-md.command.txt",
+      "bytes": 157,
+      "sha256": "3f2d6b58f1852d1876fce986c254cfe1340b998a54aaf869fc5e50fa2ed29eeb"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-01-current-architecture-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-01-current-architecture-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-02-existing-database-md.command.txt",
+      "bytes": 151,
+      "sha256": "70b3abaf3c5ed4d5d650a2027c9833f82fae6648a96d752798b9e162680fc0de"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-02-existing-database-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-02-existing-database-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-03-existing-sync-audit-md.command.txt",
+      "bytes": 155,
+      "sha256": "9dd5f1c919043ae6573259c7dfb484beeb3fd194251fca88e53c9b348f0c50de"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-03-existing-sync-audit-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-03-existing-sync-audit-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-04-existing-feature-inventory-md.command.txt",
+      "bytes": 169,
+      "sha256": "85a80e252f06c30943d871739407664c257bd959b94e7257c5556cc7640817d2"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-04-existing-feature-inventory-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-04-existing-feature-inventory-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-05-build-and-test-baseline-md.command.txt",
+      "bytes": 163,
+      "sha256": "d59032aa1382d468599e9b510e77162873e8ee59eb34604cc39b7201bdef243f"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-05-build-and-test-baseline-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-05-build-and-test-baseline-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-06-upgrade-risks-md.command.txt",
+      "bytes": 143,
+      "sha256": "cb04dffefacb941f74f41c2e07a259e7d199d1a4f88e9248b6b52be43b229167"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-06-upgrade-risks-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-06-upgrade-risks-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-07-development-standards-md.command.txt",
+      "bytes": 159,
+      "sha256": "fef043a6372086c97f5912b127b781216525e75a8fe1d3f1a3da5d88201e6a5d"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-07-development-standards-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-07-development-standards-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-08-development-task-gates-md.command.txt",
+      "bytes": 161,
+      "sha256": "4a32d488f4dc860067439ec65a8a0819339c59b6db3f0dee489f67428498fe9e"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-08-development-task-gates-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-08-development-task-gates-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-09-phase-one-entry-plan-md.command.txt",
+      "bytes": 157,
+      "sha256": "98850d170e93045acbbecb8c42d75ed32147d1c1dc0a2e3b024fba95d0fef29b"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-09-phase-one-entry-plan-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-09-phase-one-entry-plan-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-10-three-platform-ci-plan-md.command.txt",
+      "bytes": 161,
+      "sha256": "36bd1d969989afa5b1024ca6ddabcae275b9b755352104841411d6d56af20865"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-10-three-platform-ci-plan-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-10-three-platform-ci-plan-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-11-acceptance-execution-status-md.command.txt",
+      "bytes": 171,
+      "sha256": "ee1c2b4cbd8be6129c8a53e346c16594fc0e1979451fd9ab4fde08162c2ac6f6"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-11-acceptance-execution-status-md.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-11-acceptance-execution-status-md.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-preservation-json.command.txt",
+      "bytes": 171,
+      "sha256": "7fe425373f037cadd022e4c59f157c98a7d0ad1e8bd622c29bdc34b39b981311"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-preservation-json.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-preservation-json.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-snapshot-manifest-json.command.txt",
+      "bytes": 181,
+      "sha256": "9d35538028dee4b84877b58c5be9388f1e51f07fb829504a8029e9ad956e4638"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-snapshot-manifest-json.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-snapshot-manifest-json.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-tree-txt.command.txt",
+      "bytes": 153,
+      "sha256": "c452cac1be165cfec4a257e46a6d3b9b1c0cbdafb04dd06aba1489a74cd96a11"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-tree-txt.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/copy-docs-upgrade-evidence-source-tree-txt.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-add.command.txt",
+      "bytes": 654,
+      "sha256": "26e75e7a6075c3e749f1cec247febc262b8500773eea254c58b395059970dff0"
+    },
+    {
+      "path": "submission/docs-add.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-add.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-commit-sha.txt",
+      "bytes": 41,
+      "sha256": "33786ad26cdbe2dd4d0f1632778dac0e23d4c87b543b9567ccb40fd727bc4dd6"
+    },
+    {
+      "path": "submission/docs-commit.command.txt",
+      "bytes": 103,
+      "sha256": "580fe4285b1d984299329d3020e959903370422832f60d2dcde3b68d891536c9"
+    },
+    {
+      "path": "submission/docs-commit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-commit.stdout.log",
+      "bytes": 1033,
+      "sha256": "f29fae970de13236da86f9d5b001f7101d2080cf4c5a276fabec1dfedd98536a"
+    },
+    {
+      "path": "submission/docs-head.command.txt",
+      "bytes": 51,
+      "sha256": "84d6be72b92472b259f55a4a10703ed1371114401284e249d28fe473180bf06a"
+    },
+    {
+      "path": "submission/docs-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-head.stdout.log",
+      "bytes": 41,
+      "sha256": "33786ad26cdbe2dd4d0f1632778dac0e23d4c87b543b9567ccb40fd727bc4dd6"
+    },
+    {
+      "path": "submission/docs-push.command.txt",
+      "bytes": 51,
+      "sha256": "81b85ac3978b898c6f1df510a744905c19bcdd77fa63594f61be0b108401663f"
+    },
+    {
+      "path": "submission/docs-push.stderr.log",
+      "bytes": 74,
+      "sha256": "713ba7f2d45dcb7528d7e30df1535c1d3aada746073cd1f403c18c0b585760f5"
+    },
+    {
+      "path": "submission/docs-push.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-staged-list.command.txt",
+      "bytes": 53,
+      "sha256": "e577dce014c62bd58fc8c2052194ce4e5af9fdfab88cbb1ca0e707826172e778"
+    },
+    {
+      "path": "submission/docs-staged-list.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-staged-list.stdout.log",
+      "bytes": 620,
+      "sha256": "29285cc41a69443fcf5e0c5c0edead45a4778332deef2cb5b1806a975d6477f4"
+    },
+    {
+      "path": "submission/docs-staged-stat.command.txt",
+      "bytes": 48,
+      "sha256": "a118f2af429fadfaca989c552dff2a2852288fea1560d84b0d3278e894e785ba"
+    },
+    {
+      "path": "submission/docs-staged-stat.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/docs-staged-stat.stdout.log",
+      "bytes": 976,
+      "sha256": "f9426c6cf312d2bc6173bef1a117f294d743a10e0a4a85c377ac3928b926d23e"
+    },
+    {
+      "path": "submission/final-status.command.txt",
+      "bytes": 80,
+      "sha256": "c999b27cb722d7dd78efcc470807b193c47169c4dcb4959977c3147193d175a3"
+    },
+    {
+      "path": "submission/final-status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/final-status.stdout.log",
+      "bytes": 26,
+      "sha256": "2ebd13cacaf6c180d91decb9d32bb9bdbcef747ebc3c5ea521c2c03a21924f14"
+    },
+    {
+      "path": "submission/gh-location.command.txt",
+      "bytes": 15,
+      "sha256": "cdff4f40d9f1d9ea324c013a2c842fe6f7219e2045469423e88966412eb2b3e3"
+    },
+    {
+      "path": "submission/gh-location.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/gh-location.stdout.log",
+      "bytes": 12,
+      "sha256": "916caa690d343153dabd465c7322b649a650d90e3f490dfff927ffde18ee3fe3"
+    },
+    {
+      "path": "submission/installer-syntax.command.txt",
+      "bytes": 91,
+      "sha256": "1d8d9a93a4b9ca44542d51f47ccbb9df0de87383966d0eeeb91acce6713f2d7a"
+    },
+    {
+      "path": "submission/installer-syntax.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/installer-syntax.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/post-docs-clean.command.txt",
+      "bytes": 71,
+      "sha256": "22ea5026fee8eb4cfef7dd8d792d0861f97041c334078b14a40fc7596a0d4d58"
+    },
+    {
+      "path": "submission/post-docs-clean.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/post-docs-clean.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-branch.command.txt",
+      "bytes": 49,
+      "sha256": "5cb2739c2d4628e971b28c875ea281ced0b34f1e69b3e7672c1d5936d582ab95"
+    },
+    {
+      "path": "submission/preflight-branch.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-branch.stdout.log",
+      "bytes": 7,
+      "sha256": "9b3162498c21d7f960877099174ecea13410bd21d12440b2ea8868117fc08ae0"
+    },
+    {
+      "path": "submission/preflight-clean.command.txt",
+      "bytes": 71,
+      "sha256": "22ea5026fee8eb4cfef7dd8d792d0861f97041c334078b14a40fc7596a0d4d58"
+    },
+    {
+      "path": "submission/preflight-clean.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-clean.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-fetch.command.txt",
+      "bytes": 47,
+      "sha256": "148aaa0c4c16023ba837c7ba830e6af48dc921c48832d839cab34bd4b185c178"
+    },
+    {
+      "path": "submission/preflight-fetch.stderr.log",
+      "bytes": 86,
+      "sha256": "90d7ec5af6ce286ea4519c20abe05026208522e1976f3e428070c2c4e00ffeeb"
+    },
+    {
+      "path": "submission/preflight-fetch.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-head.command.txt",
+      "bytes": 51,
+      "sha256": "84d6be72b92472b259f55a4a10703ed1371114401284e249d28fe473180bf06a"
+    },
+    {
+      "path": "submission/preflight-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-head.stdout.log",
+      "bytes": 41,
+      "sha256": "e1cd538a8332ed304ab8750b21ba8b587cb06a58f4a864049d9a93ca987d8d65"
+    },
+    {
+      "path": "submission/preflight-remote-head.command.txt",
+      "bytes": 64,
+      "sha256": "62e04c10fcbc3daa049bd3d92e5f57b4df8053f54ef0a60921412dccad68338a"
+    },
+    {
+      "path": "submission/preflight-remote-head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-remote-head.stdout.log",
+      "bytes": 41,
+      "sha256": "e1cd538a8332ed304ab8750b21ba8b587cb06a58f4a864049d9a93ca987d8d65"
+    },
+    {
+      "path": "submission/preflight-status.command.txt",
+      "bytes": 80,
+      "sha256": "c999b27cb722d7dd78efcc470807b193c47169c4dcb4959977c3147193d175a3"
+    },
+    {
+      "path": "submission/preflight-status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/preflight-status.stdout.log",
+      "bytes": 26,
+      "sha256": "2ebd13cacaf6c180d91decb9d32bb9bdbcef747ebc3c5ea521c2c03a21924f14"
+    },
+    {
+      "path": "submission/remote-origin-identity.txt",
+      "bytes": 16,
+      "sha256": "2d834c3caac003674d68d379b8839aa931e9155ee3f668ad49938e41d229cb3e"
+    },
+    {
+      "path": "submission/submission-status.txt",
+      "bytes": 14,
+      "sha256": "cf53e245f154b3d2a16c4c1d44e493386a2116547ca6fb61f034a3e553e48e25"
+    },
+    {
+      "path": "submission/submitted-files.command.txt",
+      "bytes": 126,
+      "sha256": "d6f5b274b45246ed8b779ce04d68e76c3f519f175f583158e335cbda00650cb5"
+    },
+    {
+      "path": "submission/submitted-files.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/submitted-files.stdout.log",
+      "bytes": 689,
+      "sha256": "29ba85df3c9ba9a5f9399c9ec07f55ac84a8a3da4e51df068ffa360994ddf4ce"
+    },
+    {
+      "path": "submission/submitted-log.command.txt",
+      "bytes": 50,
+      "sha256": "92bbab3788fe48ef7d18b93c22bf87d3f94b03c4226e73eecab23ff63344856b"
+    },
+    {
+      "path": "submission/submitted-log.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/submitted-log.stdout.log",
+      "bytes": 652,
+      "sha256": "650bf6a7e5dfc893e9c9c3916941b81d25976e79fa06632dd2eda43dc9df5c60"
+    },
+    {
+      "path": "submission/transfer-sha256.command.txt",
+      "bytes": 44,
+      "sha256": "045ff56298ac7b7c832b4c61d1f274dda81e747771af3d07fd1897da7a4d5514"
+    },
+    {
+      "path": "submission/transfer-sha256.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "submission/transfer-sha256.stdout.log",
+      "bytes": 844,
+      "sha256": "362dce2b8b8756893ffb868470b40a0603150edb0bee79ae36c01d6ee175c11f"
+    },
+    {
+      "path": "run-final.json",
+      "bytes": 11746,
+      "sha256": "3f7aa0b22646249188837a74f9c8c166e4d8629a561a008526f94a7061265731"
+    },
+    {
+      "path": "jobs-current.json",
+      "bytes": 10216,
+      "sha256": "1f976aeed9f8e38c1d274658534fe41f2d0ebce54b0dda67638b0d0cd0ea633e"
+    },
+    {
+      "path": "run-discovery.json",
+      "bytes": 11779,
+      "sha256": "f0f0bf5eb465fcd9b86fd9a49117323f16b474f78a38faa84f283c17fbda1472"
+    },
+    {
+      "path": "actions-full.log",
+      "bytes": 172522,
+      "sha256": "5395d11543314bacafd2f655d18f83806e391c73e82b381c1d6a12cf16d426c5"
+    },
+    {
+      "path": "actions-full.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "transport-initial-exit.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    }
+  ]
+}

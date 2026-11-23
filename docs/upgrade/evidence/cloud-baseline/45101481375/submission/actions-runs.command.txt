@@ -1,0 +1,1 @@
+gh run list --repo johny751/MyTodo --branch master --workflow phase0-baseline.yml --commit 06a269b965c0c92c0e818effba5546986dd3242d --limit 5 --json databaseId\,url\,status\,conclusion\,headSha\,createdAt\,updatedAt\,event\,workflowName 

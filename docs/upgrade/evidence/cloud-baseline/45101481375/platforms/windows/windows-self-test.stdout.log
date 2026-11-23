@@ -1,0 +1,33 @@
+PASS open isolated database
+PASS create task transaction and outbox
+PASS Unicode persistence
+PASS apply remote with cursor
+PASS duplicate remote replay
+PASS invalid batch rolls back
+PASS failed batch cursor unchanged
+PASS causal local edit
+PASS merge concurrent same field
+PASS preserve field conflict
+PASS resolve conflict with full vector
+PASS resolution removes conflict
+PASS configure monthly repeat
+PASS complete repeating task
+PASS generate exactly one next instance
+PASS repeat completion is idempotent
+PASS no duplicate recurrence
+PASS January 31 clamps to February 28
+PASS complete February recurrence
+PASS monthly anchor does not drift
+PASS create nested task
+PASS delete parent and descendants
+PASS descendant tombstone retained
+PASS late offline edit applied safely
+PASS late edit does not resurrect
+PASS SQLite integrity
+PASS outbox durable
+PASS reopen database
+PASS tombstone survives restart
+PASS invalid calendar date rejected
+PASS Beijing date parsing
+PASS double precision roundtrip
+{"checks":32,"failures":0}

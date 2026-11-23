@@ -1,0 +1,740 @@
+TAP version 13
+# (node:5904) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 升级保留 A 的迁移数据与提醒收据，B 从空数据开始，切换后可恢复
+ok 1 - 升级保留 A 的迁移数据与提醒收据，B 从空数据开始，切换后可恢复
+  ---
+  duration_ms: 833.5923
+  type: 'test'
+  ...
+# Subtest: 固定账号句柄隔离延迟写入、导出数据和并行保存
+ok 2 - 固定账号句柄隔离延迟写入、导出数据和并行保存
+  ---
+  duration_ms: 179.0737
+  type: 'test'
+  ...
+# Subtest: 账号新增和重命名按队列保存，重复名称被拒绝
+ok 3 - 账号新增和重命名按队列保存，重复名称被拒绝
+  ---
+  duration_ms: 93.0345
+  type: 'test'
+  ...
+# Subtest: 账号同步目录与基线独立，规范化及并行配置不能复用同一云目录
+ok 4 - 账号同步目录与基线独立，规范化及并行配置不能复用同一云目录
+  ---
+  duration_ms: 192.8369
+  type: 'test'
+  ...
+# Subtest: 两台设备的 A/B 经各自 WebDAV 目录双向同步，相同 ID 也不串数据
+ok 5 - 两台设备的 A/B 经各自 WebDAV 目录双向同步，相同 ID 也不串数据
+  ---
+  duration_ms: 672.9683
+  type: 'test'
+  ...
+# Subtest: 快速子任务继承分类并采用添加时间，保持同级顺序但不复制重复或提醒规则
+ok 6 - 快速子任务继承分类并采用添加时间，保持同级顺序但不复制重复或提醒规则
+  ---
+  duration_ms: 1.5843
+  type: 'test'
+  ...
+# Subtest: 新用户所有账号从空白开始，设备标识独立且同步未配置
+ok 7 - 新用户所有账号从空白开始，设备标识独立且同步未配置
+  ---
+  duration_ms: 157.3932
+  type: 'test'
+  ...
+# Subtest: 实际完成日按北京时间处理 UTC 和带时区时间戳
+ok 8 - 实际完成日按北京时间处理 UTC 和带时区时间戳
+  ---
+  duration_ms: 37.3364
+  type: 'test'
+  ...
+# Subtest: 完成操作写入的北京时间午夜边界决定当天结果，重新打开后移除
+ok 9 - 完成操作写入的北京时间午夜边界决定当天结果，重新打开后移除
+  ---
+  duration_ms: 4.0458
+  type: 'test'
+  ...
+# Subtest: 当天完成包括过去和未来安排的任务，排除当天安排但其他日完成的任务
+ok 10 - 当天完成包括过去和未来安排的任务，排除当天安排但其他日完成的任务
+  ---
+  duration_ms: 2.9323
+  type: 'test'
+  ...
+# Subtest: 已过重复截止日的任务仍按实际完成日出现，未完成任务不混入
+ok 11 - 已过重复截止日的任务仍按实际完成日出现，未完成任务不混入
+  ---
+  duration_ms: 1.0654
+  type: 'test'
+  ...
+# Subtest: 时间轴展开每层子任务后按各自实际完成日筛选
+ok 12 - 时间轴展开每层子任务后按各自实际完成日筛选
+  ---
+  duration_ms: 1.5218
+  type: 'test'
+  ...
+# (node:5860) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 六端同一周期先后及同时添加修改，所有来源的批次最终完整收敛
+ok 13 - 六端同一周期先后及同时添加修改，所有来源的批次最终完整收敛
+  ---
+  duration_ms: 2669.2776
+  type: 'test'
+  ...
+# Subtest: 上传成功但清单提交中断，重启后复用同一批次，清单竞争不覆盖他人进度
+ok 14 - 上传成功但清单提交中断，重启后复用同一批次，清单竞争不覆盖他人进度
+  ---
+  duration_ms: 584.5761
+  type: 'test'
+  ...
+# Subtest: 缺少中间批次不跳跃推进，恢复后补齐每一批而不重复
+ok 15 - 缺少中间批次不跳跃推进，恢复后补齐每一批而不重复
+  ---
+  duration_ms: 617.6015
+  type: 'test'
+  ...
+# Subtest: 同字段并发版本保留，显式选择收敛，删除不会被离线旧副本复活
+ok 16 - 同字段并发版本保留，显式选择收敛，删除不会被离线旧副本复活
+  ---
+  duration_ms: 1623.3746
+  type: 'test'
+  ...
+# Subtest: 事务失败不落下半条数据、发件箱或进度，磁盘重开后仍可恢复
+ok 17 - 事务失败不落下半条数据、发件箱或进度，磁盘重开后仍可恢复
+  ---
+  duration_ms: 82.684
+  type: 'test'
+  ...
+# Subtest: 快照支持新设备跳过旧日志、保留本地离线新增，校验失败不推进进度
+ok 18 - 快照支持新设备跳过旧日志、保留本地离线新增，校验失败不推进进度
+  ---
+  duration_ms: 841.5052
+  type: 'test'
+  ...
+# Subtest: 旧 JSON 云端迁移先备份并阻止旧客户端覆盖，再合并原记录
+ok 19 - 旧 JSON 云端迁移先备份并阻止旧客户端覆盖，再合并原记录
+  ---
+  duration_ms: 283.6977
+  type: 'test'
+  ...
+# Subtest: 无变化检查只获取小清单，304 不重复下载记录、不改实体或发件箱
+ok 20 - 无变化检查只获取小清单，304 不重复下载记录、不改实体或发件箱
+  ---
+  duration_ms: 280.8936
+  type: 'test'
+  ...
+# Subtest: 实际 WebDAV 传输适配器压缩增量文件并正确使用条件 GET
+ok 21 - 实际 WebDAV 传输适配器压缩增量文件并正确使用条件 GET
+  ---
+  duration_ms: 175.0126
+  type: 'test'
+  ...
+# Subtest: 乱序重复应用和同时变更不同字段，最终投影与冲突一致
+ok 22 - 乱序重复应用和同时变更不同字段，最终投影与冲突一致
+  ---
+  duration_ms: 0.9387
+  type: 'test'
+  ...
+# Subtest: 同一数据库的两个浏览器同步会话只允许一个发送者，编辑仍可入队
+ok 23 - 同一数据库的两个浏览器同步会话只允许一个发送者，编辑仍可入队
+  ---
+  duration_ms: 284.3566
+  type: 'test'
+  ...
+# Subtest: 切换到新云目录完整携带当前记录、删除标记和待同步内容
+ok 24 - 切换到新云目录完整携带当前记录、删除标记和待同步内容
+  ---
+  duration_ms: 551.0478
+  type: 'test'
+  ...
+# Subtest: 窗口未见到远端字段更新时保存草稿，保留并发版本而不假装已经观察到
+ok 25 - 窗口未见到远端字段更新时保存草稿，保留并发版本而不假装已经观察到
+  ---
+  duration_ms: 651.5941
+  type: 'test'
+  ...
+# Subtest: 嵌套任务跨设备新增、修改和删除后可达，不因父级变化丢失记录
+ok 26 - 嵌套任务跨设备新增、修改和删除后可达，不因父级变化丢失记录
+  ---
+  duration_ms: 853.0348
+  type: 'test'
+  ...
+# Subtest: 快照期间仅租约元数据变化不妨碍发布，业务记录变化会阻止混合快照
+ok 27 - 快照期间仅租约元数据变化不妨碍发布，业务记录变化会阻止混合快照
+  ---
+  duration_ms: 278.1759
+  type: 'test'
+  ...
+# Subtest: 坚果云父目录缺失返回 409，建集合后重读清单再安全初始化
+ok 28 - 坚果云父目录缺失返回 409，建集合后重读清单再安全初始化
+  ---
+  duration_ms: 217.7727
+  type: 'test'
+  ...
+# Subtest: 创建集合后清单仍为 409 时停止，不覆盖已有云端状态
+ok 29 - 创建集合后清单仍为 409 时停止，不覆盖已有云端状态
+  ---
+  duration_ms: 88.4798
+  type: 'test'
+  ...
+# Subtest: 反馈独立持久化，重新打开可检索并按状态整理，不触碰任务存储
+ok 30 - 反馈独立持久化，重新打开可检索并按状态整理，不触碰任务存储
+  ---
+  duration_ms: 8.0126
+  type: 'test'
+  ...
+# Subtest: 损坏/超限/重复编号备份拒绝，现有意见及导入前备份不变
+ok 31 - 损坏/超限/重复编号备份拒绝，现有意见及导入前备份不变
+  ---
+  duration_ms: 1.9241
+  type: 'test'
+  ...
+# Subtest: 导入较新更新、较旧跳过、同时间冲突保留副本，保留原导入前快照
+ok 32 - 导入较新更新、较旧跳过、同时间冲突保留副本，保留原导入前快照
+  ---
+  duration_ms: 2.1152
+  type: 'test'
+  ...
+# Subtest: 浏览器配额失败保留当前意见，跨窗口修改和删除不会被旧编辑器覆盖
+ok 33 - 浏览器配额失败保留当前意见，跨窗口修改和删除不会被旧编辑器覆盖
+  ---
+  duration_ms: 1.227
+  type: 'test'
+  ...
+# Subtest: Windows UTC 秒格式可导入并导出为统一毫秒格式
+ok 34 - Windows UTC 秒格式可导入并导出为统一毫秒格式
+  ---
+  duration_ms: 0.37
+  type: 'test'
+  ...
+# Subtest: 导入未来时间后手动编辑保持单调，重复旧备份不能覆盖刚编辑的内容
+ok 35 - 导入未来时间后手动编辑保持单调，重复旧备份不能覆盖刚编辑的内容
+  ---
+  duration_ms: 0.4735
+  type: 'test'
+  ...
+# Subtest: 同源写锁串行处理两个窗口的写入，等待期间不使用旧快照覆盖新意见
+ok 36 - 同源写锁串行处理两个窗口的写入，等待期间不使用旧快照覆盖新意见
+  ---
+  duration_ms: 1.0853
+  type: 'test'
+  ...
+# Subtest: 官网字段、历史日期、子任务状态与完成记录均完整转换
+ok 37 - 官网字段、历史日期、子任务状态与完成记录均完整转换
+  ---
+  duration_ms: 18.7633
+  type: 'test'
+  ...
+# Subtest: 缺失历史、重复详情及超长正文会阻止导入
+ok 38 - 缺失历史、重复详情及超长正文会阻止导入
+  ---
+  duration_ms: 2.6653
+  type: 'test'
+  ...
+# Subtest: 再次导入不增加副本，也不覆盖用户已修改的任务和设置
+ok 39 - 再次导入不增加副本，也不覆盖用户已修改的任务和设置
+  ---
+  duration_ms: 1.7204
+  type: 'test'
+  ...
+# Subtest: 已结束的循环任务保留在历史搜索中，当前日期不显示过期待办
+ok 40 - 已结束的循环任务保留在历史搜索中，当前日期不显示过期待办
+  ---
+  duration_ms: 0.9068
+  type: 'test'
+  ...
+# Subtest: 同象限排序保存后仍保留相对顺序
+ok 41 - 同象限排序保存后仍保留相对顺序
+  ---
+  duration_ms: 26.3223
+  type: 'test'
+  ...
+# Subtest: 跨象限插入与移入空象限
+ok 42 - 跨象限插入与移入空象限
+  ---
+  duration_ms: 0.5597
+  type: 'test'
+  ...
+# Subtest: 筛选后排序保留不可见任务
+ok 43 - 筛选后排序保留不可见任务
+  ---
+  duration_ms: 0.539
+  type: 'test'
+  ...
+# Subtest: 时间轴仍按日期排序，与手动顺序独立
+ok 44 - 时间轴仍按日期排序，与手动顺序独立
+  ---
+  duration_ms: 1.2394
+  type: 'test'
+  ...
+# Subtest: 子任务参与搜索，多个词跨字段按 AND 匹配
+ok 45 - 子任务参与搜索，多个词跨字段按 AND 匹配
+  ---
+  duration_ms: 5.7059
+  type: 'test'
+  ...
+# Subtest: 便签、项目简介、地点、标签都参与搜索
+ok 46 - 便签、项目简介、地点、标签都参与搜索
+  ---
+  duration_ms: 1.2658
+  type: 'test'
+  ...
+# Subtest: 导入旧数据补齐默认手势配置和排序，不丢失内容
+ok 47 - 导入旧数据补齐默认手势配置和排序，不丢失内容
+  ---
+  duration_ms: 0.5584
+  type: 'test'
+  ...
+# Subtest: 两个滑动开关可独立关闭，长按时间有合理边界
+ok 48 - 两个滑动开关可独立关闭，长按时间有合理边界
+  ---
+  duration_ms: 0.3421
+  type: 'test'
+  ...
+# Subtest: 周从星期一开始，正确跨越月末
+ok 49 - 周从星期一开始，正确跨越月末
+  ---
+  duration_ms: 3.4624
+  type: 'test'
+  ...
+# Subtest: 月范围包含闰年二月，月切换不溢出
+ok 50 - 月范围包含闰年二月，月切换不溢出
+  ---
+  duration_ms: 0.3241
+  type: 'test'
+  ...
+# Subtest: 待办保留逾期任务，未来任务按范围出现
+ok 51 - 待办保留逾期任务，未来任务按范围出现
+  ---
+  duration_ms: 12.6984
+  type: 'test'
+  ...
+# Subtest: 完成筛选与分类搜索互相独立
+ok 52 - 完成筛选与分类搜索互相独立
+  ---
+  duration_ms: 0.7473
+  type: 'test'
+  ...
+# Subtest: 持久化格式可往返，重复 ID 不会破坏任务关系
+ok 53 - 持久化格式可往返，重复 ID 不会破坏任务关系
+  ---
+  duration_ms: 1.2091
+  type: 'test'
+  ...
+# Subtest: 安卓首次启动保存空白数据，重新读取保持空白
+ok 54 - 安卓首次启动保存空白数据，重新读取保持空白
+  ---
+  duration_ms: 2.5409
+  type: 'test'
+  ...
+# Subtest: 安卓写入后排序、子任务和交互设置一同保留
+ok 55 - 安卓写入后排序、子任务和交互设置一同保留
+  ---
+  duration_ms: 22.6317
+  type: 'test'
+  ...
+# Subtest: 安卓存储拒绝写入时显示失败，不把失败当成保存成功
+ok 56 - 安卓存储拒绝写入时显示失败，不把失败当成保存成功
+  ---
+  duration_ms: 1.3498
+  type: 'test'
+  ...
+# Subtest: 已有数据损坏时停止读取，不使用空白数据覆盖
+ok 57 - 已有数据损坏时停止读取，不使用空白数据覆盖
+  ---
+  duration_ms: 0.2646
+  type: 'test'
+  ...
+# Subtest: empty board swipes change one period only after release, in both directions
+ok 58 - empty board swipes change one period only after release, in both directions
+  ---
+  duration_ms: 3.0345
+  type: 'test'
+  ...
+# Subtest: list scrolling owns the whole gesture even when it reaches an edge
+ok 59 - list scrolling owns the whole gesture even when it reaches an edge
+  ---
+  duration_ms: 0.3848
+  type: 'test'
+  ...
+# Subtest: downwards gesture switches only when it starts at the top
+ok 60 - downwards gesture switches only when it starts at the top
+  ---
+  duration_ms: 0.247
+  type: 'test'
+  ...
+# Subtest: right swipe opens the avatar menu and takes over task gestures
+ok 61 - right swipe opens the avatar menu and takes over task gestures
+  ---
+  duration_ms: 0.4335
+  type: 'test'
+  ...
+# Subtest: other primary pages support the right menu swipe but keep vertical scrolling
+ok 62 - other primary pages support the right menu swipe but keep vertical scrolling
+  ---
+  duration_ms: 0.4486
+  type: 'test'
+  ...
+# Subtest: leftward, diagonal, short and reversed gestures do not navigate
+ok 63 - leftward, diagonal, short and reversed gestures do not navigate
+  ---
+  duration_ms: 0.5323
+  type: 'test'
+  ...
+# Subtest: inputs, drag handles and action buttons are excluded
+ok 64 - inputs, drag handles and action buttons are excluded
+  ---
+  duration_ms: 0.2881
+  type: 'test'
+  ...
+# Subtest: multi-touch, cancellation, overlays, dragging and detached views abort navigation
+ok 65 - multi-touch, cancellation, overlays, dragging and detached views abort navigation
+  ---
+  duration_ms: 0.5699
+  type: 'test'
+  ...
+# Subtest: a non-cancelable or already scrolling touch cannot become period navigation
+ok 66 - a non-cancelable or already scrolling touch cannot become period navigation
+  ---
+  duration_ms: 0.4805
+  type: 'test'
+  ...
+# Subtest: period ranges and offsets retain week, year and month-end boundaries
+ok 67 - period ranges and offsets retain week, year and month-end boundaries
+  ---
+  duration_ms: 2.442
+  type: 'test'
+  ...
+# Subtest: 月底和闰年重复保持原始日期，不逐月漂移
+ok 68 - 月底和闰年重复保持原始日期，不逐月漂移
+  ---
+  duration_ms: 25.2297
+  type: 'test'
+  ...
+# Subtest: 工作日、指定星期与隔周重复正确跨周
+ok 69 - 工作日、指定星期与隔周重复正确跨周
+  ---
+  duration_ms: 1.3313
+  type: 'test'
+  ...
+# Subtest: 结束日期包含当天、无日期不生成、间隔生效
+ok 70 - 结束日期包含当天、无日期不生成、间隔生效
+  ---
+  duration_ms: 1.6912
+  type: 'test'
+  ...
+# Subtest: 完成生成下一次并重置子任务，撤销一起恢复且保留后来编辑
+ok 71 - 完成生成下一次并重置子任务，撤销一起恢复且保留后来编辑
+  ---
+  duration_ms: 3.0686
+  type: 'test'
+  ...
+# Subtest: 两端同时完成和重新打开再完成不会制造重复实例
+ok 72 - 两端同时完成和重新打开再完成不会制造重复实例
+  ---
+  duration_ms: 3.9453
+  type: 'test'
+  ...
+# Subtest: 提醒使用北京时间，准时、提前、全天、自定义及完成取消
+ok 73 - 提醒使用北京时间，准时、提前、全天、自定义及完成取消
+  ---
+  duration_ms: 0.6123
+  type: 'test'
+  ...
+# Subtest: 重复任务的自定义提醒跟随下一次日期，保存与同步不丢失规则
+ok 74 - 重复任务的自定义提醒跟随下一次日期，保存与同步不丢失规则
+  ---
+  duration_ms: 1.0089
+  type: 'test'
+  ...
+# Subtest: 任务统计按北京时间计算最近七天与完成率
+ok 75 - 任务统计按北京时间计算最近七天与完成率
+  ---
+  duration_ms: 3.6015
+  type: 'test'
+  ...
+# Subtest: 添加子任务使用当前北京时间，脱离父任务的日期、全天和结束时间
+ok 76 - 添加子任务使用当前北京时间，脱离父任务的日期、全天和结束时间
+  ---
+  duration_ms: 2.7992
+  type: 'test'
+  ...
+# Subtest: 未安排日期的父任务也按真实添加时间创建子任务
+ok 77 - 未安排日期的父任务也按真实添加时间创建子任务
+  ---
+  duration_ms: 0.1865
+  type: 'test'
+  ...
+# Subtest: 北京时间跨日正确，时间显示按分钟且不受宿主时区影响
+ok 78 - 北京时间跨日正确，时间显示按分钟且不受宿主时区影响
+  ---
+  duration_ms: 0.1804
+  type: 'test'
+  ...
+# Subtest: 嵌套子任务保存与同步往返保留各自添加时间，不改已有父子任务
+ok 79 - 嵌套子任务保存与同步往返保留各自添加时间，不改已有父子任务
+  ---
+  duration_ms: 1.7097
+  type: 'test'
+  ...
+# Subtest: 保存父任务跨日或延迟时，实际添加入口仍使用点击时捕获的时间
+ok 80 - 保存父任务跨日或延迟时，实际添加入口仍使用点击时捕获的时间
+  ---
+  duration_ms: 14.264
+  type: 'test'
+  ...
+# Subtest: 两个独立设备通过 WebDAV 通道同步，凭据不出现在返回值、状态或磁盘明文中
+ok 81 - 两个独立设备通过 WebDAV 通道同步，凭据不出现在返回值、状态或磁盘明文中
+  ---
+  duration_ms: 86.496
+  type: 'test'
+  ...
+# Subtest: 任务标题、备注、复盘、快速子任务和地点的Enter保留浏览器换行默认动作，不保存任务
+ok 82 - 任务标题、备注、复盘、快速子任务和地点的Enter保留浏览器换行默认动作，不保存任务
+  ---
+  duration_ms: 3.111
+  type: 'test'
+  ...
+# Subtest: 日期、时间、数值、单选和下拉控件Enter不改格式值，也不隐式提交任务
+ok 83 - 日期、时间、数值、单选和下拉控件Enter不改格式值，也不隐式提交任务
+  ---
+  duration_ms: 0.7814
+  type: 'test'
+  ...
+# Subtest: 只有项目和标签搜索Enter确认选择，Shift+Enter仍可输入多行且不保存任务
+ok 84 - 只有项目和标签搜索Enter确认选择，Shift+Enter仍可输入多行且不保存任务
+  ---
+  duration_ms: 0.3287
+  type: 'test'
+  ...
+# Subtest: IME组合Enter及229确认留给输入法，意外form submit仍不能保存任务
+ok 85 - IME组合Enter及229确认留给输入法，意外form submit仍不能保存任务
+  ---
+  duration_ms: 0.3451
+  type: 'test'
+  ...
+# Subtest: 任务表单拒绝requestSubmit式入口，独立保存按钮显式保存多行草稿且保持详情打开
+ok 86 - 任务表单拒绝requestSubmit式入口，独立保存按钮显式保存多行草稿且保持详情打开
+  ---
+  duration_ms: 2.0593
+  type: 'test'
+  ...
+# Subtest: 显式保存失败时保留子任务草稿和详情，按钮的Enter不被文本处理器拦截
+ok 87 - 显式保存失败时保留子任务草稿和详情，按钮的Enter不被文本处理器拦截
+  ---
+  duration_ms: 0.3386
+  type: 'test'
+  ...
+# Subtest: 地点多行输入、全选清空、保存和返回保留草稿；未编辑的空搜索不清除已选地点
+ok 88 - 地点多行输入、全选清空、保存和返回保留草稿；未编辑的空搜索不清除已选地点
+  ---
+  duration_ms: 0.259
+  type: 'test'
+  ...
+# Subtest: 深层子任务的独立保存保持原父子层级和多行内容
+ok 89 - 深层子任务的独立保存保持原父子层级和多行内容
+  ---
+  duration_ms: 1.7313
+  type: 'test'
+  ...
+# Subtest: 旧子任务升级保留 ID、顺序和状态，深层完整字段可往返
+ok 90 - 旧子任务升级保留 ID、顺序和状态，深层完整字段可往返
+  ---
+  duration_ms: 5.2223
+  type: 'test'
+  ...
+# Subtest: 任意深度重复 ID、过深嵌套和子项超限拒绝写入，不静默丢弃
+ok 91 - 任意深度重复 ID、过深嵌套和子项超限拒绝写入，不静默丢弃
+  ---
+  duration_ms: 2.026
+  type: 'test'
+  ...
+# Subtest: 同级拖动重排不改变父子关系，保存和撤销后顺序准确
+ok 92 - 同级拖动重排不改变父子关系，保存和撤销后顺序准确
+  ---
+  duration_ms: 3.0459
+  type: 'test'
+  ...
+# Subtest: 编辑深层任务保存在原父任务内，保留其他层最新修改
+ok 93 - 编辑深层任务保存在原父任务内，保留其他层最新修改
+  ---
+  duration_ms: 1.4744
+  type: 'test'
+  ...
+# Subtest: 新建子任务仅追加同级列表，父任务被删除后不误建顶层任务
+ok 94 - 新建子任务仅追加同级列表，父任务被删除后不误建顶层任务
+  ---
+  duration_ms: 0.5571
+  type: 'test'
+  ...
+# Subtest: 完成子任务只影响自身，在原父级生成重复实例，后代重置且 ID 全部唯一
+ok 95 - 完成子任务只影响自身，在原父级生成重复实例，后代重置且 ID 全部唯一
+  ---
+  duration_ms: 1.2223
+  type: 'test'
+  ...
+# Subtest: 完成重复父任务递归复制后代，深层日期与提醒跟随新实例
+ok 96 - 完成重复父任务递归复制后代，深层日期与提醒跟随新实例
+  ---
+  duration_ms: 1.5453
+  type: 'test'
+  ...
+# Subtest: 同步可合并子任务重排与另一端的深层备注编辑
+ok 97 - 同步可合并子任务重排与另一端的深层备注编辑
+  ---
+  duration_ms: 2.5594
+  type: 'test'
+  ...
+# Subtest: 深层字段冲突保留双方完整树，冲突副本后代 ID 不重复
+ok 98 - 深层字段冲突保留双方完整树，冲突副本后代 ID 不重复
+  ---
+  duration_ms: 2.2305
+  type: 'test'
+  ...
+# Subtest: 删除子树后可完整撤销，同时保留其他子任务后来的编辑
+ok 99 - 删除子树后可完整撤销，同时保留其他子任务后来的编辑
+  ---
+  duration_ms: 1.1946
+  type: 'test'
+  ...
+# Subtest: 深层备注、复盘、标签可搜索并直接定位到子任务
+ok 100 - 深层备注、复盘、标签可搜索并直接定位到子任务
+  ---
+  duration_ms: 24.1501
+  type: 'test'
+  ...
+# Subtest: 读取旧格式并升级为版本 2，防止旧客户端静默丢弃完整子任务字段
+ok 101 - 读取旧格式并升级为版本 2，防止旧客户端静默丢弃完整子任务字段
+  ---
+  duration_ms: 0.5445
+  type: 'test'
+  ...
+# Subtest: 完成任务可撤销，保留完成之后修改的备注和其他任务
+ok 102 - 完成任务可撤销，保留完成之后修改的备注和其他任务
+  ---
+  duration_ms: 4.0001
+  type: 'test'
+  ...
+# Subtest: 删除可还原完整任务和子任务，同时不撤销后来新建的任务
+ok 103 - 删除可还原完整任务和子任务，同时不撤销后来新建的任务
+  ---
+  duration_ms: 1.6175
+  type: 'test'
+  ...
+# Subtest: 多个撤销入口独立计时，过期操作不能回滚
+ok 104 - 多个撤销入口独立计时，过期操作不能回滚
+  ---
+  duration_ms: 1.1312
+  type: 'test'
+  ...
+# Subtest: 撤销旧完成操作不覆盖后续状态更新
+ok 105 - 撤销旧完成操作不覆盖后续状态更新
+  ---
+  duration_ms: 1.4384
+  type: 'test'
+  ...
+# Subtest: 独立设备的不同字段及新增任务可以合并
+ok 106 - 独立设备的不同字段及新增任务可以合并
+  ---
+  duration_ms: 1.4723
+  type: 'test'
+  ...
+# Subtest: 一端删除未修改条目会传播删除；删除与编辑冲突保留编辑
+ok 107 - 一端删除未修改条目会传播删除；删除与编辑冲突保留编辑
+  ---
+  duration_ms: 1.1025
+  type: 'test'
+  ...
+# Subtest: 同一字段冲突保留双方，复制的子任务 ID 不重复且重试不重复造副本
+ok 108 - 同一字段冲突保留双方，复制的子任务 ID 不重复且重试不重复造副本
+  ---
+  duration_ms: 1.7187
+  type: 'test'
+  ...
+# Subtest: 标签地点增删合并且各端手势设置独立
+ok 109 - 标签地点增删合并且各端手势设置独立
+  ---
+  duration_ms: 0.5482
+  type: 'test'
+  ...
+# Subtest: ETag 冲突后重新读取合并，不盲目覆盖新云端数据
+ok 110 - ETag 冲突后重新读取合并，不盲目覆盖新云端数据
+  ---
+  duration_ms: 2.5192
+  type: 'test'
+  ...
+# Subtest: 首同步使用 If-None-Match 语义，已有未知文件或缺少 ETag 时不写入
+ok 111 - 首同步使用 If-None-Match 语义，已有未知文件或缺少 ETag 时不写入
+  ---
+  duration_ms: 1.7796
+  type: 'test'
+  ...
+# Subtest: 401、429、网络失败及持续并发错误不会伪报成功
+ok 112 - 401、429、网络失败及持续并发错误不会伪报成功
+  ---
+  duration_ms: 1.5945
+  type: 'test'
+  ...
+# Subtest: back and forward traverse picker, detail, quadrant, and board
+ok 113 - back and forward traverse picker, detail, quadrant, and board
+  ---
+  duration_ms: 27.6156
+  type: 'test'
+  ...
+# Subtest: closing a detail consumes its history entry without reopening it on Back
+ok 114 - closing a detail consumes its history entry without reopening it on Back
+  ---
+  duration_ms: 12.6159
+  type: 'test'
+  ...
+# Subtest: failed save restores the browser position and keeps the editor
+ok 115 - failed save restores the browser position and keeps the editor
+  ---
+  duration_ms: 15.7122
+  type: 'test'
+  ...
+# Subtest: choosing a destination replaces the open navigation menu
+ok 116 - choosing a destination replaces the open navigation menu
+  ---
+  duration_ms: 2.4461
+  type: 'test'
+  ...
+# Subtest: repeated Back is absorbed while a save is pending
+ok 117 - repeated Back is absorbed while a save is pending
+  ---
+  duration_ms: 13.2845
+  type: 'test'
+  ...
+# Subtest: 网页发布启动避开非HTTP占用端口，重复启动复用，停止和重启保留数据
+ok 118 - 网页发布启动避开非HTTP占用端口，重复启动复用，停止和重启保留数据
+  ---
+  duration_ms: 3998.1734
+  type: 'test'
+  ...
+# Subtest: 两个并发启动只创建一个服务，版本改变时拒绝复用旧服务
+ok 119 - 两个并发启动只创建一个服务，版本改变时拒绝复用旧服务
+  ---
+  duration_ms: 1487.2347
+  type: 'test'
+  ...
+# Subtest: 失效的PID记录不会停止仍在监听的其他服务
+ok 120 - 失效的PID记录不会停止仍在监听的其他服务
+  ---
+  duration_ms: 1195.8961
+  type: 'test'
+  ...
+# Subtest: Windows DPAPI helper保留UTF8新配置并兼容合成UTF16旧配置
+ok 121 - Windows DPAPI helper保留UTF8新配置并兼容合成UTF16旧配置
+  ---
+  duration_ms: 301.7185
+  type: 'test'
+  ...
+1..121
+# tests 121
+# suites 0
+# pass 121
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 21701.9361
