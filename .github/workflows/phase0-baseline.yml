@@ -1,0 +1,291 @@
+{
+  "name": "MyTodo phase 0 cloud baseline",
+  "on": {
+    "push": {
+      "branches": [
+        "master"
+      ],
+      "paths": [
+        ".github/workflows/phase0-baseline.yml",
+        "scripts/ci/phase0-baseline.ps1"
+      ]
+    },
+    "workflow_dispatch": {
+      "inputs": {
+        "source_ref": {
+          "description": "Source ref resolved once; business code is on master",
+          "required": true,
+          "default": "master",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "mytodo-phase0-${{ github.ref }}",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "resolve-source": {
+      "name": "Freeze source SHA",
+      "runs-on": "windows-latest",
+      "timeout-minutes": 5,
+      "outputs": {
+        "source-sha": "${{ steps.source.outputs.sha }}"
+      },
+      "steps": [
+        {
+          "name": "Initialize source-resolution evidence",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n$evidence = Join-Path $env:RUNNER_TEMP 'mytodo-phase0-resolve'\nNew-Item -ItemType Directory -Path $evidence -Force | Out-Null\n@{repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=(\"$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID\");workflowSha=$env:GITHUB_SHA;status='not_run';sourceSha=$null;exitCode=$null;startedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'source-resolution.json') -Encoding utf8"
+        },
+        {
+          "name": "Checkout requested source ref",
+          "id": "checkout",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.event_name == 'workflow_dispatch' && inputs.source_ref || github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Freeze and verify one complete source SHA",
+          "id": "source",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n$evidence = Join-Path $env:RUNNER_TEMP 'mytodo-phase0-resolve'\n$receiptPath = Join-Path $evidence 'source-resolution.json'\n$receipt = Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json -AsHashtable\n$receipt.status = 'running'\n$receipt | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8\ntry {\n  $head = & git rev-parse --verify HEAD 2> (Join-Path $evidence 'head.stderr.log')\n  $headExit = $LASTEXITCODE\n  $head | Set-Content -LiteralPath (Join-Path $evidence 'head.stdout.log') -Encoding utf8\n  $receipt.exitCode = $headExit\n  if ($headExit -ne 0 -or \"$head\".Trim() -notmatch '^[a-fA-F0-9]{40}$') { throw 'Source ref did not resolve to a complete commit SHA.' }\n  $sha = \"$head\".Trim().ToLowerInvariant()\n  $status = & git status --porcelain=v1 --untracked-files=all 2> (Join-Path $evidence 'status.stderr.log')\n  $statusExit = $LASTEXITCODE\n  $status | Set-Content -LiteralPath (Join-Path $evidence 'status.stdout.log') -Encoding utf8\n  $receipt.statusExitCode = $statusExit\n  if ($statusExit -ne 0 -or \"$status\".Trim()) { throw 'Source checkout is not pristine.' }\n  $receipt.sourceSha = $sha\n  $receipt.status = 'success'\n  \"sha=$sha\" | Out-File -LiteralPath $env:GITHUB_OUTPUT -Encoding utf8 -Append\n} catch {\n  $receipt.status = 'failure'\n  $receipt.reason = $_.Exception.Message\n  throw\n} finally {\n  $receipt.finishedAt = [DateTime]::UtcNow.ToString('o')\n  $receipt | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8\n}"
+        },
+        {
+          "name": "Finalize source-resolution receipt",
+          "if": "always()",
+          "shell": "pwsh",
+          "env": {
+            "CHECKOUT_OUTCOME": "${{ steps.checkout.outcome }}",
+            "RESOLVE_OUTCOME": "${{ steps.source.outcome }}"
+          },
+          "run": "$ErrorActionPreference = 'Stop'\n$evidence = Join-Path $env:RUNNER_TEMP 'mytodo-phase0-resolve'\nNew-Item -ItemType Directory -Path $evidence -Force | Out-Null\n$path = Join-Path $evidence 'source-resolution.json'\n$receipt = if (Test-Path -LiteralPath $path) { Get-Content -LiteralPath $path -Raw | ConvertFrom-Json -AsHashtable } else { @{repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;workflowSha=$env:GITHUB_SHA;sourceSha=$null;exitCode=$null;status='failure';reason='Initialization did not complete.'} }\n$receipt.checkoutOutcome = $env:CHECKOUT_OUTCOME\n$receipt.resolveOutcome = $env:RESOLVE_OUTCOME\nif ($env:CHECKOUT_OUTCOME -ne 'success' -or $env:RESOLVE_OUTCOME -ne 'success') {\n  $receipt.status = 'failure'\n  if (-not $receipt.reason) { $receipt.reason = 'Checkout or SHA resolution did not complete; platform jobs cannot run.' }\n}\n$receipt.finishedAt = [DateTime]::UtcNow.ToString('o')\n$receipt | ConvertTo-Json | Set-Content -LiteralPath $path -Encoding utf8"
+        },
+        {
+          "name": "Save source-resolution evidence",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "phase0-source-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/mytodo-phase0-resolve/",
+            "retention-days": 14,
+            "if-no-files-found": "error"
+          }
+        }
+      ]
+    },
+    "windows": {
+      "name": "Windows native build and self-tests",
+      "needs": [
+        "resolve-source"
+      ],
+      "runs-on": "windows-latest",
+      "timeout-minutes": 30,
+      "env": {
+        "EXPECTED_SOURCE_SHA": "${{ needs.resolve-source.outputs.source-sha }}",
+        "BASELINE_MODE": "Windows"
+      },
+      "steps": [
+        {
+          "name": "Checkout reviewed CI definition",
+          "id": "definition",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Copy executor outside the source checkout",
+          "id": "executor",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\nif ($env:EXPECTED_SOURCE_SHA -notmatch '^[a-fA-F0-9]{40}$') { throw 'Frozen source SHA is missing.' }\n$target = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'\nCopy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'scripts/ci/phase0-baseline.ps1') -Destination $target\n(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256') -Encoding utf8"
+        },
+        {
+          "name": "Checkout the same frozen source SHA",
+          "id": "source",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ needs.resolve-source.outputs.source-sha }}",
+            "persist-credentials": false,
+            "clean": true
+          }
+        },
+        {
+          "name": "Run cloud-only baseline executor",
+          "id": "baseline",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n& (Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1') -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA\nexit $LASTEXITCODE"
+        },
+        {
+          "name": "Finalize evidence even after failure",
+          "if": "always()",
+          "shell": "pwsh",
+          "env": {
+            "PRIOR_JOB_STATUS": "${{ job.status }}",
+            "DEFINITION_OUTCOME": "${{ steps.definition.outcome }}",
+            "EXECUTOR_OUTCOME": "${{ steps.executor.outcome }}",
+            "SOURCE_OUTCOME": "${{ steps.source.outcome }}",
+            "BASELINE_OUTCOME": "${{ steps.baseline.outcome }}"
+          },
+          "run": "$ErrorActionPreference = 'Stop'\n$evidence = Join-Path $env:RUNNER_TEMP ('mytodo-phase0-' + $env:BASELINE_MODE.ToLowerInvariant())\nNew-Item -ItemType Directory -Path $evidence -Force | Out-Null\n@{definitionCheckout=$env:DEFINITION_OUTCOME;executorCopy=$env:EXECUTOR_OUTCOME;sourceCheckout=$env:SOURCE_OUTCOME;baseline=$env:BASELINE_OUTCOME;priorJobStatus=$env:PRIOR_JOB_STATUS;workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'workflow-step-outcomes.json') -Encoding utf8\n$hashPath = Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256'\nif (Test-Path -LiteralPath $hashPath) { Copy-Item -LiteralPath $hashPath -Destination (Join-Path $evidence 'executor.sha256') }\n$executor = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'\nif (Test-Path -LiteralPath $executor) {\n  & $executor -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA -FinalizeOnly -PriorJobStatus $env:PRIOR_JOB_STATUS\n  exit $LASTEXITCODE\n}\n@{mode=$env:BASELINE_MODE;repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=(\"$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID\");workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA;actualSourceSha=$null;sourceVerified=$false;jobStatus='failure';failureCategory='source';failureReason='Reviewed executor was not copied; no build or test ran.';exitCode=$null;cases=@();artifacts=@();requiredItemsComplete=$false;requiredArtifactsComplete=$false;finishedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'run-receipt.json') -Encoding utf8\nif ($env:PRIOR_JOB_STATUS -eq 'success') { exit 1 }"
+        },
+        {
+          "name": "Save logs, receipts and this run artifacts",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "phase0-windows-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/mytodo-phase0-windows/",
+            "retention-days": 14,
+            "if-no-files-found": "error"
+          }
+        }
+      ]
+    },
+    "web": {
+      "name": "Web and shared JavaScript tests",
+      "needs": [
+        "resolve-source"
+      ],
+      "runs-on": "windows-latest",
+      "timeout-minutes": 30,
+      "env": {
+        "EXPECTED_SOURCE_SHA": "${{ needs.resolve-source.outputs.source-sha }}",
+        "BASELINE_MODE": "Web"
+      },
+      "steps": [
+        {
+          "name": "Checkout reviewed CI definition",
+          "id": "definition",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Copy executor outside the source checkout",
+          "id": "executor",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\nif ($env:EXPECTED_SOURCE_SHA -notmatch '^[a-fA-F0-9]{40}$') { throw 'Frozen source SHA is missing.' }\n$target = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'\nCopy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'scripts/ci/phase0-baseline.ps1') -Destination $target\n(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256') -Encoding utf8"
+        },
+        {
+          "name": "Checkout the same frozen source SHA",
+          "id": "source",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ needs.resolve-source.outputs.source-sha }}",
+            "persist-credentials": false,
+            "clean": true
+          }
+        },
+        {
+          "name": "Run cloud-only baseline executor",
+          "id": "baseline",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n& (Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1') -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA\nexit $LASTEXITCODE"
+        },
+        {
+          "name": "Finalize evidence even after failure",
+          "if": "always()",
+          "shell": "pwsh",
+          "env": {
+            "PRIOR_JOB_STATUS": "${{ job.status }}",
+            "DEFINITION_OUTCOME": "${{ steps.definition.outcome }}",
+            "EXECUTOR_OUTCOME": "${{ steps.executor.outcome }}",
+            "SOURCE_OUTCOME": "${{ steps.source.outcome }}",
+            "BASELINE_OUTCOME": "${{ steps.baseline.outcome }}"
+          },
+          "run": "$ErrorActionPreference = 'Stop'\n$evidence = Join-Path $env:RUNNER_TEMP ('mytodo-phase0-' + $env:BASELINE_MODE.ToLowerInvariant())\nNew-Item -ItemType Directory -Path $evidence -Force | Out-Null\n@{definitionCheckout=$env:DEFINITION_OUTCOME;executorCopy=$env:EXECUTOR_OUTCOME;sourceCheckout=$env:SOURCE_OUTCOME;baseline=$env:BASELINE_OUTCOME;priorJobStatus=$env:PRIOR_JOB_STATUS;workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'workflow-step-outcomes.json') -Encoding utf8\n$hashPath = Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256'\nif (Test-Path -LiteralPath $hashPath) { Copy-Item -LiteralPath $hashPath -Destination (Join-Path $evidence 'executor.sha256') }\n$executor = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'\nif (Test-Path -LiteralPath $executor) {\n  & $executor -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA -FinalizeOnly -PriorJobStatus $env:PRIOR_JOB_STATUS\n  exit $LASTEXITCODE\n}\n@{mode=$env:BASELINE_MODE;repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=(\"$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID\");workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA;actualSourceSha=$null;sourceVerified=$false;jobStatus='failure';failureCategory='source';failureReason='Reviewed executor was not copied; no build or test ran.';exitCode=$null;cases=@();artifacts=@();requiredItemsComplete=$false;requiredArtifactsComplete=$false;finishedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'run-receipt.json') -Encoding utf8\nif ($env:PRIOR_JOB_STATUS -eq 'success') { exit 1 }"
+        },
+        {
+          "name": "Save logs, receipts and this run artifacts",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "phase0-web-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/mytodo-phase0-web/",
+            "retention-days": 14,
+            "if-no-files-found": "error"
+          }
+        }
+      ]
+    },
+    "android": {
+      "name": "Android unsigned build and Java tests",
+      "needs": [
+        "resolve-source"
+      ],
+      "runs-on": "windows-latest",
+      "timeout-minutes": 30,
+      "env": {
+        "EXPECTED_SOURCE_SHA": "${{ needs.resolve-source.outputs.source-sha }}",
+        "BASELINE_MODE": "Android"
+      },
+      "steps": [
+        {
+          "name": "Checkout reviewed CI definition",
+          "id": "definition",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Copy executor outside the source checkout",
+          "id": "executor",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\nif ($env:EXPECTED_SOURCE_SHA -notmatch '^[a-fA-F0-9]{40}$') { throw 'Frozen source SHA is missing.' }\n$target = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'\nCopy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'scripts/ci/phase0-baseline.ps1') -Destination $target\n(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256') -Encoding utf8"
+        },
+        {
+          "name": "Checkout the same frozen source SHA",
+          "id": "source",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ needs.resolve-source.outputs.source-sha }}",
+            "persist-credentials": false,
+            "clean": true
+          }
+        },
+        {
+          "name": "Run cloud-only baseline executor",
+          "id": "baseline",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n& (Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1') -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA\nexit $LASTEXITCODE"
+        },
+        {
+          "name": "Finalize evidence even after failure",
+          "if": "always()",
+          "shell": "pwsh",
+          "env": {
+            "PRIOR_JOB_STATUS": "${{ job.status }}",
+            "DEFINITION_OUTCOME": "${{ steps.definition.outcome }}",
+            "EXECUTOR_OUTCOME": "${{ steps.executor.outcome }}",
+            "SOURCE_OUTCOME": "${{ steps.source.outcome }}",
+            "BASELINE_OUTCOME": "${{ steps.baseline.outcome }}"
+          },
+          "run": "$ErrorActionPreference = 'Stop'\n$evidence = Join-Path $env:RUNNER_TEMP ('mytodo-phase0-' + $env:BASELINE_MODE.ToLowerInvariant())\nNew-Item -ItemType Directory -Path $evidence -Force | Out-Null\n@{definitionCheckout=$env:DEFINITION_OUTCOME;executorCopy=$env:EXECUTOR_OUTCOME;sourceCheckout=$env:SOURCE_OUTCOME;baseline=$env:BASELINE_OUTCOME;priorJobStatus=$env:PRIOR_JOB_STATUS;workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'workflow-step-outcomes.json') -Encoding utf8\n$hashPath = Join-Path $env:RUNNER_TEMP 'phase0-executor.sha256'\nif (Test-Path -LiteralPath $hashPath) { Copy-Item -LiteralPath $hashPath -Destination (Join-Path $evidence 'executor.sha256') }\n$executor = Join-Path $env:RUNNER_TEMP 'phase0-baseline.ps1'\nif (Test-Path -LiteralPath $executor) {\n  & $executor -Mode $env:BASELINE_MODE -ExpectedSourceSha $env:EXPECTED_SOURCE_SHA -FinalizeOnly -PriorJobStatus $env:PRIOR_JOB_STATUS\n  exit $LASTEXITCODE\n}\n@{mode=$env:BASELINE_MODE;repository=$env:GITHUB_REPOSITORY;runId=$env:GITHUB_RUN_ID;runAttempt=$env:GITHUB_RUN_ATTEMPT;runUrl=(\"$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID\");workflowSha=$env:GITHUB_SHA;expectedSourceSha=$env:EXPECTED_SOURCE_SHA;actualSourceSha=$null;sourceVerified=$false;jobStatus='failure';failureCategory='source';failureReason='Reviewed executor was not copied; no build or test ran.';exitCode=$null;cases=@();artifacts=@();requiredItemsComplete=$false;requiredArtifactsComplete=$false;finishedAt=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'run-receipt.json') -Encoding utf8\nif ($env:PRIOR_JOB_STATUS -eq 'success') { exit 1 }"
+        },
+        {
+          "name": "Save logs, receipts and this run artifacts",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "phase0-android-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/mytodo-phase0-android/",
+            "retention-days": 14,
+            "if-no-files-found": "error"
+          }
+        }
+      ]
+    }
+  }
+}
