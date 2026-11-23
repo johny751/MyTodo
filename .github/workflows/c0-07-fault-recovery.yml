@@ -1,0 +1,179 @@
+name: MyTodo C0-07 real transaction and publication recovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, 'c0-07/**']
+    paths:
+      - '.github/workflows/c0-07-fault-recovery.yml'
+      - 'tests/fault-harness/**'
+      - 'tests/protocol-harness/android/remote-file-evidence.mjs'
+      - 'tests/protocol-harness/android/run-android.mjs'
+      - 'tests/c006/c006-harness/fixture-server.mjs'
+      - 'src/sqlite-store.mjs'
+      - 'src/replica.mjs'
+      - 'src/delta-sync.mjs'
+      - 'windows/database.c'
+      - 'windows/sync.c'
+      - 'android/src/local/gxtodo/replica/ReplicaDatabase.java'
+      - 'android/src/local/gxtodo/replica/AccountStore.java'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mytodo-c007-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+  NODE_OPTIONS: --experimental-sqlite
+
+jobs:
+  javascript:
+    name: Node SQLite actual faults and same-database process restart
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select existing Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Record frozen source and C006 fixture dependency
+        run: node tests/fault-harness/c007-evidence.mjs start "$RUNNER_TEMP/c007-javascript" javascript
+      - name: Execute real Node SQL and publication fault suite
+        run: node tests/fault-harness/run-c007-suite.mjs --platform javascript --output "$RUNNER_TEMP/c007-javascript/suite" > "$RUNNER_TEMP/c007-javascript/run.log" 2>&1
+      - name: Seal all successful and failed evidence
+        if: always()
+        run: node tests/fault-harness/c007-evidence.mjs seal "$RUNNER_TEMP/c007-javascript" javascript
+      - name: Preserve Node evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c007-javascript-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c007-javascript/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+
+  native:
+    name: Windows C actual SQLite and WinHTTP faults
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select existing Node runtime
+        shell: pwsh
+        run: ./scripts/ci/c004-node-path.ps1
+      - name: Record frozen source and C006 fixture dependency
+        shell: pwsh
+        run: node tests/fault-harness/c007-evidence.mjs start "$env:RUNNER_TEMP/c007-windows-c" windows-c
+      - name: Build actual C worker and execute every fault scenario
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidence = Join-Path $env:RUNNER_TEMP 'c007-windows-c'
+          & node tests/fault-harness/build-c007-windows.mjs "$evidence/bin/c007-worker.exe" *> "$evidence/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & node tests/fault-harness/run-c007-suite.mjs --platform windows-c --windows-exe "$evidence/bin/c007-worker.exe" --output "$evidence/suite" *> "$evidence/run.log"
+          exit $LASTEXITCODE
+      - name: Seal all successful and failed evidence
+        if: always()
+        shell: pwsh
+        run: node tests/fault-harness/c007-evidence.mjs seal "$env:RUNNER_TEMP/c007-windows-c" windows-c
+      - name: Preserve C build and execution evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c007-windows-c-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c007-windows-c/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+
+  android:
+    name: Android WebView and SQLite real commit boundaries
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    env:
+      MYTODO_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_ANDROID_PULSE_INSTALL: '1'
+      MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select existing Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Record frozen source and C006 fixture dependency
+        run: node tests/fault-harness/c007-evidence.mjs start "$RUNNER_TEMP/c007-android" android
+      - name: Start existing C004 API 34 emulator recipe
+        id: emulator
+        run: node scripts/ci/c004-android-emulator.mjs start
+      - name: Prepare and build the observed production test APK
+        run: |
+          node tests/fault-harness/android/prepare-c007-android.mjs "$RUNNER_TEMP/c007-android/shell" > "$RUNNER_TEMP/c007-android/adaptation.log" 2>&1
+          node "$RUNNER_TEMP/c007-android/shell/build-android.mjs" --root "$GITHUB_WORKSPACE" --output-dir "$RUNNER_TEMP/c007-android/build" > "$RUNNER_TEMP/c007-android/build.log" 2>&1
+      - name: Install isolated test APK once
+        run: node tests/protocol-harness/android/run-android.mjs --apk "$RUNNER_TEMP/c007-android/build/mytodo-c003-test.apk" --serial "$MYTODO_ANDROID_SERIAL" --output "$RUNNER_TEMP/c007-android/prepared.json" --prepare > "$RUNNER_TEMP/c007-android/install.log" 2>&1
+      - name: Execute fixed-database scenarios without automatic crash retries
+        run: node tests/fault-harness/run-c007-suite.mjs --platform android --apk "$RUNNER_TEMP/c007-android/build/mytodo-c003-test.apk" --prepared "$RUNNER_TEMP/c007-android/prepared.json.receipt.json" --serial "$MYTODO_ANDROID_SERIAL" --output "$RUNNER_TEMP/c007-android/suite" > "$RUNNER_TEMP/c007-android/run.log" 2>&1
+      - name: Stop emulator and finalize runtime evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
+        run: node scripts/ci/c004-android-emulator.mjs finish
+      - name: Seal all successful and failed evidence
+        if: always()
+        run: node tests/fault-harness/c007-evidence.mjs seal "$RUNNER_TEMP/c007-android" android
+      - name: Preserve Android build, first failures and original databases
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c007-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c007-android/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+      - name: Preserve existing emulator and official dependency receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c007-android-environment-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android-emulator/
+          if-no-files-found: error
+          retention-days: 30
+
+  report:
+    name: Verify all three same-source execution receipts
+    needs: [javascript, native, android]
+    if: ${{ always() && !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select existing Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Download only this workflow attempt
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: c007-*-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c007-input/
+      - name: Verify source, hashes, case counts and all assertion results
+        if: always()
+        run: node tests/fault-harness/c007-evidence.mjs report "$RUNNER_TEMP/c007-input" "$RUNNER_TEMP/c007-report"
+      - name: Preserve exact-source C007 acceptance report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c007-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c007-report/
+          if-no-files-found: error
+          retention-days: 30
