@@ -7,6 +7,8 @@ on:
       - '.github/workflows/c0-06-android-interruption.yml'
       - 'tests/c006/android-kill/**'
       - 'tests/c006/c006-harness/**'
+      - 'tests/protocol-harness/android/remote-file-evidence.mjs'
+      - 'tests/protocol-harness/android/run-android.mjs'
       - 'src/**'
       - 'android/**'
 permissions:

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {spawn,execFileSync} from 'node:child_process';
 import {setTimeout as sleep} from 'node:timers/promises';
+import {captureRemoteFile} from '../../protocol-harness/android/remote-file-evidence.mjs';
 import {cloudOnly,confined,startMigrationServer,sha} from '../c006-harness/fixture-server.mjs';
 cloudOnly();
 const argv=process.argv.slice(2),option=name=>{const n=argv.indexOf(name);return n<0?null:argv[n+1];};
@@ -26,6 +27,7 @@ const domain=a=>a.rows.map(row=>({key:row.key,data:row.data,deleted:row.deleted}
 const retained=a=>a.rows.map(row=>({key:row.key,events:row.record.events.map(canonical).sort((a,b)=>a.actor<b.actor?-1:a.actor>b.actor?1:a.seq-b.seq)})).sort((a,b)=>a.key<b.key?-1:a.key>b.key?1:0);
 const receipt={schema:'mytodo-c006-android-interruption-run',sourceSha,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,
  serial,apkSha256,environment,commands:[],startedAt:new Date().toISOString()},cases=[];
+receipt.captureHelper={path:'tests/protocol-harness/android/remote-file-evidence.mjs',sha256:sha(await fs.readFile(new URL('../../protocol-harness/android/remote-file-evidence.mjs',import.meta.url)))};
 let commandSequence=0,attemptSequence=0;
 async function command(directory,label,args,{input,allowFailure=false,timeout=20000}={}){
  const entry={label,command:[adb,'-s',serial,...args],startedAt:new Date().toISOString()};receipt.commands.push(entry);
@@ -40,7 +42,7 @@ async function command(directory,label,args,{input,allowFailure=false,timeout=20
  await fs.writeFile(path.join(directory,prefix+'.stdout'),result.bytes,{flag:'wx'});await fs.writeFile(path.join(directory,prefix+'.stderr'),result.stderr,{flag:'wx'});
  Object.assign(entry,{exitCode:result.code,signal:result.signal,completedAt:new Date().toISOString(),stdoutSha256:sha(result.bytes),stderrSha256:sha(result.stderr)});
  if(!allowFailure)must(result.code===0&&!result.signal&&!entry.timedOut&&!entry.spawnError&&!entry.stdinError,'ADB command failed: '+label);
- return {...result,text:result.bytes.toString('utf8'),timedOut:!!entry.timedOut,spawnError:entry.spawnError};
+ return {...result,text:result.bytes.toString('utf8'),timedOut:!!entry.timedOut,spawnError:entry.spawnError,stdinError:entry.stdinError};
 }
 async function gone(directory,label){
  for(let n=0;n<16;n++){
@@ -53,15 +55,19 @@ async function gone(directory,label){
 async function stop(directory,label){await command(directory,label,['shell','am','force-stop',pkg]);await gone(directory,label+'-pid');}
 async function exportDatabase(directory,dbCase){
  const target=path.join(directory,'database');await fs.mkdir(target);const files=[];
+ const observe=async(label,args,options={})=>{
+  const result=await command(directory,'capture-'+label,args,{...options,allowFailure:true});
+  return {...result,stdout:result.text,stderr:result.stderr.toString('utf8')};
+ };
  for(const name of ['tasks.sqlite','tasks.sqlite-wal','tasks.sqlite-shm','tasks.sqlite-journal']){
-  const remote='files/protocol-cases/'+dbCase+'/'+name,present=await command(directory,'exists-'+name,['shell','run-as',pkg,'test','-f',remote],{allowFailure:true});
-  if(present.code===1&&!present.timedOut&&!present.spawnError){files.push({name,status:'absent'});continue;}
-  must(present.code===0&&!present.timedOut&&!present.spawnError,'Cannot inspect database evidence');
-  const bytes=(await command(directory,'export-'+name,['exec-out','run-as',pkg,'cat',remote])).bytes;
-  await fs.writeFile(path.join(target,name),bytes,{flag:'wx'});files.push({name,bytes:bytes.length,sha256:sha(bytes),status:'preserved'});
+  const item=await captureRemoteFile({packageName:pkg,remote:'files/protocol-cases/'+dbCase+'/'+name,name,directory:target,
+   observe,selected:(...args)=>args,sqlite:name==='tasks.sqlite'});
+  files.push({name,...item,status:item.state});
  }
- must(files.some(file=>file.name==='tasks.sqlite'&&file.status==='preserved'),'Real SQLite database is missing');
- await save(path.join(target,'files.json'),files);return files;
+ await save(path.join(target,'files.json'),files);
+ must(files.some(file=>file.name==='tasks.sqlite'&&file.status==='preserved'&&file.sqliteHeaderValid&&file.localReadbackVerified),'Real SQLite database is unavailable or not verified');
+ must(files.every(file=>file.status==='preserved'||(file.before?.valid&&file.before.state==='unavailable'&&file.before.reason==='missing')),'SQLite sidecar evidence is incomplete or not verified');
+ return files;
 }
 async function operation(context,operation,extra={}){
  const attemptId='attempt-'+String(++attemptSequence).padStart(3,'0'),dbCase=extra.dbCase||context.id;
