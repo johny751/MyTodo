@@ -1,0 +1,4785 @@
+{
+  "schema": "mytodo-protocol-vectors",
+  "version": 1,
+  "protocol": {
+    "format": "gxtodo-delta",
+    "version": 2,
+    "sources": [
+      "docs/sync-v2.md",
+      "docs/webdav-sync-implementation-guide.md",
+      "src/replica.mjs",
+      "src/delta-sync.mjs",
+      "windows/database.c",
+      "windows/sync.c",
+      "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+      "android/src/local/gxtodo/replica/AccountStore.java"
+    ]
+  },
+  "defaults": {
+    "producerActor": "producer-A",
+    "receiverActor": "receiver-R",
+    "epoch": "c0-03-epoch",
+    "scope": "[\"fixture-user\",\"C003\"]",
+    "folder": "C003"
+  },
+  "cases": [
+    {
+      "id": "basic-note",
+      "category": "cross-storage",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "unicode-body",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"中文😀-é\"]",
+              "values": {
+                "body": "中文😀 café\n换行",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "causal-field-trimming",
+      "category": "versions",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "one",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "two"
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "color": "#336699"
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "multiple-entities",
+      "category": "cross-storage",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"first\"]",
+              "values": {
+                "body": "one",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            },
+            {
+              "key": "[\"notes\",\"second\"]",
+              "values": {
+                "body": "two",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            },
+            {
+              "key": "[\"projects\",\"project\"]",
+              "values": {
+                "name": "project",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "duplicate-events",
+      "category": "idempotency",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept",
+          "duplicate": true
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "reversed-events",
+      "category": "ordering",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "second"
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept",
+          "reverse": true
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "independent-fields",
+      "category": "conflict",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "alpha"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "a",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "color": "red"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "actor-A-a",
+      "category": "ordering",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "upper"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "a",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "lower"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "actor-A-a-reverse",
+      "category": "ordering",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "a",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "lower"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "upper"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "actor-hyphen-ascii",
+      "category": "ordering",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "0"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A-",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "1"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A0",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "2"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "a",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "3"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "a-",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "4"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "ascii-punctuation-id",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"!#$%&'()+,./:;<=>?@[\\\\]^_`{|}~\"]",
+              "values": {
+                "body": "ASCII punctuation",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "field-conflict",
+      "category": "conflict",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "B",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "left"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "C",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "right"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "tombstone-late-old",
+      "category": "tombstone",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 2,
+              "clock": 2,
+              "context": {
+                "A": 1
+              },
+              "values": {
+                "_deleted": true
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "old",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "tombstone-concurrent-edit",
+      "category": "tombstone",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "_deleted": true
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "B",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "late edit",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "explicit-causal-restore",
+      "category": "tombstone",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "_deleted": true
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 2,
+              "clock": 2,
+              "context": {
+                "A": 1
+              },
+              "values": {
+                "_deleted": false,
+                "body": "restored"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "sparse-retained-seq",
+      "category": "versions",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "color": "red"
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 3,
+              "clock": 3,
+              "context": {
+                "A": 2
+              },
+              "values": {
+                "body": "third"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "tampered-duplicate",
+      "category": "idempotency",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            },
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "changed",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "reject"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "actor-length-80",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "actor-length-81",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "actor-invalid-punctuation",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A!",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "actor-unicode",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "设备",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-ascii-200",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-ascii-201",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-cjk-66",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-cjk-67",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-emoji-100",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-empty",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-three-items",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\",\"extra\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-one-item",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-swapped",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"probe\",\"notes\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-array-type",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": [
+                "notes",
+                "probe"
+              ],
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-malformed",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-scalar-json",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "\"notes\"",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "key-number-id",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",42]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-null",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": null,
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-array",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": [],
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-number",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": 7,
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-string",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": "text",
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-negative",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {
+                "A": -1
+              },
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-unsafe",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {
+                "A": 9007199254740992
+              },
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-max-safe",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {
+                "A": 9007199254740991
+              },
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "context-invalid-actor",
+      "category": "input-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {
+                "A!": 1
+              },
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "seq-zero",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 0,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "seq-fraction",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1.5,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "seq-max-safe",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 9007199254740991,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "seq-unsafe",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 9007199254740992,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "clock-max-safe",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 9007199254740991,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "clock-unsafe",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 9007199254740992,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "values-array",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": []
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "values-forbidden-field",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "constructor": "x"
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "manifest-int32-plus-one",
+      "category": "manifest-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "manifest",
+          "response": {
+            "status": 200,
+            "etag": "\"fixture-1\"",
+            "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"A\":2147483648},\"snapshot\":null}"
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "manifest-max-safe",
+      "category": "manifest-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "manifest",
+          "response": {
+            "status": 200,
+            "etag": "\"fixture-1\"",
+            "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"A\":9007199254740991},\"snapshot\":null}"
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "manifest-unsafe",
+      "category": "manifest-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "manifest",
+          "response": {
+            "status": 200,
+            "etag": "\"fixture-1\"",
+            "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"A\":9007199254740992},\"snapshot\":null}"
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "manifest-heads-array",
+      "category": "manifest-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "manifest",
+          "response": {
+            "status": 200,
+            "etag": "\"fixture-1\"",
+            "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":[],\"snapshot\":null}"
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "manifest-empty-actor",
+      "category": "manifest-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "manifest",
+          "response": {
+            "status": 200,
+            "etag": "\"fixture-1\"",
+            "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"\":1},\"snapshot\":null}"
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "manifest-empty-epoch",
+      "category": "manifest-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "manifest",
+          "response": {
+            "status": 200,
+            "etag": "\"fixture-1\"",
+            "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"\",\"heads\":{},\"snapshot\":null}"
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "prepare-int32-overflow",
+      "category": "integer-boundary",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"offline\"]",
+              "values": {
+                "body": "pending",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "prepare",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {
+              "receiver-R": 2147483647
+            },
+            "snapshot": null
+          },
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "sql-remote-rollback",
+      "category": "sql-fault",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"offline\"]",
+              "values": {
+                "body": "preserve outbox",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "prepare",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "expect": "accept"
+        },
+        {
+          "op": "sqlFault",
+          "enabled": true,
+          "kind": "update-abort",
+          "table": "meta",
+          "name": "c003_abort_meta"
+        },
+        {
+          "op": "remote",
+          "fromSample": "events",
+          "device": "producer-A",
+          "index": 1,
+          "expect": "reject"
+        },
+        {
+          "op": "sqlFault",
+          "enabled": false,
+          "kind": "update-abort",
+          "table": "meta",
+          "name": "c003_abort_meta"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "sql-local-rollback",
+      "category": "sql-fault",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"offline\"]",
+              "values": {
+                "body": "preserve outbox",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "sqlFault",
+          "enabled": true,
+          "kind": "update-abort",
+          "table": "meta",
+          "name": "c003_abort_meta"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"must-rollback\"]",
+              "values": {
+                "body": "not committed",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "reject"
+        },
+        {
+          "op": "sqlFault",
+          "enabled": false,
+          "kind": "update-abort",
+          "table": "meta",
+          "name": "c003_abort_meta"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract"
+    },
+    {
+      "id": "batch-gap",
+      "category": "batch-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"one\"]",
+              "values": {
+                "body": "one",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"two\"]",
+              "values": {
+                "body": "two",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"three\"]",
+              "values": {
+                "body": "three",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {
+              "producer-A": 3
+            },
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "reject"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "batches",
+        "omit": [
+          2
+        ],
+        "eventsPerBatch": 1
+      }
+    },
+    {
+      "id": "batch-duplicate-restart",
+      "category": "batch-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"one\"]",
+              "values": {
+                "body": "one",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"two\"]",
+              "values": {
+                "body": "two",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"three\"]",
+              "values": {
+                "body": "three",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {
+              "producer-A": 3
+            },
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {
+              "producer-A": 3
+            },
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "batches",
+        "eventsPerBatch": 1
+      }
+    },
+    {
+      "id": "batch-over-500",
+      "category": "batch-validation",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {
+              "producer-A": 1
+            },
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "reject"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "batches",
+        "repeatEvents": 501
+      }
+    },
+    {
+      "id": "snapshot-complete",
+      "category": "snapshot-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-first\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-second\"]",
+              "values": {
+                "body": "second",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "snapshot",
+        "recordsPerPart": 1
+      }
+    },
+    {
+      "id": "snapshot-missing-part",
+      "category": "snapshot-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-first\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-second\"]",
+              "values": {
+                "body": "second",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "reject"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "snapshot",
+        "recordsPerPart": 1,
+        "omitParts": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "snapshot-bad-hash",
+      "category": "snapshot-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-first\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-second\"]",
+              "values": {
+                "body": "second",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "reject"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "snapshot",
+        "recordsPerPart": 1,
+        "badHashPart": 1
+      }
+    },
+    {
+      "id": "snapshot-wrong-epoch",
+      "category": "snapshot-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-first\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-second\"]",
+              "values": {
+                "body": "second",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "reject"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "snapshot",
+        "recordsPerPart": 1,
+        "wrongEpochPart": 1
+      }
+    },
+    {
+      "id": "snapshot-cursor-unsafe",
+      "category": "snapshot-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-first\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-second\"]",
+              "values": {
+                "body": "second",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "observation",
+      "fixturePlan": {
+        "kind": "snapshot",
+        "recordsPerPart": 1,
+        "snapshotCursors": {
+          "producer-A": 9007199254740992
+        }
+      }
+    },
+    {
+      "id": "snapshot-sql-restart",
+      "category": "snapshot-recovery",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "contract",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-first\"]",
+              "values": {
+                "body": "first",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"snapshot-second\"]",
+              "values": {
+                "body": "second",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"offline\"]",
+              "values": {
+                "body": "must remain queued",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "sqlFault",
+          "enabled": true,
+          "kind": "insert-id-abort",
+          "table": "entities",
+          "id": "snapshot-second",
+          "name": "c003_abort_entity"
+        },
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "reject"
+        },
+        {
+          "op": "sqlFault",
+          "enabled": false,
+          "kind": "insert-id-abort",
+          "table": "entities",
+          "id": "snapshot-second",
+          "name": "c003_abort_entity"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "pull",
+          "manifest": {
+            "format": "gxtodo-delta",
+            "version": 2,
+            "epoch": "c0-03-epoch",
+            "heads": {},
+            "snapshot": null
+          },
+          "budget": 12,
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "mode": "contract",
+      "fixturePlan": {
+        "kind": "snapshot",
+        "recordsPerPart": 1
+      }
+    },
+    {
+      "id": "cursor-int32-max",
+      "category": "integer-boundary",
+      "contractSources": [
+        "src/replica.mjs",
+        "windows/database.c"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "cursor probe",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 2147483647,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "cursor-int32-plus-one",
+      "category": "integer-boundary",
+      "contractSources": [
+        "src/replica.mjs",
+        "windows/database.c"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "cursor probe",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 2147483648,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "cursor-max-safe",
+      "category": "integer-boundary",
+      "contractSources": [
+        "src/replica.mjs",
+        "windows/database.c"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "cursor probe",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 9007199254740991,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "cursor-unsafe",
+      "category": "integer-boundary",
+      "contractSources": [
+        "src/replica.mjs",
+        "windows/database.c"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "cursor probe",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 9007199254740992,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    }
+  ]
+}
