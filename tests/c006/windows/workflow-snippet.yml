@@ -1,0 +1,19 @@
+# Insert under a Windows Actions job, after checkout and Node selection.
+# All paths intentionally stay inside RUNNER_TEMP. This is a snippet, not a
+# complete workflow or an assertion of C006 acceptance.
+- name: Build C006 production native migration adapter
+  shell: pwsh
+  env:
+    EXPECTED_SOURCE_SHA: ${{ github.sha }}
+  run: |
+    $ErrorActionPreference = 'Stop'
+    $out = Join-Path $env:RUNNER_TEMP 'c006-native'
+    New-Item -ItemType Directory -Force $out | Out-Null
+    & node tests/c006/windows/build-native.mjs "$out/migration-native.exe" *> "$out/build.log"
+    $code = $LASTEXITCODE
+    @{sourceSha=$env:GITHUB_SHA;command='node tests/c006/windows/build-native.mjs';exitCode=$code} | ConvertTo-Json | Set-Content "$out/build-execution.json" -Encoding utf8
+    if ($code -ne 0) { exit $code }
+    "C006_NATIVE_EXE=$out/migration-native.exe" | Add-Content $env:GITHUB_ENV
+# The parent C006 runner invokes C006_NATIVE_EXE with spec/result JSON paths,
+# verifies exit/result consistency, and records actual assertion outcomes.
+# Preserve the runner's cases and producer SHA256 inventory with always().

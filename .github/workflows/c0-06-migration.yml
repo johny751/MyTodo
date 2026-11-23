@@ -1,0 +1,169 @@
+name: MyTodo C0-06 actual legacy recovery
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, 'c0-06/**']
+    paths:
+      - '.github/workflows/c0-06-migration.yml'
+      - 'tests/c006/**'
+      - 'src/**'
+      - 'windows/**'
+      - 'android/**'
+permissions:
+  contents: read
+concurrency:
+  group: mytodo-c006-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  javascript:
+    name: Real Node SQLite migration and process recovery
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select the existing supported Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Execute existing production migration with synthetic disk WebDAV
+        run: |
+          mkdir -p "$RUNNER_TEMP/c006-js"
+          node --experimental-sqlite tests/c006/c006-harness/runner.mjs --output "$RUNNER_TEMP/c006-js" > "$RUNNER_TEMP/c006-js/run.log" 2>&1
+      - name: Seal all Node evidence including summary and logs
+        if: always()
+        run: node tests/c006/c006-harness/seal-evidence.mjs "$RUNNER_TEMP/c006-js"
+      - name: Preserve every first failure and same-database retry
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c006-js-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c006-js/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+  complete:
+    name: Verify same-source C006 execution receipts
+    needs: [javascript, native, android]
+    if: ${{ always() && !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select the existing supported Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Download only this exact workflow attempt
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: c006-*-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c006-input/
+      - name: Verify receipts and preserve failure accounting
+        if: always()
+        run: node tests/c006/c006-harness/summarize.mjs "$RUNNER_TEMP/c006-input" "$RUNNER_TEMP/c006-report"
+      - name: Seal the acceptance report including failure evidence
+        if: always()
+        run: node tests/c006/c006-harness/seal-evidence.mjs "$RUNNER_TEMP/c006-report"
+      - name: Preserve exact-source acceptance report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c006-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c006-report/
+          if-no-files-found: error
+          retention-days: 14
+  native:
+    name: Real Windows C migration safeguards and observers
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select the existing supported Node runtime
+        shell: pwsh
+        run: ./scripts/ci/c004-node-path.ps1
+      - name: Build and run actual production C adapter
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $root = Join-Path $env:RUNNER_TEMP 'c006-native'
+          New-Item -ItemType Directory -Force $root | Out-Null
+          & node tests/c006/windows/build-native.mjs "$root/migration-native.exe" *> "$root/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $env:C006_NATIVE_EXE = "$root/migration-native.exe"
+          & node --experimental-sqlite tests/c006/windows/native-runner.mjs --output "$root/cases" *> "$root/run.log"
+          exit $LASTEXITCODE
+      - name: Seal native build adaptation, binaries, logs and all cases
+        if: always()
+        shell: pwsh
+        run: node tests/c006/c006-harness/seal-evidence.mjs "$env:RUNNER_TEMP/c006-native"
+      - name: Preserve native build and case evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c006-native-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c006-native/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+  android:
+    name: Real Android WebView and SQLite legacy recovery
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      MYTODO_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_ANDROID_PULSE_INSTALL: '1'
+      MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select the existing supported Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Provision the existing supported API 34 emulator runtime
+        id: emulator
+        run: node scripts/ci/c004-android-emulator.mjs start
+      - name: Build and execute real WebView and SQLite migration
+        run: |
+          mkdir -p "$RUNNER_TEMP/c006-android"
+          node tests/c006/c006-harness/prepare-android.mjs "$RUNNER_TEMP/c006-android/shell" > "$RUNNER_TEMP/c006-android/prepare.log" 2>&1
+          node "$RUNNER_TEMP/c006-android/shell/build-android.mjs" --root "$GITHUB_WORKSPACE" --output-dir "$RUNNER_TEMP/c006-android/build" > "$RUNNER_TEMP/c006-android/build.log" 2>&1
+          node tests/c006/c006-harness/android-runner.mjs --output "$RUNNER_TEMP/c006-android/cases" --apk "$RUNNER_TEMP/c006-android/build/mytodo-c003-test.apk" --serial "$MYTODO_ANDROID_SERIAL" --environment "$RUNNER_TEMP/c004-android-emulator/environment.json" > "$RUNNER_TEMP/c006-android/run.log" 2>&1
+      - name: Stop emulator and finish exact-run runtime evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
+        run: node scripts/ci/c004-android-emulator.mjs finish
+      - name: Seal final emulator and dependency evidence
+        if: always()
+        run: node tests/c006/c006-harness/seal-evidence.mjs "$RUNNER_TEMP/c004-android-emulator"
+      - name: Preserve emulator and authorized dependency receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c006-android-environment-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android-emulator/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Seal Android adapter, APK, logs and all cases
+        if: always()
+        run: node tests/c006/c006-harness/seal-evidence.mjs "$RUNNER_TEMP/c006-android"
+      - name: Preserve actual Android evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c006-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c006-android/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
