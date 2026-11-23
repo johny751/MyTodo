@@ -11,6 +11,8 @@ on:
       - 'scripts/ci/c004-node-path.*'
       - 'tests/protocol-harness/**'
       - 'tests/protocol-vectors/**'
+      - 'tests/credential-harness/**'
+      - '.github/workflows/c0-05-credentials.yml'
       - 'src/**'
       - 'windows/**'
       - 'android/**'
