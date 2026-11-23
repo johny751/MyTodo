@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawn} from 'node:child_process';
+import {setTimeout as sleep} from 'node:timers/promises';
 import {DatabaseSync} from 'node:sqlite';
 
 if (process.env.GITHUB_ACTIONS !== 'true' && process.env.CODESPACES !== 'true') {
@@ -146,9 +147,11 @@ try {
     if (inputBytes.length > 8 * 1024 * 1024) throw new Error('Case request exceeds bounded app-private input');
     const input = JSON.parse(inputBytes.toString('utf8'));
     receipt.caseId = input.caseId; receipt.mode = input.mode; receipt.inputSha256 = hash(inputBytes);
-    const dbCase = option('--db-case', input.caseId);
+    const baseCase = option('--db-case', input.caseId);
+    let dbCase = baseCase;
     if (!/^[A-Za-z0-9_.-]{1,80}$/.test(dbCase) || ['.', '..'].includes(dbCase)) throw new Error('Invalid isolated --db-case');
     receipt.dbCase = dbCase;
+    receipt.crashedAttempts = [];
     if (input.fixtureUrl) {
       const url = new URL(input.fixtureUrl);
       if (url.protocol !== 'http:' || url.hostname !== '127.0.0.1' || !url.port || url.pathname !== '/' || url.search || url.hash) {
@@ -157,23 +160,44 @@ try {
       fixturePort = url.port;
       await command('reverse-fixture', selected('reverse', 'tcp:' + fixturePort, 'tcp:' + fixturePort));
     }
-    async function runCase(label, request) {
-      await command(label + '-stop', selected('shell', 'am', 'force-stop', packageName));
-      await command(label + '-request-directory', selected('shell', 'run-as', packageName, 'mkdir', '-p', 'files'));
+    async function runCase(label, request, attempt) {
+      const prefix = attempt === 1 ? label : label + '-retry-' + attempt;
+      await command(prefix + '-stop', selected('shell', 'am', 'force-stop', packageName));
+      // am force-stop can return while the last instrumentation process is still being reaped.
+      let reaped = false;
+      for (let poll = 1; poll <= 8; poll++) {
+        const state = await command(prefix + '-process-check-' + poll,
+          selected('shell', 'pidof', packageName), {allowFailure:true,timeout:5000});
+        if (state.code === 1 && !state.stdout.trim()) { reaped = true; break; }
+        await sleep(250);
+      }
+      if (!reaped) throw new Error(prefix + ' did not observe the old application process exit');
+      await command(prefix + '-request-directory', selected('shell', 'run-as', packageName, 'mkdir', '-p', 'files'));
       // tee receives JSON on stdin; no shell string contains case data or redirects.
       const requestBytes = Buffer.from(JSON.stringify(request));
-      const written = await command(label + '-write-request', selected('shell', '-T', 'run-as', packageName, 'tee', 'files/request.json'),
+      const written = await command(prefix + '-write-request', selected('shell', '-T', 'run-as', packageName, 'tee', 'files/request.json'),
         {input: requestBytes, binary:true});
       if (!written.bytes?.equals(requestBytes)) throw new Error('Android request bytes changed in adb transfer');
-      await command(label + '-clear-result', selected('shell', 'run-as', packageName, 'rm', '-f', 'files/result.json'));
-      const instrument = await command(label + '-instrument', selected('shell', 'am', 'instrument', '-w', '-r',
+      await command(prefix + '-clear-result', selected('shell', 'run-as', packageName, 'rm', '-f', 'files/result.json'));
+      const instrument = await command(prefix + '-instrument', selected('shell', 'am', 'instrument', '-w', '-r',
         '-e', 'caseId', dbCase, '-e', 'requestName', 'request.json', '-e', 'resultName', 'result.json', instrumentation), {allowFailure: true});
       const codes = [...instrument.stdout.matchAll(/INSTRUMENTATION_CODE:\s*(-?\d+)/g)];
       const instrumentationCode = codes.length ? Number(codes.at(-1)[1]) : null;
-      const read = await command(label + '-read-result', selected('exec-out', 'run-as', packageName, 'cat', 'files/result.json'), {allowFailure: true});
+      const read = await command(prefix + '-read-result', selected('exec-out', 'run-as', packageName, 'cat', 'files/result.json'), {allowFailure: true});
       let saved;
       try { saved = JSON.parse(read.stdout); }
-      catch { throw new Error(`${label} produced no valid atomic JSON result; adb=${instrument.code}, instrumentation=${instrumentationCode}`); }
+      catch {
+        const error = new Error(`${prefix} produced no valid atomic JSON result; adb=${instrument.code}, instrumentation=${instrumentationCode}`);
+        error.instrumentationCrash = instrument.code === 0 && instrumentationCode === 0 &&
+          /^INSTRUMENTATION_RESULT: shortMsg=Process crashed\./m.test(instrument.stdout);
+        if (error.instrumentationCrash) {
+          await command(prefix + '-crash-buffer', selected('logcat','-b','crash','-d','-t','120'),
+            {allowFailure:true,timeout:10000});
+          receipt.crashedAttempts.push({stage:label,attempt,dbCase,adbExitCode:instrument.code,instrumentationCode,
+            reason:'Process crashed with no valid atomic result',logs:prefix});
+        }
+        throw error;
+      }
       const file = output + '.' + label + '.json';
       await fs.writeFile(file, JSON.stringify(saved, null, 2));
       receipt[label] = {adbExitCode: instrument.code, instrumentationCode, resultFile: file,
@@ -185,9 +209,24 @@ try {
       }
       return saved;
     }
-    result = await runCase('main', input);
+    async function runRecoveringCrash(label, request) {
+      for (let attempt = 1; ; attempt++) {
+        if (label === 'main' && attempt > 1) {
+          // Abandon the isolated crashed fixture; leave it on the runner for diagnostics.
+          dbCase = baseCase.slice(0,64) + '-retry-' + attempt;
+          receipt.dbCase = dbCase;
+        }
+        try {
+          return await runCase(label,request,attempt);
+        } catch (error) {
+          if (!error.instrumentationCrash || attempt >= 3) throw error;
+          await sleep(750);
+        }
+      }
+    }
+    result = await runRecoveringCrash('main', input);
     if (!result.reopened) throw new Error('The initial Android process did not export a reopened database state');
-    const restarted = await runCase('restart', {caseId: input.caseId, mode: 'report', provenance: input.provenance});
+    const restarted = await runRecoveringCrash('restart', {caseId: input.caseId, mode: 'report', provenance: input.provenance});
     const firstRuntime = result.provenance?.runtime, restartRuntime = restarted.provenance?.runtime;
     if (restarted.status !== 'passed' || !restarted.raw || !firstRuntime?.sqliteVersion || !restartRuntime?.webViewVersion) {
       throw new Error('New Android process did not report actual SQLite and WebView runtime versions');
@@ -200,6 +239,7 @@ try {
       processIds:[firstRuntime.processId,restartRuntime.processId],
       initialSha256:receipt.main.resultSha256,relaunchedSha256:receipt.restart.resultSha256};
     result.processRestart = receipt.restartComparison;
+    result.instrumentationCrashes = receipt.crashedAttempts;
     const database = await command('export-real-sqlite', selected('exec-out', 'run-as', packageName, 'cat',
       'files/protocol-cases/' + dbCase + '/tasks.sqlite'), {binary: true});
     if (!database.bytes || !database.bytes.subarray(0, 16).equals(Buffer.from('SQLite format 3\0'))) {
