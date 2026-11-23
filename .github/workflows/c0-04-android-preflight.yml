@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 23
     env:
       EXPECTED_SOURCE_SHA: ${{ github.sha }}
-      MYTODO_ANDROID_IMAGE_INSTALL: ${{ vars.MYTODO_ANDROID_IMAGE_INSTALL || '0' }}
+      MYTODO_ANDROID_IMAGE_INSTALL: '1'
       MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
     steps:
       - name: Checkout exact preflight definition

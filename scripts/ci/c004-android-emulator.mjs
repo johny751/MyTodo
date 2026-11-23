@@ -39,7 +39,7 @@ const receipt = {
   startedAt: new Date().toISOString(), status: 'blocked', exitCode: null, serial: null,
   requested: { api, tag, abi, imagePackage, serial, avd, expectedRevision: process.env.MYTODO_ANDROID_IMAGE_REVISION || null },
   sdk: sdk || null,
-  installPolicy: { allowOfficialImage: process.env.MYTODO_ANDROID_IMAGE_INSTALL === '1', attempted: false,
+  installPolicy: { enabled: process.env.MYTODO_ANDROID_IMAGE_INSTALL === '1', attempted: false, packages: [],
     source: 'official Google Android SDK repository via the preinstalled sdkmanager', licenseOperation: 'existing SDK licenses only' },
   gradle: { usedForBuild: false }, commands: [],
 };
@@ -110,6 +110,11 @@ async function describeFile(file) {
   return { file: path.basename(file), bytes: (await stat(file)).size, sha256: digest.digest('hex') };
 }
 
+function parseProperties(properties) {
+  return Object.fromEntries(properties.split(/\r?\n/).filter(line => line.includes('='))
+    .map(line => [line.slice(0, line.indexOf('=')), line.slice(line.indexOf('=') + 1)]));
+}
+
 async function start() {
   if (await readable(environmentFile)) throw new Error('This job already has an emulator setup receipt.');
   const head = (await run('git-head', 'git', ['rev-parse', 'HEAD'])).stdout.trim();
@@ -130,21 +135,23 @@ async function start() {
   const gradle = await run('gradle-version', 'gradle', ['--offline', '--version']);
   receipt.gradle = { usedForBuild: false, exitCode: gradle.exitCode,
     version: gradle.stdout.match(/^Gradle\s+(\S+)/m)?.[1] || null, log: receipt.commands.at(-1).log };
-  if (!receipt.initial.emulatorExists || !receipt.initial.adbExists) {
-    throw new Blocked('The hosted SDK lacks its preinstalled emulator or platform-tools adb.');
-  }
-  await requireCommand('emulator-version', emulator, ['-version']);
+  if (!receipt.initial.adbExists) throw new Blocked('The hosted SDK lacks its preinstalled platform-tools adb.');
   await requireCommand('adb-version', adb, ['version']);
+  const packages = [!receipt.initial.emulatorExists && 'emulator', !receipt.initial.targetImageExists && imagePackage].filter(Boolean);
+  receipt.installPolicy.packages = packages;
+  if (packages.length && !receipt.installPolicy.enabled) {
+    throw new Blocked(`Installed-only mode cannot find ${packages.join(', ')}. KVM access was inventoried.`);
+  }
   if (!receipt.initial.kvmExists) throw new Blocked('The hosted Linux runner exposes no /dev/kvm device.');
+  receipt.kvm = { accessibleBefore: receipt.initial.kvmAccessible, accessibleAfter: null, accessMethod: 'preinstalled' };
   if (!receipt.initial.kvmAccessible) {
     const uid = (await requireCommand('runner-uid', 'id', ['-u']));
     if (!/^\d+$/.test(uid) || uid === '0') throw new Error('Unexpected non-numeric or root hosted runner UID.');
+    receipt.kvm.accessMethod = 'runner UID ACL';
     await requireCommand('kvm-runner-access', 'sudo', ['-n', 'setfacl', '-m', `u:${uid}:rw`, '/dev/kvm']);
-    if (!await readable('/dev/kvm', constants.R_OK | constants.W_OK)) {
-      throw new Blocked('The hosted runner user still lacks access to its /dev/kvm device.');
-    }
   }
-  await requireCommand('emulator-acceleration-check', emulator, ['-accel-check']);
+  receipt.kvm.accessibleAfter = await readable('/dev/kvm', constants.R_OK | constants.W_OK);
+  if (!receipt.kvm.accessibleAfter) throw new Blocked('The hosted runner user still lacks access to its /dev/kvm device.');
   const toolRoot = path.join(sdk, 'cmdline-tools');
   const versions = await readdir(toolRoot).catch(() => []);
   let tools;
@@ -157,19 +164,30 @@ async function start() {
   const sdkmanager = path.join(tools, 'sdkmanager');
   const avdmanager = path.join(tools, 'avdmanager');
   await requireCommand('sdkmanager-version', sdkmanager, ['--version']);
-  if (!receipt.initial.targetImageExists) {
-    if (!receipt.installPolicy.allowOfficialImage) throw new Blocked(`Installed-only mode cannot find ${imagePackage}.`);
+  if (packages.length) {
     if (!await readable(path.join(sdk, 'licenses/android-sdk-license'))) {
       throw new Blocked('The preinstalled SDK has no existing Android SDK license.');
     }
     receipt.installPolicy.attempted = true;
-    await requireCommand('install-official-system-image', sdkmanager,
-      [`--sdk_root=${sdk}`, '--channel=0', '--install', imagePackage], { timeout: 540_000 });
+    await requireCommand('install-official-android-packages', sdkmanager,
+      [`--sdk_root=${sdk}`, '--channel=0', '--install', ...packages], { timeout: 540_000 });
   }
+  if (!await readable(emulator, constants.X_OK)) throw new Blocked('The requested SDK emulator package did not provide its executable.');
+  const emulatorPropertiesPath = path.join(sdk, 'emulator', 'source.properties');
+  if (!await readable(emulatorPropertiesPath)) throw new Blocked('The SDK emulator package does not provide source.properties.');
+  const emulatorProperties = await readFile(emulatorPropertiesPath, 'utf8');
+  const emulatorRevision = parseProperties(emulatorProperties)['Pkg.Revision'];
+  if (!emulatorRevision) throw new Blocked('The SDK emulator package does not report its package revision.');
+  await writeFile(path.join(output, 'emulator-source.properties'), emulatorProperties);
+  receipt.emulatorPackage = {
+    package: 'emulator', location: path.relative(sdk, path.dirname(emulator)), revision: emulatorRevision,
+    sourcePropertiesSha256: sha256(emulatorProperties), executable: await describeFile(emulator),
+    version: await requireCommand('emulator-version', emulator, ['-version']),
+  };
+  receipt.kvm.accelerationCheck = await requireCommand('emulator-acceleration-check', emulator, ['-accel-check']);
   if (!await readable(systemImage)) throw new Blocked(`The requested package did not provide ${systemImage}.`);
   const properties = await readFile(path.join(imageDir, 'source.properties'), 'utf8');
-  const metadata = Object.fromEntries(properties.split(/\r?\n/).filter(line => line.includes('='))
-    .map(line => [line.slice(0, line.indexOf('=')), line.slice(line.indexOf('=') + 1)]));
+  const metadata = parseProperties(properties);
   if (metadata['AndroidVersion.ApiLevel'] !== api || metadata['SystemImage.Abi'] !== abi ||
       metadata['SystemImage.TagId'] !== tag || !metadata['Pkg.Revision']) {
     throw new Blocked('The installed system image metadata does not match the requested API, tag, ABI, and revision.');
