@@ -118,7 +118,12 @@ try{
       default:throw Error('Unsupported C007 operation');
     }
     receipt.operationAccepted=true;
-  }catch(error){receipt.operationAccepted=false;receipt.operationError={name:error.name,message:error.message,code:error.code??null,errcode:error.errcode??null,errstr:error.errstr??null};}
+  }catch(error){
+    receipt.operationAccepted=false;
+    receipt.operationError={name:error.name,message:error.message,code:error.code??null,errcode:error.errcode??null,errstr:error.errstr??null};
+    // Observe the actual exception attached by production before any cleanup SQL.
+    if(error.rollbackError){const rollbackError=error.rollbackError;receipt.operationError.rollbackError={name:rollbackError.name,message:rollbackError.message,code:rollbackError.code??null,errcode:rollbackError.errcode??null,errstr:rollbackError.errstr??null};}
+  }
   receipt.ackCommitted=ackCommitted;
   // Copy the original fault result before cleanup/audit can execute more SQL.
   await checkpoint('operation');

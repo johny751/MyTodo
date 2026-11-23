@@ -87,6 +87,22 @@ try{
       if(step.requireSqlError)summary.checks.push({id:prefix+':sqlite-error',passed:scenario.platform==='windows-c'?observed.sqliteCode!==0&&observed.sqliteCode!=null||observed.nativeSqlErrors?.some(e=>e.primaryCode!==0&&e.primaryCode!==27&&e.primaryCode!==28):scenario.platform==='android'?/^android\.database\.sqlite\.SQLite/.test(observed.nativeError?.class||''):observed.operationError?.code==='ERR_SQLITE_ERROR'});
       if(step.requireCommitStage)summary.checks.push({id:prefix+':commit-stage',passed:scenario.platform==='android'?observed.nativeError?.stack?.some(s=>/SQLiteSession\.endTransaction|SQLiteDatabase\.endTransaction/.test(s)):true});
       if(step.requireFaultHit)summary.checks.push({id:prefix+':fault-hit',passed:observed.faultHits>0});
+      if(step.rollbackErrorChain){
+        const primary=observed.operationError,secondary=primary?.rollbackError,expected=step.rollbackErrorChain;
+        summary.checks.push({id:prefix+':rollback-probe-new-rows',passed:scenario.platform==='javascript'&&auditValid(observed.before)&&!observed.before.rows.some(row=>row.key===expected.firstWriteKey||row.key===expected.blockedKey)});
+        summary.checks.push({id:prefix+':original-sql-error-preserved',passed:scenario.platform==='javascript'&&primary?.code==='ERR_SQLITE_ERROR'&&Number.isInteger(primary.errcode)&&(primary.errcode&255)===19&&primary.message===expected.primaryMessage});
+        summary.checks.push({id:prefix+':secondary-rollback-error-observed',passed:scenario.platform==='javascript'&&secondary?.code==='ERR_SQLITE_ERROR'&&Number.isInteger(secondary.errcode)&&(secondary.errcode&255)===1&&secondary.message===expected.rollbackMessage});
+        summary.checks.push({id:prefix+':rollback-probe-schema-preserved',passed:Array.isArray(observed.before?.schema)&&Array.isArray(observed.after?.schema)&&eq(observed.before.schema,observed.after.schema)});
+      }
+      if(step.requireCommitHookPrimary){
+        // SQLITE_CONSTRAINT_COMMITHOOK = SQLITE_CONSTRAINT (19) | (2 << 8).
+        // SQLite logging need not emit the original COMMIT-hook failure.
+        // Accept the same-operation native error pair or one complete log entry.
+        const operationCommitHook=observed.sqliteCode===19&&observed.sqliteExtendedCode===531;
+        const loggedCommitHook=observed.nativeSqlErrors?.some(error=>error.primaryCode===19&&error.extendedCode===531);
+        summary.checks.push({id:prefix+':native-commit-hook-error',passed:scenario.platform==='windows-c'&&observed.fault?.kind==='commit-reject'&&observed.faultHits>0&&observed.operationAccepted===false&&(operationCommitHook||loggedCommitHook)});
+        summary.checks.push({id:prefix+':commit-primary-diagnostic-preserved',passed:scenario.platform==='windows-c'&&observed.operationError==='constraint failed'&&!/rollback|no transaction/i.test(observed.operationError)});
+      }
       if(step.unchanged)summary.checks.push({id:prefix+':atomic',passed:eq(protocolState(observed.before),protocolState(observed.after))});
       if(step.errorIncludes)summary.checks.push({id:prefix+':primary-error-preserved',passed:typeof observed.operationError==='string'&&observed.operationError.includes(step.errorIncludes)});
       if(step.commitDeniedPhase){
@@ -105,6 +121,10 @@ try{
     attempt.postReopenFiles=await rawFiles(path.join(out,prefix+'.post-reopen'),scenario.platform==='android'?auditFile+'.database':dbDir);
     if(scenario.platform==='android')summary.checks.push({id:prefix+':new-native-process',passed:Number.isInteger(reopened.runtime?.processId)&&reopened.runtime.processId!==(attempt.marker?.processId||last?.runtime?.processId)&&reopened.deviceDatabase=== (attempt.marker?.databaseFile||last?.deviceDatabase)});
     if(expected===0)summary.checks.push({id:prefix+':reopen-state',passed:eq(protocolState(last.after),protocolState(reopened.after))});
+    if(step.rollbackErrorChain){
+      summary.checks.push({id:prefix+':rollback-probe-fresh-process',passed:scenario.platform==='javascript'&&Number.isInteger(last.processId)&&last.processId>0&&Number.isInteger(reopened.processId)&&reopened.processId>0&&last.processId!==reopened.processId&&path.resolve(last.dbDir)===dbDir&&path.resolve(reopened.dbDir)===dbDir});
+      summary.checks.push({id:prefix+':rollback-probe-reopened-schema',passed:Array.isArray(last.after?.schema)&&Array.isArray(reopened.before?.schema)&&Array.isArray(reopened.after?.schema)&&eq(last.after.schema,reopened.before.schema)&&eq(reopened.before.schema,reopened.after.schema)});
+    }
     if(expected===86){
       const beforeEvidence=JSON.parse(await fs.readFile(file+'.before.json','utf8')),expectedState=protocolState(beforeEvidence.before);
       if(request.exitAt==='before-commit'&&scenario.platform!=='windows-c'){

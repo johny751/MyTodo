@@ -5,6 +5,14 @@ export function sqlFaultPlan(spec = {}) {
   const kind = spec.kind || 'none', table = spec.table || 'meta';
   if (!identifiers.has(table)) throw Error('C007 fault table is not allowed');
   if (kind === 'none') return {kind,statements:[]};
+  if (kind === 'insert-rollback') {
+    if (table !== 'entities' || typeof spec.id !== 'string' || !spec.id ||
+        typeof spec.priorId !== 'string' || !spec.priorId || spec.priorId === spec.id)
+      throw Error('C007 rollback probe requires two distinct entity ids');
+    // The real first INSERT must exist in this transaction before the second
+    // INSERT reaches RAISE(ROLLBACK). No production error is fabricated here.
+    return {kind,statements:[`CREATE TEMP TRIGGER c007_abort BEFORE INSERT ON main.entities WHEN NEW.id=${literal(spec.id)} BEGIN SELECT CASE WHEN NOT EXISTS(SELECT 1 FROM main.entities WHERE id=${literal(spec.priorId)}) THEN RAISE(ABORT,'C007_FIRST_WRITE_NOT_PRESENT') END; SELECT c007_fault_hit(); SELECT RAISE(ROLLBACK,'C007_SQL_ROLLBACK_ABORT'); END`]};
+  }
   if (['update-abort','insert-abort','delete-abort'].includes(kind)) {
     const verb = kind.split('-')[0].toUpperCase();
     const predicate = spec.id == null ? '' : table === 'entities' && verb !== 'DELETE'

@@ -19,6 +19,16 @@ const scenario={caseId:'c007-real-sql-atomicity',platform,dbCase:'c007-real-sql-
     {id:'read-step-failure',request:{fault:{kind:'read-overflow',table:'outbox'},operation:{op:'outbox'}},accepted:false,requireSqlError:true,unchanged:true,outboxCount:3,pendingRetained:true,pendingBodyFrom:'prepare'},
     {id:'normal-edit',request:{operation:{op:'local',changes:[note('one','normal after failures')]}},accepted:true,outboxCount:4,pendingRetained:true,pendingBodyFrom:'prepare'},
   ]};
+if(platform==='javascript'){
+ const priorId='rollback-first-write',blockedId='rollback-blocked';
+ const position=scenario.steps.findIndex(step=>step.id==='commit-failure');
+ if(position<0)throw Error('C007 rollback probe insertion anchor changed');
+ scenario.steps.splice(position+1,0,{id:'rollback-double-failure',
+  request:{fault:{kind:'insert-rollback',table:'entities',id:blockedId,priorId},operation:{op:'local',changes:[note(priorId,'real prior write must roll back'),note(blockedId,'real RAISE(ROLLBACK) target')]}},
+  accepted:false,requireSqlError:true,requireFaultHit:true,unchanged:true,outboxCount:3,pendingRetained:true,pendingBodyFrom:'prepare',
+  rollbackErrorChain:{primaryMessage:'C007_SQL_ROLLBACK_ABORT',rollbackMessage:'cannot rollback - no transaction is active',firstWriteKey:note(priorId,'').key,blockedKey:note(blockedId,'').key}});
+}
+if(platform==='windows-c')for(const step of scenario.steps)if(step.id==='commit-failure')step.requireCommitHookPrimary=true;
 if(platform==='android')for(const step of scenario.steps){step.requireFaultHit=false;if(step.id==='commit-failure')step.requireCommitStage=true;}
 scenario.steps.push({id:'exit-before-commit',request:{exitAt:'before-commit',fault:{kind:'none'},operation:{op:'local',changes:[note('one','must roll back after termination')]}},expectedExitCode:86,pendingRetained:true,outboxCount:4,pendingBodyFrom:'prepare'});
 if(platform==='windows-c'){

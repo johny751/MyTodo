@@ -27,7 +27,7 @@ for(const plan of plans){
    {id:'prepare',request:{operation:{op:'prepare',manifest}},accepted:true,pendingRetained:true,outboxCount:2},
    {id:'later-event',request:{operation:{op:'local',changes:[note('later','must not be acknowledged')]}},accepted:true,outboxCount:3,pendingRetained:true,pendingBodyFrom:'prepare'},
    {id:'publish-fault',request:{fault:plan.fault||{kind:'none'},exitAt:plan.exitAt,operation:{op:'publish'}},expectedExitCode:exit?86:0,accepted:exit?undefined:false,
-    unchanged:!exit,requireSqlError:!!plan.fault,requireFaultHit:!!plan.fault&&platform!=='android',requireCommitStage:platform==='android'&&plan.id==='ack-commit-failed',pendingRetained:!committed,outboxCount:committed?1:3,pendingBodyFrom:committed?undefined:'prepare',cursor:committed?{actor,value:1}:undefined,
+    unchanged:!exit,requireSqlError:!!plan.fault,requireFaultHit:!!plan.fault&&platform!=='android',requireCommitStage:platform==='android'&&plan.id==='ack-commit-failed',requireCommitHookPrimary:platform==='windows-c'&&plan.id==='ack-commit-failed',pendingRetained:!committed,outboxCount:committed?1:3,pendingBodyFrom:committed?undefined:'prepare',cursor:committed?{actor,value:1}:undefined,
     cloud:{head:plan.head,batchAbsent:plan.absent,batchBodyFrom:plan.absent?undefined:'prepare',faultUsed:plan.network?plan.id:undefined},restartCloudAfter:true},
    {id:'resume-publish',request:{fault:{kind:'none'},operation:{op:committed?'audit':'publish'}},accepted:true,pendingRetained:false,outboxCount:1,cursor:{actor,value:1},cloud:{head:1,batchBodyFrom:'prepare',noDuplicateBatch:true}},
   ]};

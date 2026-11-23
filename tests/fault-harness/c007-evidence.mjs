@@ -54,7 +54,7 @@ if(mode==='start'){
     const outcome={caseId:entry.caseId,status:'failed'};result.cases.push(outcome);
     try{
      const summary=JSON.parse(await fs.readFile(path.join(artifact,'suite',entry.caseId,'summary.json'),'utf8'));
-     const expectedAttempts=entry.caseId==='sql-atomicity'?(platform==='windows-c'?31:10):5;
+     const expectedAttempts=entry.caseId==='sql-atomicity'?(platform==='windows-c'?31:platform==='javascript'?11:10):5;
      Object.assign(outcome,{attempts:summary.attempts?.length,checks:summary.checks?.length,failedChecks:summary.checks?.filter(c=>c.passed!==true)||[],error:summary.error||null});
      const passed=entry.status==='passed'&&entry.exitCode===0&&summary.sourceSha===sourceSha&&summary.platform===platform&&summary.status==='passed'&&summary.exitCode===0&&summary.attempts?.length===expectedAttempts&&summary.checks?.length>0&&summary.checks.every(c=>c.passed===true);
      if(!passed)throw Error('Case receipt is incomplete or failed');
