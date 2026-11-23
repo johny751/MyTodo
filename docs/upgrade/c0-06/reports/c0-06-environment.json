@@ -1,0 +1,397 @@
+{
+  "schema": "mytodo-c006-cloud-environment-report",
+  "version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+  "localExecution": false,
+  "baseline": [
+    {
+      "platform": "web",
+      "receipt": {
+        "path": "outputs/c0-06/evidence/45170150066/artifacts/phase0-web-45170150066-1/run-receipt.json",
+        "bytes": 13839,
+        "sha256": "1104ec1a427c29687998b34aa0ec58615e6dd1769b02a3aae5d5cf9c53dca7a3"
+      },
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "sourceVerified": true,
+      "jobStatus": "success",
+      "runner": {
+        "name": "GitHub Actions 1000000341",
+        "os": "Windows",
+        "arch": "X64",
+        "imageOS": "win25-vs2026",
+        "imageVersion": "20261116.315.1",
+        "toolCache": "C:\\hostedtoolcache\\windows"
+      },
+      "toolPathsAndVersions": {
+        "git": {
+          "path": "C:\\Program Files\\Git\\bin\\git.exe",
+          "version": "2.56.1.windows.1"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "version": "v22.23.5"
+        },
+        "vswhere": {
+          "path": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+          "version": "3.1.7.39155"
+        },
+        "windows-sdk": {
+          "path": "C:/Program Files (x86)/Windows Kits/10",
+          "version": "10.0.26100.0"
+        },
+        "msvc-cl": {
+          "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025\\bin\\Hostx64\\x64\\cl.exe",
+          "version": "14.52.37025"
+        }
+      },
+      "testSummary": {
+        "tests": 121,
+        "fail": 0,
+        "skipped": 0
+      },
+      "artifacts": [
+        {
+          "name": "WebCredentialHelper.exe",
+          "kind": "windows-dpapi-helper",
+          "buildCase": "helper-build",
+          "path": "D:\\a\\_temp\\mytodo-phase0-web\\WebCredentialHelper.exe",
+          "present": true,
+          "producedThisRun": true,
+          "bytes": 149504,
+          "sha256": "4826e8e7370a69692548eabb538a4153f2fcd038fc78b5abd80915fd8f48d178",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "buildStartedAt": "2026-11-23T12:00:44.2202927Z",
+          "buildFinishedAt": "2026-11-23T12:00:50.1937836Z",
+          "validationStatus": "success",
+          "absence": null
+        },
+        {
+          "name": "MyTodo-web-source.zip",
+          "kind": "web-source-zip",
+          "buildCase": "web-package",
+          "path": "D:\\a\\_temp\\mytodo-phase0-web\\MyTodo-web-source.zip",
+          "present": true,
+          "producedThisRun": true,
+          "bytes": 101740,
+          "sha256": "c8d9f2ecd9914c6579bafba6547a20f37f3215dbd34ffb74749a43537d18d73d",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "buildStartedAt": "2026-11-23T12:01:11.7275688Z",
+          "buildFinishedAt": "2026-11-23T12:01:11.8053178Z",
+          "validationStatus": "success",
+          "absence": null
+        }
+      ],
+      "limitations": [
+        "Cloud compile/test baseline only",
+        "No real user databases or credentials",
+        "No real network sync or three-platform interoperability test",
+        "Android APK is unsigned and is not install/upgrade evidence",
+        "Web package excludes Node runtime and DPAPI helper",
+        "APK Git/time/history UI is not implemented by this CI script"
+      ]
+    },
+    {
+      "platform": "windows",
+      "receipt": {
+        "path": "outputs/c0-06/evidence/45170150066/artifacts/phase0-windows-45170150066-1/run-receipt.json",
+        "bytes": 11526,
+        "sha256": "f1861e9b586b1793e39c813b9bb3c3593ded2df671f08e7917117d7b1766e58b"
+      },
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "sourceVerified": true,
+      "jobStatus": "success",
+      "runner": {
+        "name": "GitHub Actions 1000000342",
+        "os": "Windows",
+        "arch": "X64",
+        "imageOS": "win25-vs2026",
+        "imageVersion": "20261116.315.1",
+        "toolCache": "C:\\hostedtoolcache\\windows"
+      },
+      "toolPathsAndVersions": {
+        "windows-sdk": {
+          "path": "C:/Program Files (x86)/Windows Kits/10",
+          "version": "10.0.26100.0"
+        },
+        "git": {
+          "path": "C:\\Program Files\\Git\\bin\\git.exe",
+          "version": "2.56.1.windows.1"
+        },
+        "windows-rc": {
+          "path": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe",
+          "version": "10.0.26100.0"
+        },
+        "vswhere": {
+          "path": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+          "version": "3.1.7.39155"
+        },
+        "msvc-cl": {
+          "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025\\bin\\Hostx64\\x64\\cl.exe",
+          "version": "14.52.37025"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "version": "v22.23.5"
+        }
+      },
+      "testSummary": null,
+      "artifacts": [
+        {
+          "name": "MyTodo-phase0.exe",
+          "kind": "windows-exe",
+          "buildCase": "windows-build",
+          "path": "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+          "present": true,
+          "producedThisRun": true,
+          "bytes": 1326080,
+          "sha256": "6c9f29d8ceeabdb2230a1e5a022901d09087954302b1c3707ed943ab540f9e8f",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "buildStartedAt": "2026-11-23T12:00:39.5795467Z",
+          "buildFinishedAt": "2026-11-23T12:01:08.7713365Z",
+          "validationStatus": "success",
+          "absence": null
+        }
+      ],
+      "limitations": [
+        "Cloud compile/test baseline only",
+        "No real user databases or credentials",
+        "No real network sync or three-platform interoperability test",
+        "Android APK is unsigned and is not install/upgrade evidence",
+        "Web package excludes Node runtime and DPAPI helper",
+        "APK Git/time/history UI is not implemented by this CI script"
+      ]
+    },
+    {
+      "platform": "android",
+      "receipt": {
+        "path": "outputs/c0-06/evidence/45170150066/artifacts/phase0-android-45170150066-1/run-receipt.json",
+        "bytes": 17954,
+        "sha256": "58c4a8d4f490ae5d82c1fe1ff4cccac32936364b1b44e0dabbda5a52062a1bfd"
+      },
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "sourceVerified": true,
+      "jobStatus": "success",
+      "runner": {
+        "name": "GitHub Actions 1000000340",
+        "os": "Windows",
+        "arch": "X64",
+        "imageOS": "win25-vs2026",
+        "imageVersion": "20261116.315.1",
+        "toolCache": "C:\\hostedtoolcache\\windows"
+      },
+      "toolPathsAndVersions": {
+        "git": {
+          "path": "C:\\Program Files\\Git\\bin\\git.exe",
+          "version": "2.56.1.windows.1"
+        },
+        "jdk17-javac": {
+          "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\javac.exe",
+          "version": "javac 17.0.21"
+        },
+        "jdk17-java": {
+          "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+          "version": "openjdk version \"17.0.21\" 2026-10-20\r\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\r\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)"
+        },
+        "aapt2": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt2.exe",
+          "version": "not reported by installed file"
+        },
+        "d8": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\lib\\d8.jar",
+          "version": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go/r8bot (luci-r8-custom-ci-archive-0-77gl))"
+        },
+        "android-api34": {
+          "path": "C:\\Android\\android-sdk\\platforms\\android-34\\android.jar",
+          "version": "API34 installed platform"
+        },
+        "zipalign": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\zipalign.exe",
+          "version": "build-tools directory 35.0.0"
+        },
+        "aapt": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+          "version": "Android Asset Packaging Tool, v0.2-11948202"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "version": "v22.23.5"
+        },
+        "android-build-tools": {
+          "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0",
+          "version": "35.0.0"
+        },
+        "jdk17-jar": {
+          "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\jar.exe",
+          "version": "jar 17.0.21"
+        }
+      },
+      "testSummary": null,
+      "artifacts": [
+        {
+          "name": "MyTodo-unsigned.apk",
+          "kind": "android-unsigned-apk",
+          "buildCase": "android-build",
+          "path": "D:\\a\\_temp\\mytodo-phase0-android\\MyTodo-unsigned.apk",
+          "present": true,
+          "producedThisRun": true,
+          "bytes": 281749,
+          "sha256": "9770106797d1539b84969ee4cccab963a19886e2b54213ce940730145d58978a",
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "buildStartedAt": "2026-11-23T12:00:57.1842034Z",
+          "buildFinishedAt": "2026-11-23T12:01:18.8211468Z",
+          "validationStatus": "success",
+          "absence": null
+        }
+      ],
+      "limitations": [
+        "Cloud compile/test baseline only",
+        "No real user databases or credentials",
+        "No real network sync or three-platform interoperability test",
+        "Android APK is unsigned and is not install/upgrade evidence",
+        "Web package excludes Node runtime and DPAPI helper",
+        "APK Git/time/history UI is not implemented by this CI script"
+      ]
+    }
+  ],
+  "androidCore": {
+    "receipt": {
+      "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-android-environment-45170150079-1/environment.json",
+      "bytes": 23541,
+      "sha256": "19f93c2be1c12f0b968b3b6402c9fcc594281c3c17d27120d21add7929a8851d"
+    },
+    "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+    "runId": "45170150079",
+    "runAttempt": "1",
+    "runner": {
+      "os": "Linux",
+      "arch": "X64",
+      "image": "ubuntu24",
+      "imageVersion": "20261116.376.1",
+      "environment": "github-hosted"
+    },
+    "image": {
+      "package": "system-images;android-34;google_apis;x86_64",
+      "location": "system-images/android-34/google_apis/x86_64",
+      "revision": "14",
+      "sourcePropertiesSha256": "bd7597e0dfa855335194fbafaf63bde93aa86bc3b56cea73cd54635715e77abc",
+      "system": {
+        "file": "system.img",
+        "bytes": 4306501632,
+        "sha256": "156534aa2c707edfb57026f7b573a561e513433d7643d9ce3230ae6d65804c7a"
+      }
+    },
+    "runtime": {
+      "api": "34",
+      "abi": "x86_64",
+      "emulator": "1",
+      "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.050/12077443:userdebug/dev-keys",
+      "webview": "Current WebView Update Service state\n  Multiprocess enabled: true\n  Current WebView package (name, version): (com.google.android.webview, 113.0.5672.136)\n  Minimum targetSdkVersion: 33\n  Minimum WebView version code: 567263637\n  Number of relros started: 1\n  Number of relros finished: 1\n  WebView package dirty: false\n  Any WebView package installed: true\n  Preferred WebView package (name, version): (com.google.android.webview, 113.0.5672.136)\n  WebView packages:\n    Valid package com.google.android.webview (versionName: 113.0.5672.136, versionCode: 567263637, targetSdkVersion: 34) is  installed/enabled for all users\n    com.google.android.webview.beta is NOT installed.\n    com.google.android.webview.dev is NOT installed.\n    com.google.android.webview.canary is NOT installed.\n    com.google.android.webview.debug is NOT installed.\n    com.android.webview is NOT installed.",
+      "webviewPackage": "com.google.android.webview",
+      "webviewVersion": "113.0.5672.136",
+      "sqliteCli": {
+        "exitCode": 0,
+        "version": "3.39.2 2022-07-21 15:24:47 698edb77537b67c41adc68f9b892db56bcf9a55e00371a61420f3ddd668e6603",
+        "role": "Optional device shell probe. Actual framework SQLite version comes from the instrumentation database."
+      }
+    },
+    "serial": "emulator-5554",
+    "actualFrameworkSqliteVersion": "3.39.2",
+    "emulatorNotPhysicalDevice": true
+  },
+  "binaryIdentity": {
+    "run": "45170150066",
+    "source": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+    "artifactMatches": [
+      {
+        "artifact": "phase0-windows-45170150066-1/MyTodo-phase0.exe",
+        "bytes": 1326080,
+        "sha256": "6c9f29d8ceeabdb2230a1e5a022901d09087954302b1c3707ed943ab540f9e8f",
+        "matched": true
+      },
+      {
+        "artifact": "phase0-android-45170150066-1/MyTodo-unsigned.apk",
+        "bytes": 281749,
+        "sha256": "9770106797d1539b84969ee4cccab963a19886e2b54213ce940730145d58978a",
+        "matched": true
+      },
+      {
+        "artifact": "phase0-web-45170150066-1/WebCredentialHelper.exe",
+        "bytes": 149504,
+        "sha256": "4826e8e7370a69692548eabb538a4153f2fcd038fc78b5abd80915fd8f48d178",
+        "matched": true
+      },
+      {
+        "artifact": "phase0-web-45170150066-1/MyTodo-web-source.zip",
+        "bytes": 101740,
+        "sha256": "c8d9f2ecd9914c6579bafba6547a20f37f3215dbd34ffb74749a43537d18d73d",
+        "matched": true
+      }
+    ],
+    "note": "Four named build artifacts match original run receipts. Referenced case logs exist. No recursive producer seal in baseline artifacts; original collector exit1 retained.",
+    "unchangedDependencies": [
+      {
+        "path": "windows/sync.c",
+        "sha256": "edf06c948cce62563b987db873e51a0c8cf0149f73afc0da9afd556b1e22e6cf",
+        "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+      },
+      {
+        "path": "windows/credential-helper.c",
+        "sha256": "c2c22a775d6f14a021b12cadb022a604e219e591ebc46090335c752f9b17ee5a",
+        "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+      },
+      {
+        "path": "src/sync-server.mjs",
+        "sha256": "d46cb1454c69e15f6e82cd5187ab0c55b46f590024f311b5f34f0d1f635365ba",
+        "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+      },
+      {
+        "path": "tests/protocol-harness/android/remote-file-evidence.mjs",
+        "sha256": "41613ce991718a0c1cf03f2f7747d43598e5b0ab3cf081f811e0d3af08a0c350",
+        "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+      },
+      {
+        "path": "tests/protocol-harness/android/run-android.mjs",
+        "sha256": "96d48dc0ee6f81d77da76284b4ee68b5b38c572c230d4ae9512c6b2bceb8cfba",
+        "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+      }
+    ],
+    "sourceDeltaSha256": "c6c9511314ee3b03aa28a708cfef10006b58a1f74ee24eb5b6fc6feb5a80dad5"
+  },
+  "qualifications": [
+    "Cloud build/run identities only; no local runtime execution",
+    "Baseline APK unsigned; harness APK test-only",
+    "Host Android baseline does not run real Android SQLite; runtime evidence comes from separate emulator suites",
+    "Cloud binaries were not opened or executed locally",
+    "Recursive baseline seal absent and original incomplete receipt retained"
+  ],
+  "accepted": true,
+  "status": "accepted-with-documented-evidence-qualifications",
+  "pending": [],
+  "closureNotes": [
+    "Main controller reviewed the completed evidence and accepted C006 with all documented evidence qualifications; C006 is closed.",
+    "Android stability issue remains open; first crashes and new-database retries remain recorded.",
+    "C007 remains a separate acceptance scope; D1 is not approved.",
+    "Original collector exit codes, incomplete flags, excluded credential counts and historical failures are unchanged.",
+    "Only reports were edited in this closure pass; original audits, raw evidence, project status, AGENTS and GROWTH were not changed."
+  ],
+  "deployment": {
+    "repository": "johny751/MyTodo",
+    "reports": "docs/upgrade/c0-06/reports/",
+    "audits": "docs/upgrade/c0-06/audit/",
+    "auditFiles": [
+      "final-core-evidence-review.md",
+      "final-kill-evidence-review.md",
+      "final-matrix-evidence-review.md",
+      "latest-evidence-review.md"
+    ],
+    "localWorkspaceRoot": "C:/Users/adwoo/Documents/Codex/2026-11-23/x20",
+    "localRawEvidenceRoots": [
+      "outputs/c0-06/evidence/",
+      "outputs/android-stability/evidence/"
+    ],
+    "rawEvidenceDirectoryUploaded": false,
+    "pathSemantics": "Existing outputs/... and work/... evidence and provenance paths resolve within the local workspace; repository copies of the four named audits resolve via ../audit/. Original binary artifacts remain attached to GitHub runs."
+  }
+}

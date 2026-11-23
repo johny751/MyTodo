@@ -1,0 +1,59 @@
+{
+  "run": "45170150066",
+  "source": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+  "artifactMatches": [
+    {
+      "artifact": "phase0-windows-45170150066-1/MyTodo-phase0.exe",
+      "bytes": 1326080,
+      "sha256": "6c9f29d8ceeabdb2230a1e5a022901d09087954302b1c3707ed943ab540f9e8f",
+      "matched": true
+    },
+    {
+      "artifact": "phase0-android-45170150066-1/MyTodo-unsigned.apk",
+      "bytes": 281749,
+      "sha256": "9770106797d1539b84969ee4cccab963a19886e2b54213ce940730145d58978a",
+      "matched": true
+    },
+    {
+      "artifact": "phase0-web-45170150066-1/WebCredentialHelper.exe",
+      "bytes": 149504,
+      "sha256": "4826e8e7370a69692548eabb538a4153f2fcd038fc78b5abd80915fd8f48d178",
+      "matched": true
+    },
+    {
+      "artifact": "phase0-web-45170150066-1/MyTodo-web-source.zip",
+      "bytes": 101740,
+      "sha256": "c8d9f2ecd9914c6579bafba6547a20f37f3215dbd34ffb74749a43537d18d73d",
+      "matched": true
+    }
+  ],
+  "note": "Four named build artifacts match original run receipts. Referenced case logs exist. No recursive producer seal in baseline artifacts; original collector exit1 retained.",
+  "unchangedDependencies": [
+    {
+      "path": "windows/sync.c",
+      "sha256": "edf06c948cce62563b987db873e51a0c8cf0149f73afc0da9afd556b1e22e6cf",
+      "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+    },
+    {
+      "path": "windows/credential-helper.c",
+      "sha256": "c2c22a775d6f14a021b12cadb022a604e219e591ebc46090335c752f9b17ee5a",
+      "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+    },
+    {
+      "path": "src/sync-server.mjs",
+      "sha256": "d46cb1454c69e15f6e82cd5187ab0c55b46f590024f311b5f34f0d1f635365ba",
+      "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+    },
+    {
+      "path": "tests/protocol-harness/android/remote-file-evidence.mjs",
+      "sha256": "41613ce991718a0c1cf03f2f7747d43598e5b0ab3cf081f811e0d3af08a0c350",
+      "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+    },
+    {
+      "path": "tests/protocol-harness/android/run-android.mjs",
+      "sha256": "96d48dc0ee6f81d77da76284b4ee68b5b38c572c230d4ae9512c6b2bceb8cfba",
+      "unchangedSince": "32e21eb69764dfa99227439b7727f0553205e5ca"
+    }
+  ],
+  "sourceDeltaSha256": "c6c9511314ee3b03aa28a708cfef10006b58a1f74ee24eb5b6fc6feb5a80dad5"
+}

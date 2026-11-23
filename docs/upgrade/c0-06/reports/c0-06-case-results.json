@@ -1,0 +1,1569 @@
+{
+  "schema": "mytodo-c006-final-source-case-results",
+  "version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+  "localProjectTestsExecuted": false,
+  "countSemantics": "Five independently named suites on the same final source: core83, Android internal-kill2, bootstrap4. Their89 scenario rows exclude baseline, protocol-matrix, DPAPI and observer tests. Final assertion success does not imply every invocation first-attempt success.",
+  "groups": [
+    {
+      "group": "core-javascript",
+      "platform": "javascript",
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "runId": "45170150079",
+      "runAttempt": "1",
+      "suiteSummary": {
+        "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-js-45170150079-1/summary.json",
+        "bytes": 5942,
+        "sha256": "e0c6c006029622553930a8986a65b34e873f9722b673bf7b01150999bb6a18a9"
+      },
+      "executed": 59,
+      "passed": 59,
+      "failed": 0,
+      "cases": [
+        {
+          "id": "C006-01-empty",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-02-legacy",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-03-backup-before",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-04-backup-after",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-05-fence-before",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-06-fence-after",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-27-manifest-before",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-28-manifest-after",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-07-reread-v1",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-08-reread-missing",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: A stale failed-attempt backup leaked into a later empty fence\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:126:21\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:123:3",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-09-appearing-v1",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-10-appearing-guard",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-11-appearing-empty",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-13-etag-missing",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-13-etag-weak",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-12-eight-conflicts",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-16-backup-404",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-16-backup-500",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-17-truncated",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-17-crc",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-17-json",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-17-format",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-absent",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit production rejection\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at rejected (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:62:25)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:147:32\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:146:345",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-empty",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit production rejection\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at rejected (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:62:25)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:147:32\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:146:345",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-number",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-array",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-object",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-traversal",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-url",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-query",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-fragment",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-directory",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-long",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-18-capacity",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-21-format",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-21-string-version",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-21-version",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-21-trailing",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-21-nul",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit production rejection\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at rejected (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:62:25)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:154:35\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:153:366",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-22-winner-valid",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-23-winner-missing",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-23-winner-malformed",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-23-winner-weak",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-24-kill-after-backup",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-25-kill-after-fence",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-26-kill-after-import",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-29-kill-after-manifest",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-30-fresh-takeover",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Independent observer is missing legacy records\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at observe (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:74:3)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:179:18\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:177:3",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-31-kill-after-batch",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-34-delete-with-base",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-35-delete-without-base",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Legacy recovery resurrected a local tombstone\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:189:2\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:186:99",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-32-two-migrators",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-33-three-way-base",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-36-edit-during-retry",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Migration retry resurrected deletion made during interruption\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:206:31\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:204:1",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-37-conflict-retry",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-38-v2-delete-after-migration",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-39-import-marker-atomic",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit production rejection\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at rejected (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:62:25)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:219:111\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:218:1",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-40-import-marker-repeat",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Successful import did not durably record actual backup digest\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:226:58\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:225:1",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-41-import-backup-tamper",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Import marker did not bind the selected backup\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:26:54)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:235:2\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:95:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/runner.mjs:233:1",
+            "qualification": null
+          }
+        }
+      ]
+    },
+    {
+      "group": "core-windows-native",
+      "platform": "windows-native",
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "runId": "45170150079",
+      "runAttempt": "1",
+      "suiteSummary": {
+        "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-native-45170150079-1/cases/summary.json",
+        "bytes": 2846,
+        "sha256": "a7c059317d557889a4efb936b77639f162af65525e852a0b494f8605c47313eb"
+      },
+      "executed": 18,
+      "passed": 18,
+      "failed": 0,
+      "cases": [
+        {
+          "id": "C006-01-empty",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-09-appearing-v1",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:213:42\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:212:4",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-10-appearing-guard",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:213:42\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:212:4",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-11-appearing-empty",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Native migration did not reread state.json after 412\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at assertRereadAfter412 (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:185:2)\n    at file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:218:96\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:217:1",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-14-existing-guard",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:223:97\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:222:115",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-15-existing-v1",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-absent",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-empty",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-number",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-array",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-object",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-traversal",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-url",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-query",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-fragment",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-directory",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-19-20-long",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Native nonempty legacy/v1 cases may pass through required safe rejection; no native v1 importer is claimed.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit native production rejection\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at rejected (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:104:28)\n    at refuseSafely (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:169:17)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:230:98\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:229:2",
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-30-js-killed-native-snapshot",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Kills JavaScript producer, then native takes over. Does not claim native process forced-termination recovery.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Native observer is missing restored legacy records\n    at must (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:17:61)\n    at assertLegacy (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:80:2)\n    at file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:248:54\n    at async test (file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:193:43)\n    at async file:///D:/a/MyTodo/MyTodo/tests/c006/windows/native-runner.mjs:235:1",
+            "qualification": null
+          }
+        }
+      ]
+    },
+    {
+      "group": "core-android",
+      "platform": "android",
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "runId": "45170150079",
+      "runAttempt": "1",
+      "suiteSummary": {
+        "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-android-45170150079-1/cases/summary.json",
+        "bytes": 863,
+        "sha256": "b1ae80dcde25f0acc052015bf9e33a5e9ada222bfa9797e322f9ce9ad1b559b1"
+      },
+      "executed": 6,
+      "passed": 6,
+      "failed": 0,
+      "cases": [
+        {
+          "id": "C006-A02-legacy",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-A06-fence-drop",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-A27-manifest-fail",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": "Final operation accepted as expected; observer restart attempt1 crashed, same dbCase later passed. Original diagnostic scene preserved after force-stop, not crash-time transaction state.",
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-A28-manifest-drop",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": null
+          }
+        },
+        {
+          "id": "C006-A19-missing-backup",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Real Android execution failed/crashed/timed out\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:20:46)\n    at operation (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:34:2)\n    at async sync (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:47:46)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:53:152\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:43:37)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:53:1",
+            "qualification": "Actual output-2: expectedAccepted=false, operationAccepted=true, uploaded=1. Restart comparison and actual SQLite export match/integrity passed. Generic suite error does not establish a crash."
+          }
+        },
+        {
+          "id": "C006-A35-tombstone",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150079",
+          "runAttempt": "1",
+          "qualification": null,
+          "historicalBaseline": {
+            "runId": "45164223526",
+            "sourceSha": "1fd53ce311e8c1566e11fdb653c6c8e5b1466948",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Android migration resurrected a tombstone\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:20:46)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:55:163\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:43:37)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:54:1",
+            "qualification": null
+          }
+        }
+      ]
+    },
+    {
+      "group": "android-internal-kill",
+      "platform": "android",
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "runId": "45170150057",
+      "runAttempt": "1",
+      "suiteSummary": {
+        "path": "outputs/c0-06/evidence/45170150057/artifacts/c006-android-kill-45170150057-1/cases/summary.json",
+        "bytes": 702,
+        "sha256": "a989b3a928ea58d7b2661bdf58935cc41e2b86f2a15ceccb915ded1cbdc912b7"
+      },
+      "executed": 2,
+      "passed": 2,
+      "failed": 0,
+      "cases": [
+        {
+          "id": "C006-A26-import-kill",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150057",
+          "runAttempt": "1",
+          "qualification": "Actual internal process death; original database reopened/resumed after natural lease wait, original actor/rows/outbox checked.",
+          "historicalBaseline": {
+            "runId": "45164373911",
+            "sourceSha": "a7e309e5059b4027c4dcf302d0e718d942bb233e",
+            "reportedStatus": "passed",
+            "reportedError": null,
+            "qualification": "Original suite reported passed. The old export lacked remote before/after size/hash and full sidecar verification. Do not upgrade this to complete scene preservation."
+          }
+        },
+        {
+          "id": "C006-A30-manifest-kill",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150057",
+          "runAttempt": "1",
+          "qualification": "Actual death after manifest; original database isolated; fresh database restores retained records from snapshot only.",
+          "historicalBaseline": {
+            "runId": "45164373911",
+            "sourceSha": "a7e309e5059b4027c4dcf302d0e718d942bb233e",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Legacy note is missing or changed\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/android-kill/android-kill-runner.mjs:21:46)\n    at assertLegacy (file:///home/runner/work/MyTodo/MyTodo/tests/c006/android-kill/android-kill-runner.mjs:122:2)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/android-kill/android-kill-runner.mjs:193:3\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/android-kill/android-kill-runner.mjs:150:91)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/android-kill/android-kill-runner.mjs:185:2",
+            "qualification": "Original suite failed: legacy note missing or changed. Later collector repair cannot change the original result."
+          }
+        }
+      ]
+    },
+    {
+      "group": "bootstrap",
+      "platform": "javascript",
+      "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "runId": "45170150092",
+      "runAttempt": "1",
+      "suiteSummary": {
+        "path": "outputs/c0-06/evidence/45170150092/artifacts/c006-bootstrap-45170150092-1/summary.json",
+        "bytes": 760,
+        "sha256": "2f71588e42487941174b7f87b3187af1df2531466b5b8dc39bf4f57c743ca081"
+      },
+      "executed": 4,
+      "passed": 4,
+      "failed": 0,
+      "cases": [
+        {
+          "id": "C006-B42-snapshot-before",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150092",
+          "runAttempt": "1",
+          "qualification": "Actual injected fault seen2/used1, initial rejection, retry and fresh observer pass.",
+          "historicalBaseline": {
+            "runId": "45166586294",
+            "sourceSha": "40b0d84c07d6489583ff44e15f94cb2b2c2e6262",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit production rejection\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:20:54)\n    at rejected (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:63:25)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:102:35\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:93:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:101:3",
+            "qualification": "Executed failed row; no snapshot request and fault seen=0/used=0. Intended write-failure boundary was not hit."
+          }
+        },
+        {
+          "id": "C006-B43-snapshot-disconnect",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150092",
+          "runAttempt": "1",
+          "qualification": "Actual injected fault seen2/used1, initial rejection, retry and fresh observer pass.",
+          "historicalBaseline": {
+            "runId": "45166586294",
+            "sourceSha": "40b0d84c07d6489583ff44e15f94cb2b2c2e6262",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Expected explicit production rejection\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:20:54)\n    at rejected (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:63:25)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:102:35\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:93:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:101:3",
+            "qualification": "Executed failed row; no snapshot request and fault seen=0/used=0. Intended persisted-response-loss boundary was not hit."
+          }
+        },
+        {
+          "id": "C006-B44-kill-after-snapshot",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150092",
+          "runAttempt": "1",
+          "qualification": "Snapshot PUT returned201; real SIGKILL PID2249; later audit/retry/observer pass.",
+          "historicalBaseline": {
+            "runId": "45166586294",
+            "sourceSha": "40b0d84c07d6489583ff44e15f94cb2b2c2e6262",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Actual SIGKILL at selected gate was not evidenced\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:20:54)\n    at runWorker (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:56:16)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:121:35\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:93:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:120:1",
+            "qualification": "Executed failed row; gate=null and killed=false. Does not evidence an actual kill at the selected boundary."
+          }
+        },
+        {
+          "id": "C006-B45-real-edit-cas",
+          "status": "passed",
+          "error": null,
+          "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+          "runId": "45170150092",
+          "runAttempt": "1",
+          "qualification": "Independent editor PID2377 changes real database; sync PID2365 has actual CAS outcome.ok=false then recomputes and passes.",
+          "historicalBaseline": {
+            "runId": "45166586294",
+            "sourceSha": "40b0d84c07d6489583ff44e15f94cb2b2c2e6262",
+            "reportedStatus": "failed",
+            "reportedError": "Error: Stale import changes resurrected the concurrent tombstone\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:20:54)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:155:2\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:93:6)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/bootstrap/runner.mjs:143:1",
+            "qualification": "Real second-process edit occurred. The stale import resurrected its concurrent tombstone."
+          }
+        }
+      ]
+    }
+  ],
+  "scenarioRows": 89,
+  "passedScenarioRows": 89,
+  "history": {
+    "firstCore": {
+      "runId": "45161953954",
+      "sourceSha": "bdfa69a6f97942f4bc4e3effe5cd224392b78412",
+      "reportedExecuted": 83,
+      "reportedPassed": 51,
+      "reportedFailed": 32,
+      "android": {
+        "reportedExecuted": 6,
+        "reportedPassed": 0,
+        "reportedFailed": 6,
+        "qualification": "Export-audit shape contract mismatch prevented business assertions; retained as historical failure, superseded only for current coverage by the separate red rerun."
+      }
+    },
+    "initialCandidateSourceSha": "32e21eb69764dfa99227439b7727f0553205e5ca",
+    "frozenDraft": "work/c006-reports-draft/c0-06-case-results.json",
+    "previousDraftStatus": "draft-regression-open-final-source-pending",
+    "previousDraftUnchanged": true
+  },
+  "accepted": true,
+  "status": "accepted-with-documented-evidence-qualifications",
+  "pending": [],
+  "closureNotes": [
+    "Main controller reviewed the completed evidence and accepted C006 with all documented evidence qualifications; C006 is closed.",
+    "Android stability issue remains open; first crashes and new-database retries remain recorded.",
+    "C007 remains a separate acceptance scope; D1 is not approved.",
+    "Original collector exit codes, incomplete flags, excluded credential counts and historical failures are unchanged.",
+    "Only reports were edited in this closure pass; original audits, raw evidence, project status, AGENTS and GROWTH were not changed."
+  ],
+  "deployment": {
+    "repository": "johny751/MyTodo",
+    "reports": "docs/upgrade/c0-06/reports/",
+    "audits": "docs/upgrade/c0-06/audit/",
+    "auditFiles": [
+      "final-core-evidence-review.md",
+      "final-kill-evidence-review.md",
+      "final-matrix-evidence-review.md",
+      "latest-evidence-review.md"
+    ],
+    "localWorkspaceRoot": "C:/Users/adwoo/Documents/Codex/2026-11-23/x20",
+    "localRawEvidenceRoots": [
+      "outputs/c0-06/evidence/",
+      "outputs/android-stability/evidence/"
+    ],
+    "rawEvidenceDirectoryUploaded": false,
+    "pathSemantics": "Existing outputs/... and work/... evidence and provenance paths resolve within the local workspace; repository copies of the four named audits resolve via ../audit/. Original binary artifacts remain attached to GitHub runs."
+  }
+}

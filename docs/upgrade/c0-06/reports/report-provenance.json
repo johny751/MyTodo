@@ -1,0 +1,227 @@
+{
+  "schema": "mytodo-c006-final-report-provenance",
+  "version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "sourceSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+  "status": "accepted-with-documented-evidence-qualifications",
+  "localProjectExecution": false,
+  "originalDraftsUnmodified": true,
+  "originalEvidenceUnmodified": true,
+  "inputFiles": [
+    {
+      "path": "work/c006-reports-draft/c0-06-case-results.json",
+      "bytes": 48562,
+      "sha256": "d9b84748d8c6ad1aa4374a6d7a07ce85045e5476747f92be846e251ee9bd87f7"
+    },
+    {
+      "path": "work/c006-reports-draft/c0-06-case-results.md",
+      "bytes": 12001,
+      "sha256": "a1e1b0010545186cfa64470ba8dc59fb65484b4661339fc2c4885ecb8ecd186c"
+    },
+    {
+      "path": "work/c006-reports-draft/c0-06-compatibility.md",
+      "bytes": 3907,
+      "sha256": "6a79542df66d9bc3cdd8441152d4f076c7c719736ed281041fca067911063c7b"
+    },
+    {
+      "path": "work/c006-reports-draft/c0-06-report.md",
+      "bytes": 10090,
+      "sha256": "3812878959d9048b8e1e278990a08ac2c2ec82c10c15df3543870df7530d1770"
+    },
+    {
+      "path": "work/c006-reports-draft/c0-06-verification.json",
+      "bytes": 7318,
+      "sha256": "793476b476d6622bad23d8ea2c0808b3470f32944b7675cc2a57ebe0d2573fcb"
+    },
+    {
+      "path": "work/c006-reports-draft/draft-provenance.json",
+      "bytes": 10444,
+      "sha256": "19352aa786101ea87f26be734c3bd1f356874602ce5ff27343e2b597641f61f4"
+    },
+    {
+      "path": "work/c006-reports-draft/growth-entry.md",
+      "bytes": 1111,
+      "sha256": "004285722a81582ad726988040e0b36e351dbfc3043ecdd16765c22c158bf87b"
+    },
+    {
+      "path": "work/c006-reports-draft/README.md",
+      "bytes": 2269,
+      "sha256": "f494ebdaa4cdbc90393631e0f4c2fdc7088fef9c0f294c075a5e2204cf9ec0b7"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-report-45170150079-1/acceptance.json",
+      "bytes": 13737,
+      "sha256": "c7082189b9212f282c20e49ce1f27ed468caafe14147e04165863c462a02b448"
+    },
+    {
+      "path": "outputs/c0-06/final-core-evidence-review.md",
+      "bytes": 10548,
+      "sha256": "b07693a1e8d4df08190534a875f200cece5d7e72a272963179a14c9843e9de3f"
+    },
+    {
+      "path": "outputs/c0-06/final-kill-evidence-review.md",
+      "bytes": 7506,
+      "sha256": "13bb10bd18ed768e754a7a8eeafffb46872f4d4792e9a93de1325c196da35871"
+    },
+    {
+      "path": "outputs/c0-06/final-matrix-evidence-review.md",
+      "bytes": 11473,
+      "sha256": "7ec177b62d48d6312c51425193a75b830989549e74393490c2dcf254e3538ba4"
+    },
+    {
+      "path": "outputs/c0-06/latest-evidence-review.md",
+      "bytes": 10002,
+      "sha256": "695667c714d7200978cf7fe16cfa585032b9731d637e6182ed909668ba173dd9"
+    },
+    {
+      "path": "outputs/c0-06/kill-evidence-review.md",
+      "bytes": 9326,
+      "sha256": "adb7c90bc6ce2f15c0a55dcf1d93b9b7b43dd4c0cd0eeccc09c2cffd07d16e9f"
+    },
+    {
+      "path": "outputs/c0-06/evidence/c006-baseline-qualified.json",
+      "bytes": 2332,
+      "sha256": "a994a259a2551ebc0a1481b02e86ffc4585e51043dd3e31d75cbdaadfb0373c7"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-js-45170150079-1/summary.json",
+      "bytes": 5942,
+      "sha256": "e0c6c006029622553930a8986a65b34e873f9722b673bf7b01150999bb6a18a9"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-native-45170150079-1/cases/summary.json",
+      "bytes": 2846,
+      "sha256": "a7c059317d557889a4efb936b77639f162af65525e852a0b494f8605c47313eb"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150079/artifacts/c006-android-45170150079-1/cases/summary.json",
+      "bytes": 863,
+      "sha256": "b1ae80dcde25f0acc052015bf9e33a5e9ada222bfa9797e322f9ce9ad1b559b1"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150057/artifacts/c006-android-kill-45170150057-1/cases/summary.json",
+      "bytes": 702,
+      "sha256": "a989b3a928ea58d7b2661bdf58935cc41e2b86f2a15ceccb915ded1cbdc912b7"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150092/artifacts/c006-bootstrap-45170150092-1/summary.json",
+      "bytes": 760,
+      "sha256": "2f71588e42487941174b7f87b3187af1df2531466b5b8dc39bf4f57c743ca081"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150079/collection-summary.json",
+      "bytes": 5779,
+      "sha256": "213cc4700ab7190250ed5e4e07d9e6a4430960bc36ed893abc5daa038ae052cb"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150057/collection-summary.json",
+      "bytes": 1179,
+      "sha256": "30b60cd9c7aadb384f63ae389c44f9ee558388c5c38c5c26cccbbc8c2360f206"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150092/collection-summary.json",
+      "bytes": 1017,
+      "sha256": "9ba009ce8ca4055e72b2142d8f6e5e39cf1c951fbe9ee7d8e2d43388b7abeb74"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150066/collection-summary.json",
+      "bytes": 2112,
+      "sha256": "6398e502da18c9fdacece671396e73f3a3b0c5214d1c2776b9104baad765a566"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45168648612/collection-summary.json",
+      "bytes": 1024,
+      "sha256": "58f198741149a7a91e1bfb266a1be2de8ecd57256b0bbad80e2b21ba049d0e34"
+    },
+    {
+      "path": "outputs/android-stability/evidence/45169951082/collection-summary.json",
+      "bytes": 1193,
+      "sha256": "b50b4a7971a6df2e861f8e1a2f52aa5bfcb3a970a77723faa54b763d933953e9"
+    },
+    {
+      "path": "outputs/c0-06/evidence/45170150060/collection-summary.json",
+      "bytes": 3620,
+      "sha256": "a92684764b4ec5b598f2a138f7dc57cbe2d3fca198a138b7e3e194f220aa79e7"
+    }
+  ],
+  "outputFiles": [
+    {
+      "path": "outputs/c0-06/reports/c0-06-case-results.json",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-case-results.json",
+      "bytes": 74638,
+      "sha256": "f3e921cc6ce626222696a6ca3fff18c05e37398c44886bf34c2b41fd8650a5af"
+    },
+    {
+      "path": "outputs/c0-06/reports/c0-06-case-results.md",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-case-results.md",
+      "bytes": 10110,
+      "sha256": "7546e9c39f5980309061a6ac6dd787f518d70e659f76f1c6a03da6028bd9e4ea"
+    },
+    {
+      "path": "outputs/c0-06/reports/c0-06-compatibility.md",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-compatibility.md",
+      "bytes": 3707,
+      "sha256": "884b5362ec9aa01032dfa050acbf4d24f9955a7673cdb3f44a448aa4dfc6744e"
+    },
+    {
+      "path": "outputs/c0-06/reports/c0-06-environment.json",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-environment.json",
+      "bytes": 16981,
+      "sha256": "bdfa08765624eda6ecdb2c29a9c0375ac21e0f3323788cf884a617afa309c113"
+    },
+    {
+      "path": "outputs/c0-06/reports/c0-06-environment.md",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-environment.md",
+      "bytes": 2788,
+      "sha256": "b3fe663b3de72ea3b9e61e219d8ffc5de802107c2ee4fc472fbc841f1590edea"
+    },
+    {
+      "path": "outputs/c0-06/reports/c0-06-report.md",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-report.md",
+      "bytes": 12156,
+      "sha256": "9fa651824b1ad74e58eca0e24a75d552e9b8f3a40576a13df61f8fbe1b57203c"
+    },
+    {
+      "path": "outputs/c0-06/reports/c0-06-verification.json",
+      "repositoryPath": "docs/upgrade/c0-06/reports/c0-06-verification.json",
+      "bytes": 20895,
+      "sha256": "120f05b70adfbab0347d2fd046da5b0cb133e76519e7125b788f8ab3f29ebeab"
+    },
+    {
+      "path": "outputs/c0-06/reports/README.md",
+      "repositoryPath": "docs/upgrade/c0-06/reports/README.md",
+      "bytes": 3029,
+      "sha256": "b1636e9932682f5fff063ecf5f68f56e368a9f5aca64c5dddd693532c2aa12a0"
+    }
+  ],
+  "selfHashIncluded": false,
+  "pending": [],
+  "accepted": true,
+  "closureNotes": [
+    "Main controller reviewed the completed evidence and accepted C006 with all documented evidence qualifications; C006 is closed.",
+    "Android stability issue remains open; first crashes and new-database retries remain recorded.",
+    "C007 remains a separate acceptance scope; D1 is not approved.",
+    "Original collector exit codes, incomplete flags, excluded credential counts and historical failures are unchanged.",
+    "Only reports were edited in this closure pass; original audits, raw evidence, project status, AGENTS and GROWTH were not changed.",
+    "Transfer-only normalization: the nine report files were normalized to UTF-8 without BOM, LF line endings and exactly one final LF. Pre-normalization bytes are preserved at work/c006-report-history/pre-lf/. Acceptance facts and evidence inputs are unchanged; only the eight output byte lengths/SHA256 entries and this provenance note were refreshed."
+  ],
+  "deployment": {
+    "repository": "johny751/MyTodo",
+    "reports": "docs/upgrade/c0-06/reports/",
+    "audits": "docs/upgrade/c0-06/audit/",
+    "auditFiles": [
+      "final-core-evidence-review.md",
+      "final-kill-evidence-review.md",
+      "final-matrix-evidence-review.md",
+      "latest-evidence-review.md"
+    ],
+    "localWorkspaceRoot": "C:/Users/adwoo/Documents/Codex/2026-11-23/x20",
+    "localRawEvidenceRoots": [
+      "outputs/c0-06/evidence/",
+      "outputs/android-stability/evidence/"
+    ],
+    "rawEvidenceDirectoryUploaded": false,
+    "pathSemantics": "Existing outputs/... and work/... evidence and provenance paths resolve within the local workspace; repository copies of the four named audits resolve via ../audit/. Original binary artifacts remain attached to GitHub runs."
+  }
+}
