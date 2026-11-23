@@ -4780,6 +4780,360 @@
           "op": "export"
         }
       ]
+    },
+    {
+      "id": "id-ascii-800",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-ascii-801",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-cjk-266",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-cjk-267",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-emoji-200",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
+    },
+    {
+      "id": "id-emoji-201",
+      "category": "encoding",
+      "contractSources": [
+        "docs/sync-v2.md",
+        "src/replica.mjs",
+        "src/delta-sync.mjs"
+      ],
+      "expectationMode": "observation",
+      "generate": [
+        {
+          "op": "local",
+          "changes": [
+            {
+              "key": "[\"notes\",\"probe\"]",
+              "values": {
+                "body": "generated on production storage",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "_deleted": false
+              }
+            }
+          ],
+          "expect": "accept"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ],
+      "receive": [
+        {
+          "op": "remote",
+          "events": [
+            {
+              "key": "[\"notes\",\"😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀\"]",
+              "actor": "A",
+              "seq": 1,
+              "clock": 1,
+              "context": {},
+              "values": {
+                "body": "A",
+                "_deleted": false
+              }
+            }
+          ],
+          "device": "wire-A",
+          "index": 1,
+          "expect": "observe"
+        },
+        {
+          "op": "reopen"
+        },
+        {
+          "op": "export"
+        }
+      ]
     }
   ]
 }
