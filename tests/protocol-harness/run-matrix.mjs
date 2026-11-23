@@ -132,7 +132,9 @@ finally {
  const count=rows=>Object.fromEntries(['passed','failed','blocked','skipped','static-reviewed'].map(status=>[status,rows.filter(row=>row.status===status).length]));
  summary.executionCounts=count(summary.executions);summary.comparisonCounts=count(summary.comparisons);
  await fs.writeFile(path.join(output,'summary.json'),JSON.stringify(summary,null,2));
- const payload=[];async function collect(directory){for(const entry of await fs.readdir(directory,{withFileTypes:true})){const full=path.join(directory,entry.name);if(entry.isDirectory())await collect(full);else {const bytes=await fs.readFile(full);payload.push({path:path.relative(output,full).replaceAll('\\','/'),bytes:bytes.length,sha256:hash(bytes)});}}}
+ // The wrapper hashes its redirected stdout after this process exits. Hashing
+ // that still-open stream here would produce an obsolete digest.
+ const payload=[];async function collect(directory){for(const entry of await fs.readdir(directory,{withFileTypes:true})){const full=path.join(directory,entry.name);if(entry.isDirectory())await collect(full);else {const relativeFile=path.relative(output,full).replaceAll('\\','/');if(relativeFile==='matrix.stdout-stderr.log')continue;const bytes=await fs.readFile(full);payload.push({path:relativeFile,bytes:bytes.length,sha256:hash(bytes)});}}}
  await collect(output);await fs.writeFile(path.join(output,'payload-sha256.json'),JSON.stringify(payload,null,2));
  console.log(JSON.stringify({status:summary.status,sourceSha:summary.sourceSha,executionCounts:summary.executionCounts,comparisonCounts:summary.comparisonCounts,exitCode:summary.exitCode,output}));process.exitCode=summary.exitCode;
 }

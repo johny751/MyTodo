@@ -54,7 +54,8 @@
             "name": "c003-protocol-${{ github.run_id }}-${{ github.run_attempt }}",
             "path": "${{ runner.temp }}/c003-matrix/",
             "if-no-files-found": "error",
-            "retention-days": 14
+            "retention-days": 14,
+            "include-hidden-files": true
           }
         }
       ]
@@ -117,7 +118,8 @@
             "name": "c003-smoke-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}",
             "path": "${{ runner.temp }}/c003-smoke-${{ matrix.platform }}/",
             "if-no-files-found": "error",
-            "retention-days": 14
+            "retention-days": 14,
+            "include-hidden-files": true
           }
         }
       ]
