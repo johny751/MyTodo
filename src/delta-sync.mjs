@@ -56,23 +56,148 @@ const requireStatus=(r,allowed)=>{if(!allowed.includes(r.status))throw Error(syn
 async function immutable(request,path,body){
  const put=await request({method:'PUT',path,body,etag:null});if(put.status===412){const read=await request({method:'GET',path});if(read.status!==200||read.body!==body)throw Error('同名同步批次内容不同，已停止以避免覆盖；请勿在设备间复制活动数据库');}else requireStatus(put,[200,201,204]);
 }
-async function ensureManifest(call,request,legacyBase){
- let read=await request({method:'GET',path:'v2/manifest.json'});if(![404,409].includes(read.status))return {value:manifestValue(read),etag:read.etag};
- // Jianguoyun returns 409 when an ancestor collection does not exist.
+// C006 candidate. Uses the existing v2 snapshot and event wire formats.
+function migrationGuard(value) {
+ if(!isProtocolObject(value)||value.format!=='gxtodo-sync'||value.version!==2||
+    !Object.hasOwn(value,'backup')||
+    !(value.backup===null||(typeof value.backup==='string'&&value.backup.length<160&&
+      /^v2\/legacy-[a-zA-Z0-9_-]+\.json\.gz$/.test(value.backup))))
+  throw Error('旧版迁移标记格式错误，未覆盖云端文件');
+ return value;
+}
+
+// Unlike action:state, page includes durable tombstones and retained field events.
+async function migrationRows(call) {
+ for(let attempt=0;attempt<8;attempt++) {
+  const {meta}=await call({action:'inspect',keys:[]});
+  const rows=[];let after='',changed=false;
+  while(true) {
+   const page=await call({action:'page',after,limit:100});
+   if(page.meta.revision!==meta.revision){changed=true;break;}
+   rows.push(...page.rows);
+   if(page.rows.length<100)break;
+   after=page.rows.at(-1).key;
+  }
+  if(!changed&&(await call({action:'inspect',keys:[]})).meta.revision===meta.revision)
+   return {meta,rows};
+ }
+ throw Error('迁移期间本地数据正在变化，请稍后重试');
+}
+
+async function importLegacyOnce(call,scope,backup,body,legacyBase) {
+ // Parse the same wire restrictions used by the v2 protocol before v1 decoding.
+ parseWire(body);
+ const remote=decodeRemote(body),digest=await sha(body);
+ const retry=Symbol('legacy-import-revision-changed');
+ for(let attempt=0;attempt<8;attempt++) {
+  const snapshot=await migrationRows(call),prior=snapshot.meta.legacyMigration;
+  if(isProtocolObject(prior)&&prior.scope===scope&&prior.backup===backup) {
+   if(prior.sha256!==digest)throw Error('旧版不可变备份内容已改变，已停止迁移');
+   return;
+  }
+  const state=buildState(snapshot.rows,snapshot.meta.settings);
+  const merged=mergeStates(legacyBase||emptyState(),state,remote).state;
+  const deleted=new Set(snapshot.rows.filter(row=>row.deleted).map(row=>row.key));
+  // Explicit durable deletion wins over the old, full-file backup.
+  const changes=diffState(state,merged).changes.filter(change=>!deleted.has(change.key));
+  const marker={scope,backup,sha256:digest};
+  const guardedCall=async input=>{
+   if(input.action==='inspect') {
+    const value=await call(input);
+    if(value.meta.revision!==snapshot.meta.revision)throw retry;
+    return value;
+   }
+   if(input.action==='commit') {
+    if(input.expected!==snapshot.meta.revision)throw retry;
+    // Metadata and import events share this actual production SQLite commit.
+    const saved=await call({...input,meta:{...input.meta,legacyMigration:marker}});
+    if(!saved.ok)throw retry;
+    return saved;
+   }
+   return call(input);
+  };
+  try {
+   // Empty changes still commit the marker through editReplica.
+   await editReplica(guardedCall,changes,merged.settings);
+   return;
+  } catch(error) {if(error!==retry)throw error;}
+ }
+ throw Error('迁移保存期间本地数据正在变化，请稍后重试');
+}
+
+async function initialMigrationSnapshot(call,request,epoch) {
+ for(let attempt=0;attempt<8;attempt++) {
+  const start=await migrationRows(call),id=uuid(),parts=[];
+  let records=[],size=0;
+  const flush=async()=>{
+   if(!records.length)return;
+   const body=JSON.stringify({id,epoch,records});
+   // Match the native expanded-file ceiling; never publish an unreadable part.
+   if(bytes(body)>8*1024*1024)throw Error('迁移快照条目过大，原数据与备份已保留');
+   const file='v2/s-'+id+'-'+parts.length+'.json.gz';
+   await immutable(request,file,body);
+   parts.push({path:file,sha256:await sha(body)});records=[];size=0;
+  };
+  for(const row of start.rows) {
+   const length=bytes(JSON.stringify(row.record));
+   if(records.length&&size+length>384*1024)await flush();
+   records.push(row.record);size+=length;
+  }
+  await flush();
+  const latest=await call({action:'inspect',keys:[]});
+  if((latest.meta.dataRevision||0)!==(start.meta.dataRevision||0))continue;
+  // No batch has been advertised yet. Raw records retain actor/seq/context;
+  // subsequent outbox publication or replay therefore remains idempotent.
+  return {id,parts,cursors:{},createdAt:new Date().toISOString()};
+ }
+ throw Error('迁移快照期间数据持续变化，请稍后重试');
+}
+
+async function ensureManifest(call,request,legacyBase,scope) {
+ let read=await request({method:'GET',path:'v2/manifest.json'});
+ if(![404,409].includes(read.status))return {value:manifestValue(read),etag:read.etag};
  requireStatus(await request({method:'MKCOL',path:'v2/'}),[200,201,204,405]);
- read=await request({method:'GET',path:'v2/manifest.json'});if(read.status!==404)return {value:manifestValue(read),etag:read.etag};
- let legacy=null,guard;
- // Fence the old full-file protocol before new writers start. The original cloud file is immutable backup.
- for(let i=0;i<8;i++){
-  const old=await request({method:'GET',path:'state.json'});if(![200,404].includes(old.status))throw Error(syncError(old.status));
-  if(old.status===200){const data=JSON.parse(old.body);if(data.format==='gxtodo-sync'&&data.version===2){guard=data;break;}decodeRemote(old.body);if(!old.etag||old.etag.startsWith('W/'))throw Error('旧同步文件缺少并发保护标识');legacy='v2/legacy-'+uuid()+'.json.gz';await immutable(request,legacy,old.body);}
-  guard={format:'gxtodo-sync',version:2,backup:legacy,message:'请将全部设备升级到 0.8.0 或更新版本；旧版数据已备份。'};
-  const fenced=await request({method:'PUT',path:'state.json',body:JSON.stringify(guard),etag:old.status===200?old.etag:null});if([200,201,204].includes(fenced.status))break;if(fenced.status!==412)throw Error(syncError(fenced.status));guard=null;
+ read=await request({method:'GET',path:'v2/manifest.json'});
+ if(read.status!==404)return {value:manifestValue(read),etag:read.etag};
+ let guard=null;
+ for(let attempt=0;attempt<8;attempt++) {
+  let legacy=null;
+  const old=await request({method:'GET',path:'state.json'});
+  if(![200,404].includes(old.status))throw Error(syncError(old.status));
+  if(old.status===200) {
+   const data=parseWire(old.body);
+   if(isProtocolObject(data)&&data.format==='gxtodo-sync'&&data.version===2) {
+    guard=migrationGuard(data);break;
+   }
+   decodeRemote(old.body);
+   if(typeof old.etag!=='string'||!old.etag||old.etag.startsWith('W/'))
+    throw Error('旧同步文件缺少并发保护标识');
+   legacy='v2/legacy-'+uuid()+'.json.gz';
+   await immutable(request,legacy,old.body);
+  }
+  const proposed={format:'gxtodo-sync',version:2,backup:legacy,
+   message:'请将全部设备升级到 0.8.0 或更新版本；旧版数据已备份。'};
+  const fenced=await request({method:'PUT',path:'state.json',body:JSON.stringify(proposed),
+   etag:old.status===200?old.etag:null});
+  if([200,201,204].includes(fenced.status)){guard=proposed;break;}
+  if(fenced.status!==412)throw Error(syncError(fenced.status));
  }
  if(!guard)throw Error('其他设备正在迁移同步目录，请稍后重试');
- if(guard.backup){const old=requireStatus(await request({method:'GET',path:guard.backup}),[200]),snapshot=await call({action:'state'}),state=buildState(snapshot.rows,snapshot.meta.settings);const merged=mergeStates(legacyBase||emptyState(),state,decodeRemote(old.body)).state;await editReplica(call,diffState(state,merged).changes,merged.settings);}
- const value={format:'gxtodo-delta',version:2,epoch:uuid(),heads:{},snapshot:null,legacy:guard.backup||null};
- const created=await request({method:'PUT',path:'v2/manifest.json',body:JSON.stringify(value),etag:null});if(![200,201,204,412].includes(created.status))throw Error(syncError(created.status));read=await request({method:'GET',path:'v2/manifest.json'});return {value:manifestValue(read),etag:read.etag};
+ migrationGuard(guard);
+ if(guard.backup!==null) {
+  const old=requireStatus(await request({method:'GET',path:guard.backup}),[200]);
+  await importLegacyOnce(call,scope,guard.backup,old.body,legacyBase);
+ }
+ const epoch=uuid();
+ // Upload a reachable initial recovery state BEFORE publishing the manifest.
+ // All consumers, including existing native clients, already read this format.
+ const snapshot=await initialMigrationSnapshot(call,request,epoch);
+ const value={format:'gxtodo-delta',version:2,epoch,heads:{},snapshot,legacy:guard.backup};
+ validateManifest(value);
+ const created=await request({method:'PUT',path:'v2/manifest.json',body:JSON.stringify(value),etag:null});
+ if(![200,201,204,412].includes(created.status))throw Error(syncError(created.status));
+ read=await request({method:'GET',path:'v2/manifest.json'});
+ return {value:manifestValue(read),etag:read.etag};
 }
 async function bind(call,scope,epoch){
  const {meta}=await call({action:'inspect',keys:[]});if(meta.scope===scope&&meta.epoch===epoch)return;
@@ -168,7 +293,7 @@ async function exchangeDelta({call,request,scope,legacyBase=null,shouldContinue=
  let cached=initial.meta.scope===scope?initial.meta.cachedManifest:null;
  if(cached){try{validateManifest(cached.value);if(typeof cached.etag!=='string'||!cached.etag||cached.etag.startsWith('W/'))cached=null;}catch{cached=null;}}
  let read=await request({method:'GET',path:'v2/manifest.json',etag:cached?.etag}),manifest;
- if(read.status===304&&cached)manifest=cached;else if([404,409].includes(read.status))manifest=await ensureManifest(call,request,legacyBase);else manifest={value:manifestValue(read),etag:read.etag};
+ if(read.status===304&&cached)manifest=cached;else if([404,409].includes(read.status))manifest=await ensureManifest(call,request,legacyBase,scope);else manifest={value:manifestValue(read),etag:read.etag};
  await bind(call,scope,manifest.value.epoch);
  const first=await pull(call,request,manifest.value,shouldContinue,maxBatches);let pushed=0;
  while(shouldContinue()&&pushed<maxBatches){const pending=await prepare(call,manifest.value);if(!pending)break;manifest=await publish(call,request,manifest,pending);pushed++;}

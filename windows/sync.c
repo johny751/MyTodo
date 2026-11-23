@@ -199,7 +199,113 @@ static int ack(Sync*s,J*p){if(!db_begin(s->d))return 0;J*m=db_meta(s->d);sn(get(
 static int publish(Sync*s,J**m,char**etag,J*p){if(!immutable(s,str(p,"path"),str(p,"body")))return 0;J*b=cJSON_Parse(str(p,"body"));for(int attempt=0;attempt<10;attempt++){if(strcmp(str(*m,"epoch"),str(b,"epoch"))){cJSON_Delete(b);return fail(s,"Cloud epoch changed; upload retained");}double head=n0(get(*m,"heads"),str(p,"device"));if(head>=num(p,"index")){cJSON_Delete(b);return ack(s,p);}if(head!=num(p,"index")-1){cJSON_Delete(b);return fail(s,"Device batch gap");}J*next=dup(*m);sn(get(next,"heads"),str(p,"device"),num(p,"index"));
  if(!manifest_valid(next)){cJSON_Delete(next);cJSON_Delete(b);return fail(s,"Invalid next manifest; outbox retained");}
  char*t=json(next);Response r=request(s,"PUT","v2/manifest.json",t,*etag);free(t);cJSON_Delete(next);int status=r.status;response_free(&r);if(!good(status)&&status!=412){cJSON_Delete(b);return fail(s,"Manifest upload failed; outbox retained");}if(good(status)&&!ack(s,p)){cJSON_Delete(b);return 0;}Response read=request(s,"GET","v2/manifest.json",0,0);J*latest=manifest(s,&read);if(!latest){response_free(&read);cJSON_Delete(b);return 0;}cJSON_Delete(*m);*m=latest;free(*etag);*etag=read.etag;read.etag=0;response_free(&read);if(good(status)){cJSON_Delete(b);return 1;}}cJSON_Delete(b);return fail(s,"Manifest contention; retry later");}
-static int create_manifest(Sync*s){Response parent=request(s,"MKCOL","",0,0);int ps=parent.status;response_free(&parent);if(!good(ps)&&ps!=405)return fail(s,"Cannot create configured WebDAV folder");Response r=request(s,"MKCOL","v2/",0,0);int status=r.status;response_free(&r);if(!good(status)&&status!=405)return fail(s,"Create the configured WebDAV folder first");Response old=request(s,"GET","state.json",0,0);if(old.status==200){J*guard=cJSON_Parse(old.body);int ok=guard&&!strcmp(str(guard,"format"),"gxtodo-sync")&&num(guard,"version")==2;cJSON_Delete(guard);if(!ok){response_free(&old);return fail(s,"Legacy cloud data requires one synchronization with version 0.8.1 before native migration");}}else if(old.status==404){J*g=cJSON_CreateObject();ss(g,"format","gxtodo-sync");sn(g,"version",2);set(g,"backup",cJSON_CreateNull());ss(g,"message","Upgrade all clients to 0.8.0 or later");char*t=json(g);r=request(s,"PUT","state.json",t,0);int ok=good(r.status)||r.status==412;response_free(&r);free(t);cJSON_Delete(g);if(!ok){response_free(&old);return fail(s,"Cannot fence legacy sync protocol");}}else{response_free(&old);return fail(s,"Cannot inspect legacy cloud state");}response_free(&old);J*m=cJSON_CreateObject();char id[80];uuid(id);ss(m,"format","gxtodo-delta");sn(m,"version",2);ss(m,"epoch",id);set(m,"heads",cJSON_CreateObject());set(m,"snapshot",cJSON_CreateNull());set(m,"legacy",cJSON_CreateNull());char*t=json(m);r=request(s,"PUT","v2/manifest.json",t,0);int ok=good(r.status)||r.status==412;response_free(&r);free(t);cJSON_Delete(m);return ok?1:fail(s,"Cannot initialize manifest");}
+/* C006 candidate; source text only, not compiled or executed.
+ * Insert near create_manifest; replace only that function on C005 final source.
+ * Native v1 merge is intentionally not added by this patch.
+ */
+static int legacy_backup_path(const char *path) {
+    size_t length = strlen(path);
+    if (length < 19 || length >= 160 || strncmp(path, "v2/legacy-", 10) ||
+        strcmp(path + length - 8, ".json.gz")) return 0;
+    for (const char *p = path + 10; p < path + length - 8; p++) {
+        char c = *p;
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+              (c >= '0' && c <= '9') || c == '-' || c == '_')) return 0;
+    }
+    return 1;
+}
+
+static int create_manifest(Sync *s) {
+    Response r = request(s, "MKCOL", "", 0, 0);
+    int status = r.status;
+    response_free(&r);
+    if (!good(status) && status != 405)
+        return fail(s, "Cannot create configured WebDAV folder");
+
+    r = request(s, "MKCOL", "v2/", 0, 0);
+    status = r.status;
+    response_free(&r);
+    if (!good(status) && status != 405)
+        return fail(s, "Create the configured WebDAV folder first");
+
+    /* Another migrator may have completed since sync_run's first GET. */
+    r = request(s, "GET", "v2/manifest.json", 0, 0);
+    if (r.status == 200) {
+        J *existing = manifest(s, &r);
+        int ok = existing != 0;
+        cJSON_Delete(existing);
+        response_free(&r);
+        return ok;
+    }
+    status = r.status;
+    response_free(&r);
+    if (status != 404) return fail(s, "Cannot inspect migration manifest");
+
+    int fenced = 0;
+    for (int attempt = 0; attempt < 8; attempt++) {
+        Response old = request(s, "GET", "state.json", 0, 0);
+        if (old.status == 200) {
+            J *guard = old.body && protocol_json_without_nul(old.body)
+                ? cJSON_ParseWithOpts(old.body, 0, 1) : 0;
+            J *version = get(guard, "version");
+            J *backup = get(guard, "backup");
+            int is_guard = cJSON_IsObject(guard) &&
+                !strcmp(str(guard, "format"), "gxtodo-sync") &&
+                cJSON_IsNumber(version) && version->valuedouble == 2;
+            int empty_backup = is_guard && cJSON_IsNull(backup);
+            int pending_backup = is_guard && cJSON_IsString(backup) &&
+                legacy_backup_path(backup->valuestring);
+            cJSON_Delete(guard);
+            response_free(&old);
+            if (pending_backup)
+                return fail(s, "Legacy migration is incomplete; resume synchronization on the migrating JavaScript client before native synchronization");
+            if (!empty_backup)
+                return fail(s, "Legacy cloud state is unsupported or malformed; complete legacy migration before native synchronization");
+            fenced = 1;
+            break;
+        }
+        status = old.status;
+        response_free(&old);
+        if (status != 404) return fail(s, "Cannot inspect legacy cloud state");
+
+        J *guard = cJSON_CreateObject();
+        ss(guard, "format", "gxtodo-sync");
+        sn(guard, "version", 2);
+        set(guard, "backup", cJSON_CreateNull());
+        ss(guard, "message", "Upgrade all clients to 0.8.0 or later");
+        char *text = json(guard);
+        r = request(s, "PUT", "state.json", text, 0);
+        status = r.status;
+        response_free(&r);
+        free(text);
+        cJSON_Delete(guard);
+        if (good(status)) {
+            fenced = 1;
+            break;
+        }
+        /* 412 means another actor won: reread, never assume its state is safe. */
+        if (status != 412) return fail(s, "Cannot fence legacy sync protocol");
+    }
+    if (!fenced) return fail(s, "Legacy migration contention; retry later");
+
+    J *value = cJSON_CreateObject();
+    char id[80];
+    uuid(id);
+    ss(value, "format", "gxtodo-delta");
+    sn(value, "version", 2);
+    ss(value, "epoch", id);
+    set(value, "heads", cJSON_CreateObject());
+    set(value, "snapshot", cJSON_CreateNull());
+    set(value, "legacy", cJSON_CreateNull());
+    char *text = json(value);
+    r = request(s, "PUT", "v2/manifest.json", text, 0);
+    status = r.status;
+    response_free(&r);
+    free(text);
+    cJSON_Delete(value);
+    /* sync_run must perform its existing GET+manifest validation afterwards. */
+    return good(status) || status == 412 ? 1 : fail(s, "Cannot initialize manifest");
+}
 
 static int snapshot_part(Sync*s,const char*id,const char*epoch,J*records,J*parts){if(!cJSON_GetArraySize(records))return 1;J*chunk=cJSON_CreateObject();ss(chunk,"id",id);ss(chunk,"epoch",epoch);set(chunk,"records",dup(records));char*body=json(chunk),file[200],hash[65];snprintf(file,sizeof(file),"v2/s-%s-%d.json.gz",id,cJSON_GetArraySize(parts));sha256(body,hash);int ok=immutable(s,file,body);if(ok){J*part=cJSON_CreateObject();ss(part,"path",file);ss(part,"sha256",hash);cJSON_AddItemToArray(parts,part);}free(body);cJSON_Delete(chunk);return ok;}
 static int make_snapshot(Sync*s,J*m){J*meta=db_meta(s->d),*out=db_outbox(s->d,1);int skip=cJSON_GetArraySize(out)||cJSON_IsObject(get(meta,"pending"));cJSON_Delete(out);J*v;cJSON_ArrayForEach(v,get(m,"heads"))if(n0(get(meta,"cursors"),v->string)<v->valuedouble)skip=1;J*prior=get(m,"snapshot");if(cJSON_IsObject(prior)&&progress_gap(get(meta,"cursors"),get(prior,"cursors"),64)<64)skip=1;if(skip){cJSON_Delete(meta);return 1;}char id[80],after[4900]="";uuid(id);J*parts=cJSON_CreateArray(),*records=cJSON_CreateArray();size_t size=0;int ok=1,changed=0;for(;;){J*current=db_meta(s->d);changed=n0(current,"dataRevision")!=n0(meta,"dataRevision");cJSON_Delete(current);if(changed)break;J*page=db_page(s->d,after,100),*row;cJSON_ArrayForEach(row,page){char*text=json(get(row,"record"));size_t len=strlen(text);free(text);if(size+len>384*1024&&cJSON_GetArraySize(records)){ok=snapshot_part(s,id,str(m,"epoch"),records,parts);cJSON_Delete(records);records=cJSON_CreateArray();size=0;}if(!ok)break;cJSON_AddItemToArray(records,dup(get(row,"record")));size+=len;snprintf(after,sizeof(after),"%s",str(row,"key"));}int n=cJSON_GetArraySize(page);cJSON_Delete(page);if(!ok||n<100)break;}if(ok&&!changed)ok=snapshot_part(s,id,str(m,"epoch"),records,parts);cJSON_Delete(records);J*current=db_meta(s->d);changed=changed||n0(current,"dataRevision")!=n0(meta,"dataRevision");cJSON_Delete(current);if(ok&&!changed){Response r=request(s,"GET","v2/manifest.json",0,0);J*latest=manifest(s,&r);if(!latest)ok=0;else{if(strcmp(str(latest,"epoch"),str(m,"epoch")))changed=1;
