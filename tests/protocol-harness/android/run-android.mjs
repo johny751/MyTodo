@@ -152,6 +152,7 @@ try {
     if (!/^[A-Za-z0-9_.-]{1,80}$/.test(dbCase) || ['.', '..'].includes(dbCase)) throw new Error('Invalid isolated --db-case');
     receipt.dbCase = dbCase;
     receipt.crashedAttempts = [];
+    receipt.failureEvidence = [];
     if (input.fixtureUrl) {
       const url = new URL(input.fixtureUrl);
       if (url.protocol !== 'http:' || url.hostname !== '127.0.0.1' || !url.port || url.pathname !== '/' || url.search || url.hash) {
@@ -159,6 +160,89 @@ try {
       }
       fixturePort = url.port;
       await command('reverse-fixture', selected('reverse', 'tcp:' + fixturePort, 'tcp:' + fixturePort));
+    }
+    async function preserveFailedAttempt(prefix, label, attempt, failedDbCase) {
+      // Diagnostic capture only. Never open, recover, truncate or overwrite the failed database.
+      // These files stay inside this case's GitHub artifact, before a main retry changes dbCase.
+      const directory = output + '.failures/' + prefix;
+      const evidence = {schema:'mytodo-android-failed-attempt',version:1,
+        sourceSha:receipt.sourceSha,runId:receipt.runId,runAttempt:receipt.runAttempt,
+        stage:label,attempt,dbCase:failedDbCase,startedAt:new Date().toISOString(),
+        observations:[],files:[],errors:[],originalDatabaseReplayed:false,
+        snapshotSemantics:'Raw files after diagnostic force-stop; no claim of crash-time transaction state'};
+      const reference = {stage:label,attempt,dbCase:failedDbCase,directory,status:'incomplete'};
+      receipt.failureEvidence.push(reference);
+      async function observe(suffix, argv, options = {}) {
+        const index = receipt.commands.length;
+        try {
+          const result = await command(prefix + '-evidence-' + suffix, argv,
+            {allowFailure:true,timeout:10000,...options});
+          const entry = receipt.commands[index];
+          evidence.observations.push({label:suffix,exitCode:result.code,signal:result.signal,
+            timedOut:entry?.timedOut || false,log:entry?.log,logSha256:entry?.logSha256});
+          return result;
+        } catch (error) {
+          // A diagnostic failure must not replace the original instrumentation failure.
+          evidence.errors.push({label:suffix,error:String(error)});
+          return null;
+        }
+      }
+      try {
+        await fs.mkdir(directory,{recursive:true});
+        // Capture exit history before our force-stop adds another intentional exit reason.
+        // Unsupported shell commands retain their actual exit/log; no reason is fabricated.
+        await observe('exit-info',selected('shell','dumpsys','activity','exit-info',packageName));
+        await observe('processes',selected('shell','dumpsys','activity','processes',packageName));
+        await observe('logcat',selected('logcat','-b','main','-b','system','-b','events','-b','crash',
+          '-v','threadtime','-d','-t','2000'));
+        await observe('uptime',selected('shell','cat','/proc/uptime'));
+        await observe('meminfo',selected('shell','dumpsys','meminfo',packageName));
+        await observe('stop',selected('shell','am','force-stop',packageName));
+        let stopped = false;
+        for (let poll = 1; poll <= 8; poll++) {
+          const state = await observe('process-check-' + poll,selected('shell','pidof',packageName),{timeout:5000});
+          if (state?.code === 1 && !state.stdout.trim()) { stopped = true; break; }
+          await sleep(250);
+        }
+        evidence.mainProcessObservedStopped = stopped;
+        if (stopped) {
+          const failedDirectory = 'files/protocol-cases/' + failedDbCase + '/';
+          const candidates = [
+            ...['tasks.sqlite','tasks.sqlite-wal','tasks.sqlite-shm','tasks.sqlite-journal']
+              .map(name => ({remote:failedDirectory + name,name})),
+            ...['result.json','result.json.bak','result.json.new']
+              .map(name => ({remote:'files/' + name,name:'atomic-' + name})),
+          ];
+          for (const file of candidates) {
+            const captured = await observe('file-' + file.name,
+              selected('exec-out','run-as',packageName,'cat',file.remote),{binary:true});
+            const item = {remote:file.remote,state:'unavailable',exitCode:captured?.code ?? null};
+            // "Unavailable" includes missing/permission/transport errors; it is not proof of no prior writes.
+            if (captured?.code === 0 && captured.bytes) {
+              const destination = path.join(directory,file.name);
+              await fs.writeFile(destination,captured.bytes,{flag:'wx'});
+              Object.assign(item,{state:'preserved',path:destination,bytes:captured.bytes.length,
+                sha256:hash(captured.bytes)});
+            }
+            evidence.files.push(item);
+          }
+        } else {
+          evidence.errors.push({label:'raw-files',error:'Main process exit was not observed; no live-file copy attempted'});
+        }
+      } catch (error) {
+        evidence.errors.push({label:'capture',error:String(error)});
+      } finally {
+        evidence.completedAt = new Date().toISOString();
+        const file = path.join(directory,'evidence.json');
+        try {
+          await fs.writeFile(file,JSON.stringify(evidence,null,2),{flag:'wx'});
+          Object.assign(reference,{status:evidence.errors.length ? 'partial':'recorded',
+            file,sha256:hash(await fs.readFile(file))});
+        } catch (error) {
+          reference.error = String(error);
+        }
+      }
+      return reference;
     }
     async function runCase(label, request, attempt) {
       const prefix = attempt === 1 ? label : label + '-retry-' + attempt;
@@ -195,6 +279,7 @@ try {
             {allowFailure:true,timeout:10000});
           receipt.crashedAttempts.push({stage:label,attempt,dbCase,adbExitCode:instrument.code,instrumentationCode,
             reason:'Process crashed with no valid atomic result',logs:prefix});
+          await preserveFailedAttempt(prefix,label,attempt,dbCase);
         }
         throw error;
       }
