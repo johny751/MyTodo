@@ -25,7 +25,7 @@ PowerShell 失败诊断为 `CouldNotAutoloadMatchingModule`。runner 继承的 P
 
 22 例使用同一 GitHub Windows runner 用户的实际 `CryptProtectData`/`CryptUnprotectData`，调用原生 `config_save/config_read`、实际 credential helper 和 Node `createSyncStore`。覆盖双向 ASCII/Unicode、旧 C/PowerShell 格式、空密码保留、首次空文件、截断/奇数 hex/错前缀/非 hex/密文损坏/超长/NUL、解密后非法 UTF-8/JSON/标量/尾随内容，以及真实 Windows 独占文件读取失败。
 
-合成随机凭据通过 stdin 传入，在进程内比较；HTTP 请求入口使用内存夹具核对授权头。没有真实 WebDAV 请求（报告 networkRequests=0）、真实坚果云账号或用户业务数据。最终报告 credentialPlaintextLogged=false。失败拒绝必须同时满足正常进程退出、结构化断言成立和原文件字节保留，崩溃、超时均不能算通过。
+合成随机凭据通过 stdin 传入，在进程内比较；HTTP 请求入口使用内存夹具核对授权头。没有真实 WebDAV 请求（报告 networkRequests=0）、真实坚果云账号或用户业务数据。最终报告 credentialPlaintextLogged=false，表示受监控输出没有检出完整合成凭据；这不是全系统零泄漏证明。C adapter 的失败拒绝必须同时满足正常进程退出、结构化断言成立和原文件字节保留，崩溃、超时不能算通过。Node 负例辅助断言接受抛出的异常，本套件未逐个负例区分内部 helper 的拒绝与基础设施异常；正向互读、55 条干净子进程收据和原文件保留断言共同支持本轮结论。
 
 最终 Windows 镜像为 `win25-vs2026 / 20261116.315.1`，Node `v22.23.5`，PowerShell `7.6.10`。同源原生凭据测试 EXE SHA256 为 `d2af3aa17f0a38b9ec3289c64486102efea9b6eb8463c484ab20b2b4f19ab446`。Codespaces LF 版 `windows/sync.c` SHA256 为 `b06f9eb43d9366b14172cce81c6de6483878c1736ccf8752cd1fb1c9554c1cf5`；Windows checkout CRLF 字节为 `830ed87ce03490695e40c15d5e46c8cf65c3dc9065e7b1184d1e823f36567f0b`，已确认两者仅换行不同，保留各自实际哈希。
 
