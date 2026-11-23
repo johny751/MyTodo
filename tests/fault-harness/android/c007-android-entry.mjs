@@ -1,6 +1,6 @@
 import {runAndroidEntry} from './tests/protocol-harness/android/android-adapter.mjs';
 import {editReplica,applyRemote,updateMeta} from './src/replica.mjs';
-import {__c003Internals as delta} from './src/.c003-delta-adapter.mjs';
+import {__c003Internals as delta} from './src/c003-delta-adapter.mjs';
 await runAndroidEntry(async(input,adapter)=>{
  const metadata=await(await fetch('./build-metadata.json')).json(),runtime=await adapter.describe();
  if(!/^[a-f0-9]{40}$/.test(input.sourceSha||'')||metadata.sourceSha!==input.sourceSha)throw Error('C007 APK source SHA mismatch');

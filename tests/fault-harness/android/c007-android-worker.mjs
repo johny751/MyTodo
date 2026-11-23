@@ -40,7 +40,7 @@ async function stop(label){
  await command(label+'-stop',['shell','am','force-stop',pkg]);
  for(let n=0;n<12;n++){
   const state=await command(label+'-pid-'+n,['shell','pidof',pkg],{allowFailure:true});
-  if(!commandCompleted(state)||![0,1].includes(state.code))throw Error('Cannot verify Android cleanup process state');
+  if(!commandCompleted(state)||![0,1].includes(state.code)||state.stderr.toString('utf8').trim())throw Error('Cannot verify Android cleanup process state');
   if(state.code===1&&!state.text.trim()){receipt.stopConfirmed=true;return;}
   await sleep(250);
  }
@@ -53,8 +53,8 @@ async function observeNaturalExit(originalPid){
   const text=state.text.trim(),pids=/^[0-9]+(?:\s+[0-9]+)*$/.test(text)?text.split(/\s+/).map(Number):[];
   observation.observations.push({at:new Date().toISOString(),adbExitCode:state.code,signal:state.signal,
    timedOut:state.timedOut,spawnError:state.spawnError,stdinError:state.stdinError,processClosed:state.processClosed,
-   packagePids:pids,originalPidAbsent:!pids.includes(originalPid),stdoutSha256:sha(state.bytes)});
-  if(!commandCompleted(state)||![0,1].includes(state.code)||(state.code===0&&(!pids.length||pids.some(pid=>!Number.isSafeInteger(pid)||pid<=0)))||(state.code===1&&text))
+   packagePids:pids,originalPidAbsent:!pids.includes(originalPid),stdoutSha256:sha(state.bytes),stderrSha256:sha(state.stderr)});
+  if(!commandCompleted(state)||![0,1].includes(state.code)||state.stderr.toString('utf8').trim()||(state.code===0&&(!pids.length||pids.some(pid=>!Number.isSafeInteger(pid)||pid<=0)))||(state.code===1&&text))
    throw Error('Cannot verify natural native process death; cleanup cannot substitute for the requested boundary');
   if(state.code===1){observation.confirmed=true;observation.confirmedAt=new Date().toISOString();return;}
   await sleep(250);
