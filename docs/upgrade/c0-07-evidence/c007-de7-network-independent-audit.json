@@ -1,0 +1,1140 @@
+{
+  "schema": "mytodo-c007-de7-independent-network-evidence-audit",
+  "version": 2,
+  "runId": "45190559178",
+  "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+  "scriptSha256": "58e31eac205194c463d4ab3df7231a521917e44c6634ef543a434e6ec33e06b4",
+  "auditedAt": "2026-11-23T14:36:32.5231581+00:00",
+  "cases": [
+    {
+      "platform": "javascript",
+      "caseId": "C007-batch-rejected",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/b-c007-A-1.json.gz",
+        "status": 503,
+        "writeCommitted": false,
+        "disconnected": false
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "6c2821df28adec118b1f4998b87a16e907f4e158a2e9801dbd58932265f05ee0",
+      "faultCloudBatchCount": 0,
+      "faultCloudHead": 0,
+      "retryBatchPutStatus": 201,
+      "retryBatchWritten": true,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 55,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-batch-response-lost",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/b-c007-A-1.json.gz",
+        "status": null,
+        "writeCommitted": true,
+        "disconnected": true
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "6c2821df28adec118b1f4998b87a16e907f4e158a2e9801dbd58932265f05ee0",
+      "faultCloudBatchCount": 1,
+      "faultCloudHead": 0,
+      "retryBatchPutStatus": 412,
+      "retryBatchWritten": false,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 55,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-manifest-rejected",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/manifest.json",
+        "status": 503,
+        "writeCommitted": false,
+        "disconnected": false
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "6c2821df28adec118b1f4998b87a16e907f4e158a2e9801dbd58932265f05ee0",
+      "faultCloudBatchCount": 1,
+      "faultCloudHead": 0,
+      "retryBatchPutStatus": 412,
+      "retryBatchWritten": false,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 55,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-manifest-response-lost",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/manifest.json",
+        "status": null,
+        "writeCommitted": true,
+        "disconnected": true
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "6c2821df28adec118b1f4998b87a16e907f4e158a2e9801dbd58932265f05ee0",
+      "faultCloudBatchCount": 1,
+      "faultCloudHead": 1,
+      "retryBatchPutStatus": 412,
+      "retryBatchWritten": false,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 55,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-batch-rejected",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/b-c007-A-1.json.gz",
+        "status": 503,
+        "writeCommitted": false,
+        "disconnected": false
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "05264171a06c326c84d14ea152fdc9d91334d6c3fc326c0a94f256762b0dc5e5",
+      "faultCloudBatchCount": 0,
+      "faultCloudHead": 0,
+      "retryBatchPutStatus": 201,
+      "retryBatchWritten": true,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 65,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-batch-response-lost",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/b-c007-A-1.json.gz",
+        "status": null,
+        "writeCommitted": true,
+        "disconnected": true
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "05264171a06c326c84d14ea152fdc9d91334d6c3fc326c0a94f256762b0dc5e5",
+      "faultCloudBatchCount": 1,
+      "faultCloudHead": 0,
+      "retryBatchPutStatus": 412,
+      "retryBatchWritten": false,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 65,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-manifest-rejected",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/manifest.json",
+        "status": 503,
+        "writeCommitted": false,
+        "disconnected": false
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "05264171a06c326c84d14ea152fdc9d91334d6c3fc326c0a94f256762b0dc5e5",
+      "faultCloudBatchCount": 1,
+      "faultCloudHead": 0,
+      "retryBatchPutStatus": 412,
+      "retryBatchWritten": false,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 65,
+      "summaryFailures": 0
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-manifest-response-lost",
+      "faultUses": 1,
+      "faultHttp": {
+        "path": "v2/manifest.json",
+        "status": null,
+        "writeCommitted": true,
+        "disconnected": true
+      },
+      "pendingPlainBytes": 383,
+      "pendingPlainSha256": "913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e",
+      "gzipWireSha256": "05264171a06c326c84d14ea152fdc9d91334d6c3fc326c0a94f256762b0dc5e5",
+      "faultCloudBatchCount": 1,
+      "faultCloudHead": 1,
+      "retryBatchPutStatus": 412,
+      "retryBatchWritten": false,
+      "finalBatchCount": 1,
+      "finalHead": 1,
+      "retainedOutboxId": 3,
+      "summaryChecks": 65,
+      "summaryFailures": 0
+    }
+  ],
+  "checkedLocalTextFiles": [
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/summary.json",
+      "bytes": 96196,
+      "sha256": "5ff6f2ce859768e818bb9c3fe69695107f577f8116575776febcc6aff168d8d5"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/001-prepare.result.json",
+      "bytes": 10263,
+      "sha256": "3d0b4e37e7e684a26400e43f249690efb53a9228ad854cd2c33e5a6e04d1976e"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/002-later-event.result.json",
+      "bytes": 11459,
+      "sha256": "927bbb754f59cbc084f23d08f4ceaafb53e01d437097eeed33b942584165d76c"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/003-publish-fault.result.json",
+      "bytes": 12449,
+      "sha256": "7bac18df92c9b010e5baeea6c23ce1670f1a744e19c6b2ba24152fb4db33f07a"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/003-publish-fault.reopened.json",
+      "bytes": 17695,
+      "sha256": "80cfde2de10e04848bcef18243ac0a9972349346fb6ad1d5db7b767e27217a9b"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/004-resume-publish.result.json",
+      "bytes": 11252,
+      "sha256": "c04637234d19e6c9fb536d30bc2571ba24d453906c617e6a56c8246957d4338b"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/004-resume-publish.reopened.json",
+      "bytes": 13805,
+      "sha256": "0e9733f256423cd5491bcd2961a4cc0ba47e348b062840a7fa360d383e5f40f1"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/003-publish-fault.cloud/trace.json",
+      "bytes": 2959,
+      "sha256": "5906d6f48de8a81651e2d10974450e79b960f9756c57421eaeed749671104f02"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/004-resume-publish.cloud/trace.json",
+      "bytes": 5782,
+      "sha256": "71f6430606e2a5ccdf77e8fea4b0bbe82f173736988dd0819dbc78b87c66747e"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/summary.json",
+      "bytes": 98775,
+      "sha256": "b7b1ebb093d0df0aa0271265719edde5b441d1a450eef92480d2432f8dd7bc8a"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/001-prepare.result.json",
+      "bytes": 10273,
+      "sha256": "e1acc76e4d90dc883b39789571b2c9699d4277dbc868436c13d24e16f17a3170"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/002-later-event.result.json",
+      "bytes": 11469,
+      "sha256": "c79b496dfc1bdee9529b78f4e57c4e9f1a10eb840a2acba76c362760845f3667"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.result.json",
+      "bytes": 12425,
+      "sha256": "35a2616f5407756692447b1ac6ac318476a867394ec5ceb35c75c35f0868d3bd"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.reopened.json",
+      "bytes": 17705,
+      "sha256": "2fa6700a197f278f6d5c5b522ed1644d994107e3890f9367b846d48bd277220b"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.result.json",
+      "bytes": 11262,
+      "sha256": "353d6ea3b0d0a868d0096b49544c15b7a83399ca54fe2c9859d2dba93aeb0b15"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.reopened.json",
+      "bytes": 13815,
+      "sha256": "f13daafa156490b2be011da96b512791df85082f79375609ce2cf37e3a9a34e3"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.cloud/trace.json",
+      "bytes": 3887,
+      "sha256": "1cf1ef50067389baddd66f2ecfeda04054acbbc56353dee7c00b794d07466c7c"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.cloud/trace.json",
+      "bytes": 7076,
+      "sha256": "578227710520e3043040600a6d93094431ba7194b38cd7eb7f600ef79c7cb747"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/summary.json",
+      "bytes": 99899,
+      "sha256": "4a0ddce20af0542d4c785e8965d9aa947891de4890def2007d334fc14f240bec"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/001-prepare.result.json",
+      "bytes": 10269,
+      "sha256": "c3744977f0a9d133fe9ab96f55f629a66b3efba83a3193f2024f3a5c0bc1e3bd"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/002-later-event.result.json",
+      "bytes": 11465,
+      "sha256": "52dad9df8d4e6c03f0a5ce1317832011e361346e0eb20e6379c3866a101f9f07"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.result.json",
+      "bytes": 12455,
+      "sha256": "3ccaa1655f6a69da334d125c4674d2c2724a5c675dc1c0753afd0ba141768252"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.reopened.json",
+      "bytes": 17701,
+      "sha256": "6d7bd5080e169ad0e7888b9de757b107994b92cab9f83af26fe10b3bdd2c24d6"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.result.json",
+      "bytes": 11258,
+      "sha256": "cb8603a30941a5e99fc195005c4a7c7760b28823e554c0e36c84afe20099b35f"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.reopened.json",
+      "bytes": 13811,
+      "sha256": "cceed8914e8974dcac84e83afc89fdfc2d0051a7b6b9825a7f63255ed7772b9f"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.cloud/trace.json",
+      "bytes": 4913,
+      "sha256": "f07b26df0cc371727b3c5f58bc814cbe7a11f1b1ee7a461eb2119178e7fb3380"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.cloud/trace.json",
+      "bytes": 7076,
+      "sha256": "8c3d2df27613908f47cc8cd9b65c41234a52a8d9249ba06d9c5d1eb0e9d5ba56"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/summary.json",
+      "bytes": 97846,
+      "sha256": "a1a388d832b78fa45fc88c397d8a75861635dd067449bc2b2724c8bfa48e6139"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/001-prepare.result.json",
+      "bytes": 10279,
+      "sha256": "45ba05418bf51e0d0b6a8fc31fd4e4a1e2b0fb070182a8f78218fa5e541f9786"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/002-later-event.result.json",
+      "bytes": 11475,
+      "sha256": "de55987167dd34fc19c54cb4e86d514910f41cc2f3b43dfb24d0b7201e54f1e5"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.result.json",
+      "bytes": 12431,
+      "sha256": "a050d1cd4004e364d2a551c05a7d430202a06a30dc8df3876fa67a5722a2673d"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.reopened.json",
+      "bytes": 17711,
+      "sha256": "3e04aa074f7c29a6ad531408b0ebfeb0d50e73421e66f52815512e721d4b6650"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.result.json",
+      "bytes": 11268,
+      "sha256": "4455a6f9ae4124fe3db69174c41931e072ae37cf4d5f9085da51a0b03b51f8b6"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.reopened.json",
+      "bytes": 13821,
+      "sha256": "6123facf89bba95037177d774d0886f93c8d182c06592b1a86c23321433be22f"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.cloud/trace.json",
+      "bytes": 5001,
+      "sha256": "94ed5f9898073665ca25036a7dac4b29bf95304ef957ce19c9c67a6c284de126"
+    },
+    {
+      "path": "artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.cloud/trace.json",
+      "bytes": 5051,
+      "sha256": "d96b238e18da1c6a30046ad5452b381bcedd96880a3fe4ccf6c1d9b2efff9875"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/summary.json",
+      "bytes": 79814,
+      "sha256": "83a475f2d8eefa0118712de8935caae589deceb14dbeab9a8ef38bfa0197071c"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/001-prepare.result.json",
+      "bytes": 4324,
+      "sha256": "ac24ad76d83e29f6a6b25dc40f65dac289dc058eaa8f7cfa54fdb929779d7fc1"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/002-later-event.result.json",
+      "bytes": 4820,
+      "sha256": "75ba23c2d764a51314a5cd15568bb3949b7fb6ceb4ded2a30d954a383a9743d2"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/003-publish-fault.result.json",
+      "bytes": 5442,
+      "sha256": "a79ca3e9b02a93b75ae763ef2c7d31bda718a8942b1fadbdbd50cae215942250"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/003-publish-fault.reopened.json",
+      "bytes": 7544,
+      "sha256": "67f7e661b6d4e0feabafa46f46d678c4616b8dfd39b4a911806f9a144fa5ba52"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/004-resume-publish.result.json",
+      "bytes": 4531,
+      "sha256": "2bc3ea79f222aca44b965a88976ac170dcd55a7b5b88d743b3955dc895351da3"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/004-resume-publish.reopened.json",
+      "bytes": 4932,
+      "sha256": "1bc080b9eeab02b4bb65a461a675c61d189c91ceda590d203a4b62dc660c0af2"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/003-publish-fault.cloud/trace.json",
+      "bytes": 2959,
+      "sha256": "fa20bcf483d6074a39574352166c239eedf3bbae60d7988cc9c84abc36679955"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/004-resume-publish.cloud/trace.json",
+      "bytes": 5782,
+      "sha256": "7b84f5fdd004d8a39b6cf814de1bc1890d188ad8cd27fe4b21daaaf7a2518283"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/003-publish-fault.process.json",
+      "bytes": 690,
+      "sha256": "4a40cf69fc721f8d16f87d63e9858e1aa1a7abf4f2c7afbf86e5a6dc4b688330"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/003-publish-fault-reopen.process.json",
+      "bytes": 699,
+      "sha256": "5aa5728a4df8c8535538c3cd35dcb597d6ec96e7297dcf8e99ca954074954a7f"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/004-resume-publish.process.json",
+      "bytes": 692,
+      "sha256": "8e8a8baa88ee2228ef654ab6a4288fff6358f41c245bab7e95575871934cb038"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/004-resume-publish-reopen.process.json",
+      "bytes": 701,
+      "sha256": "4bdbcb66002ac43a37977933475ee4e6e6919fbfb0069332f25188f52e449d00"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/summary.json",
+      "bytes": 82453,
+      "sha256": "34e84dd6712a0ac27ef62108e78384cc97b73f6fe0d06fe3da4beb7c4b35f0e3"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/001-prepare.result.json",
+      "bytes": 4334,
+      "sha256": "7be0c7cd8f2bab5382fab635e54623d7761620f9d4b175c9b7e5937a3c0ff692"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/002-later-event.result.json",
+      "bytes": 4830,
+      "sha256": "5cfb7f7d408f4f1c0b2039c80e614afdd4f12bc00737615a7141264bd5e64221"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.result.json",
+      "bytes": 5428,
+      "sha256": "ad93b72389ce1db2280545723e12ca78db7439de13a3a71f943ef58d0c9cfc5b"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.reopened.json",
+      "bytes": 7554,
+      "sha256": "2416e92649663e621234f782b274aca7ada3b873738472b61dd7ae5050955851"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.result.json",
+      "bytes": 4541,
+      "sha256": "26d38254695acafa02013b589412be76a1783333a5ba31231f86d83ebcabf81f"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.reopened.json",
+      "bytes": 4942,
+      "sha256": "02bba8184f3d50e713dbc5d4ad8cf334c23e173b6b1a47a0621efeee0cc7209c"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.cloud/trace.json",
+      "bytes": 3887,
+      "sha256": "7d232d24d262b50333c155b9ed66cb4c40e37c235e47008e4a8299cc989ffdd2"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.cloud/trace.json",
+      "bytes": 7076,
+      "sha256": "6519125597dd453c0a23b2a68c38b08cd8c19155cba1d1dfab75d8ab2f2e4b68"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/003-publish-fault.process.json",
+      "bytes": 705,
+      "sha256": "d3f75f259354e475a50c8fd6ede9167712bb44da0d31485ea12a8837f1bb47f1"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/003-publish-fault-reopen.process.json",
+      "bytes": 714,
+      "sha256": "4f5ac40fe5a7b9b6367c5878ec845fcf771c2a2060cf3736b2b757480fc3b18e"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/004-resume-publish.process.json",
+      "bytes": 707,
+      "sha256": "440c0d8849f0df21c9854f1e215a7e2e8c85b4b1abb470adaba65b3ceda0e59a"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/004-resume-publish-reopen.process.json",
+      "bytes": 716,
+      "sha256": "2902ad66af92f306f520aa31aa59b379e128aac86ec0bee32dc11857bcc2fe4e"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/summary.json",
+      "bytes": 83536,
+      "sha256": "ac4267eb5902aa0c77e9773cea8ee3b7c076cb5d9997f3af23681ab19480e8c1"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/001-prepare.result.json",
+      "bytes": 4330,
+      "sha256": "4b3781831f74580cf23cd8ba6f625e457519e152752bdf4011f47b42db1c8eb7"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/002-later-event.result.json",
+      "bytes": 4826,
+      "sha256": "95a6cc6473b10bd5dbc7b15f90723d2d0813c791c50d358717ee614e9253aed8"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.result.json",
+      "bytes": 5437,
+      "sha256": "b6487aba13dc3bad8432f310ad4444588c54706db704fa23714dfbedda7b61cd"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.reopened.json",
+      "bytes": 7550,
+      "sha256": "feae6cf6032f7874705abb738104b430d032f6569642ba5a37b38ced93ffa961"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.result.json",
+      "bytes": 4537,
+      "sha256": "c267522a0542c1853ab055d81adb99eee6d0f04fdd4c1e365a07bc18408ad228"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.reopened.json",
+      "bytes": 4938,
+      "sha256": "67811114fa3dccd85c1615b19b90bf339bc704178360585551e21a7bf2d81653"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.cloud/trace.json",
+      "bytes": 4913,
+      "sha256": "c20d5ea3fd27160167eb9a7270401eb3a9239fed3d900268285268c6205e7f34"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.cloud/trace.json",
+      "bytes": 7076,
+      "sha256": "f483bb19f0e853137d67f12de1f43314aabe3032a3a5e4ef3aff391e9bf99d63"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/003-publish-fault.process.json",
+      "bytes": 699,
+      "sha256": "dda8c706acbb7e2e1f303bba11e811564133aca0fc106a15139a8ba7ef052522"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/003-publish-fault-reopen.process.json",
+      "bytes": 708,
+      "sha256": "2106fc28188a1bf2187d357659038940b85c61047cc3705379b343a701f5e9fd"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/004-resume-publish.process.json",
+      "bytes": 701,
+      "sha256": "d71496e5d3d793a08a5d50bda37815ec0e4a4bf77d0fc08f55f2449307e4ed9c"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/004-resume-publish-reopen.process.json",
+      "bytes": 710,
+      "sha256": "4e071ef978808bfebd2f86c39ddda61262ab64797f77d05c3b771f3108178f8f"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/summary.json",
+      "bytes": 81554,
+      "sha256": "b69dc342f1f724fb0a2c70186abde24b3a4687ce6be617df67922848ac2c12bf"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/001-prepare.result.json",
+      "bytes": 4340,
+      "sha256": "c801528c43f6ab0174665ef0828d4939f66fb7738c99e1a698592c24fea29444"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/002-later-event.result.json",
+      "bytes": 4836,
+      "sha256": "2618c32e968e80ea389ed382b5b5ad1cc3d6e0e79c98080b1db943af56c2bae7"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.result.json",
+      "bytes": 5434,
+      "sha256": "05e8ad25d907a2c6804a975919074e6d5dd2cda81eaac0f030cfe682b33f4f62"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.reopened.json",
+      "bytes": 7560,
+      "sha256": "e9aa13c3385e90457617382aaba0a55de4d8317a60e5313c356ec49712bec64c"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.result.json",
+      "bytes": 4547,
+      "sha256": "6eb971554223ae4e96a5031d422cf439bb80fdb368e79c54c6cbc14138bdc096"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.reopened.json",
+      "bytes": 4948,
+      "sha256": "b7cc90765c611e5e9607541d42ab24855bfcda2bdcddc1a4558ef1868ee8e8a9"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.cloud/trace.json",
+      "bytes": 5001,
+      "sha256": "1dec476e35159e46f9f477827c433a323975d4e152578ea59e51a190cfaaff2c"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.cloud/trace.json",
+      "bytes": 5051,
+      "sha256": "470295565cecc510fae54e90db33979af83b0045d98f76952061cab0dd312f81"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault.process.json",
+      "bytes": 714,
+      "sha256": "0429c51bf8204ea615689a0f20f4de92a14b73d9619373dfbd1ea518ea496fc1"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/003-publish-fault-reopen.process.json",
+      "bytes": 723,
+      "sha256": "4370954a3838107dfec35b021ace7b42f2647437e65a6a6587874b654fe1ff2e"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish.process.json",
+      "bytes": 716,
+      "sha256": "75b86d70c4b64f669fa8bf57938b94d804dd07805c94c7c014f5d827ebe571fe"
+    },
+    {
+      "path": "artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/004-resume-publish-reopen.process.json",
+      "bytes": 725,
+      "sha256": "45d8e1c11050ecc6ff34b3e10f42ff0e6d19af2b3b04cafb57c3de9f4d852def"
+    }
+  ],
+  "auditChecks": [
+    {
+      "id": "javascript:C007-batch-rejected:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:fresh-retry-upload",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-rejected:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:persisted-pending-text",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:immutable-retry-verifies-existing",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-batch-response-lost:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:persisted-pending-text",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:immutable-retry-verifies-existing",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-rejected:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:persisted-pending-text",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:immutable-retry-verifies-existing",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "javascript:C007-manifest-response-lost:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:fresh-retry-upload",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:pre-operation-lease-renewal-only",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-rejected:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:persisted-pending-text",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:immutable-retry-verifies-existing",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:pre-operation-lease-renewal-only",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-batch-response-lost:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:persisted-pending-text",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:immutable-retry-verifies-existing",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:pre-operation-lease-renewal-only",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-rejected:one-final-batch-and-head",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:source-case-platform",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:prepared-through-two",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:later-event-outside-pending",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:fault-rejected-no-local-ack",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:fault-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:http-boundary",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:fault-disk-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:persisted-pending-text",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:identical-retransmission",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:immutable-retry-verifies-existing",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:pre-operation-lease-renewal-only",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:resume-begins-from-fault-state",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:resume-ack-exact-prefix",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:resume-same-db-reopen",
+      "passed": true
+    },
+    {
+      "id": "windows-c:C007-manifest-response-lost:one-final-batch-and-head",
+      "passed": true
+    }
+  ],
+  "failedAuditChecks": [],
+  "auditPassed": true,
+  "localProjectExecutions": 0,
+  "supersedes": "work/c007-audit-history/de7-network-v1-overstrict.json; draft incorrectly required missing ordinary native receipt PIDs and ignored native pre-operation lease renewal.",
+  "limitations": [
+    "Only the four network-fault cases on JavaScript and Windows C were semantically reviewed here.",
+    "Native ordinary result receipts have no PID; sequential distinct controller executions with the same db-dir and closed-process timestamps supply restart evidence.",
+    "Native preparation renews lease: only revision plus one and lease.until change before resumed publish; all other metadata, rows and outbox were independently compared.",
+    "Wire digests were compared across archived request/response and disk trace receipts; cloud gzip bytes were not locally read. Pending JSON body SHA256 was independently recomputed from UTF8 bytes.",
+    "Disk traces state observed bytes after rename, not a power-loss durability guarantee.",
+    "The trusted archive transfer and full producer-manifest closure are supplied by the separate frozen auditor.",
+    "The collector exit1/114 Android binary-stdout exclusions for the overall run remain unchanged.",
+    "Audit check counts are evidence consistency checks, not additional project test executions."
+  ]
+}

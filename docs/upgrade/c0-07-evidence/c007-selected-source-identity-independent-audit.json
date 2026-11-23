@@ -1,0 +1,36 @@
+{
+  "schema": "mytodo-c007-selected-source-identity-independent-audit",
+  "reviewedAt": "2026-11-23T23:02:08.5447167+08:00",
+  "sourceReceipt": {
+    "path": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-source-bytes.json",
+    "bytes": 287842,
+    "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02"
+  },
+  "priorSourceReceipt": {
+    "path": "outputs/c0-07/evidence/edf-final-transfer/c007-final-source-bytes.json",
+    "bytes": 381100,
+    "sha256": "87abf6a0d14a7d4bac6ae64810dedecd92172fdd3937f4557a5572792eb05584"
+  },
+  "before": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+  "after": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+  "beforeFiles": 682,
+  "afterFiles": 682,
+  "priorEdfLedgerRowsCompared": 682,
+  "priorEdfLedgerMismatches": 0,
+  "addedFiles": 0,
+  "changedPaths": [
+    "tests/c006/c006-harness/android-runner.mjs"
+  ],
+  "unchangedFiles": 681,
+  "changedFile": {
+    "path": "tests/c006/c006-harness/android-runner.mjs",
+    "beforeBytes": 7512,
+    "beforeSha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+    "afterBytes": 7788,
+    "afterSha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a"
+  },
+  "candidateLocalSha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a",
+  "allChecksPassed": true,
+  "localProjectExecutions": 0,
+  "qualification": "Local parsing compares cloud source-byte receipts and binds candidate text; does not locally read all source blobs or provide independent network provenance."
+}

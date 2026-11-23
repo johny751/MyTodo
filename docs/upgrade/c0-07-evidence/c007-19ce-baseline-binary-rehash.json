@@ -1,0 +1,27 @@
+{
+  "runId": "45199684912",
+  "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+  "method": "actual payload read_bytes in Codespaces",
+  "files": [
+    {
+      "path": "phase0-android-45199684912-1/MyTodo-unsigned.apk",
+      "size": 281749,
+      "sha256": "b17bf35e0b6fe5a599696348c209cbb2a4ffd9dd631a93c21a3b8c0ce6dffb79"
+    },
+    {
+      "path": "phase0-web-45199684912-1/MyTodo-web-source.zip",
+      "size": 101876,
+      "sha256": "8aa8cc205ac288e632af769e16e89b79dd4ceed24ea9090f1e44fcefbdd0bfe9"
+    },
+    {
+      "path": "phase0-web-45199684912-1/WebCredentialHelper.exe",
+      "size": 149504,
+      "sha256": "a8f6fb1bfef20b48eb9ab1f1478997136e9cd82d3b773cad8c8d3fa6d8c66172"
+    },
+    {
+      "path": "phase0-windows-45199684912-1/MyTodo-phase0.exe",
+      "size": 1328640,
+      "sha256": "6e787ff3a445ec63d46005125b14934a565b9e7a75af3b795ec075604fa3e637"
+    }
+  ]
+}

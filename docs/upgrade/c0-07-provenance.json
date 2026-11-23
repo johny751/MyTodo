@@ -1,0 +1,1993 @@
+{
+  "schema": "mytodo-c0-07-provenance",
+  "version": 1,
+  "documentDate": "2026-11-23",
+  "timeZone": "Asia/Shanghai",
+  "scope": "Archived evidence bytes and document publication only; all project builds/tests executed on GitHub. Hashes do not upgrade original test or collector verdicts.",
+  "publicationBase": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+  "repository": "johny751/MyTodo",
+  "branch": "master",
+  "pathBase": "docs/upgrade",
+  "qualifiedAcceptance": true,
+  "D1": false,
+  "sourceIdentity": {
+    "gitBlobIdentity": {
+      "path": "outputs/c0-07/evidence/final-identity/c007-final-source-identity.json",
+      "bytes": 230620,
+      "sha256": "90456b1918f671893d2cda64041d2c548498ab86212113d4de5a9ca514fabe90",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-final-source-identity.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 230621,
+        "sha256": "acf473335f79f18e0c824709ff9142041e0e88422c222c3bfea81a2ec0c6273b",
+        "transform": "terminal-LF-to-one-only"
+      }
+    },
+    "actualBlobSha256Receipt": {
+      "path": "outputs/c0-07/evidence/edf-final-transfer/c007-final-source-bytes.json",
+      "bytes": 381100,
+      "sha256": "87abf6a0d14a7d4bac6ae64810dedecd92172fdd3937f4557a5572792eb05584",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-final-source-bytes.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 381101,
+        "sha256": "7548ecd3dbd16ed1d74ea54b5e1c23221de5770464fe927fd239ced70872b14b",
+        "transform": "terminal-LF-to-one-only"
+      }
+    },
+    "receiptMethod": "git archive exact commit blobs read and SHA256 in Codespaces, no extraction or project execution",
+    "refs": [
+      "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "edfde91eba174f9f8c20657ded4657c8841d0f83",
+      "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa"
+    ],
+    "filesPerRef": [
+      {
+        "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "count": 682
+      },
+      {
+        "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "count": 682
+      },
+      {
+        "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "count": 682
+      },
+      {
+        "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "count": 682
+      }
+    ],
+    "transitions": [
+      {
+        "before": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "after": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "unchangedBlobs": 681,
+        "changed": [
+          {
+            "path": "tests/fault-harness/c007-windows-worker.c",
+            "beforeGitBlob": "5b7b2296b5d02b2f0ced5d20330d4b62687a9364",
+            "afterGitBlob": "72cbacf5491fda8d2c2daad8221599772cc1bf41",
+            "beforeBytes": 16962,
+            "beforeSha256": "8f230846a78cfb232aac99203a00482073c44becd6ffc40acdb9786738d2a963",
+            "afterBytes": 16968,
+            "afterSha256": "d8aef0e85ef658e564b2bb4d96d389c0e502909ab60d97f874249e21a15cc8ea"
+          }
+        ]
+      },
+      {
+        "before": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "after": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "unchangedBlobs": 681,
+        "changed": [
+          {
+            "path": "tests/c006/android-kill/android-kill-runner.mjs",
+            "beforeGitBlob": "11a2f3d77f73fb07326b7141a585be9c07da2d5f",
+            "afterGitBlob": "44714750a50db2056954ff57aa2df6e7d3f14d64",
+            "beforeBytes": 23255,
+            "beforeSha256": "e671bd7be73d2aea7299fc2e4839f0d01367d031f7d85cd65e1766322746d518",
+            "afterBytes": 23284,
+            "afterSha256": "792a609c5897131f26574f39b93008da20bbaeefc26fb65aef5783b60d19b8f0"
+          }
+        ]
+      },
+      {
+        "before": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "after": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "unchangedByteFiles": 681,
+        "changed": [
+          {
+            "path": "tests/c006/c006-harness/android-runner.mjs",
+            "beforeBytes": 7512,
+            "beforeSha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+            "afterBytes": 7788,
+            "afterSha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a"
+          }
+        ],
+        "priorEdfLedgerCrossCheckRows": 682,
+        "priorEdfLedgerCrossCheckMismatches": 0
+      }
+    ],
+    "qualification": "Three successive source transitions change only named harness files. C007 directly executed de7; core, Android kill, bootstrap and baseline directly executed source19ce. Original run sourceSha values remain unchanged; old gates are associated through explicit unchanged-source dependency identity, not renamed as new-source execution.",
+    "selectedDatabaseTransitionReceipt": {
+      "path": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-source-bytes.json",
+      "bytes": 287842,
+      "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-selected-db-source-bytes.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 287842,
+        "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+        "transform": "byte-identical"
+      }
+    },
+    "selectedDatabaseTransitionIndependentAudit": {
+      "path": "work/c007-selected-source-identity-independent-audit.json",
+      "bytes": 1582,
+      "sha256": "54640f3f80ee4f963445e8cc50fe2aca00d19c12dfc878fb0cf0b0664bf88bec",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-selected-source-identity-independent-audit.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 1546,
+        "sha256": "ae73337f23a6fd05ca6222dedf3e929df748cdf5a2a03ee48a6e1f74d4de7e49",
+        "transform": "CRLF-to-LF-only"
+      }
+    }
+  },
+  "productionFrozenSince": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+  "productionFiles": [
+    {
+      "path": "windows/database.c",
+      "sha256": "17c980cca5c5f3a8ff7f02eebd73a29719ea00c1576323eb0b5b1a39348e5840"
+    },
+    {
+      "path": "windows/sync.c",
+      "sha256": "23ca036978d47a56580613eb02f88844b4368138773728b3c3d8369d8b220467"
+    },
+    {
+      "path": "src/sqlite-store.mjs",
+      "sha256": "0f398ec44f2d3ded1c3a1db9adcc7235e150558cf7f58e9a3853770d0f713344"
+    }
+  ],
+  "reports": [
+    {
+      "path": "c0-07-report.md",
+      "bytes": 15240,
+      "sha256": "1843a56aff6a431b1894c34e5ad7fa70183625031dedd1709521894b86fd35b9"
+    },
+    {
+      "path": "c0-07-readme.md",
+      "bytes": 1680,
+      "sha256": "9470949b9c9a9bc3601ae57f4ef04c72f58ed5b9b9230b5c14ae3b9c2559d232"
+    },
+    {
+      "path": "c0-07-verification.json",
+      "bytes": 82614,
+      "sha256": "654759c37a545b5a39b3da70cad268152f998ecf644eb63a5a764c88d6b1a20f"
+    },
+    {
+      "path": "c0-07-case-results.json",
+      "bytes": 178856,
+      "sha256": "ef67ebc649ee69957c51ba6fff0c1d0a9cd16fbb47d842839612342d1effd66d"
+    },
+    {
+      "path": "c0-07-case-results.md",
+      "bytes": 7430,
+      "sha256": "fcafa1d7486a9d859eef0c3e2997f61ae19b0777c75922e808e3c0ceee29201d"
+    },
+    {
+      "path": "c0-07-environment.json",
+      "bytes": 47728,
+      "sha256": "3a97338362cc3f869dce19671a28212ac5a5227fa573f08bdff0765f27f0181f"
+    },
+    {
+      "path": "c0-07-environment.md",
+      "bytes": 6492,
+      "sha256": "6672ebfda48d24bc5166b55d9e889755e4a6c931c7b421ef1be24c377b615b33"
+    }
+  ],
+  "originalArchiveIdentityPolicy": "These are local archive-byte SHA256 values. Nested outer/inner archives are distinct transfer records, not additional test executions. Cloud-only APK/EXE/SQLite records are not local binary rehashes.",
+  "originalArchives": [
+    {
+      "path": "outputs/c0-07/evidence/19ce-final-receipts/c007-19ce-final-receipts.zip",
+      "bytes": 1246,
+      "sha256": "adcaec6858c8d0e6cfbca4ca91fb04b845023a36abbc85817fb0dc4c62f244c1"
+    },
+    {
+      "path": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-supplement-evidence-45199684912.zip",
+      "bytes": 100432,
+      "sha256": "1ee39eac4a5df21a0f68af646e1fb69470797d33ca0dc17e37df935a9b4b968c"
+    },
+    {
+      "path": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-supplement-evidence-45199685144.zip",
+      "bytes": 505329,
+      "sha256": "1d91444f0ceb73ec5b85d777520b6d9c1db3b3be446c1236e0d1c72602e4e341"
+    },
+    {
+      "path": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-supplement-transfer.zip",
+      "bytes": 550797,
+      "sha256": "2dd6fcf766858f4285231f24dbaa95a70850a3b577ac61d79f9792e3a8c0ae87"
+    },
+    {
+      "path": "outputs/c0-07/evidence/45186305462/archives/c007-f9-remaining-evidence-45186305462.zip",
+      "bytes": 308930,
+      "sha256": "8c3282c9537719c82c803957f25e23636cedb0798c28e651530b09aff0ad98fa"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-19ce-core-evidence-45199685003.zip",
+      "bytes": 5279924,
+      "sha256": "4712aeb72630f33e758bdc007cfe7cbf699a1866862b1f4e85d70aa2b108d5de"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-19ce-kill-evidence-45199685578.zip",
+      "bytes": 653673,
+      "sha256": "324d121e4d069d003d9e37b4f9d63c8f5dc9988c80822a0b6d8f36c773d60bb8"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-de7-transfer.zip",
+      "bytes": 8044630,
+      "sha256": "ffe7d9415d46e18dbe1e9cc790aa49cf60bad452b320143a7c67cd7c0259b3d1"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-edf-core-evidence-45194185453.zip",
+      "bytes": 5160801,
+      "sha256": "3822b155e1f9bb4cd952546880802b1eaab9ea04893bb2e37aa508685054e223"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-edf-final-transfer.zip",
+      "bytes": 458040,
+      "sha256": "77548d73cca2fbf7ae62ad9b6991db120d64eb32efb6dcd520ace676048c8e44"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-f9-review-transfer.zip",
+      "bytes": 33266719,
+      "sha256": "4f63922d156240239ab9d3ed62839c5e24547c371e1c047e0efcb1b9103f41cf"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-f9-supplement.zip",
+      "bytes": 1577,
+      "sha256": "340fe832c7921a3cc290242e61794ed6542f7993e2d49767495adabf1685c2de"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-final-identity.zip",
+      "bytes": 70472,
+      "sha256": "714dd1afc060d2abdc202f378f3d26aeac647d0037b8d2888e2b1b45bf99aa29"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-first-full-evidence-45180141745.zip",
+      "bytes": 2777061,
+      "sha256": "6556d1df2fc0e9ff7231c00a32b0d38e604858b0fec4ad069bbbc1897cf32874"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-first-red-evidence-45180141745.zip",
+      "bytes": 2554746,
+      "sha256": "d1a4b784556f36a8e9ce1ee1e314683041f6aa50d68d1d3c4fa25a8e7d9a6bd9"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-red-evidence-45183273190.zip",
+      "bytes": 7943259,
+      "sha256": "13eaf83974d4abe282d37e9fa621a1be8aac2203c66d935e989d64cbb2b99186"
+    },
+    {
+      "path": "outputs/c0-07/evidence/archives/c007-regressions-initial.zip",
+      "bytes": 572497,
+      "sha256": "554dfd81faf17b02fe66d98930389d1d49e588737b6402414f47744eb8be228d"
+    },
+    {
+      "path": "outputs/c0-07/evidence/de7-transfer/archives/c007-de7-evidence-45190559178.zip",
+      "bytes": 7941721,
+      "sha256": "e9f094e2e25b294bcac0d46b7e554243de59ff292d5bdee1cf6f8741a5bd3ba9"
+    },
+    {
+      "path": "outputs/c0-07/evidence/de7-transfer/archives/c007-de7-evidence-45190559425.zip",
+      "bytes": 100703,
+      "sha256": "92a8b720cfb7651a3fa2a0628480fae74df712a395e7e5d808a30ffb1cd4eac8"
+    },
+    {
+      "path": "outputs/c0-07/evidence/edf-final-transfer/c007-edf-kill-evidence-45194185184.zip",
+      "bytes": 653021,
+      "sha256": "3308b8b4e453a377f27a1d2d751c21c83617b9260d03559dc37f7dd978a7ec69"
+    },
+    {
+      "path": "outputs/c0-07/evidence/f9-remaining-transfer/archives/c007-f9-remaining-evidence-45186305189.zip",
+      "bytes": 7940667,
+      "sha256": "96dd33cc2718dcc873b8918753be38c0e338bb5e3ed60df78793bcae98f98660"
+    },
+    {
+      "path": "outputs/c0-07/evidence/f9-remaining-transfer/archives/c007-f9-remaining-evidence-45186305196.zip",
+      "bytes": 20072164,
+      "sha256": "48505dfa4eba0901f9aa8b37c6a557805a463280919a56b920c912d57cbdea35"
+    },
+    {
+      "path": "outputs/c0-07/evidence/f9-remaining-transfer/archives/c007-f9-remaining-evidence-45186305230.zip",
+      "bytes": 5219714,
+      "sha256": "18c0040eef027a4a2a1260b4b7b9bd4b50ade102a6361c4932ee071286a558b3"
+    },
+    {
+      "path": "outputs/c0-07/evidence/initial-regressions/c007-regression-evidence-45186305173.zip",
+      "bytes": 100876,
+      "sha256": "5af6a46a3abbd5b3313962a4c7561914682565428bec51c56b13ad59568b6eda"
+    },
+    {
+      "path": "outputs/c0-07/evidence/initial-regressions/c007-regression-evidence-45186305386.zip",
+      "bytes": 18911,
+      "sha256": "d4ed1406fe13647d4c934fe3242f74ccacfd4f6c2d161b71519c9399febb1204"
+    },
+    {
+      "path": "outputs/c0-07/evidence/initial-regressions/c007-regression-evidence-45186305576.zip",
+      "bytes": 505473,
+      "sha256": "51922a051ff83f29a482496be5624904bac1287239056395f6a92c89f07ef3d0"
+    },
+    {
+      "path": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-identity.zip",
+      "bytes": 65443,
+      "sha256": "850dc61e6ca90ce4d417539df6fe2747f866764efa4b23903e248e90bcd9fc76"
+    }
+  ],
+  "publishedEvidence": [
+    {
+      "source": "outputs/c0-07/evidence/19ce-final-receipts/c007-19ce-final-runs.json",
+      "bytes": 607,
+      "sha256": "d8da0106c98e646aac51b4b569a2b24a6d1329aa972ad3cab0fde7813fa3090f",
+      "publishedPath": "c0-07-evidence/c007-19ce-final-runs.json",
+      "publishedBytes": 607,
+      "publishedSha256": "d8da0106c98e646aac51b4b569a2b24a6d1329aa972ad3cab0fde7813fa3090f",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-baseline-binary-rehash.json",
+      "bytes": 893,
+      "sha256": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+      "publishedPath": "c0-07-evidence/c007-19ce-baseline-binary-rehash.json",
+      "publishedBytes": 893,
+      "publishedSha256": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "outputs/c0-07/evidence/edf-final-transfer/c007-final-source-bytes.json",
+      "bytes": 381100,
+      "sha256": "87abf6a0d14a7d4bac6ae64810dedecd92172fdd3937f4557a5572792eb05584",
+      "publishedPath": "c0-07-evidence/c007-final-source-bytes.json",
+      "publishedBytes": 381101,
+      "publishedSha256": "7548ecd3dbd16ed1d74ea54b5e1c23221de5770464fe927fd239ced70872b14b",
+      "transform": "terminal-LF-to-one-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 0,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "outputs/c0-07/evidence/final-identity/c007-final-source-identity.json",
+      "bytes": 230620,
+      "sha256": "90456b1918f671893d2cda64041d2c548498ab86212113d4de5a9ca514fabe90",
+      "publishedPath": "c0-07-evidence/c007-final-source-identity.json",
+      "publishedBytes": 230621,
+      "publishedSha256": "acf473335f79f18e0c824709ff9142041e0e88422c222c3bfea81a2ec0c6273b",
+      "transform": "terminal-LF-to-one-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 0,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-publication.json",
+      "bytes": 323,
+      "sha256": "53b3d5f1f2dbafd099d4d1c29a18f61d1e460d1bf7cd30abc0595b115d60b93b",
+      "publishedPath": "c0-07-evidence/c007-selected-db-publication.json",
+      "publishedBytes": 323,
+      "publishedSha256": "53b3d5f1f2dbafd099d4d1c29a18f61d1e460d1bf7cd30abc0595b115d60b93b",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-source-bytes.json",
+      "bytes": 287842,
+      "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+      "publishedPath": "c0-07-evidence/c007-selected-db-source-bytes.json",
+      "publishedBytes": 287842,
+      "publishedSha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "outputs/c0-07/evidence/selected-db-identity/initial-runs.json",
+      "bytes": 1129,
+      "sha256": "92fd598e85dd91b03cd08b1384b2f5bbfd6fdcb492daa647db2377c07dee058a",
+      "publishedPath": "c0-07-evidence/initial-runs.json",
+      "publishedBytes": 1130,
+      "publishedSha256": "50221c363574e9d11e6902e56e2b341eebcbba2a872ddc7ae0fd06de0b85cc36",
+      "transform": "terminal-LF-to-one-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 0,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/audit-c007-19ce-c006-core.ps1",
+      "bytes": 11695,
+      "sha256": "fbfd65c7be55d6a4cf4e8e53b2274c41ce54e2a26ef3dc27d232c3edb3ecd690",
+      "publishedPath": "c0-07-evidence/audit-c007-19ce-c006-core.ps1",
+      "publishedBytes": 11695,
+      "publishedSha256": "fbfd65c7be55d6a4cf4e8e53b2274c41ce54e2a26ef3dc27d232c3edb3ecd690",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/audit-c007-19ce-node-native-reopens.ps1",
+      "bytes": 6266,
+      "sha256": "d0b70af406c0376f8f378a99c1855a591e1290066e12f5449b56571275c39b06",
+      "publishedPath": "c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1",
+      "publishedBytes": 6266,
+      "publishedSha256": "d0b70af406c0376f8f378a99c1855a591e1290066e12f5449b56571275c39b06",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/audit-c007-archive.ps1",
+      "bytes": 33424,
+      "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+      "publishedPath": "c0-07-evidence/audit-c007-archive.ps1",
+      "publishedBytes": 33424,
+      "publishedSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-19ce-core-android-final-review.md",
+      "bytes": 11355,
+      "sha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+      "publishedPath": "c0-07-evidence/c006-19ce-core-android-final-review.md",
+      "publishedBytes": 11355,
+      "publishedSha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-19ce-core-android-semantic-audit.json",
+      "bytes": 19001,
+      "sha256": "d5b38a9cf1b327352a31669265f396ed4bbfd7f3e03d68b757c4435dd2b4d3b6",
+      "publishedPath": "c0-07-evidence/c006-19ce-core-android-semantic-audit.json",
+      "publishedBytes": 18335,
+      "publishedSha256": "86780e076ca1528866b20f22d60d4714cc6688ad3e178c0b5c698a6a6c6ae3ed",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-19ce-core-android-semantic-audit.ps1",
+      "bytes": 26145,
+      "sha256": "0bda5f9ecc6eb5165f73aaebe611cf1c963fd135997e48e10f41f5d2c66de30b",
+      "publishedPath": "c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1",
+      "publishedBytes": 26145,
+      "publishedSha256": "0bda5f9ecc6eb5165f73aaebe611cf1c963fd135997e48e10f41f5d2c66de30b",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-19ce-kill-final-review.md",
+      "bytes": 7574,
+      "sha256": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2",
+      "publishedPath": "c0-07-evidence/c006-19ce-kill-final-review.md",
+      "publishedBytes": 7574,
+      "publishedSha256": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-19ce-kill-semantic-audit.json",
+      "bytes": 6827,
+      "sha256": "a7556bdcff2e8e438d53c2dd005c661df6dca19d5246f460b8d2dc941f1433d5",
+      "publishedPath": "c0-07-evidence/c006-19ce-kill-semantic-audit.json",
+      "publishedBytes": 6587,
+      "publishedSha256": "a5826da55551f9c32a19600846948a709aa07f313baa2b47a363561dcbf42461",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-edf-a27-diagnosis.md",
+      "bytes": 9474,
+      "sha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+      "publishedPath": "c0-07-evidence/c006-edf-a27-diagnosis.md",
+      "publishedBytes": 9474,
+      "publishedSha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-edf-android-kill-final-review.md",
+      "bytes": 8295,
+      "sha256": "48e9fd22b62b5022b9c41e89cf3ecd09f4314f3f5563f0ca1a1c66b68319f870",
+      "publishedPath": "c0-07-evidence/c006-edf-android-kill-final-review.md",
+      "publishedBytes": 8295,
+      "publishedSha256": "48e9fd22b62b5022b9c41e89cf3ecd09f4314f3f5563f0ca1a1c66b68319f870",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-edf-kill-semantic-audit.json",
+      "bytes": 6829,
+      "sha256": "0be23149ff4b145ffa2c4b23ed2904bea017ccaa3e8ef3c274f76202224fe0b3",
+      "publishedPath": "c0-07-evidence/c006-edf-kill-semantic-audit.json",
+      "publishedBytes": 6589,
+      "publishedSha256": "554a01a48a117fe5cb4de48c39a00b566ac8330b1d8b7982ca2e88fb6539ba2e",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-edf-selected-db-contract-evidence-v2.json",
+      "bytes": 70409,
+      "sha256": "a23d14fd6e6e4d8f35c76ae162ff4ef85e99a5d6a2c6ecdf2443899b90d29d48",
+      "publishedPath": "c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json",
+      "publishedBytes": 68750,
+      "publishedSha256": "9fc0dd1566f25ce277713245647e0119064239f1ae1325fb4d969f007168eb09",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c006-selected-db-contract-independent-review.json",
+      "bytes": 33555,
+      "sha256": "34a8f9278ac6cc1e6b9d27eef2157ac2589ca436ff8962c983c6ff013a8148cf",
+      "publishedPath": "c0-07-evidence/c006-selected-db-contract-independent-review.json",
+      "publishedBytes": 32772,
+      "publishedSha256": "f5233d34bba2a08a739dd619f0781e97a460e476e16435112f0494b6c69c02b9",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-android-kill-integrity-only-raw.json",
+      "bytes": 7168,
+      "sha256": "b929295d81e36b51231b62358afe3dab1e862e30a518e07739042ff2d1624d54",
+      "publishedPath": "c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json",
+      "publishedBytes": 6987,
+      "publishedSha256": "b4bb62e0dcb0d227e833a9ddebaf69cb7558fa848bc89071e3d7b8ac4b42f657",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-baseline-integrity-only-raw.json",
+      "bytes": 3463,
+      "sha256": "112116cdc6daa2de07fd82232723cab489f3a6a3545be8326cf509a8c75e440d",
+      "publishedPath": "c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json",
+      "publishedBytes": 3366,
+      "publishedSha256": "a2b0aa1c0c32bd861a8de1c1be50edfb7790a64e132472ea88f74eb4edd889cf",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-baseline-qualified.json",
+      "bytes": 3031,
+      "sha256": "a6363a2c2f100205a17d37c581766ad536bd9d8d5ef6ac079f0240379561fb35",
+      "publishedPath": "c0-07-evidence/c007-19ce-baseline-qualified.json",
+      "publishedBytes": 2959,
+      "publishedSha256": "2011d4eaf6c7252ccc9e98c3a1134a1e94d29c87ac9983dd2660d0cc919ba20f",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-bootstrap-integrity-only-raw.json",
+      "bytes": 3226,
+      "sha256": "9c8d6910a2094c314c2c0ac6e73d4ab7963c37b97371b98a282f6a8edb5eefb4",
+      "publishedPath": "c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json",
+      "publishedBytes": 3136,
+      "publishedSha256": "d1f5231f6afff8568bf1feef2731dcea9cc0328fdd4b29d0e47c8d1e10abdb02",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-c006-core-audit.json",
+      "bytes": 177489,
+      "sha256": "7ba341f57c2581aec03d04de606920c109252c9b3d0abd8f071ad717fc34750e",
+      "publishedPath": "c0-07-evidence/c007-19ce-c006-core-audit.json",
+      "publishedBytes": 170820,
+      "publishedSha256": "b2af468bfad19aba2ac2d2acfc1f8de02402d52a7419606afda747fb881451ec",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-c006-core-integrity-only-raw.json",
+      "bytes": 9622,
+      "sha256": "4f7f509f9005112f313664d2246f18884623dadf61f0445de79594e5799a5c07",
+      "publishedPath": "c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json",
+      "publishedBytes": 9370,
+      "publishedSha256": "7338ae761055b0abcc1fea7143008d8fc8f09b20aa77e964fcfe5c3c7388dcd6",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-node-native-reopens-audit.json",
+      "bytes": 559534,
+      "sha256": "dc42e154fe66096f4d854fe49b9324a446888d1fd4bb278253400c919e237ae0",
+      "publishedPath": "c0-07-evidence/c007-19ce-node-native-reopens-audit.json",
+      "publishedBytes": 541556,
+      "publishedSha256": "eac309e28dc19d95f417f97fd6023e99fca93c1c3473ba9435fbf1f6c02cdeae",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-19ce-regression-audit.json",
+      "bytes": 29480,
+      "sha256": "2d465b68279daf131a07daaf4bd677d7e385aa70bc425d7e7262fc086b253de9",
+      "publishedPath": "c0-07-evidence/c007-19ce-regression-audit.json",
+      "publishedBytes": 28483,
+      "publishedSha256": "2a94dee1e2db11b2570f37c436b7615716f628f3dedb8b806f4b4328cfcc5d6d",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-archive-auditor-independent-review.md",
+      "bytes": 6218,
+      "sha256": "03966d32b339346e12418b4c4fc4f0ff31b9a993a3bd64ed038c9fbee36ade64",
+      "publishedPath": "c0-07-evidence/c007-archive-auditor-independent-review.md",
+      "publishedBytes": 6218,
+      "publishedSha256": "03966d32b339346e12418b4c4fc4f0ff31b9a993a3bd64ed038c9fbee36ade64",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-de7-android-final-review.md",
+      "bytes": 8478,
+      "sha256": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6",
+      "publishedPath": "c0-07-evidence/c007-de7-android-final-review.md",
+      "publishedBytes": 8478,
+      "publishedSha256": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-de7-network-independent-audit.json",
+      "bytes": 42398,
+      "sha256": "7fffa5b62e3ee1e33bb472f5fc9c5cc5ded351e8caebcb9ce8c2913c97fb8694",
+      "publishedPath": "c0-07-evidence/c007-de7-network-independent-audit.json",
+      "publishedBytes": 41259,
+      "publishedSha256": "97a4103c53b5d19b07fa0821fa1f979293c609e76fac059e458efe57d7db609a",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-de7-node-windows-evidence-audit-v3.json",
+      "bytes": 599493,
+      "sha256": "19b4c1908e6927e86cbecd04e39571289a8710b78fdaa0ef0df5e7bec16b8245",
+      "publishedPath": "c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json",
+      "publishedBytes": 583920,
+      "publishedSha256": "48091700c8e26719618e0e8523139276a9ee2880ffad73744e07383749be45ec",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-de7-production-evidence-review.md",
+      "bytes": 10711,
+      "sha256": "28473731c695f7cf7dd68116379b4511124ecbd5dcc9f73f8c338aabd8fd431e",
+      "publishedPath": "c0-07-evidence/c007-de7-production-evidence-review.md",
+      "publishedBytes": 10711,
+      "publishedSha256": "28473731c695f7cf7dd68116379b4511124ecbd5dcc9f73f8c338aabd8fd431e",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-de7-production-integrity-audit.json",
+      "bytes": 58022,
+      "sha256": "61d72889e7a5473235b1a8390648f15b9ef63e366505a13d3d763a5e99a9497f",
+      "publishedPath": "c0-07-evidence/c007-de7-production-integrity-audit.json",
+      "publishedBytes": 56547,
+      "publishedSha256": "fd391e9217f2b771777244459a14f8af64f83b912c1eaf10959651678018eec6",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-edf-a27-local-text-integrity-review.json",
+      "bytes": 59536,
+      "sha256": "d0d0550cbe3e0653b2726481a531e64aed5375776b7cb5838f4d45ff139229b4",
+      "publishedPath": "c0-07-evidence/c007-edf-a27-local-text-integrity-review.json",
+      "publishedBytes": 58359,
+      "publishedSha256": "e3e7da000d9ef15c5421706ac9dc3fa34e507da0904c11cd6c030748bff3f709",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-edf-android-kill-integrity-only-raw.json",
+      "bytes": 7168,
+      "sha256": "42018d28567f06f0b0a0c74b514d04736de0908aa075278e2d290c0df3a03cc3",
+      "publishedPath": "c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json",
+      "publishedBytes": 6987,
+      "publishedSha256": "f45288dac6b098a375572db0ee82fa4efe750a90da7acc69458089e526bcb2ea",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-edf-c006-core-integrity-only-raw.json",
+      "bytes": 9622,
+      "sha256": "7c9c61d041ebc0e8dd4f096e5d96295db9c962fc67bcfb87f597a583809c0b59",
+      "publishedPath": "c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json",
+      "publishedBytes": 9370,
+      "publishedSha256": "fe27f768607fdb8a104bf5ec663823d43a9871f50ecfc0f45a4a91f6b78af220",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-baseline-qualified.json",
+      "bytes": 3529,
+      "sha256": "0e61d68cad812f0d08d52d68e371816269c3f234005d6176ee751202f5a1a793",
+      "publishedPath": "c0-07-evidence/c007-f9-baseline-qualified.json",
+      "publishedBytes": 3454,
+      "publishedSha256": "9a2635c3763af36743b4c012faa60479caa5f7c145e38adc6d9768b6cc275de1",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-c006-a26-failure-review.md",
+      "bytes": 10324,
+      "sha256": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316",
+      "publishedPath": "c0-07-evidence/c007-f9-c006-a26-failure-review.md",
+      "publishedBytes": 10324,
+      "publishedSha256": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-c006-core-audit.json",
+      "bytes": 177361,
+      "sha256": "e0714f1374eaea8398d71e7b6032139e4d93463022facb07b648e29411951d99",
+      "publishedPath": "c0-07-evidence/c007-f9-c006-core-audit.json",
+      "publishedBytes": 170697,
+      "publishedSha256": "6493b836d9f1e68a9e94d8348549c24c9269aad3c1bc28346f09c1b37c4d3f75",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-c006-core-integrity-only-raw.json",
+      "bytes": 9622,
+      "sha256": "3120c6d3a197d5d19afa5fe69f5966d2f97afa0b5468f7785f33e543a645dd69",
+      "publishedPath": "c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json",
+      "publishedBytes": 9370,
+      "publishedSha256": "c0ba30f31e6be84c8547cb18933c045aee124af742a95410e1727ba15fdc182d",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-core-matrix-manifest-coverage.json",
+      "bytes": 9566,
+      "sha256": "0d97613f57cb81de072415748573589da9b460165ab033b8f02e623f71530ef9",
+      "publishedPath": "c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json",
+      "publishedBytes": 9314,
+      "publishedSha256": "054ddec7227ed31e43a0b13592f34dae148552feffef46522346489f2f9504ac",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-matrix-android-crash-review.md",
+      "bytes": 9687,
+      "sha256": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e",
+      "publishedPath": "c0-07-evidence/c007-f9-matrix-android-crash-review.md",
+      "publishedBytes": 9687,
+      "publishedSha256": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-matrix-integrity-only-raw.json",
+      "bytes": 9956,
+      "sha256": "a6a4ae8459ba3aee8ae079755b27f0515de34c82bc87e14a3cf3ab2777a1958a",
+      "publishedPath": "c0-07-evidence/c007-f9-matrix-integrity-only-raw.json",
+      "publishedBytes": 9645,
+      "publishedSha256": "03c1d817c461d96ff38153be98ba57363e7d7c034ad45e00a1aebd51a42b23fc",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-matrix-semantic-review.json",
+      "bytes": 669,
+      "sha256": "eeb4c14aac5841fcc967015fe4a49e26843f9dfdd9d302d8ec0283c68a342c63",
+      "publishedPath": "c0-07-evidence/c007-f9-matrix-semantic-review.json",
+      "publishedBytes": 650,
+      "publishedSha256": "9ca3ed19c383c8702a57c83cfe667e19ffca117ee4b9e677291bcb07fe369b3b",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-production-integrity-audit.json",
+      "bytes": 59004,
+      "sha256": "35bc08ced53013d9e8aef874fd4ea588e83c2f47c3e52151a03254c695bf2c8f",
+      "publishedPath": "c0-07-evidence/c007-f9-production-integrity-audit.json",
+      "publishedBytes": 57503,
+      "publishedSha256": "72646a507a9bd2e851f6e1e8f6e492f641e31354b21ff8772739589d15558d87",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-f9-regression-audit.json",
+      "bytes": 37534,
+      "sha256": "184b6dc978f04eaadfefbcd847bb1a86b7308d7e5169b1d8cdcd13b48e196983",
+      "publishedPath": "c0-07-evidence/c007-f9-regression-audit.json",
+      "publishedBytes": 36273,
+      "publishedSha256": "435ad373d0f2749b70704fa2a055734c10f3845ee32bc7bba044e24e4c25d967",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-feb-android-deep-review.md",
+      "bytes": 8652,
+      "sha256": "b29d695b9d5861ae4ec005fe6a64a6cf8b73ac920bb405c121a8e8dc8092edef",
+      "publishedPath": "c0-07-evidence/c007-feb-android-deep-review.md",
+      "publishedBytes": 8652,
+      "publishedSha256": "b29d695b9d5861ae4ec005fe6a64a6cf8b73ac920bb405c121a8e8dc8092edef",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-first-red-android-review.md",
+      "bytes": 7306,
+      "sha256": "bea7a8ffb66271fd65fe31d9cebdaa3cf446ff132ab0a0bdfcfb71a070906224",
+      "publishedPath": "c0-07-evidence/c007-first-red-android-review.md",
+      "publishedBytes": 7306,
+      "publishedSha256": "bea7a8ffb66271fd65fe31d9cebdaa3cf446ff132ab0a0bdfcfb71a070906224",
+      "transform": "byte-identical",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-first-red-integrity-audit.json",
+      "bytes": 68069,
+      "sha256": "12fcbdd3e5e339d23eb5ddbc4400743b959ec6ee55deeaccbc0e71fd0d22f57e",
+      "publishedPath": "c0-07-evidence/c007-first-red-integrity-audit.json",
+      "publishedBytes": 66302,
+      "publishedSha256": "b2e53f6f8a1eb4639e31c7fa821ace0f278bd280da28ee13c1ea4fbfb2f82220",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-selected-source-identity-independent-audit.json",
+      "bytes": 1582,
+      "sha256": "54640f3f80ee4f963445e8cc50fe2aca00d19c12dfc878fb0cf0b0664bf88bec",
+      "publishedPath": "c0-07-evidence/c007-selected-source-identity-independent-audit.json",
+      "publishedBytes": 1546,
+      "publishedSha256": "ae73337f23a6fd05ca6222dedf3e929df748cdf5a2a03ee48a6e1f74d4de7e49",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    },
+    {
+      "source": "work/c007-strengthened-red-integrity-audit.json",
+      "bytes": 68126,
+      "sha256": "2252cc77ce8939274b21ef925c963a9f4286c99ed0d399d0427c4191d02baa00",
+      "publishedPath": "c0-07-evidence/c007-strengthened-red-integrity-audit.json",
+      "publishedBytes": 66381,
+      "publishedSha256": "cde0fd24f11426ef195383b1e03741a782c7faa0fa298b3957b5a32b6802b256",
+      "transform": "CRLF-to-LF-only",
+      "originalTerminalLfCountAfterCrlfNormalization": 1,
+      "publishedTerminalLfCount": 1
+    }
+  ],
+  "publishedEvidenceCount": 52,
+  "publishedEvidenceBytes": 3165408.0,
+  "transformationPolicy": "Only CRLF-to-LF and exactly one terminal LF; originals unchanged. Original path/hash and published path/hash must never be substituted.",
+  "publicationMapIdentity": {
+    "path": "work/c007-publication-evidence-map.json",
+    "bytes": 25850,
+    "sha256": "5c4d417f6a34ba3c692e0c7ecbe24452595330f0afa771fdf594369c28e8fbb0"
+  },
+  "publicationMapIndependentReview": {
+    "original": {
+      "path": "work/c007-publication-final-map-review.json",
+      "bytes": 40418,
+      "sha256": "9a4ce88281989bf967fc2fe0e1b28226169779b4f388620b56269a28b7009e08"
+    },
+    "report": {
+      "schema": "mytodo-c007-publication-independent-review",
+      "version": 1,
+      "scope": "Independent local evidence-only byte/hash comparison; no project execution",
+      "policy": "CRLF-to-LF and exactly one terminal LF",
+      "map": {
+        "path": "work/c007-publication-evidence-map.json",
+        "bytes": 25850,
+        "sha256": "5c4d417f6a34ba3c692e0c7ecbe24452595330f0afa771fdf594369c28e8fbb0"
+      },
+      "script": {
+        "path": "work/prepare-c007-report-evidence.ps1",
+        "sha256": "331aa93a7082ff5da8828e7f8506667c5686ae9f793b2d8cb3539fff3212cd18"
+      },
+      "fileCount": 52,
+      "failedFiles": 0,
+      "checks": 520.0,
+      "passed": true,
+      "rows": [
+        {
+          "source": "outputs/c0-07/evidence/19ce-final-receipts/c007-19ce-final-runs.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-final-runs.json",
+          "originalHash": "d8da0106c98e646aac51b4b569a2b24a6d1329aa972ad3cab0fde7813fa3090f",
+          "publishedHash": "d8da0106c98e646aac51b4b569a2b24a6d1329aa972ad3cab0fde7813fa3090f",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-baseline-binary-rehash.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-baseline-binary-rehash.json",
+          "originalHash": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+          "publishedHash": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "outputs/c0-07/evidence/edf-final-transfer/c007-final-source-bytes.json",
+          "publishedPath": "c0-07-evidence/c007-final-source-bytes.json",
+          "originalHash": "87abf6a0d14a7d4bac6ae64810dedecd92172fdd3937f4557a5572792eb05584",
+          "publishedHash": "7548ecd3dbd16ed1d74ea54b5e1c23221de5770464fe927fd239ced70872b14b",
+          "transform": "terminal-LF-to-one-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "outputs/c0-07/evidence/final-identity/c007-final-source-identity.json",
+          "publishedPath": "c0-07-evidence/c007-final-source-identity.json",
+          "originalHash": "90456b1918f671893d2cda64041d2c548498ab86212113d4de5a9ca514fabe90",
+          "publishedHash": "acf473335f79f18e0c824709ff9142041e0e88422c222c3bfea81a2ec0c6273b",
+          "transform": "terminal-LF-to-one-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-publication.json",
+          "publishedPath": "c0-07-evidence/c007-selected-db-publication.json",
+          "originalHash": "53b3d5f1f2dbafd099d4d1c29a18f61d1e460d1bf7cd30abc0595b115d60b93b",
+          "publishedHash": "53b3d5f1f2dbafd099d4d1c29a18f61d1e460d1bf7cd30abc0595b115d60b93b",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-source-bytes.json",
+          "publishedPath": "c0-07-evidence/c007-selected-db-source-bytes.json",
+          "originalHash": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+          "publishedHash": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "outputs/c0-07/evidence/selected-db-identity/initial-runs.json",
+          "publishedPath": "c0-07-evidence/initial-runs.json",
+          "originalHash": "92fd598e85dd91b03cd08b1384b2f5bbfd6fdcb492daa647db2377c07dee058a",
+          "publishedHash": "50221c363574e9d11e6902e56e2b341eebcbba2a872ddc7ae0fd06de0b85cc36",
+          "transform": "terminal-LF-to-one-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/audit-c007-19ce-c006-core.ps1",
+          "publishedPath": "c0-07-evidence/audit-c007-19ce-c006-core.ps1",
+          "originalHash": "fbfd65c7be55d6a4cf4e8e53b2274c41ce54e2a26ef3dc27d232c3edb3ecd690",
+          "publishedHash": "fbfd65c7be55d6a4cf4e8e53b2274c41ce54e2a26ef3dc27d232c3edb3ecd690",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/audit-c007-19ce-node-native-reopens.ps1",
+          "publishedPath": "c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1",
+          "originalHash": "d0b70af406c0376f8f378a99c1855a591e1290066e12f5449b56571275c39b06",
+          "publishedHash": "d0b70af406c0376f8f378a99c1855a591e1290066e12f5449b56571275c39b06",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/audit-c007-archive.ps1",
+          "publishedPath": "c0-07-evidence/audit-c007-archive.ps1",
+          "originalHash": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+          "publishedHash": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-19ce-core-android-final-review.md",
+          "publishedPath": "c0-07-evidence/c006-19ce-core-android-final-review.md",
+          "originalHash": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+          "publishedHash": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-19ce-core-android-semantic-audit.json",
+          "publishedPath": "c0-07-evidence/c006-19ce-core-android-semantic-audit.json",
+          "originalHash": "d5b38a9cf1b327352a31669265f396ed4bbfd7f3e03d68b757c4435dd2b4d3b6",
+          "publishedHash": "86780e076ca1528866b20f22d60d4714cc6688ad3e178c0b5c698a6a6c6ae3ed",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-19ce-core-android-semantic-audit.ps1",
+          "publishedPath": "c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1",
+          "originalHash": "0bda5f9ecc6eb5165f73aaebe611cf1c963fd135997e48e10f41f5d2c66de30b",
+          "publishedHash": "0bda5f9ecc6eb5165f73aaebe611cf1c963fd135997e48e10f41f5d2c66de30b",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-19ce-kill-final-review.md",
+          "publishedPath": "c0-07-evidence/c006-19ce-kill-final-review.md",
+          "originalHash": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2",
+          "publishedHash": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-19ce-kill-semantic-audit.json",
+          "publishedPath": "c0-07-evidence/c006-19ce-kill-semantic-audit.json",
+          "originalHash": "a7556bdcff2e8e438d53c2dd005c661df6dca19d5246f460b8d2dc941f1433d5",
+          "publishedHash": "a5826da55551f9c32a19600846948a709aa07f313baa2b47a363561dcbf42461",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-edf-a27-diagnosis.md",
+          "publishedPath": "c0-07-evidence/c006-edf-a27-diagnosis.md",
+          "originalHash": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+          "publishedHash": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-edf-android-kill-final-review.md",
+          "publishedPath": "c0-07-evidence/c006-edf-android-kill-final-review.md",
+          "originalHash": "48e9fd22b62b5022b9c41e89cf3ecd09f4314f3f5563f0ca1a1c66b68319f870",
+          "publishedHash": "48e9fd22b62b5022b9c41e89cf3ecd09f4314f3f5563f0ca1a1c66b68319f870",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-edf-kill-semantic-audit.json",
+          "publishedPath": "c0-07-evidence/c006-edf-kill-semantic-audit.json",
+          "originalHash": "0be23149ff4b145ffa2c4b23ed2904bea017ccaa3e8ef3c274f76202224fe0b3",
+          "publishedHash": "554a01a48a117fe5cb4de48c39a00b566ac8330b1d8b7982ca2e88fb6539ba2e",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-edf-selected-db-contract-evidence-v2.json",
+          "publishedPath": "c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json",
+          "originalHash": "a23d14fd6e6e4d8f35c76ae162ff4ef85e99a5d6a2c6ecdf2443899b90d29d48",
+          "publishedHash": "9fc0dd1566f25ce277713245647e0119064239f1ae1325fb4d969f007168eb09",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c006-selected-db-contract-independent-review.json",
+          "publishedPath": "c0-07-evidence/c006-selected-db-contract-independent-review.json",
+          "originalHash": "34a8f9278ac6cc1e6b9d27eef2157ac2589ca436ff8962c983c6ff013a8148cf",
+          "publishedHash": "f5233d34bba2a08a739dd619f0781e97a460e476e16435112f0494b6c69c02b9",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-android-kill-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json",
+          "originalHash": "b929295d81e36b51231b62358afe3dab1e862e30a518e07739042ff2d1624d54",
+          "publishedHash": "b4bb62e0dcb0d227e833a9ddebaf69cb7558fa848bc89071e3d7b8ac4b42f657",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-baseline-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json",
+          "originalHash": "112116cdc6daa2de07fd82232723cab489f3a6a3545be8326cf509a8c75e440d",
+          "publishedHash": "a2b0aa1c0c32bd861a8de1c1be50edfb7790a64e132472ea88f74eb4edd889cf",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-baseline-qualified.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-baseline-qualified.json",
+          "originalHash": "a6363a2c2f100205a17d37c581766ad536bd9d8d5ef6ac079f0240379561fb35",
+          "publishedHash": "2011d4eaf6c7252ccc9e98c3a1134a1e94d29c87ac9983dd2660d0cc919ba20f",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-bootstrap-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json",
+          "originalHash": "9c8d6910a2094c314c2c0ac6e73d4ab7963c37b97371b98a282f6a8edb5eefb4",
+          "publishedHash": "d1f5231f6afff8568bf1feef2731dcea9cc0328fdd4b29d0e47c8d1e10abdb02",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-c006-core-audit.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-c006-core-audit.json",
+          "originalHash": "7ba341f57c2581aec03d04de606920c109252c9b3d0abd8f071ad717fc34750e",
+          "publishedHash": "b2af468bfad19aba2ac2d2acfc1f8de02402d52a7419606afda747fb881451ec",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-c006-core-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json",
+          "originalHash": "4f7f509f9005112f313664d2246f18884623dadf61f0445de79594e5799a5c07",
+          "publishedHash": "7338ae761055b0abcc1fea7143008d8fc8f09b20aa77e964fcfe5c3c7388dcd6",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-node-native-reopens-audit.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-node-native-reopens-audit.json",
+          "originalHash": "dc42e154fe66096f4d854fe49b9324a446888d1fd4bb278253400c919e237ae0",
+          "publishedHash": "eac309e28dc19d95f417f97fd6023e99fca93c1c3473ba9435fbf1f6c02cdeae",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-19ce-regression-audit.json",
+          "publishedPath": "c0-07-evidence/c007-19ce-regression-audit.json",
+          "originalHash": "2d465b68279daf131a07daaf4bd677d7e385aa70bc425d7e7262fc086b253de9",
+          "publishedHash": "2a94dee1e2db11b2570f37c436b7615716f628f3dedb8b806f4b4328cfcc5d6d",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-archive-auditor-independent-review.md",
+          "publishedPath": "c0-07-evidence/c007-archive-auditor-independent-review.md",
+          "originalHash": "03966d32b339346e12418b4c4fc4f0ff31b9a993a3bd64ed038c9fbee36ade64",
+          "publishedHash": "03966d32b339346e12418b4c4fc4f0ff31b9a993a3bd64ed038c9fbee36ade64",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-de7-android-final-review.md",
+          "publishedPath": "c0-07-evidence/c007-de7-android-final-review.md",
+          "originalHash": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6",
+          "publishedHash": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-de7-network-independent-audit.json",
+          "publishedPath": "c0-07-evidence/c007-de7-network-independent-audit.json",
+          "originalHash": "7fffa5b62e3ee1e33bb472f5fc9c5cc5ded351e8caebcb9ce8c2913c97fb8694",
+          "publishedHash": "97a4103c53b5d19b07fa0821fa1f979293c609e76fac059e458efe57d7db609a",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-de7-node-windows-evidence-audit-v3.json",
+          "publishedPath": "c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json",
+          "originalHash": "19b4c1908e6927e86cbecd04e39571289a8710b78fdaa0ef0df5e7bec16b8245",
+          "publishedHash": "48091700c8e26719618e0e8523139276a9ee2880ffad73744e07383749be45ec",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-de7-production-evidence-review.md",
+          "publishedPath": "c0-07-evidence/c007-de7-production-evidence-review.md",
+          "originalHash": "28473731c695f7cf7dd68116379b4511124ecbd5dcc9f73f8c338aabd8fd431e",
+          "publishedHash": "28473731c695f7cf7dd68116379b4511124ecbd5dcc9f73f8c338aabd8fd431e",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-de7-production-integrity-audit.json",
+          "publishedPath": "c0-07-evidence/c007-de7-production-integrity-audit.json",
+          "originalHash": "61d72889e7a5473235b1a8390648f15b9ef63e366505a13d3d763a5e99a9497f",
+          "publishedHash": "fd391e9217f2b771777244459a14f8af64f83b912c1eaf10959651678018eec6",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-edf-a27-local-text-integrity-review.json",
+          "publishedPath": "c0-07-evidence/c007-edf-a27-local-text-integrity-review.json",
+          "originalHash": "d0d0550cbe3e0653b2726481a531e64aed5375776b7cb5838f4d45ff139229b4",
+          "publishedHash": "e3e7da000d9ef15c5421706ac9dc3fa34e507da0904c11cd6c030748bff3f709",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-edf-android-kill-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json",
+          "originalHash": "42018d28567f06f0b0a0c74b514d04736de0908aa075278e2d290c0df3a03cc3",
+          "publishedHash": "f45288dac6b098a375572db0ee82fa4efe750a90da7acc69458089e526bcb2ea",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-edf-c006-core-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json",
+          "originalHash": "7c9c61d041ebc0e8dd4f096e5d96295db9c962fc67bcfb87f597a583809c0b59",
+          "publishedHash": "fe27f768607fdb8a104bf5ec663823d43a9871f50ecfc0f45a4a91f6b78af220",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-baseline-qualified.json",
+          "publishedPath": "c0-07-evidence/c007-f9-baseline-qualified.json",
+          "originalHash": "0e61d68cad812f0d08d52d68e371816269c3f234005d6176ee751202f5a1a793",
+          "publishedHash": "9a2635c3763af36743b4c012faa60479caa5f7c145e38adc6d9768b6cc275de1",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-c006-a26-failure-review.md",
+          "publishedPath": "c0-07-evidence/c007-f9-c006-a26-failure-review.md",
+          "originalHash": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316",
+          "publishedHash": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-c006-core-audit.json",
+          "publishedPath": "c0-07-evidence/c007-f9-c006-core-audit.json",
+          "originalHash": "e0714f1374eaea8398d71e7b6032139e4d93463022facb07b648e29411951d99",
+          "publishedHash": "6493b836d9f1e68a9e94d8348549c24c9269aad3c1bc28346f09c1b37c4d3f75",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-c006-core-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json",
+          "originalHash": "3120c6d3a197d5d19afa5fe69f5966d2f97afa0b5468f7785f33e543a645dd69",
+          "publishedHash": "c0ba30f31e6be84c8547cb18933c045aee124af742a95410e1727ba15fdc182d",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-core-matrix-manifest-coverage.json",
+          "publishedPath": "c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json",
+          "originalHash": "0d97613f57cb81de072415748573589da9b460165ab033b8f02e623f71530ef9",
+          "publishedHash": "054ddec7227ed31e43a0b13592f34dae148552feffef46522346489f2f9504ac",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-matrix-android-crash-review.md",
+          "publishedPath": "c0-07-evidence/c007-f9-matrix-android-crash-review.md",
+          "originalHash": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e",
+          "publishedHash": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-matrix-integrity-only-raw.json",
+          "publishedPath": "c0-07-evidence/c007-f9-matrix-integrity-only-raw.json",
+          "originalHash": "a6a4ae8459ba3aee8ae079755b27f0515de34c82bc87e14a3cf3ab2777a1958a",
+          "publishedHash": "03c1d817c461d96ff38153be98ba57363e7d7c034ad45e00a1aebd51a42b23fc",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-matrix-semantic-review.json",
+          "publishedPath": "c0-07-evidence/c007-f9-matrix-semantic-review.json",
+          "originalHash": "eeb4c14aac5841fcc967015fe4a49e26843f9dfdd9d302d8ec0283c68a342c63",
+          "publishedHash": "9ca3ed19c383c8702a57c83cfe667e19ffca117ee4b9e677291bcb07fe369b3b",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-production-integrity-audit.json",
+          "publishedPath": "c0-07-evidence/c007-f9-production-integrity-audit.json",
+          "originalHash": "35bc08ced53013d9e8aef874fd4ea588e83c2f47c3e52151a03254c695bf2c8f",
+          "publishedHash": "72646a507a9bd2e851f6e1e8f6e492f641e31354b21ff8772739589d15558d87",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-f9-regression-audit.json",
+          "publishedPath": "c0-07-evidence/c007-f9-regression-audit.json",
+          "originalHash": "184b6dc978f04eaadfefbcd847bb1a86b7308d7e5169b1d8cdcd13b48e196983",
+          "publishedHash": "435ad373d0f2749b70704fa2a055734c10f3845ee32bc7bba044e24e4c25d967",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-feb-android-deep-review.md",
+          "publishedPath": "c0-07-evidence/c007-feb-android-deep-review.md",
+          "originalHash": "b29d695b9d5861ae4ec005fe6a64a6cf8b73ac920bb405c121a8e8dc8092edef",
+          "publishedHash": "b29d695b9d5861ae4ec005fe6a64a6cf8b73ac920bb405c121a8e8dc8092edef",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-first-red-android-review.md",
+          "publishedPath": "c0-07-evidence/c007-first-red-android-review.md",
+          "originalHash": "bea7a8ffb66271fd65fe31d9cebdaa3cf446ff132ab0a0bdfcfb71a070906224",
+          "publishedHash": "bea7a8ffb66271fd65fe31d9cebdaa3cf446ff132ab0a0bdfcfb71a070906224",
+          "transform": "byte-identical",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-first-red-integrity-audit.json",
+          "publishedPath": "c0-07-evidence/c007-first-red-integrity-audit.json",
+          "originalHash": "12fcbdd3e5e339d23eb5ddbc4400743b959ec6ee55deeaccbc0e71fd0d22f57e",
+          "publishedHash": "b2e53f6f8a1eb4639e31c7fa821ace0f278bd280da28ee13c1ea4fbfb2f82220",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-selected-source-identity-independent-audit.json",
+          "publishedPath": "c0-07-evidence/c007-selected-source-identity-independent-audit.json",
+          "originalHash": "54640f3f80ee4f963445e8cc50fe2aca00d19c12dfc878fb0cf0b0664bf88bec",
+          "publishedHash": "ae73337f23a6fd05ca6222dedf3e929df748cdf5a2a03ee48a6e1f74d4de7e49",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        },
+        {
+          "source": "work/c007-strengthened-red-integrity-audit.json",
+          "publishedPath": "c0-07-evidence/c007-strengthened-red-integrity-audit.json",
+          "originalHash": "2252cc77ce8939274b21ef925c963a9f4286c99ed0d399d0427c4191d02baa00",
+          "publishedHash": "cde0fd24f11426ef195383b1e03741a782c7faa0fa298b3957b5a32b6802b256",
+          "transform": "CRLF-to-LF-only",
+          "checks": {
+            "sourceBytes": true,
+            "sourceHash": true,
+            "publishedBytes": true,
+            "publishedHash": true,
+            "exactAllowedTransformation": true,
+            "transformLabel": true,
+            "publishedNoCR": true,
+            "publishedNoTrailingSpaces": true,
+            "oneTerminalLF": true,
+            "terminalCountsRecorded": true
+          },
+          "passed": true
+        }
+      ]
+    }
+  },
+  "generationScript": {
+    "path": "work/prepare-c007-provenance.ps1",
+    "bytes": 5583,
+    "sha256": "80ceb04dbb538c572570ab10f054259b03c4bb0cb5d5868d0588d43c6e80f8c2"
+  },
+  "finalReview": "c0-07-final-independent-review.md",
+  "nonCircularSealPolicy": "This provenance hashes the seven frozen reports and maps the 52 published evidence files. It intentionally excludes its own hash and the subsequent independent review. The final transport manifest and post-publication receipt bind all files including provenance and review; the immutable reports do not embed their own Git commit.",
+  "preservedQualifications": [
+    "C007 recordedRunPassed=false and original collector failures remain unchanged.",
+    "edf core82/83 failure is historical;19ce core83/83 is separate.",
+    "19ce Android observer restart first crash remains in original audit1365/1fail and supplemental stabilityIssues1.",
+    "C007 de7 exact run has2299/2299 checks, not a claim of complete Android startup stability.",
+    "issue1 stays open;D1 unapproved;no real Nutstore/private data or signed release APK acceptance."
+  ]
+}

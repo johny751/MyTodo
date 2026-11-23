@@ -1,0 +1,76 @@
+{
+  "schema": "mytodo-c007-f9-baseline-qualified",
+  "version": 1,
+  "runId": "45186305173",
+  "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+  "qualifiedAt": "2026-11-23T14:23:00.5131874+00:00",
+  "rawCloudReceiptPath": "outputs/c0-07/evidence/f9-supplement/c007-f9-transfer-parts.txt",
+  "rawCloudReceiptSha256": "c336174493ccad52700455b36ff6d5060ab6b41e8cf12f19446f40186e7c8201",
+  "regressionAuditSha256": "184b6dc978f04eaadfefbcd847bb1a86b7308d7e5169b1d8cdcd13b48e196983",
+  "fourNamedBuildArtifactHashesMatch": true,
+  "cloudRehash": [
+    {
+      "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-windows-45186305173-1/MyTodo-phase0.exe",
+      "expectedBytes": 1328640,
+      "expectedSha256": "7ca03e633b965ef88166ea0b90d4b3b8cfee9f693083efaed314fffe93613a4a",
+      "cloudRehashRows": 1,
+      "actualBytes": 1328640,
+      "actualSha256": "7ca03e633b965ef88166ea0b90d4b3b8cfee9f693083efaed314fffe93613a4a",
+      "matched": true
+    },
+    {
+      "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-android-45186305173-1/MyTodo-unsigned.apk",
+      "expectedBytes": 281749,
+      "expectedSha256": "2a2c8d5690f0018d0f600146f3e4fb7563458f7cd2c8cf70dab81795d7684b32",
+      "cloudRehashRows": 1,
+      "actualBytes": 281749,
+      "actualSha256": "2a2c8d5690f0018d0f600146f3e4fb7563458f7cd2c8cf70dab81795d7684b32",
+      "matched": true
+    },
+    {
+      "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-web-45186305173-1/WebCredentialHelper.exe",
+      "expectedBytes": 149504,
+      "expectedSha256": "c72cb4bf7fa4557591918348fc8dd37d866c75bd854acc5606f7fcb96307ac28",
+      "cloudRehashRows": 1,
+      "actualBytes": 149504,
+      "actualSha256": "c72cb4bf7fa4557591918348fc8dd37d866c75bd854acc5606f7fcb96307ac28",
+      "matched": true
+    },
+    {
+      "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-web-45186305173-1/MyTodo-web-source.zip",
+      "expectedBytes": 101876,
+      "expectedSha256": "e45b4a02bdf6c94c35e93b5c94d35d00238997b4babdcf1233416b3b2068df6e",
+      "cloudRehashRows": 1,
+      "actualBytes": 101876,
+      "actualSha256": "e45b4a02bdf6c94c35e93b5c94d35d00238997b4babdcf1233416b3b2068df6e",
+      "matched": true
+    }
+  ],
+  "originalCollectorExitCode": 1,
+  "originalCollectorEvidenceComplete": false,
+  "originalCollectorFailures": [
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "c003-android-inventory-45186305173-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-android-45186305173-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-source-45186305173-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-web-45186305173-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-windows-45186305173-1"
+    }
+  ],
+  "qualification": "The parent independently read cloud artifact bytes and recomputed size/SHA256. This review matched that original receipt to the four baseline run-receipt expectations. This closes the four named build artifact hashes only; it does not create missing recursive producer manifests or change original collector exit1/incomplete. Host tests and unsigned APK are not installation/device-matrix evidence.",
+  "localBinaryReads": 0,
+  "localProjectExecutions": 0
+}

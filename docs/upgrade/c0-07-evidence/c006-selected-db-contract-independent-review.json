@@ -1,0 +1,783 @@
+{
+  "schema": "mytodo-c006-selected-db-contract-independent-review",
+  "version": 1,
+  "reviewedAt": "2026-11-23T22:56:15.9997544+08:00",
+  "verdict": "No blocking issue found in the two-assertion candidate; suitable for source-bound cloud validation",
+  "acceptedRuntime": false,
+  "D1": false,
+  "candidate": {
+    "path": "work/c006-selected-db-contract/tests/c006/c006-harness/android-runner.mjs",
+    "bytes": 7788,
+    "sha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a"
+  },
+  "baseline": {
+    "path": "work/c006-tests-input/tests/c006/c006-harness/android-runner.mjs",
+    "bytes": 7512,
+    "sha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106"
+  },
+  "sourceReceipt": {
+    "path": "outputs/c0-07/evidence/edf-final-transfer/c007-final-source-bytes.json",
+    "bytes": 381100,
+    "sha256": "87abf6a0d14a7d4bac6ae64810dedecd92172fdd3937f4557a5572792eb05584"
+  },
+  "baselineMatches": [
+    {
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "bytes": 7512,
+      "sha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+      "matches": true
+    },
+    {
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "bytes": 7512,
+      "sha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+      "matches": true
+    },
+    {
+      "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+      "bytes": 7512,
+      "sha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+      "matches": true
+    }
+  ],
+  "onlyTwoAssertionAdditions": true,
+  "operationBoundary": "After preserving process and receipt and requiring normal execution; before accepting result status, source identity or production outcome. Both added predicates fail closed for missing fields.",
+  "selectedDatabaseContract": "Receipt dbCase and native result path must match caller-selected dbCase, including explicit observer database. Checks detect fresh-database substitution and do not suppress or repair original crash.",
+  "unchangedBehavior": [
+    "Production code and shared retry runner unchanged",
+    "No new retry, lease bypass, database overwrite or cleanup behavior",
+    "Original operation process/receipt and failure remain recorded before assertion",
+    "Existing source/status/restart/production-outcome assertions remain unchanged"
+  ],
+  "runId": "45194185453",
+  "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+  "historicalOperations": 22,
+  "oldAccepted": 21,
+  "newlyRejected": 1,
+  "newRejection": {
+    "caseId": "C006-A27-manifest-fail",
+    "operationNumber": 2,
+    "operation": "sync",
+    "requestedDbCase": "C006-A27-manifest-fail",
+    "receiptDbCase": "C006-A27-manifest-fail-retry-2",
+    "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail-retry-2/tasks.sqlite",
+    "oldAccepted": true,
+    "identityMatches": false,
+    "candidateWouldAccept": false
+  },
+  "candidateAcceptedHistoricalOperations": 20,
+  "historicalExistingFailure": [
+    {
+      "caseId": "C006-A27-manifest-fail",
+      "operationNumber": 3,
+      "operation": "sync",
+      "requestedDbCase": "C006-A27-manifest-fail",
+      "receiptDbCase": "C006-A27-manifest-fail",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+      "oldAccepted": false,
+      "identityMatches": true,
+      "candidateWouldAccept": false
+    }
+  ],
+  "operations": [
+    {
+      "caseId": "C006-A02-legacy",
+      "operationNumber": 1,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A02-legacy",
+      "receiptDbCase": "C006-A02-legacy",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A02-legacy",
+      "operationNumber": 2,
+      "operation": "sync",
+      "requestedDbCase": "C006-A02-legacy",
+      "receiptDbCase": "C006-A02-legacy",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A02-legacy",
+      "operationNumber": 3,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A02-legacy-observer",
+      "receiptDbCase": "C006-A02-legacy-observer",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy-observer/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A02-legacy",
+      "operationNumber": 4,
+      "operation": "sync",
+      "requestedDbCase": "C006-A02-legacy-observer",
+      "receiptDbCase": "C006-A02-legacy-observer",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy-observer/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A06-fence-drop",
+      "operationNumber": 1,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A06-fence-drop",
+      "receiptDbCase": "C006-A06-fence-drop",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A06-fence-drop",
+      "operationNumber": 2,
+      "operation": "sync",
+      "requestedDbCase": "C006-A06-fence-drop",
+      "receiptDbCase": "C006-A06-fence-drop",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A06-fence-drop",
+      "operationNumber": 3,
+      "operation": "sync",
+      "requestedDbCase": "C006-A06-fence-drop",
+      "receiptDbCase": "C006-A06-fence-drop",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A06-fence-drop",
+      "operationNumber": 4,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A06-fence-drop-observer",
+      "receiptDbCase": "C006-A06-fence-drop-observer",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop-observer/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A06-fence-drop",
+      "operationNumber": 5,
+      "operation": "sync",
+      "requestedDbCase": "C006-A06-fence-drop-observer",
+      "receiptDbCase": "C006-A06-fence-drop-observer",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop-observer/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A19-missing-backup",
+      "operationNumber": 1,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A19-missing-backup",
+      "receiptDbCase": "C006-A19-missing-backup",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A19-missing-backup/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A19-missing-backup",
+      "operationNumber": 2,
+      "operation": "sync",
+      "requestedDbCase": "C006-A19-missing-backup",
+      "receiptDbCase": "C006-A19-missing-backup",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A19-missing-backup/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A27-manifest-fail",
+      "operationNumber": 1,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A27-manifest-fail",
+      "receiptDbCase": "C006-A27-manifest-fail",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A27-manifest-fail",
+      "operationNumber": 2,
+      "operation": "sync",
+      "requestedDbCase": "C006-A27-manifest-fail",
+      "receiptDbCase": "C006-A27-manifest-fail-retry-2",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail-retry-2/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": false,
+      "candidateWouldAccept": false
+    },
+    {
+      "caseId": "C006-A27-manifest-fail",
+      "operationNumber": 3,
+      "operation": "sync",
+      "requestedDbCase": "C006-A27-manifest-fail",
+      "receiptDbCase": "C006-A27-manifest-fail",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+      "oldAccepted": false,
+      "identityMatches": true,
+      "candidateWouldAccept": false
+    },
+    {
+      "caseId": "C006-A28-manifest-drop",
+      "operationNumber": 1,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A28-manifest-drop",
+      "receiptDbCase": "C006-A28-manifest-drop",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A28-manifest-drop",
+      "operationNumber": 2,
+      "operation": "sync",
+      "requestedDbCase": "C006-A28-manifest-drop",
+      "receiptDbCase": "C006-A28-manifest-drop",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A28-manifest-drop",
+      "operationNumber": 3,
+      "operation": "sync",
+      "requestedDbCase": "C006-A28-manifest-drop",
+      "receiptDbCase": "C006-A28-manifest-drop",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A28-manifest-drop",
+      "operationNumber": 4,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A28-manifest-drop-observer",
+      "receiptDbCase": "C006-A28-manifest-drop-observer",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop-observer/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A28-manifest-drop",
+      "operationNumber": 5,
+      "operation": "sync",
+      "requestedDbCase": "C006-A28-manifest-drop-observer",
+      "receiptDbCase": "C006-A28-manifest-drop-observer",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop-observer/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A35-tombstone",
+      "operationNumber": 1,
+      "operation": "initialize",
+      "requestedDbCase": "C006-A35-tombstone",
+      "receiptDbCase": "C006-A35-tombstone",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A35-tombstone",
+      "operationNumber": 2,
+      "operation": "edit",
+      "requestedDbCase": "C006-A35-tombstone",
+      "receiptDbCase": "C006-A35-tombstone",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    },
+    {
+      "caseId": "C006-A35-tombstone",
+      "operationNumber": 3,
+      "operation": "sync",
+      "requestedDbCase": "C006-A35-tombstone",
+      "receiptDbCase": "C006-A35-tombstone",
+      "nativeDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+      "oldAccepted": true,
+      "identityMatches": true,
+      "candidateWouldAccept": true
+    }
+  ],
+  "index": {
+    "path": "outputs/c0-07/evidence/45194185453/text-archive-files-sha256.json",
+    "bytes": 533253,
+    "sha256": "2b81728c241d6727f9d9e4258071613a840c7938a068363691ae4783786e1d3d"
+  },
+  "independentIndexedInputs": [
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-1.json",
+      "bytes": 53832,
+      "sha256": "d7c950711cd2afa6708d483da444a6eb878be310710d0d7bb832030b1fd7ed61"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-2.json.receipt.json",
+      "bytes": 47995,
+      "sha256": "b4ce6d2fd573fe88ebd605ea034b885af88b81600a70e463370918dc0d88818b"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-2.json",
+      "bytes": 34935,
+      "sha256": "85f0a5fdede63b8fec0d0ef9a65c65e14f014c2c69b75db1e03610a53c89db27"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-2.json",
+      "bytes": 196,
+      "sha256": "dd6945009d67abd7729803ec15efc5f7f97098d3e2a0043d5ea180fbfccb99b5"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-2.json",
+      "bytes": 55790,
+      "sha256": "8bf756d933c4b04e9440bf06496aa1709880add75e195774b510f208eb667709"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-1.json.receipt.json",
+      "bytes": 47993,
+      "sha256": "331898b8dcf33a1e9ef45534631a094fafc4d2ab7900527d904c8dbe5dfede93"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-1.json",
+      "bytes": 21554,
+      "sha256": "54fe1fec85b002bcda71e0d0ecf0c8e0a8a63acf169539eebe07c6961e3cb3dc"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-1.json",
+      "bytes": 414,
+      "sha256": "a9742b1b779eaa6be04c24ff9ded1c9a08997ce1c90572358fbed964f0306bbe"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-1.json",
+      "bytes": 55788,
+      "sha256": "56a481a4bca15c28ade279b891d84bf3a32bae49cf2604c0b6ac2c2e3e11792b"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-3.json",
+      "bytes": 55790,
+      "sha256": "0b3bea46329f3c2c6c5a49e5bde3084b2dfb244d2de83591ea4763159c30cd5a"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.receipt.json",
+      "bytes": 48635,
+      "sha256": "d25df79b21ec04a156ecf4b10ee4fdb6d2fbac295aa49ee73d870462a6ce0f47"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-3.json",
+      "bytes": 167,
+      "sha256": "b1bfe08fce3c0ce9616ab0616f1339583ea9b302d931d8f4d5a85ad32763ffca"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-3.json",
+      "bytes": 56658,
+      "sha256": "08418fa48336cab0ffbff04f27fddd676d8aea639e5982b6ee798d6170cb7493"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.receipt.json",
+      "bytes": 77663,
+      "sha256": "62e6b415f849f22c245c0981f3c53018a67111c58f8e1bb2a3fafe35e26cb74d"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json",
+      "bytes": 25083,
+      "sha256": "1529572e8fd971ed2893bcd371d16065c5c10c25b0e0c41b5808e40f7a6e2ccc"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-2.json",
+      "bytes": 196,
+      "sha256": "bc3d45e5979617f20a593e1e7651b5862e7f298d3177c26c4ce56af1474df9d6"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-2.json",
+      "bytes": 92740,
+      "sha256": "f43672452b63b51f1c13e6fee9353d178412473dd1854b29127b0d7b2a80edce"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.receipt.json",
+      "bytes": 47250,
+      "sha256": "a543a81f0ac18e3489843c6d3b76266574a32f711b433d60e6cb392330aad1fa"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json",
+      "bytes": 21554,
+      "sha256": "1858c9298d6a4a2c3c616db6395bb4089a67d0fd6cfbb1844b53b35f59b43601"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json",
+      "bytes": 25069,
+      "sha256": "88954734c3acc71f4d7f4c4bbfae96ff26fa19bb53f9fe11bcbe58ee97c93242"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-1.json",
+      "bytes": 414,
+      "sha256": "4a9c8f2abfd1ed5b850f4bb54c8e8c9836e0cf6caf2ddb178d02246ff37ab9cb"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-3.json",
+      "bytes": 167,
+      "sha256": "ad7e5267a05ad20d44a244c638cca93be55e58b0497bd561dd280e17149a7235"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-3.json.receipt.json",
+      "bytes": 47995,
+      "sha256": "88eb8a24fa2a632d057a5891c5832022a3ed9ee6f07243f297ffbbb6192be9e4"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-3.json",
+      "bytes": 159,
+      "sha256": "75c8577e015829f13f4443cef1a449e7a0cc24f1f8a9d080d70bbb90f5969f6a"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/process-3.json",
+      "bytes": 55494,
+      "sha256": "b75baf391c9e1dd9380281777ba14283d9c07aec5c8eba2cd64ca58c28a5327a"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-2.json.receipt.json",
+      "bytes": 47839,
+      "sha256": "60179439df0f9c1e78e71aa10973bbca1f2b6589ddefe2fafe8b8a2b18b16a80"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-2.json",
+      "bytes": 28163,
+      "sha256": "d4689b9abf09274683c07343ac1a31e2156e0596ddbc63c8b1f1567d4027080d"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-2.json",
+      "bytes": 286,
+      "sha256": "85cbd8e32d67d9cc9ecb53dcd7206f9ee87b24d6fd05e14cd0463ee33bed74c4"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/process-2.json",
+      "bytes": 55494,
+      "sha256": "2146fb120f2fbabcc23ecc93a1dfe11095621652b1939fa27f421f109fd0a996"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-1.json.receipt.json",
+      "bytes": 47839,
+      "sha256": "09207bfd83291e26aab95760e69c39bf70b9f02c3d873566fc434b245b518674"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-1.json",
+      "bytes": 21717,
+      "sha256": "0a90d0e04bff82b658092ab7093c6511699e23392e7c9fd7c16b16664101c5cd"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-3.json",
+      "bytes": 37551,
+      "sha256": "d91f20126411720bf572d4acab94d27778fb38420080f09fc9b8fd6980bbfb26"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-1.json",
+      "bytes": 413,
+      "sha256": "a237fe0088bd57587b4ffc2fc1cffc69fc2491d5c67837d1b05a79741889e7d8"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-5.json.receipt.json",
+      "bytes": 48013,
+      "sha256": "2623079909bb6155fdf27800811e6ea89584f602ad48f966dc732a4ad318a8ae"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-5.json",
+      "bytes": 30766,
+      "sha256": "a93e6d0cdd0f8892a52b264d46d19da78f4b0ffcc1faefe74d94cc9c26f50472"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-5.json",
+      "bytes": 167,
+      "sha256": "ad7e5267a05ad20d44a244c638cca93be55e58b0497bd561dd280e17149a7235"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-5.json",
+      "bytes": 55817,
+      "sha256": "43f336ed2e7a5f8c07c64ba6ceb5ae230dd72dbf95f8ca9799d1845e4f7c8524"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-4.json.receipt.json",
+      "bytes": 48031,
+      "sha256": "704eab715ca588d8a2fce218d504ffa8191498925475cdb8ad512063c1eb565f"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-4.json",
+      "bytes": 13210,
+      "sha256": "7adf6159fb663b270043e047e70d6c68396f27bea016c8bd4617aaad2d1ab11b"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-4.json",
+      "bytes": 296,
+      "sha256": "34f7db44e35dfb350eaea46b01f2f1b39f3e489ca93ca1d8137c2459f223f63b"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-4.json",
+      "bytes": 55835,
+      "sha256": "fb624d6e9f9c1aa567b97f43451bd6a86143df77bb91d54a662ad6380fc971ee"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/process-1.json",
+      "bytes": 55494,
+      "sha256": "03a7b245b46fa6c89e1857de95116e89462e7a01e3f55017082c068ec95ee1a3"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-1.json",
+      "bytes": 55045,
+      "sha256": "4f5300ee1d6bd6166b0274d6ecdf005253098ba51f7f0110c61787a5ff8a9459"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-2.json.receipt.json",
+      "bytes": 48034,
+      "sha256": "a020eee22bf31f5bfddf2c538ca8c3de377b1e33d1c3146801363b001ce84e42"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-2.json",
+      "bytes": 24787,
+      "sha256": "34f7a25199fddeaf9a57755eb4dafd96c98092c5270dd7c76d7b165ac7b981a6"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-1.json",
+      "bytes": 21536,
+      "sha256": "cf18e4fc035ace8de76a39559d32863c4f827b4538283673a7a5cf6e153ef88f"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-1.json",
+      "bytes": 408,
+      "sha256": "788f497351b0a119e4667ec70bcfdb49ffb28a759b35c9fc79846ec825e36cf9"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-1.json",
+      "bytes": 54173,
+      "sha256": "fe35dd3b8202c7f3af770924da64dc125fc3cc7ca850136b381d4a14b8e288f3"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-4.json.receipt.json",
+      "bytes": 46363,
+      "sha256": "8fb140e71d4083284de4f60ea62da5c971cc8f5c9e14db737f40f240b04308f6"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-4.json",
+      "bytes": 30669,
+      "sha256": "d8d82b5a76508664a6bdff029cd05232260f22d8bef884d1327f8c7146c0c281"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-4.json",
+      "bytes": 153,
+      "sha256": "4437ce41577becb626b6e53490cf16dde2c48a2e26024e08481aae6caf4e3bc0"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-4.json",
+      "bytes": 53922,
+      "sha256": "758871b91d69f00777cf89f1e7764806226d50c0b187484ba15dbeb7b2d76172"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-3.json.receipt.json",
+      "bytes": 46363,
+      "sha256": "5891c64dfe739a03c293a9f1e25c1b923b07f0f3cf231ca6afd90c952ab5f51d"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-1.json.receipt.json",
+      "bytes": 46483,
+      "sha256": "756f7d7083e10bc6da07bd509f3188765efecedaa1cd2d720d6095d6be07b9a5"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-3.json",
+      "bytes": 13162,
+      "sha256": "feb2203341b3ba79c994560eecf5bad4c5066a0bac3ae1624e6bdcd3c83f32a0"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-3.json",
+      "bytes": 53922,
+      "sha256": "a88e3684e022d478ea602e4867ddd61ce96797ecc12c8f0537a569c0816008d7"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-2.json.receipt.json",
+      "bytes": 46327,
+      "sha256": "2ed011cffe71e648f3a6488a8e3d26fc7dd9befe0df502f99a544b0ca4e5e9dc"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-2.json",
+      "bytes": 34432,
+      "sha256": "339364791ce072aad4250d5a2872e26020372b4fe418063025cc85d57c9dc92a"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-2.json",
+      "bytes": 153,
+      "sha256": "4437ce41577becb626b6e53490cf16dde2c48a2e26024e08481aae6caf4e3bc0"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-2.json",
+      "bytes": 53877,
+      "sha256": "b70b9a7a2925d52af4d444c0c582a2dce91b4320877b489088b8317230a0203c"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-1.json.receipt.json",
+      "bytes": 46282,
+      "sha256": "bfb1a7d7e913004ac0c51d9a3bc9b204cbf500c5291191e6e95269061fdb802c"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-1.json",
+      "bytes": 21512,
+      "sha256": "445a18af21d92fb9a6dd2526c8ee2183dce82632295101167b8f8b9dd9d3808d"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-1.json",
+      "bytes": 400,
+      "sha256": "d7c09a1c2706e54e8ffb5f3708849d00d1b44f3bd9afaa8212923d5e68a49587"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-3.json",
+      "bytes": 282,
+      "sha256": "b18febd6e067a6cd0d6ca5418cec7a480e21f176688fa040537374b85ec3e16a"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-2.json",
+      "bytes": 54191,
+      "sha256": "8f6d662bb0af3e5b23e139699cd631ea830d1bf65ae7dec4399dd37769e864ec"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-2.json",
+      "bytes": 190,
+      "sha256": "992f34eec14824efa1b595503cb646e4ca72346e4a2cb9d9a1173072572650a6"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-2.json",
+      "bytes": 24376,
+      "sha256": "5a473aeaa0326fda593114c66acbb8342e22e7446b8ebf593f163b4919badbf2"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/input-2.json",
+      "bytes": 198,
+      "sha256": "ab01206eaf3293518879ef7912725e1a49e3fb555bc51039eb98c7946e3bfc6c"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/process-2.json",
+      "bytes": 55864,
+      "sha256": "1db185c35eb5d8e0cf14fefacd851628887f03e4de58505e134c3c875ec73b4b"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-1.json.receipt.json",
+      "bytes": 48034,
+      "sha256": "502a8a0412ef031d9b7d301f04771dd0f86f0e1df621de698e7bb13e4b6b059f"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-1.json",
+      "bytes": 21566,
+      "sha256": "feb0263dae5aca2e6886ba85864bbf6c57acfb2690c89c9279cad3c81ea93a3b"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/input-1.json",
+      "bytes": 416,
+      "sha256": "6662f4ae187d40f2a279076c62fc4a36a6c56dd18464b79aa42f2afb8dd5015a"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/process-1.json",
+      "bytes": 55864,
+      "sha256": "6557026e29703db67aff8fd411e0658ce0183aca4af51cefb37cccdd9eadfcfb"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-5.json.receipt.json",
+      "bytes": 47169,
+      "sha256": "4680c00fc8aaf9a832622ab907799db6356bbc5f1a2cadd0a78d67f404244174"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-5.json",
+      "bytes": 30721,
+      "sha256": "9aea624803b90557a96d798425bf6c990ad084430511e888e4e855c5acdf5d61"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-5.json",
+      "bytes": 161,
+      "sha256": "25325e486e6c497b78ac381692ced3e8dfd4d8b9c31bf93bae63d22370872ffb"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-5.json",
+      "bytes": 54868,
+      "sha256": "05a740a5cc08c67f2399b323e412fbd8e03e3377ddb63badf6fc24016fa05a05"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-4.json.receipt.json",
+      "bytes": 46519,
+      "sha256": "9297d41df3c5c3ed6558b719beda0b497b183197c52a5871a5c7cfc81c56b4b5"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-4.json",
+      "bytes": 13186,
+      "sha256": "3ae9555da179a54b8fde356fb2bf25ae4b066862ecdbd12cf764a3d6a669cbce"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-4.json",
+      "bytes": 290,
+      "sha256": "ac7c4bd1594011b06275a1f9c0a25695aa7fdb5a479132c549274c9c48b11262"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-4.json",
+      "bytes": 54218,
+      "sha256": "708486027061a13318658420d57e7e9f2d04ab567b14a02daddc284ebb72daad"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-3.json.receipt.json",
+      "bytes": 46501,
+      "sha256": "5a5a649e984177225908b88b0b35f2b2a0414d3f139b09d4cb0293e4792e2d72"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-3.json",
+      "bytes": 34544,
+      "sha256": "500ecc7d2a2ceb662aaaad01e3c64df3f2f1b314911373d0e46391f18eef1318"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-3.json",
+      "bytes": 161,
+      "sha256": "25325e486e6c497b78ac381692ced3e8dfd4d8b9c31bf93bae63d22370872ffb"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-3.json",
+      "bytes": 54191,
+      "sha256": "41b1e3ce452303a109216689069ee3e5efc77d90a3fbe602311b5ef3c222de99"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-2.json.receipt.json",
+      "bytes": 46501,
+      "sha256": "9e73f3005df7f15cbf4ddcde67f64d87f270af4a95a1b26e4feb609eaa71cf5d"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-3.json",
+      "bytes": 31088,
+      "sha256": "92b950ac0767f54cb9453dc4ad94a97e5a588776f470784e29760013cab0d2e6"
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-3.json.receipt.json",
+      "bytes": 47839,
+      "sha256": "eb8b8f3331f917f4d862152d4204939620db7f56b22eed637895d96e853b6a28"
+    }
+  ],
+  "independentIndexedInputCount": 88,
+  "localProjectExecutions": 0,
+  "localJsSyntaxChecks": 0,
+  "localBuilds": 0,
+  "localAdbOperations": 0,
+  "limitations": [
+    "This is independent source and archived-evidence parsing, not execution of candidate JavaScript.",
+    "A green candidate cloud run remains required; historical failure 82/83 is not reclassified.",
+    "These assertions establish selected-database identity and do not prove absence of crashes, physical durability, cross-file atomic snapshots, or recovery after original lease expiry."
+  ]
+}

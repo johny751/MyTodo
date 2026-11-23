@@ -1,0 +1,6665 @@
+{
+  "schema": "mytodo-c007-f9-c006-core-independent-evidence-audit",
+  "version": 1,
+  "runId": "45186305230",
+  "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+  "scriptSha256": "8471973e65a1af64dce48cb43799f36e5e6758fe2ff7fc909464153d5fb6dd3c",
+  "auditedAt": "2026-11-23T14:26:23.3954755+00:00",
+  "integrityAuditPath": "work/c007-f9-c006-core-integrity-only-raw.json",
+  "integrityAuditSha256": "3120c6d3a197d5d19afa5fe69f5966d2f97afa0b5468f7785f33e543a645dd69",
+  "integrityOnly": {
+    "localTextFiles": 2595,
+    "localTextBytes": 37001335,
+    "cloudFiles": 3063,
+    "producerRows": 3101,
+    "producerLocalRows": 2623,
+    "producerCloudRows": 478,
+    "issues": []
+  },
+  "recordedCases": 83,
+  "platforms": [
+    {
+      "platform": "javascript",
+      "cases": 59,
+      "passed": 59,
+      "failed": 0,
+      "operations": 280,
+      "expectedRejections": 42,
+      "nativeAccepted": 0,
+      "jsPassed": 232,
+      "androidProcessRestarts": 0,
+      "androidCrashedAttempts": 0,
+      "casesSummary": [
+        {
+          "id": "C006-01-empty",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-02-legacy",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-03-backup-before",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-03-backup-before",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-04-backup-after",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-04-backup-after",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-05-fence-before",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-05-fence-before",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-06-fence-after",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-06-fence-after",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-27-manifest-before",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-27-manifest-before",
+              "seen": 3,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-28-manifest-after",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-28-manifest-after",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-07-reread-v1",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-07-reread-v1",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-08-reread-missing",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-08-reread-missing",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-09-appearing-v1",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-09-appearing-v1",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-10-appearing-guard",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-10-appearing-guard",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-11-appearing-empty",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-11-appearing-empty",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-13-etag-missing",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "etag",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-13-etag-weak",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "etag",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-12-eight-conflicts",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "eight-conflicts",
+              "seen": 9,
+              "used": 8
+            }
+          ]
+        },
+        {
+          "id": "C006-16-backup-404",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "backup-get",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-16-backup-500",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "backup-get",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-17-truncated",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-17-crc",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-17-json",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-17-format",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-absent",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-empty",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-number",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-array",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-object",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-traversal",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-url",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-query",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-fragment",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-directory",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-long",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-18-capacity",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-21-format",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-21-string-version",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-21-version",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-21-trailing",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-21-nul",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-22-winner-valid",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-race",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-23-winner-missing",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-race",
+              "seen": 2,
+              "used": 1
+            },
+            {
+              "id": "winner-read",
+              "seen": 7,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-23-winner-malformed",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-race",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-23-winner-weak",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-race",
+              "seen": 2,
+              "used": 1
+            },
+            {
+              "id": "winner-read",
+              "seen": 7,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-24-kill-after-backup",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-25-kill-after-fence",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-26-kill-after-import",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-29-kill-after-manifest",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-30-fresh-takeover",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-31-kill-after-batch",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-34-delete-with-base",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-35-delete-without-base",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-32-two-migrators",
+          "status": "passed",
+          "operations": 10,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-33-three-way-base",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-36-edit-during-retry",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-before",
+              "seen": 3,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-37-conflict-retry",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-before",
+              "seen": 3,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-38-v2-delete-after-migration",
+          "status": "passed",
+          "operations": 7,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-39-import-marker-atomic",
+          "status": "passed",
+          "operations": 8,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-40-import-marker-repeat",
+          "status": "passed",
+          "operations": 9,
+          "expectedRejections": 2,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "two-manifest-failures",
+              "seen": 4,
+              "used": 2
+            }
+          ]
+        },
+        {
+          "id": "C006-41-import-backup-tamper",
+          "status": "passed",
+          "operations": 3,
+          "expectedRejections": 2,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "manifest-before",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        }
+      ],
+      "notExecuted": [
+        "windows-native (separate runner required)",
+        "android (integration required)"
+      ],
+      "scope": null
+    },
+    {
+      "platform": "windows-native",
+      "cases": 18,
+      "passed": 18,
+      "failed": 0,
+      "operations": 104,
+      "expectedRejections": 15,
+      "nativeAccepted": 71,
+      "jsPassed": 17,
+      "androidProcessRestarts": 0,
+      "androidCrashedAttempts": 0,
+      "casesSummary": [
+        {
+          "id": "C006-01-empty",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-09-appearing-v1",
+          "status": "passed",
+          "operations": 11,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-09-appearing-v1",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-10-appearing-guard",
+          "status": "passed",
+          "operations": 11,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-10-appearing-guard",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-11-appearing-empty",
+          "status": "passed",
+          "operations": 6,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": [
+            {
+              "id": "C006-11",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-14-existing-guard",
+          "status": "passed",
+          "operations": 11,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-15-existing-v1",
+          "status": "passed",
+          "operations": 11,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-absent",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-empty",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-number",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-array",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-object",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-traversal",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-url",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-query",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-fragment",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-directory",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-19-20-long",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 1,
+          "dbCases": [],
+          "faults": []
+        },
+        {
+          "id": "C006-30-js-killed-native-snapshot",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 0,
+          "dbCases": [],
+          "faults": []
+        }
+      ],
+      "notExecuted": [
+        "android (separate runner)",
+        "native forced-termination lease recovery (not in this suite)"
+      ],
+      "scope": null
+    },
+    {
+      "platform": "android",
+      "cases": 6,
+      "passed": 6,
+      "failed": 0,
+      "operations": 24,
+      "expectedRejections": 4,
+      "nativeAccepted": 0,
+      "jsPassed": 0,
+      "androidProcessRestarts": 24,
+      "androidCrashedAttempts": 0,
+      "casesSummary": [
+        {
+          "id": "C006-A02-legacy",
+          "status": "passed",
+          "operations": 4,
+          "expectedRejections": 0,
+          "dbCases": [
+            "C006-A02-legacy",
+            "C006-A02-legacy-observer"
+          ],
+          "faults": []
+        },
+        {
+          "id": "C006-A06-fence-drop",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 1,
+          "dbCases": [
+            "C006-A06-fence-drop",
+            "C006-A06-fence-drop-observer"
+          ],
+          "faults": [
+            {
+              "id": "C006-A06-fence-drop",
+              "seen": 1,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-A27-manifest-fail",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 1,
+          "dbCases": [
+            "C006-A27-manifest-fail",
+            "C006-A27-manifest-fail-observer"
+          ],
+          "faults": [
+            {
+              "id": "C006-A27-manifest-fail",
+              "seen": 3,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-A28-manifest-drop",
+          "status": "passed",
+          "operations": 5,
+          "expectedRejections": 1,
+          "dbCases": [
+            "C006-A28-manifest-drop",
+            "C006-A28-manifest-drop-observer"
+          ],
+          "faults": [
+            {
+              "id": "C006-A28-manifest-drop",
+              "seen": 2,
+              "used": 1
+            }
+          ]
+        },
+        {
+          "id": "C006-A19-missing-backup",
+          "status": "passed",
+          "operations": 2,
+          "expectedRejections": 1,
+          "dbCases": [
+            "C006-A19-missing-backup"
+          ],
+          "faults": []
+        },
+        {
+          "id": "C006-A35-tombstone",
+          "status": "passed",
+          "operations": 3,
+          "expectedRejections": 0,
+          "dbCases": [
+            "C006-A35-tombstone"
+          ],
+          "faults": []
+        }
+      ],
+      "notExecuted": null,
+      "scope": "real Android production syncDelta and SQLite; every operation force-stops and reopens same dbCase; no abrupt migration-boundary Android kill case claimed"
+    }
+  ],
+  "selectedJsKills": [
+    {
+      "platformSuite": "javascript",
+      "caseId": "C006-24-kill-after-backup",
+      "result": "result-176.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "1290e9753fa29aa546a6af17af5e67d8efa2936531a95b317e80c306546570d9",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    },
+    {
+      "platformSuite": "javascript",
+      "caseId": "C006-25-kill-after-fence",
+      "result": "result-183.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "560c8f6c259876ca8ea1d9cd6071e308a742f51cda20847e20e95fbb8e59a191",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    },
+    {
+      "platformSuite": "javascript",
+      "caseId": "C006-26-kill-after-import",
+      "result": "result-190.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "5a6054fbb44d59911a891d2b43e6afb42a51d0045c364e848ea9fd99c1c9b79d",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    },
+    {
+      "platformSuite": "javascript",
+      "caseId": "C006-29-kill-after-manifest",
+      "result": "result-197.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "69a13a18b523923b03e6c9b11f823bdffa4955220d8fffad38deeeb19fab8355",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    },
+    {
+      "platformSuite": "javascript",
+      "caseId": "C006-30-fresh-takeover",
+      "result": "result-204.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "9363a283e729a4f642feb4c2c89faa9a8f963fc664aa31466eece30ac78617ae",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    },
+    {
+      "platformSuite": "javascript",
+      "caseId": "C006-31-kill-after-batch",
+      "result": "result-208.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "5dbd5f7fc6b0e811ab8edbb39d0abb7e8b89e3aaa15be810a5ef7afe8676b573",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    },
+    {
+      "platformSuite": "windows-native",
+      "caseId": "C006-30-js-killed-native-snapshot",
+      "result": "js-kill-result-102.json",
+      "status": "paused-at-gate",
+      "signal": "SIGKILL",
+      "resultSha256": "1af10b5af2bcc86618df8225d40c04d30fac09e8750847be2a58ecfe0e2c79fc",
+      "evidencePresent": true,
+      "note": "Records selected JS worker termination; native suite entry is JS killed then fresh native takeover, not native kill recovery."
+    }
+  ],
+  "originalCollectorExitCode": 1,
+  "originalCollectorEvidenceComplete": false,
+  "originalExcludedCredentialFailures": [
+    {
+      "path": "c006-native-45186305230-1/cases/C006-01-empty/native-observer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-01-empty/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-09-appearing-v1/native-observer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-09-appearing-v1/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-10-appearing-guard/native-observer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-10-appearing-guard/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-11-appearing-empty/native-observer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-11-appearing-empty/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-14-existing-guard/native-observer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-14-existing-guard/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-15-existing-v1/native-observer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-15-existing-v1/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-absent/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-array/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-directory/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-empty/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-fragment/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-long/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-number/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-object/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-query/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-traversal/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-19-20-url/native-producer-db/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    },
+    {
+      "path": "c006-native-45186305230-1/cases/C006-30-js-killed-native-snapshot/native-snapshot-observer/sync-config.enc",
+      "kind": "unexpected-credential-fixture-in-artifact",
+      "copiedToTextArchive": false,
+      "omittedReason": "credential-fixture-excluded",
+      "localExists": false
+    }
+  ],
+  "auditChecks": [
+    {
+      "id": "identity",
+      "passed": true
+    },
+    {
+      "id": "integrity",
+      "passed": true
+    },
+    {
+      "id": "js:summary",
+      "passed": true
+    },
+    {
+      "id": "js:acceptance-binding",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-1.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-1.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-1.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-2.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-2.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-2.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-3.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-3.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-3.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-4.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-4.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-4.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-5.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-5.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-01-empty:result-5.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-6.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-6.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-6.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-7.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-7.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-7.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-8.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-8.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-8.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-9.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-9.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-9.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-10.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-10.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-02-legacy:result-10.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-11.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-11.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-11.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-12.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-12.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-12.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-13.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-13.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-13.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-14.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-14.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-14.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-15.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-15.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-15.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-16.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-16.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-03-backup-before:result-16.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-17.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-17.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-17.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-18.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-18.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-18.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-19.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-19.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-19.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-20.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-20.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-20.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-21.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-21.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-21.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-22.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-22.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-04-backup-after:result-22.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-23.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-23.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-23.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-24.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-24.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-24.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-25.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-25.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-25.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-26.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-26.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-26.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-27.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-27.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-27.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-28.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-28.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-05-fence-before:result-28.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-29.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-29.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-29.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-30.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-30.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-30.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-31.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-31.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-31.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-32.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-32.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-32.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-33.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-33.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-33.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-34.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-34.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-06-fence-after:result-34.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-35.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-35.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-35.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-36.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-36.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-36.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-37.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-37.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-37.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-38.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-38.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-38.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-39.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-39.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-39.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-40.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-40.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-27-manifest-before:result-40.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-41.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-41.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-41.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-42.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-42.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-42.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-43.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-43.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-43.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-44.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-44.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-44.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-45.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-45.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-45.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-46.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-46.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-28-manifest-after:result-46.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-47.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-47.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-47.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-48.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-48.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-48.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-49.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-49.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-49.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-50.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-50.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-50.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-51.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-51.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-07-reread-v1:result-51.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-52.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-52.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-52.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-53.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-53.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-53.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-54.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-54.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-54.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-55.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-55.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-55.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-56.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-56.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-08-reread-missing:result-56.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-57.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-57.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-57.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-58.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-58.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-58.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-59.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-59.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-59.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-60.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-60.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-60.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-61.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-61.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-09-appearing-v1:result-61.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-62.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-62.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-62.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-63.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-63.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-63.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-64.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-64.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-64.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-65.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-65.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-65.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-66.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-66.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-10-appearing-guard:result-66.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-67.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-67.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-67.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-68.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-68.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-68.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-69.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-69.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-69.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-70.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-70.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-70.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-71.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-71.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-11-appearing-empty:result-71.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:result-72.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:result-72.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:result-72.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:result-73.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:result-73.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-missing:result-73.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:result-74.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:result-74.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:result-74.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:result-75.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:result-75.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-13-etag-weak:result-75.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-76.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-76.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-76.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-77.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-77.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-77.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-78.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-78.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-78.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-79.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-79.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-79.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-80.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-80.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-80.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-81.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-81.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-12-eight-conflicts:result-81.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-82.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-82.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-82.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-83.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-83.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-83.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-84.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-84.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-84.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-85.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-85.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-85.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-86.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-86.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-86.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-87.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-87.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-404:result-87.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-88.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-88.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-88.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-89.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-89.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-89.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-90.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-90.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-90.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-91.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-91.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-91.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-92.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-92.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-92.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-93.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-93.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-16-backup-500:result-93.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-94.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-94.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-94.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-95.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-95.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-95.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-96.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-96.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-96.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-97.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-97.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-97.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-98.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-98.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-98.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-99.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-99.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-truncated:result-99.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-100.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-100.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-100.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-101.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-101.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-101.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-102.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-102.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-102.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-103.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-103.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-103.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-104.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-104.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-104.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-105.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-105.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-crc:result-105.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-106.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-106.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-106.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-107.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-107.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-107.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-108.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-108.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-108.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-109.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-109.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-109.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-110.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-110.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-110.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-111.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-111.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-json:result-111.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-112.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-112.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-112.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-113.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-113.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-113.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-114.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-114.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-114.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-115.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-115.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-115.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-116.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-116.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-116.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-117.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-117.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-17-format:result-117.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:result-118.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:result-118.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:result-118.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:result-119.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:result-119.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-absent:result-119.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:result-120.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:result-120.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:result-120.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:result-121.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:result-121.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-empty:result-121.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:result-122.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:result-122.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:result-122.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:result-123.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:result-123.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-number:result-123.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:result-124.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:result-124.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:result-124.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:result-125.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:result-125.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-array:result-125.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:result-126.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:result-126.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:result-126.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:result-127.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:result-127.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-object:result-127.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:result-128.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:result-128.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:result-128.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:result-129.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:result-129.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-traversal:result-129.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:result-130.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:result-130.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:result-130.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:result-131.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:result-131.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-url:result-131.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:result-132.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:result-132.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:result-132.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:result-133.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:result-133.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-query:result-133.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:result-134.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:result-134.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:result-134.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:result-135.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:result-135.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-fragment:result-135.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:result-136.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:result-136.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:result-136.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:result-137.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:result-137.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-directory:result-137.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:result-138.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:result-138.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:result-138.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:result-139.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:result-139.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-19-20-long:result-139.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:result-140.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:result-140.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:result-140.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:result-141.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:result-141.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-18-capacity:result-141.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:result-142.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:result-142.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:result-142.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:result-143.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:result-143.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-format:result-143.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:result-144.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:result-144.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:result-144.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:result-145.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:result-145.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-string-version:result-145.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:result-146.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:result-146.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:result-146.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:result-147.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:result-147.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-version:result-147.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:result-148.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:result-148.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:result-148.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:result-149.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:result-149.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-trailing:result-149.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:result-150.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:result-150.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:result-150.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:result-151.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:result-151.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-21-nul:result-151.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-152.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-152.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-152.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-153.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-153.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-153.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-154.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-154.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-154.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-155.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-155.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-155.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-156.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-156.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-22-winner-valid:result-156.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-157.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-157.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-157.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-158.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-158.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-158.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-159.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-159.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-159.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-160.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-160.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-160.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-161.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-161.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-161.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-162.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-162.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-missing:result-162.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-163.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-163.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-163.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-164.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-164.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-164.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-165.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-165.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-165.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-166.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-166.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-166.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-167.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-167.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-167.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-168.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-168.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-malformed:result-168.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-169.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-169.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-169.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-170.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-170.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-170.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-171.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-171.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-171.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-172.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-172.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-172.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-173.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-173.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-173.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-174.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-174.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-23-winner-weak:result-174.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-175.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-175.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-175.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-176.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-176.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-176.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-177.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-177.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-177.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-178.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-178.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-178.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-179.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-179.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-179.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-180.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-180.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-180.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-181.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-181.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-24-kill-after-backup:result-181.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-182.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-182.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-182.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-183.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-183.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-183.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-184.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-184.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-184.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-185.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-185.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-185.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-186.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-186.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-186.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-187.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-187.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-187.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-188.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-188.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-25-kill-after-fence:result-188.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-189.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-189.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-189.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-190.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-190.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-190.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-191.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-191.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-191.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-192.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-192.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-192.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-193.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-193.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-193.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-194.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-194.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-194.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-195.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-195.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-26-kill-after-import:result-195.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-196.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-196.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-196.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-197.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-197.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-197.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-198.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-198.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-198.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-199.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-199.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-199.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-200.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-200.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-200.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-201.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-201.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-201.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-202.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-202.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-29-kill-after-manifest:result-202.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-203.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-203.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-203.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-204.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-204.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-204.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-205.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-205.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-205.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-206.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-206.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-30-fresh-takeover:result-206.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-207.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-207.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-207.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-208.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-208.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-208.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-209.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-209.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-209.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-210.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-210.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-210.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-211.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-211.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-211.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-212.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-212.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-212.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-213.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-213.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-31-kill-after-batch:result-213.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-214.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-214.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-214.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-215.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-215.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-215.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-216.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-216.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-216.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-217.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-217.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-217.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-218.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-218.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-218.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-219.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-219.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-34-delete-with-base:result-219.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-220.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-220.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-220.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-221.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-221.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-221.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-222.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-222.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-222.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-223.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-223.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-223.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-224.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-224.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-224.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-225.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-225.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-35-delete-without-base:result-225.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-226.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-226.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-226.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-227.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-227.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-227.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-229.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-229.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-229.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-228.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-228.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-228.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-230.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-230.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-230.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-231.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-231.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-231.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-232.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-232.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-232.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-233.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-233.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-233.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-234.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-234.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-234.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-235.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-235.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-32-two-migrators:result-235.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-236.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-236.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-236.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-237.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-237.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-237.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-238.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-238.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-238.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-239.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-239.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-239.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-240.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-240.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-33-three-way-base:result-240.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-241.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-241.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-241.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-242.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-242.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-242.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-243.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-243.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-243.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-244.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-244.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-244.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-245.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-245.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-245.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-246.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-246.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-246.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-247.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-247.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-36-edit-during-retry:result-247.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-248.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-248.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-248.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-249.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-249.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-249.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-250.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-250.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-250.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-251.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-251.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-251.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-252.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-252.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-252.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-253.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-253.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-37-conflict-retry:result-253.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-254.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-254.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-254.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-255.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-255.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-255.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-256.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-256.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-256.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-257.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-257.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-257.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-258.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-258.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-258.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-259.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-259.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-259.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-260.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-260.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-38-v2-delete-after-migration:result-260.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-261.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-261.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-261.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-262.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-262.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-262.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-263.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-263.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-263.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-264.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-264.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-264.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-265.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-265.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-265.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-266.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-266.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-266.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-267.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-267.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-267.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-268.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-268.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-39-import-marker-atomic:result-268.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-269.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-269.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-269.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-270.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-270.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-270.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-271.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-271.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-271.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-272.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-272.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-272.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-273.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-273.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-273.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-274.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-274.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-274.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-275.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-275.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-275.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-276.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-276.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-276.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-277.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-277.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-40-import-marker-repeat:result-277.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:case",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-278.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-278.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-278.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-279.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-279.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-279.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-280.json:copies",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-280.json:identity",
+      "passed": true
+    },
+    {
+      "id": "js:C006-41-import-backup-tamper:result-280.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:summary",
+      "passed": true
+    },
+    {
+      "id": "native:acceptance-binding",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-1.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-1.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-1.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-2.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-2.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-2.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-3.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-3.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-3.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-4.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-4.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-4.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-5.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-5.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-5.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-6.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-6.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-01-empty:native-result-6.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-7.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-7.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-7.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-8.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-8.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-8.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-9.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-9.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-9.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-10.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-10.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-10.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-11.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-11.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-11.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-12.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-12.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-12.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-13.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-13.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-13.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-14.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-14.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-14.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-15.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-15.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:native-result-15.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-16.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-16.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-16.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-17.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-17.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-09-appearing-v1:js-result-17.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-18.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-18.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-18.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-19.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-19.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-19.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-20.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-20.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-20.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-21.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-21.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-21.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-22.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-22.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-22.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-23.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-23.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-23.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-24.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-24.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-24.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-25.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-25.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-25.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-26.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-26.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:native-result-26.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-27.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-27.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-27.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-28.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-28.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-10-appearing-guard:js-result-28.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-29.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-29.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-29.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-30.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-30.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-30.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-31.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-31.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-31.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-32.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-32.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-32.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-33.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-33.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-33.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-34.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-34.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-11-appearing-empty:native-result-34.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-35.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-35.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-35.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-36.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-36.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-36.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-37.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-37.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-37.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-38.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-38.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-38.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-39.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-39.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-39.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-40.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-40.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-40.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-41.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-41.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-41.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-42.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-42.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-42.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-43.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-43.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:native-result-43.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-44.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-44.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-44.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-45.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-45.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-14-existing-guard:js-result-45.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-46.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-46.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-46.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-47.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-47.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-47.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-48.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-48.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-48.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-49.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-49.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-49.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-50.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-50.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-50.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-51.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-51.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-51.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-52.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-52.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-52.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-53.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-53.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-53.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-54.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-54.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:native-result-54.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-55.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-55.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-55.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-56.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-56.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-15-existing-v1:js-result-56.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-57.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-57.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-57.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-58.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-58.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-58.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-59.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-59.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-59.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-60.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-60.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-absent:native-result-60.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-61.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-61.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-61.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-62.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-62.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-62.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-63.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-63.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-63.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-64.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-64.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-empty:native-result-64.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-65.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-65.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-65.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-66.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-66.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-66.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-67.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-67.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-67.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-68.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-68.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-number:native-result-68.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-69.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-69.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-69.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-70.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-70.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-70.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-71.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-71.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-71.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-72.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-72.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-array:native-result-72.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-73.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-73.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-73.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-74.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-74.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-74.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-75.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-75.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-75.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-76.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-76.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-object:native-result-76.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-77.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-77.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-77.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-78.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-78.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-78.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-79.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-79.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-79.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-80.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-80.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-traversal:native-result-80.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-81.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-81.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-81.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-82.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-82.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-82.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-83.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-83.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-83.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-84.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-84.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-url:native-result-84.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-85.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-85.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-85.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-86.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-86.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-86.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-87.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-87.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-87.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-88.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-88.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-query:native-result-88.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-89.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-89.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-89.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-90.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-90.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-90.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-91.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-91.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-91.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-92.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-92.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-fragment:native-result-92.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-93.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-93.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-93.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-94.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-94.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-94.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-95.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-95.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-95.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-96.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-96.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-directory:native-result-96.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-97.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-97.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-97.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-98.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-98.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-98.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-99.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-99.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-99.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-100.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-100.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-19-20-long:native-result-100.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:case",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:js-result-101.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:js-result-101.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:js-result-101.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:js-kill-result-102.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:js-kill-result-102.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:js-kill-result-102.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:native-result-103.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:native-result-103.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:native-result-103.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:native-result-104.json:copies",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:native-result-104.json:identity",
+      "passed": true
+    },
+    {
+      "id": "native:C006-30-js-killed-native-snapshot:native-result-104.json:outcome",
+      "passed": true
+    },
+    {
+      "id": "android:summary",
+      "passed": true
+    },
+    {
+      "id": "android:acceptance-binding",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:case",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-1.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-1.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-1.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-1.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-2.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-2.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-2.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-2.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-3.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-3.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-3.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-3.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-4.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-4.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-4.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A02-legacy:output-4.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:case",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-1.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-1.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-1.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-1.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-2.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-2.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-2.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-2.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-3.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-3.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-3.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-3.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-4.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-4.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-4.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-4.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-5.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-5.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-5.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A06-fence-drop:output-5.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:case",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-1.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-1.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-1.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-1.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-2.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-2.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-2.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-2.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-3.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-3.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-3.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-3.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-4.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-4.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-4.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-4.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-5.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-5.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-5.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A27-manifest-fail:output-5.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:case",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-1.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-1.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-1.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-1.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-2.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-2.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-2.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-2.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-3.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-3.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-3.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-3.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-4.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-4.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-4.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-4.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-5.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-5.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-5.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A28-manifest-drop:output-5.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:case",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-1.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-1.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-1.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-1.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-2.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-2.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-2.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A19-missing-backup:output-2.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:case",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-1.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-1.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-1.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-1.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-2.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-2.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-2.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-2.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-3.json:receipt",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-3.json:hashes",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-3.json:same-db-restart",
+      "passed": true
+    },
+    {
+      "id": "android:C006-A35-tombstone:output-3.json:no-crash-and-export",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-01-empty/native-observer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-01-empty/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-09-appearing-v1/native-observer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-09-appearing-v1/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-10-appearing-guard/native-observer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-10-appearing-guard/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-11-appearing-empty/native-observer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-11-appearing-empty/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-14-existing-guard/native-observer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-14-existing-guard/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-15-existing-v1/native-observer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-15-existing-v1/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-absent/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-array/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-directory/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-empty/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-fragment/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-long/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-number/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-object/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-query/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-traversal/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-19-20-url/native-producer-db/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "excluded:c006-native-45186305230-1/cases/C006-30-js-killed-native-snapshot/native-snapshot-observer/sync-config.enc",
+      "passed": true
+    },
+    {
+      "id": "collector-qualification",
+      "passed": true
+    },
+    {
+      "id": "acceptance-counts",
+      "passed": true
+    }
+  ],
+  "failedAuditChecks": [],
+  "auditPassed": true,
+  "localProjectExecutions": 0,
+  "limitations": [
+    "C007 generic audit execution fields are inapplicable; only integrity fields were consumed.",
+    "83 means actual harness cases:59 JavaScript,18 native-suite cases,6 Android; not a universal platform cross-product.",
+    "Native suite includes JavaScript cooperation; its selected killed worker is JavaScript, not native forced-termination recovery.",
+    "Android24 operations each used a force-stop and new instrumentation process to reopen the selected dbCase. No Android internal migration boundary abrupt-kill acceptance is claimed.",
+    "24 credential fixtures remain cloud-only and unread/undecrypted; original collector1/incomplete remains.",
+    "Cloud-only hashes are collector/producer comparisons, not local binary rehashing.",
+    "The archive text inventory still requires separately trusted transfer provenance.",
+    "This independent audit verifies archived receipts and selected outcome consistency, not re-execution of project tests or a complete semantic proof of every case."
+  ]
+}

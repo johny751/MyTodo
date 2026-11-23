@@ -1,0 +1,72 @@
+{
+  "schema": "mytodo-c007-19ce-baseline-qualified",
+  "version": 1,
+  "runId": "45199684912",
+  "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+  "qualifiedAt": "2026-11-23T23:07:56.3185630+08:00",
+  "rawCloudReceiptPath": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-baseline-binary-rehash.json",
+  "rawCloudReceiptSha256": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+  "regressionAuditSha256": "2d465b68279daf131a07daaf4bd677d7e385aa70bc425d7e7262fc086b253de9",
+  "fourNamedBuildArtifactHashesMatch": true,
+  "cloudRehash": [
+    {
+      "name": "MyTodo-phase0.exe",
+      "expectedBytes": 1328640,
+      "expectedSha256": "6e787ff3a445ec63d46005125b14934a565b9e7a75af3b795ec075604fa3e637",
+      "actualCloudBytes": 1328640,
+      "actualCloudSha256": "6e787ff3a445ec63d46005125b14934a565b9e7a75af3b795ec075604fa3e637",
+      "matched": true
+    },
+    {
+      "name": "MyTodo-unsigned.apk",
+      "expectedBytes": 281749,
+      "expectedSha256": "b17bf35e0b6fe5a599696348c209cbb2a4ffd9dd631a93c21a3b8c0ce6dffb79",
+      "actualCloudBytes": 281749,
+      "actualCloudSha256": "b17bf35e0b6fe5a599696348c209cbb2a4ffd9dd631a93c21a3b8c0ce6dffb79",
+      "matched": true
+    },
+    {
+      "name": "WebCredentialHelper.exe",
+      "expectedBytes": 149504,
+      "expectedSha256": "a8f6fb1bfef20b48eb9ab1f1478997136e9cd82d3b773cad8c8d3fa6d8c66172",
+      "actualCloudBytes": 149504,
+      "actualCloudSha256": "a8f6fb1bfef20b48eb9ab1f1478997136e9cd82d3b773cad8c8d3fa6d8c66172",
+      "matched": true
+    },
+    {
+      "name": "MyTodo-web-source.zip",
+      "expectedBytes": 101876,
+      "expectedSha256": "8aa8cc205ac288e632af769e16e89b79dd4ceed24ea9090f1e44fcefbdd0bfe9",
+      "actualCloudBytes": 101876,
+      "actualCloudSha256": "8aa8cc205ac288e632af769e16e89b79dd4ceed24ea9090f1e44fcefbdd0bfe9",
+      "matched": true
+    }
+  ],
+  "originalCollectorExitCode": 1,
+  "originalCollectorEvidenceComplete": false,
+  "originalCollectorFailures": [
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "c003-android-inventory-45199684912-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-android-45199684912-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-source-45199684912-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-web-45199684912-1"
+    },
+    {
+      "kind": "artifact-has-no-integrity-manifest",
+      "path": "phase0-windows-45199684912-1"
+    }
+  ],
+  "qualification": "Four named build artifact byte hashes were independently recomputed by parent in cloud and match the source-bound run receipts and collector inventory. Missing five producer manifests remain missing and original collector1/incomplete remains. Android host assertions and unsigned APK are not device install or upgrade evidence.",
+  "localBinaryReads": 0,
+  "localProjectExecutions": 0
+}

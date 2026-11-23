@@ -1,0 +1,1746 @@
+{
+  "schema": "mytodo-c007-independent-evidence-audit",
+  "version": 2,
+  "auditedAt": "2026-11-23T14:12:29.2426987+00:00",
+  "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45183273190",
+  "auditor": {
+    "path": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\work\\audit-c007-archive.ps1",
+    "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d"
+  },
+  "collector": {
+    "runId": "45183273190",
+    "sourceSha": "feb0dca3a56ca8cc83d118d1b828b8f69ec768d2",
+    "githubConclusion": "failure",
+    "collectionExitCode": 1,
+    "evidenceComplete": false,
+    "failures": [
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-commit-failed/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-delete-failed/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-ack-meta-failed/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/003-publish-fault.result.json.logs/033-export-file-tasks.sqlite-wal.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/003-publish-fault.result.json.logs/036-export-file-tasks.sqlite-shm.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-after-ack-commit-exit/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-rejected/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-batch-response-lost/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/003-publish-fault.result.json.logs/036-export-file-tasks.sqlite-shm.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-before-ack-commit-exit/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-rejected/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/000-seed.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/000-seed.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/001-prepare.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/001-prepare.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/002-later-event.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/002-later-event.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/003-publish-fault.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/003-publish-fault.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/004-resume-publish.reopened.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/C007-manifest-response-lost/004-resume-publish.result.json.logs/030-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/000-seed.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/000-seed.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/001-prepare.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/001-prepare.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/002-later-event.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/002-later-event.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/003-meta-failure.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/003-meta-failure.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/004-step-failure.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/004-step-failure.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/005-commit-failure.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/005-commit-failure.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/006-read-failure.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/006-read-failure.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/007-read-step-failure.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/007-read-step-failure.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/008-normal-edit.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/008-normal-edit.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/009-exit-before-commit.reopened.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/009-exit-before-commit.result.json.logs/029-export-file-tasks.sqlite.stdout"
+      },
+      {
+        "kind": "binary-in-text-evidence-path",
+        "path": "c007-android-45183273190-1/suite/sql-atomicity/009-exit-before-commit.result.json.logs/035-export-file-tasks.sqlite-shm.stdout"
+      }
+    ]
+  },
+  "textInventory": {
+    "bytes": 2811083,
+    "path": "text-archive-files-sha256.json",
+    "sha256": "9ed78c6a3d357a3565bdd860c290331259a98c4d2a54070c42e0ef74fbbc140b",
+    "independentlyAuthenticated": false
+  },
+  "listedLocalTextFiles": 11354,
+  "locallyVerifiedTextFiles": 11354,
+  "localTextBytes": 29209160,
+  "cloudInventoriedFiles": 12119,
+  "producerManifests": [
+    {
+      "path": "artifacts/c007-android-45183273190-1/seal.json",
+      "schema": "mytodo-c007-seal",
+      "status": "sealed",
+      "sourceUnchanged": true,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 9385,
+      "localBytesVerifiedRows": 8941,
+      "cloudCollectorHashComparedRows": 444,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-android-environment-45183273190-1/payload-sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 41,
+      "localBytesVerifiedRows": 41,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-javascript-45183273190-1/seal.json",
+      "schema": "mytodo-c007-seal",
+      "status": "sealed",
+      "sourceUnchanged": true,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 1203,
+      "localBytesVerifiedRows": 1059,
+      "cloudCollectorHashComparedRows": 144,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-report-45183273190-1/seal.json",
+      "schema": "mytodo-c007-report-seal",
+      "status": "sealed",
+      "sourceUnchanged": null,
+      "reportStatus": "failed",
+      "reportExitCode": 1,
+      "rows": 2,
+      "localBytesVerifiedRows": 2,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-windows-c-45183273190-1/seal.json",
+      "schema": "mytodo-c007-seal",
+      "status": "sealed",
+      "sourceUnchanged": true,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 1483,
+      "localBytesVerifiedRows": 1296,
+      "cloudCollectorHashComparedRows": 187,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    }
+  ],
+  "producerRows": 12114,
+  "producerLocalBytesVerifiedRows": 11339,
+  "producerCloudCollectorHashComparedRows": 775,
+  "archiveIntegrityPassed": true,
+  "auditIssues": [],
+  "auditExitCode": 0,
+  "execution": {
+    "status": "failed-or-incomplete",
+    "platforms": [
+      {
+        "path": "artifacts/c007-android-45183273190-1/suite/suite.json",
+        "platform": "android",
+        "suiteStatus": "passed",
+        "suiteExitCode": 0,
+        "cases": [
+          {
+            "caseId": "sql-atomicity",
+            "summaryCaseId": "c007-real-sql-atomicity",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 10,
+            "attempts": 10,
+            "operationReceipts": 9,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 10,
+            "faultHitReceipts": 0,
+            "checks": 117,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-rejected",
+            "summaryCaseId": "C007-batch-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-response-lost",
+            "summaryCaseId": "C007-batch-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-rejected",
+            "summaryCaseId": "C007-manifest-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-response-lost",
+            "summaryCaseId": "C007-manifest-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-delete-failed",
+            "summaryCaseId": "C007-ack-delete-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-meta-failed",
+            "summaryCaseId": "C007-ack-meta-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-commit-failed",
+            "summaryCaseId": "C007-ack-commit-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 61,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-after-ack-commit-exit",
+            "summaryCaseId": "C007-after-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-before-ack-commit-exit",
+            "summaryCaseId": "C007-before-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 58,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          }
+        ],
+        "caseCount": 10,
+        "attempts": 55,
+        "operationReceipts": 52,
+        "boundaryReceipts": 3,
+        "reopenReceipts": 55,
+        "faultHitReceipts": 0,
+        "checks": 652,
+        "failedChecks": 0,
+        "passed": true
+      },
+      {
+        "path": "artifacts/c007-javascript-45183273190-1/suite/suite.json",
+        "platform": "javascript",
+        "suiteStatus": "failed",
+        "suiteExitCode": 1,
+        "cases": [
+          {
+            "caseId": "sql-atomicity",
+            "summaryCaseId": "c007-real-sql-atomicity",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 11,
+            "attempts": 11,
+            "operationReceipts": 10,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 11,
+            "faultHitReceipts": 4,
+            "checks": 128,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "006-rollback-double-failure:original-sql-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "006-rollback-double-failure:secondary-rollback-error-observed",
+                "passed": false
+              }
+            ],
+            "error": null,
+            "passed": false
+          },
+          {
+            "caseId": "C007-batch-rejected",
+            "summaryCaseId": "C007-batch-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-response-lost",
+            "summaryCaseId": "C007-batch-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-rejected",
+            "summaryCaseId": "C007-manifest-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-response-lost",
+            "summaryCaseId": "C007-manifest-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-delete-failed",
+            "summaryCaseId": "C007-ack-delete-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-meta-failed",
+            "summaryCaseId": "C007-ack-meta-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-commit-failed",
+            "summaryCaseId": "C007-ack-commit-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-after-ack-commit-exit",
+            "summaryCaseId": "C007-after-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 51,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-before-ack-commit-exit",
+            "summaryCaseId": "C007-before-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 53,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          }
+        ],
+        "caseCount": 10,
+        "attempts": 56,
+        "operationReceipts": 53,
+        "boundaryReceipts": 3,
+        "reopenReceipts": 56,
+        "faultHitReceipts": 7,
+        "checks": 620,
+        "failedChecks": 2,
+        "passed": false
+      },
+      {
+        "path": "artifacts/c007-windows-c-45183273190-1/suite/suite.json",
+        "platform": "windows-c",
+        "suiteStatus": "failed",
+        "suiteExitCode": 1,
+        "cases": [
+          {
+            "caseId": "sql-atomicity",
+            "summaryCaseId": "c007-real-sql-atomicity",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 31,
+            "attempts": 31,
+            "operationReceipts": 30,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 31,
+            "faultHitReceipts": 14,
+            "checks": 447,
+            "failedCheckCount": 29,
+            "failedChecks": [
+              {
+                "id": "005-commit-failure:native-commit-hook-error",
+                "passed": false
+              },
+              {
+                "id": "005-commit-failure:commit-primary-diagnostic-preserved",
+                "passed": false
+              },
+              {
+                "id": "006-read-failure:operation",
+                "passed": false
+              },
+              {
+                "id": "007-read-step-failure:operation",
+                "passed": false
+              },
+              {
+                "id": "010-row-prepare-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "010-row-prepare-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "011-row-step-overflow:operation",
+                "passed": false
+              },
+              {
+                "id": "011-row-step-overflow:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "012-page-prepare-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "012-page-prepare-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "013-page-partial-step-overflow:operation",
+                "passed": false
+              },
+              {
+                "id": "013-page-partial-step-overflow:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "014-meta-prepare-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "015-meta-step-overflow:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "016-meta-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "017-row-invalid-json:operation",
+                "passed": false
+              },
+              {
+                "id": "017-row-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "018-page-invalid-json:operation",
+                "passed": false
+              },
+              {
+                "id": "018-page-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "019-outbox-invalid-json:operation",
+                "passed": false
+              },
+              {
+                "id": "019-outbox-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "020-local-row-read-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "021-remote-row-read-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "022-pending-prepare-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "023-request-renew-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "023-request-renew-commit-denied:request-count",
+                "passed": false
+              },
+              {
+                "id": "027-empty-prepare-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "029-cache-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "030-release-commit-denied:operation",
+                "passed": false
+              }
+            ],
+            "error": null,
+            "passed": false
+          },
+          {
+            "caseId": "C007-batch-rejected",
+            "summaryCaseId": "C007-batch-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-response-lost",
+            "summaryCaseId": "C007-batch-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-rejected",
+            "summaryCaseId": "C007-manifest-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-response-lost",
+            "summaryCaseId": "C007-manifest-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-delete-failed",
+            "summaryCaseId": "C007-ack-delete-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 66,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-meta-failed",
+            "summaryCaseId": "C007-ack-meta-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 66,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-commit-failed",
+            "summaryCaseId": "C007-ack-commit-failed",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 68,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "003-publish-fault:native-commit-hook-error",
+                "passed": false
+              },
+              {
+                "id": "003-publish-fault:commit-primary-diagnostic-preserved",
+                "passed": false
+              }
+            ],
+            "error": null,
+            "passed": false
+          },
+          {
+            "caseId": "C007-after-ack-commit-exit",
+            "summaryCaseId": "C007-after-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-before-ack-commit-exit",
+            "summaryCaseId": "C007-before-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          }
+        ],
+        "caseCount": 10,
+        "attempts": 76,
+        "operationReceipts": 73,
+        "boundaryReceipts": 3,
+        "reopenReceipts": 76,
+        "faultHitReceipts": 17,
+        "checks": 1027,
+        "failedChecks": 31,
+        "passed": false
+      }
+    ],
+    "reports": [
+      {
+        "path": "artifacts/c007-report-45183273190-1/report.json",
+        "identityMatches": true,
+        "sealVerdictMatches": true,
+        "status": "failed",
+        "exitCode": 1,
+        "platforms": [
+          {
+            "platform": "javascript",
+            "status": "failed",
+            "cases": [
+              {
+                "caseId": "sql-atomicity",
+                "status": "failed",
+                "attempts": 11,
+                "checks": 128,
+                "failedChecks": [
+                  {
+                    "id": "006-rollback-double-failure:original-sql-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "006-rollback-double-failure:secondary-rollback-error-observed",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: Case receipt is incomplete or failed\n    at file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-evidence.mjs:60:23"
+              },
+              {
+                "caseId": "C007-batch-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-delete-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-meta-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-commit-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-after-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 51,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-before-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 53,
+                "failedChecks": [],
+                "error": null
+              }
+            ],
+            "suiteStatus": "failed",
+            "suiteExitCode": 1
+          },
+          {
+            "platform": "windows-c",
+            "status": "failed",
+            "cases": [
+              {
+                "caseId": "sql-atomicity",
+                "status": "failed",
+                "attempts": 31,
+                "checks": 447,
+                "failedChecks": [
+                  {
+                    "id": "005-commit-failure:native-commit-hook-error",
+                    "passed": false
+                  },
+                  {
+                    "id": "005-commit-failure:commit-primary-diagnostic-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "006-read-failure:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "007-read-step-failure:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "010-row-prepare-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "010-row-prepare-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "011-row-step-overflow:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "011-row-step-overflow:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "012-page-prepare-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "012-page-prepare-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "013-page-partial-step-overflow:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "013-page-partial-step-overflow:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "014-meta-prepare-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "015-meta-step-overflow:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "016-meta-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "017-row-invalid-json:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "017-row-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "018-page-invalid-json:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "018-page-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "019-outbox-invalid-json:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "019-outbox-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "020-local-row-read-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "021-remote-row-read-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "022-pending-prepare-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "023-request-renew-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "023-request-renew-commit-denied:request-count",
+                    "passed": false
+                  },
+                  {
+                    "id": "027-empty-prepare-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "029-cache-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "030-release-commit-denied:operation",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: Case receipt is incomplete or failed\n    at file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-evidence.mjs:60:23"
+              },
+              {
+                "caseId": "C007-batch-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-delete-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 66,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-meta-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 66,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-commit-failed",
+                "status": "failed",
+                "attempts": 5,
+                "checks": 68,
+                "failedChecks": [
+                  {
+                    "id": "003-publish-fault:native-commit-hook-error",
+                    "passed": false
+                  },
+                  {
+                    "id": "003-publish-fault:commit-primary-diagnostic-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: Case receipt is incomplete or failed\n    at file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-evidence.mjs:60:23"
+              },
+              {
+                "caseId": "C007-after-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-before-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              }
+            ],
+            "suiteStatus": "failed",
+            "suiteExitCode": 1
+          },
+          {
+            "platform": "android",
+            "status": "passed",
+            "cases": [
+              {
+                "caseId": "sql-atomicity",
+                "status": "passed",
+                "attempts": 10,
+                "checks": 117,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-delete-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-meta-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-commit-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 61,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-after-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-before-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 58,
+                "failedChecks": [],
+                "error": null
+              }
+            ],
+            "suiteStatus": "passed",
+            "suiteExitCode": 0
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "issues": [],
+    "cases": 30,
+    "attempts": 187,
+    "checks": 2299,
+    "failedChecks": 33
+  },
+  "recordedRunPassed": false,
+  "acceptanceDecision": "not-made-by-this-auditor",
+  "attemptCountMeaning": "Controller child attempts, including startup failures; not a claim that each business operation executed.",
+  "deepPlatformSemanticsAudit": "not-performed-requires-independent-review",
+  "scope": [
+    "Only archived JSON/text bytes and hashes were read; no project code, tests, database or binary was executed.",
+    "Cloud-only hashes were compared with producer and collector records; cloud-only bytes were not locally rehashed.",
+    "The text inventory is not self-authenticating; archive/receipt provenance needs its separately trusted download receipt.",
+    "Sealed/sourceUnchanged and expected failed operations or exit 86 do not themselves determine test success.",
+    "Execution statistics are derived from actual materialized scenarios and receipts, not a fixed 186/187 assumption."
+  ]
+}

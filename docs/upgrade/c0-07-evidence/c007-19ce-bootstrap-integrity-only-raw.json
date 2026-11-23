@@ -1,0 +1,91 @@
+{
+  "schema": "mytodo-c007-independent-evidence-audit",
+  "version": 2,
+  "auditedAt": "2026-11-23T15:06:57.4219112+00:00",
+  "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45199685144",
+  "auditor": {
+    "path": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\work\\audit-c007-archive.ps1",
+    "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d"
+  },
+  "collector": {
+    "runId": "45199685144",
+    "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+    "githubConclusion": "success",
+    "collectionExitCode": 0,
+    "evidenceComplete": true,
+    "failures": []
+  },
+  "textInventory": {
+    "sha256": "2299ac5bf8a338840cad059a0a675faf4a176ae3b0c8305537a6e13552d91f42",
+    "independentlyAuthenticated": false,
+    "path": "text-archive-files-sha256.json",
+    "bytes": 22221
+  },
+  "listedLocalTextFiles": 110,
+  "locallyVerifiedTextFiles": 110,
+  "localTextBytes": 7888452,
+  "cloudInventoriedFiles": 122,
+  "producerManifests": [
+    {
+      "path": "artifacts/c006-bootstrap-45199685144-1/sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 121,
+      "localBytesVerifiedRows": 99,
+      "cloudCollectorHashComparedRows": 22,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    }
+  ],
+  "producerRows": 121,
+  "producerLocalBytesVerifiedRows": 99,
+  "producerCloudCollectorHashComparedRows": 22,
+  "archiveIntegrityPassed": true,
+  "auditIssues": [],
+  "auditExitCode": 0,
+  "execution": {
+    "status": "failed-or-incomplete",
+    "platforms": [],
+    "reports": [],
+    "issues": [
+      {
+        "kind": "missing-or-duplicate-platform",
+        "path": "",
+        "detail": "javascript"
+      },
+      {
+        "kind": "missing-or-duplicate-platform",
+        "path": "",
+        "detail": "windows-c"
+      },
+      {
+        "kind": "missing-or-duplicate-platform",
+        "path": "",
+        "detail": "android"
+      },
+      {
+        "kind": "missing-or-duplicate-report",
+        "path": "",
+        "detail": "0"
+      }
+    ],
+    "cases": 0,
+    "attempts": 0,
+    "checks": 0,
+    "failedChecks": 0
+  },
+  "recordedRunPassed": false,
+  "acceptanceDecision": "not-made-by-this-auditor",
+  "attemptCountMeaning": "Controller child attempts, including startup failures; not a claim that each business operation executed.",
+  "deepPlatformSemanticsAudit": "not-performed-requires-independent-review",
+  "scope": [
+    "Only archived JSON/text bytes and hashes were read; no project code, tests, database or binary was executed.",
+    "Cloud-only hashes were compared with producer and collector records; cloud-only bytes were not locally rehashed.",
+    "The text inventory is not self-authenticating; archive/receipt provenance needs its separately trusted download receipt.",
+    "Sealed/sourceUnchanged and expected failed operations or exit 86 do not themselves determine test success.",
+    "Execution statistics are derived from actual materialized scenarios and receipts, not a fixed 186/187 assumption."
+  ]
+}

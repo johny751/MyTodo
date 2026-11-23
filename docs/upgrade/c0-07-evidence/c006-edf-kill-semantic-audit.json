@@ -1,0 +1,241 @@
+{
+  "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+  "runId": "45194185184",
+  "scope": "static JSON/text semantics only; no project execution or binary reads",
+  "caseCount": 2,
+  "attemptCount": 11,
+  "commands": 293,
+  "localRawStreams": 570,
+  "cloudOnlyRawStreams": 16,
+  "nativePidCount": 11,
+  "uniqueNativePids": 11,
+  "uniqueOSExits": 24,
+  "exitGroups": [
+    {
+      "Name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0, 1, 17, 0",
+      "Count": 5
+    },
+    {
+      "Name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0, 13, 17, 0",
+      "Count": 8
+    },
+    {
+      "Name": "local.gxtodo.protocolharness, 2, 0, 9",
+      "Count": 2
+    },
+    {
+      "Name": "local.gxtodo.protocolharness, 10, 21, 0",
+      "Count": 9
+    }
+  ],
+  "attempts": [
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-001",
+      "dbCase": "C006-A26-import-kill",
+      "operation": "initialize",
+      "pid": 3589,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-002",
+      "dbCase": "C006-A26-import-kill",
+      "operation": "sync",
+      "pid": 4371,
+      "status": "observed-boundary",
+      "instrumentationCode": 0,
+      "commands": 28
+    },
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-003",
+      "dbCase": "C006-A26-import-kill",
+      "operation": "audit",
+      "pid": 5026,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-004",
+      "dbCase": "C006-A26-import-kill",
+      "operation": "sync",
+      "pid": 5368,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-005",
+      "dbCase": "C006-A26-import-kill",
+      "operation": "sync",
+      "pid": 6824,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-006",
+      "dbCase": "C006-A26-import-kill-observer",
+      "operation": "initialize",
+      "pid": 7042,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-007",
+      "dbCase": "C006-A26-import-kill-observer",
+      "operation": "sync",
+      "pid": 7222,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A30-manifest-kill",
+      "attempt": "attempt-008",
+      "dbCase": "C006-A30-manifest-kill",
+      "operation": "initialize",
+      "pid": 7409,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A30-manifest-kill",
+      "attempt": "attempt-009",
+      "dbCase": "C006-A30-manifest-kill",
+      "operation": "sync",
+      "pid": 7584,
+      "status": "observed-boundary",
+      "instrumentationCode": 0,
+      "commands": 28
+    },
+    {
+      "case": "C006-A30-manifest-kill",
+      "attempt": "attempt-010",
+      "dbCase": "C006-A30-manifest-kill-observer",
+      "operation": "initialize",
+      "pid": 7791,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    },
+    {
+      "case": "C006-A30-manifest-kill",
+      "attempt": "attempt-011",
+      "dbCase": "C006-A30-manifest-kill-observer",
+      "operation": "sync",
+      "pid": 7969,
+      "status": "observed",
+      "instrumentationCode": -1,
+      "commands": 25
+    }
+  ],
+  "deaths": [
+    {
+      "case": "C006-A26-import-kill",
+      "attempt": "attempt-002",
+      "pid": 4371,
+      "boundary": "after-real-import-commit",
+      "markerSha256": "fc6e2f7cf70ee6e809926d073d541880801554b6607e13638187ed5f351cc543",
+      "naturalConfirmedAt": "2026-11-23T14:30:34.739Z",
+      "firstProbeAt": "2026-11-23T14:30:34.739Z",
+      "revision": 3,
+      "rows": 6,
+      "outbox": 6,
+      "leaseUntil": 1795444352795
+    },
+    {
+      "case": "C006-A30-manifest-kill",
+      "attempt": "attempt-009",
+      "pid": 7584,
+      "boundary": "after-real-manifest-success-response",
+      "markerSha256": "0c350130a434aa48d230d6c61959532af9eee7559984f0b904675ca8e97447af",
+      "naturalConfirmedAt": "2026-11-23T14:32:51.095Z",
+      "firstProbeAt": "2026-11-23T14:32:51.096Z",
+      "revision": 3,
+      "rows": 5,
+      "outbox": 5,
+      "leaseUntil": 1795444490426
+    }
+  ],
+  "exportObservations": 44,
+  "preservedFiles": 15,
+  "validMissingFiles": 29,
+  "availableRawProbes": 30,
+  "missingRawProbes": 29,
+  "sidecars": [
+    {
+      "attempt": "attempt-002",
+      "name": "tasks.sqlite-wal",
+      "bytes": 32992,
+      "sha256": "864d5797a82a08bdf7e1b1d2720fd0900eb95ee247798025d68c3d8dbd164a69"
+    },
+    {
+      "attempt": "attempt-002",
+      "name": "tasks.sqlite-shm",
+      "bytes": 32768,
+      "sha256": "4ca7f8b20938f530b364478070480f8404be7e2d74a5fa3e6a6b275bd6a2957f"
+    },
+    {
+      "attempt": "attempt-009",
+      "name": "tasks.sqlite-wal",
+      "bytes": 32992,
+      "sha256": "4a6357afb8b274ab206b20b3333ad88f6a27f03ba7f22318aab1c9d7f638646e"
+    },
+    {
+      "attempt": "attempt-009",
+      "name": "tasks.sqlite-shm",
+      "bytes": 32768,
+      "sha256": "e356bcf5bd2a3c8a0a7d5d5b4a9b972c5bb8d898fde5103e6dab237a001b818b"
+    }
+  ],
+  "cloudPlainTextHashes": 20,
+  "A26": {
+    "markerPid": 4371,
+    "reopenPid": 5026,
+    "busyPid": 5368,
+    "recoveryPid": 6824,
+    "observerPid": 7222,
+    "waitMilliseconds": 100856,
+    "originalActor": "05fac39d-eb93-4353-b3db-3b204c05efd5",
+    "retainedRows": 6,
+    "publishedOriginalEvents": 6,
+    "finalSequence": 6
+  },
+  "A30": {
+    "markerPid": 7584,
+    "observerPid": 7969,
+    "manifestPutRequestId": 10,
+    "observerRequests": [
+      {
+        "id": 11,
+        "method": "GET",
+        "relative": "v2/manifest.json",
+        "status": 200
+      },
+      {
+        "id": 12,
+        "method": "GET",
+        "relative": "v2/s-09ecba5c-ee09-4bde-a2c6-7e6b0137150a-0.json.gz",
+        "status": 200
+      }
+    ],
+    "snapshotParts": 1,
+    "isolatedMainSha256": "b60a9a40855858587913d16a92e758f69bb75d9c2c10c84e4f2aa162946a5be0",
+    "newActor": "bc46ec20-d7a9-48ea-a853-feec0737863b",
+    "retainedRows": 5,
+    "newSequence": 0
+  },
+  "apkSha256": "c350c2fb113c00193fa7462cefd20c1a3f352913189cb75c651a126919105c5e",
+  "issues": []
+}

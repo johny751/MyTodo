@@ -1,0 +1,4848 @@
+{
+  "schema": "mytodo-c007-four-stage-case-results",
+  "version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "scope": "Four already audited C007 GitHub runs, 10 scenario families x 3 platforms each. No C006 19ce/core results included.",
+  "acceptanceDecision": "Not issued by this detail report; see c0-07-verification.json",
+  "countsMeaning": {
+    "case": "One top-level scenario on one platform; SQL substeps differ between platforms",
+    "attempt": "Controller child attempt, including seed and planned rejection/exit; not synonymous with completed or successful business operation",
+    "check": "Recorded summary assertion; not an additional business operation",
+    "ordinaryReceipt": "Ordinary completed operation result, including expected rejection",
+    "boundaryReceipt": "Expected process-boundary exit with separate evidence, not ordinary success",
+    "reopenReceipt": "New-process inspection of original database; not extra business operation",
+    "genericAndroidFaultHits": "Unavailable generic field, not zero actual fault execution"
+  },
+  "stages": [
+    {
+      "key": "first4a8",
+      "label": "首轮",
+      "runId": "45180141745",
+      "runAttempt": "1",
+      "sourceSha": "4a8dd94f7fbceeb0583c37cc7aefdb29e9937691",
+      "githubConclusion": "failure",
+      "producerReportStatus": "failed",
+      "producerReportExitCode": 1,
+      "archiveIntegrityPassed": true,
+      "originalCollector": {
+        "exitCode": 0,
+        "evidenceComplete": true,
+        "exclusions": 0
+      },
+      "recordedRunPassed": false,
+      "auditInputRef": "I001",
+      "textIndexInputRef": "I002",
+      "producerReportInputRef": "I003",
+      "totals": {
+        "cases": 30.0,
+        "passedCases": 19.0,
+        "failedCases": 11.0,
+        "attempts": 141.0,
+        "ordinaryOperationReceipts": 125.0,
+        "expectedBoundaryExitReceipts": 6.0,
+        "reopenReceipts": 131.0,
+        "checks": 1644.0,
+        "failedChecks": 47.0
+      },
+      "platforms": [
+        {
+          "platform": "javascript",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 55,
+          "ordinaryOperationReceipts": 52,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 55,
+          "checks": 601,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 10,
+              "attempts": 10,
+              "ordinaryOperationReceipts": 9,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 10,
+              "checks": 109,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I004"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I005"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I006"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I007"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I008"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I009"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I010"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I011"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 51,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I012"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 53,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I013"
+            }
+          ]
+        },
+        {
+          "platform": "windows-c",
+          "status": "failed",
+          "exitCode": 1,
+          "caseCount": 10,
+          "passedCases": 9,
+          "failedCases": 1,
+          "attempts": 76,
+          "ordinaryOperationReceipts": 73,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 76,
+          "checks": 1023,
+          "failedChecks": 27,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "executed-failed",
+              "plannedOperations": 31,
+              "attempts": 31,
+              "ordinaryOperationReceipts": 30,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 31,
+              "checks": 445,
+              "failedChecks": 27,
+              "failedCheckIds": [
+                "006-read-failure:operation",
+                "007-read-step-failure:operation",
+                "010-row-prepare-denied:operation",
+                "010-row-prepare-denied:primary-error-preserved",
+                "011-row-step-overflow:operation",
+                "011-row-step-overflow:primary-error-preserved",
+                "012-page-prepare-denied:operation",
+                "012-page-prepare-denied:primary-error-preserved",
+                "013-page-partial-step-overflow:operation",
+                "013-page-partial-step-overflow:primary-error-preserved",
+                "014-meta-prepare-denied:primary-error-preserved",
+                "015-meta-step-overflow:primary-error-preserved",
+                "016-meta-invalid-json:primary-error-preserved",
+                "017-row-invalid-json:operation",
+                "017-row-invalid-json:primary-error-preserved",
+                "018-page-invalid-json:operation",
+                "018-page-invalid-json:primary-error-preserved",
+                "019-outbox-invalid-json:operation",
+                "019-outbox-invalid-json:primary-error-preserved",
+                "020-local-row-read-denied:primary-error-preserved",
+                "021-remote-row-read-denied:primary-error-preserved",
+                "022-pending-prepare-commit-denied:operation",
+                "023-request-renew-commit-denied:operation",
+                "023-request-renew-commit-denied:request-count",
+                "027-empty-prepare-commit-denied:operation",
+                "029-cache-commit-denied:operation",
+                "030-release-commit-denied:operation"
+              ],
+              "originalError": null,
+              "summaryInputRef": "I014"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I015"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I016"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I017"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I018"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I019"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I020"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I021"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I022"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I023"
+            }
+          ]
+        },
+        {
+          "platform": "android",
+          "status": "failed",
+          "exitCode": 1,
+          "caseCount": 10,
+          "passedCases": 0,
+          "failedCases": 10,
+          "attempts": 10,
+          "ordinaryOperationReceipts": 0,
+          "expectedBoundaryExitReceipts": 0,
+          "reopenReceipts": 0,
+          "checks": 20,
+          "failedChecks": 20,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 10,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/sql-atomicity/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I024"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-batch-rejected/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I025"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-batch-response-lost/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I026"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-manifest-rejected/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I027"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-manifest-response-lost/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I028"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-delete-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I029"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-meta-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I030"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-commit-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I031"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-after-ack-commit-exit/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I032"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "entry-failed-before-business-operation-completed",
+              "plannedOperations": 5,
+              "attempts": 1,
+              "ordinaryOperationReceipts": 0,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 0,
+              "checks": 2,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "000-seed:exit",
+                "000-seed:database-preserved"
+              ],
+              "originalError": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-before-ack-commit-exit/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+              "summaryInputRef": "I033"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "strengthenedfeb",
+      "label": "补强夹具红测",
+      "runId": "45183273190",
+      "runAttempt": "1",
+      "sourceSha": "feb0dca3a56ca8cc83d118d1b828b8f69ec768d2",
+      "githubConclusion": "failure",
+      "producerReportStatus": "failed",
+      "producerReportExitCode": 1,
+      "archiveIntegrityPassed": true,
+      "originalCollector": {
+        "exitCode": 1,
+        "evidenceComplete": false,
+        "exclusions": 114
+      },
+      "recordedRunPassed": false,
+      "auditInputRef": "I034",
+      "textIndexInputRef": "I035",
+      "producerReportInputRef": "I036",
+      "totals": {
+        "cases": 30.0,
+        "passedCases": 27.0,
+        "failedCases": 3.0,
+        "attempts": 187.0,
+        "ordinaryOperationReceipts": 178.0,
+        "expectedBoundaryExitReceipts": 9.0,
+        "reopenReceipts": 187.0,
+        "checks": 2299.0,
+        "failedChecks": 33.0
+      },
+      "platforms": [
+        {
+          "platform": "javascript",
+          "status": "failed",
+          "exitCode": 1,
+          "caseCount": 10,
+          "passedCases": 9,
+          "failedCases": 1,
+          "attempts": 56,
+          "ordinaryOperationReceipts": 53,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 56,
+          "checks": 620,
+          "failedChecks": 2,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "executed-failed",
+              "plannedOperations": 11,
+              "attempts": 11,
+              "ordinaryOperationReceipts": 10,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 11,
+              "checks": 128,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "006-rollback-double-failure:original-sql-error-preserved",
+                "006-rollback-double-failure:secondary-rollback-error-observed"
+              ],
+              "originalError": null,
+              "summaryInputRef": "I037"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I038"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I039"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I040"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I041"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I042"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I043"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I044"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 51,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I045"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 53,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I046"
+            }
+          ]
+        },
+        {
+          "platform": "windows-c",
+          "status": "failed",
+          "exitCode": 1,
+          "caseCount": 10,
+          "passedCases": 8,
+          "failedCases": 2,
+          "attempts": 76,
+          "ordinaryOperationReceipts": 73,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 76,
+          "checks": 1027,
+          "failedChecks": 31,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "executed-failed",
+              "plannedOperations": 31,
+              "attempts": 31,
+              "ordinaryOperationReceipts": 30,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 31,
+              "checks": 447,
+              "failedChecks": 29,
+              "failedCheckIds": [
+                "005-commit-failure:native-commit-hook-error",
+                "005-commit-failure:commit-primary-diagnostic-preserved",
+                "006-read-failure:operation",
+                "007-read-step-failure:operation",
+                "010-row-prepare-denied:operation",
+                "010-row-prepare-denied:primary-error-preserved",
+                "011-row-step-overflow:operation",
+                "011-row-step-overflow:primary-error-preserved",
+                "012-page-prepare-denied:operation",
+                "012-page-prepare-denied:primary-error-preserved",
+                "013-page-partial-step-overflow:operation",
+                "013-page-partial-step-overflow:primary-error-preserved",
+                "014-meta-prepare-denied:primary-error-preserved",
+                "015-meta-step-overflow:primary-error-preserved",
+                "016-meta-invalid-json:primary-error-preserved",
+                "017-row-invalid-json:operation",
+                "017-row-invalid-json:primary-error-preserved",
+                "018-page-invalid-json:operation",
+                "018-page-invalid-json:primary-error-preserved",
+                "019-outbox-invalid-json:operation",
+                "019-outbox-invalid-json:primary-error-preserved",
+                "020-local-row-read-denied:primary-error-preserved",
+                "021-remote-row-read-denied:primary-error-preserved",
+                "022-pending-prepare-commit-denied:operation",
+                "023-request-renew-commit-denied:operation",
+                "023-request-renew-commit-denied:request-count",
+                "027-empty-prepare-commit-denied:operation",
+                "029-cache-commit-denied:operation",
+                "030-release-commit-denied:operation"
+              ],
+              "originalError": null,
+              "summaryInputRef": "I047"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I048"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I049"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I050"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I051"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I052"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I053"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "executed-failed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 68,
+              "failedChecks": 2,
+              "failedCheckIds": [
+                "003-publish-fault:native-commit-hook-error",
+                "003-publish-fault:commit-primary-diagnostic-preserved"
+              ],
+              "originalError": null,
+              "summaryInputRef": "I054"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I055"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I056"
+            }
+          ]
+        },
+        {
+          "platform": "android",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 55,
+          "ordinaryOperationReceipts": 52,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 55,
+          "checks": 652,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 10,
+              "attempts": 10,
+              "ordinaryOperationReceipts": 9,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 10,
+              "checks": 117,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I057"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I058"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I059"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I060"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I061"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I062"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I063"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 61,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I064"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I065"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 58,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I066"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "f9",
+      "label": "生产修复后",
+      "runId": "45186305189",
+      "runAttempt": "1",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "githubConclusion": "failure",
+      "producerReportStatus": "failed",
+      "producerReportExitCode": 1,
+      "archiveIntegrityPassed": true,
+      "originalCollector": {
+        "exitCode": 1,
+        "evidenceComplete": false,
+        "exclusions": 114
+      },
+      "recordedRunPassed": false,
+      "auditInputRef": "I067",
+      "textIndexInputRef": "I068",
+      "producerReportInputRef": "I069",
+      "totals": {
+        "cases": 30.0,
+        "passedCases": 29.0,
+        "failedCases": 1.0,
+        "attempts": 187.0,
+        "ordinaryOperationReceipts": 178.0,
+        "expectedBoundaryExitReceipts": 9.0,
+        "reopenReceipts": 187.0,
+        "checks": 2299.0,
+        "failedChecks": 3.0
+      },
+      "platforms": [
+        {
+          "platform": "javascript",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 56,
+          "ordinaryOperationReceipts": 53,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 56,
+          "checks": 620,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 11,
+              "attempts": 11,
+              "ordinaryOperationReceipts": 10,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 11,
+              "checks": 128,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I070"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I071"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I072"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I073"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I074"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I075"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I076"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I077"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 51,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I078"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 53,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I079"
+            }
+          ]
+        },
+        {
+          "platform": "windows-c",
+          "status": "failed",
+          "exitCode": 1,
+          "caseCount": 10,
+          "passedCases": 9,
+          "failedCases": 1,
+          "attempts": 76,
+          "ordinaryOperationReceipts": 73,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 76,
+          "checks": 1027,
+          "failedChecks": 3,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "failed",
+              "exitCode": 1,
+              "semanticStatus": "executed-failed",
+              "plannedOperations": 31,
+              "attempts": 31,
+              "ordinaryOperationReceipts": 30,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 31,
+              "checks": 447,
+              "failedChecks": 3,
+              "failedCheckIds": [
+                "010-row-prepare-denied:operation",
+                "011-row-step-overflow:operation",
+                "017-row-invalid-json:operation"
+              ],
+              "originalError": null,
+              "summaryInputRef": "I080"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I081"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I082"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I083"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I084"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I085"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I086"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 68,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I087"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I088"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I089"
+            }
+          ]
+        },
+        {
+          "platform": "android",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 55,
+          "ordinaryOperationReceipts": 52,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 55,
+          "checks": 652,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 10,
+              "attempts": 10,
+              "ordinaryOperationReceipts": 9,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 10,
+              "checks": 117,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I090"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I091"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I092"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I093"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I094"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I095"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I096"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 61,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I097"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I098"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 58,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I099"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "finalde7",
+      "label": "inspect夹具修正后",
+      "runId": "45190559178",
+      "runAttempt": "1",
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "githubConclusion": "success",
+      "producerReportStatus": "passed",
+      "producerReportExitCode": 0,
+      "archiveIntegrityPassed": true,
+      "originalCollector": {
+        "exitCode": 1,
+        "evidenceComplete": false,
+        "exclusions": 114
+      },
+      "recordedRunPassed": false,
+      "auditInputRef": "I100",
+      "textIndexInputRef": "I101",
+      "producerReportInputRef": "I102",
+      "totals": {
+        "cases": 30.0,
+        "passedCases": 30.0,
+        "failedCases": 0.0,
+        "attempts": 187.0,
+        "ordinaryOperationReceipts": 178.0,
+        "expectedBoundaryExitReceipts": 9.0,
+        "reopenReceipts": 187.0,
+        "checks": 2299.0,
+        "failedChecks": 0.0
+      },
+      "platforms": [
+        {
+          "platform": "javascript",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 56,
+          "ordinaryOperationReceipts": 53,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 56,
+          "checks": 620,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 11,
+              "attempts": 11,
+              "ordinaryOperationReceipts": 10,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 11,
+              "checks": 128,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I103"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I104"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I105"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I106"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 55,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I107"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I108"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I109"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I110"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 51,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I111"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 53,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I112"
+            }
+          ]
+        },
+        {
+          "platform": "windows-c",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 76,
+          "ordinaryOperationReceipts": 73,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 76,
+          "checks": 1027,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 31,
+              "attempts": 31,
+              "ordinaryOperationReceipts": 30,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 31,
+              "checks": 447,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I113"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I114"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I115"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I116"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 65,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I117"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I118"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 66,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I119"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 68,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I120"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I121"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I122"
+            }
+          ]
+        },
+        {
+          "platform": "android",
+          "status": "passed",
+          "exitCode": 0,
+          "caseCount": 10,
+          "passedCases": 10,
+          "failedCases": 0,
+          "attempts": 55,
+          "ordinaryOperationReceipts": 52,
+          "expectedBoundaryExitReceipts": 3,
+          "reopenReceipts": 55,
+          "checks": 652,
+          "failedChecks": 0,
+          "cases": [
+            {
+              "caseId": "sql-atomicity",
+              "summaryCaseId": "c007-real-sql-atomicity",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 10,
+              "attempts": 10,
+              "ordinaryOperationReceipts": 9,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 10,
+              "checks": 117,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I123"
+            },
+            {
+              "caseId": "C007-batch-rejected",
+              "summaryCaseId": "C007-batch-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I124"
+            },
+            {
+              "caseId": "C007-batch-response-lost",
+              "summaryCaseId": "C007-batch-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I125"
+            },
+            {
+              "caseId": "C007-manifest-rejected",
+              "summaryCaseId": "C007-manifest-rejected",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I126"
+            },
+            {
+              "caseId": "C007-manifest-response-lost",
+              "summaryCaseId": "C007-manifest-response-lost",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I127"
+            },
+            {
+              "caseId": "C007-ack-delete-failed",
+              "summaryCaseId": "C007-ack-delete-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I128"
+            },
+            {
+              "caseId": "C007-ack-meta-failed",
+              "summaryCaseId": "C007-ack-meta-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 60,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I129"
+            },
+            {
+              "caseId": "C007-ack-commit-failed",
+              "summaryCaseId": "C007-ack-commit-failed",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 5,
+              "expectedBoundaryExitReceipts": 0,
+              "reopenReceipts": 5,
+              "checks": 61,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I130"
+            },
+            {
+              "caseId": "C007-after-ack-commit-exit",
+              "summaryCaseId": "C007-after-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 56,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I131"
+            },
+            {
+              "caseId": "C007-before-ack-commit-exit",
+              "summaryCaseId": "C007-before-ack-commit-exit",
+              "status": "passed",
+              "exitCode": 0,
+              "semanticStatus": "executed-passed",
+              "plannedOperations": 5,
+              "attempts": 5,
+              "ordinaryOperationReceipts": 4,
+              "expectedBoundaryExitReceipts": 1,
+              "reopenReceipts": 5,
+              "checks": 58,
+              "failedChecks": 0,
+              "failedCheckIds": [
+                null
+              ],
+              "originalError": null,
+              "summaryInputRef": "I132"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "platform": "javascript",
+      "caseId": "sql-atomicity",
+      "scenario": "真实 SQLite 原子性、读取/prepare/step/COMMIT 错误、首错保留、回滚与同库恢复；各平台子步骤数不同",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 10,
+          "checks": 109,
+          "failedChecks": 0,
+          "summaryInputRef": "I004"
+        },
+        "strengthenedfeb": {
+          "status": "failed",
+          "semanticStatus": "executed-failed",
+          "attempts": 11,
+          "checks": 128,
+          "failedChecks": 2,
+          "summaryInputRef": "I037"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 11,
+          "checks": 128,
+          "failedChecks": 0,
+          "summaryInputRef": "I070"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 11,
+          "checks": 128,
+          "failedChecks": 0,
+          "summaryInputRef": "I103"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-batch-rejected",
+      "scenario": "batch PUT 写入前拒绝，pending 保留后重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I005"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I038"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I071"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I104"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-batch-response-lost",
+      "scenario": "batch 已持久化后断连，原 pending 字节重发并去重",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I006"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I039"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I072"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I105"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-manifest-rejected",
+      "scenario": "manifest PUT 写入前拒绝，后续恢复发布",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I007"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I040"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I073"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I106"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-manifest-response-lost",
+      "scenario": "manifest 已持久化后响应丢失，后续确认并恢复",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I008"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I041"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I074"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 55,
+          "failedChecks": 0,
+          "summaryInputRef": "I107"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-ack-delete-failed",
+      "scenario": "ACK 删除已确认 outbox 时失败，事务回滚并重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I009"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I042"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I075"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I108"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-ack-meta-failed",
+      "scenario": "ACK 更新元数据时失败，事务回滚并重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I010"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I043"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I076"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I109"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-ack-commit-failed",
+      "scenario": "ACK COMMIT 被真实数据库拒绝，保留首错并重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I011"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I044"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I077"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I110"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-after-ack-commit-exit",
+      "scenario": "ACK 已提交后预期进程退出，重开保留提交状态",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 51,
+          "failedChecks": 0,
+          "summaryInputRef": "I012"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 51,
+          "failedChecks": 0,
+          "summaryInputRef": "I045"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 51,
+          "failedChecks": 0,
+          "summaryInputRef": "I078"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 51,
+          "failedChecks": 0,
+          "summaryInputRef": "I111"
+        }
+      }
+    },
+    {
+      "platform": "javascript",
+      "caseId": "C007-before-ack-commit-exit",
+      "scenario": "ACK 提交前预期进程退出，重开不保留未提交状态",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 53,
+          "failedChecks": 0,
+          "summaryInputRef": "I013"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 53,
+          "failedChecks": 0,
+          "summaryInputRef": "I046"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 53,
+          "failedChecks": 0,
+          "summaryInputRef": "I079"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 53,
+          "failedChecks": 0,
+          "summaryInputRef": "I112"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "sql-atomicity",
+      "scenario": "真实 SQLite 原子性、读取/prepare/step/COMMIT 错误、首错保留、回滚与同库恢复；各平台子步骤数不同",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "executed-failed",
+          "attempts": 31,
+          "checks": 445,
+          "failedChecks": 27,
+          "summaryInputRef": "I014"
+        },
+        "strengthenedfeb": {
+          "status": "failed",
+          "semanticStatus": "executed-failed",
+          "attempts": 31,
+          "checks": 447,
+          "failedChecks": 29,
+          "summaryInputRef": "I047"
+        },
+        "f9": {
+          "status": "failed",
+          "semanticStatus": "executed-failed",
+          "attempts": 31,
+          "checks": 447,
+          "failedChecks": 3,
+          "summaryInputRef": "I080"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 31,
+          "checks": 447,
+          "failedChecks": 0,
+          "summaryInputRef": "I113"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-batch-rejected",
+      "scenario": "batch PUT 写入前拒绝，pending 保留后重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I015"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I048"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I081"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I114"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-batch-response-lost",
+      "scenario": "batch 已持久化后断连，原 pending 字节重发并去重",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I016"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I049"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I082"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I115"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-manifest-rejected",
+      "scenario": "manifest PUT 写入前拒绝，后续恢复发布",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I017"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I050"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I083"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I116"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-manifest-response-lost",
+      "scenario": "manifest 已持久化后响应丢失，后续确认并恢复",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I018"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I051"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I084"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 65,
+          "failedChecks": 0,
+          "summaryInputRef": "I117"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-ack-delete-failed",
+      "scenario": "ACK 删除已确认 outbox 时失败，事务回滚并重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I019"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I052"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I085"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I118"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-ack-meta-failed",
+      "scenario": "ACK 更新元数据时失败，事务回滚并重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I020"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I053"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I086"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I119"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-ack-commit-failed",
+      "scenario": "ACK COMMIT 被真实数据库拒绝，保留首错并重试",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 66,
+          "failedChecks": 0,
+          "summaryInputRef": "I021"
+        },
+        "strengthenedfeb": {
+          "status": "failed",
+          "semanticStatus": "executed-failed",
+          "attempts": 5,
+          "checks": 68,
+          "failedChecks": 2,
+          "summaryInputRef": "I054"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 68,
+          "failedChecks": 0,
+          "summaryInputRef": "I087"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 68,
+          "failedChecks": 0,
+          "summaryInputRef": "I120"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-after-ack-commit-exit",
+      "scenario": "ACK 已提交后预期进程退出，重开保留提交状态",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I022"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I055"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I088"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I121"
+        }
+      }
+    },
+    {
+      "platform": "windows-c",
+      "caseId": "C007-before-ack-commit-exit",
+      "scenario": "ACK 提交前预期进程退出，重开不保留未提交状态",
+      "stages": {
+        "first4a8": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I023"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I056"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I089"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I122"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "sql-atomicity",
+      "scenario": "真实 SQLite 原子性、读取/prepare/step/COMMIT 错误、首错保留、回滚与同库恢复；各平台子步骤数不同",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I024"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 10,
+          "checks": 117,
+          "failedChecks": 0,
+          "summaryInputRef": "I057"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 10,
+          "checks": 117,
+          "failedChecks": 0,
+          "summaryInputRef": "I090"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 10,
+          "checks": 117,
+          "failedChecks": 0,
+          "summaryInputRef": "I123"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-batch-rejected",
+      "scenario": "batch PUT 写入前拒绝，pending 保留后重试",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I025"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I058"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I091"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I124"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-batch-response-lost",
+      "scenario": "batch 已持久化后断连，原 pending 字节重发并去重",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I026"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I059"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I092"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I125"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-manifest-rejected",
+      "scenario": "manifest PUT 写入前拒绝，后续恢复发布",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I027"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I060"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I093"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I126"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-manifest-response-lost",
+      "scenario": "manifest 已持久化后响应丢失，后续确认并恢复",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I028"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I061"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I094"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I127"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-ack-delete-failed",
+      "scenario": "ACK 删除已确认 outbox 时失败，事务回滚并重试",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I029"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I062"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I095"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I128"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-ack-meta-failed",
+      "scenario": "ACK 更新元数据时失败，事务回滚并重试",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I030"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I063"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I096"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 60,
+          "failedChecks": 0,
+          "summaryInputRef": "I129"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-ack-commit-failed",
+      "scenario": "ACK COMMIT 被真实数据库拒绝，保留首错并重试",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I031"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 61,
+          "failedChecks": 0,
+          "summaryInputRef": "I064"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 61,
+          "failedChecks": 0,
+          "summaryInputRef": "I097"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 61,
+          "failedChecks": 0,
+          "summaryInputRef": "I130"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-after-ack-commit-exit",
+      "scenario": "ACK 已提交后预期进程退出，重开保留提交状态",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I032"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I065"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I098"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 56,
+          "failedChecks": 0,
+          "summaryInputRef": "I131"
+        }
+      }
+    },
+    {
+      "platform": "android",
+      "caseId": "C007-before-ack-commit-exit",
+      "scenario": "ACK 提交前预期进程退出，重开不保留未提交状态",
+      "stages": {
+        "first4a8": {
+          "status": "failed",
+          "semanticStatus": "entry-failed-before-business-operation-completed",
+          "attempts": 1,
+          "checks": 2,
+          "failedChecks": 2,
+          "summaryInputRef": "I033"
+        },
+        "strengthenedfeb": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 58,
+          "failedChecks": 0,
+          "summaryInputRef": "I066"
+        },
+        "f9": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 58,
+          "failedChecks": 0,
+          "summaryInputRef": "I099"
+        },
+        "finalde7": {
+          "status": "passed",
+          "semanticStatus": "executed-passed",
+          "attempts": 5,
+          "checks": 58,
+          "failedChecks": 0,
+          "summaryInputRef": "I132"
+        }
+      }
+    }
+  ],
+  "semanticNotes": [
+    "first4a8 Android: 10 seed-entry attempts, 0 completed business-operation receipts, 0 reopen receipts, 0 boundary markers; all planned SQL/publish/ACK fault bodies were not reached. Instrument ADB timeout and cleanup force-stop are not target transaction deaths.",
+    "first4a8 JavaScript 55 attempts/601 checks passed only its then-existing coverage; strengthenedfeb added the real double-failure probe, which failed two error-preservation checks. The earlier green does not prove that new behavior.",
+    "strengthenedfeb corrected Android entry packaging and strengthened Node double-error/Windows COMMIT diagnostics; its 33 failed checks remain red.",
+    "f9 production changes removed the Node/Windows production failures; three Windows inspect :operation failures remained because the fixture treated cJSON null as a non-null pointer. Their literal :observer checks passed.",
+    "finalde7 changes only inspect fixture acceptance calculation; all 30 scenarios/187 attempts/2299 checks passed, preserving actual errors. No historical failed run is reclassified.",
+    "The original strengthenedfeb/f9/finalde7 collector exit 1, evidenceComplete=false and 114 exclusions are preserved even where producer execution is passed. Overall acceptance is owned by the parent verification report."
+  ],
+  "semanticReviewInputRefs": [
+    "I133",
+    "I134",
+    "I135",
+    "I136",
+    "I137",
+    "I138"
+  ],
+  "inputs": [
+    {
+      "id": "I001",
+      "path": "work/c007-first-red-integrity-audit.json",
+      "role": "Previously completed frozen archive/execution audit",
+      "bytes": 68069,
+      "sha256": "12fcbdd3e5e339d23eb5ddbc4400743b959ec6ee55deeaccbc0e71fd0d22f57e"
+    },
+    {
+      "id": "I002",
+      "path": "outputs/c0-07/evidence/45180141745/text-archive-files-sha256.json",
+      "role": "Original local-text archive index",
+      "bytes": 570043,
+      "sha256": "359757f54fd7ee131dbcf8be66a08f0884aea07a5bd8676219b4d1d9d244c88d"
+    },
+    {
+      "id": "I003",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-report-45180141745-1/report.json",
+      "role": "Original producer execution report",
+      "bytes": 15922,
+      "sha256": "75cfe4371f945244eeea76836ed014c51ec85f2916ff864564e2cf623547fd27"
+    },
+    {
+      "id": "I004",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 184146,
+      "sha256": "da4c8760132c786d31c2192828eaf8546a0ac291094f5f2dc64fe622b20c8c8a"
+    },
+    {
+      "id": "I005",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96196,
+      "sha256": "0c6dedfac477895850779df31f4c6ba279ccbfd6c852c84a6e9c0473c3f2d8ee"
+    },
+    {
+      "id": "I006",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98775,
+      "sha256": "c2028991d673d1a8a3d584688917bdfff5264530c09ea69e0e05eb6a7f1129ab"
+    },
+    {
+      "id": "I007",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99899,
+      "sha256": "e1ad4e5323862be38d5d2f14174feb54b3c59010899ab3432e606c82e1745879"
+    },
+    {
+      "id": "I008",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97846,
+      "sha256": "c6ef67d4afe7d20d1905fa2faeaa2445095408adc0f6fd92b30ff8142d1d8777"
+    },
+    {
+      "id": "I009",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97198,
+      "sha256": "5a1782672c22323f90d374a1e906283a27793bcd28e1d8166026d064467943b1"
+    },
+    {
+      "id": "I010",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97122,
+      "sha256": "4ba52b381a110e40c90f877d4fa035378d2aacf648e13057da4c89559605e2b5"
+    },
+    {
+      "id": "I011",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97211,
+      "sha256": "a45839c5b10dbacae57a2fbd56c90dacdc3649fc5532c3e08c23610708738523"
+    },
+    {
+      "id": "I012",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 89368,
+      "sha256": "27b99f45e4654578ccab05c35666dd2328330d40854c35cf4497bcf284e4f355"
+    },
+    {
+      "id": "I013",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-javascript-45180141745-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 95521,
+      "sha256": "415885cb86625f2f604cd43f9dbe88a6dbdea14f11bc4a89a2880b40964e60c0"
+    },
+    {
+      "id": "I014",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 522458,
+      "sha256": "ad16b0a99727d81a5f10cf5fbce6fb46bc19a2450edc11c30e4fc855d26d2f64"
+    },
+    {
+      "id": "I015",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 79814,
+      "sha256": "b7abe77248403d6b0a2e0e911749e3111329a6515a5e3a8384c235771cb54642"
+    },
+    {
+      "id": "I016",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 82477,
+      "sha256": "0de486516aedcaa6e796cb16e81b4a8ff1cd5c85497f02b885b0b9896134abcc"
+    },
+    {
+      "id": "I017",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 83536,
+      "sha256": "13dd94da00b9702d03277ad7fbe43cb173a4f52cf905d51ec1a08f6028a8e004"
+    },
+    {
+      "id": "I018",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81567,
+      "sha256": "b4bfd13a0d710f8a68b8268394aeee5b1749f329d6d3c958caf5fba4d8bc3361"
+    },
+    {
+      "id": "I019",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80989,
+      "sha256": "021be4c9953c61c62db0360018d7e4a136900e6ed50f6df4a13f12f6dc8fae73"
+    },
+    {
+      "id": "I020",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80916,
+      "sha256": "9744e5ceaabe8fcc746971985df156b73fcb12c33d17db341e25ac2a4bc66294"
+    },
+    {
+      "id": "I021",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81065,
+      "sha256": "f8530f88017c85e262029369a6628e344f9ed30cb43a58d1738cd86b1a22a98e"
+    },
+    {
+      "id": "I022",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 72742,
+      "sha256": "55581b6fafe191c00c417807e6997ea277defd88c5dfcb30ec5507c18b9b1510"
+    },
+    {
+      "id": "I023",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-windows-c-45180141745-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 74852,
+      "sha256": "07f5498892bfb497259fa4aa5cf7450ab1e8f36d729e8f2e157a7d1f057d178f"
+    },
+    {
+      "id": "I024",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2367,
+      "sha256": "ad9a72450cddd36084f8f0bb27ea4c19b0bd66c91dbf5604d3f8f6e0c843d083"
+    },
+    {
+      "id": "I025",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2383,
+      "sha256": "401b8127a90d4ae66c74e686e21c3f42acf0fd2ca826a46c2ee1a634fd95f0f8"
+    },
+    {
+      "id": "I026",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2413,
+      "sha256": "13e77daf9bc7ea5c38447b829797819066564accef34b6a986c17ff563ba4b9a"
+    },
+    {
+      "id": "I027",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2401,
+      "sha256": "f4d95efcda681ec82f7ef0d038d4053b174f55526bcf1ca9718a061ca6171e33"
+    },
+    {
+      "id": "I028",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2431,
+      "sha256": "50fed9906badb8cc85dffd6bda420177f547c8b3bf9435c1d197b20f46f84589"
+    },
+    {
+      "id": "I029",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2401,
+      "sha256": "dbf6ea270e7edbf1ab754696e677cdec45b49e4af76feb14d926598d2b10f6cf"
+    },
+    {
+      "id": "I030",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2389,
+      "sha256": "c4cabc209d25f469dba2e2f0907ed3cb3f6a1f40838f72c1be19b6f4d6ed3459"
+    },
+    {
+      "id": "I031",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2401,
+      "sha256": "f6015577d06526900dcc7eaf80ada5706b25768f7e2415c13ae9c8e85829ebdd"
+    },
+    {
+      "id": "I032",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2425,
+      "sha256": "d52b421fd905d79b36cd7273629dce577d7aaabb8a7de3759c79afe2cacdc7b7"
+    },
+    {
+      "id": "I033",
+      "path": "outputs/c0-07/evidence/45180141745/artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 2431,
+      "sha256": "5fed35d7b0fe97da86ccef60ef16462d4266f7997ffab66a803c04c632834d7a"
+    },
+    {
+      "id": "I034",
+      "path": "work/c007-strengthened-red-integrity-audit.json",
+      "role": "Previously completed frozen archive/execution audit",
+      "bytes": 68126,
+      "sha256": "2252cc77ce8939274b21ef925c963a9f4286c99ed0d399d0427c4191d02baa00"
+    },
+    {
+      "id": "I035",
+      "path": "outputs/c0-07/evidence/45183273190/text-archive-files-sha256.json",
+      "role": "Original local-text archive index",
+      "bytes": 2811083,
+      "sha256": "9ed78c6a3d357a3565bdd860c290331259a98c4d2a54070c42e0ef74fbbc140b"
+    },
+    {
+      "id": "I036",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-report-45183273190-1/report.json",
+      "role": "Original producer execution report",
+      "bytes": 11263,
+      "sha256": "491d132d2361976d002c4e71261b9448e068395bae9942f2a9f353d82fdd15d1"
+    },
+    {
+      "id": "I037",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 204917,
+      "sha256": "0bff5a9d46948820c5281390734c71081cb11e5f1f616ddeaba656c247860de1"
+    },
+    {
+      "id": "I038",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96196,
+      "sha256": "dffec4293592b26ac440f830b8d5fd15730c5deddc3faded08c7a66057d83937"
+    },
+    {
+      "id": "I039",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98775,
+      "sha256": "088436166fdcac314f02bede2b451860c18f95c11cfea64da4fc09d29221cfed"
+    },
+    {
+      "id": "I040",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99899,
+      "sha256": "2eab5a85bfc6e9f8fa88100e3f40a72f3d21b58103973615b87a0a164543e9a6"
+    },
+    {
+      "id": "I041",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97846,
+      "sha256": "86fbc96f1485741dd248da21a37329f64a490d911bbc7dc8f48503c201b95413"
+    },
+    {
+      "id": "I042",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97198,
+      "sha256": "02d30b10a11485324a57640d31f66e0bd867474d15551527b3d23a55edf8cbde"
+    },
+    {
+      "id": "I043",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97122,
+      "sha256": "a588f85b48c448f37c7da8aadebb5e829ef41b3c0bd15eb86f93803c0d910793"
+    },
+    {
+      "id": "I044",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97211,
+      "sha256": "0046d842fb04d82274edc045aac76b472b7965e3cb14512012f019bb4f1d4f6f"
+    },
+    {
+      "id": "I045",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 89368,
+      "sha256": "4eaa9f67548097d6d3b8327c71412d1ccbf24427584e1860bf8857f347bfc48c"
+    },
+    {
+      "id": "I046",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-javascript-45183273190-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 95521,
+      "sha256": "da37b18e8a8cd0da2db0f17b1a9866a2934615cc139cb0f7edc15948bb7ee8ae"
+    },
+    {
+      "id": "I047",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 522657,
+      "sha256": "db8f0a499768e2707f6c3ca9430fd1acde596ac4c99e4649a7c6a12dd2cdc024"
+    },
+    {
+      "id": "I048",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 79814,
+      "sha256": "fd3456f837ec579472b96251c378d0b72be97b23ae9d83cf0679381728e5ebc6"
+    },
+    {
+      "id": "I049",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 82477,
+      "sha256": "6495603b72e180945d28bfdd773c86690e5b9d1dd7f892fd794af535d87975db"
+    },
+    {
+      "id": "I050",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 83536,
+      "sha256": "6f243cc408a7fb2bf2be700f8a11272ebae3f4d6dbdf3890337d0eb0a0bed93e"
+    },
+    {
+      "id": "I051",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81567,
+      "sha256": "83d7c447bafb719f61de07eaf77cd7cf352a70ccdea811227c2ed4710d92a5ad"
+    },
+    {
+      "id": "I052",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80989,
+      "sha256": "f4cb7ec2dafe89d8dea58a2f44166304f468e78c19042c8c8e8242148f2a8738"
+    },
+    {
+      "id": "I053",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80916,
+      "sha256": "9ba6eb6bf9cffc798f8ce5b1a19fd32f8438dc2191d0f15b7f07ec3cbdd7c6b6"
+    },
+    {
+      "id": "I054",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81262,
+      "sha256": "6329d732e08ae3ed4d92d6ca1b9f2780b1379121d5b130595cc5f96f9af0b663"
+    },
+    {
+      "id": "I055",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 72742,
+      "sha256": "a192c534697ca645c3e688667700b366fa7f63e5937b88098bc97201eef9a477"
+    },
+    {
+      "id": "I056",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-windows-c-45183273190-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 74852,
+      "sha256": "7de160acc35d834551e09a8f34746fb21548dbbffdd0a25b4b2b416001573023"
+    },
+    {
+      "id": "I057",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 185982,
+      "sha256": "aaadf84d1c9e2a52f35f194b62d7cd0a124d051e5ac2cbe0acdde807fc2c3739"
+    },
+    {
+      "id": "I058",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96704,
+      "sha256": "69e2a397027988ceb7d0e37c369e6ae857e0e455dc81e5920914fd11e11524b3"
+    },
+    {
+      "id": "I059",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99076,
+      "sha256": "f9345f3b4eae0f28c68e3e3215c9075d5bd9ac0b47b5217fd7325e9295281301"
+    },
+    {
+      "id": "I060",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 100285,
+      "sha256": "78cc77d9464ea7d8a14c127fe4662b24296269c1a36a7cda1c931933eb7f8552"
+    },
+    {
+      "id": "I061",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98192,
+      "sha256": "32537d949c3ddd5358ecfa9cdbb331196c5394a168550bae982dedc87ee60e8f"
+    },
+    {
+      "id": "I062",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98837,
+      "sha256": "c3f2690d43dce0d289bd42380da412aa37e782b33d718458fb3eee41430f1441"
+    },
+    {
+      "id": "I063",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98823,
+      "sha256": "3ec24666e12f59a4698a5bd6d338f6420b13ada2b030242681250a28ff02866a"
+    },
+    {
+      "id": "I064",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98906,
+      "sha256": "346d16c0ab0eb20f4025dc8f9e7067a9ec119773f477d837dc77b601d6acf34c"
+    },
+    {
+      "id": "I065",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80543,
+      "sha256": "81568e0f2c8a2cb73cd7adcd989e5a2cb94e7a590573111460bb95cead44d1d0"
+    },
+    {
+      "id": "I066",
+      "path": "outputs/c0-07/evidence/45183273190/artifacts/c007-android-45183273190-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 86312,
+      "sha256": "c456f580acde8b00d662f5c7c72a20123211679c0ca3753cbea3952aadd9d704"
+    },
+    {
+      "id": "I067",
+      "path": "work/c007-f9-production-integrity-audit.json",
+      "role": "Previously completed frozen archive/execution audit",
+      "bytes": 59004,
+      "sha256": "35bc08ced53013d9e8aef874fd4ea588e83c2f47c3e52151a03254c695bf2c8f"
+    },
+    {
+      "id": "I068",
+      "path": "outputs/c0-07/evidence/45186305189/text-archive-files-sha256.json",
+      "role": "Original local-text archive index",
+      "bytes": 2810884,
+      "sha256": "8b5037e18c524f87b9c75c6cd9068b93e719c80a1be90b2e4e5fc10c14daf488"
+    },
+    {
+      "id": "I069",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-report-45186305189-1/report.json",
+      "role": "Original producer execution report",
+      "bytes": 7183,
+      "sha256": "c02c106ffa39db42e31be0392ca9dfd2e775d61dbaf869ec9d325fa1b300343a"
+    },
+    {
+      "id": "I070",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 205147,
+      "sha256": "38b461d182bd3712509a0692041d1724647b5809e67967319e7fddbea0656a56"
+    },
+    {
+      "id": "I071",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96196,
+      "sha256": "4fcc250f46727512cff659c6ee48016055dad127cb1b202c834ac0272b12ff5f"
+    },
+    {
+      "id": "I072",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98775,
+      "sha256": "37fb1dccce2affe71acbf8a28567c534fd82dcc93f14b5d02ee9d7f87e2fd24c"
+    },
+    {
+      "id": "I073",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99899,
+      "sha256": "fefa2b2766114120a8b44da32bf209b6ca5b5176b04bb2419c682680c76ffc32"
+    },
+    {
+      "id": "I074",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97846,
+      "sha256": "159789dd48138d818a6828248f7cdea22bf7e0b4b1f3771d9b4f3dca80d2f19e"
+    },
+    {
+      "id": "I075",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97198,
+      "sha256": "bb4a94d2b062295b67b6619d123d2889a55e7b66c5c079ba4f5ec2f14a45e9b9"
+    },
+    {
+      "id": "I076",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97122,
+      "sha256": "e50e9ceaede6a012eb63c62ecc0cddcdfad831198b01dc71faf325443a44b304"
+    },
+    {
+      "id": "I077",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97211,
+      "sha256": "d2f8529b29e581820a0a2a4ab59122a3886cc68b2cf2467ed0816f14b3160d8f"
+    },
+    {
+      "id": "I078",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 89368,
+      "sha256": "c47e54f4f8898704da73ba98465d771a77d6a0ab3969d00ea0fa385ad5f672dd"
+    },
+    {
+      "id": "I079",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-javascript-45186305189-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 95521,
+      "sha256": "26fd5b1b72feff95a7b13ad8790de384a18060eec55cb446330e6bd8c57f34ae"
+    },
+    {
+      "id": "I080",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 506648,
+      "sha256": "121fbfe4d0efe4edcf5ab54cf9599a78e8b4d48cea5e6ac6b9c6988bb0b02399"
+    },
+    {
+      "id": "I081",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 79814,
+      "sha256": "ca859c7155da90136fdbc8386ceb79f3077fc82041887abf83f7e93a46a2863c"
+    },
+    {
+      "id": "I082",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 82453,
+      "sha256": "f47cace7fbc01d4423d28e11275169d86460d7ef110b83b06cef175ff7c83ea1"
+    },
+    {
+      "id": "I083",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 83536,
+      "sha256": "8f4658bfedea80303dd12df1e7138410a4d29f261d08cbde8ab29abcf1b1771e"
+    },
+    {
+      "id": "I084",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81554,
+      "sha256": "acc3ac368bfab629f3fce3354b250ab8a91202f82bd8bcef83e1f3cfd563211f"
+    },
+    {
+      "id": "I085",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81047,
+      "sha256": "cdd4f5fb2fa565f27746ac976350d626b0f2892901c1394caef940347590fdaa"
+    },
+    {
+      "id": "I086",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80950,
+      "sha256": "bce48bd8d0fe9e1bd0f1750bfe8762ca8b088c30e85cf08545cd47ffea28f866"
+    },
+    {
+      "id": "I087",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81017,
+      "sha256": "2d755f241382ef9fdff4a3e60409e3af039071f68a9212e2fd97a1e9c18e2f48"
+    },
+    {
+      "id": "I088",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 72742,
+      "sha256": "7546084d024d772f787a389a1939bfa439d05fd771ce594f6d221251032f01f7"
+    },
+    {
+      "id": "I089",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-windows-c-45186305189-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 74852,
+      "sha256": "93f132e2609f0cf11f2ce627518e00cf61e082e9cdd00c07bb1c09b9f39b6f19"
+    },
+    {
+      "id": "I090",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 185982,
+      "sha256": "8e301e06e0512ba3d9c98ba05f0985a2eb8e2689c51595c0f520f64243b0f904"
+    },
+    {
+      "id": "I091",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96704,
+      "sha256": "1352001e69169527b705a8863c341324f5b2322e28ed23aec69cb2ab8212a035"
+    },
+    {
+      "id": "I092",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99076,
+      "sha256": "d233b0367e4683f4a7e14216bde9b03be374d6e4a7d17c195ea18c287afea7d7"
+    },
+    {
+      "id": "I093",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 100285,
+      "sha256": "13e7824f1ead7dc877a910ebe9d0e1ad0c572fea4caaeeb4dfcd406c19f1ea4a"
+    },
+    {
+      "id": "I094",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98192,
+      "sha256": "ecbad40691841a58e3b5c0033a2762485a898e2fa0bb67e86f8fc495db003f1c"
+    },
+    {
+      "id": "I095",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98837,
+      "sha256": "ab1006ff63d01a292dd5aa413d9a95d4ac45473afb378cd754204f8ab2786ed0"
+    },
+    {
+      "id": "I096",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98823,
+      "sha256": "35199c7d15c28692b7e27410f65647a8aaf07df08b54f67612c05da86ab2f9e4"
+    },
+    {
+      "id": "I097",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98906,
+      "sha256": "96e8a4feb10124796ab2bbb9b2c102347ea95a871c09a4125cc42877aaca0d96"
+    },
+    {
+      "id": "I098",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80543,
+      "sha256": "43b8de6e690b95774151d3d834ae04f8583ae2af4d923d47d406103eb76855b0"
+    },
+    {
+      "id": "I099",
+      "path": "outputs/c0-07/evidence/45186305189/artifacts/c007-android-45186305189-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 86312,
+      "sha256": "ff3abc8bae0db1ff3e3fa448e355fe7b6592edd42ce86403cb3145b6506ac367"
+    },
+    {
+      "id": "I100",
+      "path": "work/c007-de7-production-integrity-audit.json",
+      "role": "Previously completed frozen archive/execution audit",
+      "bytes": 58022,
+      "sha256": "61d72889e7a5473235b1a8390648f15b9ef63e366505a13d3d763a5e99a9497f"
+    },
+    {
+      "id": "I101",
+      "path": "outputs/c0-07/evidence/45190559178/text-archive-files-sha256.json",
+      "role": "Original local-text archive index",
+      "bytes": 2811652,
+      "sha256": "6915ce4912a831bdcd87c332f1fe3b545f46c479c692111e6f2fd0cd749397f4"
+    },
+    {
+      "id": "I102",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-report-45190559178-1/report.json",
+      "role": "Original producer execution report",
+      "bytes": 6699,
+      "sha256": "c1c8bac166350bb80cd1829b82fa1676dc2242f68887fc25c00a0eb841dcb35d"
+    },
+    {
+      "id": "I103",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 205147,
+      "sha256": "1fbb467b83972143055b82ab33bcd72a5263863b7f2ffbda8bf249dfe634ba04"
+    },
+    {
+      "id": "I104",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96196,
+      "sha256": "5ff6f2ce859768e818bb9c3fe69695107f577f8116575776febcc6aff168d8d5"
+    },
+    {
+      "id": "I105",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98775,
+      "sha256": "b7b1ebb093d0df0aa0271265719edde5b441d1a450eef92480d2432f8dd7bc8a"
+    },
+    {
+      "id": "I106",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99899,
+      "sha256": "4a0ddce20af0542d4c785e8965d9aa947891de4890def2007d334fc14f240bec"
+    },
+    {
+      "id": "I107",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97846,
+      "sha256": "a1a388d832b78fa45fc88c397d8a75861635dd067449bc2b2724c8bfa48e6139"
+    },
+    {
+      "id": "I108",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97198,
+      "sha256": "b9f73a3e5c0b00da4a2c2cacb60a60e38bae93ad787e5e84837862dec1543bc9"
+    },
+    {
+      "id": "I109",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97122,
+      "sha256": "3933a6a791868dc629c61e9e5ece4b7553559ab8c5287c90ca2f3f81aadb90b7"
+    },
+    {
+      "id": "I110",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 97211,
+      "sha256": "6d9b86cfa2b94bc952a4f698ac5c08e63d8e4882e7c6f5ed6877ea6a247eb804"
+    },
+    {
+      "id": "I111",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 89368,
+      "sha256": "e9db9acae82ad240e5f43638da301c832ddb0abdbd5e863fb9d48bcd86b4147c"
+    },
+    {
+      "id": "I112",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 95521,
+      "sha256": "1918c26d69b0a3e472789a920d5814d781f047486c450fe776626385392b20f4"
+    },
+    {
+      "id": "I113",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 506648,
+      "sha256": "508cc1fbed5f8b69df426f774f6792c5af10f0c6fb13e4f191a482151d844706"
+    },
+    {
+      "id": "I114",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 79814,
+      "sha256": "83a475f2d8eefa0118712de8935caae589deceb14dbeab9a8ef38bfa0197071c"
+    },
+    {
+      "id": "I115",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 82453,
+      "sha256": "34e84dd6712a0ac27ef62108e78384cc97b73f6fe0d06fe3da4beb7c4b35f0e3"
+    },
+    {
+      "id": "I116",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 83536,
+      "sha256": "ac4267eb5902aa0c77e9773cea8ee3b7c076cb5d9997f3af23681ab19480e8c1"
+    },
+    {
+      "id": "I117",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81554,
+      "sha256": "b69dc342f1f724fb0a2c70186abde24b3a4687ce6be617df67922848ac2c12bf"
+    },
+    {
+      "id": "I118",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81047,
+      "sha256": "1a9a3ae6538ae8a6fba6ce281a3f736ec8f165a7682d4fac94167f983da8c8cb"
+    },
+    {
+      "id": "I119",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80950,
+      "sha256": "9ec7e7de6e43bbc29cb4f90686487bb464da563f83d8644de816ac3a439f418f"
+    },
+    {
+      "id": "I120",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 81017,
+      "sha256": "351e8473107722bddff2503173f1adfa57c74c6ec638316b489cbaf98c0e8c95"
+    },
+    {
+      "id": "I121",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 72742,
+      "sha256": "53c965ee6010123f4b778111b6df715bf180eb20248c6d14a721e607dcbe8885"
+    },
+    {
+      "id": "I122",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 74852,
+      "sha256": "a03dd2d9ec23a6e6a5d75edb0926c52d17740d821595be7449cec0d26450e0c2"
+    },
+    {
+      "id": "I123",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/sql-atomicity/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 185982,
+      "sha256": "febe8e00c48cb84da65819175f2f79aabe467eb3c199873f3d8be851ede991e8"
+    },
+    {
+      "id": "I124",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-batch-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 96704,
+      "sha256": "4b0f1d399355fc10efe95e939eab83c1529d4b112c5a8f5e3b89a9d0c21ad14c"
+    },
+    {
+      "id": "I125",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-batch-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 99076,
+      "sha256": "83b373a431767dd9eb276ab86b8fb90306389bd62dfdd23b39deed9fb1d56a35"
+    },
+    {
+      "id": "I126",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-manifest-rejected/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 100285,
+      "sha256": "30858bb6cf1a6206c326fd38ccac358899cdfd4abdc99956af8ed01df560904b"
+    },
+    {
+      "id": "I127",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-manifest-response-lost/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98192,
+      "sha256": "025a5b17f1796523bbc4ed582ffb3b619500e18d8dbcb93f79f1ac91f75c537a"
+    },
+    {
+      "id": "I128",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-ack-delete-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98837,
+      "sha256": "4b17b415d816dcefba0ea7e3eb4e3c873b6878786b0f4468b0ec00cf99ac4223"
+    },
+    {
+      "id": "I129",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-ack-meta-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98823,
+      "sha256": "6cc8acf4b3ee66ae8e7d0ea39cb1d19ac35f5b0627124be266755a550fe1f51f"
+    },
+    {
+      "id": "I130",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-ack-commit-failed/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 98906,
+      "sha256": "0888256ecb0e28d804981d440c61d7038bc80b8cdf93caf876ddf7528c0a4a0e"
+    },
+    {
+      "id": "I131",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-after-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 80543,
+      "sha256": "ea9725b323338db48f6c1fd46a5a0e8a420788d8003b0c3641b8634dde091ec6"
+    },
+    {
+      "id": "I132",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/C007-before-ack-commit-exit/summary.json",
+      "role": "Original case summary underlying the already completed audit",
+      "bytes": 86312,
+      "sha256": "7186c09389bb697908573cc2c03f31a4747f9482ccee0cfab1987bd4a0f4bc56"
+    },
+    {
+      "id": "I133",
+      "path": "work/c007-first-red-android-review.md",
+      "role": "Previously completed semantic review; not rerun here",
+      "bytes": 7306,
+      "sha256": "bea7a8ffb66271fd65fe31d9cebdaa3cf446ff132ab0a0bdfcfb71a070906224"
+    },
+    {
+      "id": "I134",
+      "path": "work/c007-feb-android-deep-review.md",
+      "role": "Previously completed semantic review; not rerun here",
+      "bytes": 8652,
+      "sha256": "b29d695b9d5861ae4ec005fe6a64a6cf8b73ac920bb405c121a8e8dc8092edef"
+    },
+    {
+      "id": "I135",
+      "path": "work/c007-f9-production-evidence-review.md",
+      "role": "Previously completed semantic review; not rerun here",
+      "bytes": 4520,
+      "sha256": "194e252b91b7413b5b1e6e039489541417e2a44ddd1d36e759081e98cc23491a"
+    },
+    {
+      "id": "I136",
+      "path": "work/c007-de7-production-evidence-review.md",
+      "role": "Previously completed semantic review; not rerun here",
+      "bytes": 10711,
+      "sha256": "28473731c695f7cf7dd68116379b4511124ecbd5dcc9f73f8c338aabd8fd431e"
+    },
+    {
+      "id": "I137",
+      "path": "work/c007-de7-android-final-review.md",
+      "role": "Previously completed semantic review; not rerun here",
+      "bytes": 8478,
+      "sha256": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6"
+    },
+    {
+      "id": "I138",
+      "path": "work/c007-de7-network-independent-audit.json",
+      "role": "Previously completed semantic review; not rerun here",
+      "bytes": 42398,
+      "sha256": "7fffa5b62e3ee1e33bb472f5fc9c5cc5ded351e8caebcb9ce8c2913c97fb8694"
+    }
+  ],
+  "generation": "Local evidence-only PowerShell JSON/hash aggregation; no project code, syntax check, build, database, or tests executed."
+}

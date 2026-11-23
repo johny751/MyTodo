@@ -1,0 +1,1177 @@
+{
+  "schema": "mytodo-c007-edf-a27-local-text-integrity-review",
+  "runId": "45194185453",
+  "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+  "method": "Local archived index hash and size comparisons only; no project execution or binary/credential read",
+  "reviewedAt": "2026-11-23T22:50:09.4361006+08:00",
+  "indexPath": "outputs/c0-07/evidence/45194185453/text-archive-files-sha256.json",
+  "indexSha256": "2b81728c241d6727f9d9e4258071613a840c7938a068363691ae4783786e1d3d",
+  "indexFormat": "JSON array of objects with path relative to evidence root, integer bytes, lowercase sha256",
+  "checkedFiles": 145,
+  "failedFiles": 0,
+  "requiredFiles": 20,
+  "missingRequired": [],
+  "rows": [
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/case.json",
+      "expectedBytes": 215415,
+      "actualBytes": 215415,
+      "expectedSha256": "6affd95b3e036f178e5fa89f0d83aba55ffea4c495c61dfe72f3378d604fe40e",
+      "actualSha256": "6affd95b3e036f178e5fa89f0d83aba55ffea4c495c61dfe72f3378d604fe40e",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/cloud/dav/C006-A27-manifest-fail/state.json",
+      "expectedBytes": 191,
+      "actualBytes": 191,
+      "expectedSha256": "3bdb6fc130005b8108e442f3c5c3e37f943fbce64037fd4ca08a248beab0e917",
+      "actualSha256": "3bdb6fc130005b8108e442f3c5c3e37f943fbce64037fd4ca08a248beab0e917",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/cloud/http-requests.jsonl",
+      "expectedBytes": 7247,
+      "actualBytes": 7247,
+      "expectedSha256": "414c283a5a24c2d3edbdd3a8b8dd82d4d2df2329d0d53ceca81609a8c7b2cb4c",
+      "actualSha256": "414c283a5a24c2d3edbdd3a8b8dd82d4d2df2329d0d53ceca81609a8c7b2cb4c",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/cloud-final.json",
+      "expectedBytes": 1749,
+      "actualBytes": 1749,
+      "expectedSha256": "4d97834b5a53450df05a48ae4b5103724ccf36b158c6111e5a97aefdbb756375",
+      "actualSha256": "4d97834b5a53450df05a48ae4b5103724ccf36b158c6111e5a97aefdbb756375",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-1.json",
+      "expectedBytes": 414,
+      "actualBytes": 414,
+      "expectedSha256": "4a9c8f2abfd1ed5b850f4bb54c8e8c9836e0cf6caf2ddb178d02246ff37ab9cb",
+      "actualSha256": "4a9c8f2abfd1ed5b850f4bb54c8e8c9836e0cf6caf2ddb178d02246ff37ab9cb",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-2.json",
+      "expectedBytes": 196,
+      "actualBytes": 196,
+      "expectedSha256": "bc3d45e5979617f20a593e1e7651b5862e7f298d3177c26c4ce56af1474df9d6",
+      "actualSha256": "bc3d45e5979617f20a593e1e7651b5862e7f298d3177c26c4ce56af1474df9d6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-3.json",
+      "expectedBytes": 167,
+      "actualBytes": 167,
+      "expectedSha256": "b1bfe08fce3c0ce9616ab0616f1339583ea9b302d931d8f4d5a85ad32763ffca",
+      "actualSha256": "b1bfe08fce3c0ce9616ab0616f1339583ea9b302d931d8f4d5a85ad32763ffca",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json",
+      "expectedBytes": 21554,
+      "actualBytes": 21554,
+      "expectedSha256": "1858c9298d6a4a2c3c616db6395bb4089a67d0fd6cfbb1844b53b35f59b43601",
+      "actualSha256": "1858c9298d6a4a2c3c616db6395bb4089a67d0fd6cfbb1844b53b35f59b43601",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.export-audit.json",
+      "expectedBytes": 1673,
+      "actualBytes": 1673,
+      "expectedSha256": "18b615e4a4132384b2983e1a432fd6dd005ee5a6dc35f68bb1c0698f27fa21b8",
+      "actualSha256": "18b615e4a4132384b2983e1a432fd6dd005ee5a6dc35f68bb1c0698f27fa21b8",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/001-adb-version.log",
+      "expectedBytes": 178,
+      "actualBytes": 178,
+      "expectedSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "actualSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/002-devices.log",
+      "expectedBytes": 156,
+      "actualBytes": 156,
+      "expectedSha256": "e69067e320c1aff91a7feb523be2f37d0512baa9631e2ed3195d900f00aaa56b",
+      "actualSha256": "e69067e320c1aff91a7feb523be2f37d0512baa9631e2ed3195d900f00aaa56b",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/003-emulator-state.log",
+      "expectedBytes": 23,
+      "actualBytes": 23,
+      "expectedSha256": "f66a2b96bcd211adc2b1e4a0434b3a7b8173ae5abfd0e8e657cb73332601caef",
+      "actualSha256": "f66a2b96bcd211adc2b1e4a0434b3a7b8173ae5abfd0e8e657cb73332601caef",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/004-emulator-qemu.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/005-emulator-boot-qemu.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/006-emulator-boot.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/007-android-properties.log",
+      "expectedBytes": 23809,
+      "actualBytes": 23809,
+      "expectedSha256": "0855327372a7d9ec4508875ceecc7801c3b8f13e1fa45e6ff978565e60438635",
+      "actualSha256": "0855327372a7d9ec4508875ceecc7801c3b8f13e1fa45e6ff978565e60438635",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/008-webview-provider.log",
+      "expectedBytes": 900,
+      "actualBytes": 900,
+      "expectedSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927",
+      "actualSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/009-android-api.log",
+      "expectedBytes": 19,
+      "actualBytes": 19,
+      "expectedSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928",
+      "actualSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/010-android-abi.log",
+      "expectedBytes": 23,
+      "actualBytes": 23,
+      "expectedSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736",
+      "actualSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/011-android-image-fingerprint.log",
+      "expectedBytes": 98,
+      "actualBytes": 98,
+      "expectedSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b",
+      "actualSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/012-install-test-apk.log",
+      "expectedBytes": 151,
+      "actualBytes": 151,
+      "expectedSha256": "5aab5715eceae5db0d7b85c75f80f703e240ef4c68c3c39328d17d29c78eaf94",
+      "actualSha256": "5aab5715eceae5db0d7b85c75f80f703e240ef4c68c3c39328d17d29c78eaf94",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/013-verify-installed-apk.log",
+      "expectedBytes": 124,
+      "actualBytes": 124,
+      "expectedSha256": "a65a3502bfc0447c62ea3269e39623eaa366c60fe54d6ebcb688bdc41923d632",
+      "actualSha256": "a65a3502bfc0447c62ea3269e39623eaa366c60fe54d6ebcb688bdc41923d632",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/014-reverse-fixture.log",
+      "expectedBytes": 22,
+      "actualBytes": 22,
+      "expectedSha256": "7d06cef83f4286c79ddde01dc77c008a3f74636049bb95c4e1c304bf04090dcb",
+      "actualSha256": "7d06cef83f4286c79ddde01dc77c008a3f74636049bb95c4e1c304bf04090dcb",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/015-main-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/016-main-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/017-main-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/018-main-write-request.log",
+      "expectedBytes": 113,
+      "actualBytes": 113,
+      "expectedSha256": "110836da4b9c90d51a8b3b31d61c6da6cca61e46ae4d0174e63fe07fea933826",
+      "actualSha256": "110836da4b9c90d51a8b3b31d61c6da6cca61e46ae4d0174e63fe07fea933826",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/019-main-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/020-main-instrument.log",
+      "expectedBytes": 174,
+      "actualBytes": 174,
+      "expectedSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "actualSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/021-main-read-result.log",
+      "expectedBytes": 14627,
+      "actualBytes": 14627,
+      "expectedSha256": "70d75a6b9260eeac6d292ba8c33fd37bbceaa5c7fa296004822d50f1ba3a4edc",
+      "actualSha256": "70d75a6b9260eeac6d292ba8c33fd37bbceaa5c7fa296004822d50f1ba3a4edc",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/022-restart-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/023-restart-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/024-restart-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/025-restart-write-request.log",
+      "expectedBytes": 112,
+      "actualBytes": 112,
+      "expectedSha256": "4acf5808ba80dfb72aac7b49cb8a44945cdbab9821a1abe66902dd77dd043208",
+      "actualSha256": "4acf5808ba80dfb72aac7b49cb8a44945cdbab9821a1abe66902dd77dd043208",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/026-restart-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/027-restart-instrument.log",
+      "expectedBytes": 174,
+      "actualBytes": 174,
+      "expectedSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "actualSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/028-restart-read-result.log",
+      "expectedBytes": 9778,
+      "actualBytes": 9778,
+      "expectedSha256": "263dbafe8fc3a7b84ccbe59801b8717018289c10193b3651715efc2b784b9b32",
+      "actualSha256": "263dbafe8fc3a7b84ccbe59801b8717018289c10193b3651715efc2b784b9b32",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/029-export-real-sqlite.log",
+      "expectedBytes": 115,
+      "actualBytes": 115,
+      "expectedSha256": "065d3f46f5e392a63f1a2f9f5f33576aed458a430f284a9d3ad601132c2662b2",
+      "actualSha256": "065d3f46f5e392a63f1a2f9f5f33576aed458a430f284a9d3ad601132c2662b2",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.logs/030-remove-fixture-reverse.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.main.json",
+      "expectedBytes": 20122,
+      "actualBytes": 20122,
+      "expectedSha256": "e18161b3755efcb7f4491671179c77ef2fd50d680f79e2c5e559d5b97adacf45",
+      "actualSha256": "e18161b3755efcb7f4491671179c77ef2fd50d680f79e2c5e559d5b97adacf45",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.receipt.json",
+      "expectedBytes": 47250,
+      "actualBytes": 47250,
+      "expectedSha256": "a543a81f0ac18e3489843c6d3b76266574a32f711b433d60e6cb392330aad1fa",
+      "actualSha256": "a543a81f0ac18e3489843c6d3b76266574a32f711b433d60e6cb392330aad1fa",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.restart.json",
+      "expectedBytes": 12884,
+      "actualBytes": 12884,
+      "expectedSha256": "d50207dc210c93820d2ddc62124b466261b613786d132c3d3e95302b957a8889",
+      "actualSha256": "d50207dc210c93820d2ddc62124b466261b613786d132c3d3e95302b957a8889",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json",
+      "expectedBytes": 25083,
+      "actualBytes": 25083,
+      "expectedSha256": "1529572e8fd971ed2893bcd371d16065c5c10c25b0e0c41b5808e40f7a6e2ccc",
+      "actualSha256": "1529572e8fd971ed2893bcd371d16065c5c10c25b0e0c41b5808e40f7a6e2ccc",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.export-audit.json",
+      "expectedBytes": 2103,
+      "actualBytes": 2103,
+      "expectedSha256": "851d854163c3df01d7f23a4a2f5e18e9bc82670d28d2e077595411c1e3d47135",
+      "actualSha256": "851d854163c3df01d7f23a4a2f5e18e9bc82670d28d2e077595411c1e3d47135",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.failures/main/evidence.json",
+      "expectedBytes": 21837,
+      "actualBytes": 21837,
+      "expectedSha256": "66218a936723e03465bdbb8138bd710146a5c3ae4de3858450491a88e415c2cd",
+      "actualSha256": "66218a936723e03465bdbb8138bd710146a5c3ae4de3858450491a88e415c2cd",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/001-adb-version.log",
+      "expectedBytes": 178,
+      "actualBytes": 178,
+      "expectedSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "actualSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/002-devices.log",
+      "expectedBytes": 156,
+      "actualBytes": 156,
+      "expectedSha256": "e69067e320c1aff91a7feb523be2f37d0512baa9631e2ed3195d900f00aaa56b",
+      "actualSha256": "e69067e320c1aff91a7feb523be2f37d0512baa9631e2ed3195d900f00aaa56b",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/003-emulator-state.log",
+      "expectedBytes": 23,
+      "actualBytes": 23,
+      "expectedSha256": "f66a2b96bcd211adc2b1e4a0434b3a7b8173ae5abfd0e8e657cb73332601caef",
+      "actualSha256": "f66a2b96bcd211adc2b1e4a0434b3a7b8173ae5abfd0e8e657cb73332601caef",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/004-emulator-qemu.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/005-emulator-boot-qemu.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/006-emulator-boot.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/007-android-properties.log",
+      "expectedBytes": 24415,
+      "actualBytes": 24415,
+      "expectedSha256": "850ae699fe46d86027eecb5006fc3240ea69dd32fa713ae6bd55d8dc72901fe8",
+      "actualSha256": "850ae699fe46d86027eecb5006fc3240ea69dd32fa713ae6bd55d8dc72901fe8",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/008-webview-provider.log",
+      "expectedBytes": 900,
+      "actualBytes": 900,
+      "expectedSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927",
+      "actualSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/009-android-api.log",
+      "expectedBytes": 19,
+      "actualBytes": 19,
+      "expectedSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928",
+      "actualSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/010-android-abi.log",
+      "expectedBytes": 23,
+      "actualBytes": 23,
+      "expectedSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736",
+      "actualSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/011-android-image-fingerprint.log",
+      "expectedBytes": 98,
+      "actualBytes": 98,
+      "expectedSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b",
+      "actualSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/012-install-test-apk.log",
+      "expectedBytes": 151,
+      "actualBytes": 151,
+      "expectedSha256": "177c91a08784ffc62309a391694741768d98926c880eeeaf84cdce3c423e601a",
+      "actualSha256": "177c91a08784ffc62309a391694741768d98926c880eeeaf84cdce3c423e601a",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/013-verify-installed-apk.log",
+      "expectedBytes": 124,
+      "actualBytes": 124,
+      "expectedSha256": "bfb7a1f82a78ed6bb3a0271ca60a2c1ab78457ad918b40d53066340be10ad75f",
+      "actualSha256": "bfb7a1f82a78ed6bb3a0271ca60a2c1ab78457ad918b40d53066340be10ad75f",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/014-reverse-fixture.log",
+      "expectedBytes": 22,
+      "actualBytes": 22,
+      "expectedSha256": "7d06cef83f4286c79ddde01dc77c008a3f74636049bb95c4e1c304bf04090dcb",
+      "actualSha256": "7d06cef83f4286c79ddde01dc77c008a3f74636049bb95c4e1c304bf04090dcb",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/015-main-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/016-main-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/017-main-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/018-main-write-request.log",
+      "expectedBytes": 113,
+      "actualBytes": 113,
+      "expectedSha256": "d5a74adb729bb4980b75834c42a4f7bb018f0b485406f0de683aaa560d7647a0",
+      "actualSha256": "d5a74adb729bb4980b75834c42a4f7bb018f0b485406f0de683aaa560d7647a0",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/019-main-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/020-main-instrument.log",
+      "expectedBytes": 90,
+      "actualBytes": 90,
+      "expectedSha256": "f8d28690516cd61fdcf7218e8cc6b0e7b26418a7e0172b23c7ed915808bff9b9",
+      "actualSha256": "f8d28690516cd61fdcf7218e8cc6b0e7b26418a7e0172b23c7ed915808bff9b9",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/021-main-read-result.log",
+      "expectedBytes": 66,
+      "actualBytes": 66,
+      "expectedSha256": "1cc071d6d173b0a3c1ac6770c8a5bb6a0cf45681ff6cc239b26a02f7d98ab5f7",
+      "actualSha256": "1cc071d6d173b0a3c1ac6770c8a5bb6a0cf45681ff6cc239b26a02f7d98ab5f7",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/022-main-crash-buffer.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/023-main-evidence-exit-info.log",
+      "expectedBytes": 6838,
+      "actualBytes": 6838,
+      "expectedSha256": "3170685b8e45e8dccd2df0f0df131ff0e3e966b00e990e1e78284c36422d89cd",
+      "actualSha256": "3170685b8e45e8dccd2df0f0df131ff0e3e966b00e990e1e78284c36422d89cd",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/024-main-evidence-processes.log",
+      "expectedBytes": 1440,
+      "actualBytes": 1440,
+      "expectedSha256": "eb35d637956c2880b5f14ad9fa7109ae757f8dcee7070175c3e88391b9bdea9a",
+      "actualSha256": "eb35d637956c2880b5f14ad9fa7109ae757f8dcee7070175c3e88391b9bdea9a",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/025-main-evidence-logcat.log",
+      "expectedBytes": 405418,
+      "actualBytes": 405418,
+      "expectedSha256": "806fdc35f78294d42d60c79d2814cef8576d046ee21763f7da04b0b0d358aaa7",
+      "actualSha256": "806fdc35f78294d42d60c79d2814cef8576d046ee21763f7da04b0b0d358aaa7",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/026-main-evidence-uptime.log",
+      "expectedBytes": 29,
+      "actualBytes": 29,
+      "expectedSha256": "0f1aea16cf53af5a9eec5615aac84f30ab622071b8f01bb9605cb47cc9db44ad",
+      "actualSha256": "0f1aea16cf53af5a9eec5615aac84f30ab622071b8f01bb9605cb47cc9db44ad",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/027-main-evidence-meminfo.log",
+      "expectedBytes": 67,
+      "actualBytes": 67,
+      "expectedSha256": "42342c683aeb1157537e18dbf61dcd470132ea015a15c323393b4f4538aa5522",
+      "actualSha256": "42342c683aeb1157537e18dbf61dcd470132ea015a15c323393b4f4538aa5522",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/028-main-evidence-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/029-main-evidence-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/030-main-evidence-probe-before-tasks.sqlite.log",
+      "expectedBytes": 162,
+      "actualBytes": 162,
+      "expectedSha256": "04ad0f7de417102ea211461206d1c5caf4f5fe82af90faae97554ff5b073bce9",
+      "actualSha256": "04ad0f7de417102ea211461206d1c5caf4f5fe82af90faae97554ff5b073bce9",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/031-main-evidence-file-tasks.sqlite.log",
+      "expectedBytes": 115,
+      "actualBytes": 115,
+      "expectedSha256": "2a3559381e2a0fd87b503e44f8421ac5145afc3a253c223ffea2e74d3416bf24",
+      "actualSha256": "2a3559381e2a0fd87b503e44f8421ac5145afc3a253c223ffea2e74d3416bf24",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/032-main-evidence-probe-after-tasks.sqlite.log",
+      "expectedBytes": 162,
+      "actualBytes": 162,
+      "expectedSha256": "08a2a94a3e9fc6290a26253eed632acb32f2d686d60fb04c56fcfca902723a59",
+      "actualSha256": "08a2a94a3e9fc6290a26253eed632acb32f2d686d60fb04c56fcfca902723a59",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/033-main-evidence-probe-before-tasks.sqlite-wal.log",
+      "expectedBytes": 161,
+      "actualBytes": 161,
+      "expectedSha256": "134add0b13a06fbbb71234ecae6661a2eeac9cd48ee5df96818dcffe11656b5c",
+      "actualSha256": "134add0b13a06fbbb71234ecae6661a2eeac9cd48ee5df96818dcffe11656b5c",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/034-main-evidence-file-tasks.sqlite-wal.log",
+      "expectedBytes": 114,
+      "actualBytes": 114,
+      "expectedSha256": "c629294e2d92ff3f8b7fe785c4ee65ae102b142b7e913acc9338d290a49ae3ee",
+      "actualSha256": "c629294e2d92ff3f8b7fe785c4ee65ae102b142b7e913acc9338d290a49ae3ee",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/035-main-evidence-probe-after-tasks.sqlite-wal.log",
+      "expectedBytes": 161,
+      "actualBytes": 161,
+      "expectedSha256": "7f8e532c8aa8ff48963851d8e199cb4bbead5803062f3a1bf1232688f840a1d6",
+      "actualSha256": "7f8e532c8aa8ff48963851d8e199cb4bbead5803062f3a1bf1232688f840a1d6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/036-main-evidence-probe-before-tasks.sqlite-shm.log",
+      "expectedBytes": 162,
+      "actualBytes": 162,
+      "expectedSha256": "0a85f1d76ca954141f48a5af5b4bdb08470a42748cab378c0cc16201a2eb6751",
+      "actualSha256": "0a85f1d76ca954141f48a5af5b4bdb08470a42748cab378c0cc16201a2eb6751",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/037-main-evidence-file-tasks.sqlite-shm.log",
+      "expectedBytes": 115,
+      "actualBytes": 115,
+      "expectedSha256": "d85ba57d848de01e897d04d3bfa4326a1453f52650bb103358817d687961f99a",
+      "actualSha256": "d85ba57d848de01e897d04d3bfa4326a1453f52650bb103358817d687961f99a",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/038-main-evidence-probe-after-tasks.sqlite-shm.log",
+      "expectedBytes": 162,
+      "actualBytes": 162,
+      "expectedSha256": "ff720978e3b814c7273e1fee99b677f464d1b3409a4b66e404f985af6715135e",
+      "actualSha256": "ff720978e3b814c7273e1fee99b677f464d1b3409a4b66e404f985af6715135e",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/039-main-evidence-probe-before-tasks.sqlite-journal.log",
+      "expectedBytes": 88,
+      "actualBytes": 88,
+      "expectedSha256": "4cc6635e2fc21559be381fe90ef3791e8fa53251a45fce05bebc4a55a1d55de3",
+      "actualSha256": "4cc6635e2fc21559be381fe90ef3791e8fa53251a45fce05bebc4a55a1d55de3",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/040-main-evidence-probe-before-atomic-result.json.log",
+      "expectedBytes": 88,
+      "actualBytes": 88,
+      "expectedSha256": "6169b03323fa04f11825d21d51e5dc371349125c0c0d45df086633fa6a396f53",
+      "actualSha256": "6169b03323fa04f11825d21d51e5dc371349125c0c0d45df086633fa6a396f53",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/041-main-evidence-probe-before-atomic-result.json.bak.log",
+      "expectedBytes": 88,
+      "actualBytes": 88,
+      "expectedSha256": "0225dcee3799b779728e779c6358276865f447e165441a8d7cb9555e7c8523ce",
+      "actualSha256": "0225dcee3799b779728e779c6358276865f447e165441a8d7cb9555e7c8523ce",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/042-main-evidence-probe-before-atomic-result.json.new.log",
+      "expectedBytes": 88,
+      "actualBytes": 88,
+      "expectedSha256": "5ad42df20784acb87600d46aad2b290d104b4ad14684f0745fa1a7f74fd82e30",
+      "actualSha256": "5ad42df20784acb87600d46aad2b290d104b4ad14684f0745fa1a7f74fd82e30",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/043-main-retry-2-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/044-main-retry-2-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/045-main-retry-2-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/046-main-retry-2-write-request.log",
+      "expectedBytes": 113,
+      "actualBytes": 113,
+      "expectedSha256": "d5a74adb729bb4980b75834c42a4f7bb018f0b485406f0de683aaa560d7647a0",
+      "actualSha256": "d5a74adb729bb4980b75834c42a4f7bb018f0b485406f0de683aaa560d7647a0",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/047-main-retry-2-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/048-main-retry-2-instrument.log",
+      "expectedBytes": 174,
+      "actualBytes": 174,
+      "expectedSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "actualSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/049-main-retry-2-read-result.log",
+      "expectedBytes": 17440,
+      "actualBytes": 17440,
+      "expectedSha256": "9df00cd3dce68425637c1c66bb40800f76168c9ecfccd72777d821058ef55ae0",
+      "actualSha256": "9df00cd3dce68425637c1c66bb40800f76168c9ecfccd72777d821058ef55ae0",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/050-restart-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/051-restart-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/052-restart-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/053-restart-write-request.log",
+      "expectedBytes": 112,
+      "actualBytes": 112,
+      "expectedSha256": "4acf5808ba80dfb72aac7b49cb8a44945cdbab9821a1abe66902dd77dd043208",
+      "actualSha256": "4acf5808ba80dfb72aac7b49cb8a44945cdbab9821a1abe66902dd77dd043208",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/054-restart-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/055-restart-instrument.log",
+      "expectedBytes": 174,
+      "actualBytes": 174,
+      "expectedSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "actualSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/056-restart-read-result.log",
+      "expectedBytes": 10941,
+      "actualBytes": 10941,
+      "expectedSha256": "198f34ad6af2b7ac1268a78a358307a498c15cf224effad51aa4ada277486ae6",
+      "actualSha256": "198f34ad6af2b7ac1268a78a358307a498c15cf224effad51aa4ada277486ae6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/057-export-real-sqlite.log",
+      "expectedBytes": 115,
+      "actualBytes": 115,
+      "expectedSha256": "909507abb3cdcb8e25186eb4f393a432335d48fbec77856fe4395c6394eba0c7",
+      "actualSha256": "909507abb3cdcb8e25186eb4f393a432335d48fbec77856fe4395c6394eba0c7",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/058-remove-fixture-reverse.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.main.json",
+      "expectedBytes": 23411,
+      "actualBytes": 23411,
+      "expectedSha256": "34b2fabbb4c0778661c54af0ffc4ab22f0c5db7d604f4f71e7adf065d762b14d",
+      "actualSha256": "34b2fabbb4c0778661c54af0ffc4ab22f0c5db7d604f4f71e7adf065d762b14d",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.receipt.json",
+      "expectedBytes": 77663,
+      "actualBytes": 77663,
+      "expectedSha256": "62e6b415f849f22c245c0981f3c53018a67111c58f8e1bb2a3fafe35e26cb74d",
+      "actualSha256": "62e6b415f849f22c245c0981f3c53018a67111c58f8e1bb2a3fafe35e26cb74d",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.restart.json",
+      "expectedBytes": 14324,
+      "actualBytes": 14324,
+      "expectedSha256": "81cdaaef17f1dd4d9e64af5bcb884be9254d13dc8363f7cf0f30d02b52e97ca0",
+      "actualSha256": "81cdaaef17f1dd4d9e64af5bcb884be9254d13dc8363f7cf0f30d02b52e97ca0",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json",
+      "expectedBytes": 25069,
+      "actualBytes": 25069,
+      "expectedSha256": "88954734c3acc71f4d7f4c4bbfae96ff26fa19bb53f9fe11bcbe58ee97c93242",
+      "actualSha256": "88954734c3acc71f4d7f4c4bbfae96ff26fa19bb53f9fe11bcbe58ee97c93242",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.export-audit.json",
+      "expectedBytes": 1779,
+      "actualBytes": 1779,
+      "expectedSha256": "9a3d3ddb6d03124878e56de3630c2c755a1258dc88e399da48dfd6852c6eebb3",
+      "actualSha256": "9a3d3ddb6d03124878e56de3630c2c755a1258dc88e399da48dfd6852c6eebb3",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/001-adb-version.log",
+      "expectedBytes": 178,
+      "actualBytes": 178,
+      "expectedSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "actualSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/002-devices.log",
+      "expectedBytes": 156,
+      "actualBytes": 156,
+      "expectedSha256": "e69067e320c1aff91a7feb523be2f37d0512baa9631e2ed3195d900f00aaa56b",
+      "actualSha256": "e69067e320c1aff91a7feb523be2f37d0512baa9631e2ed3195d900f00aaa56b",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/003-emulator-state.log",
+      "expectedBytes": 23,
+      "actualBytes": 23,
+      "expectedSha256": "f66a2b96bcd211adc2b1e4a0434b3a7b8173ae5abfd0e8e657cb73332601caef",
+      "actualSha256": "f66a2b96bcd211adc2b1e4a0434b3a7b8173ae5abfd0e8e657cb73332601caef",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/004-emulator-qemu.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/005-emulator-boot-qemu.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/006-emulator-boot.log",
+      "expectedBytes": 18,
+      "actualBytes": 18,
+      "expectedSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "actualSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/007-android-properties.log",
+      "expectedBytes": 24542,
+      "actualBytes": 24542,
+      "expectedSha256": "3746b110341d02eb066457c4cfc136f2d0a96afdba3aff18482feb86c483584d",
+      "actualSha256": "3746b110341d02eb066457c4cfc136f2d0a96afdba3aff18482feb86c483584d",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/008-webview-provider.log",
+      "expectedBytes": 900,
+      "actualBytes": 900,
+      "expectedSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927",
+      "actualSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/009-android-api.log",
+      "expectedBytes": 19,
+      "actualBytes": 19,
+      "expectedSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928",
+      "actualSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/010-android-abi.log",
+      "expectedBytes": 23,
+      "actualBytes": 23,
+      "expectedSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736",
+      "actualSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/011-android-image-fingerprint.log",
+      "expectedBytes": 98,
+      "actualBytes": 98,
+      "expectedSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b",
+      "actualSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/012-install-test-apk.log",
+      "expectedBytes": 151,
+      "actualBytes": 151,
+      "expectedSha256": "07fc6d05bc40b1301cf57c5d75517a2a30f3f96ae471179cc4cd9a350eb13e15",
+      "actualSha256": "07fc6d05bc40b1301cf57c5d75517a2a30f3f96ae471179cc4cd9a350eb13e15",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/013-verify-installed-apk.log",
+      "expectedBytes": 124,
+      "actualBytes": 124,
+      "expectedSha256": "1cfa88ad6174ca7a87035d9b48e89994e8b3b6212f4b75e91268d4b230d9b7ae",
+      "actualSha256": "1cfa88ad6174ca7a87035d9b48e89994e8b3b6212f4b75e91268d4b230d9b7ae",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/014-reverse-fixture.log",
+      "expectedBytes": 22,
+      "actualBytes": 22,
+      "expectedSha256": "7d06cef83f4286c79ddde01dc77c008a3f74636049bb95c4e1c304bf04090dcb",
+      "actualSha256": "7d06cef83f4286c79ddde01dc77c008a3f74636049bb95c4e1c304bf04090dcb",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/015-main-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/016-main-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/017-main-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/018-main-write-request.log",
+      "expectedBytes": 113,
+      "actualBytes": 113,
+      "expectedSha256": "550c51ae35b17be05131c44970470daeab027fb01d7c5900156266bc05cb7f79",
+      "actualSha256": "550c51ae35b17be05131c44970470daeab027fb01d7c5900156266bc05cb7f79",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/019-main-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/020-main-instrument.log",
+      "expectedBytes": 173,
+      "actualBytes": 173,
+      "expectedSha256": "6a280a85580a8d18e2dd96c19c0ce06435a8e8fc8d05213fe00c136dc76766b0",
+      "actualSha256": "6a280a85580a8d18e2dd96c19c0ce06435a8e8fc8d05213fe00c136dc76766b0",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/021-main-read-result.log",
+      "expectedBytes": 17127,
+      "actualBytes": 17127,
+      "expectedSha256": "0467c27b5fb27f214c0b1eeeeb406ea519ced8281ff7fa5bbf7b6ffb4446164d",
+      "actualSha256": "0467c27b5fb27f214c0b1eeeeb406ea519ced8281ff7fa5bbf7b6ffb4446164d",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/022-restart-stop.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/023-restart-process-check-1.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/024-restart-request-directory.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/025-restart-write-request.log",
+      "expectedBytes": 112,
+      "actualBytes": 112,
+      "expectedSha256": "4acf5808ba80dfb72aac7b49cb8a44945cdbab9821a1abe66902dd77dd043208",
+      "actualSha256": "4acf5808ba80dfb72aac7b49cb8a44945cdbab9821a1abe66902dd77dd043208",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/026-restart-clear-result.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/027-restart-instrument.log",
+      "expectedBytes": 174,
+      "actualBytes": 174,
+      "expectedSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "actualSha256": "0bfcc31a5e75422c2dce39b343d93aac89f70ddcfca1a1dcf7c9a793dde5cdf6",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/028-restart-read-result.log",
+      "expectedBytes": 10023,
+      "actualBytes": 10023,
+      "expectedSha256": "1b592c48ef617a85203b577acb0e6c0c0109352d0dff132e18f755ca71c3d996",
+      "actualSha256": "1b592c48ef617a85203b577acb0e6c0c0109352d0dff132e18f755ca71c3d996",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/029-export-real-sqlite.log",
+      "expectedBytes": 115,
+      "actualBytes": 115,
+      "expectedSha256": "6af96a441b27adebdf3e54ac6126b03bcbb436f8616b700a1529199f7e38262e",
+      "actualSha256": "6af96a441b27adebdf3e54ac6126b03bcbb436f8616b700a1529199f7e38262e",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/030-remove-fixture-reverse.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.logs/031-android-logcat.log",
+      "expectedBytes": 16,
+      "actualBytes": 16,
+      "expectedSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "actualSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.main.json",
+      "expectedBytes": 23637,
+      "actualBytes": 23637,
+      "expectedSha256": "bad297e98631e7b2d286c75ab93a6d3ed03b20def3c5503f489cac8512a7605f",
+      "actualSha256": "bad297e98631e7b2d286c75ab93a6d3ed03b20def3c5503f489cac8512a7605f",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.receipt.json",
+      "expectedBytes": 48635,
+      "actualBytes": 48635,
+      "expectedSha256": "d25df79b21ec04a156ecf4b10ee4fdb6d2fbac295aa49ee73d870462a6ce0f47",
+      "actualSha256": "d25df79b21ec04a156ecf4b10ee4fdb6d2fbac295aa49ee73d870462a6ce0f47",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.restart.json",
+      "expectedBytes": 13199,
+      "actualBytes": 13199,
+      "expectedSha256": "e4fed8098c5c791a541dd44e8350064c050ea759cf7425a615c34a174faa400f",
+      "actualSha256": "e4fed8098c5c791a541dd44e8350064c050ea759cf7425a615c34a174faa400f",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-1.json",
+      "expectedBytes": 55045,
+      "actualBytes": 55045,
+      "expectedSha256": "4f5300ee1d6bd6166b0274d6ecdf005253098ba51f7f0110c61787a5ff8a9459",
+      "actualSha256": "4f5300ee1d6bd6166b0274d6ecdf005253098ba51f7f0110c61787a5ff8a9459",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-2.json",
+      "expectedBytes": 92740,
+      "actualBytes": 92740,
+      "expectedSha256": "f43672452b63b51f1c13e6fee9353d178412473dd1854b29127b0d7b2a80edce",
+      "actualSha256": "f43672452b63b51f1c13e6fee9353d178412473dd1854b29127b0d7b2a80edce",
+      "passed": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-3.json",
+      "expectedBytes": 56658,
+      "actualBytes": 56658,
+      "expectedSha256": "08418fa48336cab0ffbff04f27fddd676d8aea639e5982b6ee798d6170cb7493",
+      "actualSha256": "08418fa48336cab0ffbff04f27fddd676d8aea639e5982b6ee798d6170cb7493",
+      "passed": true
+    }
+  ],
+  "qualification": "This audit establishes the indexed local text bytes, not runtime success or independent trust in index transfer provenance."
+}

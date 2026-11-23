@@ -1,0 +1,19 @@
+{
+  "schema": "mytodo-c007-f9-matrix-semantic-review",
+  "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+  "runId": "45186305196",
+  "runAttempt": "1",
+  "summarySha256": "653a54253b430b0c90578bff8e643ad34aeeb0d424176f054d85e30b6439649c",
+  "suiteCases": 78,
+  "executions": 936,
+  "uniqueExecutions": 936,
+  "badExecutions": 0,
+  "comparisons": 936,
+  "badComparisons": 0,
+  "lineage": 702,
+  "badLineage": 0,
+  "runStatus": "passed",
+  "exitCode": 0,
+  "qualification": "Android first failures and fresh-database retries reviewed separately; these counts do not prove original failed-database recovery",
+  "localProjectExecution": false
+}

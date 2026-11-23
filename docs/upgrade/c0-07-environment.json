@@ -1,0 +1,1165 @@
+{
+  "schema": "mytodo-c007-execution-environment",
+  "version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "runId": "45190559178",
+  "runAttempt": "1",
+  "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+  "scope": "Environment and isolated test artifacts of final C007 execution only; no release APK/EXE claim",
+  "acceptanceDecision": "Not issued by this detail report; see c0-07-verification.json",
+  "platformRuntimes": [
+    {
+      "platform": "javascript",
+      "runnerOs": "Linux",
+      "image": "ubuntu24",
+      "imageVersion": "20261116.376.1",
+      "hostNode": "v22.23.5",
+      "hostNodeSqlite": "3.54.1",
+      "actualStoreSqlite": "3.54.1",
+      "nodeSelection": "Existing hosted-runner runtime selected by scripts/ci/c004-node-path; no Node installation in these recorded steps",
+      "nodePath": null,
+      "nodePathStatus": "exact selected executable path not recorded in selected step output",
+      "sourceInputRef": "E004",
+      "storeRuntimeInputRef": "E005",
+      "fixtureDependency": {
+        "path": "tests/c006/c006-harness/fixture-server.mjs",
+        "sameCheckout": true
+      }
+    },
+    {
+      "platform": "windows-c",
+      "runnerOs": "Windows",
+      "image": "win25-vs2026",
+      "imageVersion": "20261116.315.1",
+      "hostNode": "v22.23.5",
+      "hostNodeSqlite": "3.54.1",
+      "actualStoreSqlite": "3.38.2",
+      "nodeSelection": "Existing hosted-runner runtime selected by scripts/ci/c004-node-path; no Node installation in these recorded steps",
+      "nodePath": "C:\\Program Files\\nodejs\\node.exe",
+      "nodePathStatus": "recorded",
+      "sourceInputRef": "E006",
+      "storeRuntimeInputRef": "E007",
+      "fixtureDependency": {
+        "path": "tests/c006/c006-harness/fixture-server.mjs",
+        "sameCheckout": true
+      }
+    },
+    {
+      "platform": "android",
+      "runnerOs": "Linux",
+      "image": "ubuntu24",
+      "imageVersion": "20261116.376.1",
+      "hostNode": "v22.23.5",
+      "hostNodeSqlite": "3.54.1",
+      "actualStoreSqlite": "3.39.2",
+      "nodeSelection": "Existing hosted-runner runtime selected by scripts/ci/c004-node-path; no Node installation in these recorded steps",
+      "nodePath": null,
+      "nodePathStatus": "exact selected executable path not recorded in selected step output",
+      "sourceInputRef": "E008",
+      "storeRuntimeInputRef": "E009",
+      "fixtureDependency": {
+        "path": "tests/c006/c006-harness/fixture-server.mjs",
+        "sameCheckout": true
+      }
+    }
+  ],
+  "android": {
+    "status": "ready",
+    "exitCode": 0,
+    "runner": {
+      "os": "Linux",
+      "arch": "X64",
+      "image": "ubuntu24",
+      "imageVersion": "20261116.376.1",
+      "environment": "github-hosted"
+    },
+    "serial": "emulator-5554",
+    "requested": {
+      "api": "34",
+      "tag": "google_apis",
+      "abi": "x86_64",
+      "imagePackage": "system-images;android-34;google_apis;x86_64",
+      "serial": "emulator-5554",
+      "avd": "mytodo-c004-api34-x86_64",
+      "expectedRevision": null
+    },
+    "sdkPath": "/usr/local/lib/android/sdk",
+    "initial": {
+      "sdkExists": true,
+      "emulatorExists": false,
+      "adbExists": true,
+      "systemImages": [],
+      "targetImageExists": false,
+      "kvmExists": true,
+      "kvmAccessible": false
+    },
+    "kvm": {
+      "accessibleBefore": false,
+      "accessibleAfter": true,
+      "accessMethod": "runner UID ACL",
+      "accelerationCheck": "accel:\n0\nKVM (version 12) is installed and usable.\naccel"
+    },
+    "gradle": {
+      "usedForBuild": false,
+      "exitCode": 0,
+      "version": "9.9.1",
+      "log": "004-gradle-version.log"
+    },
+    "api": "34",
+    "abi": "x86_64",
+    "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.050/12077443:userdebug/dev-keys",
+    "webViewPackage": "com.google.android.webview",
+    "webViewVersion": "113.0.5672.136",
+    "actualFrameworkSqlite": "3.39.2",
+    "optionalDeviceShellSqlite": {
+      "exitCode": 0,
+      "version": "3.39.2 2022-07-21 15:24:47 698edb77537b67c41adc68f9b892db56bcf9a55e00371a61420f3ddd668e6603",
+      "role": "Optional device shell probe. Actual framework SQLite version comes from the instrumentation database."
+    },
+    "shutdownStatus": "finished",
+    "shutdownExitCode": 0,
+    "environmentInputRef": "E010",
+    "hostPackages": {
+      "libpulsePresent": false,
+      "installAllowed": true,
+      "libpulse": {
+        "file": "libpulse.so.0",
+        "bytes": 326856,
+        "sha256": "3d78bd6bfcebccb7d4e65bac298c3aef5b0906fc4c6a4bebcd761c845f4c3c4a"
+      },
+      "libpulsePackage": "libpulse0:amd64\t1:16.1+dfsg1-2ubuntu10.1"
+    }
+  },
+  "tools": [
+    {
+      "name": "Java",
+      "version": "Temurin 17.0.21+9",
+      "role": "Android build JDK",
+      "inputRef": "E012"
+    },
+    {
+      "name": "javac",
+      "version": "17.0.21",
+      "role": "Compile --release 17",
+      "inputRef": "E013"
+    },
+    {
+      "name": "ADB",
+      "version": "1.0.41 / platform-tools 37.0.1-15733141",
+      "role": "Real emulator instrumentation and evidence",
+      "inputRef": "E015"
+    },
+    {
+      "name": "sdkmanager",
+      "version": "12.0",
+      "role": "Existing SDK manager installs emulator/image",
+      "inputRef": "E016"
+    },
+    {
+      "name": "Gradle",
+      "version": "9.9.1",
+      "role": "Version recorded only; usedForBuild=false",
+      "inputRef": "E010"
+    },
+    {
+      "name": "Android build-tools",
+      "version": "35.0.0",
+      "role": "Recorded tool paths; no installation of this package recorded in this run",
+      "inputRef": "E024"
+    },
+    {
+      "name": "aapt2",
+      "version": "2.19-11948202",
+      "role": "Resource packaging",
+      "inputRef": "E029"
+    },
+    {
+      "name": "D8",
+      "version": "8.6.2-dev / abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca",
+      "role": "Dex conversion; min-api 26",
+      "inputRef": "E030"
+    },
+    {
+      "name": "Android platform",
+      "version": "android-34",
+      "role": "android.jar compile/link input; package revision and this-run installation not recorded",
+      "inputRef": "E024"
+    },
+    {
+      "name": "Windows compiler",
+      "version": null,
+      "role": "MSVC cl.exe selected by source builder via vswhere; actual selected version not recorded",
+      "inputRef": "E044"
+    },
+    {
+      "name": "Windows SDK",
+      "version": null,
+      "role": "Builder selects an existing SDK; actual selected version not recorded",
+      "inputRef": "E044"
+    }
+  ],
+  "installedGooglePackages": [
+    {
+      "name": "Android Emulator",
+      "version": "37.3.10",
+      "installedThisRun": true,
+      "source": "official Google Android SDK repository via the preinstalled sdkmanager",
+      "fullDownloadUrl": null,
+      "fullDownloadUrlStatus": "Not recorded in installation log; do not infer domain",
+      "executable": {
+        "file": "emulator",
+        "bytes": 10144992,
+        "sha256": "5c48296df39c35bad694a361312e3c9915e47d4061eed475b061c98625599173"
+      },
+      "sourcePropertiesSha256": "399a3ad857aa3ba1d2983745f82d6c438221481c220c3bba0aec577adb313a03",
+      "inputRef": "E010"
+    },
+    {
+      "name": "system-images;android-34;google_apis;x86_64",
+      "version": "revision 14",
+      "installedThisRun": true,
+      "source": "official Google Android SDK repository via the preinstalled sdkmanager",
+      "fullDownloadUrl": null,
+      "fullDownloadUrlStatus": "Not recorded in installation log",
+      "systemImage": {
+        "file": "system.img",
+        "bytes": 4306501632,
+        "sha256": "156534aa2c707edfb57026f7b573a561e513433d7643d9ce3230ae6d65804c7a"
+      },
+      "sourcePropertiesSha256": "bd7597e0dfa855335194fbafaf63bde93aa86bc3b56cea73cd54635715e77abc",
+      "inputRef": "E010"
+    }
+  ],
+  "installedUbuntuPackages": [
+    {
+      "name": "libasyncns0",
+      "version": "0.8-6build4",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libflac12t64",
+      "version": "1.4.3+ds-2.1ubuntu2",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libmp3lame0",
+      "version": "3.100-6build1",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libmpg123-0t64",
+      "version": "1.32.5-1ubuntu1.1",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble-updates/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libopus0",
+      "version": "1.4-1build1",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libvorbisenc2",
+      "version": "1.3.7-1build3",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libsndfile1",
+      "version": "1.2.2-1ubuntu5.24.04.1",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble-updates/main",
+      "evidenceInputRef": "E019"
+    },
+    {
+      "name": "libpulse0",
+      "version": "1:16.1+dfsg1-2ubuntu10.1",
+      "architecture": "amd64",
+      "repository": "http://azure.archive.ubuntu.com/ubuntu",
+      "suiteComponent": "noble-updates/main",
+      "evidenceInputRef": "E019"
+    }
+  ],
+  "installationCommands": [
+    {
+      "label": "install-official-android-packages",
+      "argv": [
+        "/usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager",
+        "--sdk_root=/usr/local/lib/android/sdk",
+        "--channel=0",
+        "--install",
+        "emulator",
+        "system-images;android-34;google_apis;x86_64"
+      ],
+      "startedAt": "2026-11-23T14:06:55.274Z",
+      "finishedAt": "2026-11-23T14:07:42.61Z",
+      "exitCode": 0,
+      "logSha256": "4ccdc4d17f27fe7ade8fc727b735c8a1b898bffb5bf2985895923b6446f94700",
+      "inputRef": "E010"
+    },
+    {
+      "label": "update-official-ubuntu-package-index",
+      "argv": [
+        "sudo",
+        "-n",
+        "apt-get",
+        "-o",
+        "Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources",
+        "-o",
+        "Dir::Etc::sourceparts=-",
+        "update"
+      ],
+      "startedAt": "2026-11-23T14:07:42.61Z",
+      "finishedAt": "2026-11-23T14:07:46.956Z",
+      "exitCode": 0,
+      "logSha256": "e3e27594e46cad6187ef449aafe2e8ece2dcbb6e7dced3f1412fd276bab59714",
+      "inputRef": "E010"
+    },
+    {
+      "label": "install-host-libpulse0",
+      "argv": [
+        "sudo",
+        "-n",
+        "apt-get",
+        "-o",
+        "Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources",
+        "-o",
+        "Dir::Etc::sourceparts=-",
+        "install",
+        "-y",
+        "--no-install-recommends",
+        "libpulse0"
+      ],
+      "startedAt": "2026-11-23T14:07:46.956Z",
+      "finishedAt": "2026-11-23T14:07:54.331Z",
+      "exitCode": 0,
+      "logSha256": "ae0dad063811294bdc0add41abf820550ebabd907991bc93c0c73eab99e226a1",
+      "inputRef": "E010"
+    }
+  ],
+  "installationScope": {
+    "allExecutionLocation": "GitHub hosted temporary runner",
+    "googleLicenseHandling": "existing SDK licenses only",
+    "ubuntuSourceRestriction": "Only /etc/apt/sources.list.d/ubuntu.sources; sourceparts=-",
+    "observedUbuntuRepository": "http://azure.archive.ubuntu.com/ubuntu",
+    "node": "Existing runner runtime selected, not installed in recorded steps",
+    "jdkAndBuildTools": "Used existing recorded paths; no JDK/build-tools/platform installation command recorded in this run",
+    "projectFixture": "tests/c006/c006-harness/fixture-server.mjs from same exact-source checkout",
+    "npmInstall": "No npm install step recorded in this workflow execution",
+    "noLocalInstallOrExecution": true
+  },
+  "androidBuild": {
+    "status": "passed",
+    "exitCode": 0,
+    "startedAt": "2026-11-23T14:09:08.489Z",
+    "completedAt": "2026-11-23T14:09:49.684Z",
+    "commandCount": 17,
+    "commands": [
+      {
+        "label": "git-head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exitCode": 0,
+        "logSha256": "692df4b99160b2f4a5796faa78cd1ba5e362706bbf671fe71474fbe86a69b6d5",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "git-status",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "java-version",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+          "-version"
+        ],
+        "exitCode": 0,
+        "logSha256": "aa8b8c37cfb8295d241a736330151318fe156c8937b464a27b2c21d638db1862",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "javac-version",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+          "-version"
+        ],
+        "exitCode": 0,
+        "logSha256": "53955dabf9a6a9ac74307e877578ef6a74f0011d24edec0f2fd8495d48609836",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "aapt2-version",
+        "argv": [
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/aapt2",
+          "version"
+        ],
+        "exitCode": 0,
+        "logSha256": "b456c2c4fa3006534da3cb71d3d148b64d3539141f65fcb01e24939cf32a041f",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "d8-version",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+          "-cp",
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/d8.jar",
+          "com.android.tools.r8.D8",
+          "--version"
+        ],
+        "exitCode": 0,
+        "logSha256": "6e4ed8ecaff21b1c340174dea0de7abdf10fd3b07cde83b7e603a6887e87bc37",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "aapt2-compile",
+        "argv": [
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/aapt2",
+          "compile",
+          "--dir",
+          "/home/runner/work/_temp/c007-android/shell/res",
+          "-o",
+          "/home/runner/work/_temp/c007-android/build/resources.zip"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "aapt2-link",
+        "argv": [
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/aapt2",
+          "link",
+          "-o",
+          "/home/runner/work/_temp/c007-android/build/unsigned.apk",
+          "--manifest",
+          "/home/runner/work/_temp/c007-android/shell/AndroidManifest.xml",
+          "-I",
+          "/usr/local/lib/android/sdk/platforms/android-34/android.jar",
+          "--java",
+          "/home/runner/work/_temp/c007-android/build/generated",
+          "-A",
+          "/home/runner/work/_temp/c007-android/build/assets",
+          "/home/runner/work/_temp/c007-android/build/resources.zip"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "javac",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+          "-encoding",
+          "UTF-8",
+          "--release",
+          "17",
+          "-classpath",
+          "/usr/local/lib/android/sdk/platforms/android-34/android.jar",
+          "-d",
+          "/home/runner/work/_temp/c007-android/build/classes",
+          "/home/runner/work/_temp/c007-android/shell/observed-production/ReplicaDatabase.java",
+          "/home/runner/work/MyTodo/MyTodo/android/src/local/gxtodo/replica/AccountStore.java",
+          "/home/runner/work/MyTodo/MyTodo/android/src/local/gxtodo/replica/SyncStore.java",
+          "/home/runner/work/MyTodo/MyTodo/android/src/local/gxtodo/replica/PomodoroTasks.java",
+          "/home/runner/work/MyTodo/MyTodo/android/src/local/gxtodo/replica/DailyTaskPolicy.java",
+          "/home/runner/work/_temp/c007-android/shell/src/local/gxtodo/replica/C007CommitObserver.java",
+          "/home/runner/work/_temp/c007-android/shell/src/local/gxtodo/replica/C007Faults.java",
+          "/home/runner/work/_temp/c007-android/shell/src/local/gxtodo/replica/ProtocolHarnessActivity.java",
+          "/home/runner/work/_temp/c007-android/shell/src/local/gxtodo/replica/ProtocolHarnessInstrumentation.java",
+          "/home/runner/work/_temp/c007-android/build/generated/local/gxtodo/protocolharness/R.java"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "jar",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/jar",
+          "cf",
+          "/home/runner/work/_temp/c007-android/build/classes.jar",
+          "-C",
+          "/home/runner/work/_temp/c007-android/build/classes",
+          "."
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "d8",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+          "-cp",
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/d8.jar",
+          "com.android.tools.r8.D8",
+          "--min-api",
+          "26",
+          "--lib",
+          "/usr/local/lib/android/sdk/platforms/android-34/android.jar",
+          "--output",
+          "/home/runner/work/_temp/c007-android/build/dex",
+          "/home/runner/work/_temp/c007-android/build/classes.jar"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "apk-dex",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/jar",
+          "uf",
+          "/home/runner/work/_temp/c007-android/build/unsigned.apk",
+          "-C",
+          "/home/runner/work/_temp/c007-android/build/dex",
+          "classes.dex"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "zipalign",
+        "argv": [
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/zipalign",
+          "-f",
+          "-p",
+          "4",
+          "/home/runner/work/_temp/c007-android/build/unsigned.apk",
+          "/home/runner/work/_temp/c007-android/build/aligned.apk"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "keytool-test-only",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/keytool",
+          "-genkeypair",
+          "-keystore",
+          "/home/runner/work/_temp/c007-android/build/synthetic-c003-test.p12",
+          "-storetype",
+          "PKCS12",
+          "-storepass",
+          "c003-test-only",
+          "-keypass",
+          "c003-test-only",
+          "-alias",
+          "c003-test",
+          "-keyalg",
+          "RSA",
+          "-keysize",
+          "2048",
+          "-validity",
+          "1",
+          "-dname",
+          "CN=MyTodo C003 isolated CI test",
+          "-noprompt"
+        ],
+        "exitCode": 0,
+        "logSha256": "917de3fc5a4411f28e964c64c00e1c7a1274928b77a254d75551e8db5dd6eb2b",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "apksigner-test-only",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+          "-jar",
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/apksigner.jar",
+          "sign",
+          "--ks",
+          "/home/runner/work/_temp/c007-android/build/synthetic-c003-test.p12",
+          "--ks-key-alias",
+          "c003-test",
+          "--ks-pass",
+          "pass:c003-test-only",
+          "--key-pass",
+          "pass:c003-test-only",
+          "--out",
+          "/home/runner/work/_temp/c007-android/build/mytodo-c003-test.apk",
+          "/home/runner/work/_temp/c007-android/build/aligned.apk"
+        ],
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "apksigner-verify",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+          "-jar",
+          "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/apksigner.jar",
+          "verify",
+          "--verbose",
+          "--print-certs",
+          "/home/runner/work/_temp/c007-android/build/mytodo-c003-test.apk"
+        ],
+        "exitCode": 0,
+        "logSha256": "e47727bc7e2df9dba36a0ffdeffeca09d75dfb5adca61c727d5c040a89df4e9f",
+        "receiptInputRef": "E024"
+      },
+      {
+        "label": "verify-packaged-webview-assets",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/jar",
+          "tf",
+          "/home/runner/work/_temp/c007-android/build/mytodo-c003-test.apk"
+        ],
+        "exitCode": 0,
+        "logSha256": "84d7c4a7ff60f91dc59dbbaa1eaad6fb4bfd0b7c847000eb513367819a8a6f45",
+        "receiptInputRef": "E024"
+      }
+    ],
+    "signaturePurpose": "Synthetic isolated one-day CI test certificate, not production signing",
+    "deltaAdapter": {
+      "originalSha256": "c6c9511314ee3b03aa28a708cfef10006b58a1f74ee24eb5b6fc6feb5a80dad5",
+      "adaptedSha256": "38525e83347d87f42356a8b36e482d27ac42a8ccbf93bf8f7cb28bd8819430d8",
+      "adaptation": "Original source bytes plus test-only private-symbol export; no function-body edits"
+    },
+    "receiptInputRef": "E024"
+  },
+  "windowsBuild": {
+    "receipt": {
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "mode": "Windows C real production modules",
+      "sourceBuilder": "scripts/build-windows.mjs",
+      "sourceBuilderSha256": "a9199dc51822c2a12d6823f23417286c82525c36243d94d00130a94044d93693",
+      "temporaryBuilderSha256": "bbb819733d665038a650d0cd39770f831e30bb8cfd646ed9e1ebff8b2fdce031",
+      "productionSyncSha256": "5edd69dc6fc78c055e8feee8a57149a38d0cfb058cf42a8400de5bd8118398c4",
+      "fixtureSyncSha256": "67ddc00e1ce39097a996d1e29e7b7ee75810be1eec0c5b3a57731d2ea5e49b9c",
+      "fixtureTransportReplacementCount": 1,
+      "fixtureTransportDifference": "Test copy changes secure transport and the full-sync target to validated loopback, and observes actual ACK return; production SQL and ACK body are unchanged.",
+      "harnessSha256": "f9a80b1552507e464eb44d336626c15bc4484a2c8d234964b4a9a74dce03fe17",
+      "replacements": [
+        "main.c -> tests/fault-harness/c007-windows-worker.c",
+        "sync.c is included by the harness TU with the one recorded fixture-only transport flag"
+      ],
+      "productionBuilderModified": false,
+      "productionProtocolModified": false,
+      "output": "D:\\a\\_temp\\c007-windows-c\\bin\\c007-worker.exe",
+      "startedAt": "2026-11-23T14:06:31.596Z",
+      "finishedAt": "2026-11-23T14:07:34.649Z",
+      "exitCode": 0,
+      "outputSha256": "a75585e933ded028065a802954fb2f8ffe375ecea0531ad02c08a6a7d56e6596",
+      "outputBytes": 1079808
+    },
+    "receiptInputRef": "E042",
+    "builderSourceInputRef": "E044",
+    "buildLogInputRef": "E043",
+    "compilerWarning": "C4244: int64_t to double possible loss of data, retained in successful build log",
+    "exactResolvedCompilerArgv": "Not printed in receipt/log; source-builder template is hash-bound; wrapper command is recorded in GitHub log"
+  },
+  "javascriptBuild": {
+    "mode": "Interpreted Node test worker and production modules; no compiled standalone package",
+    "nodeBuiltinSqlite": "3.54.1",
+    "sourceInputRef": "E004"
+  },
+  "executedWorkflowCommandExcerpts": [
+    {
+      "line": 119,
+      "text": "Windows C actual SQLite and WinHTTP faults\tSelect existing Node runtime\t﻿2026-11-23T14:06:16.9240382Z ##[group]Run ./scripts/ci/c004-node-path.ps1",
+      "inputRef": "E003"
+    },
+    {
+      "line": 120,
+      "text": "Windows C actual SQLite and WinHTTP faults\tSelect existing Node runtime\t2026-11-23T14:06:16.9240854Z ^[[36;1m./scripts/ci/c004-node-path.ps1^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 126,
+      "text": "Windows C actual SQLite and WinHTTP faults\tSelect existing Node runtime\t2026-11-23T14:06:20.4830282Z C:\\Program Files\\nodejs\\node.exe v22.23.5",
+      "inputRef": "E003"
+    },
+    {
+      "line": 137,
+      "text": "Windows C actual SQLite and WinHTTP faults\tBuild actual C worker and execute every fault scenario\t2026-11-23T14:06:30.8569223Z ^[[36;1m& node tests/fault-harness/build-c007-windows.mjs \"$evidence/bin/c007-worker.exe\" *> \"$evidence/build.log\"^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 139,
+      "text": "Windows C actual SQLite and WinHTTP faults\tBuild actual C worker and execute every fault scenario\t2026-11-23T14:06:30.8570492Z ^[[36;1m& node tests/fault-harness/run-c007-suite.mjs --platform windows-c --windows-exe \"$evidence/bin/c007-worker.exe\" --output \"$evidence/suite\" *> \"$evidence/run.log\"^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 327,
+      "text": "Android WebView and SQLite real commit boundaries\tSelect existing Node runtime\t﻿2026-11-23T14:06:15.1735483Z ##[group]Run bash scripts/ci/c004-node-path.sh",
+      "inputRef": "E003"
+    },
+    {
+      "line": 328,
+      "text": "Android WebView and SQLite real commit boundaries\tSelect existing Node runtime\t2026-11-23T14:06:15.1736581Z ^[[36;1mbash scripts/ci/c004-node-path.sh^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 359,
+      "text": "Android WebView and SQLite real commit boundaries\tPrepare and build the observed production test APK\t﻿2026-11-23T14:09:08.1805380Z ##[group]Run node tests/fault-harness/android/prepare-c007-android.mjs \"$RUNNER_TEMP/c007-android/shell\" > \"$RUNNER_TEMP/c007-android/adaptation.log\" 2>&1",
+      "inputRef": "E003"
+    },
+    {
+      "line": 360,
+      "text": "Android WebView and SQLite real commit boundaries\tPrepare and build the observed production test APK\t2026-11-23T14:09:08.1808020Z ^[[36;1mnode tests/fault-harness/android/prepare-c007-android.mjs \"$RUNNER_TEMP/c007-android/shell\" > \"$RUNNER_TEMP/c007-android/adaptation.log\" 2>&1^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 384,
+      "text": "Android WebView and SQLite real commit boundaries\tExecute fixed-database scenarios without automatic crash retries\t﻿2026-11-23T14:09:54.5551992Z ##[group]Run node tests/fault-harness/run-c007-suite.mjs --platform android --apk \"$RUNNER_TEMP/c007-android/build/mytodo-c003-test.apk\" --prepared \"$RUNNER_TEMP/c007-android/prepared.json.receipt.json\" --serial \"$MYTODO_ANDROID_SERIAL\" --output \"$RUNNER_TEMP/c007-android/suite\" > \"$RUNNER_TEMP/c007-android/run.log\" 2>&1",
+      "inputRef": "E003"
+    },
+    {
+      "line": 385,
+      "text": "Android WebView and SQLite real commit boundaries\tExecute fixed-database scenarios without automatic crash retries\t2026-11-23T14:09:54.5606208Z ^[[36;1mnode tests/fault-harness/run-c007-suite.mjs --platform android --apk \"$RUNNER_TEMP/c007-android/build/mytodo-c003-test.apk\" --prepared \"$RUNNER_TEMP/c007-android/prepared.json.receipt.json\" --serial \"$MYTODO_ANDROID_SERIAL\" --output \"$RUNNER_TEMP/c007-android/suite\" > \"$RUNNER_TEMP/c007-android/run.log\" 2>&1^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 629,
+      "text": "Node SQLite actual faults and same-database process restart\tSelect existing Node runtime\t﻿2026-11-23T14:06:11.4630087Z ##[group]Run bash scripts/ci/c004-node-path.sh",
+      "inputRef": "E003"
+    },
+    {
+      "line": 630,
+      "text": "Node SQLite actual faults and same-database process restart\tSelect existing Node runtime\t2026-11-23T14:06:11.4632579Z ^[[36;1mbash scripts/ci/c004-node-path.sh^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 644,
+      "text": "Node SQLite actual faults and same-database process restart\tExecute real Node SQL and publication fault suite\t﻿2026-11-23T14:06:11.8239430Z ##[group]Run node tests/fault-harness/run-c007-suite.mjs --platform javascript --output \"$RUNNER_TEMP/c007-javascript/suite\" > \"$RUNNER_TEMP/c007-javascript/run.log\" 2>&1",
+      "inputRef": "E003"
+    },
+    {
+      "line": 645,
+      "text": "Node SQLite actual faults and same-database process restart\tExecute real Node SQL and publication fault suite\t2026-11-23T14:06:11.8245853Z ^[[36;1mnode tests/fault-harness/run-c007-suite.mjs --platform javascript --output \"$RUNNER_TEMP/c007-javascript/suite\" > \"$RUNNER_TEMP/c007-javascript/run.log\" 2>&1^[[0m",
+      "inputRef": "E003"
+    },
+    {
+      "line": 829,
+      "text": "Verify all three same-source execution receipts\tSelect existing Node runtime\t﻿2026-11-23T14:18:58.2804049Z ##[group]Run bash scripts/ci/c004-node-path.sh",
+      "inputRef": "E003"
+    },
+    {
+      "line": 830,
+      "text": "Verify all three same-source execution receipts\tSelect existing Node runtime\t2026-11-23T14:18:58.2804333Z ^[[36;1mbash scripts/ci/c004-node-path.sh^[[0m",
+      "inputRef": "E003"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "c007-android-45190559178-1/build/mytodo-c003-test.apk",
+      "bytes": 167011,
+      "sha256": "c80cf3070c7f8d1a684e316b1cbcec4a6f4b5b91ec3a5ef28a76e9cd88829f1f",
+      "hashVerification": "Recorded build receipt matches cloud inventory; binary not downloaded or executed/rehashed locally",
+      "inventoryInputRef": "E002",
+      "buildReceiptInputRef": "E024",
+      "purpose": "Isolated CI fault harness artifact; not production release package"
+    },
+    {
+      "path": "c007-android-45190559178-1/build/unsigned.apk",
+      "bytes": 154232,
+      "sha256": "57bf8c9bef5fe32d15f1e7aa1941e8135b30691176aea40f3ff2c3effb4c96f0",
+      "hashVerification": "Recorded build receipt matches cloud inventory; binary not downloaded or executed/rehashed locally",
+      "inventoryInputRef": "E002",
+      "buildReceiptInputRef": "E024",
+      "purpose": "Isolated CI fault harness artifact; not production release package"
+    },
+    {
+      "path": "c007-windows-c-45190559178-1/bin/c007-worker.exe",
+      "bytes": 1079808,
+      "sha256": "a75585e933ded028065a802954fb2f8ffe375ecea0531ad02c08a6a7d56e6596",
+      "hashVerification": "Recorded build receipt matches cloud inventory; binary not downloaded or executed/rehashed locally",
+      "inventoryInputRef": "E002",
+      "buildReceiptInputRef": "E042",
+      "purpose": "Isolated CI fault harness artifact; not production release package"
+    }
+  ],
+  "unknowns": [
+    "Exact MSVC compiler version, resolved Windows SDK version and full resolved compiler argv were not recorded.",
+    "Individual apksigner/zipalign executable version banners were not recorded; their build-tools/35.0.0 paths are recorded.",
+    "Complete Google SDK download URLs were not recorded; official repository provenance and exact installed package/source.properties/binary hashes are recorded.",
+    "Exact Android platform package revision and independent this-run JDK/build-tools installation receipts were not recorded.",
+    "Binary artifacts, emulator/system image and host library hashes here are recorded cloud evidence, not locally rehashed binaries."
+  ],
+  "textArchiveIndexInputRef": "E001",
+  "inputs": [
+    {
+      "id": "E001",
+      "path": "outputs/c0-07/evidence/45190559178/text-archive-files-sha256.json",
+      "role": "Original text archive index (self-hash; not self-indexed)",
+      "bytes": 2811652,
+      "sha256": "6915ce4912a831bdcd87c332f1fe3b545f46c479c692111e6f2fd0cd749397f4",
+      "matchesTextArchiveIndex": null
+    },
+    {
+      "id": "E002",
+      "path": "outputs/c0-07/evidence/45190559178/all-files-sha256.json",
+      "role": "Cloud producer/collector inventory for binary artifact hashes; not local binary readback",
+      "bytes": 4110351,
+      "sha256": "b34d8d4b254280b09acfdb83be77cc45ffdd4ac410a0a0918e2d345710b8d0b7",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E003",
+      "path": "outputs/c0-07/evidence/45190559178/github-job.log",
+      "role": "Actual GitHub command and existing Node runtime selection log",
+      "bytes": 167489,
+      "sha256": "0eddf2a50c1b726c8162c2231f6b833ffc33f2ca2ace062f4a9524b8c465d184",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E004",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/source.json",
+      "role": "Per-platform exact-source and host runtime record",
+      "bytes": 7359,
+      "sha256": "b0dbd47875d6e59cee077d0fcac190daa3044d5ac563c4d5bb7ebb9f2f87d08f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E005",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-javascript-45190559178-1/suite/sql-atomicity/000-seed.result.json",
+      "role": "Actual store runtime reported by completed seed operation",
+      "bytes": 7245,
+      "sha256": "416ae226e50ebe63e9e9cf8fa13b047e4ecfeb627c6ec2ebf22300c639f3206f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E006",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/source.json",
+      "role": "Per-platform exact-source and host runtime record",
+      "bytes": 7364,
+      "sha256": "23e39f0d09c40fb8363df3b679d08ce48f1ee3812dbbdc1abfca9e1938540b20",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E007",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/suite/sql-atomicity/000-seed.result.json",
+      "role": "Actual store runtime reported by completed seed operation",
+      "bytes": 2425,
+      "sha256": "e559e678b761950486130042d24ae4db3bcdcf14530afe426c5297dfcbb2a0c7",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E008",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/source.json",
+      "role": "Per-platform exact-source and host runtime record",
+      "bytes": 7356,
+      "sha256": "03c71e9a879bf8e5c5f50d435dc94242fac415eafcc2600ac9efdc238956490c",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E009",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/suite/sql-atomicity/000-seed.result.json",
+      "role": "Actual store runtime reported by completed seed operation",
+      "bytes": 5961,
+      "sha256": "6fdcfc5fc88ddbeb25eb2aa53c3a2dc5e437b93fc6c3923da8f64e1112697c8a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E010",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/environment.json",
+      "role": "Recorded Android environment and actual dependency installation commands",
+      "bytes": 24058,
+      "sha256": "6bb6ae6df6c8dca3f4043aa147e077f5f1bf78c4c88f47c9ee918dc58158dd57",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E011",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/shutdown.json",
+      "role": "Recorded environment shutdown result",
+      "bytes": 2373,
+      "sha256": "1a4196ff642cf895b6feaf908527f48f7e243dcceeeb34ceb4bdae961d1f2125",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E012",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/002-java-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 199,
+      "sha256": "23fe535917d8e27a06f7458c13c1017829fffc1f19eda9e568632851ef8a15ee",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E013",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/003-javac-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 30,
+      "sha256": "eab424ec43e8a9c7c2ba277938fb749cd711942e49fc33501d844e14decfd00f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E014",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/004-gradle-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 892,
+      "sha256": "a5542f9b98af924a13944026f44bd9549ab3e3bc9d22b4b4f6e6cd1e1f6a9905",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E015",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/005-adb-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 178,
+      "sha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E016",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/008-sdkmanager-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 22,
+      "sha256": "39d0744f310c05092cf9a1d4667cb0176493e895e8e2afc3a8fb0309c3952243",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E017",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/009-install-official-android-packages.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 15813,
+      "sha256": "4ccdc4d17f27fe7ade8fc727b735c8a1b898bffb5bf2985895923b6446f94700",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E018",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/010-update-official-ubuntu-package-index.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 1450,
+      "sha256": "e3e27594e46cad6187ef449aafe2e8ece2dcbb6e7dced3f1412fd276bab59714",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E019",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/011-install-host-libpulse0.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 4368,
+      "sha256": "ae0dad063811294bdc0add41abf820550ebabd907991bc93c0c73eab99e226a1",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E020",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/012-libpulse0-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 57,
+      "sha256": "d1198385327494c5656cb2eda4ae0096ef60c9145853ba4d70640a42c71b7458",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E021",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/013-emulator-version.log",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 671,
+      "sha256": "3b731f3a793eded86771cca52ee803c102721f98c3feee3c833c8c149a0e9b53",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E022",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/emulator-source.properties",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 103,
+      "sha256": "399a3ad857aa3ba1d2983745f82d6c438221481c220c3bba0aec577adb313a03",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E023",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-environment-45190559178-1/system-image-source.properties",
+      "role": "Exact-run tool version / dependency install provenance",
+      "bytes": 357,
+      "sha256": "bd7597e0dfa855335194fbafaf63bde93aa86bc3b56cea73cd54635715e77abc",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E024",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/build-receipt.json",
+      "role": "Executed Android build command argv, exit status and output hashes",
+      "bytes": 17559,
+      "sha256": "4cd831cf8ee2949a4712d5cf7225d1e7638b0ecf38d82c4dbf7806348f6d33b7",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E025",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/git-head.log",
+      "role": "Build command output/version",
+      "bytes": 41,
+      "sha256": "692df4b99160b2f4a5796faa78cd1ba5e362706bbf671fe71474fbe86a69b6d5",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E026",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/git-status.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E027",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/java-version.log",
+      "role": "Build command output/version",
+      "bytes": 183,
+      "sha256": "aa8b8c37cfb8295d241a736330151318fe156c8937b464a27b2c21d638db1862",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E028",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/javac-version.log",
+      "role": "Build command output/version",
+      "bytes": 14,
+      "sha256": "53955dabf9a6a9ac74307e877578ef6a74f0011d24edec0f2fd8495d48609836",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E029",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/aapt2-version.log",
+      "role": "Build command output/version",
+      "bytes": 50,
+      "sha256": "b456c2c4fa3006534da3cb71d3d148b64d3539141f65fcb01e24939cf32a041f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E030",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/d8-version.log",
+      "role": "Build command output/version",
+      "bytes": 111,
+      "sha256": "6e4ed8ecaff21b1c340174dea0de7abdf10fd3b07cde83b7e603a6887e87bc37",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E031",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/aapt2-compile.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E032",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/aapt2-link.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E033",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/javac.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E034",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/jar.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E035",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/d8.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E036",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/apk-dex.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E037",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/zipalign.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E038",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/keytool-test-only.log",
+      "role": "Build command output/version",
+      "bytes": 142,
+      "sha256": "917de3fc5a4411f28e964c64c00e1c7a1274928b77a254d75551e8db5dd6eb2b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E039",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/apksigner-test-only.log",
+      "role": "Build command output/version",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E040",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/apksigner-verify.log",
+      "role": "Build command output/version",
+      "bytes": 952,
+      "sha256": "e47727bc7e2df9dba36a0ffdeffeca09d75dfb5adca61c727d5c040a89df4e9f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E041",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-android-45190559178-1/build/verify-packaged-webview-assets.log",
+      "role": "Build command output/version",
+      "bytes": 1255,
+      "sha256": "84d7c4a7ff60f91dc59dbbaa1eaad6fb4bfd0b7c847000eb513367819a8a6f45",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E042",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/bin/windows-protocol-build.json",
+      "role": "Windows C actual builder, fixture adaptation and binary receipt",
+      "bytes": 1387,
+      "sha256": "9842d324d3b45d0dd0577ca781bdf3ba031faee727937fbf5d0c0e795ec9f623",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E043",
+      "path": "outputs/c0-07/evidence/45190559178/artifacts/c007-windows-c-45190559178-1/build.log",
+      "role": "Actual successful compiler output, including retained C4244 warning",
+      "bytes": 2479,
+      "sha256": "e6f1e96222a54701c130e584fbb64851a750d0c1232f9efc6bb0c161954b71d3",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "id": "E044",
+      "path": "C:/Users/adwoo/Documents/Codex/2026-11-23/mytodo-agent-mytodo-agent-mytodo-github/work/source/MyTodo-master/scripts/build-windows.mjs",
+      "role": "Read-only source text, exactly matching Windows cloud build receipt sourceBuilderSha256",
+      "bytes": 4125,
+      "sha256": "a9199dc51822c2a12d6823f23417286c82525c36243d94d00130a94044d93693",
+      "matchesRecordedBuilderHash": true
+    }
+  ],
+  "generation": "Local text/JSON/hash aggregation only; no project source, compiler, Node, emulator, SQLite, test, or dependency installer executed locally."
+}

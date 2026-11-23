@@ -1,0 +1,2014 @@
+{
+  "schema": "mytodo-c0-07-verification",
+  "schemaVersion": 1,
+  "revision": 10,
+  "state": "qualified-accepted",
+  "generatedAt": "2026-11-23T22:46:25.5967545+08:00",
+  "generatedTimeZone": "China Standard Time",
+  "accepted": true,
+  "D1": false,
+  "acceptanceAuthority": "parent-agent under existing user scope",
+  "executionScope": {
+    "localProjectExecutions": 0,
+    "localBuilds": 0,
+    "localTests": 0,
+    "localAdbOrEmulatorOperations": 0,
+    "credentialFixtureReads": 0,
+    "localAuditMethod": "PowerShell archived JSON/text parsing, file SHA256 and static evidence review only",
+    "cloudOnlyBytes": "Compared producer and collector/inventory hash records; not locally rehashed. Cloud inventory trust depends on transfer provenance handled separately by parent."
+  },
+  "sourceIdentity": {
+    "gitBlobIdentity": {
+      "path": "outputs/c0-07/evidence/final-identity/c007-final-source-identity.json",
+      "bytes": 230620,
+      "sha256": "90456b1918f671893d2cda64041d2c548498ab86212113d4de5a9ca514fabe90",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-final-source-identity.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 230621,
+        "sha256": "acf473335f79f18e0c824709ff9142041e0e88422c222c3bfea81a2ec0c6273b",
+        "transform": "terminal-LF-to-one-only"
+      }
+    },
+    "actualBlobSha256Receipt": {
+      "path": "outputs/c0-07/evidence/edf-final-transfer/c007-final-source-bytes.json",
+      "bytes": 381100,
+      "sha256": "87abf6a0d14a7d4bac6ae64810dedecd92172fdd3937f4557a5572792eb05584",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-final-source-bytes.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 381101,
+        "sha256": "7548ecd3dbd16ed1d74ea54b5e1c23221de5770464fe927fd239ced70872b14b",
+        "transform": "terminal-LF-to-one-only"
+      }
+    },
+    "receiptMethod": "git archive exact commit blobs read and SHA256 in Codespaces, no extraction or project execution",
+    "refs": [
+      "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "edfde91eba174f9f8c20657ded4657c8841d0f83",
+      "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa"
+    ],
+    "filesPerRef": [
+      {
+        "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "count": 682
+      },
+      {
+        "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "count": 682
+      },
+      {
+        "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "count": 682
+      },
+      {
+        "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "count": 682
+      }
+    ],
+    "transitions": [
+      {
+        "before": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "after": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "unchangedBlobs": 681,
+        "changed": [
+          {
+            "path": "tests/fault-harness/c007-windows-worker.c",
+            "beforeGitBlob": "5b7b2296b5d02b2f0ced5d20330d4b62687a9364",
+            "afterGitBlob": "72cbacf5491fda8d2c2daad8221599772cc1bf41",
+            "beforeBytes": 16962,
+            "beforeSha256": "8f230846a78cfb232aac99203a00482073c44becd6ffc40acdb9786738d2a963",
+            "afterBytes": 16968,
+            "afterSha256": "d8aef0e85ef658e564b2bb4d96d389c0e502909ab60d97f874249e21a15cc8ea"
+          }
+        ]
+      },
+      {
+        "before": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "after": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "unchangedBlobs": 681,
+        "changed": [
+          {
+            "path": "tests/c006/android-kill/android-kill-runner.mjs",
+            "beforeGitBlob": "11a2f3d77f73fb07326b7141a585be9c07da2d5f",
+            "afterGitBlob": "44714750a50db2056954ff57aa2df6e7d3f14d64",
+            "beforeBytes": 23255,
+            "beforeSha256": "e671bd7be73d2aea7299fc2e4839f0d01367d031f7d85cd65e1766322746d518",
+            "afterBytes": 23284,
+            "afterSha256": "792a609c5897131f26574f39b93008da20bbaeefc26fb65aef5783b60d19b8f0"
+          }
+        ]
+      },
+      {
+        "before": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "after": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "unchangedByteFiles": 681,
+        "changed": [
+          {
+            "path": "tests/c006/c006-harness/android-runner.mjs",
+            "beforeBytes": 7512,
+            "beforeSha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+            "afterBytes": 7788,
+            "afterSha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a"
+          }
+        ],
+        "priorEdfLedgerCrossCheckRows": 682,
+        "priorEdfLedgerCrossCheckMismatches": 0
+      }
+    ],
+    "qualification": "Three successive source transitions change only named harness files. C007 directly executed de7; core, Android kill, bootstrap and baseline directly executed source19ce. Original run sourceSha values remain unchanged; old gates are associated through explicit unchanged-source dependency identity, not renamed as new-source execution.",
+    "selectedDatabaseTransitionReceipt": {
+      "path": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-source-bytes.json",
+      "bytes": 287842,
+      "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-selected-db-source-bytes.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 287842,
+        "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+        "transform": "byte-identical"
+      }
+    },
+    "selectedDatabaseTransitionIndependentAudit": {
+      "path": "work/c007-selected-source-identity-independent-audit.json",
+      "bytes": 1582,
+      "sha256": "54640f3f80ee4f963445e8cc50fe2aca00d19c12dfc878fb0cf0b0664bf88bec",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-selected-source-identity-independent-audit.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 1546,
+        "sha256": "ae73337f23a6fd05ca6222dedf3e929df748cdf5a2a03ee48a6e1f74d4de7e49",
+        "transform": "CRLF-to-LF-only"
+      }
+    }
+  },
+  "frozenAuditor": {
+    "script": {
+      "path": "work/audit-c007-archive.ps1",
+      "bytes": 33424,
+      "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+      "publishedFile": {
+        "path": "c0-07-evidence/audit-c007-archive.ps1",
+        "relativeTo": "docs/upgrade",
+        "bytes": 33424,
+        "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+        "transform": "byte-identical"
+      }
+    },
+    "independentReview": {
+      "path": "work/c007-archive-auditor-independent-review.md",
+      "bytes": 6218,
+      "sha256": "03966d32b339346e12418b4c4fc4f0ff31b9a993a3bd64ed038c9fbee36ade64",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-archive-auditor-independent-review.md",
+        "relativeTo": "docs/upgrade",
+        "bytes": 6218,
+        "sha256": "03966d32b339346e12418b4c4fc4f0ff31b9a993a3bd64ed038c9fbee36ade64",
+        "transform": "byte-identical"
+      }
+    },
+    "meaning": "Archive integrity is separate from runtime verdict. For non-C0-07 archives only the integrity portion applies; its C0-07 execution verdict is inapplicable."
+  },
+  "c007Stages": [
+    {
+      "stage": "first-red",
+      "runId": "45180141745",
+      "sourceSha": "4a8dd94f7fbceeb0583c37cc7aefdb29e9937691",
+      "githubConclusion": "failure",
+      "executionStatus": "failed-or-incomplete",
+      "cases": 30,
+      "attempts": 141,
+      "checks": 1644,
+      "failedChecks": 47,
+      "recordedRunPassed": false,
+      "platforms": [
+        {
+          "platform": "android",
+          "cases": 10,
+          "attempts": 10,
+          "checks": 20,
+          "failedChecks": 20,
+          "suiteStatus": "failed",
+          "suiteExitCode": 1
+        },
+        {
+          "platform": "javascript",
+          "cases": 10,
+          "attempts": 55,
+          "checks": 601,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        },
+        {
+          "platform": "windows-c",
+          "cases": 10,
+          "attempts": 76,
+          "checks": 1023,
+          "failedChecks": 27,
+          "suiteStatus": "failed",
+          "suiteExitCode": 1
+        }
+      ],
+      "archive": {
+        "audit": {
+          "path": "work/c007-first-red-integrity-audit.json",
+          "bytes": 68069,
+          "sha256": "12fcbdd3e5e339d23eb5ddbc4400743b959ec6ee55deeaccbc0e71fd0d22f57e",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-first-red-integrity-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 66302,
+            "sha256": "b2e53f6f8a1eb4639e31c7fa821ace0f278bd280da28ee13c1ea4fbfb2f82220",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45180141745",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 2577,
+        "localTextBytes": 10887219,
+        "cloudInventoryRecords": 3564,
+        "producerManifestCount": 5,
+        "producerRows": 3559,
+        "producerLocalByteVerifiedRows": 2562,
+        "producerCloudRecordComparedRows": 997,
+        "originalCollector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "failureCount": 0,
+          "failureKinds": []
+        }
+      }
+    },
+    {
+      "stage": "strengthened-red",
+      "runId": "45183273190",
+      "sourceSha": "feb0dca3a56ca8cc83d118d1b828b8f69ec768d2",
+      "githubConclusion": "failure",
+      "executionStatus": "failed-or-incomplete",
+      "cases": 30,
+      "attempts": 187,
+      "checks": 2299,
+      "failedChecks": 33,
+      "recordedRunPassed": false,
+      "platforms": [
+        {
+          "platform": "android",
+          "cases": 10,
+          "attempts": 55,
+          "checks": 652,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        },
+        {
+          "platform": "javascript",
+          "cases": 10,
+          "attempts": 56,
+          "checks": 620,
+          "failedChecks": 2,
+          "suiteStatus": "failed",
+          "suiteExitCode": 1
+        },
+        {
+          "platform": "windows-c",
+          "cases": 10,
+          "attempts": 76,
+          "checks": 1027,
+          "failedChecks": 31,
+          "suiteStatus": "failed",
+          "suiteExitCode": 1
+        }
+      ],
+      "archive": {
+        "audit": {
+          "path": "work/c007-strengthened-red-integrity-audit.json",
+          "bytes": 68126,
+          "sha256": "2252cc77ce8939274b21ef925c963a9f4286c99ed0d399d0427c4191d02baa00",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-strengthened-red-integrity-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 66381,
+            "sha256": "cde0fd24f11426ef195383b1e03741a782c7faa0fa298b3957b5a32b6802b256",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45183273190",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 11354,
+        "localTextBytes": 29209160,
+        "cloudInventoryRecords": 12119,
+        "producerManifestCount": 5,
+        "producerRows": 12114,
+        "producerLocalByteVerifiedRows": 11339,
+        "producerCloudRecordComparedRows": 775,
+        "originalCollector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "failureCount": 114,
+          "failureKinds": [
+            {
+              "kind": "binary-in-text-evidence-path",
+              "count": 114
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "f9-production",
+      "runId": "45186305189",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "githubConclusion": "failure",
+      "executionStatus": "failed-or-incomplete",
+      "cases": 30,
+      "attempts": 187,
+      "checks": 2299,
+      "failedChecks": 3,
+      "recordedRunPassed": false,
+      "platforms": [
+        {
+          "platform": "android",
+          "cases": 10,
+          "attempts": 55,
+          "checks": 652,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        },
+        {
+          "platform": "javascript",
+          "cases": 10,
+          "attempts": 56,
+          "checks": 620,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        },
+        {
+          "platform": "windows-c",
+          "cases": 10,
+          "attempts": 76,
+          "checks": 1027,
+          "failedChecks": 3,
+          "suiteStatus": "failed",
+          "suiteExitCode": 1
+        }
+      ],
+      "archive": {
+        "audit": {
+          "path": "work/c007-f9-production-integrity-audit.json",
+          "bytes": 59004,
+          "sha256": "35bc08ced53013d9e8aef874fd4ea588e83c2f47c3e52151a03254c695bf2c8f",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-f9-production-integrity-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 57503,
+            "sha256": "72646a507a9bd2e851f6e1e8f6e492f641e31354b21ff8772739589d15558d87",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45186305189",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 11353,
+        "localTextBytes": 29176587,
+        "cloudInventoryRecords": 12118,
+        "producerManifestCount": 5,
+        "producerRows": 12113,
+        "producerLocalByteVerifiedRows": 11338,
+        "producerCloudRecordComparedRows": 775,
+        "originalCollector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "failureCount": 114,
+          "failureKinds": [
+            {
+              "kind": "binary-in-text-evidence-path",
+              "count": 114
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "de7-runtime-green",
+      "runId": "45190559178",
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "githubConclusion": "success",
+      "executionStatus": "passed",
+      "cases": 30,
+      "attempts": 187,
+      "checks": 2299,
+      "failedChecks": 0,
+      "recordedRunPassed": false,
+      "platforms": [
+        {
+          "platform": "android",
+          "cases": 10,
+          "attempts": 55,
+          "checks": 652,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        },
+        {
+          "platform": "javascript",
+          "cases": 10,
+          "attempts": 56,
+          "checks": 620,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        },
+        {
+          "platform": "windows-c",
+          "cases": 10,
+          "attempts": 76,
+          "checks": 1027,
+          "failedChecks": 0,
+          "suiteStatus": "passed",
+          "suiteExitCode": 0
+        }
+      ],
+      "archive": {
+        "audit": {
+          "path": "work/c007-de7-production-integrity-audit.json",
+          "bytes": 58022,
+          "sha256": "61d72889e7a5473235b1a8390648f15b9ef63e366505a13d3d763a5e99a9497f",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-de7-production-integrity-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 56547,
+            "sha256": "fd391e9217f2b771777244459a14f8af64f83b912c1eaf10959651678018eec6",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45190559178",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 11357,
+        "localTextBytes": 29180649,
+        "cloudInventoryRecords": 12122,
+        "producerManifestCount": 5,
+        "producerRows": 12117,
+        "producerLocalByteVerifiedRows": 11342,
+        "producerCloudRecordComparedRows": 775,
+        "originalCollector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "failureCount": 114,
+          "failureKinds": [
+            {
+              "kind": "binary-in-text-evidence-path",
+              "count": 114
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "c007Qualifications": [
+    "First-red Android has ten startup/seed attempts and twenty failed checks; it did not execute the intended business operations.",
+    "The three f9 Windows C failed checks were inspect receipt false-acceptance harness defects; they are not three demonstrated production data defects.",
+    "Strengthened, f9 and de7 collectors preserve 114 binary-in-text-evidence-path exclusions: 110 SQLite main stdout files, three SHM stdout files and one nonempty WAL stdout file. These are indexed cloud-only and absent locally.",
+    "All four generic C0-07 recordedRunPassed fields remain false. de7 runtime passed but its original collector is incomplete.",
+    "Android lacks the faultHits field; a zero generic numeric fault-hit counter must not be interpreted as no injected faults."
+  ],
+  "independentC007Reviews": {
+    "nodeAndWindows": {
+      "audit": {
+        "path": "work/c007-de7-node-windows-evidence-audit-v3.json",
+        "bytes": 599493,
+        "sha256": "19b4c1908e6927e86cbecd04e39571289a8710b78fdaa0ef0df5e7bec16b8245",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 583920,
+          "sha256": "48091700c8e26719618e0e8523139276a9ee2880ffad73744e07383749be45ec",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "runId": "45190559178",
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "attempts": 132,
+      "evidenceConsistencyChecks": 2500,
+      "failedChecks": 0,
+      "passed": true,
+      "inputRecords": 616,
+      "qualification": "Evidence consistency checks are not additional project tests. 615 original evidence inputs are index hash/size bound; one additional input is the generic audit."
+    },
+    "network": {
+      "audit": {
+        "path": "work/c007-de7-network-independent-audit.json",
+        "bytes": 42398,
+        "sha256": "7fffa5b62e3ee1e33bb472f5fc9c5cc5ded351e8caebcb9ce8c2913c97fb8694",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-de7-network-independent-audit.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 41259,
+          "sha256": "97a4103c53b5d19b07fa0821fa1f979293c609e76fac059e458efe57d7db609a",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "runId": "45190559178",
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "cases": 8,
+      "indexedLocalTexts": 88,
+      "evidenceConsistencyChecks": 122,
+      "failedChecks": 0,
+      "semantics": [
+        "Four network faults each in JavaScript and Windows C; every injected fault used exactly once.",
+        "Rejected writes: HTTP503, writeCommitted=false, disconnected=false. Lost responses: status=null, writeCommitted=true, disconnected=true.",
+        "Pending UTF8 body is 383 bytes with SHA256 913de72935793cf9d6f35e256bff9399307457fc0d2677dfb40de4e682dc769e. Within each platform first and retry gzip wire bytes match.",
+        "Batch-rejected retry writes with 201; the other three fault types retry with 412 and GET200 confirms preexisting bytes.",
+        "Final batch/head count is one; pending clears; only later outbox id3 remains; rows and tombstones are preserved.",
+        "Ordinary native receipts lack PID. Sequential closed-process timing and distinct reopen commands identify fresh same-db reopen.",
+        "Native resume renews lease before publishing: revision increments and lease.until changes; other metadata is preserved."
+      ]
+    },
+    "finalAndroid": {
+      "status": "passed-with-archive-qualification",
+      "runId": "45190559178",
+      "sourceSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "audit": {
+        "path": "work/c007-de7-android-final-review.md",
+        "bytes": 8478,
+        "sha256": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-de7-android-final-review.md",
+          "relativeTo": "docs/upgrade",
+          "bytes": 8478,
+          "sha256": "558d508a2e9389c545c00400b04e19429bd04ec0f95e4f7e377b252c6de9a2f6",
+          "transform": "byte-identical"
+        }
+      },
+      "plannedOperations": 55,
+      "originalDeviceSameDatabaseReopens": 55,
+      "expectedProcessDeaths": 3,
+      "recordedChecks": 652,
+      "failedChecks": 0,
+      "additionalUnexpectedMainProcessExitsFound": 0,
+      "uniqueNativePids": 110,
+      "rawCommands": 3822,
+      "rawStreams": 7644,
+      "locallyRehashedTextStreams": 7530,
+      "cloudOnlyBinaryStreams": 114,
+      "databaseFileObservations": 440,
+      "preservedFiles": 116,
+      "validMissingFiles": 324,
+      "qualification": "No extra main-process startup crash was found within this run captured evidence. Expected natural deaths were confirmed before later force-stop cleanup and stable sequential file export. No local APK/database binary read or rehash; original collector exit1/incomplete remains; Android historical stability is not closed."
+    }
+  },
+  "f9Regressions": {
+    "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+    "aggregateAudit": {
+      "path": "work/c007-f9-regression-audit.json",
+      "bytes": 37534,
+      "sha256": "184b6dc978f04eaadfefbcd847bb1a86b7308d7e5169b1d8cdcd13b48e196983",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-f9-regression-audit.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 36273,
+        "sha256": "435ad373d0f2749b70704fa2a055734c10f3845ee32bc7bba044e24e4c25d967",
+        "transform": "CRLF-to-LF-only"
+      }
+    },
+    "evidenceConsistencyChecks": 141,
+    "failedEvidenceChecks": 0,
+    "archiveRecords": [
+      {
+        "kind": "bootstrap",
+        "runId": "45186305576",
+        "collectorExitCode": 0,
+        "collectorEvidenceComplete": true,
+        "originalCollectorFailures": [],
+        "integrity": {
+          "rawAuditPath": "work/c007-f9-bootstrap-integrity-only-raw.json",
+          "rawAuditSha256": "77954508cccd5ae9f16331c0d2fdbcabed5e6834fcb1103bf2d7bcfc3f2aef5a",
+          "auditorSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+          "localListedTextFiles": 110,
+          "locallyVerifiedTextFiles": 110,
+          "localTextBytes": 7888446,
+          "cloudInventoriedFiles": 122,
+          "producerRows": 121,
+          "producerLocalBytesVerifiedRows": 99,
+          "producerCloudCollectorHashComparedRows": 22,
+          "issues": [],
+          "scope": "Uses only raw audit integrity fields. Its C007-only execution fields do not apply to these C005/C006/baseline regressions."
+        }
+      },
+      {
+        "kind": "dpapi",
+        "runId": "45186305386",
+        "collectorExitCode": 0,
+        "collectorEvidenceComplete": true,
+        "originalCollectorFailures": [],
+        "integrity": {
+          "rawAuditPath": "work/c007-f9-dpapi-integrity-only-raw.json",
+          "rawAuditSha256": "5dc9a56a979dee3ba595b934afb26ed30e5e8d8875ef85fcef16a2f197b7cb56",
+          "auditorSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+          "localListedTextFiles": 19,
+          "locallyVerifiedTextFiles": 19,
+          "localTextBytes": 66989,
+          "cloudInventoriedFiles": 13,
+          "producerRows": 12,
+          "producerLocalBytesVerifiedRows": 8,
+          "producerCloudCollectorHashComparedRows": 4,
+          "issues": [],
+          "scope": "Uses only raw audit integrity fields. Its C007-only execution fields do not apply to these C005/C006/baseline regressions."
+        }
+      },
+      {
+        "kind": "baseline",
+        "runId": "45186305173",
+        "collectorExitCode": 1,
+        "collectorEvidenceComplete": false,
+        "originalCollectorFailures": [
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "c003-android-inventory-45186305173-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-android-45186305173-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-source-45186305173-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-web-45186305173-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-windows-45186305173-1"
+          }
+        ],
+        "integrity": {
+          "rawAuditPath": "work/c007-f9-baseline-integrity-only-raw.json",
+          "rawAuditSha256": "0ecf6bf102d24851442d445882a3a220dabec89924e6a2e9453501ccc318e5db",
+          "auditorSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+          "localListedTextFiles": 122,
+          "locallyVerifiedTextFiles": 122,
+          "localTextBytes": 397218,
+          "cloudInventoriedFiles": 146,
+          "producerRows": 0,
+          "producerLocalBytesVerifiedRows": 0,
+          "producerCloudCollectorHashComparedRows": 0,
+          "issues": [],
+          "scope": "Uses only raw audit integrity fields. Its C007-only execution fields do not apply to these C005/C006/baseline regressions."
+        }
+      }
+    ],
+    "bootstrap": {
+      "runId": "45186305576",
+      "cases": 4,
+      "passedCases": 4,
+      "childOperations": 23,
+      "expectedRejectedExit1": 2,
+      "selectedSigkill": 1,
+      "qualification": "SIGKILL was paused at its gate; same-db, lease, CAS and tombstone semantics were reviewed."
+    },
+    "dpapi": {
+      "runId": "45186305386",
+      "cases": 22,
+      "passedCases": 22,
+      "subprocesses": 55,
+      "expectedNativeWriteRejections": 14,
+      "abnormalSubprocesses": 0,
+      "networkRequests": 0,
+      "plaintextLogged": false,
+      "qualification": "Same Windows runner user context only; does not demonstrate cross-user decryptability. Sixty-six textual check descriptions are labels, not sixty-six independent machine assertions."
+    },
+    "baseline": {
+      "runId": "45186305173",
+      "receiptCases": {
+        "windows": 11,
+        "windowsRequired": 10,
+        "android": 19,
+        "androidRequired": 18,
+        "web": 13,
+        "webRequired": 12,
+        "allPassed": true
+      },
+      "javascriptTap": {
+        "passed": 121,
+        "failed": 0,
+        "skipped": 0
+      },
+      "windows": {
+        "selfAssertions": 32,
+        "advancedAssertions": 48,
+        "feedbackAssertions": 21,
+        "detailKeyChecks": 48,
+        "detailKeyChecksAreSeparate": true
+      },
+      "androidHostAssertions": [
+        73,
+        47,
+        20
+      ],
+      "qualificationAudit": {
+        "path": "work/c007-f9-baseline-qualified.json",
+        "bytes": 3529,
+        "sha256": "0e61d68cad812f0d08d52d68e371816269c3f234005d6176ee751202f5a1a793",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-f9-baseline-qualified.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 3454,
+          "sha256": "9a2635c3763af36743b4c012faa60479caa5f7c145e38adc6d9768b6cc275de1",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "namedBuildArtifacts": [
+        {
+          "name": "MyTodo-phase0.exe",
+          "bytes": 1328640,
+          "sha256": "7ca03e633b965ef88166ea0b90d4b3b8cfee9f693083efaed314fffe93613a4a",
+          "matched": true
+        },
+        {
+          "name": "MyTodo-unsigned.apk",
+          "bytes": 281749,
+          "sha256": "2a2c8d5690f0018d0f600146f3e4fb7563458f7cd2c8cf70dab81795d7684b32",
+          "matched": true
+        },
+        {
+          "name": "WebCredentialHelper.exe",
+          "bytes": 149504,
+          "sha256": "c72cb4bf7fa4557591918348fc8dd37d866c75bd854acc5606f7fcb96307ac28",
+          "matched": true
+        },
+        {
+          "name": "MyTodo-web-source.zip",
+          "bytes": 101876,
+          "sha256": "e45b4a02bdf6c94c35e93b5c94d35d00238997b4babdcf1233416b3b2068df6e",
+          "matched": true
+        }
+      ],
+      "allFourNamedArtifactHashesMatch": true,
+      "originalCollectorExitCode": 1,
+      "originalCollectorEvidenceComplete": false,
+      "missingProducerManifests": 5,
+      "qualification": "Four named build artifacts were independently rehashed in cloud and matched to receipts. Missing recursive producer manifests remain missing. Android assertions are host tests; unsigned APK is not install/device-matrix evidence."
+    },
+    "c006Core": {
+      "runId": "45186305230",
+      "audit": {
+        "path": "work/c007-f9-c006-core-audit.json",
+        "bytes": 177361,
+        "sha256": "e0714f1374eaea8398d71e7b6032139e4d93463022facb07b648e29411951d99",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-f9-c006-core-audit.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 170697,
+          "sha256": "6493b836d9f1e68a9e94d8348549c24c9269aad3c1bc28346f09c1b37c4d3f75",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "archive": {
+        "audit": {
+          "path": "work/c007-f9-c006-core-integrity-only-raw.json",
+          "bytes": 9622,
+          "sha256": "3120c6d3a197d5d19afa5fe69f5966d2f97afa0b5468f7785f33e543a645dd69",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 9370,
+            "sha256": "c0ba30f31e6be84c8547cb18933c045aee124af742a95410e1727ba15fdc182d",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45186305230",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 2595,
+        "localTextBytes": 37001335,
+        "cloudInventoryRecords": 3063,
+        "producerManifestCount": 6,
+        "producerRows": 3101,
+        "producerLocalByteVerifiedRows": 2623,
+        "producerCloudRecordComparedRows": 478,
+        "originalCollector": {
+          "exitCode": 1,
+          "evidenceComplete": false,
+          "failureCount": 24,
+          "failureKinds": [
+            {
+              "kind": "unexpected-credential-fixture-in-artifact",
+              "count": 24
+            }
+          ]
+        }
+      },
+      "cases": 83,
+      "passedCases": 83,
+      "platformCases": {
+        "javascript": 59,
+        "nativeSuite": 18,
+        "android": 6
+      },
+      "operations": 408,
+      "javascript": {
+        "operations": 280,
+        "passed": 232,
+        "expectedRejected": 42,
+        "selectedSigkill": 6
+      },
+      "nativeSuite": {
+        "operations": 104,
+        "nativeAccepted": 71,
+        "nativeRejected": 15,
+        "javascriptPassed": 17,
+        "javascriptSigkill": 1
+      },
+      "android": {
+        "operations": 24,
+        "sameDatabaseFreshProcessReopens": 24,
+        "expectedRejected": 4,
+        "crashedAttempts": 0,
+        "failureEvidenceRecords": 0
+      },
+      "evidenceConsistencyChecks": 1365,
+      "failedEvidenceChecks": 0,
+      "qualification": [
+        "The killed worker in the native suite was JavaScript followed by fresh native snapshot takeover; it does not demonstrate native forced-termination recovery.",
+        "The Android core archive does not claim abrupt internal-boundary kill.",
+        "Twenty-four sync-config.enc fixture exclusions remain original collector failures. They are cloud-inventoried, copied=false with credential-fixture-excluded, locally absent and never read or decrypted."
+      ]
+    },
+    "matrix": {
+      "runId": "45186305196",
+      "semanticAudit": {
+        "path": "work/c007-f9-matrix-semantic-review.json",
+        "bytes": 669,
+        "sha256": "eeb4c14aac5841fcc967015fe4a49e26843f9dfdd9d302d8ec0283c68a342c63",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-f9-matrix-semantic-review.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 650,
+          "sha256": "9ca3ed19c383c8702a57c83cfe667e19ffca117ee4b9e677291bcb07fe369b3b",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "archive": {
+        "audit": {
+          "path": "work/c007-f9-matrix-integrity-only-raw.json",
+          "bytes": 9956,
+          "sha256": "a6a4ae8459ba3aee8ae079755b27f0515de34c82bc87e14a3cf3ab2777a1958a",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-f9-matrix-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 9645,
+            "sha256": "03c1d817c461d96ff38153be98ba57363e7d7c034ad45e00a1aebd51a42b23fc",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45186305196",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 13550,
+        "localTextBytes": 111335893,
+        "cloudInventoryRecords": 15743,
+        "producerManifestCount": 18,
+        "producerRows": 15725,
+        "producerLocalByteVerifiedRows": 13522,
+        "producerCloudRecordComparedRows": 2203,
+        "originalCollector": {
+          "exitCode": 0,
+          "evidenceComplete": true,
+          "failureCount": 0,
+          "failureKinds": []
+        }
+      },
+      "suiteCases": 78,
+      "executions": 936,
+      "uniqueExecutions": 936,
+      "badExecutions": 0,
+      "comparisons": 936,
+      "badComparisons": 0,
+      "lineage": 702,
+      "badLineage": 0,
+      "runStatus": "passed",
+      "exitCode": 0,
+      "summarySha256": "653a54253b430b0c90578bff8e643ad34aeeb0d424176f054d85e30b6439649c",
+      "androidFailureReview": {
+        "path": "work/c007-f9-matrix-android-crash-review.md",
+        "bytes": 9687,
+        "sha256": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-f9-matrix-android-crash-review.md",
+          "relativeTo": "docs/upgrade",
+          "bytes": 9687,
+          "sha256": "a4a6eab49682a62680864ac975f500e17809cd2733d2fa178f29cc1bb4a96a2e",
+          "transform": "byte-identical"
+        }
+      },
+      "originalAndroidCrashes": 7,
+      "mainRetriesOnNewDatabase": 5,
+      "restartRetriesOnSameOriginalDatabase": 2,
+      "originalMissingFileProbes": 37,
+      "entirelyMissingOriginalDatabaseCases": [
+        "shard3 actor-invalid-punctuation",
+        "shard7 id-cjk-66"
+      ],
+      "qualification": "Failure evidence is partial. Collector complete and 936 passed executions/702 lineage records do not prove recovery of every original failed database."
+    },
+    "rootManifestCoverage": {
+      "audit": {
+        "path": "work/c007-f9-core-matrix-manifest-coverage.json",
+        "bytes": 9566,
+        "sha256": "0d97613f57cb81de072415748573589da9b460165ab033b8f02e623f71530ef9",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 9314,
+          "sha256": "054ddec7227ed31e43a0b13592f34dae148552feffef46522346489f2f9504ac",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "coreExpected": 5,
+      "coreClosed": 5,
+      "matrixExpected": 18,
+      "matrixClosed": 18,
+      "qualification": "Exact expected root manifest set is closed. Nested manifest rows may overlap and must not be treated as distinct file counts."
+    },
+    "originalAndroidKill": {
+      "runId": "45186305462",
+      "cases": 2,
+      "passedCases": 1,
+      "failedCases": 1,
+      "A26": "failed",
+      "A30": "passed",
+      "detailedFailureReview": {
+        "path": "work/c007-f9-c006-a26-failure-review.md",
+        "bytes": 10324,
+        "sha256": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-f9-c006-a26-failure-review.md",
+          "relativeTo": "docs/upgrade",
+          "bytes": 10324,
+          "sha256": "a7f56c201c4f27cdd0544c73ac3bdf4a5cfd59a6fad4cfd6dd22286b4b4f5316",
+          "transform": "byte-identical"
+        }
+      },
+      "A26ExitAt": null,
+      "qualification": [
+        "A26 only initialized; the intended after-import kill gate and recovery did not execute.",
+        "Instrumentation stdout said Process crashed despite instrumentation code0/ADB exit0. OS main PID3421 exit reason12 was DEPENDENCY DIED tied to Google FontsProvider in dying gms persistent.",
+        "All four original database files were absent according to nonce probes. Export assertion then failed; catch reused database directory and caused secondary EEXIST evidence-capture failure.",
+        "These records do not demonstrate a production SQLite regression or that device stability was fixed. The edf change only captures failures into failure-database."
+      ]
+    }
+  },
+  "latestEdfRuns": {
+    "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+    "informationSource": "Parent-agent status message; run-level success alone is not deep evidence acceptance.",
+    "androidKill": {
+      "runId": "45194185184",
+      "githubConclusion": "success",
+      "rawArchiveDownloaded": true,
+      "detailedEvidenceReview": "passed-with-archive-qualification",
+      "accepted": false,
+      "archive": {
+        "audit": {
+          "path": "work/c007-edf-android-kill-integrity-only-raw.json",
+          "bytes": 7168,
+          "sha256": "42018d28567f06f0b0a0c74b514d04736de0908aa075278e2d290c0df3a03cc3",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 6987,
+            "sha256": "f45288dac6b098a375572db0ee82fa4efe750a90da7acc69458089e526bcb2ea",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "scope": "Generic archive integrity portion only; C007 execution verdict is inapplicable",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 725,
+        "localTextBytes": 2489200,
+        "cloudInventoryRecords": 818,
+        "producerManifests": 3,
+        "producerRows": 857,
+        "producerLocalByteVerifiedRows": 754,
+        "producerCloudRecordComparedRows": 103,
+        "collectorExitCode": 1,
+        "collectorEvidenceComplete": false,
+        "collectorFailureCount": 16,
+        "collectorFailureKinds": [
+          {
+            "kind": "binary-in-text-evidence-path",
+            "count": 16
+          }
+        ],
+        "qualification": "Cloud-only bytes are recorded hash comparisons, not locally rehashed. Nested producer rows may overlap. Original collector failures are preserved."
+      },
+      "qualifiedRuntimeEvidencePassed": true,
+      "detailedReview": {
+        "path": "work/c006-edf-android-kill-final-review.md",
+        "bytes": 8295,
+        "sha256": "48e9fd22b62b5022b9c41e89cf3ecd09f4314f3f5563f0ca1a1c66b68319f870",
+        "publishedFile": {
+          "path": "c0-07-evidence/c006-edf-android-kill-final-review.md",
+          "relativeTo": "docs/upgrade",
+          "bytes": 8295,
+          "sha256": "48e9fd22b62b5022b9c41e89cf3ecd09f4314f3f5563f0ca1a1c66b68319f870",
+          "transform": "byte-identical"
+        }
+      },
+      "semanticAudit": {
+        "path": "work/c006-edf-kill-semantic-audit.json",
+        "bytes": 6829,
+        "sha256": "0be23149ff4b145ffa2c4b23ed2904bea017ccaa3e8ef3c274f76202224fe0b3",
+        "publishedFile": {
+          "path": "c0-07-evidence/c006-edf-kill-semantic-audit.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 6589,
+          "sha256": "554a01a48a117fe5cb4de48c39a00b566ac8330b1d8b7982ca2e88fb6539ba2e",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "runtime": {
+        "cases": 2,
+        "passedCases": 2,
+        "operations": 11,
+        "normalResults": 9,
+        "expectedSigkillDeaths": 2,
+        "uniqueMainPids": 11,
+        "commands": 293,
+        "locallyRehashedRawTextStreams": 570,
+        "cloudOnlyBinaryStreams": 16,
+        "semanticIssues": 0,
+        "A26": "Original-device same-database recovery after real import commit death and actual lease expiry, followed by independent observer propagation check",
+        "A30": "Original database deliberately isolated, distinct-actor fresh database takes over from snapshot after manifest response death; not original-database recovery",
+        "qualifications": [
+          "Original collector exit1/incomplete and sixteen excluded binary streams remain.",
+          "Success path did not execute failure-database/catch; it does not dynamically prove the capture fix.",
+          "No extra main-process startup crash found in this run does not close historical Android stability.",
+          "Captured files are sequential post-stop copies; no local database binary replay."
+        ],
+        "acceptanceScope": "Qualified evidence of these two prescribed behaviors; not overall C0-07 acceptance"
+      }
+    },
+    "c006Core": {
+      "runId": "45194185453",
+      "githubConclusion": "failure",
+      "diagnosis": "completed; original failed run preserved; source19ce successor validation is recorded separately",
+      "accepted": false,
+      "archive": {
+        "audit": {
+          "path": "work/c007-edf-c006-core-integrity-only-raw.json",
+          "bytes": 9622,
+          "sha256": "7c9c61d041ebc0e8dd4f096e5d96295db9c962fc67bcfb87f597a583809c0b59",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 9370,
+            "sha256": "fe27f768607fdb8a104bf5ec663823d43a9871f50ecfc0f45a4a91f6b78af220",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "scope": "Generic archive integrity portion only; C007 execution verdict is inapplicable",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 2551,
+        "localTextBytes": 36895016,
+        "cloudInventoryRecords": 3013,
+        "producerManifests": 6,
+        "producerRows": 3052,
+        "producerLocalByteVerifiedRows": 2580,
+        "producerCloudRecordComparedRows": 472,
+        "collectorExitCode": 1,
+        "collectorEvidenceComplete": false,
+        "collectorFailureCount": 24,
+        "collectorFailureKinds": [
+          {
+            "kind": "unexpected-credential-fixture-in-artifact",
+            "count": 24
+          }
+        ],
+        "qualification": "Cloud-only bytes are recorded hash comparisons, not locally rehashed. Nested producer rows may overlap. Original collector failures are preserved."
+      },
+      "A27LocalTextIntegrity": {
+        "audit": {
+          "path": "work/c007-edf-a27-local-text-integrity-review.json",
+          "bytes": 59536,
+          "sha256": "d0d0550cbe3e0653b2726481a531e64aed5375776b7cb5838f4d45ff139229b4",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-edf-a27-local-text-integrity-review.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 58359,
+            "sha256": "e3e7da000d9ef15c5421706ac9dc3fa34e507da0904c11cd6c030748bff3f709",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "checkedFiles": 145,
+        "failedFiles": 0,
+        "requiredDiagnosticFiles": 20,
+        "missingRequiredFiles": 0,
+        "qualification": "Binds local diagnostic text bytes to original index; does not accept runtime or diagnose semantics by itself."
+      },
+      "detailedDiagnosis": {
+        "path": "work/c006-edf-a27-diagnosis.md",
+        "bytes": 9474,
+        "sha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+        "publishedFile": {
+          "path": "c0-07-evidence/c006-edf-a27-diagnosis.md",
+          "relativeTo": "docs/upgrade",
+          "bytes": 9474,
+          "sha256": "365de951d997e24440c1681368fa91af13095c57b7006f8492d41422aaaf9647",
+          "transform": "byte-identical"
+        }
+      },
+      "diagnosisEvidence": {
+        "path": "work/c006-edf-selected-db-contract-evidence-v2.json",
+        "bytes": 70409,
+        "sha256": "a23d14fd6e6e4d8f35c76ae162ff4ef85e99a5d6a2c6ecdf2443899b90d29d48",
+        "publishedFile": {
+          "path": "c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 68750,
+          "sha256": "9fc0dd1566f25ce277713245647e0119064239f1ae1325fb4d969f007168eb09",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "runtime": {
+        "cases": 83,
+        "passedCases": 82,
+        "failedCases": 1,
+        "javascriptPassed": 59,
+        "nativeSuitePassed": 18,
+        "androidPassed": 5,
+        "androidCases": 6,
+        "failedCase": "C006-A27-manifest-fail",
+        "diagnosis": "Original sync process died due to GMS FontsProvider dependency death. Shared runner retried on a fresh retry-2 database, which produced expected HTTP500 and mutated synthetic cloud. Next operation returned to original database before its lease expired and returned busy; old runner lacked selected-db identity checks.",
+        "diagnosticInputsRehashed": 95,
+        "diagnosticInputMismatches": 0,
+        "originalDatabaseStatePreservedThroughThirdOperation": true,
+        "leaseExpiryRecoveryExecuted": false,
+        "deviceTimezoneEvidence": "A27 output-2.json.logs/007-android-properties.log records persist.sys.timezone and vendor.qemu.timezone as Etc/UTC",
+        "qualification": "Original failure remains failure. Fresh retry database does not demonstrate original-database recovery."
+      }
+    },
+    "baseline": {
+      "runId": "45194185293",
+      "githubConclusion": "success",
+      "detailedCounts": null,
+      "accepted": false
+    }
+  },
+  "gates": [
+    {
+      "id": "c007-recorded-runtime",
+      "status": "passed-with-archive-qualification",
+      "runId": "45190559178",
+      "accepted": false
+    },
+    {
+      "id": "c007-node-windows-deep-review",
+      "status": "passed",
+      "evidenceCheckCount": 2500,
+      "failedEvidenceChecks": 0
+    },
+    {
+      "id": "c007-network-independent-review",
+      "status": "passed",
+      "evidenceCheckCount": 122,
+      "failedEvidenceChecks": 0
+    },
+    {
+      "id": "final-android-deep-review",
+      "status": "passed-with-archive-qualification"
+    },
+    {
+      "id": "kill-2-of-2-detailed-evidence-review",
+      "status": "resolved-for-edf-run-with-archive-qualification",
+      "runId": "45194185184"
+    },
+    {
+      "id": "latest-core-failure-diagnosis",
+      "status": "resolved-diagnosis; original-runtime-failure-preserved",
+      "runId": "45194185453"
+    },
+    {
+      "id": "report-independent-review-publication",
+      "status": "technical-review-complete; documentation-commit-awaited-at-document-freeze"
+    },
+    {
+      "id": "D1",
+      "status": "not-opened",
+      "enabled": false
+    },
+    {
+      "id": "candidate-core-cloud-validation",
+      "status": "passed-with-archive-and-original-restart-crash-qualification",
+      "runId": "45199685003",
+      "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "accepted": false
+    },
+    {
+      "id": "candidate-regression-run-observation",
+      "status": "bootstrap-baseline-and-kill-independently-reviewed-with-stated-qualifications",
+      "runIds": [
+        "45199685578",
+        "45199685144",
+        "45199684912"
+      ],
+      "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "qualification": "New runs separately recorded; edf kill qualified result is not renamed as these runs"
+    }
+  ],
+  "pending": [
+    "documentation-commit-pending-at-document-freeze"
+  ],
+  "preservedHistory": {
+    "path": "work/c007-audit-history/",
+    "meaning": "Superseded auditor drafts, false draft audit results and original failures remain preserved. This draft does not rewrite receipts or declare failed raw evidence passed."
+  },
+  "updatedAt": "2026-11-23T23:48:22.7217066+08:00",
+  "selectedDatabaseContractCandidate": {
+    "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+    "parentSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+    "changedPath": "tests/c006/c006-harness/android-runner.mjs",
+    "baselineBytes": 7512,
+    "baselineSha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+    "candidateBytes": 7788,
+    "candidateSha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a",
+    "change": "Only two operation-boundary assertions bind receipt.dbCase and result.rawSQL.databaseFile to caller-selected database",
+    "independentReview": {
+      "path": "work/c006-selected-db-contract-independent-review.json",
+      "bytes": 33555,
+      "sha256": "34a8f9278ac6cc1e6b9d27eef2157ac2589ca436ff8962c983c6ff013a8148cf",
+      "publishedFile": {
+        "path": "c0-07-evidence/c006-selected-db-contract-independent-review.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 32772,
+        "sha256": "f5233d34bba2a08a739dd619f0781e97a460e476e16435112f0494b6c69c02b9",
+        "transform": "CRLF-to-LF-only"
+      }
+    },
+    "staticBaselineMatchesF9De7Edf": true,
+    "staticOnlyTwoAdditions": true,
+    "historicalOperationsCompared": 22,
+    "historicalOldAccepted": 21,
+    "newlyRejectedHistoricalOperations": 1,
+    "newRejection": "A27 output-2 from retry-2 database",
+    "historicalExistingFailureUnchanged": "A27 output-3",
+    "sourcePushStatus": "Downloaded publication receipt records commit19ce, parentedf, only android-runner path, statusclean; cloud-byte receipt matches local candidate exactly",
+    "runtimeAccepted": false,
+    "localProjectExecutions": 0,
+    "qualification": "New source19ce completed cloud core validation. All24 Android operations used caller-selected database identities and same-database final reopens. A27 observer restart had one original crash and same-database retry, preserved and separately reviewed. Static historical replay is not candidate execution and the new run does not dynamically trigger a mismatched-db rejection.",
+    "publishedSourceReceipt": {
+      "path": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-source-bytes.json",
+      "bytes": 287842,
+      "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-selected-db-source-bytes.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 287842,
+        "sha256": "1a829388a15c1c8ddaa9de4ef3f3277da9ca0b674e1b032f1675d12b466bce02",
+        "transform": "byte-identical"
+      }
+    },
+    "publicationReceipt": {
+      "path": "outputs/c0-07/evidence/selected-db-identity/c007-selected-db-publication.json",
+      "bytes": 323,
+      "sha256": "53b3d5f1f2dbafd099d4d1c29a18f61d1e460d1bf7cd30abc0595b115d60b93b",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-selected-db-publication.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 323,
+        "sha256": "53b3d5f1f2dbafd099d4d1c29a18f61d1e460d1bf7cd30abc0595b115d60b93b",
+        "transform": "byte-identical"
+      }
+    },
+    "qualifiedCloudEvidencePassed": true
+  },
+  "latestCandidateRuns": {
+    "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+    "informationSource": "All four source19ce runs are completed/success in downloaded final run receipt; their archived runtime and integrity evidence has independent review. Overall acceptance remains parent authority.",
+    "core": {
+      "runId": "45199685003",
+      "status": "completed",
+      "conclusion": "success",
+      "accepted": false,
+      "qualifiedRuntimeEvidencePassed": true,
+      "archive": {
+        "audit": {
+          "path": "work/c007-19ce-c006-core-integrity-only-raw.json",
+          "bytes": 9622,
+          "sha256": "4f7f509f9005112f313664d2246f18884623dadf61f0445de79594e5799a5c07",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 9370,
+            "sha256": "7338ae761055b0abcc1fea7143008d8fc8f09b20aa77e964fcfe5c3c7388dcd6",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "scope": "Generic archive integrity portion only; C007 execution verdict is inapplicable",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 2620,
+        "localTextBytes": 37464530,
+        "cloudInventoryRecords": 3089,
+        "producerManifests": 6,
+        "producerRows": 3127,
+        "producerLocalByteVerifiedRows": 2648,
+        "producerCloudRecordComparedRows": 479,
+        "collectorExitCode": 1,
+        "collectorEvidenceComplete": false,
+        "collectorFailureCount": 24,
+        "collectorFailureKinds": [
+          {
+            "kind": "unexpected-credential-fixture-in-artifact",
+            "count": 24
+          }
+        ],
+        "qualification": "Cloud-only bytes are recorded hash comparisons, not locally rehashed. Nested producer rows may overlap. Original collector failures are preserved."
+      },
+      "runtime": {
+        "cases": 83,
+        "passedCases": 83,
+        "failedCases": 0,
+        "operations": 408,
+        "harnessSuites": [
+          {
+            "suite": "javascript",
+            "cases": 59,
+            "operations": 280,
+            "jsPassed": 232,
+            "jsExpectedRejected": 42,
+            "selectedJsKills": 6
+          },
+          {
+            "suite": "windows-native",
+            "cases": 18,
+            "operations": 104,
+            "nativeAccepted": 71,
+            "nativeExpectedRejected": 15,
+            "cooperatingJsPassed": 17,
+            "cooperatingJsKilled": 1
+          },
+          {
+            "suite": "android",
+            "cases": 6,
+            "operations": 24,
+            "accepted": 20,
+            "expectedRejected": 4,
+            "finalSameDbReopens": 24,
+            "successfulInstrumentation": 48,
+            "originalCrashedInstrumentation": 1,
+            "totalInstrumentation": 49
+          }
+        ],
+        "processImplementationCounts": {
+          "nodeAndNativeOperations": 384,
+          "javascriptWorkerOperations": 298,
+          "nativeWorkerOperations": 86,
+          "androidOperations": 24,
+          "meaning": "JS suite280 plus native suite104 equals384: actual JavaScript processes280+18=298, actual native processes86. Android24 makes408 total operations. Successful/failed instrumentation attempts are separate units."
+        },
+        "nativeCloseReopens": 86,
+        "javascriptSameDbNewProcessStateLinks": 190,
+        "selectedJsKills": 7,
+        "originalAndroidRestartCrashes": 1,
+        "androidSelectedDbIdentityPassed": true,
+        "androidFinalSameDbReopenPassed": true
+      },
+      "originalAdaptedAudit": {
+        "audit": {
+          "path": "work/c007-19ce-c006-core-audit.json",
+          "bytes": 177489,
+          "sha256": "7ba341f57c2581aec03d04de606920c109252c9b3d0abd8f071ad717fc34750e",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-c006-core-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 170820,
+            "sha256": "b2af468bfad19aba2ac2d2acfc1f8de02402d52a7419606afda747fb881451ec",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "script": {
+          "path": "work/audit-c007-19ce-c006-core.ps1",
+          "bytes": 11695,
+          "sha256": "fbfd65c7be55d6a4cf4e8e53b2274c41ce54e2a26ef3dc27d232c3edb3ecd690",
+          "publishedFile": {
+            "path": "c0-07-evidence/audit-c007-19ce-c006-core.ps1",
+            "relativeTo": "docs/upgrade",
+            "bytes": 11695,
+            "sha256": "fbfd65c7be55d6a4cf4e8e53b2274c41ce54e2a26ef3dc27d232c3edb3ecd690",
+            "transform": "byte-identical"
+          }
+        },
+        "evidenceChecks": 1365,
+        "failedEvidenceChecks": 1,
+        "auditPassed": false,
+        "failedChecks": [
+          {
+            "id": "android:C006-A27-manifest-fail:output-5.json:no-crash-and-export",
+            "passed": false
+          }
+        ],
+        "qualification": "The inherited f9-specific no-crash-and-export conjunction fails because source19ce records one observer restart crash. Original result remains false. It is separate from83/83 project cases and is not treated as a new no-crash project contract."
+      },
+      "nodeNativeDeepReview": {
+        "audit": {
+          "path": "work/c007-19ce-node-native-reopens-audit.json",
+          "bytes": 559534,
+          "sha256": "dc42e154fe66096f4d854fe49b9324a446888d1fd4bb278253400c919e237ae0",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-node-native-reopens-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 541556,
+            "sha256": "eac309e28dc19d95f417f97fd6023e99fca93c1c3473ba9435fbf1f6c02cdeae",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "script": {
+          "path": "work/audit-c007-19ce-node-native-reopens.ps1",
+          "bytes": 6266,
+          "sha256": "d0b70af406c0376f8f378a99c1855a591e1290066e12f5449b56571275c39b06",
+          "publishedFile": {
+            "path": "c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1",
+            "relativeTo": "docs/upgrade",
+            "bytes": 6266,
+            "sha256": "d0b70af406c0376f8f378a99c1855a591e1290066e12f5449b56571275c39b06",
+            "transform": "byte-identical"
+          }
+        },
+        "evidenceChecks": 2948,
+        "failedEvidenceChecks": 0,
+        "summary": {
+          "operations": 384,
+          "nativeOperations": 86,
+          "jsOperations": 298,
+          "nativeCloseReopens": 86,
+          "jsSameDbProcessChainLinks": 190,
+          "selectedJsKills": 7,
+          "checks": 2948,
+          "failedChecks": 0
+        }
+      },
+      "androidDeepReview": {
+        "audit": {
+          "path": "work/c006-19ce-core-android-semantic-audit.json",
+          "bytes": 19001,
+          "sha256": "d5b38a9cf1b327352a31669265f396ed4bbfd7f3e03d68b757c4435dd2b4d3b6",
+          "publishedFile": {
+            "path": "c0-07-evidence/c006-19ce-core-android-semantic-audit.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 18335,
+            "sha256": "86780e076ca1528866b20f22d60d4714cc6688ad3e178c0b5c698a6a6c6ae3ed",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "report": {
+          "path": "work/c006-19ce-core-android-final-review.md",
+          "bytes": 11355,
+          "sha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+          "publishedFile": {
+            "path": "c0-07-evidence/c006-19ce-core-android-final-review.md",
+            "relativeTo": "docs/upgrade",
+            "bytes": 11355,
+            "sha256": "091457142824280a3dfaa39dcf0ed1af609e1bc73ce0a2df389013c3f70e7b7c",
+            "transform": "byte-identical"
+          }
+        },
+        "issues": [],
+        "scope": "24 requested database identities, final main/restart equality and exported-state consistency, preserved original observer restart crash and same-database retry; detailed counts in bound audit",
+        "script": {
+          "path": "work/c006-19ce-core-android-semantic-audit.ps1",
+          "bytes": 26145,
+          "sha256": "0bda5f9ecc6eb5165f73aaebe611cf1c963fd135997e48e10f41f5d2c66de30b",
+          "publishedFile": {
+            "path": "c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1",
+            "relativeTo": "docs/upgrade",
+            "bytes": 26145,
+            "sha256": "0bda5f9ecc6eb5165f73aaebe611cf1c963fd135997e48e10f41f5d2c66de30b",
+            "transform": "byte-identical"
+          }
+        },
+        "assertions": 3544,
+        "stabilityIssues": [
+          "C006-A27-manifest-fail:5:original no-crash assertion fails; first observer restart crashed, same-DB retry succeeded"
+        ],
+        "originalRestartFailure": {
+          "stage": "restart",
+          "mainPid": 9613,
+          "originalFailedPid": 9801,
+          "finalRestartPid": 10258,
+          "dbCase": "C006-A27-manifest-fail-observer",
+          "actor": "05e82daf-d3f4-459d-94c3-5dac6410e86a",
+          "revision": 8,
+          "reason": "DEPENDENCY DIED: GMS persistent4814 herrevad module config restart, self SIG9, FontsProvider dependent PID9801 killed",
+          "rawInstrumentationCode": 0,
+          "evidenceSha256": "a7cef070f7f11f6e2b48821c3c5643cdb6fe407f1363f85451000a354a1c3334",
+          "preservedDatabaseBytes": 40960,
+          "preservedDatabaseSha256": "17416ddb0e92462b75b653341abfd1b0ae87d21f58a24b852b8ec9bcc518594d",
+          "preservedFiles": 1,
+          "missingFiles": 6,
+          "snapshotSemantics": "Raw files after diagnostic force-stop; no claim of crash-time transaction state",
+          "originalDatabaseReplayed": false,
+          "sameDatabaseRetryVerified": true,
+          "originalNoCrashCriterion": "failed and retained"
+        },
+        "successfulInstrumentation": 48,
+        "failedInstrumentation": 1,
+        "uniqueNativePidsIncludingOriginalCrash": 49
+      },
+      "qualifications": [
+        "Original collector exit1/incomplete and24 excluded synthetic credential fixtures remain unread/undecrypted.",
+        "A27 observer main PID9613, failed restart PID9801, successful same-db restart PID10258; one original crash is retained.",
+        "No source19ce main operation switched database; the new mismatched-db rejection branch was not dynamically triggered in this run.",
+        "The seven selected killed workers are JavaScript; native suite snapshot takeover does not prove native forced-termination recovery.",
+        "Evidence comparisons are static archive checks, not additional project tests or local project execution.",
+        "Original edf82/83 failure and previous raw audits remain unchanged; this result does not close Android startup stability."
+      ]
+    },
+    "androidKill": {
+      "runId": "45199685578",
+      "status": "completed",
+      "conclusion": "success",
+      "accepted": false,
+      "qualifiedRuntimeEvidencePassed": true,
+      "archive": {
+        "audit": {
+          "path": "work/c007-19ce-android-kill-integrity-only-raw.json",
+          "bytes": 7168,
+          "sha256": "b929295d81e36b51231b62358afe3dab1e862e30a518e07739042ff2d1624d54",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 6987,
+            "sha256": "b4bb62e0dcb0d227e833a9ddebaf69cb7558fa848bc89071e3d7b8ac4b42f657",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "scope": "Generic archive integrity portion only; C007 execution verdict is inapplicable",
+        "archiveIntegrityPassed": true,
+        "auditIssueCount": 0,
+        "localTextFiles": 727,
+        "localTextBytes": 2492676,
+        "cloudInventoryRecords": 820,
+        "producerManifests": 3,
+        "producerRows": 861,
+        "producerLocalByteVerifiedRows": 758,
+        "producerCloudRecordComparedRows": 103,
+        "collectorExitCode": 1,
+        "collectorEvidenceComplete": false,
+        "collectorFailureCount": 16,
+        "collectorFailureKinds": [
+          {
+            "kind": "binary-in-text-evidence-path",
+            "count": 16
+          }
+        ],
+        "qualification": "Cloud-only bytes are recorded hash comparisons, not locally rehashed. Nested producer rows may overlap. Original collector failures are preserved."
+      },
+      "detailedReview": {
+        "path": "work/c006-19ce-kill-final-review.md",
+        "bytes": 7574,
+        "sha256": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2",
+        "publishedFile": {
+          "path": "c0-07-evidence/c006-19ce-kill-final-review.md",
+          "relativeTo": "docs/upgrade",
+          "bytes": 7574,
+          "sha256": "dcdb8e8c0606034a93541ab057998e5d101ff4ac0f7d41e488fd3c636c976bc2",
+          "transform": "byte-identical"
+        }
+      },
+      "semanticAudit": {
+        "path": "work/c006-19ce-kill-semantic-audit.json",
+        "bytes": 6827,
+        "sha256": "a7556bdcff2e8e438d53c2dd005c661df6dca19d5246f460b8d2dc941f1433d5",
+        "publishedFile": {
+          "path": "c0-07-evidence/c006-19ce-kill-semantic-audit.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 6587,
+          "sha256": "a5826da55551f9c32a19600846948a709aa07f313baa2b47a363561dcbf42461",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "runtime": {
+        "cases": 2,
+        "passedCases": 2,
+        "operations": 11,
+        "normalResults": 9,
+        "expectedSigkillDeaths": 2,
+        "uniqueMainPids": 11,
+        "commands": 293,
+        "locallyRehashedRawTextStreams": 570,
+        "cloudOnlyBinaryStreams": 16,
+        "semanticIssues": 0,
+        "A26": {
+          "markerPid": 4407,
+          "reopenPid": 4779,
+          "busyPid": 5230,
+          "recoveryPid": 6733,
+          "observerPid": 7111,
+          "waitMilliseconds": 98232,
+          "originalActor": "d12fd7c5-a84b-4ab4-8b9f-65640507fbe5",
+          "retainedRows": 6,
+          "publishedOriginalEvents": 6,
+          "finalSequence": 6
+        },
+        "A30": {
+          "markerPid": 7474,
+          "observerPid": 7882,
+          "manifestPutRequestId": 10,
+          "observerRequests": [
+            {
+              "id": 11,
+              "method": "GET",
+              "relative": "v2/manifest.json",
+              "status": 200
+            },
+            {
+              "id": 12,
+              "method": "GET",
+              "relative": "v2/s-13f3f701-05d1-4d8b-91db-6690ec3a3841-0.json.gz",
+              "status": 200
+            }
+          ],
+          "snapshotParts": 1,
+          "isolatedMainSha256": "1d8c72293f1ac0bad0cd3fdd788397ba3079597a0ce11e2099b7976a08b56d11",
+          "newActor": "07a894c9-a68f-4e55-9e22-2ee7294c3110",
+          "retainedRows": 5,
+          "newSequence": 0
+        },
+        "qualifications": [
+          "A26 retains the original database and actor, waits actual lease expiry, then recovers and publishes retained events.",
+          "A30 intentionally isolates the original database and uses a fresh actor/database to recover from snapshot.",
+          "Natural process death is confirmed before export; C006 has no additional post-confirmation cleanup in that interval.",
+          "Original collector exit1/incomplete and16 binary stdout exclusions remain.",
+          "Successful path did not dynamically execute failure-database/catch. No extra startup crash in this kill run does not close historical stability.",
+          "Captured files are sequential post-stop copies, not atomic crash-time snapshots or local database replays."
+        ]
+      }
+    },
+    "bootstrap": {
+      "runId": "45199685144",
+      "status": "completed",
+      "conclusion": "success",
+      "accepted": false,
+      "qualifiedRuntimeEvidencePassed": true,
+      "runtime": {
+        "cases": 4,
+        "passedCases": 4,
+        "failedCases": 0,
+        "childOperations": 23,
+        "expectedRejectedExit1": 2,
+        "selectedSigkill": 1,
+        "semanticScope": "All child receipt identity/copy/outcomes plus fault boundary, same-db reopen, lease no-mutation, CAS/tombstone checks",
+        "collectorExitCode": 0,
+        "collectorEvidenceComplete": true
+      },
+      "archive": {
+        "audit": {
+          "path": "work/c007-19ce-bootstrap-integrity-only-raw.json",
+          "bytes": 3226,
+          "sha256": "9c8d6910a2094c314c2c0ac6e73d4ab7963c37b97371b98a282f6a8edb5eefb4",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 3136,
+            "sha256": "d1f5231f6afff8568bf1feef2731dcea9cc0328fdd4b29d0e47c8d1e10abdb02",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "localTextFiles": 110,
+        "localTextBytes": 7888452,
+        "cloudInventoryRecords": 122,
+        "producerManifests": 1,
+        "producerRows": 121,
+        "localVerifiedRows": 99,
+        "cloudComparedRows": 22,
+        "issues": 0,
+        "qualification": "Generic C007 execution verdict is inapplicable; integrity fields only. Cloud-only hash records not locally rehashed."
+      }
+    },
+    "baseline": {
+      "runId": "45199684912",
+      "status": "completed",
+      "conclusion": "success",
+      "accepted": false,
+      "qualifiedRuntimeEvidencePassed": true,
+      "runtime": {
+        "platforms": [
+          {
+            "platform": "windows",
+            "jobStatus": "success",
+            "receiptCaseCount": 11,
+            "requiredReceiptCaseCount": 10,
+            "failedReceiptCases": 0,
+            "testCases": [
+              {
+                "id": "windows-self-test",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "windows-advanced-test",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "windows-feedback-test",
+                "status": "passed",
+                "exitCode": 0
+              }
+            ],
+            "testSummary": null,
+            "androidManifest": null
+          },
+          {
+            "platform": "android",
+            "jobStatus": "success",
+            "receiptCaseCount": 19,
+            "requiredReceiptCaseCount": 18,
+            "failedReceiptCases": 0,
+            "testCases": [
+              {
+                "id": "android-pomodoro-tests",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "android-daily-tests",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "android-notification-controls-tests",
+                "status": "passed",
+                "exitCode": 0
+              }
+            ],
+            "testSummary": null,
+            "androidManifest": {
+              "applicationId": "local.gxtodo.replica",
+              "versionCode": "15",
+              "versionName": "0.9.2",
+              "unsigned": true
+            }
+          },
+          {
+            "platform": "web",
+            "jobStatus": "success",
+            "receiptCaseCount": 13,
+            "requiredReceiptCaseCount": 12,
+            "failedReceiptCases": 0,
+            "testCases": [
+              {
+                "id": "shared-js-tests",
+                "status": "passed",
+                "exitCode": 0
+              }
+            ],
+            "testSummary": {
+              "fail": 0,
+              "skipped": 0,
+              "tests": 121
+            },
+            "androidManifest": null
+          }
+        ],
+        "sharedJsTests": 121,
+        "sharedJsFailures": 0,
+        "sharedJsSkipped": 0,
+        "windowsLogSummaries": [
+          {
+            "test": "self",
+            "jsonSummaries": [
+              {
+                "checks": 32,
+                "failures": 0
+              }
+            ]
+          },
+          {
+            "test": "advanced",
+            "jsonSummaries": [
+              {
+                "detailKeyChecks": 48,
+                "detailKeyFailures": 0
+              },
+              {
+                "checks": 48,
+                "failures": 0
+              }
+            ]
+          },
+          {
+            "test": "feedback",
+            "jsonSummaries": [
+              {
+                "checks": 21,
+                "failures": 0
+              }
+            ]
+          }
+        ],
+        "androidHostAssertions": [
+          {
+            "id": "pomodoro",
+            "assertions": 73
+          },
+          {
+            "id": "daily",
+            "assertions": 47
+          },
+          {
+            "id": "notification-controls",
+            "assertions": 20
+          }
+        ]
+      },
+      "archive": {
+        "audit": {
+          "path": "work/c007-19ce-baseline-integrity-only-raw.json",
+          "bytes": 3463,
+          "sha256": "112116cdc6daa2de07fd82232723cab489f3a6a3545be8326cf509a8c75e440d",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 3366,
+            "sha256": "a2b0aa1c0c32bd861a8de1c1be50edfb7790a64e132472ea88f74eb4edd889cf",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "localTextFiles": 122,
+        "localTextBytes": 397225,
+        "cloudInventoryRecords": 146,
+        "producerManifests": 0,
+        "producerRows": 0,
+        "issues": 0,
+        "collectorExitCode": 1,
+        "collectorEvidenceComplete": false,
+        "originalCollectorFailures": [
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "c003-android-inventory-45199684912-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-android-45199684912-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-source-45199684912-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-web-45199684912-1"
+          },
+          {
+            "kind": "artifact-has-no-integrity-manifest",
+            "path": "phase0-windows-45199684912-1"
+          }
+        ],
+        "qualification": "Five producer manifests remain absent. Archive record integrity is separate from collector completeness and runtime verdict."
+      },
+      "buildArtifactQualification": {
+        "audit": {
+          "path": "work/c007-19ce-baseline-qualified.json",
+          "bytes": 3031,
+          "sha256": "a6363a2c2f100205a17d37c581766ad536bd9d8d5ef6ac079f0240379561fb35",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-baseline-qualified.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 2959,
+            "sha256": "2011d4eaf6c7252ccc9e98c3a1134a1e94d29c87ac9983dd2660d0cc919ba20f",
+            "transform": "CRLF-to-LF-only"
+          }
+        },
+        "rawCloudRehashReceipt": {
+          "path": "outputs/c0-07/evidence/19ce-supplement-transfer/c007-19ce-baseline-binary-rehash.json",
+          "bytes": 893,
+          "sha256": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+          "publishedFile": {
+            "path": "c0-07-evidence/c007-19ce-baseline-binary-rehash.json",
+            "relativeTo": "docs/upgrade",
+            "bytes": 893,
+            "sha256": "ef44b8c5cd9e6b5e86cdda99c8ffd9eeef83c5afe9b3110860ba250e196caaea",
+            "transform": "byte-identical"
+          }
+        },
+        "allFourMatch": true,
+        "artifacts": [
+          {
+            "name": "MyTodo-phase0.exe",
+            "expectedBytes": 1328640,
+            "expectedSha256": "6e787ff3a445ec63d46005125b14934a565b9e7a75af3b795ec075604fa3e637",
+            "actualCloudBytes": 1328640,
+            "actualCloudSha256": "6e787ff3a445ec63d46005125b14934a565b9e7a75af3b795ec075604fa3e637",
+            "matched": true
+          },
+          {
+            "name": "MyTodo-unsigned.apk",
+            "expectedBytes": 281749,
+            "expectedSha256": "b17bf35e0b6fe5a599696348c209cbb2a4ffd9dd631a93c21a3b8c0ce6dffb79",
+            "actualCloudBytes": 281749,
+            "actualCloudSha256": "b17bf35e0b6fe5a599696348c209cbb2a4ffd9dd631a93c21a3b8c0ce6dffb79",
+            "matched": true
+          },
+          {
+            "name": "WebCredentialHelper.exe",
+            "expectedBytes": 149504,
+            "expectedSha256": "a8f6fb1bfef20b48eb9ab1f1478997136e9cd82d3b773cad8c8d3fa6d8c66172",
+            "actualCloudBytes": 149504,
+            "actualCloudSha256": "a8f6fb1bfef20b48eb9ab1f1478997136e9cd82d3b773cad8c8d3fa6d8c66172",
+            "matched": true
+          },
+          {
+            "name": "MyTodo-web-source.zip",
+            "expectedBytes": 101876,
+            "expectedSha256": "8aa8cc205ac288e632af769e16e89b79dd4ceed24ea9090f1e44fcefbdd0bfe9",
+            "actualCloudBytes": 101876,
+            "actualCloudSha256": "8aa8cc205ac288e632af769e16e89b79dd4ceed24ea9090f1e44fcefbdd0bfe9",
+            "matched": true
+          }
+        ],
+        "qualification": "Four named build artifact byte hashes were independently recomputed by parent in cloud and match the source-bound run receipts and collector inventory. Missing five producer manifests remain missing and original collector1/incomplete remains. Android host assertions and unsigned APK are not device install or upgrade evidence."
+      }
+    },
+    "initialRunReceipt": {
+      "path": "outputs/c0-07/evidence/selected-db-identity/initial-runs.json",
+      "bytes": 1129,
+      "sha256": "92fd598e85dd91b03cd08b1384b2f5bbfd6fdcb492daa647db2377c07dee058a",
+      "publishedFile": {
+        "path": "c0-07-evidence/initial-runs.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 1130,
+        "sha256": "50221c363574e9d11e6902e56e2b341eebcbba2a872ddc7ae0fd06de0b85cc36",
+        "transform": "terminal-LF-to-one-only"
+      }
+    },
+    "bootstrapAndBaselineIndependentReview": {
+      "audit": {
+        "path": "work/c007-19ce-regression-audit.json",
+        "bytes": 29480,
+        "sha256": "2d465b68279daf131a07daaf4bd677d7e385aa70bc425d7e7262fc086b253de9",
+        "publishedFile": {
+          "path": "c0-07-evidence/c007-19ce-regression-audit.json",
+          "relativeTo": "docs/upgrade",
+          "bytes": 28483,
+          "sha256": "2a94dee1e2db11b2570f37c436b7615716f628f3dedb8b806f4b4328cfcc5d6d",
+          "transform": "CRLF-to-LF-only"
+        }
+      },
+      "evidenceConsistencyChecks": 135,
+      "failedEvidenceChecks": 0,
+      "localProjectExecutions": 0,
+      "qualification": "These are archived evidence consistency checks, not additional project tests."
+    },
+    "finalRunReceipt": {
+      "path": "outputs/c0-07/evidence/19ce-final-receipts/c007-19ce-final-runs.json",
+      "bytes": 607,
+      "sha256": "d8da0106c98e646aac51b4b569a2b24a6d1329aa972ad3cab0fde7813fa3090f",
+      "publishedFile": {
+        "path": "c0-07-evidence/c007-19ce-final-runs.json",
+        "relativeTo": "docs/upgrade",
+        "bytes": 607,
+        "sha256": "d8da0106c98e646aac51b4b569a2b24a6d1329aa972ad3cab0fde7813fa3090f",
+        "transform": "byte-identical"
+      }
+    }
+  },
+  "publicationIdentityPolicy": "Original evidence path/bytes/sha256 remain exact archived-file anchors. Each publishedFile separately identifies its docs/upgrade-relative published copy; stated LF normalization can change published bytes and SHA256. All original and publication identity anchors are unchanged by the parent qualified acceptance; D1 remains false.",
+  "acceptanceQualification": {
+    "decision": "Qualified acceptance of C0-07 SQL, publication and ACK fault recovery within the declared evidence scope; this is the parent-agent final technical acceptance decision.",
+    "basis": [
+      "C007 directly executed source de7 with30 scenarios,187 attempts,2299 checks and0 failed checks across Node, Windows C and Android.",
+      "Source19ce core83/83, Android kill2/2, bootstrap4/4 and baseline completed successfully with explicit archive qualifications.",
+      "Independent Android core review has3544 semantic evidence checks with0 semantic/integrity issues and1 preserved stability issue.",
+      "Source transitions and unchanged production/dependency bytes explicitly associate earlier gates with the final source without rewriting original run identities."
+    ],
+    "requiredQualifications": [
+      "All four original C007 recordedRunPassed values remain false because the generic auditor includes original collector completeness; this decision does not rewrite them.",
+      "Original collectors retain exit1/incomplete, including114 C007 binary stdout exclusions,24 C006 core synthetic credential exclusions,16 Android kill binary exclusions and five baseline missing producer manifests where stated.",
+      "Source19ce A27 observer restart first crashed with FontsProvider dependency death, then reopened the same database. Original1365-check broad audit still has1 failed no-crash criterion; Android startup stability and issue1 remain open.",
+      "Original edf core failure82/83 remains failure. New source19ce83/83 is a separate execution, not a reclassification.",
+      "The seven selected core killed workers are JavaScript, including native-suite cooperation; no native forced-termination recovery is inferred.",
+      "New selected-database assertions ran on24 correct database operations; the new mismatched-database rejection branch was not dynamically triggered.",
+      "Cloud-only binary hashes are producer/collector record comparisons unless a separately named cloud byte rehash is explicitly provided. No local project or binary execution occurred.",
+      "Previously stated omitted vectors, real-cloud/private-account behavior, production APK install/signature upgrade, power-loss behavior and atomic crash-time database snapshots remain outside acceptance."
+    ],
+    "rawEvidencePreserved": true,
+    "priorSubreviewAcceptanceFields": "Existing nested accepted=false fields remain the earlier independent-review/non-acceptance markers. They are preserved audit history; this top-level parent decision now governs C0-07 technical acceptance.",
+    "D1": "Not authorized or opened by this acceptance; remains false.",
+    "publication": "Technical acceptance is complete. Publication and pending fields describe the document-freeze state; a separate post-publication receipt confirms the documentation commit."
+  },
+  "publication": {
+    "statusAtDocumentFreeze": "awaiting-documentation-commit",
+    "technicalAcceptanceComplete": true,
+    "confirmation": "Post-publication receipt delivered separately; immutable report does not embed its own commit"
+  }
+}

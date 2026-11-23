@@ -1,0 +1,253 @@
+{
+  "schema": "mytodo-c007-independent-evidence-audit",
+  "version": 2,
+  "auditedAt": "2026-11-23T15:14:57.0555470+00:00",
+  "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45199685003",
+  "auditor": {
+    "path": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\work\\audit-c007-archive.ps1",
+    "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d"
+  },
+  "collector": {
+    "runId": "45199685003",
+    "sourceSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+    "githubConclusion": "success",
+    "collectionExitCode": 1,
+    "evidenceComplete": false,
+    "failures": [
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-01-empty/native-observer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-01-empty/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-09-appearing-v1/native-observer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-09-appearing-v1/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-10-appearing-guard/native-observer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-10-appearing-guard/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-11-appearing-empty/native-observer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-11-appearing-empty/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-14-existing-guard/native-observer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-14-existing-guard/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-15-existing-v1/native-observer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-15-existing-v1/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-absent/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-array/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-directory/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-empty/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-fragment/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-long/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-number/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-object/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-query/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-traversal/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-19-20-url/native-producer-db/sync-config.enc"
+      },
+      {
+        "kind": "unexpected-credential-fixture-in-artifact",
+        "path": "c006-native-45199685003-1/cases/C006-30-js-killed-native-snapshot/native-snapshot-observer/sync-config.enc"
+      }
+    ]
+  },
+  "textInventory": {
+    "bytes": 549092,
+    "path": "text-archive-files-sha256.json",
+    "independentlyAuthenticated": false,
+    "sha256": "78cfa18a2b9976c2c2f07b16282320ff7c8d0dc92cd6e7686ca6a2fd50869597"
+  },
+  "listedLocalTextFiles": 2620,
+  "locallyVerifiedTextFiles": 2620,
+  "localTextBytes": 37464530,
+  "cloudInventoriedFiles": 3089,
+  "producerManifests": [
+    {
+      "path": "artifacts/c006-android-45199685003-1/sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 1127,
+      "localBytesVerifiedRows": 971,
+      "cloudCollectorHashComparedRows": 156,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c006-android-environment-45199685003-1/payload-sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 43,
+      "localBytesVerifiedRows": 43,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c006-android-environment-45199685003-1/sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 45,
+      "localBytesVerifiedRows": 45,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c006-js-45199685003-1/sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 1373,
+      "localBytesVerifiedRows": 1134,
+      "cloudCollectorHashComparedRows": 239,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c006-native-45199685003-1/sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 536,
+      "localBytesVerifiedRows": 452,
+      "cloudCollectorHashComparedRows": 84,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c006-report-45199685003-1/sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 3,
+      "localBytesVerifiedRows": 3,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    }
+  ],
+  "producerRows": 3127,
+  "producerLocalBytesVerifiedRows": 2648,
+  "producerCloudCollectorHashComparedRows": 479,
+  "archiveIntegrityPassed": true,
+  "auditIssues": [],
+  "auditExitCode": 0,
+  "execution": {
+    "status": "failed-or-incomplete",
+    "platforms": [],
+    "reports": [],
+    "issues": [
+      {
+        "kind": "missing-or-duplicate-platform",
+        "path": "",
+        "detail": "javascript"
+      },
+      {
+        "kind": "missing-or-duplicate-platform",
+        "path": "",
+        "detail": "windows-c"
+      },
+      {
+        "kind": "missing-or-duplicate-platform",
+        "path": "",
+        "detail": "android"
+      },
+      {
+        "kind": "missing-or-duplicate-report",
+        "path": "",
+        "detail": "0"
+      }
+    ],
+    "cases": 0,
+    "attempts": 0,
+    "checks": 0,
+    "failedChecks": 0
+  },
+  "recordedRunPassed": false,
+  "acceptanceDecision": "not-made-by-this-auditor",
+  "attemptCountMeaning": "Controller child attempts, including startup failures; not a claim that each business operation executed.",
+  "deepPlatformSemanticsAudit": "not-performed-requires-independent-review",
+  "scope": [
+    "Only archived JSON/text bytes and hashes were read; no project code, tests, database or binary was executed.",
+    "Cloud-only hashes were compared with producer and collector records; cloud-only bytes were not locally rehashed.",
+    "The text inventory is not self-authenticating; archive/receipt provenance needs its separately trusted download receipt.",
+    "Sealed/sourceUnchanged and expected failed operations or exit 86 do not themselves determine test success.",
+    "Execution statistics are derived from actual materialized scenarios and receipts, not a fixed 186/187 assumption."
+  ]
+}

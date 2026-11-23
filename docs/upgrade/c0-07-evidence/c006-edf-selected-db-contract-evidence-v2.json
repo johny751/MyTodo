@@ -1,0 +1,1660 @@
+{
+  "schema": "mytodo-c006-selected-db-contract-static-evidence-review",
+  "version": 2,
+  "previousReview": {
+    "path": "work/c006-edf-selected-db-contract-evidence.json",
+    "sha256": "1bec8cd7cb63115da7f8876fec22fb557658fc6163d6c49c987c64c8b2431e93",
+    "change": "Added four indexed diagnostic text anchors and explicit device timezone evidence; no source or execution-result changes"
+  },
+  "scope": "PowerShell parsing/hash comparison of previously recorded GitHub artifacts and source text only; no local project execution, JS syntax check, test, build, SQLite open, or install",
+  "sourceSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+  "runId": "45194185453",
+  "historicalRunPassed": false,
+  "historicalTotals": {
+    "total": 83,
+    "passed": 82,
+    "failed": 1
+  },
+  "acceptance": false,
+  "inputIndex": {
+    "path": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45194185453\\text-archive-files-sha256.json",
+    "sha256": "2b81728c241d6727f9d9e4258071613a840c7938a068363691ae4783786e1d3d"
+  },
+  "candidate": {
+    "path": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\work\\c006-selected-db-contract\\tests\\c006\\c006-harness\\android-runner.mjs",
+    "bytes": 7788,
+    "sha256": "53ce46518adc004979f8e8f95712e48b4a8bed0ad481c329a3625bbb631f3c9a",
+    "baselinePath": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\work\\c006-tests-input\\tests\\c006\\c006-harness\\android-runner.mjs",
+    "baselineSha256": "9aa22bbfc01c7087edc4f57776ecc7ae6cb5614e396a8774e6f20b5f70e97106",
+    "baselineMatchesRecordedCloudBytes": true,
+    "onlyChange": "Two operation-boundary database identity assertions inserted after execution status check",
+    "addedLines": [
+      " must(receipt?.dbCase===dbCase,'Android execution switched the selected database');",
+      " must(typeof result?.rawSQL?.databaseFile==='string'&&result.rawSQL.databaseFile.endsWith('/protocol-cases/'+dbCase+'/tasks.sqlite'),'Android result does not identify the selected database');"
+    ],
+    "noLocalExecution": true,
+    "cloudValidation": "pending"
+  },
+  "comparisons": {
+    "operationCount": 22,
+    "oldAccepted": 21,
+    "selectedIdentityMismatches": 1,
+    "oldAcceptedButCandidateRejects": 1,
+    "operations": [
+      {
+        "caseId": "C006-A02-legacy",
+        "number": 1,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-1.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-1.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-1.json.receipt.json",
+        "expectedDbCase": "C006-A02-legacy",
+        "receiptDbCase": "C006-A02-legacy",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A02-legacy/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A02-legacy",
+        "number": 2,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-2.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-2.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-2.json.receipt.json",
+        "expectedDbCase": "C006-A02-legacy",
+        "receiptDbCase": "C006-A02-legacy",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A02-legacy/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A02-legacy",
+        "number": 3,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-3.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-3.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-3.json.receipt.json",
+        "expectedDbCase": "C006-A02-legacy-observer",
+        "receiptDbCase": "C006-A02-legacy-observer",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy-observer/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A02-legacy-observer/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A02-legacy",
+        "number": 4,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-4.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-4.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-4.json.receipt.json",
+        "expectedDbCase": "C006-A02-legacy-observer",
+        "receiptDbCase": "C006-A02-legacy-observer",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A02-legacy-observer/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A02-legacy-observer/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A06-fence-drop",
+        "number": 1,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-1.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-1.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-1.json.receipt.json",
+        "expectedDbCase": "C006-A06-fence-drop",
+        "receiptDbCase": "C006-A06-fence-drop",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A06-fence-drop",
+        "number": 2,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-2.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-2.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-2.json.receipt.json",
+        "expectedDbCase": "C006-A06-fence-drop",
+        "receiptDbCase": "C006-A06-fence-drop",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A06-fence-drop",
+        "number": 3,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-3.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-3.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-3.json.receipt.json",
+        "expectedDbCase": "C006-A06-fence-drop",
+        "receiptDbCase": "C006-A06-fence-drop",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A06-fence-drop/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A06-fence-drop",
+        "number": 4,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-4.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-4.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-4.json.receipt.json",
+        "expectedDbCase": "C006-A06-fence-drop-observer",
+        "receiptDbCase": "C006-A06-fence-drop-observer",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop-observer/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A06-fence-drop-observer/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A06-fence-drop",
+        "number": 5,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-5.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-5.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-5.json.receipt.json",
+        "expectedDbCase": "C006-A06-fence-drop-observer",
+        "receiptDbCase": "C006-A06-fence-drop-observer",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A06-fence-drop-observer/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A06-fence-drop-observer/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A19-missing-backup",
+        "number": 1,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/input-1.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-1.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-1.json.receipt.json",
+        "expectedDbCase": "C006-A19-missing-backup",
+        "receiptDbCase": "C006-A19-missing-backup",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A19-missing-backup/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A19-missing-backup/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A19-missing-backup",
+        "number": 2,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/input-2.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-2.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-2.json.receipt.json",
+        "expectedDbCase": "C006-A19-missing-backup",
+        "receiptDbCase": "C006-A19-missing-backup",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A19-missing-backup/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A19-missing-backup/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A27-manifest-fail",
+        "number": 1,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-1.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.receipt.json",
+        "expectedDbCase": "C006-A27-manifest-fail",
+        "receiptDbCase": "C006-A27-manifest-fail",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A27-manifest-fail",
+        "number": 2,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-2.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.receipt.json",
+        "expectedDbCase": "C006-A27-manifest-fail",
+        "receiptDbCase": "C006-A27-manifest-fail-retry-2",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail-retry-2/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": false,
+        "selectedDbPathMatches": false,
+        "candidateWouldAccept": false
+      },
+      {
+        "caseId": "C006-A27-manifest-fail",
+        "number": 3,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-3.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.receipt.json",
+        "expectedDbCase": "C006-A27-manifest-fail",
+        "receiptDbCase": "C006-A27-manifest-fail",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "execution": {
+          "code": 1,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "failed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": false,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": false
+      },
+      {
+        "caseId": "C006-A28-manifest-drop",
+        "number": 1,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-1.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-1.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-1.json.receipt.json",
+        "expectedDbCase": "C006-A28-manifest-drop",
+        "receiptDbCase": "C006-A28-manifest-drop",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A28-manifest-drop",
+        "number": 2,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-2.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-2.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-2.json.receipt.json",
+        "expectedDbCase": "C006-A28-manifest-drop",
+        "receiptDbCase": "C006-A28-manifest-drop",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A28-manifest-drop",
+        "number": 3,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-3.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-3.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-3.json.receipt.json",
+        "expectedDbCase": "C006-A28-manifest-drop",
+        "receiptDbCase": "C006-A28-manifest-drop",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A28-manifest-drop/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A28-manifest-drop",
+        "number": 4,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-4.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-4.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-4.json.receipt.json",
+        "expectedDbCase": "C006-A28-manifest-drop-observer",
+        "receiptDbCase": "C006-A28-manifest-drop-observer",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop-observer/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A28-manifest-drop-observer/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A28-manifest-drop",
+        "number": 5,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-5.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-5.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-5.json.receipt.json",
+        "expectedDbCase": "C006-A28-manifest-drop-observer",
+        "receiptDbCase": "C006-A28-manifest-drop-observer",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A28-manifest-drop-observer/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A28-manifest-drop-observer/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A35-tombstone",
+        "number": 1,
+        "operation": "initialize",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-1.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-1.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-1.json.receipt.json",
+        "expectedDbCase": "C006-A35-tombstone",
+        "receiptDbCase": "C006-A35-tombstone",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A35-tombstone",
+        "number": 2,
+        "operation": "edit",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-2.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-2.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-2.json.receipt.json",
+        "expectedDbCase": "C006-A35-tombstone",
+        "receiptDbCase": "C006-A35-tombstone",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      },
+      {
+        "caseId": "C006-A35-tombstone",
+        "number": 3,
+        "operation": "sync",
+        "input": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-3.json",
+        "output": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-3.json",
+        "receipt": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-3.json.receipt.json",
+        "expectedDbCase": "C006-A35-tombstone",
+        "receiptDbCase": "C006-A35-tombstone",
+        "rawSQLDatabaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+        "expectedSuffix": "/protocol-cases/C006-A35-tombstone/tasks.sqlite",
+        "execution": {
+          "code": 0,
+          "signal": null,
+          "error": null,
+          "timedOut": false
+        },
+        "recordedOutputStatus": "passed",
+        "recordedRestartComparison": "passed",
+        "oldOperationAcceptance": true,
+        "selectedDbReceiptMatches": true,
+        "selectedDbPathMatches": true,
+        "candidateWouldAccept": true
+      }
+    ]
+  },
+  "case": {
+    "id": "C006-A27-manifest-fail",
+    "recordedStatus": "failed",
+    "recordedError": "Error: Real Android execution failed/crashed/timed out\n    at must (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:20:46)\n    at operation (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:34:2)\n    at async sync (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:47:46)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:51:82\n    at async test (file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:43:37)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/c006/c006-harness/android-runner.mjs:50:265",
+    "faults": [
+      {
+        "id": "C006-A27-manifest-fail",
+        "seen": 1,
+        "used": 1
+      }
+    ],
+    "outputs": [
+      {
+        "number": 1,
+        "status": "passed",
+        "beforePid": 8078,
+        "databaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "expectedAccepted": true,
+        "operationAccepted": true,
+        "before": {
+          "revision": 0,
+          "dataRevision": 0,
+          "actor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+          "initialized": false,
+          "lease": null,
+          "pending": null,
+          "rowIds": [],
+          "outboxIds": []
+        },
+        "raw": {
+          "revision": 1,
+          "dataRevision": 1,
+          "actor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+          "initialized": true,
+          "lease": null,
+          "pending": null,
+          "rowIds": [
+            "local-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "reopened": {
+          "revision": 1,
+          "dataRevision": 1,
+          "actor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+          "initialized": true,
+          "lease": null,
+          "pending": null,
+          "rowIds": [
+            "local-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "sync": null,
+        "productionError": null,
+        "error": null,
+        "receiptStartedAt": "2026-11-23T14:31:44.554Z",
+        "receiptCompletedAt": "2026-11-23T14:31:58.626Z",
+        "receiptExitCode": 0,
+        "receiptMain": {
+          "adbExitCode": 0,
+          "instrumentationCode": -1,
+          "resultFile": "/home/runner/work/_temp/c006-android/cases/C006-A27-manifest-fail/output-1.json.main.json",
+          "resultSha256": "e18161b3755efcb7f4491671179c77ef2fd50d680f79e2c5e559d5b97adacf45",
+          "status": "passed"
+        },
+        "crashedAttempts": [],
+        "instrumentation": [
+          {
+            "label": "main-instrument",
+            "startedAt": "2026-11-23T14:31:46.818Z",
+            "completedAt": "2026-11-23T14:31:52.645Z",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "label": "restart-instrument",
+            "startedAt": "2026-11-23T14:31:53.649Z",
+            "completedAt": "2026-11-23T14:31:58.384Z",
+            "exitCode": 0,
+            "signal": null
+          }
+        ],
+        "sqliteExport": {
+          "bytes": 40960,
+          "sha256": "7a6746fe027f0b3e06c9743d2188d2c5901fe0ffa2d5aeef082e111c53a00c9d",
+          "integrityCheck": [
+            {
+              "integrity_check": "ok"
+            }
+          ],
+          "actualAuditMatches": true,
+          "unchangedByRead": null
+        }
+      },
+      {
+        "number": 2,
+        "status": "passed",
+        "beforePid": 9042,
+        "databaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail-retry-2/tasks.sqlite",
+        "expectedAccepted": false,
+        "operationAccepted": false,
+        "before": {
+          "revision": 0,
+          "dataRevision": 0,
+          "actor": "889d9cb6-cbcf-449a-8dfb-af9c8b0a2643",
+          "initialized": false,
+          "lease": null,
+          "pending": null,
+          "rowIds": [],
+          "outboxIds": []
+        },
+        "raw": {
+          "revision": 3,
+          "dataRevision": 1,
+          "actor": "889d9cb6-cbcf-449a-8dfb-af9c8b0a2643",
+          "initialized": false,
+          "lease": null,
+          "pending": null,
+          "rowIds": [
+            "legacy-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "reopened": {
+          "revision": 3,
+          "dataRevision": 1,
+          "actor": "889d9cb6-cbcf-449a-8dfb-af9c8b0a2643",
+          "initialized": false,
+          "lease": null,
+          "pending": null,
+          "rowIds": [
+            "legacy-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "sync": null,
+        "productionError": "Error: 同步失败（HTTP 500），本地数据已保留\n    at ensureManifest (https://c003.gxtodo.local/src/delta-sync.mjs:198:55)\n    at async exchangeDelta (https://c003.gxtodo.local/src/delta-sync.mjs:298:96)\n    at async syncDelta (https://c003.gxtodo.local/src/delta-sync.mjs:319:13)\n    at async https://c003.gxtodo.local/harness-entry.mjs:24:48\n    at async runAndroidEntry (https://c003.gxtodo.local/tests/protocol-harness/android/android-adapter.mjs:50:14)\n    at async https://c003.gxtodo.local/harness-entry.mjs:12:1",
+        "error": null,
+        "receiptStartedAt": "2026-11-23T14:31:58.815Z",
+        "receiptCompletedAt": "2026-11-23T14:32:19.287Z",
+        "receiptExitCode": 0,
+        "receiptMain": {
+          "adbExitCode": 0,
+          "instrumentationCode": -1,
+          "resultFile": "/home/runner/work/_temp/c006-android/cases/C006-A27-manifest-fail/output-2.json.main.json",
+          "resultSha256": "34b2fabbb4c0778661c54af0ffc4ab22f0c5db7d604f4f71e7adf065d762b14d",
+          "status": "passed"
+        },
+        "crashedAttempts": [
+          {
+            "stage": "main",
+            "attempt": 1,
+            "dbCase": "C006-A27-manifest-fail",
+            "adbExitCode": 0,
+            "instrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "logs": "main"
+          }
+        ],
+        "instrumentation": [
+          {
+            "label": "main-instrument",
+            "startedAt": "2026-11-23T14:32:00.227Z",
+            "completedAt": "2026-11-23T14:32:04.725Z",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "label": "main-retry-2-instrument",
+            "startedAt": "2026-11-23T14:32:07.814Z",
+            "completedAt": "2026-11-23T14:32:14.217Z",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "label": "restart-instrument",
+            "startedAt": "2026-11-23T14:32:15.517Z",
+            "completedAt": "2026-11-23T14:32:19.076Z",
+            "exitCode": 0,
+            "signal": null
+          }
+        ],
+        "sqliteExport": {
+          "bytes": 40960,
+          "sha256": "12fa96c6d06278f0b9b734bde0ff1e1c53b20e91218f393bcfdd31a2e3bf5ab0",
+          "integrityCheck": [
+            {
+              "integrity_check": "ok"
+            }
+          ],
+          "actualAuditMatches": true,
+          "unchangedByRead": null
+        }
+      },
+      {
+        "number": 3,
+        "status": "failed",
+        "beforePid": 9394,
+        "databaseFile": "/data/data/local.gxtodo.protocolharness/files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "expectedAccepted": true,
+        "operationAccepted": true,
+        "before": {
+          "revision": 2,
+          "dataRevision": 1,
+          "actor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+          "initialized": true,
+          "lease": {
+            "token": "695f9a0f-a175-4c08-ab26-3703bde104ee",
+            "until": 1795444444306
+          },
+          "pending": null,
+          "rowIds": [
+            "local-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "raw": {
+          "revision": 2,
+          "dataRevision": 1,
+          "actor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+          "initialized": true,
+          "lease": {
+            "token": "695f9a0f-a175-4c08-ab26-3703bde104ee",
+            "until": 1795444444306
+          },
+          "pending": null,
+          "rowIds": [
+            "local-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "reopened": {
+          "revision": 2,
+          "dataRevision": 1,
+          "actor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+          "initialized": true,
+          "lease": {
+            "token": "695f9a0f-a175-4c08-ab26-3703bde104ee",
+            "until": 1795444444306
+          },
+          "pending": null,
+          "rowIds": [
+            "local-note"
+          ],
+          "outboxIds": [
+            1
+          ]
+        },
+        "sync": {
+          "more": true,
+          "busy": true,
+          "downloaded": 0,
+          "uploaded": 0,
+          "conflicts": []
+        },
+        "productionError": null,
+        "error": "Production outcome did not match explicitly declared acceptance/rejection, or lease is busy",
+        "receiptStartedAt": "2026-11-23T14:32:19.404Z",
+        "receiptCompletedAt": "2026-11-23T14:32:28.524Z",
+        "receiptExitCode": 1,
+        "receiptMain": {
+          "adbExitCode": 0,
+          "instrumentationCode": 1,
+          "resultFile": "/home/runner/work/_temp/c006-android/cases/C006-A27-manifest-fail/output-3.json.main.json",
+          "resultSha256": "bad297e98631e7b2d286c75ab93a6d3ed03b20def3c5503f489cac8512a7605f",
+          "status": "failed"
+        },
+        "crashedAttempts": [],
+        "instrumentation": [
+          {
+            "label": "main-instrument",
+            "startedAt": "2026-11-23T14:32:20.384Z",
+            "completedAt": "2026-11-23T14:32:24.096Z",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "label": "restart-instrument",
+            "startedAt": "2026-11-23T14:32:24.592Z",
+            "completedAt": "2026-11-23T14:32:28.044Z",
+            "exitCode": 0,
+            "signal": null
+          }
+        ],
+        "sqliteExport": {
+          "bytes": 40960,
+          "sha256": "654fb2629ca90755c34511975f736cb5ac983889b8c0fc71f47dbfb296ca03cf",
+          "integrityCheck": [
+            {
+              "integrity_check": "ok"
+            }
+          ],
+          "actualAuditMatches": true,
+          "unchangedByRead": null
+        }
+      }
+    ]
+  },
+  "firstProcessDeath": {
+    "pid": 8502,
+    "cause": "Android killed protocolharness because its GMS FontsProvider dependency died",
+    "gmsPid": 1426,
+    "gmsTrigger": "ChimeraModuleLdr module config changed, forcing restart due to com.google.android.gms.rcs; SIG9",
+    "gmsSignalTimeUtc": "2026-11-23T14:32:04.285Z",
+    "protocolKillTimeUtc": "2026-11-23T14:32:04.364Z",
+    "exitInfoReason": 12,
+    "exitInfoReasonName": "DEPENDENCY DIED",
+    "logcatLines": [
+      2319,
+      2321,
+      2322,
+      2367,
+      2393,
+      2395,
+      2399,
+      2502
+    ],
+    "crashIsNotEvidenceOfProductionException": true
+  },
+  "diagnosticTextAnchors": [
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/007-android-properties.log",
+      "bytes": 24415,
+      "sha256": "850ae699fe46d86027eecb5006fc3240ea69dd32fa713ae6bd55d8dc72901fe8",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/020-main-instrument.log",
+      "bytes": 90,
+      "sha256": "f8d28690516cd61fdcf7218e8cc6b0e7b26418a7e0172b23c7ed915808bff9b9",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/023-main-evidence-exit-info.log",
+      "bytes": 6838,
+      "sha256": "3170685b8e45e8dccd2df0f0df131ff0e3e966b00e990e1e78284c36422d89cd",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/025-main-evidence-logcat.log",
+      "bytes": 405418,
+      "sha256": "806fdc35f78294d42d60c79d2814cef8576d046ee21763f7da04b0b0d358aaa7",
+      "matchesTextArchiveIndex": true
+    }
+  ],
+  "deviceTimezone": {
+    "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/007-android-properties.log",
+    "persistSysTimezone": "Etc/UTC",
+    "vendorQemuTimezone": "Etc/UTC",
+    "lines": [
+      255,
+      564
+    ],
+    "supportsUtcInterpretationOfThreadtime": true
+  },
+  "failureSnapshot": {
+    "originalDatabasePreserved": true,
+    "originalDatabaseReplayed": false,
+    "allObservedFilesVerified": true,
+    "mainProcessObservedStopped": true,
+    "snapshotSemantics": "Raw files after diagnostic force-stop; no claim of crash-time transaction state",
+    "errors": [],
+    "files": [
+      {
+        "remote": "files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite",
+        "state": "preserved",
+        "bytes": 40960,
+        "sha256": "cad955e40ee536ea8018f9523da2f387e5596bfcf5a6b5d945cd1dbe7415b04d",
+        "sourceStable": true,
+        "transferMatchesRemote": true,
+        "localReadbackVerified": true,
+        "sqliteHeaderValid": true
+      },
+      {
+        "remote": "files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite-wal",
+        "state": "preserved",
+        "bytes": 4152,
+        "sha256": "18d12d581b1524c89ed3e735da958bbda02e026600d78aea2d48c67041e23bc4",
+        "sourceStable": true,
+        "transferMatchesRemote": true,
+        "localReadbackVerified": true,
+        "sqliteHeaderValid": null
+      },
+      {
+        "remote": "files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite-shm",
+        "state": "preserved",
+        "bytes": 32768,
+        "sha256": "73db88e3c7af7631f354f6a48916ffc69f95a0cbea35f153c42a55b97ec1ece3",
+        "sourceStable": true,
+        "transferMatchesRemote": true,
+        "localReadbackVerified": true,
+        "sqliteHeaderValid": null
+      },
+      {
+        "remote": "files/protocol-cases/C006-A27-manifest-fail/tasks.sqlite-journal",
+        "state": "unavailable",
+        "bytes": null,
+        "sha256": null,
+        "sourceStable": null,
+        "transferMatchesRemote": null,
+        "localReadbackVerified": null,
+        "sqliteHeaderValid": null
+      },
+      {
+        "remote": "files/result.json",
+        "state": "unavailable",
+        "bytes": null,
+        "sha256": null,
+        "sourceStable": null,
+        "transferMatchesRemote": null,
+        "localReadbackVerified": null,
+        "sqliteHeaderValid": null
+      },
+      {
+        "remote": "files/result.json.bak",
+        "state": "unavailable",
+        "bytes": null,
+        "sha256": null,
+        "sourceStable": null,
+        "transferMatchesRemote": null,
+        "localReadbackVerified": null,
+        "sqliteHeaderValid": null
+      },
+      {
+        "remote": "files/result.json.new",
+        "state": "unavailable",
+        "bytes": null,
+        "sha256": null,
+        "sourceStable": null,
+        "transferMatchesRemote": null,
+        "localReadbackVerified": null,
+        "sqliteHeaderValid": null
+      }
+    ],
+    "binaryHashesAreRecordedCloudEvidenceOnly": true
+  },
+  "fixtureRequests": {
+    "count": 10,
+    "firstRequestUtc": "2026-11-23T14:32:12.305Z",
+    "lastRequestUtc": "2026-11-23T14:32:13.341Z",
+    "firstCrashBeforeFirstRequest": true,
+    "faultRequest": [
+      {
+        "id": 10,
+        "started": "2026-11-23T14:32:13.341Z",
+        "method": "PUT",
+        "path": "/dav/C006-A27-manifest-fail/v2/manifest.json",
+        "status": 500,
+        "writeCommitted": false,
+        "disconnected": false,
+        "faults": [
+          {
+            "id": "C006-A27-manifest-fail",
+            "phase": "before-write",
+            "effect": {
+              "status": 500
+            }
+          }
+        ]
+      }
+    ],
+    "committedRequests": [
+      {
+        "id": 6,
+        "started": "2026-11-23T14:32:12.603Z",
+        "method": "PUT",
+        "relative": "v2/legacy-1ab2fae8-bbe7-4358-8ba5-5636dc072535.json.gz",
+        "status": 201
+      },
+      {
+        "id": 7,
+        "started": "2026-11-23T14:32:12.669Z",
+        "method": "PUT",
+        "relative": "state.json",
+        "status": 204
+      },
+      {
+        "id": 9,
+        "started": "2026-11-23T14:32:13.161Z",
+        "method": "PUT",
+        "relative": "v2/s-eaf6bc62-cbd5-4fef-a586-305bcb386577-0.json.gz",
+        "status": 201
+      }
+    ]
+  },
+  "lease": {
+    "originalDatabaseActor": "5dbf128a-d40c-481b-b09d-f4264f0df881",
+    "token": "695f9a0f-a175-4c08-ab26-3703bde104ee",
+    "until": 1795444444306,
+    "untilUtc": "2026-11-23T14:34:04.306Z",
+    "thirdOperationBeforeExpiry": true,
+    "thirdOperationRawAndReopenedUnchanged": true,
+    "originalLocalNoteAndOutboxPreserved": true,
+    "recoveryAfterExpiry": "not executed by this case"
+  },
+  "inputs": [
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-1.json",
+      "bytes": 21512,
+      "sha256": "445a18af21d92fb9a6dd2526c8ee2183dce82632295101167b8f8b9dd9d3808d",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/process-2.json",
+      "bytes": 55864,
+      "sha256": "1db185c35eb5d8e0cf14fefacd851628887f03e4de58505e134c3c875ec73b4b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-4.json.receipt.json",
+      "bytes": 48031,
+      "sha256": "704eab715ca588d8a2fce218d504ffa8191498925475cdb8ad512063c1eb565f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-5.json.receipt.json",
+      "bytes": 48013,
+      "sha256": "2623079909bb6155fdf27800811e6ea89584f602ad48f966dc732a4ad318a8ae",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-2.json",
+      "bytes": 92740,
+      "sha256": "f43672452b63b51f1c13e6fee9353d178412473dd1854b29127b0d7b2a80edce",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-2.json.receipt.json",
+      "bytes": 46501,
+      "sha256": "9e73f3005df7f15cbf4ddcde67f64d87f270af4a95a1b26e4feb609eaa71cf5d",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-1.json",
+      "bytes": 21717,
+      "sha256": "0a90d0e04bff82b658092ab7093c6511699e23392e7c9fd7c16b16664101c5cd",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-1.json",
+      "bytes": 413,
+      "sha256": "a237fe0088bd57587b4ffc2fc1cffc69fc2491d5c67837d1b05a79741889e7d8",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-4.json",
+      "bytes": 54218,
+      "sha256": "708486027061a13318658420d57e7e9f2d04ab567b14a02daddc284ebb72daad",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-1.json",
+      "bytes": 55788,
+      "sha256": "56a481a4bca15c28ade279b891d84bf3a32bae49cf2604c0b6ac2c2e3e11792b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-4.json",
+      "bytes": 153,
+      "sha256": "4437ce41577becb626b6e53490cf16dde2c48a2e26024e08481aae6caf4e3bc0",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-4.json",
+      "bytes": 53922,
+      "sha256": "758871b91d69f00777cf89f1e7764806226d50c0b187484ba15dbeb7b2d76172",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-4.json.receipt.json",
+      "bytes": 46363,
+      "sha256": "8fb140e71d4083284de4f60ea62da5c971cc8f5c9e14db737f40f240b04308f6",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/process-2.json",
+      "bytes": 55494,
+      "sha256": "2146fb120f2fbabcc23ecc93a1dfe11095621652b1939fa27f421f109fd0a996",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-1.json",
+      "bytes": 55045,
+      "sha256": "4f5300ee1d6bd6166b0274d6ecdf005253098ba51f7f0110c61787a5ff8a9459",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/process-1.json",
+      "bytes": 55864,
+      "sha256": "6557026e29703db67aff8fd411e0658ce0183aca4af51cefb37cccdd9eadfcfb",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-1.json",
+      "bytes": 21536,
+      "sha256": "cf18e4fc035ace8de76a39559d32863c4f827b4538283673a7a5cf6e153ef88f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-3.json",
+      "bytes": 282,
+      "sha256": "b18febd6e067a6cd0d6ca5418cec7a480e21f176688fa040537374b85ec3e16a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-4.json",
+      "bytes": 13210,
+      "sha256": "7adf6159fb663b270043e047e70d6c68396f27bea016c8bd4617aaad2d1ab11b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-1.json",
+      "bytes": 21566,
+      "sha256": "feb0263dae5aca2e6886ba85864bbf6c57acfb2690c89c9279cad3c81ea93a3b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-3.json",
+      "bytes": 161,
+      "sha256": "25325e486e6c497b78ac381692ced3e8dfd4d8b9c31bf93bae63d22370872ffb",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json.receipt.json",
+      "bytes": 47250,
+      "sha256": "a543a81f0ac18e3489843c6d3b76266574a32f711b433d60e6cb392330aad1fa",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json",
+      "bytes": 25083,
+      "sha256": "1529572e8fd971ed2893bcd371d16065c5c10c25b0e0c41b5808e40f7a6e2ccc",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/process-1.json",
+      "bytes": 55494,
+      "sha256": "03a7b245b46fa6c89e1857de95116e89462e7a01e3f55017082c068ec95ee1a3",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-4.json",
+      "bytes": 290,
+      "sha256": "ac7c4bd1594011b06275a1f9c0a25695aa7fdb5a479132c549274c9c48b11262",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-1.json.receipt.json",
+      "bytes": 47839,
+      "sha256": "09207bfd83291e26aab95760e69c39bf70b9f02c3d873566fc434b245b518674",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-3.json",
+      "bytes": 31088,
+      "sha256": "92b950ac0767f54cb9453dc4ad94a97e5a588776f470784e29760013cab0d2e6",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-2.json",
+      "bytes": 153,
+      "sha256": "4437ce41577becb626b6e53490cf16dde2c48a2e26024e08481aae6caf4e3bc0",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-4.json.receipt.json",
+      "bytes": 46519,
+      "sha256": "9297d41df3c5c3ed6558b719beda0b497b183197c52a5871a5c7cfc81c56b4b5",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/007-android-properties.log",
+      "bytes": 24415,
+      "sha256": "850ae699fe46d86027eecb5006fc3240ea69dd32fa713ae6bd55d8dc72901fe8",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-1.json",
+      "bytes": 53832,
+      "sha256": "d7c950711cd2afa6708d483da444a6eb878be310710d0d7bb832030b1fd7ed61",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-2.json.receipt.json",
+      "bytes": 48034,
+      "sha256": "a020eee22bf31f5bfddf2c538ca8c3de377b1e33d1c3146801363b001ce84e42",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-1.json.receipt.json",
+      "bytes": 47993,
+      "sha256": "331898b8dcf33a1e9ef45534631a094fafc4d2ab7900527d904c8dbe5dfede93",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-3.json",
+      "bytes": 159,
+      "sha256": "75c8577e015829f13f4443cef1a449e7a0cc24f1f8a9d080d70bbb90f5969f6a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-1.json",
+      "bytes": 54173,
+      "sha256": "fe35dd3b8202c7f3af770924da64dc125fc3cc7ca850136b381d4a14b8e288f3",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-1.json.receipt.json",
+      "bytes": 46483,
+      "sha256": "756f7d7083e10bc6da07bd509f3188765efecedaa1cd2d720d6095d6be07b9a5",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/input-2.json",
+      "bytes": 286,
+      "sha256": "85cbd8e32d67d9cc9ecb53dcd7206f9ee87b24d6fd05e14cd0463ee33bed74c4",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-5.json.receipt.json",
+      "bytes": 47169,
+      "sha256": "4680c00fc8aaf9a832622ab907799db6356bbc5f1a2cadd0a78d67f404244174",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.failures/main/evidence.json",
+      "bytes": 21837,
+      "sha256": "66218a936723e03465bdbb8138bd710146a5c3ae4de3858450491a88e415c2cd",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-3.json",
+      "bytes": 167,
+      "sha256": "b1bfe08fce3c0ce9616ab0616f1339583ea9b302d931d8f4d5a85ad32763ffca",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/025-main-evidence-logcat.log",
+      "bytes": 405418,
+      "sha256": "806fdc35f78294d42d60c79d2814cef8576d046ee21763f7da04b0b0d358aaa7",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-3.json.receipt.json",
+      "bytes": 46501,
+      "sha256": "5a5a649e984177225908b88b0b35f2b2a0414d3f139b09d4cb0293e4792e2d72",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json.receipt.json",
+      "bytes": 48635,
+      "sha256": "d25df79b21ec04a156ecf4b10ee4fdb6d2fbac295aa49ee73d870462a6ce0f47",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-2.json",
+      "bytes": 28163,
+      "sha256": "d4689b9abf09274683c07343ac1a31e2156e0596ddbc63c8b1f1567d4027080d",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-3.json",
+      "bytes": 54191,
+      "sha256": "41b1e3ce452303a109216689069ee3e5efc77d90a3fbe602311b5ef3c222de99",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-2.json.receipt.json",
+      "bytes": 46327,
+      "sha256": "2ed011cffe71e648f3a6488a8e3d26fc7dd9befe0df502f99a544b0ca4e5e9dc",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/input-1.json",
+      "bytes": 416,
+      "sha256": "6662f4ae187d40f2a279076c62fc4a36a6c56dd18464b79aa42f2afb8dd5015a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-2.json",
+      "bytes": 34935,
+      "sha256": "85f0a5fdede63b8fec0d0ef9a65c65e14f014c2c69b75db1e03610a53c89db27",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-3.json.receipt.json",
+      "bytes": 46363,
+      "sha256": "5891c64dfe739a03c293a9f1e25c1b923b07f0f3cf231ca6afd90c952ab5f51d",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-3.json",
+      "bytes": 53922,
+      "sha256": "a88e3684e022d478ea602e4867ddd61ce96797ecc12c8f0537a569c0816008d7",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-4.json",
+      "bytes": 30669,
+      "sha256": "d8d82b5a76508664a6bdff029cd05232260f22d8bef884d1327f8c7146c0c281",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-1.json.receipt.json",
+      "bytes": 46282,
+      "sha256": "bfb1a7d7e913004ac0c51d9a3bc9b204cbf500c5291191e6e95269061fdb802c",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/023-main-evidence-exit-info.log",
+      "bytes": 6838,
+      "sha256": "3170685b8e45e8dccd2df0f0df131ff0e3e966b00e990e1e78284c36422d89cd",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-2.json",
+      "bytes": 190,
+      "sha256": "992f34eec14824efa1b595503cb646e4ca72346e4a2cb9d9a1173072572650a6",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-3.json",
+      "bytes": 25069,
+      "sha256": "88954734c3acc71f4d7f4c4bbfae96ff26fa19bb53f9fe11bcbe58ee97c93242",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-1.json",
+      "bytes": 21554,
+      "sha256": "1858c9298d6a4a2c3c616db6395bb4089a67d0fd6cfbb1844b53b35f59b43601",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-2.json",
+      "bytes": 196,
+      "sha256": "bc3d45e5979617f20a593e1e7651b5862e7f298d3177c26c4ce56af1474df9d6",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-1.json.receipt.json",
+      "bytes": 48034,
+      "sha256": "502a8a0412ef031d9b7d301f04771dd0f86f0e1df621de698e7bb13e4b6b059f",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-1.json",
+      "bytes": 414,
+      "sha256": "a9742b1b779eaa6be04c24ff9ded1c9a08997ce1c90572358fbed964f0306bbe",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-2.json",
+      "bytes": 34432,
+      "sha256": "339364791ce072aad4250d5a2872e26020372b4fe418063025cc85d57c9dc92a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/process-3.json",
+      "bytes": 55494,
+      "sha256": "b75baf391c9e1dd9380281777ba14283d9c07aec5c8eba2cd64ca58c28a5327a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-5.json",
+      "bytes": 161,
+      "sha256": "25325e486e6c497b78ac381692ced3e8dfd4d8b9c31bf93bae63d22370872ffb",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-4.json",
+      "bytes": 55835,
+      "sha256": "fb624d6e9f9c1aa567b97f43451bd6a86143df77bb91d54a662ad6380fc971ee",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/cloud/http-requests.jsonl",
+      "bytes": 7247,
+      "sha256": "414c283a5a24c2d3edbdd3a8b8dd82d4d2df2329d0d53ceca81609a8c7b2cb4c",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/process-3.json",
+      "bytes": 56658,
+      "sha256": "08418fa48336cab0ffbff04f27fddd676d8aea639e5982b6ee798d6170cb7493",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-3.json.receipt.json",
+      "bytes": 47839,
+      "sha256": "eb8b8f3331f917f4d862152d4204939620db7f56b22eed637895d96e853b6a28",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.receipt.json",
+      "bytes": 77663,
+      "sha256": "62e6b415f849f22c245c0981f3c53018a67111c58f8e1bb2a3fafe35e26cb74d",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/output-3.json",
+      "bytes": 13162,
+      "sha256": "feb2203341b3ba79c994560eecf5bad4c5066a0bac3ae1624e6bdcd3c83f32a0",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/input-2.json",
+      "bytes": 198,
+      "sha256": "ab01206eaf3293518879ef7912725e1a49e3fb555bc51039eb98c7946e3bfc6c",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/input-1.json",
+      "bytes": 414,
+      "sha256": "4a9c8f2abfd1ed5b850f4bb54c8e8c9836e0cf6caf2ddb178d02246ff37ab9cb",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-3.json",
+      "bytes": 34544,
+      "sha256": "500ecc7d2a2ceb662aaaad01e3c64df3f2f1b314911373d0e46391f18eef1318",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A19-missing-backup/output-2.json",
+      "bytes": 24787,
+      "sha256": "34f7a25199fddeaf9a57755eb4dafd96c98092c5270dd7c76d7b165ac7b981a6",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-4.json",
+      "bytes": 296,
+      "sha256": "34f7db44e35dfb350eaea46b01f2f1b39f3e489ca93ca1d8137c2459f223f63b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-2.json.receipt.json",
+      "bytes": 47995,
+      "sha256": "b4ce6d2fd573fe88ebd605ea034b885af88b81600a70e463370918dc0d88818b",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/input-1.json",
+      "bytes": 400,
+      "sha256": "d7c09a1c2706e54e8ffb5f3708849d00d1b44f3bd9afaa8212923d5e68a49587",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-5.json",
+      "bytes": 55817,
+      "sha256": "43f336ed2e7a5f8c07c64ba6ceb5ae230dd72dbf95f8ca9799d1845e4f7c8524",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-3.json",
+      "bytes": 37551,
+      "sha256": "d91f20126411720bf572d4acab94d27778fb38420080f09fc9b8fd6980bbfb26",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-3.json.receipt.json",
+      "bytes": 47995,
+      "sha256": "88eb8a24fa2a632d057a5891c5832022a3ed9ee6f07243f297ffbbb6192be9e4",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-3.json",
+      "bytes": 55790,
+      "sha256": "0b3bea46329f3c2c6c5a49e5bde3084b2dfb244d2de83591ea4763159c30cd5a",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-5.json",
+      "bytes": 54868,
+      "sha256": "05a740a5cc08c67f2399b323e412fbd8e03e3377ddb63badf6fc24016fa05a05",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A02-legacy/process-2.json",
+      "bytes": 53877,
+      "sha256": "b70b9a7a2925d52af4d444c0c582a2dce91b4320877b489088b8317230a0203c",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/process-2.json",
+      "bytes": 55790,
+      "sha256": "8bf756d933c4b04e9440bf06496aa1709880add75e195774b510f208eb667709",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/input-1.json",
+      "bytes": 408,
+      "sha256": "788f497351b0a119e4667ec70bcfdb49ffb28a759b35c9fc79846ec825e36cf9",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/case.json",
+      "bytes": 215415,
+      "sha256": "6affd95b3e036f178e5fa89f0d83aba55ffea4c495c61dfe72f3378d604fe40e",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-2.json",
+      "bytes": 196,
+      "sha256": "dd6945009d67abd7729803ec15efc5f7f97098d3e2a0043d5ea180fbfccb99b5",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A35-tombstone/output-2.json.receipt.json",
+      "bytes": 47839,
+      "sha256": "60179439df0f9c1e78e71aa10973bbca1f2b6589ddefe2fafe8b8a2b18b16a80",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-1.json",
+      "bytes": 21554,
+      "sha256": "54fe1fec85b002bcda71e0d0ecf0c8e0a8a63acf169539eebe07c6961e3cb3dc",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-3.json",
+      "bytes": 167,
+      "sha256": "ad7e5267a05ad20d44a244c638cca93be55e58b0497bd561dd280e17149a7235",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-2.json",
+      "bytes": 24376,
+      "sha256": "5a473aeaa0326fda593114c66acbb8342e22e7446b8ebf593f163b4919badbf2",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-5.json",
+      "bytes": 30721,
+      "sha256": "9aea624803b90557a96d798425bf6c990ad084430511e888e4e855c5acdf5d61",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/output-4.json",
+      "bytes": 13186,
+      "sha256": "3ae9555da179a54b8fde356fb2bf25ae4b066862ecdbd12cf764a3d6a669cbce",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A06-fence-drop/process-2.json",
+      "bytes": 54191,
+      "sha256": "8f6d662bb0af3e5b23e139699cd631ea830d1bf65ae7dec4399dd37769e864ec",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/input-5.json",
+      "bytes": 167,
+      "sha256": "ad7e5267a05ad20d44a244c638cca93be55e58b0497bd561dd280e17149a7235",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A28-manifest-drop/output-5.json",
+      "bytes": 30766,
+      "sha256": "a93e6d0cdd0f8892a52b264d46d19da78f4b0ffcc1faefe74d94cc9c26f50472",
+      "matchesTextArchiveIndex": true
+    },
+    {
+      "path": "artifacts/c006-android-45194185453-1/cases/C006-A27-manifest-fail/output-2.json.logs/020-main-instrument.log",
+      "bytes": 90,
+      "sha256": "f8d28690516cd61fdcf7218e8cc6b0e7b26418a7e0172b23c7ed915808bff9b9",
+      "matchesTextArchiveIndex": true
+    }
+  ],
+  "limitations": [
+    "Static evidence comparison is not a new test run or reclassification of the failed historical run.",
+    "The changed assertions detect a replacement database; they do not make the environment restart stable or complete the original database recovery.",
+    "Failed SQLite/WAL/SHM binary hashes are producer-recorded preservation evidence; this local review did not open/replay the databases.",
+    "Cloud syntax/build/execution validation of the new candidate remains pending."
+  ]
+}

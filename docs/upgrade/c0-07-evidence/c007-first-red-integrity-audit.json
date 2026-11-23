@@ -1,0 +1,1768 @@
+{
+  "schema": "mytodo-c007-independent-evidence-audit",
+  "version": 2,
+  "auditedAt": "2026-11-23T14:11:52.6918169+00:00",
+  "evidenceRoot": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\outputs\\c0-07\\evidence\\45180141745",
+  "auditor": {
+    "path": "C:\\Users\\adwoo\\Documents\\Codex\\2026-11-23\\x20\\work\\audit-c007-archive.ps1",
+    "sha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d"
+  },
+  "collector": {
+    "runId": "45180141745",
+    "sourceSha": "4a8dd94f7fbceeb0583c37cc7aefdb29e9937691",
+    "githubConclusion": "failure",
+    "collectionExitCode": 0,
+    "evidenceComplete": true,
+    "failures": []
+  },
+  "textInventory": {
+    "sha256": "359757f54fd7ee131dbcf8be66a08f0884aea07a5bd8676219b4d1d9d244c88d",
+    "bytes": 570043,
+    "path": "text-archive-files-sha256.json",
+    "independentlyAuthenticated": false
+  },
+  "listedLocalTextFiles": 2577,
+  "locallyVerifiedTextFiles": 2577,
+  "localTextBytes": 10887219,
+  "cloudInventoriedFiles": 3564,
+  "producerManifests": [
+    {
+      "path": "artifacts/c007-android-45180141745-1/seal.json",
+      "schema": "mytodo-c007-seal",
+      "status": "sealed",
+      "sourceUnchanged": true,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 846,
+      "localBytesVerifiedRows": 178,
+      "cloudCollectorHashComparedRows": 668,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-android-environment-45180141745-1/payload-sha256.json",
+      "schema": null,
+      "status": null,
+      "sourceUnchanged": null,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 43,
+      "localBytesVerifiedRows": 43,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-javascript-45180141745-1/seal.json",
+      "schema": "mytodo-c007-seal",
+      "status": "sealed",
+      "sourceUnchanged": true,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 1185,
+      "localBytesVerifiedRows": 1043,
+      "cloudCollectorHashComparedRows": 142,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-report-45180141745-1/seal.json",
+      "schema": "mytodo-c007-report-seal",
+      "status": "sealed",
+      "sourceUnchanged": null,
+      "reportStatus": "failed",
+      "reportExitCode": 1,
+      "rows": 2,
+      "localBytesVerifiedRows": 2,
+      "cloudCollectorHashComparedRows": 0,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    },
+    {
+      "path": "artifacts/c007-windows-c-45180141745-1/seal.json",
+      "schema": "mytodo-c007-seal",
+      "status": "sealed",
+      "sourceUnchanged": true,
+      "reportStatus": null,
+      "reportExitCode": null,
+      "rows": 1483,
+      "localBytesVerifiedRows": 1296,
+      "cloudCollectorHashComparedRows": 187,
+      "unclosedRows": 0,
+      "auditIssues": 0
+    }
+  ],
+  "producerRows": 3559,
+  "producerLocalBytesVerifiedRows": 2562,
+  "producerCloudCollectorHashComparedRows": 997,
+  "archiveIntegrityPassed": true,
+  "auditIssues": [],
+  "auditExitCode": 0,
+  "execution": {
+    "status": "failed-or-incomplete",
+    "platforms": [
+      {
+        "path": "artifacts/c007-android-45180141745-1/suite/suite.json",
+        "platform": "android",
+        "suiteStatus": "failed",
+        "suiteExitCode": 1,
+        "cases": [
+          {
+            "caseId": "sql-atomicity",
+            "summaryCaseId": "c007-real-sql-atomicity",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 10,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/sql-atomicity/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-batch-rejected",
+            "summaryCaseId": "C007-batch-rejected",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-batch-rejected/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-batch-response-lost",
+            "summaryCaseId": "C007-batch-response-lost",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-batch-response-lost/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-manifest-rejected",
+            "summaryCaseId": "C007-manifest-rejected",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-manifest-rejected/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-manifest-response-lost",
+            "summaryCaseId": "C007-manifest-response-lost",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-manifest-response-lost/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-ack-delete-failed",
+            "summaryCaseId": "C007-ack-delete-failed",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-delete-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-ack-meta-failed",
+            "summaryCaseId": "C007-ack-meta-failed",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-meta-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-ack-commit-failed",
+            "summaryCaseId": "C007-ack-commit-failed",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-commit-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-after-ack-commit-exit",
+            "summaryCaseId": "C007-after-ack-commit-exit",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-after-ack-commit-exit/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          },
+          {
+            "caseId": "C007-before-ack-commit-exit",
+            "summaryCaseId": "C007-before-ack-commit-exit",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 5,
+            "attempts": 1,
+            "operationReceipts": 0,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 0,
+            "faultHitReceipts": 0,
+            "checks": 2,
+            "failedCheckCount": 2,
+            "failedChecks": [
+              {
+                "id": "000-seed:exit",
+                "passed": false
+              },
+              {
+                "id": "000-seed:database-preserved",
+                "passed": false
+              }
+            ],
+            "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-before-ack-commit-exit/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33",
+            "passed": false
+          }
+        ],
+        "caseCount": 10,
+        "attempts": 10,
+        "operationReceipts": 0,
+        "boundaryReceipts": 0,
+        "reopenReceipts": 0,
+        "faultHitReceipts": 0,
+        "checks": 20,
+        "failedChecks": 20,
+        "passed": false
+      },
+      {
+        "path": "artifacts/c007-javascript-45180141745-1/suite/suite.json",
+        "platform": "javascript",
+        "suiteStatus": "passed",
+        "suiteExitCode": 0,
+        "cases": [
+          {
+            "caseId": "sql-atomicity",
+            "summaryCaseId": "c007-real-sql-atomicity",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 10,
+            "attempts": 10,
+            "operationReceipts": 9,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 10,
+            "faultHitReceipts": 3,
+            "checks": 109,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-rejected",
+            "summaryCaseId": "C007-batch-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-response-lost",
+            "summaryCaseId": "C007-batch-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-rejected",
+            "summaryCaseId": "C007-manifest-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-response-lost",
+            "summaryCaseId": "C007-manifest-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 55,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-delete-failed",
+            "summaryCaseId": "C007-ack-delete-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-meta-failed",
+            "summaryCaseId": "C007-ack-meta-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-commit-failed",
+            "summaryCaseId": "C007-ack-commit-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 56,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-after-ack-commit-exit",
+            "summaryCaseId": "C007-after-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 51,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-before-ack-commit-exit",
+            "summaryCaseId": "C007-before-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 53,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          }
+        ],
+        "caseCount": 10,
+        "attempts": 55,
+        "operationReceipts": 52,
+        "boundaryReceipts": 3,
+        "reopenReceipts": 55,
+        "faultHitReceipts": 6,
+        "checks": 601,
+        "failedChecks": 0,
+        "passed": true
+      },
+      {
+        "path": "artifacts/c007-windows-c-45180141745-1/suite/suite.json",
+        "platform": "windows-c",
+        "suiteStatus": "failed",
+        "suiteExitCode": 1,
+        "cases": [
+          {
+            "caseId": "sql-atomicity",
+            "summaryCaseId": "c007-real-sql-atomicity",
+            "suiteEntryStatus": "failed",
+            "suiteEntryExitCode": 1,
+            "summaryStatus": "failed",
+            "summaryExitCode": 1,
+            "plannedOperations": 31,
+            "attempts": 31,
+            "operationReceipts": 30,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 31,
+            "faultHitReceipts": 14,
+            "checks": 445,
+            "failedCheckCount": 27,
+            "failedChecks": [
+              {
+                "id": "006-read-failure:operation",
+                "passed": false
+              },
+              {
+                "id": "007-read-step-failure:operation",
+                "passed": false
+              },
+              {
+                "id": "010-row-prepare-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "010-row-prepare-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "011-row-step-overflow:operation",
+                "passed": false
+              },
+              {
+                "id": "011-row-step-overflow:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "012-page-prepare-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "012-page-prepare-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "013-page-partial-step-overflow:operation",
+                "passed": false
+              },
+              {
+                "id": "013-page-partial-step-overflow:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "014-meta-prepare-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "015-meta-step-overflow:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "016-meta-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "017-row-invalid-json:operation",
+                "passed": false
+              },
+              {
+                "id": "017-row-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "018-page-invalid-json:operation",
+                "passed": false
+              },
+              {
+                "id": "018-page-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "019-outbox-invalid-json:operation",
+                "passed": false
+              },
+              {
+                "id": "019-outbox-invalid-json:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "020-local-row-read-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "021-remote-row-read-denied:primary-error-preserved",
+                "passed": false
+              },
+              {
+                "id": "022-pending-prepare-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "023-request-renew-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "023-request-renew-commit-denied:request-count",
+                "passed": false
+              },
+              {
+                "id": "027-empty-prepare-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "029-cache-commit-denied:operation",
+                "passed": false
+              },
+              {
+                "id": "030-release-commit-denied:operation",
+                "passed": false
+              }
+            ],
+            "error": null,
+            "passed": false
+          },
+          {
+            "caseId": "C007-batch-rejected",
+            "summaryCaseId": "C007-batch-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-batch-response-lost",
+            "summaryCaseId": "C007-batch-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-rejected",
+            "summaryCaseId": "C007-manifest-rejected",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-manifest-response-lost",
+            "summaryCaseId": "C007-manifest-response-lost",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 65,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-delete-failed",
+            "summaryCaseId": "C007-ack-delete-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 66,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-meta-failed",
+            "summaryCaseId": "C007-ack-meta-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 66,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-ack-commit-failed",
+            "summaryCaseId": "C007-ack-commit-failed",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 5,
+            "boundaryReceipts": 0,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 1,
+            "checks": 66,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-after-ack-commit-exit",
+            "summaryCaseId": "C007-after-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          },
+          {
+            "caseId": "C007-before-ack-commit-exit",
+            "summaryCaseId": "C007-before-ack-commit-exit",
+            "suiteEntryStatus": "passed",
+            "suiteEntryExitCode": 0,
+            "summaryStatus": "passed",
+            "summaryExitCode": 0,
+            "plannedOperations": 5,
+            "attempts": 5,
+            "operationReceipts": 4,
+            "boundaryReceipts": 1,
+            "reopenReceipts": 5,
+            "faultHitReceipts": 0,
+            "checks": 60,
+            "failedCheckCount": 0,
+            "failedChecks": [],
+            "error": null,
+            "passed": true
+          }
+        ],
+        "caseCount": 10,
+        "attempts": 76,
+        "operationReceipts": 73,
+        "boundaryReceipts": 3,
+        "reopenReceipts": 76,
+        "faultHitReceipts": 17,
+        "checks": 1023,
+        "failedChecks": 27,
+        "passed": false
+      }
+    ],
+    "reports": [
+      {
+        "path": "artifacts/c007-report-45180141745-1/report.json",
+        "identityMatches": true,
+        "sealVerdictMatches": true,
+        "status": "failed",
+        "exitCode": 1,
+        "platforms": [
+          {
+            "platform": "javascript",
+            "status": "passed",
+            "cases": [
+              {
+                "caseId": "sql-atomicity",
+                "status": "passed",
+                "attempts": 10,
+                "checks": 109,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 55,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-delete-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-meta-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-commit-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 56,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-after-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 51,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-before-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 53,
+                "failedChecks": [],
+                "error": null
+              }
+            ],
+            "suiteStatus": "passed",
+            "suiteExitCode": 0
+          },
+          {
+            "platform": "windows-c",
+            "status": "failed",
+            "cases": [
+              {
+                "caseId": "sql-atomicity",
+                "status": "failed",
+                "attempts": 31,
+                "checks": 445,
+                "failedChecks": [
+                  {
+                    "id": "006-read-failure:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "007-read-step-failure:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "010-row-prepare-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "010-row-prepare-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "011-row-step-overflow:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "011-row-step-overflow:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "012-page-prepare-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "012-page-prepare-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "013-page-partial-step-overflow:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "013-page-partial-step-overflow:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "014-meta-prepare-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "015-meta-step-overflow:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "016-meta-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "017-row-invalid-json:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "017-row-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "018-page-invalid-json:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "018-page-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "019-outbox-invalid-json:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "019-outbox-invalid-json:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "020-local-row-read-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "021-remote-row-read-denied:primary-error-preserved",
+                    "passed": false
+                  },
+                  {
+                    "id": "022-pending-prepare-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "023-request-renew-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "023-request-renew-commit-denied:request-count",
+                    "passed": false
+                  },
+                  {
+                    "id": "027-empty-prepare-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "029-cache-commit-denied:operation",
+                    "passed": false
+                  },
+                  {
+                    "id": "030-release-commit-denied:operation",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: Case receipt is incomplete or failed\n    at file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-evidence.mjs:60:23"
+              },
+              {
+                "caseId": "C007-batch-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-batch-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-rejected",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-manifest-response-lost",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 65,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-delete-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 66,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-meta-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 66,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-ack-commit-failed",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 66,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-after-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              },
+              {
+                "caseId": "C007-before-ack-commit-exit",
+                "status": "passed",
+                "attempts": 5,
+                "checks": 60,
+                "failedChecks": [],
+                "error": null
+              }
+            ],
+            "suiteStatus": "failed",
+            "suiteExitCode": 1
+          },
+          {
+            "platform": "android",
+            "status": "failed",
+            "cases": [
+              {
+                "caseId": "sql-atomicity",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/sql-atomicity/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-batch-rejected",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-batch-rejected/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-batch-response-lost",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-batch-response-lost/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-manifest-rejected",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-manifest-rejected/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-manifest-response-lost",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-manifest-response-lost/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-ack-delete-failed",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-delete-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-ack-meta-failed",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-meta-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-ack-commit-failed",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-ack-commit-failed/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-after-ack-commit-exit",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-after-ack-commit-exit/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              },
+              {
+                "caseId": "C007-before-ack-commit-exit",
+                "status": "failed",
+                "attempts": 1,
+                "checks": 2,
+                "failedChecks": [
+                  {
+                    "id": "000-seed:exit",
+                    "passed": false
+                  },
+                  {
+                    "id": "000-seed:database-preserved",
+                    "passed": false
+                  }
+                ],
+                "error": "Error: ENOENT: no such file or directory, open '/home/runner/work/_temp/c007-android/suite/C007-before-ack-commit-exit/000-seed.result.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async Object.readFile (node:internal/fs/promises:1252:14)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/fault-harness/c007-same-db-controller.mjs:82:33"
+              }
+            ],
+            "suiteStatus": "failed",
+            "suiteExitCode": 1
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "issues": [
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "planned=10 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/sql-atomicity",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-rejected",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-batch-response-lost",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-rejected",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-manifest-response-lost",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-delete-failed",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-meta-failed",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-ack-commit-failed",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-after-ack-commit-exit",
+        "detail": "000-seed.reopened.json"
+      },
+      {
+        "kind": "case-count-incomplete",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "planned=5 attempts=1 checks=2"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "000-seed:exit"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "000-seed:same-db-restart"
+      },
+      {
+        "kind": "attempt-required-check-not-passed",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "000-seed:database-preserved"
+      },
+      {
+        "kind": "attempt-process-not-as-expected",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "000-seed"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "000-seed.result.json"
+      },
+      {
+        "kind": "missing-attempt-receipt-hash",
+        "path": "artifacts/c007-android-45180141745-1/suite/C007-before-ack-commit-exit",
+        "detail": "000-seed.reopened.json"
+      }
+    ],
+    "cases": 30,
+    "attempts": 141,
+    "checks": 1644,
+    "failedChecks": 47
+  },
+  "recordedRunPassed": false,
+  "acceptanceDecision": "not-made-by-this-auditor",
+  "attemptCountMeaning": "Controller child attempts, including startup failures; not a claim that each business operation executed.",
+  "deepPlatformSemanticsAudit": "not-performed-requires-independent-review",
+  "scope": [
+    "Only archived JSON/text bytes and hashes were read; no project code, tests, database or binary was executed.",
+    "Cloud-only hashes were compared with producer and collector records; cloud-only bytes were not locally rehashed.",
+    "The text inventory is not self-authenticating; archive/receipt provenance needs its separately trusted download receipt.",
+    "Sealed/sourceUnchanged and expected failed operations or exit 86 do not themselves determine test success.",
+    "Execution statistics are derived from actual materialized scenarios and receipts, not a fixed 186/187 assumption."
+  ]
+}

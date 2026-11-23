@@ -1,0 +1,253 @@
+{
+  "schema": "mytodo-c007-f9-root-manifest-coverage",
+  "version": 1,
+  "scriptSha256": "281d270fdf1920ece28126ec0cb7684dbf92264d369c3622775e382a452a90dc",
+  "runs": [
+    {
+      "runId": "45186305230",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "artifacts": [
+        {
+          "artifact": "c006-android-45186305230-1",
+          "manifest": "sha256.json",
+          "manifestSha256": "d999139facd9a6499779a334a4780951130f53d0271ddbd480d7dfbc0d6e1a8d",
+          "manifestRows": 1101,
+          "cloudNonManifestFiles": 1101,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c006-android-environment-45186305230-1",
+          "manifest": "sha256.json",
+          "manifestSha256": "7156f323bc76ab85ba1adea126128e3d54c494555963eabcc02e6cb90bd719ef",
+          "manifestRows": 45,
+          "cloudNonManifestFiles": 45,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c006-js-45186305230-1",
+          "manifest": "sha256.json",
+          "manifestSha256": "6a6fe9111de2f442ee336a9d4b073a692d93718ed05c4a923a97119f9b635deb",
+          "manifestRows": 1373,
+          "cloudNonManifestFiles": 1373,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c006-native-45186305230-1",
+          "manifest": "sha256.json",
+          "manifestSha256": "348de7ae513e11ded12127e3a1912fe2c499976d37d7ff0c014b49954ac5661a",
+          "manifestRows": 536,
+          "cloudNonManifestFiles": 536,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c006-report-45186305230-1",
+          "manifest": "sha256.json",
+          "manifestSha256": "cc02f23901097ead5d13016c1293f8bee9a23216ec9ec08daa0ebb6f210b6ed8",
+          "manifestRows": 3,
+          "cloudNonManifestFiles": 3,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "runId": "45186305196",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "artifacts": [
+        {
+          "artifact": "c004-android-environment-shard-0-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "6cc5041fa2a02b63d8051d708b982c579586b1fcedc99af94972718e6c51e353",
+          "manifestRows": 41,
+          "cloudNonManifestFiles": 41,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-1-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "9a60c5a1bbb76f4aeca55f7efbad1af548ffb3c6499a540a35f5c14a71dcbd6f",
+          "manifestRows": 44,
+          "cloudNonManifestFiles": 44,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-2-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "a78d0776a878f77a0a0e3a84170754639af5d7c4a8e3b5a5aba9ff6d5ff48826",
+          "manifestRows": 44,
+          "cloudNonManifestFiles": 44,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-3-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "e6ff7cb46edd4f29ff0642f69d80e1e16b50d70d925d34a11449c8afca19e68f",
+          "manifestRows": 44,
+          "cloudNonManifestFiles": 44,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-4-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "22d12eac330eeded91dd966dc98bc58bdc3ccce73ce29c3cbac86e174031b8d0",
+          "manifestRows": 43,
+          "cloudNonManifestFiles": 43,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-5-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "a1c9decb5b07d66494a97e7b4b2172ec56ab625ebd9222abcd23f45e3af49b75",
+          "manifestRows": 44,
+          "cloudNonManifestFiles": 44,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-6-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "3ee29ae8fd8561e0dbcf1c0e2d254f001aafb0e1ea60452c6d4ba0a1157b0892",
+          "manifestRows": 43,
+          "cloudNonManifestFiles": 43,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-environment-shard-7-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "df6f0d313ed2d83eed44c29272d7edbdd3606371a0e5ac1ef0e87ebc05eebfd7",
+          "manifestRows": 41,
+          "cloudNonManifestFiles": 41,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-0-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "c1a6f7032623afb76e87f2c7ac97fb2d6c98fedf7f589a994bae8086df6eaa02",
+          "manifestRows": 1231,
+          "cloudNonManifestFiles": 1231,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-1-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "abeb5be6b88e5fb0329de1a282f01945880262870aea4ceccd3e8b891cda41e0",
+          "manifestRows": 1240,
+          "cloudNonManifestFiles": 1240,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-2-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "3c62582094890f29c4fde8d4935e54f94b6cf858ac62ef5de8eac46f1db18dc0",
+          "manifestRows": 1234,
+          "cloudNonManifestFiles": 1234,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-3-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "f7011593ced98ad4f1a820d35c86a825d91b03ca69974a22035d06a8137f3d59",
+          "manifestRows": 1249,
+          "cloudNonManifestFiles": 1249,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-4-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "182200fad3096c69f1fc9dbdfdc4465028bdcbb23892da2bc94476fed3361b23",
+          "manifestRows": 1240,
+          "cloudNonManifestFiles": 1240,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-5-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "8dbfc27d21760affc158e1064d9c6f1c8d86eb05e63b860696d3dc028def508e",
+          "manifestRows": 1202,
+          "cloudNonManifestFiles": 1202,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-6-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "eafccbd34733ee7432c6e31f48d3a38feca8528999a5b71f6790bbe238a55f39",
+          "manifestRows": 1123,
+          "cloudNonManifestFiles": 1123,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-android-shard-7-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "aa854ffa04f442a909b84bf1e61322b904802786e88f038ab7672bfa24652b06",
+          "manifestRows": 1117,
+          "cloudNonManifestFiles": 1117,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-complete-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "488175ef827416c74d2cab5ae152aa5afe7418aaa03c32288305bcb8b1ad0c21",
+          "manifestRows": 1504,
+          "cloudNonManifestFiles": 1504,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        },
+        {
+          "artifact": "c004-desktop-45186305196-1",
+          "manifest": "payload-sha256.json",
+          "manifestSha256": "5d778d8122a5dabdafa70caf8b3bb7c4bed74cbe624ae3f601e3d95807aaf2c3",
+          "manifestRows": 4241,
+          "cloudNonManifestFiles": 4241,
+          "missing": [],
+          "extra": [],
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "scope": "Exact root producer manifest set comparison against original cloud collector inventory; binary bytes were not locally read. Nested manifest rows were separately verified by the frozen auditor.",
+  "supersedesInvalidDraft": "work/c007-audit-history/core-matrix-manifest-coverage-draft-invalid.json (draft assumed all root manifests were named sha256.json; matrix uses payload-sha256.json)"
+}

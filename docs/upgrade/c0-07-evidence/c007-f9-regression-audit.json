@@ -1,0 +1,1262 @@
+{
+  "schema": "mytodo-c007-f9-regression-independent-evidence-audit",
+  "version": 1,
+  "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+  "auditedAt": "2026-11-23T14:17:45.2938807+00:00",
+  "scriptSha256": "b00dad04ba6c7259828b201f32352317c044f5bf2c3cf77296ca35a5255004ba",
+  "localProjectExecutions": 0,
+  "runs": [
+    {
+      "kind": "bootstrap",
+      "runId": "45186305576",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "collectorExitCode": 0,
+      "collectorEvidenceComplete": true,
+      "originalCollectorFailures": [],
+      "integrity": {
+        "rawAuditPath": "work/c007-f9-bootstrap-integrity-only-raw.json",
+        "rawAuditSha256": "77954508cccd5ae9f16331c0d2fdbcabed5e6834fcb1103bf2d7bcfc3f2aef5a",
+        "auditorSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+        "localListedTextFiles": 110,
+        "locallyVerifiedTextFiles": 110,
+        "localTextBytes": 7888446,
+        "cloudInventoriedFiles": 122,
+        "producerRows": 121,
+        "producerLocalBytesVerifiedRows": 99,
+        "producerCloudCollectorHashComparedRows": 22,
+        "issues": [],
+        "scope": "Uses only raw audit integrity fields. Its C007-only execution fields do not apply to these C005/C006/baseline regressions."
+      },
+      "runtime": {
+        "cases": 4,
+        "passed": 4,
+        "failed": 0,
+        "childOperations": 23,
+        "expectedRejections": 2,
+        "expectedSigkill": 1,
+        "caseResults": [
+          {
+            "id": "C006-B42-snapshot-before",
+            "status": "passed",
+            "operations": [
+              {
+                "result": "result-1.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-2.json",
+                "operation": "sync",
+                "status": "rejected",
+                "exitCode": 1,
+                "signal": null
+              },
+              {
+                "result": "result-3.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-4.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-5.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              }
+            ],
+            "faults": [
+              {
+                "id": "C006-B42-snapshot-before",
+                "seen": 2,
+                "used": 1
+              }
+            ]
+          },
+          {
+            "id": "C006-B43-snapshot-disconnect",
+            "status": "passed",
+            "operations": [
+              {
+                "result": "result-6.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-7.json",
+                "operation": "sync",
+                "status": "rejected",
+                "exitCode": 1,
+                "signal": null
+              },
+              {
+                "result": "result-8.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-9.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-10.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              }
+            ],
+            "faults": [
+              {
+                "id": "C006-B43-snapshot-disconnect",
+                "seen": 2,
+                "used": 1
+              }
+            ]
+          },
+          {
+            "id": "C006-B44-kill-after-snapshot",
+            "status": "passed",
+            "operations": [
+              {
+                "result": "result-11.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-12.json",
+                "operation": "sync",
+                "status": "paused-at-gate",
+                "exitCode": null,
+                "signal": "SIGKILL"
+              },
+              {
+                "result": "result-13.json",
+                "operation": "audit",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-14.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-15.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-16.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-17.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              }
+            ],
+            "faults": []
+          },
+          {
+            "id": "C006-B45-real-edit-cas",
+            "status": "passed",
+            "operations": [
+              {
+                "result": "result-18.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-20.json",
+                "operation": "edit",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-19.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-21.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-22.json",
+                "operation": "initialize",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              },
+              {
+                "result": "result-23.json",
+                "operation": "sync",
+                "status": "passed",
+                "exitCode": 0,
+                "signal": null
+              }
+            ],
+            "faults": []
+          }
+        ],
+        "scope": "Four real Node SQLite/HTTP/process tests only; supplements rather than replaces frozen C006 evidence"
+      }
+    },
+    {
+      "kind": "dpapi",
+      "runId": "45186305386",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "collectorExitCode": 0,
+      "collectorEvidenceComplete": true,
+      "originalCollectorFailures": [],
+      "integrity": {
+        "rawAuditPath": "work/c007-f9-dpapi-integrity-only-raw.json",
+        "rawAuditSha256": "5dc9a56a979dee3ba595b934afb26ed30e5e8d8875ef85fcef16a2f197b7cb56",
+        "auditorSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+        "localListedTextFiles": 19,
+        "locallyVerifiedTextFiles": 19,
+        "localTextBytes": 66989,
+        "cloudInventoriedFiles": 13,
+        "producerRows": 12,
+        "producerLocalBytesVerifiedRows": 8,
+        "producerCloudCollectorHashComparedRows": 4,
+        "issues": [],
+        "scope": "Uses only raw audit integrity fields. Its C007-only execution fields do not apply to these C005/C006/baseline regressions."
+      },
+      "runtime": {
+        "cases": 22,
+        "passed": 22,
+        "failed": 0,
+        "subprocesses": 55,
+        "expectedWriteRejections": 14,
+        "abnormalProcessReceipts": 0,
+        "networkRequests": 0,
+        "credentialPlaintextLogged": false,
+        "checkLabels": 71,
+        "checkLabelsMeaning": "Descriptive case labels, not independently counted machine assertions.",
+        "casesSummary": [
+          {
+            "id": "c-to-node-ascii",
+            "status": "passed",
+            "checks": [
+              "C production config_save",
+              "Node real DPAPI/read/request"
+            ]
+          },
+          {
+            "id": "node-to-c-ascii",
+            "status": "passed",
+            "checks": [
+              "Node production save",
+              "C production config_read",
+              "Node process-store reopen"
+            ]
+          },
+          {
+            "id": "c-to-node-unicode",
+            "status": "passed",
+            "checks": [
+              "C production config_save",
+              "Node real DPAPI/read/request"
+            ]
+          },
+          {
+            "id": "node-to-c-unicode",
+            "status": "passed",
+            "checks": [
+              "Node production save",
+              "C production config_read",
+              "Node process-store reopen"
+            ]
+          },
+          {
+            "id": "c-modern-format",
+            "status": "passed",
+            "checks": [
+              "C output actually read by Node",
+              "modern prefix"
+            ]
+          },
+          {
+            "id": "node-blank-password-preserves",
+            "status": "passed",
+            "checks": [
+              "Node save and blank-password update",
+              "Node exact read after update",
+              "C exact read"
+            ]
+          },
+          {
+            "id": "empty-file-first-open",
+            "status": "passed",
+            "checks": {
+              "cReadRejected": true,
+              "nodeReadRejected": true,
+              "nodeSaveRejected": true,
+              "nodeOriginalPreserved": true,
+              "cSaveRejected": true,
+              "cOriginalPreserved": true
+            }
+          },
+          {
+            "id": "legacy-utf16",
+            "status": "passed",
+            "checks": [
+              "same-user real DPAPI UTF16 legacy",
+              "C/Node exact Unicode read",
+              "read preserves bytes",
+              "C upgrade and Node reread"
+            ]
+          },
+          {
+            "id": "legacy-powershell",
+            "status": "passed",
+            "checks": [
+              "Node reads self-checked PowerShell legacy file",
+              "C reads self-checked PowerShell legacy file"
+            ]
+          },
+          {
+            "id": "reject-truncated",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-odd-hex",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-wrong-prefix",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-nonhex",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-cipher-corrupt",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-empty",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-nul-trailing",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "reject-oversized",
+            "status": "passed",
+            "checks": [
+              "C reject",
+              "Node cached and fresh reject",
+              "both save reject",
+              "original bytes retained"
+            ]
+          },
+          {
+            "id": "protected-invalid-json",
+            "status": "passed",
+            "checks": [
+              "real DPAPI malformed plaintext rejection",
+              "file preserved"
+            ]
+          },
+          {
+            "id": "protected-json-scalar",
+            "status": "passed",
+            "checks": [
+              "real DPAPI malformed plaintext rejection",
+              "file preserved"
+            ]
+          },
+          {
+            "id": "protected-invalid-utf8",
+            "status": "passed",
+            "checks": [
+              "real DPAPI malformed plaintext rejection",
+              "file preserved"
+            ]
+          },
+          {
+            "id": "protected-trailing-json",
+            "status": "passed",
+            "checks": [
+              "real DPAPI malformed plaintext rejection",
+              "file preserved"
+            ]
+          },
+          {
+            "id": "read-access-denied",
+            "status": "passed",
+            "checks": [
+              "real Windows exclusive sharing failure",
+              "both reads and saves reject",
+              "original bytes retained",
+              "lock fixture released and exited normally"
+            ]
+          }
+        ],
+        "scope": "real CryptProtectData/CryptUnprotectData, same GitHub Windows runner user"
+      }
+    },
+    {
+      "kind": "baseline",
+      "runId": "45186305173",
+      "sourceSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "collectorExitCode": 1,
+      "collectorEvidenceComplete": false,
+      "originalCollectorFailures": [
+        {
+          "kind": "artifact-has-no-integrity-manifest",
+          "path": "c003-android-inventory-45186305173-1"
+        },
+        {
+          "kind": "artifact-has-no-integrity-manifest",
+          "path": "phase0-android-45186305173-1"
+        },
+        {
+          "kind": "artifact-has-no-integrity-manifest",
+          "path": "phase0-source-45186305173-1"
+        },
+        {
+          "kind": "artifact-has-no-integrity-manifest",
+          "path": "phase0-web-45186305173-1"
+        },
+        {
+          "kind": "artifact-has-no-integrity-manifest",
+          "path": "phase0-windows-45186305173-1"
+        }
+      ],
+      "integrity": {
+        "rawAuditPath": "work/c007-f9-baseline-integrity-only-raw.json",
+        "rawAuditSha256": "0ecf6bf102d24851442d445882a3a220dabec89924e6a2e9453501ccc318e5db",
+        "auditorSha256": "eb614a19ee4faa4a7a201925e17dd14c938edb15b431fc232cdc858e610e1f5d",
+        "localListedTextFiles": 122,
+        "locallyVerifiedTextFiles": 122,
+        "localTextBytes": 397218,
+        "cloudInventoriedFiles": 146,
+        "producerRows": 0,
+        "producerLocalBytesVerifiedRows": 0,
+        "producerCloudCollectorHashComparedRows": 0,
+        "issues": [],
+        "scope": "Uses only raw audit integrity fields. Its C007-only execution fields do not apply to these C005/C006/baseline regressions."
+      },
+      "runtime": {
+        "platforms": [
+          {
+            "platform": "windows",
+            "jobStatus": "success",
+            "receiptCaseCount": 11,
+            "requiredReceiptCaseCount": 10,
+            "failedReceiptCases": 0,
+            "testCases": [
+              {
+                "id": "windows-self-test",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "windows-advanced-test",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "windows-feedback-test",
+                "status": "passed",
+                "exitCode": 0
+              }
+            ],
+            "testSummary": null,
+            "androidManifest": null
+          },
+          {
+            "platform": "android",
+            "jobStatus": "success",
+            "receiptCaseCount": 19,
+            "requiredReceiptCaseCount": 18,
+            "failedReceiptCases": 0,
+            "testCases": [
+              {
+                "id": "android-pomodoro-tests",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "android-daily-tests",
+                "status": "passed",
+                "exitCode": 0
+              },
+              {
+                "id": "android-notification-controls-tests",
+                "status": "passed",
+                "exitCode": 0
+              }
+            ],
+            "testSummary": null,
+            "androidManifest": {
+              "applicationId": "local.gxtodo.replica",
+              "versionCode": "15",
+              "versionName": "0.9.2",
+              "unsigned": true
+            }
+          },
+          {
+            "platform": "web",
+            "jobStatus": "success",
+            "receiptCaseCount": 13,
+            "requiredReceiptCaseCount": 12,
+            "failedReceiptCases": 0,
+            "testCases": [
+              {
+                "id": "shared-js-tests",
+                "status": "passed",
+                "exitCode": 0
+              }
+            ],
+            "testSummary": {
+              "skipped": 0,
+              "tests": 121,
+              "fail": 0
+            },
+            "androidManifest": null
+          }
+        ],
+        "sharedJsTests": 121,
+        "sharedJsFailures": 0,
+        "sharedJsSkipped": 0,
+        "windowsLogSummaries": [
+          {
+            "test": "self",
+            "jsonSummaries": [
+              {
+                "checks": 32,
+                "failures": 0
+              }
+            ]
+          },
+          {
+            "test": "advanced",
+            "jsonSummaries": [
+              {
+                "detailKeyChecks": 48,
+                "detailKeyFailures": 0
+              },
+              {
+                "checks": 48,
+                "failures": 0
+              }
+            ]
+          },
+          {
+            "test": "feedback",
+            "jsonSummaries": [
+              {
+                "checks": 21,
+                "failures": 0
+              }
+            ]
+          }
+        ],
+        "androidHostAssertions": [
+          {
+            "assertions": 73,
+            "id": "pomodoro"
+          },
+          {
+            "assertions": 47,
+            "id": "daily"
+          },
+          {
+            "assertions": 20,
+            "id": "notification-controls"
+          }
+        ]
+      },
+      "buildArtifacts": [
+        {
+          "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-windows-45186305173-1/MyTodo-phase0.exe",
+          "bytes": 1328640,
+          "sha256": "7ca03e633b965ef88166ea0b90d4b3b8cfee9f693083efaed314fffe93613a4a",
+          "independentCloudRehash": "parent-owned-separate-receipt-required"
+        },
+        {
+          "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-android-45186305173-1/MyTodo-unsigned.apk",
+          "bytes": 281749,
+          "sha256": "2a2c8d5690f0018d0f600146f3e4fb7563458f7cd2c8cf70dab81795d7684b32",
+          "independentCloudRehash": "parent-owned-separate-receipt-required"
+        },
+        {
+          "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-web-45186305173-1/WebCredentialHelper.exe",
+          "bytes": 149504,
+          "sha256": "c72cb4bf7fa4557591918348fc8dd37d866c75bd854acc5606f7fcb96307ac28",
+          "independentCloudRehash": "parent-owned-separate-receipt-required"
+        },
+        {
+          "path": "/tmp/mytodo-c007-regression-evidence-45186305173-cffrwr20/payloads/phase0-web-45186305173-1/MyTodo-web-source.zip",
+          "bytes": 101876,
+          "sha256": "e45b4a02bdf6c94c35e93b5c94d35d00238997b4babdcf1233416b3b2068df6e",
+          "independentCloudRehash": "parent-owned-separate-receipt-required"
+        }
+      ],
+      "qualification": "Recorded runtime/build regression passed. No recursive producer manifests exist for the five artifacts. Preserve collector exit1/incomplete and use a separate independent four-artifact cloud rehash qualification. Unsigned APK plus host Java tests are not installation, upgrade, emulator or device-matrix evidence."
+    }
+  ],
+  "auditChecks": [
+    {
+      "id": "bootstrap:source-run",
+      "passed": true
+    },
+    {
+      "id": "bootstrap:local-and-producer-hashes",
+      "passed": true
+    },
+    {
+      "id": "bootstrap:recursive-manifest-coverage",
+      "passed": true
+    },
+    {
+      "id": "bootstrap:summary-seal-identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:case-passed",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:summary-entry",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-1.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-1.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-1.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-1.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-2.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-2.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-2.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-2.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-3.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-3.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-3.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-3.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-4.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-4.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-4.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-4.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-5.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-5.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-5.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:result-5.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "C006-B42-snapshot-before:snapshot-boundary",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:case-passed",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:summary-entry",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-6.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-6.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-6.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-6.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-7.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-7.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-7.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-7.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-8.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-8.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-8.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-8.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-9.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-9.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-9.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-9.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-10.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-10.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-10.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:result-10.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:fault-hit",
+      "passed": true
+    },
+    {
+      "id": "C006-B43-snapshot-disconnect:snapshot-boundary",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:case-passed",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:summary-entry",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-11.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-11.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-11.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-11.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-12.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-12.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-12.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-12.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-13.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-13.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-13.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-13.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-14.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-14.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-14.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-14.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-15.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-15.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-15.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-15.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-16.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-16.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-16.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-16.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-17.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-17.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-17.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:result-17.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:same-db-new-process",
+      "passed": true
+    },
+    {
+      "id": "C006-B44-kill-after-snapshot:lease-no-mutation",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:case-passed",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:summary-entry",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-18.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-18.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-18.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-18.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-20.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-20.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-20.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-20.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-19.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-19.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-19.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-19.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-21.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-21.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-21.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-21.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-22.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-22.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-22.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-22.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-23.json:result-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-23.json:process-copy",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-23.json:identity",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:result-23.json:process-outcome",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:failed-cas-retained-edit",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:same-db-second-process",
+      "passed": true
+    },
+    {
+      "id": "C006-B45-real-edit-cas:tombstone-and-note",
+      "passed": true
+    },
+    {
+      "id": "bootstrap:counts",
+      "passed": true
+    },
+    {
+      "id": "dpapi:source-run",
+      "passed": true
+    },
+    {
+      "id": "dpapi:local-and-producer-hashes",
+      "passed": true
+    },
+    {
+      "id": "dpapi:recursive-manifest-coverage",
+      "passed": true
+    },
+    {
+      "id": "dpapi:report-identity-and-counts",
+      "passed": true
+    },
+    {
+      "id": "dpapi:processes-network-plaintext",
+      "passed": true
+    },
+    {
+      "id": "dpapi:builder-output-hash",
+      "passed": true
+    },
+    {
+      "id": "baseline:source-run",
+      "passed": true
+    },
+    {
+      "id": "baseline:local-and-producer-hashes",
+      "passed": true
+    },
+    {
+      "id": "baseline:windows:source-success",
+      "passed": true
+    },
+    {
+      "id": "baseline:windows:case-copy",
+      "passed": true
+    },
+    {
+      "id": "baseline:MyTodo-phase0.exe:receipt-inventory-match",
+      "passed": true
+    },
+    {
+      "id": "baseline:android:source-success",
+      "passed": true
+    },
+    {
+      "id": "baseline:android:case-copy",
+      "passed": true
+    },
+    {
+      "id": "baseline:MyTodo-unsigned.apk:receipt-inventory-match",
+      "passed": true
+    },
+    {
+      "id": "baseline:web:source-success",
+      "passed": true
+    },
+    {
+      "id": "baseline:web:case-copy",
+      "passed": true
+    },
+    {
+      "id": "baseline:WebCredentialHelper.exe:receipt-inventory-match",
+      "passed": true
+    },
+    {
+      "id": "baseline:MyTodo-web-source.zip:receipt-inventory-match",
+      "passed": true
+    },
+    {
+      "id": "baseline:actual-tap121",
+      "passed": true
+    },
+    {
+      "id": "baseline:native-self:failures",
+      "passed": true
+    },
+    {
+      "id": "baseline:native-advanced:failures",
+      "passed": true
+    },
+    {
+      "id": "baseline:native-advanced:failures",
+      "passed": true
+    },
+    {
+      "id": "baseline:native-feedback:failures",
+      "passed": true
+    },
+    {
+      "id": "baseline:android-pomodoro",
+      "passed": true
+    },
+    {
+      "id": "baseline:android-daily",
+      "passed": true
+    },
+    {
+      "id": "baseline:android-notification-controls",
+      "passed": true
+    },
+    {
+      "id": "baseline:preserved-manifest-failures",
+      "passed": true
+    }
+  ],
+  "failedAuditChecks": [],
+  "auditPassed": true,
+  "limitations": [
+    "All work is original archived JSON/text and hash review; no tests, binaries, APKs or databases were locally executed.",
+    "The reused C007 auditor execution section is deliberately inapplicable; only its integrity fields are consumed.",
+    "Cloud-only entries are compared to original collector/producer hashes, not locally rehashed.",
+    "Text inventories require separately trusted archive-transfer provenance.",
+    "Bootstrap checks are selected independent semantic checks plus all child receipt identity/copy/outcome checks, not a re-execution of the entire harness.",
+    "DPAPI evidence is same Windows runner user context; it does not establish cross-user decryptability.",
+    "Baseline remains qualified, with original collection failure retained. Independent cloud build-artifact hashes are owned by the parent agent."
+  ]
+}

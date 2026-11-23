@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "{\n  \"commit\": \"19ceea620d1f7c21d89e5c65f1aa9fcac437caaa\",\n  \"parent\": \"edfde91eba174f9f8c20657ded4657c8841d0f83\",\n  \"paths\": [\n    \"tests/c006/c006-harness/android-runner.mjs\"\n  ],\n  \"evidence\": \"/tmp/mytodo-c005-zpj4jz2d\",\n  \"status\": \"clean\"\n}\n",
+  "stderr": ""
+}
