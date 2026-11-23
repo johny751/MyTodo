@@ -105,9 +105,9 @@ try {
   await copyAsset('harness-entry.mjs', path.join(here, 'harness-entry.mjs'));
   const delta = await fs.readFile(path.join(root, 'src/delta-sync.mjs'));
   const adapted = Buffer.concat([delta, Buffer.from('\nexport const __c003Internals={manifestValue,bind,checkpoint,pull,prepare,publish,makeSnapshot};\n')]);
-  const deltaPath = path.join(build, 'assets/src/.c003-delta-adapter.mjs');
+  const deltaPath = path.join(build, 'assets/src/c003-delta-adapter.mjs');
   await fs.writeFile(deltaPath, adapted);
-  receipt.assets['src/.c003-delta-adapter.mjs'] = hash(adapted);
+  receipt.assets['src/c003-delta-adapter.mjs'] = hash(adapted);
   receipt.deltaAdapter = {originalSha256: hash(delta), adaptedSha256: hash(adapted),
     adaptation: 'Original source bytes plus test-only private-symbol export; no function-body edits'};
   const metadata = {schema: 'mytodo-c003-android-source-provenance', version: 1,
@@ -145,6 +145,9 @@ try {
   await command('apksigner-test-only', java('java'), ['-jar', path.join(tools, 'lib/apksigner.jar'), 'sign', '--ks', key,
     '--ks-key-alias', 'c003-test', '--ks-pass', 'pass:c003-test-only', '--key-pass', 'pass:c003-test-only', '--out', apk, aligned]);
   await command('apksigner-verify', java('java'), ['-jar', path.join(tools, 'lib/apksigner.jar'), 'verify', '--verbose', '--print-certs', apk]);
+  const apkEntries = new Set((await command('verify-packaged-webview-assets', java('jar'), ['tf', apk])).split(/\r?\n/));
+  const missingAssets = Object.keys(receipt.assets).filter(relative => !apkEntries.has('assets/' + relative));
+  if (missingAssets.length) throw new Error('WebView assets missing from test APK: ' + missingAssets.join(', '));
   for (const output of [apk, unsigned]) receipt.outputs[path.basename(output)] = {path: output, sha256: hash(await fs.readFile(output))};
   receipt.status = 'passed'; exitCode = 0;
 } catch (error) {

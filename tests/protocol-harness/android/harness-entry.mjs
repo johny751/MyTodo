@@ -1,6 +1,6 @@
 import {runAndroidEntry} from './tests/protocol-harness/android/android-adapter.mjs';
 import {executeCase} from './tests/protocol-harness/shared-executor.mjs';
-import {__c003Internals} from './src/.c003-delta-adapter.mjs';
+import {__c003Internals} from './src/c003-delta-adapter.mjs';
 
 await runAndroidEntry(async (input, adapter) => {
   const metadata = await (await fetch('./build-metadata.json')).json();
