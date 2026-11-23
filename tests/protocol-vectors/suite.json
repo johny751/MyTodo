@@ -441,7 +441,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -491,7 +491,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -509,7 +509,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -559,7 +559,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -577,7 +577,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -657,7 +657,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1148,7 +1148,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1189,7 +1189,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1207,7 +1207,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1248,7 +1248,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1266,7 +1266,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1307,7 +1307,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1325,7 +1325,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1366,7 +1366,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1384,7 +1384,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1425,7 +1425,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1443,7 +1443,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1484,7 +1484,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1502,7 +1502,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1543,7 +1543,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1561,7 +1561,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1602,7 +1602,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1620,7 +1620,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1661,7 +1661,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -1679,7 +1679,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1720,7 +1720,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1738,7 +1738,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1779,7 +1779,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1797,7 +1797,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1838,7 +1838,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1856,7 +1856,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1897,7 +1897,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1915,7 +1915,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -1959,7 +1959,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -1977,7 +1977,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2018,7 +2018,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2036,7 +2036,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2077,7 +2077,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2095,7 +2095,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2136,7 +2136,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2154,7 +2154,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2195,7 +2195,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2213,7 +2213,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2254,7 +2254,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2272,7 +2272,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2313,7 +2313,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2331,7 +2331,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2372,7 +2372,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2390,7 +2390,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2433,7 +2433,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2451,7 +2451,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2494,7 +2494,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2512,7 +2512,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2555,7 +2555,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -2573,7 +2573,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2616,7 +2616,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2634,7 +2634,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2675,7 +2675,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2693,7 +2693,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2734,7 +2734,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2752,7 +2752,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2793,7 +2793,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -2811,7 +2811,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2852,7 +2852,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2870,7 +2870,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2911,7 +2911,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -2929,7 +2929,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -2970,7 +2970,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -2988,7 +2988,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3026,7 +3026,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -3044,7 +3044,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3084,7 +3084,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -3102,7 +3102,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3133,7 +3133,7 @@
             "etag": "\"fixture-1\"",
             "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"A\":2147483648},\"snapshot\":null}"
           },
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -3151,7 +3151,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3182,7 +3182,7 @@
             "etag": "\"fixture-1\"",
             "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"A\":9007199254740991},\"snapshot\":null}"
           },
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -3200,7 +3200,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3231,7 +3231,7 @@
             "etag": "\"fixture-1\"",
             "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"A\":9007199254740992},\"snapshot\":null}"
           },
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -3249,7 +3249,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3280,7 +3280,7 @@
             "etag": "\"fixture-1\"",
             "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":[],\"snapshot\":null}"
           },
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -3298,7 +3298,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3329,7 +3329,7 @@
             "etag": "\"fixture-1\"",
             "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"c0-03-epoch\",\"heads\":{\"\":1},\"snapshot\":null}"
           },
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -3347,7 +3347,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3378,7 +3378,7 @@
             "etag": "\"fixture-1\"",
             "body": "{\"format\":\"gxtodo-delta\",\"version\":2,\"epoch\":\"\",\"heads\":{},\"snapshot\":null}"
           },
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -3396,7 +3396,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -3445,7 +3445,7 @@
             },
             "snapshot": null
           },
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -4307,7 +4307,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4385,7 +4385,7 @@
             "snapshot": null
           },
           "budget": 12,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -4556,7 +4556,7 @@
         "src/replica.mjs",
         "windows/database.c"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4597,7 +4597,7 @@
           ],
           "device": "wire-A",
           "index": 2147483647,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -4614,7 +4614,7 @@
         "src/replica.mjs",
         "windows/database.c"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4655,7 +4655,7 @@
           ],
           "device": "wire-A",
           "index": 2147483648,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -4672,7 +4672,7 @@
         "src/replica.mjs",
         "windows/database.c"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4713,7 +4713,7 @@
           ],
           "device": "wire-A",
           "index": 9007199254740991,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -4730,7 +4730,7 @@
         "src/replica.mjs",
         "windows/database.c"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4771,7 +4771,7 @@
           ],
           "device": "wire-A",
           "index": 9007199254740992,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -4789,7 +4789,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4830,7 +4830,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -4848,7 +4848,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4889,7 +4889,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -4907,7 +4907,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -4948,7 +4948,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -4966,7 +4966,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -5007,7 +5007,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"
@@ -5025,7 +5025,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -5066,7 +5066,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "accept"
         },
         {
           "op": "reopen"
@@ -5084,7 +5084,7 @@
         "src/replica.mjs",
         "src/delta-sync.mjs"
       ],
-      "expectationMode": "observation",
+      "expectationMode": "contract",
       "generate": [
         {
           "op": "local",
@@ -5125,7 +5125,7 @@
           ],
           "device": "wire-A",
           "index": 1,
-          "expect": "observe"
+          "expect": "reject"
         },
         {
           "op": "reopen"

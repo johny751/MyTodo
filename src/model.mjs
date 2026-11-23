@@ -1,5 +1,7 @@
 import {flattenTasks} from './task-tree.mjs';
 import {normalizeRepeat,normalizeReminder,reminderTime} from './schedule.mjs';
+export const isEntityId = value => typeof value === 'string' && value.length > 0 &&
+  !/[\u0000\uD800-\uDFFF]/u.test(value) && new TextEncoder().encode(value).length <= 800;
 export const QUADRANTS = ['很重要-很紧急', '重要-不紧急', '不重要-紧急', '不重要-不紧急'];
 export function dayKey(date = new Date()) {
   return new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit', day:'2-digit'}).format(date);
@@ -63,7 +65,7 @@ const stamp=value=>text(value,40);
 export function normalizeState(input) {
   if(!input || ![1,2].includes(input.version) || !Array.isArray(input.tasks) || !Array.isArray(input.notes) || !Array.isArray(input.projects) || !Array.isArray(input.tags) || !Array.isArray(input.places)) throw new Error('数据格式不正确');
   const ids=new Set();
-  const id=value=>{if(typeof value!=='string'||!value||value.length>100||ids.has(value))throw new Error('数据包含无效或重复 ID'); ids.add(value);return value;};
+  const id=value=>{if(!isEntityId(value)||ids.has(value))throw new Error('数据包含无效或重复 ID'); ids.add(value);return value;};
   let count=0;
   function task(t,index,parent=null,depth=0){
     if(!t||typeof t!=='object')throw new Error('任务格式不正确');

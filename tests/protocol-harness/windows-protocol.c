@@ -174,13 +174,10 @@ static int harness_operation(DB*d,Sync*s,J*operation,J*sample,const wchar_t*db_d
         J*events=harness_events(operation,sample);
         if(!cJSON_IsArray(events)){cJSON_Delete(events);return harness_error(d,"Fixture remote events or producer sample are absent.");}
         J*index=get(operation,"index");
-        double n=cJSON_IsNumber(index)?num(operation,"index"):0;
-        if(n<INT_MIN||n>INT_MAX||n!=floor(n)){
-            ss(stage,"unsupportedApi","db_remote has an int cursor index; no truncating adapter conversion was performed");
-            harness_blocked++;cJSON_Delete(events);return harness_error(d,"The production C direct db_remote index API cannot represent this fixture integer.");
-        }
-        const char*device=str(operation,"device");
-        int ok=db_remote(d,events,*device?device:0,(int)n);cJSON_Delete(events);return ok;
+        J*device=get(operation,"device");
+        int has_cursor=device||index;
+        int ok=db_remote(d,events,has_cursor?str(operation,"device"):0,num(operation,"index"));
+        cJSON_Delete(events);return ok;
     }
     if(!strcmp(op,"manifest")){
         J*parsed=harness_manifest(s,operation,1);int ok=parsed!=0;set(stage,"manifest",parsed);return ok;

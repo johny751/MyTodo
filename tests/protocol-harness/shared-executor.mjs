@@ -82,9 +82,9 @@ export async function executeCase(options) {
           case 'remote': {
             const events=sourceEvents(operation,sample);
             stage.inputEvents=events;
-            stage.returned=await applyRemote(call,events,meta=>{
-              if (operation.device != null && operation.index != null) meta.cursors[operation.device]=Math.max(meta.cursors[operation.device] || 0,operation.index);
-            });break;
+            const cursor=Object.hasOwn(operation,'device')||Object.hasOwn(operation,'index')
+              ? {device:operation.device,index:operation.index} : null;
+            stage.returned=await applyRemote(call,events,undefined,cursor);break;
           }
           case 'manifest':
             if (!delta?.manifestValue) throw new Error('Actual delta manifest access is unavailable');

@@ -36,7 +36,37 @@ export function verifyResult(result,selected,defaults) {
     }
     if((stage.before.readErrors||[]).length||(stage.after.readErrors||[]).length) add('stage-'+stage.index+'-SQL-read-diagnostic',false,{before:stage.before.readErrors,after:stage.after.readErrors});
   }
-  add('final-SQL-read-diagnostic',!(result.raw.readErrors||[]).length&&!(result.reopened.readErrors||[]).length,{raw:result.raw.readErrors,reopened:result.reopened.readErrors});
+  if(result.mode==='receive') {
+    const row=result.reopened.rows?.[0];
+    const ordering={
+      'actor-A-a': {actors:['A','a'], body:'lower'},
+      'actor-A-a-reverse': {actors:['A','a'], body:'lower'},
+      'actor-hyphen-ascii': {actors:['A','A-','A0','a','a-'], body:'4'}
+    };
+    const ordered=ordering[selected.id];
+    if(ordered) {
+      add('protocol-actor-winner-and-history',row?.data?.body===ordered.body &&
+        same(row?.record?.events?.map(event=>event.actor),ordered.actors) &&
+        same(row?.conflicts?.find(conflict=>conflict.field==='body')?.values?.map(choice=>choice.device),ordered.actors) &&
+        row?.conflicts?.find(conflict=>conflict.field==='body')?.title===ordered.body);
+    }
+    if(selected.id==='prepare-int32-overflow') {
+      const pending=result.reopened.meta?.pending;
+      const body=pending?.body ? JSON.parse(pending.body) : null;
+      add('durable-positive-batch-index',pending?.index===2147483648 && body?.index===2147483648 &&
+        pending.path==='v2/b-'+defaults.receiverActor+'-2147483648.json.gz');
+    }
+    if(selected.id==='snapshot-cursor-unsafe') {
+      const stage=result.stages.find(candidate=>candidate.op==='pull');
+      add('invalid-snapshot-rejected-before-write',same(fullAudit(stage?.before),fullAudit(stage?.after)));
+    }
+    const cursorCase=result.mode==='receive' && ['cursor-int32-max','cursor-int32-plus-one','cursor-max-safe'].includes(selected.id);
+    if(cursorCase) {
+      const spec=selected.receive.find(operation=>operation.op==='remote');
+      add('durable-exact-cursor',result.reopened.meta?.cursors?.[spec.device]===spec.index);
+    }
+  }
+  add('final-SQL-read-diagnostic' ,!(result.raw.readErrors||[]).length&&!(result.reopened.readErrors||[]).length,{raw:result.raw.readErrors,reopened:result.reopened.readErrors});
   return {status:checks.some(x=>x.status==='failed')||result.status==='failed'?'failed':result.status==='blocked'?'blocked':'passed',checks};
 }
 function differences(a,b,prefix='',out=[]) {
