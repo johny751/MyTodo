@@ -14,7 +14,7 @@ const options = new Map();
 for (let i = 2; i < process.argv.length; i += 2) {
   const name = process.argv[i];
   const value = process.argv[i + 1];
-  if (!['--phase','--output','--desktop','--android','--android-environment','--android-serial'].includes(name) || !value || options.has(name)) {
+  if (!['--phase','--output','--desktop','--android','--android-environment','--android-serial','--android-shard'].includes(name) || !value || options.has(name)) {
     throw new Error('Invalid matrix argument: ' + name);
   }
   options.set(name, value);
@@ -41,6 +41,13 @@ const relativeFrom = (base, file) => path.relative(base, file).split(path.sep).j
 const suitePath = path.resolve('tests/protocol-vectors/suite.json');
 const suiteBytes = await fs.readFile(suitePath);
 const suite = JSON.parse(suiteBytes);
+const shardCount = 8;
+const shardOption = options.get('--android-shard');
+if (shardOption !== undefined && (phase !== 'android' || !/^[0-7]$/.test(shardOption))) {
+  throw new Error('Only Android accepts --android-shard 0 through 7');
+}
+const shard = shardOption === undefined ? null : Number(shardOption);
+const assignedCases = slot => suite.cases.filter((_,index) => slot === null || index % shardCount === slot);
 const jsonDigest = value => hash(JSON.stringify(canonical(value)));
 const identity = {
   sourceSha: process.env.GITHUB_SHA,
@@ -50,7 +57,7 @@ const identity = {
 };
 const summary = {
   schema:'mytodo-c004-phase', version:1, phase, ...identity,
-  suiteSha256:hash(suiteBytes), suiteCases:suite.cases.length,
+  suiteSha256:hash(suiteBytes), suiteCases:suite.cases.length, androidShard:shard,
   runUrl:`${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${identity.runId}`,
   runner:{os:process.env.RUNNER_OS,arch:process.env.RUNNER_ARCH,image:process.env.ImageOS,imageVersion:process.env.ImageVersion,node:process.version,sqlite:process.versions.sqlite},
   startedAt:new Date().toISOString(), commands:[], executions:[], comparisons:[], dependencies:{},
@@ -101,14 +108,14 @@ async function inventory(base, dir = base) {
   return payload.sort((a,b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
 }
 
-async function importPhase(name) {
-  const location = options.get('--' + name);
+async function importPhase(name, location = options.get('--' + name), slot = null) {
+  const dependency = slot === null ? name : name + '-' + slot;
   if (!location) return null;
   const source = under(runnerTemp, location);
   try {await fs.access(path.join(source, 'summary.json'));}
   catch (error) {
     if (error.code !== 'ENOENT') throw error;
-    summary.dependencies[name] = {status:'blocked',reason:'GitHub job did not publish the phase summary'};
+    summary.dependencies[dependency] = {status:'blocked',reason:'GitHub job did not publish the phase summary'};
     return null;
   }
   const [payload, manifest] = await Promise.all([inventory(source),read(path.join(source,'payload-sha256.json'))]);
@@ -118,9 +125,10 @@ async function importPhase(name) {
   for (const field of Object.keys(identity)) if (prior[field] !== identity[field]) throw new Error(name + ' evidence differs in ' + field);
   const expected = name === 'desktop' ? desktop : ['android'];
   const sources = name === 'desktop' ? desktop : platforms;
-  const required = new Set(suite.cases.flatMap(test => expected.flatMap(platform => [idFor(test,platform),...sources.map(source => idFor(test,platform,source))])));
+  if ((prior.androidShard ?? null) !== slot) throw new Error('Wrong evidence shard: ' + dependency);
+  const required = new Set(assignedCases(slot).flatMap(test => expected.flatMap(platform => [idFor(test,platform),...sources.map(source => idFor(test,platform,source))])));
   for (const item of prior.executions) {
-    if (!required.delete(item.id)) throw new Error('Unexpected or duplicate execution ' + item.id);
+    if (!required.delete(item.id) || results.has(item.id)) throw new Error('Unexpected or duplicate execution ' + item.id);
     const relative = `cases/${item.id}/result.json`;
     if (item.result !== relative || payload.find(entry => entry.path === relative)?.sha256 !== item.outputSha256) {
       throw new Error('Execution receipt does not match archived result: ' + item.id);
@@ -128,10 +136,34 @@ async function importPhase(name) {
     const result = await read(path.join(source,relative));
     results.set(item.id, {receipt:{...item,phase:name},result});
   }
-  summary.dependencies[name] = {status:required.size ? 'failed' : prior.status,exitCode:prior.exitCode,runner:prior.runner,artifactFiles:payload.length,
+  summary.dependencies[dependency] = {status:required.size ? 'failed' : prior.status,exitCode:prior.exitCode,runner:prior.runner,artifactFiles:payload.length,
     missingExecutions:[...required],
     manifestSha256:hash(await fs.readFile(path.join(source,'payload-sha256.json'))),suiteSha256:prior.suiteSha256};
   return prior;
+}
+
+async function importAndroid() {
+  const location = options.get('--android');
+  if (!location) throw new Error('Android artifact input directory is required');
+  const source = under(runnerTemp, location);
+  const phases = [];
+  for (let slot=0;slot<shardCount;slot++) {
+    const name = 'c004-android-shard-' + slot + '-' + identity.runId + '-' + identity.runAttempt;
+    phases.push(await importPhase('android',path.join(source,name),slot));
+  }
+  const shards = Array.from({length:shardCount},(_,slot)=>summary.dependencies['android-'+slot]);
+  const status = statusOf(shards);
+  summary.dependencies.android = {status,shards:shards.length,missing:shards.filter(item=>!item.artifactFiles).length};
+  const executions = [...results.values()].filter(({receipt})=>receipt.platform==='android').map(({receipt})=>receipt);
+  await save(path.join(output,'android-summary.json'),{
+    schema:'mytodo-c004-phase',version:1,phase:'android',...identity,
+    suiteSha256:summary.suiteSha256,suiteCases:summary.suiteCases,runUrl:summary.runUrl,
+    status,exitCode:status==='passed'?0:status==='blocked'?78:1,
+    runner:phases[0]?.runner,androidEnvironment:phases[0]?.androidEnvironment,
+    executionCounts:count(executions),executions,
+    shards:phases.map((phase,index)=>phase ? {index,runner:phase.runner,status:phase.status,exitCode:phase.exitCode,
+      androidBuild:phase.androidBuild,androidEnvironment:phase.androidEnvironment} : {index,status:'blocked'}),
+  });
 }
 
 let windowsExe, androidApk, preparedFile;
@@ -330,11 +362,11 @@ try {
   else await importPhase('desktop');
   if (phase === 'android') buildAvailability = await prepareAndroid();
   if (phase === 'complete') {
-    await importPhase('android');
+    await importAndroid();
     if (suite.cases.some(test => results.get(idFor(test,'android'))?.receipt.status === 'passed')) await buildWindows();
   }
 
-  for (const test of suite.cases) {
+  for (const test of assignedCases(shard)) {
     if (phase === 'desktop') {
       for (const platform of desktop) await execute(test,platform);
       for (const source of desktop) for (const platform of desktop) await execute(test,platform,source);

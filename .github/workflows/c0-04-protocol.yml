@@ -49,11 +49,16 @@ jobs:
           retention-days: 14
 
   android:
-    name: Android platform SQLite producer and receiver cases
+    name: Android SQLite shard ${{ matrix.shard }}
     needs: desktop
     if: ${{ always() && !cancelled() }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
     env:
       MYTODO_ANDROID_IMAGE_INSTALL: '1'
       MYTODO_ANDROID_PULSE_INSTALL: '1'
@@ -80,7 +85,7 @@ jobs:
       - name: Run Android generation and cross-platform reception
         if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
         run: >-
-          node tests/protocol-harness/run-c004-matrix.mjs --phase android
+          node tests/protocol-harness/run-c004-matrix.mjs --phase android --android-shard ${{ matrix.shard }}
           --desktop "$RUNNER_TEMP/c004-desktop-input"
           --android-environment "$RUNNER_TEMP/c004-android-emulator/environment.json"
           --output "$RUNNER_TEMP/c004-android"
@@ -91,7 +96,7 @@ jobs:
         if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: c004-android-environment-${{ github.run_id }}-${{ github.run_attempt }}
+          name: c004-android-environment-shard-${{ matrix.shard }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/c004-android-emulator/
           if-no-files-found: error
           retention-days: 14
@@ -99,7 +104,7 @@ jobs:
         if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: c004-android-${{ github.run_id }}-${{ github.run_attempt }}
+          name: c004-android-shard-${{ matrix.shard }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/c004-android/
           if-no-files-found: error
           include-hidden-files: true
@@ -132,7 +137,7 @@ jobs:
         if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: c004-android-${{ github.run_id }}-${{ github.run_attempt }}
+          pattern: c004-android-shard-*-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/c004-android-input/
       - name: Verify producer lineage and complete the three-platform matrix
         if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
