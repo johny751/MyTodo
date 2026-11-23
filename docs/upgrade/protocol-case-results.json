@@ -1,0 +1,1010 @@
+[
+  {
+    "caseId": "basic-note",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "cross-storage",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "unicode-body",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "causal-field-trimming",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "versions",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "multiple-entities",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "cross-storage",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "duplicate-events",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "idempotency",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "reversed-events",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "ordering",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "independent-fields",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "conflict",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-A-a",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "ordering",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-A-a-reverse",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "ordering",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-hyphen-ascii",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "ordering",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "ascii-punctuation-id",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "field-conflict",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "conflict",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "tombstone-late-old",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "tombstone",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "tombstone-concurrent-edit",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "tombstone",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "explicit-causal-restore",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "tombstone",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "sparse-retained-seq",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "versions",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "tampered-duplicate",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "idempotency",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-length-80",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-length-81",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-invalid-punctuation",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "actor-unicode",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "id-ascii-200",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "id-ascii-201",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "id-cjk-66",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "id-cjk-67",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "id-emoji-100",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "id-empty",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "encoding",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-three-items",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-one-item",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-swapped",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-array-type",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-malformed",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-scalar-json",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "key-number-id",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-null",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-array",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-number",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-string",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-negative",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-unsafe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-max-safe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "context-invalid-actor",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "input-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "seq-zero",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "seq-fraction",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "seq-max-safe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "seq-unsafe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "clock-max-safe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "clock-unsafe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "values-array",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "values-forbidden-field",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "manifest-int32-plus-one",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "manifest-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "manifest-max-safe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "manifest-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "manifest-unsafe",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "manifest-validation",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "manifest-heads-array",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "manifest-validation",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "manifest-empty-actor",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "manifest-validation",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "manifest-empty-epoch",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "manifest-validation",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "prepare-int32-overflow",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "sql-remote-rollback",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "sql-fault",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "sql-local-rollback",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "sql-fault",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "batch-gap",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "batch-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "batch-duplicate-restart",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "batch-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "batch-over-500",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "batch-validation",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "snapshot-complete",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "snapshot-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "snapshot-missing-part",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "snapshot-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "snapshot-bad-hash",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "snapshot-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "snapshot-wrong-epoch",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "snapshot-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "snapshot-cursor-unsafe",
+    "statuses": [
+      "passed",
+      "passed",
+      "failed",
+      "passed",
+      "failed",
+      "passed"
+    ],
+    "category": "snapshot-recovery",
+    "crossComparison": "failed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "snapshot-sql-restart",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "snapshot-recovery",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "cursor-int32-max",
+    "statuses": [
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "passed",
+    "android": "blocked"
+  },
+  {
+    "caseId": "cursor-int32-plus-one",
+    "statuses": [
+      "passed",
+      "passed",
+      "blocked",
+      "passed",
+      "blocked",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "blocked",
+    "android": "blocked"
+  },
+  {
+    "caseId": "cursor-max-safe",
+    "statuses": [
+      "passed",
+      "passed",
+      "blocked",
+      "passed",
+      "blocked",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "blocked",
+    "android": "blocked"
+  },
+  {
+    "caseId": "cursor-unsafe",
+    "statuses": [
+      "passed",
+      "passed",
+      "blocked",
+      "passed",
+      "blocked",
+      "passed"
+    ],
+    "category": "integer-boundary",
+    "crossComparison": "blocked",
+    "android": "blocked"
+  }
+]

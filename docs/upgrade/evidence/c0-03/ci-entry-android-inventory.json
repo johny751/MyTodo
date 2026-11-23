@@ -1,0 +1,20 @@
+{
+  "runUrl": "https://github.com/johny751/MyTodo/actions/runs/45111239771",
+  "adb": "C:\\Android\\android-sdk\\platform-tools\\adb.exe",
+  "runner": {
+    "imageVersion": "20261116.315.1",
+    "imageOS": "win25-vs2026",
+    "os": "Windows",
+    "arch": "X64"
+  },
+  "emulator": "C:\\Android\\android-sdk\\emulator\\emulator.exe",
+  "emulatorExists": true,
+  "state": "blocked",
+  "sourceSha": "6de5f70df3f3f2b701723e77cd30c8885543408c",
+  "adbExists": true,
+  "androidHome": "C:\\Android\\android-sdk",
+  "reason": "Preinstalled emulator, adb or actual system image is missing. No dependency download attempted.",
+  "systemImages": [],
+  "downloadsAttempted": false,
+  "realAndroidSQLiteTestsExecuted": false
+}
