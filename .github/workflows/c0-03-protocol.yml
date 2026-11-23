@@ -1,0 +1,126 @@
+{
+  "name": "MyTodo C0-03 real production protocol vectors",
+  "on": {
+    "push": {
+      "branches": [
+        "master"
+      ],
+      "paths": [
+        ".github/workflows/c0-03-protocol.yml",
+        "scripts/ci/c0-03.ps1",
+        "tests/protocol-vectors/**",
+        "tests/protocol-harness/**",
+        "src/**",
+        "windows/**",
+        "android/**"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "mytodo-c003-${{ github.ref }}",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "protocol": {
+      "name": "Real C / JS / Android storage protocol matrix",
+      "runs-on": "windows-latest",
+      "timeout-minutes": 45,
+      "env": {
+        "EXPECTED_SOURCE_SHA": "${{ github.sha }}"
+      },
+      "steps": [
+        {
+          "name": "Checkout this push frozen SHA",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Run production adapters and common vectors",
+          "id": "protocol",
+          "shell": "pwsh",
+          "run": "& ./scripts/ci/c0-03.ps1\nexit $LASTEXITCODE"
+        },
+        {
+          "name": "Preserve actual failed/blocked/passed evidence",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "c003-protocol-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/c003-matrix/",
+            "if-no-files-found": "error",
+            "retention-days": 14
+          }
+        }
+      ]
+    },
+    "adapter-commits": {
+      "name": "Independent adapter commit ${{ matrix.platform }}",
+      "runs-on": "windows-latest",
+      "timeout-minutes": 20,
+      "strategy": {
+        "fail-fast": false,
+        "matrix": {
+          "include": [
+            {
+              "platform": "windows-c",
+              "sha": "9b1e731ff16490d020e0c6a55056fd0cabd4a4e0"
+            },
+            {
+              "platform": "javascript",
+              "sha": "47df742a3d59e0fa4a021c39defdce2b0e9c0be6"
+            },
+            {
+              "platform": "android",
+              "sha": "f1b1b1b048f7426e9eb7505df2af5e87146c9311"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "name": "Checkout this CI definition",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Copy reviewed executor outside historical checkout",
+          "shell": "pwsh",
+          "run": "Copy-Item -LiteralPath ./scripts/ci/c003-smoke.ps1 -Destination (Join-Path $env:RUNNER_TEMP 'c003-smoke.ps1')"
+        },
+        {
+          "name": "Checkout exact independent adapter commit",
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ matrix.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Execute actual adapter smoke at its own SHA",
+          "shell": "pwsh",
+          "run": "& (Join-Path $env:RUNNER_TEMP 'c003-smoke.ps1') -Platform '${{ matrix.platform }}' -SourceSha '${{ matrix.sha }}'\nexit $LASTEXITCODE"
+        },
+        {
+          "name": "Save independent command receipts and payload",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "c003-smoke-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/c003-smoke-${{ matrix.platform }}/",
+            "if-no-files-found": "error",
+            "retention-days": 14
+          }
+        }
+      ]
+    }
+  }
+}
