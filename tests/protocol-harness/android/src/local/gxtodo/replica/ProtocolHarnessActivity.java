@@ -156,8 +156,10 @@ public final class ProtocolHarnessActivity extends Activity {
 
     private void reply(String event, JSONObject result) {
         runOnUiThread(() -> {
+            // Keep fixture values as JSON through the bridge. An inline JS
+            // object literal changes the meaning of keys such as __proto__.
             if (!destroyed) web.evaluateJavascript("document.dispatchEvent(new CustomEvent('" + event
-                + "',{detail:" + result.toString() + "}))", null);
+                + "',{detail:JSON.parse(" + JSONObject.quote(result.toString()) + ")}))", null);
         });
     }
 
@@ -336,6 +338,7 @@ public final class ProtocolHarnessActivity extends Activity {
                             cursor.moveToFirst();
                             android.content.pm.PackageInfo webview = WebView.getCurrentWebViewPackage();
                             value = new JSONObject().put("platform", "android").put("sdkInt", android.os.Build.VERSION.SDK_INT)
+                                .put("processId", android.os.Process.myPid()).put("supportedAbis", new JSONArray(java.util.Arrays.asList(android.os.Build.SUPPORTED_ABIS)))
                                 .put("sqliteVersion", cursor.getString(0)).put("webViewPackage", webview == null ? JSONObject.NULL : webview.packageName)
                                 .put("webViewVersion", webview == null ? JSONObject.NULL : webview.versionName)
                                 .put("storeClasses", new JSONArray().put(ReplicaDatabase.class.getName()).put(AccountStore.class.getName()));

@@ -33,7 +33,9 @@ public final class ProtocolHarnessInstrumentation extends Instrumentation {
             ProtocolHarnessActivity.prepareResult();
             Activity activity = startActivitySync(intent);
             JSONObject output = ProtocolHarnessActivity.awaitResult(180000);
-            result.putString("result", output.toString());
+            // Keep bulk audit data in the existing atomic result file to avoid
+            // Android's Binder transaction size limit for instrumentation bundles.
+            result.putString("status", output.optString("status"));
             result.putString("resultFile", ((ProtocolHarnessActivity)activity).resultFile());
             finish("passed".equals(output.optString("status")) ? Activity.RESULT_OK : 1, result);
         } catch (Throwable error) {
