@@ -32,6 +32,8 @@ async function operation(context,operation,extra={}){
  context.operations.push({input,out,dbCase,execution,receipt});
  await fs.writeFile(path.join(context.directory,'process-'+n+'.json'),JSON.stringify(context.operations.at(-1),null,2)+'\n');
  must(execution.code===0&&execution.signal===null&&!execution.error&&!execution.timedOut,'Real Android execution failed/crashed/timed out');
+ must(receipt?.dbCase===dbCase,'Android execution switched the selected database');
+ must(typeof result?.rawSQL?.databaseFile==='string'&&result.rawSQL.databaseFile.endsWith('/protocol-cases/'+dbCase+'/tasks.sqlite'),'Android result does not identify the selected database');
  must(result?.status==='passed'&&receipt?.restartComparison?.status==='passed','Android acceptance or same-DB restart comparison failed');
  must(result.provenance?.sourceSha===exact,'APK source SHA mismatch');
  must(result.operationAccepted===(request.expectedAccepted!==false),'Android production outcome mismatch');
