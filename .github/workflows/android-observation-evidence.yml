@@ -53,6 +53,9 @@ jobs:
       - name: Finish emulator evidence
         if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
         run: node scripts/ci/c004-android-emulator.mjs finish
+      - name: Seal completed directed verification evidence
+        if: always()
+        run: node tests/c006/c006-harness/seal-evidence.mjs "$RUNNER_TEMP/android-observation"
       - name: Preserve directed verification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
