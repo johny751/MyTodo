@@ -26,7 +26,12 @@ export function createSQLiteStore(directory){
      if(input.clearOutbox)db.exec('DELETE FROM outbox');if(input.ack!=null)db.prepare('DELETE FROM outbox WHERE id<=?').run(input.ack);
      for(const item of input.outbox||[])queue.run(item.id,JSON.stringify(item.event));
      const next={...input.meta,revision:current.revision+1,dataRevision:(current.dataRevision||0)+((input.rows||[]).length?1:0)};db.prepare('UPDATE meta SET value=? WHERE id=1').run(JSON.stringify(next));db.exec('COMMIT');return {ok:true,revision:next.revision};
-    }catch(e){db.exec('ROLLBACK');throw e;}
+    }catch(e){
+     // A failed COMMIT/statement can already have ended the transaction.
+     // Keep that SQLite exception as the primary failure if cleanup also fails.
+     try{db.exec('ROLLBACK');}catch(rollbackError){if(e&&typeof e==='object')e.rollbackError=rollbackError;}
+     throw e;
+    }
    }
    default:throw Error('不支持的数据库操作');
   }
