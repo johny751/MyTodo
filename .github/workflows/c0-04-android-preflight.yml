@@ -1,0 +1,45 @@
+name: MyTodo C0-04 Android environment preflight
+
+on:
+  push:
+    branches:
+      - master
+      - 'c0-04/**'
+    paths:
+      - '.github/workflows/c0-04-android-preflight.yml'
+      - 'scripts/ci/c004-android-emulator.mjs'
+      - 'scripts/ci/c004-node-path.sh'
+
+permissions:
+  contents: read
+
+jobs:
+  android-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 23
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      MYTODO_ANDROID_IMAGE_INSTALL: ${{ vars.MYTODO_ANDROID_IMAGE_INSTALL || '0' }}
+      MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
+    steps:
+      - name: Checkout exact preflight definition
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select a preinstalled Node
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Inspect and try to boot the Android test image
+        id: emulator
+        run: node scripts/ci/c004-android-emulator.mjs start
+      - name: Stop the Android emulator and finish the evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
+        run: node scripts/ci/c004-android-emulator.mjs finish
+      - name: Preserve environment and failure evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c004-android-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android-emulator/
+          if-no-files-found: error
+          retention-days: 14
