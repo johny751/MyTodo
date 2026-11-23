@@ -19,7 +19,7 @@
 
 入口实际run：[45111239771](https://github.com/johny751/MyTodo/actions/runs/45111239771)。只修改tests目录的向量提交实际触发：[45112960551](https://github.com/johny751/MyTodo/actions/runs/45112960551)，success。这证明tests路径生效，不假定main有workflow_dispatch。
 
-首次共同矩阵run：[45112980707](https://github.com/johny751/MyTodo/actions/runs/45112980707)，attempt1，完整被测源码1403b316eb6b3a7baf4942de537e274e7fb0d1a2，Actions conclusion=failure，矩阵真实退出1。独立job分别检出C/JS/Android适配提交自己的完整SHA；C及JS基础生成、接收、重启命令退出0；Android编译退出0，但真实存储环境blocked使wrapper退出78。
+首次共同矩阵run：[45112980707](https://github.com/johny751/MyTodo/actions/runs/45112980707)，attempt1，完整被测源码1403b316eb6b3a7baf4942de537e274e7fb0d1a2，Actions conclusion=failure，矩阵真实退出1。独立job分别检出C/JS/Android适配提交自己的完整SHA；C及JS基础生成、接收、重启命令退出0；Android编译退出0，真实存储环境为blocked；内部收据wrapperExitCode=78，但Actions实际PowerShell步骤退出1，分别保留两层数据。
 
 同集成SHA的原三端回归run：[45112980701](https://github.com/johny751/MyTodo/actions/runs/45112980701)，success。C/JS/Android中间push的原基线run45112964825、45112970652、45112975779被GitHub待执行并发队列替换，实际cancelled，不能记为通过；对应适配仍由45112980707的独立job真实测试。
 
@@ -136,3 +136,5 @@ Android清单：emulatorExists=true、adbExists=true、systemImages=[]，未取�
 | C0-07 | `windows/database.c`、`windows/sync.c`及共同SQL fault入口 | prepare/step/read/meta/COMMIT错误传播；真实publish/ACK各边界失败与重启恢复。读失败不能当空数据，未成功COMMIT不得ACK/推进cursor，失败发送确认保留原批次 |
 
 各任务单独提交、相关GitHub实测，主Agent串行审查共享接口。完成C0-03三端门槛及C0-04–07后，才按09-phase-one-entry-plan进入D1：明确列名→一致备份/恢复→编号迁移/checksum→事务/失败恢复→保全actor/seq/clock/queue/vector/cursors/outbox/pending/墓碑/冲突→三端旧数据迁移及T15/T16。业务/UI、LAN、D1及T01–T16完整验收均未开始。
+
+退出码层级补充：三个协议run的Android独立smoke日志均显示内部收据wrapperExitCode=78，而GitHub Actions PowerShell父步骤实际退出1。现有日志没有证明这一转换的具体原因，不将78伪称为父进程退出码。Android编译子Node/javac/aapt/D8实际退出0；没有Android真实存储执行。此处仅校正文档，不改变失败/blocked判定或测试代码。
