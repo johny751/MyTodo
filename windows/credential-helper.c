@@ -32,7 +32,7 @@ int main(int argc,char**argv){
    if(!utf8)ok=0;
    else{ok=WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,(WCHAR*)out.pbData,(int)(out.cbData/sizeof(WCHAR)),utf8,count,0,0)==count&&fwrite(utf8,1,count,stdout)==(size_t)count;SecureZeroMemory(utf8,count);free(utf8);}
   }
- }else if(decrypt)ok=out.cbData<=MAX_BLOB&&fwrite(out.pbData,1,out.cbData,stdout)==out.cbData;
+ }else if(decrypt)ok=out.cbData>0&&out.cbData<=MAX_BLOB&&!memchr(out.pbData,0,out.cbData)&&MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,(char*)out.pbData,(int)out.cbData,0,0)>0&&fwrite(out.pbData,1,out.cbData,stdout)==out.cbData;
  else{
   char*hex=malloc(out.cbData*2+1);if(!hex)ok=0;
   else{for(DWORD i=0;i<out.cbData;i++)sprintf(hex+i*2,"%02x",out.pbData[i]);ok=fwrite(hex,1,out.cbData*2,stdout)==out.cbData*2;SecureZeroMemory(hex,out.cbData*2+1);free(hex);}

@@ -2,8 +2,60 @@
 static double n0(J*j,const char*k){double n=num(j,k);return isfinite(n)?n:0;}
 static int64_t epoch_ms(void){FILETIME f;ULARGE_INTEGER u;GetSystemTimeAsFileTime(&f);u.LowPart=f.dwLowDateTime;u.HighPart=f.dwHighDateTime;return u.QuadPart/10000-11644473600000LL;}
 static int valid_folder(const char*s){if(!*s||strlen(s)>60)return 0;for(;*s;s++)if(!((*s>='a'&&*s<='z')||(*s>='A'&&*s<='Z')||(*s>='0'&&*s<='9')||*s=='-'||*s=='_'))return 0;return 1;}
-J *config_read(DB*d){wchar_t p[32768];join(p,d->dir,L"sync-config.enc");char*t=read_file(p);if(!t){J*j=cJSON_CreateObject();ss(j,"folder","GxTodo");set(j,"autoSync",cJSON_CreateTrue());return j;}size_t n=strlen(t);BYTE*b=malloc(n/2+1);for(size_t i=0;i<n/2;i++){unsigned v;if(sscanf(t+i*2,"%2x",&v)!=1){free(b);free(t);return 0;}b[i]=(BYTE)v;}DATA_BLOB in={(DWORD)n/2,b},out={0};J*j=0;if(CryptUnprotectData(&in,0,0,0,0,CRYPTPROTECT_UI_FORBIDDEN,&out)){wchar_t*w=calloc(out.cbData/2+1,2);memcpy(w,out.pbData,out.cbData);char*s=utf8(w);j=cJSON_Parse(s);SecureZeroMemory(s,strlen(s));free(s);SecureZeroMemory(w,out.cbData);free(w);SecureZeroMemory(out.pbData,out.cbData);LocalFree(out.pbData);}free(b);free(t);if(!j)strcpy(d->error,"Cannot decrypt WebDAV configuration");return j;}
-int config_save(DB*d,J*c){if(!valid_folder(str(c,"folder"))||truth(c,"enabled")&&(!*str(c,"username")||!*str(c,"password"))){strcpy(d->error,"Invalid sync folder or credentials");return 0;}char*t=json(c);wchar_t*w=wide(t);DATA_BLOB in={(DWORD)(wcslen(w)*2),(BYTE*)w},out={0};int ok=CryptProtectData(&in,0,0,0,0,CRYPTPROTECT_UI_FORBIDDEN,&out);if(ok){char*s=malloc(out.cbData*2+1);for(DWORD i=0;i<out.cbData;i++)sprintf(s+i*2,"%02x",out.pbData[i]);wchar_t p[32768];join(p,d->dir,L"sync-config.enc");ok=write_file(p,s);free(s);LocalFree(out.pbData);}SecureZeroMemory(t,strlen(t));free(t);SecureZeroMemory(w,wcslen(w)*2);free(w);return ok;}
+/* C0-05 replacement for config_read/config_save in windows/sync.c.
+ * Keep valid_folder and the protocol functions unchanged. */
+#define GX_CONFIG_PREFIX "gx-dpapi-v1:"
+#define GX_CONFIG_MAX (256 * 1024)
+#define GX_CONFIG_WIRE_MAX (GX_CONFIG_MAX * 2 + 1024)
+static int config_hex(char c){if(c>='0'&&c<='9')return c-'0';if(c>='a'&&c<='f')return c-'a'+10;if(c>='A'&&c<='F')return c-'A'+10;return -1;}
+static J *config_error(DB*d){strcpy(d->error,"Cannot read protected WebDAV configuration; original file retained");return 0;}
+J *config_read(DB*d){
+ wchar_t p[32768];join(p,d->dir,L"sync-config.enc");
+ HANDLE file=CreateFileW(p,GENERIC_READ,FILE_SHARE_READ,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,0);
+ if(file==INVALID_HANDLE_VALUE){
+  if(GetLastError()!=ERROR_FILE_NOT_FOUND)return config_error(d);
+  J*j=cJSON_CreateObject();ss(j,"folder","GxTodo");set(j,"autoSync",cJSON_CreateTrue());return j;
+ }
+ LARGE_INTEGER length;DWORD count=0;char*text=0;BYTE*bytes=0;char*plain=0;size_t plainSize=0;J*result=0;DATA_BLOB out={0};
+ int readOk=GetFileSizeEx(file,&length)&&length.QuadPart>0&&length.QuadPart<=GX_CONFIG_WIRE_MAX;
+ if(readOk){text=calloc((size_t)length.QuadPart+1,1);readOk=text&&ReadFile(file,text,(DWORD)length.QuadPart,&count,0)&&count==(DWORD)length.QuadPart;}
+ CloseHandle(file);
+ if(!readOk)goto finish;
+ size_t prefix=sizeof(GX_CONFIG_PREFIX)-1,n=(size_t)length.QuadPart;
+ int modern=n>=prefix&&!memcmp(text,GX_CONFIG_PREFIX,prefix);
+ char*hex=text+(modern?prefix:0);n-=modern?prefix:0;
+ if(!n||n%2||n/2>GX_CONFIG_MAX+512)goto finish;
+ bytes=malloc(n/2);if(!bytes)goto finish;
+ for(size_t i=0;i<n/2;i++){int a=config_hex(hex[i*2]),b=config_hex(hex[i*2+1]);if(a<0||b<0)goto finish;bytes[i]=(BYTE)(a*16+b);}
+ DATA_BLOB in={(DWORD)(n/2),bytes};
+ if(!CryptUnprotectData(&in,0,0,0,0,CRYPTPROTECT_UI_FORBIDDEN,&out)||!out.cbData||out.cbData>GX_CONFIG_MAX)goto finish;
+ if(modern){
+  if(memchr(out.pbData,0,out.cbData)||!MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,(char*)out.pbData,(int)out.cbData,0,0))goto finish;
+  plainSize=(size_t)out.cbData+1;plain=calloc(plainSize,1);if(!plain)goto finish;memcpy(plain,out.pbData,out.cbData);
+ }else{
+  if(out.cbData%sizeof(WCHAR))goto finish;
+  WCHAR*w=(WCHAR*)out.pbData;int units=(int)(out.cbData/sizeof(WCHAR));for(int i=0;i<units;i++)if(!w[i])goto finish;
+  int size=WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,w,units,0,0,0,0);if(size<=0)goto finish;
+  plainSize=(size_t)size+1;plain=calloc(plainSize,1);if(!plain||WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,w,units,plain,size,0,0)!=size)goto finish;
+ }
+ result=cJSON_ParseWithOpts(plain,0,1);if(!cJSON_IsObject(result)){cJSON_Delete(result);result=0;}
+finish:
+ if(plain){SecureZeroMemory(plain,plainSize);free(plain);}if(out.pbData){SecureZeroMemory(out.pbData,out.cbData);LocalFree(out.pbData);}free(bytes);free(text);
+ if(!result)config_error(d);return result;
+}
+int config_save(DB*d,J*c){
+ if(!cJSON_IsObject(c)||!valid_folder(str(c,"folder"))||(truth(c,"enabled")&&(!*str(c,"username")||!*str(c,"password")))){strcpy(d->error,"Invalid sync folder or credentials");return 0;}
+ /* A failed read is not an empty configuration and must not permit replacement. */
+ J*previous=config_read(d);if(!previous)return 0;cJSON_Delete(previous);
+ char*text=json(c);if(!text){strcpy(d->error,"Cannot serialize WebDAV configuration");return 0;}
+ size_t size=strlen(text);int ok=size>0&&size<=GX_CONFIG_MAX&&MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,text,(int)size,0,0)>0;
+ DATA_BLOB in={(DWORD)size,(BYTE*)text},out={0};
+ if(ok)ok=CryptProtectData(&in,L"GxTodo Web sync settings",0,0,0,CRYPTPROTECT_UI_FORBIDDEN,&out);
+ if(ok){size_t prefix=sizeof(GX_CONFIG_PREFIX)-1;char*wire=malloc(prefix+(size_t)out.cbData*2+1);ok=wire!=0;if(wire){memcpy(wire,GX_CONFIG_PREFIX,prefix);for(DWORD i=0;i<out.cbData;i++)sprintf(wire+prefix+i*2,"%02x",out.pbData[i]);wchar_t p[32768];join(p,d->dir,L"sync-config.enc");ok=write_file(p,wire);SecureZeroMemory(wire,prefix+(size_t)out.cbData*2+1);free(wire);}}
+ if(out.pbData){SecureZeroMemory(out.pbData,out.cbData);LocalFree(out.pbData);}SecureZeroMemory(text,size);free(text);
+ if(!ok)strcpy(d->error,"Cannot save protected WebDAV configuration; original file retained");return ok;
+}
+
 typedef struct {int status;char *body,*etag;} Response;
 typedef struct {DB*d;J*config;HINTERNET session,connect;char token[80];int ok;} Sync;
 static void response_free(Response*r){free(r->body);free(r->etag);memset(r,0,sizeof(*r));}
