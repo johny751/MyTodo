@@ -1,0 +1,617 @@
+{
+  "runs": [
+    {
+      "runId": "45153999774",
+      "sourceSha": "fad9d823ca054612ebb0e4539cca8d92dcabaec2",
+      "counts": {
+        "passed": 2,
+        "failed": 20
+      },
+      "exitCode": 1,
+      "runner": {
+        "os": "Windows",
+        "imageVersion": "20261116.315.1",
+        "node": "v22.23.5",
+        "windows": null
+      },
+      "dpapi": "real CryptProtectData/CryptUnprotectData, same GitHub Windows runner user",
+      "networkRequests": 0,
+      "credentialPlaintextLogged": false
+    },
+    {
+      "runId": "45154587045",
+      "sourceSha": "2114f152e23b432dbf2df798464094c116bb57e1",
+      "counts": {
+        "passed": 21,
+        "failed": 1
+      },
+      "exitCode": 1,
+      "runner": {
+        "os": "Windows",
+        "imageVersion": "20261116.315.1",
+        "node": "v22.23.5",
+        "windows": null
+      },
+      "dpapi": "real CryptProtectData/CryptUnprotectData, same GitHub Windows runner user",
+      "networkRequests": 0,
+      "credentialPlaintextLogged": false
+    },
+    {
+      "runId": "45155116261",
+      "sourceSha": "e761c493857706fbf61dac87bed7a3709eee64b9",
+      "counts": {
+        "passed": 21,
+        "failed": 1
+      },
+      "exitCode": 1,
+      "runner": {
+        "os": "Windows",
+        "imageVersion": "20261116.315.1",
+        "node": "v22.23.5",
+        "windows": null
+      },
+      "dpapi": "real CryptProtectData/CryptUnprotectData, same GitHub Windows runner user",
+      "networkRequests": 0,
+      "credentialPlaintextLogged": false
+    },
+    {
+      "runId": "45157015901",
+      "sourceSha": "2e211fa743dca2f0ad67005f5977d69ede7963fa",
+      "counts": {
+        "passed": 22,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "runner": {
+        "os": "Windows",
+        "imageVersion": "20261116.315.1",
+        "node": "v22.23.5",
+        "windows": null
+      },
+      "dpapi": "real CryptProtectData/CryptUnprotectData, same GitHub Windows runner user",
+      "networkRequests": 0,
+      "credentialPlaintextLogged": false
+    },
+    {
+      "runId": "45158226148",
+      "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+      "counts": {
+        "passed": 22,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "runner": {
+        "os": "Windows",
+        "imageVersion": "20261116.315.1",
+        "node": "v22.23.5",
+        "windows": null
+      },
+      "dpapi": "real CryptProtectData/CryptUnprotectData, same GitHub Windows runner user",
+      "networkRequests": 0,
+      "credentialPlaintextLogged": false
+    }
+  ],
+  "baseline": {
+    "runId": "45158226161",
+    "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+    "accepted": true,
+    "verification": "Original receipt hashes compared with actual cloud payload inventory; no local project test executed",
+    "collectorLimitation": "Generic collector requires sha256.json/payload-sha256.json, but original baseline uses artifacts.json/run-receipt.json; original collectionExitCode 1 retained",
+    "payloads": [
+      {
+        "name": "MyTodo-phase0.exe",
+        "sha256": "7f757a67f8696ea341fdb4c1f909050eecdf0878d65716b17285b21a646c06c5",
+        "bytes": 1325568,
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "cloudActualBytesHashVerified": true
+      },
+      {
+        "name": "WebCredentialHelper.exe",
+        "sha256": "2316912c62243715371613187c99a9fbccee78dc85a3fc4a08ea802eb04cdbe3",
+        "bytes": 149504,
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "cloudActualBytesHashVerified": true
+      },
+      {
+        "name": "MyTodo-web-source.zip",
+        "sha256": "90f65983778c9fa69caed675f60da5b84dd2bc098c63439deda89e13fc6e0b6b",
+        "bytes": 100462,
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "cloudActualBytesHashVerified": true
+      },
+      {
+        "name": "MyTodo-unsigned.apk",
+        "sha256": "8a8a46158b2ee29fa48989fc36b9667699e03c34989d1491d7f1bf84f1a8271f",
+        "bytes": 280493,
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "cloudActualBytesHashVerified": true
+      }
+    ],
+    "commands": [
+      {
+        "platform": "windows",
+        "id": "windows-build",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "scripts/build-windows.mjs",
+          "D:\\a\\_temp\\mytodo-phase0-windows\\MyTodo-phase0.exe",
+          "--public-release"
+        ],
+        "stdoutLog": "phase0-windows-45158226161-1/windows-build.stdout.log"
+      },
+      {
+        "platform": "windows",
+        "id": "windows-self-test",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "--data-dir",
+          "D:\\a\\_temp\\mytodo-phase0-windows-self-test-5665169fdeea403cb1ccbe03f8b620b5",
+          "--self-test"
+        ],
+        "stdoutLog": "phase0-windows-45158226161-1/windows-self-test.stdout.log"
+      },
+      {
+        "platform": "windows",
+        "id": "windows-advanced-test",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "--data-dir",
+          "D:\\a\\_temp\\mytodo-phase0-windows-advanced-test-b062d23984f248999ae866d5f78af7cb",
+          "--advanced-test"
+        ],
+        "stdoutLog": "phase0-windows-45158226161-1/windows-advanced-test.stdout.log"
+      },
+      {
+        "platform": "windows",
+        "id": "windows-feedback-test",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "--data-dir",
+          "D:\\a\\_temp\\mytodo-phase0-windows-feedback-test-9ded748bed9a4ca1997a524a19bd21db",
+          "--feedback-test"
+        ],
+        "stdoutLog": "phase0-windows-45158226161-1/windows-feedback-test.stdout.log"
+      },
+      {
+        "platform": "web",
+        "id": "helper-build",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "scripts/build-credential-helper.mjs",
+          "D:\\a\\_temp\\mytodo-phase0-web\\WebCredentialHelper.exe"
+        ],
+        "stdoutLog": "phase0-web-45158226161-1/helper-build.stdout.log"
+      },
+      {
+        "platform": "web",
+        "id": "shared-js-tests",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "--test",
+          "--test-reporter=tap",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\accounts.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\completion-day.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\delta-sync.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\feedback.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\import-official.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\interaction.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\model.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\native-storage.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\navigation-gestures.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\schedule.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\subtask-time.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\sync-transport.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\task-editor-enter.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\task-tree.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\undo-sync.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\view-history.test.mjs",
+          "D:\\a\\MyTodo\\MyTodo\\tests\\web-launcher.test.mjs"
+        ],
+        "stdoutLog": "phase0-web-45158226161-1/shared-js-tests.stdout.log"
+      },
+      {
+        "platform": "android",
+        "id": "android-pomodoro-tests",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "tests/android/run-pomodoro-tests.mjs"
+        ],
+        "stdoutLog": "phase0-android-45158226161-1/android-pomodoro-tests.stdout.log"
+      },
+      {
+        "platform": "android",
+        "id": "android-daily-tests",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "tests/android/run-daily-tests.mjs"
+        ],
+        "stdoutLog": "phase0-android-45158226161-1/android-daily-tests.stdout.log"
+      },
+      {
+        "platform": "android",
+        "id": "android-notification-controls-tests",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "tests/android/run-notification-controls-tests.mjs"
+        ],
+        "stdoutLog": "phase0-android-45158226161-1/android-notification-controls-tests.stdout.log"
+      },
+      {
+        "platform": "android",
+        "id": "android-build",
+        "exitCode": 0,
+        "execution": "native-process",
+        "arguments": [
+          "D:\\a\\MyTodo\\MyTodo\\scripts\\.phase0-unsigned-fee5d09c29b5487fa1807c25ef9d38a9.mjs"
+        ],
+        "stdoutLog": "phase0-android-45158226161-1/android-build.stdout.log"
+      }
+    ],
+    "platforms": [
+      {
+        "platform": "windows",
+        "runner": {
+          "name": "GitHub Actions 1000000206",
+          "os": "Windows",
+          "arch": "X64",
+          "imageOS": "win25-vs2026",
+          "imageVersion": "20261116.315.1",
+          "toolCache": "C:\\hostedtoolcache\\windows"
+        },
+        "tools": {
+          "windows-sdk": {
+            "path": "C:/Program Files (x86)/Windows Kits/10",
+            "version": "10.0.26100.0"
+          },
+          "vswhere": {
+            "path": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+            "version": "3.1.7.39155"
+          },
+          "node": {
+            "path": "C:\\Program Files\\nodejs\\node.exe",
+            "version": "v22.23.5"
+          },
+          "windows-rc": {
+            "path": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe",
+            "version": "10.0.26100.0"
+          },
+          "msvc-cl": {
+            "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025\\bin\\Hostx64\\x64\\cl.exe",
+            "version": "14.52.37025"
+          },
+          "git": {
+            "path": "C:\\Program Files\\Git\\bin\\git.exe",
+            "version": "2.56.1.windows.1"
+          }
+        },
+        "testSummary": null
+      },
+      {
+        "platform": "web",
+        "runner": {
+          "name": "GitHub Actions 1000000208",
+          "os": "Windows",
+          "arch": "X64",
+          "imageOS": "win25-vs2026",
+          "imageVersion": "20261116.315.1",
+          "toolCache": "C:\\hostedtoolcache\\windows"
+        },
+        "tools": {
+          "vswhere": {
+            "path": "C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe",
+            "version": "3.1.7.39155"
+          },
+          "msvc-cl": {
+            "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025\\bin\\Hostx64\\x64\\cl.exe",
+            "version": "14.52.37025"
+          },
+          "node": {
+            "path": "C:\\Program Files\\nodejs\\node.exe",
+            "version": "v22.23.5"
+          },
+          "windows-sdk": {
+            "path": "C:/Program Files (x86)/Windows Kits/10",
+            "version": "10.0.26100.0"
+          },
+          "git": {
+            "path": "C:\\Program Files\\Git\\bin\\git.exe",
+            "version": "2.56.1.windows.1"
+          }
+        },
+        "testSummary": {
+          "tests": 121,
+          "fail": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "platform": "android",
+        "runner": {
+          "name": "GitHub Actions 1000000207",
+          "os": "Windows",
+          "arch": "X64",
+          "imageOS": "win25-vs2026",
+          "imageVersion": "20261116.315.1",
+          "toolCache": "C:\\hostedtoolcache\\windows"
+        },
+        "tools": {
+          "jdk17-javac": {
+            "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\javac.exe",
+            "version": "javac 17.0.21"
+          },
+          "android-api34": {
+            "path": "C:\\Android\\android-sdk\\platforms\\android-34\\android.jar",
+            "version": "API34 installed platform"
+          },
+          "d8": {
+            "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\lib\\d8.jar",
+            "version": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go/r8bot (luci-r8-custom-ci-archive-0-77gl))"
+          },
+          "jdk17-jar": {
+            "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\jar.exe",
+            "version": "jar 17.0.21"
+          },
+          "zipalign": {
+            "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\zipalign.exe",
+            "version": "build-tools directory 35.0.0"
+          },
+          "node": {
+            "path": "C:\\Program Files\\nodejs\\node.exe",
+            "version": "v22.23.5"
+          },
+          "git": {
+            "path": "C:\\Program Files\\Git\\bin\\git.exe",
+            "version": "2.56.1.windows.1"
+          },
+          "aapt": {
+            "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt.exe",
+            "version": "Android Asset Packaging Tool, v0.2-11948202"
+          },
+          "aapt2": {
+            "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0\\aapt2.exe",
+            "version": "not reported by installed file"
+          },
+          "android-build-tools": {
+            "path": "C:\\Android\\android-sdk\\build-tools\\35.0.0",
+            "version": "35.0.0"
+          },
+          "jdk17-java": {
+            "path": "C:\\hostedtoolcache\\windows\\Java_Temurin-Hotspot_jdk\\17.0.21-9\\x64\\bin\\java.exe",
+            "version": "openjdk version \"17.0.21\" 2026-10-20\r\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\r\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)"
+          }
+        },
+        "testSummary": null
+      }
+    ]
+  },
+  "matrix": {
+    "verifiedProducerRows": 15530,
+    "actualExecutions": 936.0,
+    "verifiedLocalArchiveRows": 13367,
+    "artifacts": [
+      {
+        "artifact": "c004-android-shard-0-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 40,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-1-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 40,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-2-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 40,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-3-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 40,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-4-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 40,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-5-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 40,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-6-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 36,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-android-shard-7-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 36,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-complete-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 156,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 936,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      },
+      {
+        "artifact": "c004-desktop-45158226276-1",
+        "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "execution": {
+          "passed": 468,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "comparison": {
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "skipped": 0
+        },
+        "exitCode": 0
+      }
+    ],
+    "runId": "45158226276",
+    "comparisons": {
+      "passed": 936,
+      "failed": 0,
+      "blocked": 0,
+      "skipped": 0
+    },
+    "archiveSHA256": "3b83a5f9d1018f44db97665741f463a53301e937fc9c5b4b106372fc63f571cc",
+    "firstCrashes": [
+      {
+        "file": "c004-android-shard-2-45158226276-1/cases/id-empty--generate--android/result.json.receipt.json",
+        "attempts": [
+          {
+            "stage": "main",
+            "attempt": 1,
+            "dbCase": "id-empty--generate--android",
+            "adbExitCode": 0,
+            "instrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "logs": "main"
+          }
+        ],
+        "finalExitCode": 0,
+        "finalDbCase": "id-empty--generate--android-retry-2"
+      },
+      {
+        "file": "c004-android-shard-6-45158226276-1/cases/key-array-type--receive--android--javascript/result.json.receipt.json",
+        "attempts": [
+          {
+            "stage": "main",
+            "attempt": 1,
+            "dbCase": "key-array-type--receive--android--javascript",
+            "adbExitCode": 0,
+            "instrumentationCode": 0,
+            "reason": "Process crashed with no valid atomic result",
+            "logs": "main"
+          }
+        ],
+        "finalExitCode": 0,
+        "finalDbCase": "key-array-type--receive--android--javascript-retry-2"
+      }
+    ],
+    "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d"
+  },
+  "accepted": true
+}

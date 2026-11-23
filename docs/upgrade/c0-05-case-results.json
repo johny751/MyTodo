@@ -1,0 +1,770 @@
+{
+  "sourceSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+  "runId": "45158226148",
+  "counts": {
+    "passed": 22,
+    "failed": 0
+  },
+  "exitCode": 0,
+  "cases": [
+    {
+      "id": "c-to-node-ascii",
+      "baseline": {
+        "id": "c-to-node-ascii",
+        "status": "passed",
+        "checks": [
+          "C production config_save",
+          "Node real DPAPI/read/request"
+        ],
+        "fileSha256": "a3b291f5300d32a5a3e93e27b068f2f805965f7a73d324b800eb578d7d38d7a3",
+        "observedWireFormat": "legacy-unprefixed"
+      },
+      "productionFix": {
+        "id": "c-to-node-ascii",
+        "status": "passed",
+        "checks": [
+          "C production config_save",
+          "Node real DPAPI/read/request"
+        ],
+        "fileSha256": "4a8f23dfbb06db5d4215bbb95e79ec649459a31e159da6dad69d4d8f639c1cac",
+        "observedWireFormat": "modern-prefix"
+      },
+      "final": {
+        "id": "c-to-node-ascii",
+        "status": "passed",
+        "checks": [
+          "C production config_save",
+          "Node real DPAPI/read/request"
+        ],
+        "fileSha256": "ab7b4ee222a6b049e2d0d1d8f6dbf441383bc5180ae9a5be0ccf8959a2d0e1c3",
+        "observedWireFormat": "modern-prefix"
+      }
+    },
+    {
+      "id": "node-to-c-ascii",
+      "baseline": {
+        "id": "node-to-c-ascii",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C config_read differs"
+      },
+      "productionFix": {
+        "id": "node-to-c-ascii",
+        "status": "passed",
+        "checks": [
+          "Node production save",
+          "C production config_read",
+          "Node process-store reopen"
+        ],
+        "fileSha256": "e33a9bf7a578e05cd528a7f5de6af2b5fdfcca47e7c22b58fb62dd8758ba2d1e"
+      },
+      "final": {
+        "id": "node-to-c-ascii",
+        "status": "passed",
+        "checks": [
+          "Node production save",
+          "C production config_read",
+          "Node process-store reopen"
+        ],
+        "fileSha256": "60d32c6f451b2259c08f4bc1241549627f64ad3d75bbd28f85291f4b6023e676"
+      }
+    },
+    {
+      "id": "c-to-node-unicode",
+      "baseline": {
+        "id": "c-to-node-unicode",
+        "status": "passed",
+        "checks": [
+          "C production config_save",
+          "Node real DPAPI/read/request"
+        ],
+        "fileSha256": "568ec97ed1359b85bcef2cd6c82804ffdbae9f5221d0130abe0f1961f381ecc8",
+        "observedWireFormat": "legacy-unprefixed"
+      },
+      "productionFix": {
+        "id": "c-to-node-unicode",
+        "status": "passed",
+        "checks": [
+          "C production config_save",
+          "Node real DPAPI/read/request"
+        ],
+        "fileSha256": "51e3a57352d42ab39dfd5bb6e3fbf5af5239e99ffa4fb85d5ccdf936701353bd",
+        "observedWireFormat": "modern-prefix"
+      },
+      "final": {
+        "id": "c-to-node-unicode",
+        "status": "passed",
+        "checks": [
+          "C production config_save",
+          "Node real DPAPI/read/request"
+        ],
+        "fileSha256": "934c330792051e37002a419cb16c079adb422e208f43ce107a27cc3f820900e2",
+        "observedWireFormat": "modern-prefix"
+      }
+    },
+    {
+      "id": "node-to-c-unicode",
+      "baseline": {
+        "id": "node-to-c-unicode",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C config_read differs"
+      },
+      "productionFix": {
+        "id": "node-to-c-unicode",
+        "status": "passed",
+        "checks": [
+          "Node production save",
+          "C production config_read",
+          "Node process-store reopen"
+        ],
+        "fileSha256": "deed85d64372810a5d6d43659edafb3cf87b141c7e345893d21b78eb4cb404ec"
+      },
+      "final": {
+        "id": "node-to-c-unicode",
+        "status": "passed",
+        "checks": [
+          "Node production save",
+          "C production config_read",
+          "Node process-store reopen"
+        ],
+        "fileSha256": "c5d5e0f9ad7de56acd2116b11f222901342b25c1a38e0ad4e261f8130dfc0c7a"
+      }
+    },
+    {
+      "id": "c-modern-format",
+      "baseline": {
+        "id": "c-modern-format",
+        "status": "failed",
+        "checks": [
+          "C output actually read by Node"
+        ],
+        "fileSha256": null,
+        "error": "C modern prefix missing"
+      },
+      "productionFix": {
+        "id": "c-modern-format",
+        "status": "passed",
+        "checks": [
+          "C output actually read by Node",
+          "modern prefix"
+        ],
+        "fileSha256": "b2a9d8e8b0a2258ae1430ca1cdd2f85280393ea9c78c0a866b1c5c7d572d39ed"
+      },
+      "final": {
+        "id": "c-modern-format",
+        "status": "passed",
+        "checks": [
+          "C output actually read by Node",
+          "modern prefix"
+        ],
+        "fileSha256": "c1c361b74b481fac5a728d06538d12c12a8c7abefce87d0e081bbba093603c52"
+      }
+    },
+    {
+      "id": "node-blank-password-preserves",
+      "baseline": {
+        "id": "node-blank-password-preserves",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C reread after blank Node password differs"
+      },
+      "productionFix": {
+        "id": "node-blank-password-preserves",
+        "status": "passed",
+        "checks": [
+          "Node save and blank-password update",
+          "Node exact read after update",
+          "C exact read"
+        ],
+        "fileSha256": "8115df4e341d358de1e4a6ffa9b0cdb99a045d31d9f7c18f2986b51247c0da93"
+      },
+      "final": {
+        "id": "node-blank-password-preserves",
+        "status": "passed",
+        "checks": [
+          "Node save and blank-password update",
+          "Node exact read after update",
+          "C exact read"
+        ],
+        "fileSha256": "65ced4d8421101b5174bb8934527bc0ba721c8b14d3a473dd2cd63838ee3fc03"
+      }
+    },
+    {
+      "id": "empty-file-first-open",
+      "baseline": {
+        "id": "empty-file-first-open",
+        "status": "failed",
+        "checks": {
+          "cReadRejected": true,
+          "nodeReadRejected": true,
+          "nodeSaveRejected": true,
+          "nodeOriginalPreserved": true,
+          "cSaveRejected": false,
+          "cOriginalPreserved": false
+        },
+        "fileSha256": null,
+        "error": "First-open empty-file protections failed"
+      },
+      "productionFix": {
+        "id": "empty-file-first-open",
+        "status": "passed",
+        "checks": {
+          "cReadRejected": true,
+          "nodeReadRejected": true,
+          "nodeSaveRejected": true,
+          "nodeOriginalPreserved": true,
+          "cSaveRejected": true,
+          "cOriginalPreserved": true
+        },
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final": {
+        "id": "empty-file-first-open",
+        "status": "passed",
+        "checks": {
+          "cReadRejected": true,
+          "nodeReadRejected": true,
+          "nodeSaveRejected": true,
+          "nodeOriginalPreserved": true,
+          "cSaveRejected": true,
+          "cOriginalPreserved": true
+        },
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "id": "legacy-utf16",
+      "baseline": {
+        "id": "legacy-utf16",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C legacy rewrite not modern"
+      },
+      "productionFix": {
+        "id": "legacy-utf16",
+        "status": "passed",
+        "checks": [
+          "same-user real DPAPI UTF16 legacy",
+          "C/Node exact Unicode read",
+          "read preserves bytes",
+          "C upgrade and Node reread"
+        ],
+        "fileSha256": "5f904881c1861d51228b100ed828769fb0373ce1ebddc0015ce3d9a6a7d232b3"
+      },
+      "final": {
+        "id": "legacy-utf16",
+        "status": "passed",
+        "checks": [
+          "same-user real DPAPI UTF16 legacy",
+          "C/Node exact Unicode read",
+          "read preserves bytes",
+          "C upgrade and Node reread"
+        ],
+        "fileSha256": "1b05107ed685ba7d13c0eb99eb09b2a0391caada0a87b80b561b364be686797e"
+      }
+    },
+    {
+      "id": "legacy-powershell",
+      "baseline": {
+        "id": "legacy-powershell",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "PowerShell legacy creation failed"
+      },
+      "productionFix": {
+        "id": "legacy-powershell",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "PowerShell legacy creation failed"
+      },
+      "final": {
+        "id": "legacy-powershell",
+        "status": "passed",
+        "checks": [
+          "Node reads self-checked PowerShell legacy file",
+          "C reads self-checked PowerShell legacy file"
+        ],
+        "fileSha256": "0819105f1ff3c393cc9f5774a2250a7007c4ebb0075d8267c6b900f9e04d875f",
+        "fixture": {
+          "stage": "application-readers",
+          "status": "passed",
+          "sameProcessPowerShellRoundTrip": true,
+          "strictHex": true,
+          "process": {
+            "exitCode": 0,
+            "spawnError": false,
+            "timedOut": false,
+            "stderrBytes": 0,
+            "stdoutBytes": 1196
+          }
+        },
+        "powerShellEnvironment": {
+          "processId": 7428,
+          "pshome": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
+          "psVersionTable": {
+            "PSVersion": "5.1.26100.33822",
+            "PSEdition": "Desktop",
+            "PSCompatibleVersions": "1.0 2.0 3.0 4.0 5.0 5.1.26100.33822",
+            "BuildVersion": "10.0.26100.33822",
+            "CLRVersion": "4.0.30319.42000",
+            "WSManStackVersion": "3.0",
+            "PSRemotingProtocolVersion": "2.3",
+            "SerializationVersion": "1.1.0.1"
+          },
+          "psModulePath": "C:\\Users\\runneradmin\\Documents\\PowerShell\\Modules;C:\\Program Files\\PowerShell\\Modules;c:\\program files\\powershell\\7\\Modules;C:\\\\Modules\\az_15.6.1;C:\\Users\\packer\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\PowerShell\\Modules\\",
+          "available": [
+            {
+              "name": "Microsoft.PowerShell.Security",
+              "version": "7.0.0.0",
+              "path": "C:\\program files\\powershell\\7\\Modules\\Microsoft.PowerShell.Security\\Microsoft.PowerShell.Security.psd1"
+            },
+            {
+              "name": "Microsoft.PowerShell.Security",
+              "version": "3.0.0.0",
+              "path": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Security\\Microsoft.PowerShell.Security.psd1"
+            }
+          ],
+          "defaultImport": {
+            "success": false,
+            "error": "The following error occurred while loading the extended type data file: Error in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member AuditToString is already present.\nError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member AccessToString is already present.\nError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Sddl is already present.\nError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Access is already present.\nError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Group is already present.\nError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Owner is already present.\nError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Path is already present.\n",
+            "errorId": "FormatXmlUpdateException,Microsoft.PowerShell.Commands.ImportModuleCommand",
+            "type": "System.Management.Automation.RuntimeException",
+            "hresult": -2146233087
+          },
+          "explicitManifest": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0/Modules/Microsoft.PowerShell.Security/Microsoft.PowerShell.Security.psd1",
+          "explicitImport": {
+            "success": true,
+            "modules": [
+              {
+                "name": "Microsoft.PowerShell.Security",
+                "version": "3.0.0.0",
+                "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Security\\Microsoft.PowerShell.Security.psd1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "reject-truncated",
+      "baseline": {
+        "id": "reject-truncated",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-truncated",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "80bd5867572a33003c8828efbb5e9b270cd38cd6bcc61cc585d0afa8551bb68a"
+      },
+      "final": {
+        "id": "reject-truncated",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "39a24da68a59fefe0f16e0266303afa2d7a5d9b44bf758d4cdd049873050d521"
+      }
+    },
+    {
+      "id": "reject-odd-hex",
+      "baseline": {
+        "id": "reject-odd-hex",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-odd-hex",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "50ac1a7adefeae88a440173cfaa2e15b4af7874aab2e9fe9938299db06088dac"
+      },
+      "final": {
+        "id": "reject-odd-hex",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "0d007f4ab1b177f4e668a58a387a7a03103e2e929e35452f34f6c98e59b2382d"
+      }
+    },
+    {
+      "id": "reject-wrong-prefix",
+      "baseline": {
+        "id": "reject-wrong-prefix",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-wrong-prefix",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "9f611da00800bd71a34e3c5eeb985cf21770f9856ea1e1022b218ade0a140288"
+      },
+      "final": {
+        "id": "reject-wrong-prefix",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "69bc9e5b3b2f785902c598fdd2be757bce89e16e90b04890a1c68a7334ec0244"
+      }
+    },
+    {
+      "id": "reject-nonhex",
+      "baseline": {
+        "id": "reject-nonhex",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-nonhex",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "f4276b335234847384e0f584ee5a81c3b3b52792957b6f15ac3dd5c8bc76a3a0"
+      },
+      "final": {
+        "id": "reject-nonhex",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "9d2c3f66b616891f5f8c0bd2190bc02fbc53a351242f64c845dc6066446be853"
+      }
+    },
+    {
+      "id": "reject-cipher-corrupt",
+      "baseline": {
+        "id": "reject-cipher-corrupt",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-cipher-corrupt",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "d5900853884d0d8bfee38385a719eff118e02a19b397691f353d8f2d267d9bae"
+      },
+      "final": {
+        "id": "reject-cipher-corrupt",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "39667b96a0be9ba198e300939f8ec4bc10e3c08b5369295a589819ee395dbeef"
+      }
+    },
+    {
+      "id": "reject-empty",
+      "baseline": {
+        "id": "reject-empty",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-empty",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final": {
+        "id": "reject-empty",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "id": "reject-nul-trailing",
+      "baseline": {
+        "id": "reject-nul-trailing",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-nul-trailing",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "868d5d83ecd852228170fd7b56f67cd4a67a8a3a6dbcebca90a21f1d21ec0100"
+      },
+      "final": {
+        "id": "reject-nul-trailing",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "3561470cfcc65bc00cb9cdb89c4e21ef03353d1587a3f3f219603d6285a45b05"
+      }
+    },
+    {
+      "id": "reject-oversized",
+      "baseline": {
+        "id": "reject-oversized",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "Node cached read accepted malformed file"
+      },
+      "productionFix": {
+        "id": "reject-oversized",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "48ae5eee9491601403fd376d46db7e290903a6dd5cfc4554ac7cb1b46df68ec7"
+      },
+      "final": {
+        "id": "reject-oversized",
+        "status": "passed",
+        "checks": [
+          "C reject",
+          "Node cached and fresh reject",
+          "both save reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "48ae5eee9491601403fd376d46db7e290903a6dd5cfc4554ac7cb1b46df68ec7"
+      }
+    },
+    {
+      "id": "protected-invalid-json",
+      "baseline": {
+        "id": "protected-invalid-json",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C replaced malformed decrypted payload"
+      },
+      "productionFix": {
+        "id": "protected-invalid-json",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "a8c81f9c2b55e07fa189700007aaab4826d123b65179574b6de3a18661cf65c4"
+      },
+      "final": {
+        "id": "protected-invalid-json",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "9bd05e0faadd3d4a2ace6738b4b5c2fe3b6af17b4d41376e1dd3c165e313c7e3"
+      }
+    },
+    {
+      "id": "protected-json-scalar",
+      "baseline": {
+        "id": "protected-json-scalar",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C replaced malformed decrypted payload"
+      },
+      "productionFix": {
+        "id": "protected-json-scalar",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "ea10b086904712b2e81a20256b68f1a31887b8f7636ef85cdacf69e4934befde"
+      },
+      "final": {
+        "id": "protected-json-scalar",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "a61ab58f5ac1a45c79c10df1e963afd57508726d170d0a59e46d189f4967a8c4"
+      }
+    },
+    {
+      "id": "protected-invalid-utf8",
+      "baseline": {
+        "id": "protected-invalid-utf8",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C replaced malformed decrypted payload"
+      },
+      "productionFix": {
+        "id": "protected-invalid-utf8",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "45914111bdd7a3639554f82a03c432cf35daf68ec03b131bb9fe6b30eb08e746"
+      },
+      "final": {
+        "id": "protected-invalid-utf8",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "cfbc314974f3b783fa82c0bf5c16fa086aaa8bed2c3097a365fbcbce424af0b0"
+      }
+    },
+    {
+      "id": "protected-trailing-json",
+      "baseline": {
+        "id": "protected-trailing-json",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C replaced malformed decrypted payload"
+      },
+      "productionFix": {
+        "id": "protected-trailing-json",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "d2cac543d0b58236b5bb917f6a4a0331163dc0d4defbe7daf0794b6264aca74a"
+      },
+      "final": {
+        "id": "protected-trailing-json",
+        "status": "passed",
+        "checks": [
+          "real DPAPI malformed plaintext rejection",
+          "file preserved"
+        ],
+        "fileSha256": "b8792764b49dc9a1090304670574bfab9fc51b674c1123379710174afbfc3b82"
+      }
+    },
+    {
+      "id": "read-access-denied",
+      "baseline": {
+        "id": "read-access-denied",
+        "status": "failed",
+        "checks": [],
+        "fileSha256": null,
+        "error": "C treated unreadable file as missing"
+      },
+      "productionFix": {
+        "id": "read-access-denied",
+        "status": "passed",
+        "checks": [
+          "real Windows exclusive sharing failure",
+          "both reads and saves reject",
+          "original bytes retained"
+        ],
+        "fileSha256": "33d1ae48648280b1def2abb259ae9abe0d6eda993aaf8bb421f16570fa78b6aa"
+      },
+      "final": {
+        "id": "read-access-denied",
+        "status": "passed",
+        "checks": [
+          "real Windows exclusive sharing failure",
+          "both reads and saves reject",
+          "original bytes retained",
+          "lock fixture released and exited normally"
+        ],
+        "fileSha256": "b445b49a8c134ae1c9a071100a02050c896167d719d7cecd594077e5fc20b2ab",
+        "lockFixture": {
+          "kind": "credential-lock-holder",
+          "operation": "lock-until-stdin-release",
+          "exitCode": 0,
+          "signal": null,
+          "spawnError": false,
+          "readyTimedOut": false,
+          "forcedKill": false,
+          "readyObserved": true,
+          "stdoutBytes": 18,
+          "stderrBytes": 0,
+          "stderrDiagnostic": "",
+          "unexpectedPlaintext": false,
+          "releasedObserved": true
+        }
+      }
+    }
+  ]
+}
