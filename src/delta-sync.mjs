@@ -275,7 +275,9 @@ async function publish(call,request,manifest,pending){
 }
 async function makeSnapshot(call,request,manifest,shouldContinue){
  const start=await call({action:'outbox',limit:1}),m=manifest.value,meta=start.meta;if(start.entries.length||meta.pending||!shouldContinue())return;
- if(m.snapshot&&progressGap(meta.cursors,m.snapshot.cursors,64)<64)return;
+ const snapshotGap=m.snapshot?progressGap(meta.cursors,m.snapshot.cursors,64):null;
+ // Promote the initial zero-cursor recovery snapshot after the first published batch.
+ if(m.snapshot&&snapshotGap<64&&(snapshotGap===0||Object.values(m.snapshot.cursors).some(index=>index>0)))return;
  if(Object.entries(m.heads).some(([k,n])=>(counterAt(meta.cursors,k))<n))return;
  const id=uuid(),parts=[];let after='',records=[],size=0;
  const flush=async()=>{if(!records.length)return;const body=JSON.stringify({id,epoch:m.epoch,records}),file='v2/s-'+id+'-'+parts.length+'.json.gz';await immutable(request,file,body);parts.push({path:file,sha256:await sha(body)});records=[];size=0;};
