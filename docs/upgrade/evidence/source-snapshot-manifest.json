@@ -1,0 +1,2209 @@
+{
+  "repository": "https://github.com/johny751/MyTodo",
+  "branch": "master",
+  "sourceCommitFromZipComment": "5480c88c806cf1c366ec998b0ba627543d63233a",
+  "archiveSha256": "d05a6371b4eff1e72884c1cc75f525a0344afd0429318fd8355522c66b13a97c",
+  "archiveBytes": 46826549,
+  "gitMetadataIncluded": false,
+  "excludedBinarySuffixes": [
+    ".aab",
+    ".apk",
+    ".dll",
+    ".exe",
+    ".so",
+    ".zip"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 55,
+      "sha256": "16ef417ba9bba45d10979d9fe8f644e9468bb5fe326a58de9c9bcd9f7bee9300",
+      "gitBlobSha1": "1bd0d90ba2f82101f0d17e16c4860947123561f1",
+      "extracted": true
+    },
+    {
+      "path": "README.md",
+      "bytes": 14631,
+      "sha256": "ead003a2b3ac05d421b61e89d8e73d995b6b0b28fdd992c48f27999d42ab96a8",
+      "gitBlobSha1": "cd16c1e892a51121f44c27e5feaa4beeb82d77de",
+      "extracted": true
+    },
+    {
+      "path": "Start-Local.ps1",
+      "bytes": 1998,
+      "sha256": "f375e40230c93b71494790f61059b900d8cb5079b5674d7c390a1e612a52dd3c",
+      "gitBlobSha1": "3ab542da685efd8a4a8ad58fc5922ee2c3bdcd1d",
+      "extracted": true
+    },
+    {
+      "path": "Stop-Local.ps1",
+      "bytes": 1100,
+      "sha256": "8bed71d9b3a7df389d721b9b745f5b74211f0164e377979e3abe4151ec28ece5",
+      "gitBlobSha1": "3feeb3e91b4bcc41e9463b15d9fd6d2858af21e2",
+      "extracted": true
+    },
+    {
+      "path": "android/AndroidManifest.xml",
+      "bytes": 3342,
+      "sha256": "eb8c26e489e3d541d1aa4b56be08901136de409b6714478f626f06c0c7916508",
+      "gitBlobSha1": "299bf79b96bb63868b8a3841924315c2d197df1c",
+      "extracted": true
+    },
+    {
+      "path": "android/libs/README.md",
+      "bytes": 541,
+      "sha256": "f9cd87c81dcc7eb23ab7c1ee68bc381f0ea570711e4741464227f47ec46af6eb",
+      "gitBlobSha1": "893047484a7ab6d18651e279f4bb6a21d24eb7d4",
+      "extracted": true
+    },
+    {
+      "path": "android/libs/feedback-kit-1.2.0.aar",
+      "bytes": 152858,
+      "sha256": "4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade",
+      "gitBlobSha1": "0cac36f91f9dbba234e0602b56a046d4ec5349fe",
+      "extracted": true
+    },
+    {
+      "path": "android/res/drawable/ic_launcher.xml",
+      "bytes": 528,
+      "sha256": "7e8a9c0f59072efe0bb5895af8504889f72969b0e74026868fac5647c2a4e386",
+      "gitBlobSha1": "8ee8ae7fc46935b0416d19f4c6fe4c9aca4e186d",
+      "extracted": true
+    },
+    {
+      "path": "android/res/drawable/ic_notification.xml",
+      "bytes": 310,
+      "sha256": "dec2b91ef564bb338ff452ae65105492f897de644b39f548ccad1039664777d9",
+      "gitBlobSha1": "dd316b329a1093bdfe2a743547f52cb94e39446e",
+      "extracted": true
+    },
+    {
+      "path": "android/res/layout/notification_status.xml",
+      "bytes": 2636,
+      "sha256": "6ca497d5bb9a55ed8038f64189fffbf67b08bb625c831e94eda92894228321e3",
+      "gitBlobSha1": "20dbe713bbfd6a0c9771d979bdd18d49b2bb7668",
+      "extracted": true
+    },
+    {
+      "path": "android/res/layout/notification_status_expanded.xml",
+      "bytes": 3329,
+      "sha256": "4fbba4294ddaaca242968dd45fe6a126fea6b04cef789835f48ba20cc216381d",
+      "gitBlobSha1": "51e2f5b190107e08d556c4a33c4c66d2775e7831",
+      "extracted": true
+    },
+    {
+      "path": "android/res/layout/todo_widget.xml",
+      "bytes": 1897,
+      "sha256": "7038622f8540adc3d2b140795598ab0ed39ae37fefca0fdb2763f01099594667",
+      "gitBlobSha1": "2ba6e8f8f6d54f26adbb836045b096ad58692cfb",
+      "extracted": true
+    },
+    {
+      "path": "android/res/values/styles.xml",
+      "bytes": 414,
+      "sha256": "44954bfbdc6951c2ef5e3e2f7ef31f69f8c6b712006769edf4d112f8aa3b60ab",
+      "gitBlobSha1": "f83a2622765c11b780ce0f15bf92be72ada2ceb8",
+      "extracted": true
+    },
+    {
+      "path": "android/res/xml/todo_widget_info.xml",
+      "bytes": 334,
+      "sha256": "e6456c3a481a6512318c9156b409de31c719995436a4911f6fce723442d2300f",
+      "gitBlobSha1": "9154ba9b15736209d1e8a268a2b286f649221c5b",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AccountStore.java",
+      "bytes": 7525,
+      "sha256": "cd1128d50a4a1a5283d41bf7ac5daddac9e974d77304d67da950bf282ff11a20",
+      "gitBlobSha1": "55bb03bf353bfbb37bde96e78d84b63a50dc53d4",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AndroidCompanionService.java",
+      "bytes": 20514,
+      "sha256": "76e91bf2ce169edbd7cea5f185fd4f75b9bfba47abaaf046dcbce85c8c0cb64e",
+      "gitBlobSha1": "f29a27d13231ad8f087c79f081a6e4c25e91d861",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AndroidToolsActivity.java",
+      "bytes": 62407,
+      "sha256": "16fd684db75e80e87f3aac4941a53ca0cda2c05b647cbe47b8f6a4ae070a0142",
+      "gitBlobSha1": "46b66b6d1b787195a76bb1628a3c1de798fec714",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/CompanionAlarmReceiver.java",
+      "bytes": 251,
+      "sha256": "3174aee8e5dbfdbac1ecbbb04aebfcf87d70b7a729c7908d168a6b9f117299db",
+      "gitBlobSha1": "c950d248edff7b9e82e2e6a25b2b620839d5bd9c",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/DailyTaskPolicy.java",
+      "bytes": 3772,
+      "sha256": "2965d80c1c96ab19d12612331ca521086a36ff03e336cba1a91496539bc8a83e",
+      "gitBlobSha1": "d7f7974346ae5c4507c643bc451937fc2bf52cd4",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/DailyTaskSummary.java",
+      "bytes": 3587,
+      "sha256": "a3b0680f66cb0cfca31e154e657c3e21996936826a40ef52559915bf7ddc0570",
+      "gitBlobSha1": "cd5ad1e86e3901c65bd76909ff1dcbd807b38d45",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FeedbackApplication.java",
+      "bytes": 4185,
+      "sha256": "3e8f3226e3fde6f885c2c3b686f228bf105f8d86a18c398e55219395370b40f6",
+      "gitBlobSha1": "9dc5f98cea307ad57832f744893f8670df9ccd4a",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FeedbackToolsActivity.java",
+      "bytes": 9022,
+      "sha256": "7b883b0bb4cecba6760849ab8066ac1a071b726d397b116087306adf0e7a7ad6",
+      "gitBlobSha1": "c6f699f3d84860e46aa899f1777683009e9522b8",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FloatingBallController.java",
+      "bytes": 29916,
+      "sha256": "032e3d7b86d4a3d68d928d70ca9a2f0f06a4c57b5e537127ab6372a22c31403b",
+      "gitBlobSha1": "dd698cc57335336f9ad5dcfc4ced84fb984964a4",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/MainActivity.java",
+      "bytes": 16353,
+      "sha256": "6f7acc6c8c2bdd89e079d05d2845747dc7b972883b9ed4749443d534992922e0",
+      "gitBlobSha1": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/NotificationTimerControls.java",
+      "bytes": 1253,
+      "sha256": "3632fe597b7a57f88b14584f84bd1f511feac8460c19e7e81f71d21a276078a1",
+      "gitBlobSha1": "1963955fa660ab10073201907e4801d3d05fc22f",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroClock.java",
+      "bytes": 11359,
+      "sha256": "1ad9c070920ae62f2abf707e843ecd315434db1d11018f693747d59f7b42af39",
+      "gitBlobSha1": "9b4dca8ab48ff366ec97432778954d2efabf6c8a",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroTasks.java",
+      "bytes": 6061,
+      "sha256": "fcabd74e9cde5c2d584aeb89f1ae89e14d637085a73b447dafe25ca03d416864",
+      "gitBlobSha1": "d217a2d32911cfa22d53e276b0a1327b25ce3bbc",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroTimer.java",
+      "bytes": 11433,
+      "sha256": "9b1dbcfa10e6a9b3784e2ab485ef17fa1fc6ba9672b471678f79ad8fde5f66a3",
+      "gitBlobSha1": "82a4a971c154090e89e427dfb93231369dcfa410",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReminderReceiver.java",
+      "bytes": 941,
+      "sha256": "d3256ee58c594de7a0e258e98a73b2e5c2324ff15bf224573f40058e8126c285",
+      "gitBlobSha1": "d1c8583af5436726552712768d3e2f935ba8e764",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReminderScheduler.java",
+      "bytes": 6245,
+      "sha256": "8e9ec71e850566c23b54f42233057c803ac12e920b6749fe9be792436f8f4474",
+      "gitBlobSha1": "ec4fa4353ccaa8eaabf6bafddfad5710f191e558",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+      "bytes": 10845,
+      "sha256": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663",
+      "gitBlobSha1": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/SyncStore.java",
+      "bytes": 9967,
+      "sha256": "c73a7cac4c3f48d13cf1b0ef60504c06a4d891963226ddfa9bbf5c65dc80934e",
+      "gitBlobSha1": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+      "extracted": true
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/TodoWidget.java",
+      "bytes": 2338,
+      "sha256": "7d1ec5048762366d1f0f81497a171eb5f4b0e41e950c2da57b4665002e9d30af",
+      "gitBlobSha1": "5cf8041ebf0906f8e47ad09734371cf1cd6e2e39",
+      "extracted": true
+    },
+    {
+      "path": "dist/GxTodo-Native-0.8.2.exe",
+      "bytes": 1315328,
+      "sha256": "72aa22a2c6f8de3358c4c82cc3644babab5058c4d9f69d77a9bfc486e0cd6b4a",
+      "gitBlobSha1": "e1cf38d4a103adfc119b0b720a70b94b7b3786c2",
+      "extracted": false
+    },
+    {
+      "path": "dist/GxTodo-Native-0.8.3.exe",
+      "bytes": 1325056,
+      "sha256": "63b021b66497b2630df466088deabe7cb45bd073d31cc10ed1b1b4a3648ac08b",
+      "gitBlobSha1": "f72f73d8b99be0a3f7ff0e1c8a2fae373de6e183",
+      "extracted": false
+    },
+    {
+      "path": "dist/GxTodo-Native.exe",
+      "bytes": 1345024,
+      "sha256": "779d7deeec6a655ddc40cbba7ac832dd8d42215533714b97161a77107b561e8a",
+      "gitBlobSha1": "35a178d87bf47d4b1ee573f6b3dd39fbb1fe2fc4",
+      "extracted": false
+    },
+    {
+      "path": "dist/GxTodo-Public-0.8.3.exe",
+      "bytes": 1325056,
+      "sha256": "6226f5e32be18abae267a491e4359f648c6d26f86ed034af2c55fefdd2335cf6",
+      "gitBlobSha1": "f27ab1bbca0ccd4e6fd4eb5a413d6a33b94eb9d9",
+      "extracted": false
+    },
+    {
+      "path": "dist/GxTodo-Public-0.9.2.exe",
+      "bytes": 1345024,
+      "sha256": "82ffe85bb70bcd5658e4fb508ea816e1689b8ad2c47aacd78011b9765e6bfb6f",
+      "gitBlobSha1": "e51b7791efe00e9d9d1fb5763e369f9b96f07397",
+      "extracted": false
+    },
+    {
+      "path": "dist/WebCredentialHelper.exe",
+      "bytes": 147968,
+      "sha256": "7f433b9b574d4593e036c9bde7d7df819ba8fd0eda92600130f7121b96155f5e",
+      "gitBlobSha1": "b08d551fd8bb566f07f868a7ee6ed66d7ab61e0c",
+      "extracted": false
+    },
+    {
+      "path": "dist/android-build.json",
+      "bytes": 3636,
+      "sha256": "fd7e949e2ae5b85c13eac57831d404103ba5dcb00f7b743e364904e2bac6e9ce",
+      "gitBlobSha1": "d941c8f6092d01304daf29d12d4290514880fa10",
+      "extracted": true
+    },
+    {
+      "path": "dist/gxtodo-local-0.9.1.apk",
+      "bytes": 166086,
+      "sha256": "1821dba0f9dc9c6afef33d704a271776a5e446dc604ffb739bd0cc7f904e2d8c",
+      "gitBlobSha1": "9ec376ea836711c4b26dc74ffaef133cb2fb01a0",
+      "extracted": false
+    },
+    {
+      "path": "dist/gxtodo-local-0.9.2.apk",
+      "bytes": 289105,
+      "sha256": "2bd0826abcf50431915578c265c17ecf5379f7ef7d0c6251ac8dd13c28f009e2",
+      "gitBlobSha1": "ecae40272ffb9df349bac589ac24303041eb6425",
+      "extracted": false
+    },
+    {
+      "path": "dist/windows-build.json",
+      "bytes": 981,
+      "sha256": "e1cc1e23b0f721a96b9cc85e2e07a962aac308a0ef7a52be5e6e480bd2fe35be",
+      "gitBlobSha1": "eba2e9d10173a706a0b844632ce193b555531e54",
+      "extracted": true
+    },
+    {
+      "path": "docs/accounts.md",
+      "bytes": 3474,
+      "sha256": "1fafba33869b7121e2c0107320935aa55be24a3b4ff6fae932d73f3b763e41f1",
+      "gitBlobSha1": "656939b114107f33c604b8413d5cd875eddbe170",
+      "extracted": true
+    },
+    {
+      "path": "docs/analysis.md",
+      "bytes": 5392,
+      "sha256": "2bf6f79e5353278e2341fe7d495a2a03d9384b5e23f0ad7fb9322bc6184e379c",
+      "gitBlobSha1": "0eda0d9b19f90c4c55f6e98cd9c771059c43c755",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-build-verification.json",
+      "bytes": 10978,
+      "sha256": "3cf81f948aa3095ee75caab578cd453c65af538492e9e0cc821d7791228a3f0a",
+      "gitBlobSha1": "5fbf6b42abd181e432150cfc9a271e1998df497f",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-final-build-receipt.json",
+      "bytes": 3849,
+      "sha256": "7a93d57b38549ba10e03a07a8ba9764064381adf679eb2ca27ef2b4ae5aab9bb",
+      "gitBlobSha1": "c727ae838403b4776d4a28a95f59931145b1065c",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-final-package-verification.json",
+      "bytes": 21851,
+      "sha256": "d7d3afdeb9719c8984e2315a93e954667756ec65b185377a03c730d2a140faf3",
+      "gitBlobSha1": "26bc4f738e1596a27c6acc902079acc638a9d7a0",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/01-home.xml",
+      "bytes": 4144,
+      "sha256": "7ef2098b6d18cc969283744267826be02e6fd5a14389804f63ad1b21e90aeea2",
+      "gitBlobSha1": "ca6e4e5d904916ea474a98fe49f5aac9dd0b8561",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/02-current.png",
+      "bytes": 100092,
+      "sha256": "c2842766f5cd430df0491e0d8a73905773d7a9a86175e2bf2003b01e3303e29b",
+      "gitBlobSha1": "8e24208381bb4e55f2372ea6826c30cfb9716b9f",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/02-current.xml",
+      "bytes": 1781,
+      "sha256": "11161fc9b0f73f94e07e9775a4be675a499bccb5a7c819d9ff8558f723bd0e7c",
+      "gitBlobSha1": "5c9f5cb64338453effa1d529a7ca8faf010d2e24",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/03-home.xml",
+      "bytes": 14723,
+      "sha256": "a775c99c7be12d4df8485d1175c99375b01da4f3606d5cc24b5b5db31304d5c7",
+      "gitBlobSha1": "b254cb054e8cf2380cc91afcf516c3c98b528b62",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/04-menu.xml",
+      "bytes": 22652,
+      "sha256": "adbc23306e72da2811349a8a3a0623c534b1066a7ae4efd34b46845507d35db5",
+      "gitBlobSha1": "a7a1a75c7ed0ac4aa858caa3b16f11495f491ebd",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/05-feedback-tools.xml",
+      "bytes": 5670,
+      "sha256": "3323ab2678018853732d0bc8a127c0bc2b9208bff3a1b5ae9ed2d8b333546a73",
+      "gitBlobSha1": "ebb04f5e4a1c3a673519986aeb64cfa3a570cea7",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/06-feedback-list.xml",
+      "bytes": 9285,
+      "sha256": "545bdd5566187d3f7a187c67ceaed6be9e62e715bef43f44f1a30ec5931ad4a8",
+      "gitBlobSha1": "114fa2d4595bbc0c4876fc25ec7f818f8ff30c39",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/07-feedback-editor.xml",
+      "bytes": 14742,
+      "sha256": "5aa9910bf38a9973b07902c546c3d9b4d9bdfe12e3e6293e489ec43d7479ed6a",
+      "gitBlobSha1": "b2e238ac35f6f4b6a2deece22ac0381603cba506",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/08-feedback-typed.xml",
+      "bytes": 14695,
+      "sha256": "b3c2e1103fb119e1cdd2d6370937ea84e2577d32f638b9a0664c70856ca3a6dd",
+      "gitBlobSha1": "88507d46334b2caf09343671d4a5f04ee26e23c8",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/09-image-picker.xml",
+      "bytes": 10257,
+      "sha256": "69408d2616f447fafa384b8b17f0448a8efe91fb86cb816523eb329302884cc1",
+      "gitBlobSha1": "f032a47f98d7e5c2246c7674d2e8234020a35f95",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/10-image-cancel.xml",
+      "bytes": 14696,
+      "sha256": "fe670c659886e37b4dc03aec9172b3fb03568f1a600e16722c2ba4a67782c858",
+      "gitBlobSha1": "ec04874a3cb88313e350c55ade0f52618123c137",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/11-feedback-saved.xml",
+      "bytes": 11439,
+      "sha256": "cc473195c1aba00d21a3d4cee9e427119cb7dfd510672329e2ba43a4490eed57",
+      "gitBlobSha1": "c431ccc916e99caaef40b839d4d50d6e71b92823",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/12-feedback-completed.xml",
+      "bytes": 11812,
+      "sha256": "64d8ef16c2a96a959f2cec3c25560e038bae0b6bbb7a73273c0b98961cc05a53",
+      "gitBlobSha1": "b045bdea3cb8add293f900bd8035bb2ba202c32c",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/13-restart-home.xml",
+      "bytes": 1781,
+      "sha256": "11161fc9b0f73f94e07e9775a4be675a499bccb5a7c819d9ff8558f723bd0e7c",
+      "gitBlobSha1": "5c9f5cb64338453effa1d529a7ca8faf010d2e24",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/14-restart-home-ready.xml",
+      "bytes": 14723,
+      "sha256": "a775c99c7be12d4df8485d1175c99375b01da4f3606d5cc24b5b5db31304d5c7",
+      "gitBlobSha1": "b254cb054e8cf2380cc91afcf516c3c98b528b62",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/15-restart-menu.xml",
+      "bytes": 22652,
+      "sha256": "adbc23306e72da2811349a8a3a0623c534b1066a7ae4efd34b46845507d35db5",
+      "gitBlobSha1": "a7a1a75c7ed0ac4aa858caa3b16f11495f491ebd",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/16-restart-tools.xml",
+      "bytes": 5670,
+      "sha256": "3323ab2678018853732d0bc8a127c0bc2b9208bff3a1b5ae9ed2d8b333546a73",
+      "gitBlobSha1": "ebb04f5e4a1c3a673519986aeb64cfa3a570cea7",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/17-reopened-list.xml",
+      "bytes": 11676,
+      "sha256": "bde567a30235c958e86052fd16e563fd9ef5dd02bfeb12e7373ef8ad75d05436",
+      "gitBlobSha1": "bf1b5d9d781e9c0282121a4b203b1ca444974c93",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/18-tools-backup.xml",
+      "bytes": 14723,
+      "sha256": "a775c99c7be12d4df8485d1175c99375b01da4f3606d5cc24b5b5db31304d5c7",
+      "gitBlobSha1": "b254cb054e8cf2380cc91afcf516c3c98b528b62",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/19-menu-settings.xml",
+      "bytes": 22652,
+      "sha256": "adbc23306e72da2811349a8a3a0623c534b1066a7ae4efd34b46845507d35db5",
+      "gitBlobSha1": "a7a1a75c7ed0ac4aa858caa3b16f11495f491ebd",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/20-settings.xml",
+      "bytes": 25371,
+      "sha256": "86721d2b8c47cceffc6f3dbb4c2f9a33dee9dff290dc3fbb1de6e6e0480f1e7f",
+      "gitBlobSha1": "1cf24e16e23d0c9809d94307a1a990acff246cde",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/21-settings-feedback.xml",
+      "bytes": 25346,
+      "sha256": "51edfebee8324740b3c0508de54ee4bafc2a99aa92551e6f15b98bebdf523c9f",
+      "gitBlobSha1": "d6ffef14b7dd5eeda28fde3b39e127b9d186a591",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/22-tools-via-settings.xml",
+      "bytes": 5670,
+      "sha256": "3323ab2678018853732d0bc8a127c0bc2b9208bff3a1b5ae9ed2d8b333546a73",
+      "gitBlobSha1": "ebb04f5e4a1c3a673519986aeb64cfa3a570cea7",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/23-export-picker.xml",
+      "bytes": 25310,
+      "sha256": "fdf57a30b1f3c595fb99d24f930a0fbc7d5a1702359d6a725d7e3f1de7150e74",
+      "gitBlobSha1": "32e1e0e5ab7e0e9dd7258c5c8c7123485747316c",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/24-export-cancel.xml",
+      "bytes": 5634,
+      "sha256": "37d84451a76c9ba8e36f88c108ba1e452693c463f984552e2be2653246c0001c",
+      "gitBlobSha1": "e297631f9ac167954a0b0ff236483446a42d30c6",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/25-restore-picker.xml",
+      "bytes": 24571,
+      "sha256": "d1ea30bfb97115e355392644bc1caeb571b6e876e8e7dde5b5188dfef3983efb",
+      "gitBlobSha1": "3ff7a535103dc6a95b8e3636088a5f4d881b7d21",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/26-restore-cancel.xml",
+      "bytes": 5634,
+      "sha256": "37d84451a76c9ba8e36f88c108ba1e452693c463f984552e2be2653246c0001c",
+      "gitBlobSha1": "e297631f9ac167954a0b0ff236483446a42d30c6",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/27-final-launch.xml",
+      "bytes": 1781,
+      "sha256": "11161fc9b0f73f94e07e9775a4be675a499bccb5a7c819d9ff8558f723bd0e7c",
+      "gitBlobSha1": "5c9f5cb64338453effa1d529a7ca8faf010d2e24",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/28-final-home-ready.xml",
+      "bytes": 14723,
+      "sha256": "a775c99c7be12d4df8485d1175c99375b01da4f3606d5cc24b5b5db31304d5c7",
+      "gitBlobSha1": "b254cb054e8cf2380cc91afcf516c3c98b528b62",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/29-final-menu.xml",
+      "bytes": 22652,
+      "sha256": "adbc23306e72da2811349a8a3a0623c534b1066a7ae4efd34b46845507d35db5",
+      "gitBlobSha1": "a7a1a75c7ed0ac4aa858caa3b16f11495f491ebd",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/30-final-feedback-tools.png",
+      "bytes": 147173,
+      "sha256": "74d00562f1527bcbb1c6d64795881d428ea633fd2230542d707fabf858f6bbf3",
+      "gitBlobSha1": "f9d580204fcb6c885de55229ecde2fcfde27e05b",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/30-final-feedback-tools.xml",
+      "bytes": 5670,
+      "sha256": "3323ab2678018853732d0bc8a127c0bc2b9208bff3a1b5ae9ed2d8b333546a73",
+      "gitBlobSha1": "ebb04f5e4a1c3a673519986aeb64cfa3a570cea7",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/FeedbackQaInstrumentation.java",
+      "bytes": 13584,
+      "sha256": "998fe3ae7312a21e94f4acd8db1ec21a521a452267ed612b1245f1f2f540431e",
+      "gitBlobSha1": "5f5e001a0e1e366a96326cbca0f0af53bd30c117",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/crash-buffer-after-final.txt",
+      "bytes": 45913,
+      "sha256": "8bf65b7dd4ce5b26fecd04340859840a301defd6eb9dca888a474c3a160970e5",
+      "gitBlobSha1": "e2574395b9179ac0ddcb81c06fda371c839b8884",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/crash-buffer-before-final.txt",
+      "bytes": 45913,
+      "sha256": "8bf65b7dd4ce5b26fecd04340859840a301defd6eb9dca888a474c3a160970e5",
+      "gitBlobSha1": "e2574395b9179ac0ddcb81c06fda371c839b8884",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/feedback-detail.png",
+      "bytes": 152504,
+      "sha256": "e3bcd49806ed10e2baeaea6b36a37d37bb977be51cc1c2ac9c08dc231fd1d43d",
+      "gitBlobSha1": "3f57a3caa007a96e29fcdf20b6341ba72744aa54",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/host-exit-info-final.txt",
+      "bytes": 6233,
+      "sha256": "141a69554656b95181c63bd9e8a06bf17dc049ed9278b9089a7b5103a0fcf807",
+      "gitBlobSha1": "13b73d6fa94613ee359068a41a8ee732d0263250",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/instrumentation-output.txt",
+      "bytes": 1721,
+      "sha256": "b0f42b5b60d3fc61c342fb560b202adc4dea2b2bc5ded53f0b40957e459b5227",
+      "gitBlobSha1": "ce58308b48341780c8d49f776dc81770483259c1",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-qa/isolation-backup-result.json",
+      "bytes": 2260,
+      "sha256": "d8c5583ef26247376aff4dd41ec6d7fcf8a12ec4efdbf1d2d382a51e6c135f0d",
+      "gitBlobSha1": "94f98190e1fe558d58900f98e9e9e5c5b8a131f8",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/native-ui-backup-verification.json",
+      "bytes": 5408,
+      "sha256": "d52e3b65861c5ca7d169e4eae28dd23d71c09a9b1cf0ea1fd6b75ad930d84839",
+      "gitBlobSha1": "4c81140f7d08118493a2d4fc6156ae63467d5fa9",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-feedback-092-20261113/接入说明.md",
+      "bytes": 1360,
+      "sha256": "8eb5d8645f6a463ab326cb427225ae840e5fa3fe8549f29d07ef0f53060ed292",
+      "gitBlobSha1": "0047066cd22b7cb5b6affaedde22613f203810c7",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-focus-091-20261101/delivery.json",
+      "bytes": 1049,
+      "sha256": "31ef1543f74aaa567cffcee28b931f4d6744d33d85ceb124a58b448852d1c5b5",
+      "gitBlobSha1": "4e3abc4195c9e79f57816c5359ac2658ee59f6f3",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-focus-091-20261101/validation.json",
+      "bytes": 1477,
+      "sha256": "c41fa3b101720eb2d5455d052a53aa959feda0add02f362f2b0e92fcac1d243f",
+      "gitBlobSha1": "d839adb9b302842ed99ff6504fd217d091248fb8",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-focus-091-20261101/使用说明.md",
+      "bytes": 6977,
+      "sha256": "c91f72189e5588449321af8641d77489d803d5eefe69169a08c8afcfe1a57d7b",
+      "gitBlobSha1": "2d242d79c3ca7c8698fd9c7628c33281a0cef623",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-gestures-v081.json",
+      "bytes": 23700,
+      "sha256": "77b50879c1afc73eaf3fd0e1313ff657daf202e4c4716819d29abd9924bfad59",
+      "gitBlobSha1": "9dc48fe8fa391ff59689585996b63329150b48b0",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-performance-v080.json",
+      "bytes": 34580,
+      "sha256": "764dbd06ab89e14049429db4bb9f6a23f47fef10dd07aad990d493805885a1e8",
+      "gitBlobSha1": "c3bc943aca8fe878797baf3b20f560c13b9655b0",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-performance-v080.md",
+      "bytes": 13920,
+      "sha256": "1457be0c35c92fbd97bac5b90a6590bf763f4024f02f67ef11490874d8019e5f",
+      "gitBlobSha1": "775c449aec8a1b908ec7329ab353fd72179ab970",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-testing.md",
+      "bytes": 21506,
+      "sha256": "9e8cd92d9e201cb01ad15c3afe95f768f339083164da2d568afd306851eb59c7",
+      "gitBlobSha1": "d12c82b8466c53a1f91113502a03a9c29e563d88",
+      "extracted": true
+    },
+    {
+      "path": "docs/android-webdav-v080.json",
+      "bytes": 541,
+      "sha256": "38c84f8238d497a0b0ad65f8b3a5d12d02cfe9b85595ea82fca277a25f6d21c7",
+      "gitBlobSha1": "20ce22abfe65be01aea8c506bf6cf75683b49371",
+      "extracted": true
+    },
+    {
+      "path": "docs/benchmark-v080.json",
+      "bytes": 273,
+      "sha256": "c90be9f265b06f5eedd26be892d82df97b5a62d63022f4801ade5d40ffc357af",
+      "gitBlobSha1": "a4f59f727b4aae97ed16cdc315ab3b142bb53a73",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/Android使用说明.md",
+      "bytes": 3547,
+      "sha256": "c2335f2a594679d860752e50d7c85b15de795a21035e0828f42528b606f1ccf1",
+      "gitBlobSha1": "11da896df95401dfad17b28889357e1c8001df57",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/Node-v24.19.0-LICENSE.txt",
+      "bytes": 157606,
+      "sha256": "148eacf7863ef4329224a29398623077200a27194aa075569faf4a0a85566ca5",
+      "gitBlobSha1": "2842efa1288eef1de3a6778b5dd3519bc903308d",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/Node-v24.19.0-SHASUMS256.txt",
+      "bytes": 2967,
+      "sha256": "be0629ee2bcd8e40bb856abdd3407f0762101b76bd60a36b8867f637733631c0",
+      "gitBlobSha1": "1c49ab4d8454917659aa12fa666909fc24e43159",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/Windows使用说明.md",
+      "bytes": 3426,
+      "sha256": "aed57de96bcb746611c3d229587038dbbd5cdfb8322b84e15d96ab0a8690824d",
+      "gitBlobSha1": "0231a4e7ac21cdf59b67247971529e24b5e290be",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/Windows第三方许可.md",
+      "bytes": 2916,
+      "sha256": "5e7d29d4510ab8c5d3be68de0af20ffa2c5ea09b045cedf078a4cf68a2674287",
+      "gitBlobSha1": "cbc131132d2b888ef5fef05da6e79d5a5257bc57",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/同步与备份.md",
+      "bytes": 1511,
+      "sha256": "cd2456d78ddc5eb1ea3365d08f35284e0d6fb702f3d059739f1729d04ff8985c",
+      "gitBlobSha1": "2528d5d5bb827e01c3aac37b1496a5d857e25167",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/构建发布包.md",
+      "bytes": 1658,
+      "sha256": "cab0ceb82faada659952df0b7ab2bb77e7e63ee6664371e2363d1157b0188c0e",
+      "gitBlobSha1": "0b99b2382dd966d3c6e3b8052bd80901e253e474",
+      "extracted": true
+    },
+    {
+      "path": "docs/distribution/网页使用说明.md",
+      "bytes": 4010,
+      "sha256": "8292547f1bb242123ba57c5c77339593b9e512a47be80d4d29f578378331ef1c",
+      "gitBlobSha1": "4b2e68a9d774b79ed280911bfecd981c21b7c707",
+      "extracted": true
+    },
+    {
+      "path": "docs/import-official.md",
+      "bytes": 2181,
+      "sha256": "afd407b4e30957040f4bbc623dd8209455850a92e38b9a1270ec1b88c7901658",
+      "gitBlobSha1": "0ae6325d84116058bbc0589b3696c154c704aa7f",
+      "extracted": true
+    },
+    {
+      "path": "docs/project-cleanup-20261019.md",
+      "bytes": 4620,
+      "sha256": "140806b7fb0343aec82952e43ec1b0a51c48b59e811fbdc3bdeaa0d3c1643863",
+      "gitBlobSha1": "ffdec8c9a017318595a65da04ef0fbfd1ebdec76",
+      "extracted": true
+    },
+    {
+      "path": "docs/project-cleanup-20261031.json",
+      "bytes": 826619,
+      "sha256": "f816980d2e7705115bf1597acc1c650517c7377ad840ebc78b1db59b1ba90c50",
+      "gitBlobSha1": "db611eeb687c01463e8cf3e325359d291710598b",
+      "extracted": true
+    },
+    {
+      "path": "docs/project-cleanup-20261031.md",
+      "bytes": 4651,
+      "sha256": "502dd4f6b7eb3e9d7e3e0c7bccdc3170d1aa46749a003451f5a174d343efb474",
+      "gitBlobSha1": "93495f847d764af41c51e63efa652c484594028b",
+      "extracted": true
+    },
+    {
+      "path": "docs/project-cleanup-20261101.json",
+      "bytes": 413068,
+      "sha256": "dcfb42b431f83ffbf410ef0e60d5370dd546f0877550c1a9a7ec3af975902c46",
+      "gitBlobSha1": "d3c3cea8d54943a356c1077011a38b453b92c326",
+      "extracted": true
+    },
+    {
+      "path": "docs/project-cleanup-20261101.md",
+      "bytes": 2820,
+      "sha256": "1b5499f6080e3f1712840f5b7d2c6adaa6fe4fa73ceb33615f1d97a847ff40dd",
+      "gitBlobSha1": "c43a4eccf4ecbc6192673106ab40f66f258470bf",
+      "extracted": true
+    },
+    {
+      "path": "docs/reference-corner-current.png",
+      "bytes": 314933,
+      "sha256": "f7ac6d5c3b7eb51287d7d70cb27a17c5df5c8c8d26c4fa352f8e8e8e5855c702",
+      "gitBlobSha1": "9a8b32302b1c91d3f9e765345b6e6bc7d0a60620",
+      "extracted": true
+    },
+    {
+      "path": "docs/reference-detail-v05.png",
+      "bytes": 164426,
+      "sha256": "13ed56e39ce0b555889cfcb62846a3dfea4d818104d0b7138908f9da2595d9e0",
+      "gitBlobSha1": "e8ad154ffd577c75c93162a382a25f1117195358",
+      "extracted": true
+    },
+    {
+      "path": "docs/reference-menu-v05.png",
+      "bytes": 230791,
+      "sha256": "488f643e8feddda759c8108c33bd6fbad7b221d4246733abe474e483f8007e3d",
+      "gitBlobSha1": "125ccde9e0df4202fb3edc51e59eb7d8be149e19",
+      "extracted": true
+    },
+    {
+      "path": "docs/reference-phone-v05.png",
+      "bytes": 544590,
+      "sha256": "c3bfaf9baf5f76fb7ab136c94c29539d0027373367d3c8b74b93bc4b50846362",
+      "gitBlobSha1": "035a2227bccdac9bd7eec27f23734d98762033b1",
+      "extracted": true
+    },
+    {
+      "path": "docs/reference-task.png",
+      "bytes": 32829,
+      "sha256": "993d98ed8071608df344d0feeac6a3b644d5fbc8d1bdcf9083d355f690174cca",
+      "gitBlobSha1": "62a907320702e2e84c2ddd2ea0d413f94bb02c26",
+      "extracted": true
+    },
+    {
+      "path": "docs/reference-zoom-v05.png",
+      "bytes": 298007,
+      "sha256": "de9aa71ae6d9a91d0eaa84a3685b4bc0c83d1dd1e4728b8bf5948fb1db5514bc",
+      "gitBlobSha1": "56fa3ac113ecba60fed81575d7d9e4ee50bddfc6",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/interop-web.json",
+      "bytes": 348,
+      "sha256": "7b4f7dcdbe4c08c18f37a8bf9a23fb3a0ddfaeaf5f671ae5c4c768c2586f0a63",
+      "gitBlobSha1": "4b26346c89a6c293738a5b4794d239d564bbd831",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/interop-windows.json",
+      "bytes": 274,
+      "sha256": "94969846b9c1a6e74800f872b4c181d7cc70fdc8f196dc0dea279e67a162253c",
+      "gitBlobSha1": "c1dcbbe5da641cdd3c2bf2a1ae0affbd3601d472",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/package-integrity.json",
+      "bytes": 521,
+      "sha256": "1dea7b8cd06c820ad7b94f043cf287d969b40b72fa2f8e012eaf39c6069cc53e",
+      "gitBlobSha1": "2d7510cd5e21f07f6f7a177ff2f786c8af1becd4",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/temporary-files-cleanup.json",
+      "bytes": 1026,
+      "sha256": "15e1e4407c5a6ca9d16fd9bb86d6ea902df83e1741937fab9eaeaa21a6b45350",
+      "gitBlobSha1": "ad728ff09521cf4961200baeb68c4cc7b6d02121",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/validation.json",
+      "bytes": 11446,
+      "sha256": "d099142304269e758f376545592659da32ce77df05a9151f006429af2b5e6bb0",
+      "gitBlobSha1": "724b7a83fa6c535cb4661b6c29480de6f3715c86",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/data/accounts.json",
+      "bytes": 349,
+      "sha256": "1f064a2e99e83c0df7e73756020f6582d6f4f4f10ec874e953073ce018e5adb6",
+      "gitBlobSha1": "994171bd313e0e7ab50c88f32c228c7ff0dcbef9",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/data/state.json",
+      "bytes": 211,
+      "sha256": "7d060431d102635c91bf6ad82c41bfe01dddae72a29c2dde1c708afecf330fc3",
+      "gitBlobSha1": "1ece704c264e6d3c0a321ea845d1906f2b4269c2",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/data/tasks.sqlite",
+      "bytes": 32768,
+      "sha256": "e58ccaf682782a807034867c88684b5cc4870bcc0132bd4f2ea511390ad42eb3",
+      "gitBlobSha1": "3d53add8eeb814dee3da05887daf1736be4d66dc",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/service-receipt.json",
+      "bytes": 211,
+      "sha256": "a803592933e9190d5271ecf449fca9ebd0e5f5ed52501a64c8d3bf797313da05",
+      "gitBlobSha1": "55af080b2fdcc613a02afd3e9ef845ced0ce3d38",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/start-web-qa.mjs",
+      "bytes": 316,
+      "sha256": "0010be569a7bb0afd26f6fc0a79c40077a6d7a75f2ee1e3c0782b1638d820ea3",
+      "gitBlobSha1": "f8f60134c9b6a43bd176f09e33e29df2cf90a62b",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/validation.json",
+      "bytes": 1236,
+      "sha256": "f6d3368638f110e305ba8c7fb984490713ae4327b9b79948d280fb7dbc4ec7fa",
+      "gitBlobSha1": "82a5c0803eb4012107a710d9561fcbee8721b445",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/web-open-01.js",
+      "bytes": 132,
+      "sha256": "a3e4a7488754e7677eed75fe260aea99e97b35e0f93c1f6a8bb0af458aec4b29",
+      "gitBlobSha1": "aec440e29f8448c5e75ca6e1b7b43a7690a4d15d",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/web-qa/web-open-01.receipt.json",
+      "bytes": 764,
+      "sha256": "063ce4e456d54373a13865e2b5d7dc15d397f2b0fc894562784cb2a5c0f7b5d4",
+      "gitBlobSha1": "9913847c3dd264f1135ae6ffc27494874966b561",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-092-20261113/使用说明.md",
+      "bytes": 3344,
+      "sha256": "9e48b1a41acb30d9ff5a03a7eba1a4260d4f7d047635b2a21692b17089d0d916",
+      "gitBlobSha1": "beb0d50a272778cb1dd0e2a359807d9ddfea7d15",
+      "extracted": true
+    },
+    {
+      "path": "docs/release-v083.md",
+      "bytes": 2239,
+      "sha256": "62808477913bd7ebb32e7c9c1e57bd83f3189ef1e746294d2d4af2f7a7321462",
+      "gitBlobSha1": "f4c506ae9f335d956c0b60866b8b75c2d2d6ab2f",
+      "extracted": true
+    },
+    {
+      "path": "docs/sync-v2.md",
+      "bytes": 6518,
+      "sha256": "19279c9f5341c961a8e782d6e5ccd13d41f5e89652c2a78ee2e95216f4ddb951",
+      "gitBlobSha1": "ba685b059bba83f30044dd76307ef19c6743c15b",
+      "extracted": true
+    },
+    {
+      "path": "docs/sync.md",
+      "bytes": 5492,
+      "sha256": "5f0758df4c2e5bae2ff367ad3ac1b39b5f0bbb0f7ce62f261bba253f6b9fe9ea",
+      "gitBlobSha1": "8544a7d636381a798a84e11813d39ec211c1e44a",
+      "extracted": true
+    },
+    {
+      "path": "docs/webdav-roundtrip-v080.json",
+      "bytes": 5204,
+      "sha256": "64cbb8e87299fe810dbdae97b0e6d6082956e0ef7e8daee3f0ea34b298d62dec",
+      "gitBlobSha1": "1ca5b237fb2b87d8f0a12a4a1d046634f7e31db5",
+      "extracted": true
+    },
+    {
+      "path": "docs/webdav-sync-implementation-guide.md",
+      "bytes": 25657,
+      "sha256": "9100184d53e4747d44c416ddf7642b77f6d1384fdf2892b12cad56c19124aa5b",
+      "gitBlobSha1": "b3e2d300190772c6472c796e0645edcc1d75b973",
+      "extracted": true
+    },
+    {
+      "path": "docs/webdav-v080.json",
+      "bytes": 45977,
+      "sha256": "714d50528ac4469cdadb8dc159d1a297f98b8f05327821afa3f1ee57871f06d6",
+      "gitBlobSha1": "8d8275e923f00428b132d9eb991661ab1e4fd4fc",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-actions-20261024/task-row.png",
+      "bytes": 2977,
+      "sha256": "09e3b15964ac2e0e1816f8541c5b3c554af82e71199171e2003e1c10c4151d4e",
+      "gitBlobSha1": "c00c7863cbf3a565c2aa340ae7dfd626c4d67c08",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/cancelled-drag.png",
+      "bytes": 24786,
+      "sha256": "95caf4de60439a78e99c2b30f478f6639090ca1a4c1515f3a860c17ce225661c",
+      "gitBlobSha1": "9d38116679c317b35846f6d382ae811c1933242d",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/child-reorder-150pct.png",
+      "bytes": 56734,
+      "sha256": "a23dfa6c58eac77f9841cfa6b3c70f58eb3d6178f048395b3c071287072468c5",
+      "gitBlobSha1": "3191b2b4dc097ae87633970edf2e514061600f03",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/child-reorder.png",
+      "bytes": 39059,
+      "sha256": "7557a0d1ba39456d7162c326281c9664d64a2a02cd299daeb506143ea6f691be",
+      "gitBlobSha1": "a356847aedecc11ddedc390de8c87f52579cae70",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/collapsed-quadrant-150pct.png",
+      "bytes": 34911,
+      "sha256": "dececdb85c19bab9bdddd7797f9b21654a002829c6f71f1b1ec9fd64e6dd4578",
+      "gitBlobSha1": "2866aabe3cb5e8296fd96bcb9d89846c23e78249",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/collapsed-quadrant.png",
+      "bytes": 21599,
+      "sha256": "9d62ee44f596f44b115a7249848d68f239c92648e5c480c85752fa94adddddf3",
+      "gitBlobSha1": "8071ed139cfb6fae3cf82c1446aa1ab78e44f1e1",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/cross-quadrant-before-150pct.png",
+      "bytes": 41957,
+      "sha256": "113970cd0297ade89376669264013ca4e39f0e522e5b43f9784398818ec76f90",
+      "gitBlobSha1": "4c8917e598db466ca2d955b2c46ac9b3c40779c2",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/cross-quadrant-before.png",
+      "bytes": 24957,
+      "sha256": "54ab7cda5d51f047b6d6cb70e7944345887afeb1ed82ce2fc12f4e34296aaa22",
+      "gitBlobSha1": "85a792b59aff1b97f5c80e7a6712d2e2dafbfa17",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/edge-auto-scroll.png",
+      "bytes": 31343,
+      "sha256": "67e9a2ef6c0d40563fd938f26baa60fccd2758f09dd30ede6a2182e75861cf89",
+      "gitBlobSha1": "e3d3613d91363bb98e6bd1b5824998a828a6a422",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/empty-quadrant.png",
+      "bytes": 25128,
+      "sha256": "61a8f603d7046a258609bb243c1755b1d72e322b8e05763d776efa5c03df9792",
+      "gitBlobSha1": "718c5afa66015852d3706d8f1dbd70ae90b63fb4",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/insert-after-last.png",
+      "bytes": 24965,
+      "sha256": "e70b77412e30dabc11ffb53a916d2827b9f6576cf55261f4ca256c8e5bb817c2",
+      "gitBlobSha1": "ca8d6c2f02e4b3b7d83faf482804a8cd980f9c11",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-20261023/saved-drop.png",
+      "bytes": 33487,
+      "sha256": "76b06d4b29789d55713f5cae31d34073376015dcfd845703b5e1b8507e8ffc76",
+      "gitBlobSha1": "c88aa9c394796bb5e1b46eb14c99c9a25534acd7",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-drag-preview.md",
+      "bytes": 1357,
+      "sha256": "bc71dfb9ad3e8b6d50b73817fe773be3c4cd1defb4a25da85fcf5e4167435959",
+      "gitBlobSha1": "b3981ae177d76911c3852f1dcb977502212e0c03",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-menu-20261024/task-menu-card-144.png",
+      "bytes": 14174,
+      "sha256": "edf3cda5539f8165ce7854c5303fade66c11d7d7256b15a7e2c930c92b2b5a1d",
+      "gitBlobSha1": "cbef80368a8f4826d29933732491da87a654fe94",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-menu-20261024/task-menu-card-96.png",
+      "bytes": 8314,
+      "sha256": "91c8ebe90805fd947b8e3c5d4265b5a788308641925d12a05207791fa7b50495",
+      "gitBlobSha1": "c3a92090a68f7df52a1ef3ec28b669e579edc646",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-menu-20261024/task-menu-completed-144.png",
+      "bytes": 14309,
+      "sha256": "03925f6f0f67a9342ba4f55d266209fdf9a35ddbe26989c612cc200dfa02efe1",
+      "gitBlobSha1": "1fe236b9b9bf2d3e428153077d682676fb7d7be8",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-native-20261021.md",
+      "bytes": 7169,
+      "sha256": "3d3eaac1bd4505303f0a6418d25bb26d3ad37edfc951c68776bf505b68ef0902",
+      "gitBlobSha1": "98031ae581acdfac16a47662cf6ea6af6983de15",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-native.md",
+      "bytes": 21184,
+      "sha256": "ad7c3a19152fedb6ed8070f26ba052d2311c7280a0607acc84ac450c9467da73",
+      "gitBlobSha1": "142ce1a11f10251f2a8dfb735c4f5453fba87d7b",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-parity.md",
+      "bytes": 7255,
+      "sha256": "8ac5d7d1a29995b54dc2b239025ff48b4906914309bdde28d72f71a727c4e6c3",
+      "gitBlobSha1": "31d19bed107092a9122ee7d0f1eb45d29cdd2ca1",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-performance-100000.json",
+      "bytes": 335,
+      "sha256": "06212ea20a22c01376d4807358e2a6c8206da44245745cd7c20aab6a5c419f46",
+      "gitBlobSha1": "25985b80dbca30f7cc0c9b03e34e02039b5d3503",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-performance-ui.json",
+      "bytes": 328,
+      "sha256": "459cb83628ba4d32d1e2a22b7493a46595ca3fc5a46620567312b0bc42532911",
+      "gitBlobSha1": "246f3ad0ceca2afceec209ba7e03ba88cd6a0f3c",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-performance.json",
+      "bytes": 216,
+      "sha256": "84c8c7e4ea645aa1e7b978bcfb885867f6aacf9b0bf92854f6c940e3237f9618",
+      "gitBlobSha1": "bca8232d6fb6c804697787e6c3066d445bcadf17",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-repaint-20261023/compact-detail.png",
+      "bytes": 21267,
+      "sha256": "afd94ad55c362ee772776a345211f18a780fcf2355d74ec1e1de52af9973e9f3",
+      "gitBlobSha1": "1d71ebb8d06c05311ac3ce54011ea0eb57594a84",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-repaint-20261023/detail-150pct.png",
+      "bytes": 72057,
+      "sha256": "56588ce78d68ee0dfd758aed2b1dc1cf3feb87844fa3bf6f6d4e393a3427750f",
+      "gitBlobSha1": "82ae84cadd5e466c2f375c19834dce939fcfb89f",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-repaint-20261023/detail.png",
+      "bytes": 47254,
+      "sha256": "d79976091c02869a9c9dae3f5f41226feef90b96fd8dab749f197ef112b78896",
+      "gitBlobSha1": "bfeda7ca3135247d75961136510d0b35dc994c5c",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-repaint-20261023/notes.png",
+      "bytes": 20650,
+      "sha256": "b68867000f835288efa6c4c8f5a7ef6a1203124711c240159cab98bbce6f89b1",
+      "gitBlobSha1": "6fa9d3725e89c9e221b40770dbd7f8beb4117160",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-repaint-preview.md",
+      "bytes": 582,
+      "sha256": "f6fa21e36a188c1821ff3a5ed3161fc8b92d0577bf4d58c0af1ece791ae5a6df",
+      "gitBlobSha1": "418808d8a9037bb8f84ccf7c794157aa0be61286",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-row-actions-preview.md",
+      "bytes": 880,
+      "sha256": "8b4f52afbd65c6bb0a7e836fa0f162aba1f7f378615f977ee5d734b2d12500b0",
+      "gitBlobSha1": "cd6eaef057b69e6d798f8d37f5cc5e145a06f4d1",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-storage-20261024/settings-144.png",
+      "bytes": 21156,
+      "sha256": "e2baa3b62af16171c139c1cafe884b888928859bbdca4eadbffc45438a65b7e0",
+      "gitBlobSha1": "a5023d7051e85a24b9cd3716c6609d14b76e74ce",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-storage-20261024/settings-96.png",
+      "bytes": 12660,
+      "sha256": "691fbd8ace115d19645ff781e2f756a7b6a070f2937a4579c8a8a53345bf8bb4",
+      "gitBlobSha1": "1ce175baafdc538f93aaaa8d9d8daff5f3337148",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-storage-location.md",
+      "bytes": 2592,
+      "sha256": "ab5e3719121d893caf692b93c3faf8c7ea973ffad15bf3a29ef32b0f94623c57",
+      "gitBlobSha1": "9c1bb21f7f9a461a12d32625eb5e4db8e8488ea0",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/compact-detail.png",
+      "bytes": 21112,
+      "sha256": "cd8d1d68a37708b945351018010e12ac6b6acd85fa6081b643173a0af876e136",
+      "gitBlobSha1": "c2ec0a54fc98d48bd930d6d515c5d8b78e117af6",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/detail-150pct.png",
+      "bytes": 71565,
+      "sha256": "472d4716c0d7e2c6b43aded392271a31e837332c94fbb531e15178bb566b334a",
+      "gitBlobSha1": "bd5f175c60d607956c571252a81fb28f20e87e93",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/detail-advanced-bottom.png",
+      "bytes": 42713,
+      "sha256": "699855e64e27f25407057b9be1e6eb09e07e998e725d20eb6ef4a011ebe40df3",
+      "gitBlobSha1": "b3c6c82270086f74a6473d40e362168ee2a710ee",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/detail-q1.png",
+      "bytes": 47782,
+      "sha256": "f948dde63960ab63bfce17c39ae865eabbcff955ce0347bfaa9db73b0f687437",
+      "gitBlobSha1": "c2974c56d2a4a1c06b935ce5c5f2f6800e66cfe6",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/detail.png",
+      "bytes": 46958,
+      "sha256": "5d79df3081368054c69b0c3c6adf5e99b136ef4d8531d549c8f25b1af077ebee",
+      "gitBlobSha1": "ff52a1eb1923207d6fea53b5831e528b2877b9a5",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/page-1.png",
+      "bytes": 26679,
+      "sha256": "77b6606e2dde7972a170ee8ef73ab0a65a30641d389f4438e3186b97d07ef5eb",
+      "gitBlobSha1": "537012c405f242d0cc5b389ed864fa20189b4c75",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/page-2.png",
+      "bytes": 18720,
+      "sha256": "383bf54815aa525e43a46220872bcdc0c9c7ea71357138fc63f4fff6036374a0",
+      "gitBlobSha1": "9b6f449e2b9efe7cf08365b6a84416f70ddd925c",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/page-3.png",
+      "bytes": 15834,
+      "sha256": "ad541ab4132cf6a46e16c5b9d9ee42d5a146ff86f17920245e8eb38397017579",
+      "gitBlobSha1": "0cdaa296f8598f85270af3cdb1186840ca155dd4",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/page-4.png",
+      "bytes": 15526,
+      "sha256": "f910d62d787162da1a45354b8297124442486f0d05b65c541842ee110442d536",
+      "gitBlobSha1": "122cd88601dca6e620c15319f2faa2590804a860",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-20261022/page-6.png",
+      "bytes": 24653,
+      "sha256": "519c741ac5760217355a1bba814962d42fa2f738bfc4a0a2c33f9dea6bbdc09b",
+      "gitBlobSha1": "614a4e5d69e8be1055d0f4b34736072e72cfa309",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-ui-preview.md",
+      "bytes": 1033,
+      "sha256": "07b06b6c5a1a4b7a22353cd45dce90507d02b7ec42addf2f8930d8587f32e087",
+      "gitBlobSha1": "2c6cac80147745cde9ae01093b1f4d535543124b",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-visibility-20261023/merged-two-tasks-150pct.png",
+      "bytes": 44184,
+      "sha256": "1d78ca0e0fad22041d614a9ba45382d04ed6281a7afee537d8397ca7345265e8",
+      "gitBlobSha1": "ed0ec7a334f3654a48cef8678d362fe461ad6f67",
+      "extracted": true
+    },
+    {
+      "path": "docs/windows-visibility-20261023/merged-two-tasks.png",
+      "bytes": 26850,
+      "sha256": "567f8440a76d0de068ae833c832bf0577bdb28b4f8a5e9215a165e0d55c41d40",
+      "gitBlobSha1": "f1655df289b5411a99e0349cdb2820c326ce89a8",
+      "extracted": true
+    },
+    {
+      "path": "index.html",
+      "bytes": 508,
+      "sha256": "b3aad5c64bf6686305b4f703766a782e89b986724b0eb57403899e37fb8b75ba",
+      "gitBlobSha1": "c48aec84dec6c58a5619ad5abf70843cad18902b",
+      "extracted": true
+    },
+    {
+      "path": "interaction.css",
+      "bytes": 36039,
+      "sha256": "3232491fd78754d6040f3db1e0359de1da9e828b7fd40d4535fb798b7b349ffa",
+      "gitBlobSha1": "29ac3ebfb47c76541b9d4abad4f4787f05485357",
+      "extracted": true
+    },
+    {
+      "path": "package.json",
+      "bytes": 445,
+      "sha256": "cec7f06c05c5180bd000a8d0e20fd22da0faaf305aaf930af01a46e96630b9a3",
+      "gitBlobSha1": "aff72e9b38f3387a50f189caa8a2debdf5efbf83",
+      "extracted": true
+    },
+    {
+      "path": "scripts/android-profile.mjs",
+      "bytes": 8288,
+      "sha256": "1918837f5491da16646d4502f474f0a8604b679c3ffc6bc5e45d7de0d627bd56",
+      "gitBlobSha1": "4c49e84bf057e4d50e2a93d209933f2bdddcbb74",
+      "extracted": true
+    },
+    {
+      "path": "scripts/android-qa.mjs",
+      "bytes": 11397,
+      "sha256": "09608af9534fbd223fb9c7b9ee9b8af9a495816e9a402d024bbc7651bb1ad614",
+      "gitBlobSha1": "b83d877334c80a76d851bc581e1575cdcf3c289e",
+      "extracted": true
+    },
+    {
+      "path": "scripts/build-android.mjs",
+      "bytes": 8365,
+      "sha256": "341feb8191f067cd7c3844c55b2cf40cfb198f5fc6c93910492de9783c89234d",
+      "gitBlobSha1": "a0be5c2047c68f0bdaf7e5b8234481e75f140f32",
+      "extracted": true
+    },
+    {
+      "path": "scripts/build-credential-helper.mjs",
+      "bytes": 2001,
+      "sha256": "5b193779666b7686e55b301c76ceb68282b1a8edf9926694f3e0a32093002812",
+      "gitBlobSha1": "184997a12f0a3996273deab962906cfffdc1caf5",
+      "extracted": true
+    },
+    {
+      "path": "scripts/build-windows.mjs",
+      "bytes": 4125,
+      "sha256": "a9199dc51822c2a12d6823f23417286c82525c36243d94d00130a94044d93693",
+      "gitBlobSha1": "f8d478e2b5b0be6591d39def7f2bdb1b76afd51b",
+      "extracted": true
+    },
+    {
+      "path": "scripts/create-windows-shortcut.ps1",
+      "bytes": 646,
+      "sha256": "bf1ede71ae95552d62deac73a36357eb82bc119de73664549f0aa9b594fa87ad",
+      "gitBlobSha1": "a5d1db7869710398b011fed0b16a3a65a179c8ee",
+      "extracted": true
+    },
+    {
+      "path": "scripts/generate-windows-icon.mjs",
+      "bytes": 3744,
+      "sha256": "c0d20b150c26ae20369ebf348f14038a93f31ac801f2e203135cfc20faac7c6f",
+      "gitBlobSha1": "71607f087065f9b15b7eedf27e17cb014015dbf2",
+      "extracted": true
+    },
+    {
+      "path": "scripts/import-official.mjs",
+      "bytes": 11383,
+      "sha256": "9cba1614802bcf0c7ed616c1847af6048100d7e366281a3051fee9c4f5cbcb6f",
+      "gitBlobSha1": "577b497913b0219ce2ce22ff42ad611f21b90af3",
+      "extracted": true
+    },
+    {
+      "path": "scripts/package-release.mjs",
+      "bytes": 9245,
+      "sha256": "34d93807335fb776f25be3aefdf36abc0ed19ff9aa8879d4d3779f7b446b5d41",
+      "gitBlobSha1": "3ba93ada1cba6acd149ed12faffe4ef8de89e8ff",
+      "extracted": true
+    },
+    {
+      "path": "scripts/release-zip.mjs",
+      "bytes": 2966,
+      "sha256": "3e4e3908989b697b6cdc4248f117b192886de41b3f05934c0e91c266867af02b",
+      "gitBlobSha1": "6f1badf01e6083924abbdfdf0ff55d6365df329f",
+      "extracted": true
+    },
+    {
+      "path": "scripts/verify-webdav.mjs",
+      "bytes": 7894,
+      "sha256": "aaa317ca3ce68215c90d2a95f05cb4c37ad734db3f15d2e539d880e50463fc58",
+      "gitBlobSha1": "38334ad702fa5830190e4c8e4b8807c3a09e2146",
+      "extracted": true
+    },
+    {
+      "path": "scripts/web-launcher.cjs",
+      "bytes": 8697,
+      "sha256": "75505ba6f78fef7ba3068976423e481e79409119fa03794d88af05f528849691",
+      "gitBlobSha1": "3608e0528ac6412b0620c555a9e5721ccfffd90a",
+      "extracted": true
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 5965,
+      "sha256": "974f390d16190d2394cd5845276a6d19c8ee49d01ccd8fb28da2da920c930179",
+      "gitBlobSha1": "fc914ff40a44b5f22b7523b847298953429d6e54",
+      "extracted": true
+    },
+    {
+      "path": "src/account-store.mjs",
+      "bytes": 6291,
+      "sha256": "b841a27b28bbb8a22bc750d3242bb20b1d104b4a48c16a28a9b7f2df1ec78bb1",
+      "gitBlobSha1": "c9c7df956ef233f2a8c0253ed3b055f998432e2b",
+      "extracted": true
+    },
+    {
+      "path": "src/accounts.mjs",
+      "bytes": 713,
+      "sha256": "a222c3eabc1250bb189f46f347c3e28eec1f9b2521eaede2e242f9231b43c05d",
+      "gitBlobSha1": "bb015b7214328e643c28e21688f7d46e4da70677",
+      "extracted": true
+    },
+    {
+      "path": "src/app.mjs",
+      "bytes": 83772,
+      "sha256": "159150182dcf28e50734f54ff9844401eda35358eb165fcaf062b535895773ae",
+      "gitBlobSha1": "c2d02c82c9fb890acfbfbf71a3ecc0eb56e1fb69",
+      "extracted": true
+    },
+    {
+      "path": "src/compat.mjs",
+      "bytes": 678,
+      "sha256": "375bc2a464504c8aef79f058a49fd8ce4f477c5666a15963300e6c996305ddf1",
+      "gitBlobSha1": "39bf45a26825a263659190ff4538df63c1e26a0a",
+      "extracted": true
+    },
+    {
+      "path": "src/delta-sync.mjs",
+      "bytes": 13883,
+      "sha256": "45eb7f76120a55f6cac61e15c73e2f52073b0d20302d0092389e0eb37b1a39cf",
+      "gitBlobSha1": "6cd3b4aad75daac076dd62d831de0140f19bf300",
+      "extracted": true
+    },
+    {
+      "path": "src/feedback-ui.mjs",
+      "bytes": 8194,
+      "sha256": "57afa887fd07479ff38f6b9e1b4d99fb094ccb7aa86de3221710a9189efe169b",
+      "gitBlobSha1": "0684b25477aed63c1f524c10512c52c795352d23",
+      "extracted": true
+    },
+    {
+      "path": "src/feedback.mjs",
+      "bytes": 6288,
+      "sha256": "8e1a719b18f696df7428744410b8e6643765cd709d4bf8e6cf31e26cf4386df1",
+      "gitBlobSha1": "cb52e855c65fa390f00677b7ea5032cb45b2e2a4",
+      "extracted": true
+    },
+    {
+      "path": "src/gestures.mjs",
+      "bytes": 10402,
+      "sha256": "73a3a3eb7fdb8c2dbb52a5166e3421cb04411311742c22055069924ac9051499",
+      "gitBlobSha1": "67acd84117a5ee1cad6c7008c79551e1969f7ea8",
+      "extracted": true
+    },
+    {
+      "path": "src/model.mjs",
+      "bytes": 8649,
+      "sha256": "45ba81971b389d6c14a6e0beda3818539194a6a8374490d4a51fd65820a82169",
+      "gitBlobSha1": "bd1c4cb13f89cb75c67be02a963ce53674887153",
+      "extracted": true
+    },
+    {
+      "path": "src/personal-ui.mjs",
+      "bytes": 5868,
+      "sha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a",
+      "gitBlobSha1": "b092f2a590bc46ba870d0ed5e5f4b9e1ac5745af",
+      "extracted": true
+    },
+    {
+      "path": "src/reminders.mjs",
+      "bytes": 3350,
+      "sha256": "b558ab3b801cc1c257df9e96b941aac841392075474419381bea69729fb5d59c",
+      "gitBlobSha1": "9e25f232df725cf1cf081c231f92b7a97c14be3a",
+      "extracted": true
+    },
+    {
+      "path": "src/replica.mjs",
+      "bytes": 8586,
+      "sha256": "69b626227cf45f0f941a141c15d30f15ae02cc3bc8a6dd2f53dc34525498647b",
+      "gitBlobSha1": "7aa3a0e7e848657754bd796ac835dd900ed7cab1",
+      "extracted": true
+    },
+    {
+      "path": "src/schedule.mjs",
+      "bytes": 6620,
+      "sha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b",
+      "gitBlobSha1": "a9557a572d452aac40304fd468a9b5fed6c62fd4",
+      "extracted": true
+    },
+    {
+      "path": "src/sqlite-store.mjs",
+      "bytes": 4250,
+      "sha256": "2b7f12e6305987efadc327b46838098a987619581cb0861c6e3dda3021319eaa",
+      "gitBlobSha1": "791fcef0f03813956e3e83be16a462f4b65f17f4",
+      "extracted": true
+    },
+    {
+      "path": "src/storage.mjs",
+      "bytes": 2268,
+      "sha256": "5083cd46eb1f90248aa5b65bd09f3b0590d4f02330d3bffe01ede63608ea84f4",
+      "gitBlobSha1": "5bfb179f05e867ef573b52268224986ac5416761",
+      "extracted": true
+    },
+    {
+      "path": "src/sync-client.mjs",
+      "bytes": 1505,
+      "sha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274",
+      "gitBlobSha1": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+      "extracted": true
+    },
+    {
+      "path": "src/sync-core.mjs",
+      "bytes": 5116,
+      "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a",
+      "gitBlobSha1": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+      "extracted": true
+    },
+    {
+      "path": "src/sync-server.mjs",
+      "bytes": 8195,
+      "sha256": "f182650f5adc8397e1cf7e839737a9ace57f29a1d9480b658fa1dc598d7b13b1",
+      "gitBlobSha1": "02ddc4b8f6374eae62e924f8cf9807e4d0dc6aaf",
+      "extracted": true
+    },
+    {
+      "path": "src/task-editor.mjs",
+      "bytes": 3110,
+      "sha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad",
+      "gitBlobSha1": "8d933d78f43ce4094af332c61d68d16fe2b2efda",
+      "extracted": true
+    },
+    {
+      "path": "src/task-tree.mjs",
+      "bytes": 1581,
+      "sha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9",
+      "gitBlobSha1": "072ebe0014d039056b2b6f53494a2567d490d25a",
+      "extracted": true
+    },
+    {
+      "path": "src/undo.mjs",
+      "bytes": 2328,
+      "sha256": "742ca6a0de6e1e8bc739aaa24a8737746e1b0ac063ae04d47bbff3c78015a551",
+      "gitBlobSha1": "7efee9c72536f6da7ce1e6e7c84d677698555ab3",
+      "extracted": true
+    },
+    {
+      "path": "src/view-history.mjs",
+      "bytes": 2055,
+      "sha256": "b3b847df3ffc2f0bb5187b61265f9aecb280790d7bc885b90b8a0c1011b23e88",
+      "gitBlobSha1": "28d55a54127a3ff398b38d002bccea07189013af",
+      "extracted": true
+    },
+    {
+      "path": "start-local.cmd",
+      "bytes": 87,
+      "sha256": "862e75f6a46e1c895fb97d9c67b4eb99df859003f7be16a5ead7f7a90536071c",
+      "gitBlobSha1": "a4047c20f4d0716bcecc4d6e7c3531d872216e94",
+      "extracted": true
+    },
+    {
+      "path": "start-windows.cmd",
+      "bytes": 55,
+      "sha256": "1f80777db3446166553723647a8305e93e5956ba88d08483239936688930317b",
+      "gitBlobSha1": "7bf7e5b50a2377979bb3fed2b692f6e07d1f529f",
+      "extracted": true
+    },
+    {
+      "path": "stop-local.cmd",
+      "bytes": 70,
+      "sha256": "a45a23d6f241c0389d4f8f10783bb8c4150687feeadeffcd30250bc3fa360dfc",
+      "gitBlobSha1": "451156f8d45c391f713592296c5d8dab0b266771",
+      "extracted": true
+    },
+    {
+      "path": "styles.css",
+      "bytes": 12069,
+      "sha256": "dd8441d8ef070c3e0d23bb711d253f03727cec7b3783fca7f4bbd38e7784f33b",
+      "gitBlobSha1": "a24d5134a93218bde51a8fc3d1392445a6198ce6",
+      "extracted": true
+    },
+    {
+      "path": "tests/accounts.test.mjs",
+      "bytes": 9155,
+      "sha256": "59585991790ce11a373498a781eaf4a1c7554cbe9ffa44c09a5a58a01aabde39",
+      "gitBlobSha1": "2bcde9a61b373812bc95b75f274fdbd121b76d6b",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/DailyTaskPolicyTest.java",
+      "bytes": 7666,
+      "sha256": "9ed8d4cbfb35b31995aa4a87f66f64edaf294269b5d50fe5d445443d357e5bd9",
+      "gitBlobSha1": "866b90ac19940ec400e7b1e7c77b30ffcbb4cfbf",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/FocusInstrumentedTest.java",
+      "bytes": 9985,
+      "sha256": "cc4dde4db34bfef04fc0fd85e9f90b65da2036366c44e3057fa4c560480e3fb1",
+      "gitBlobSha1": "c0910f7b7be9342756f8f4692976f26bdbd0d534",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/NotificationTimerControlsTest.java",
+      "bytes": 3634,
+      "sha256": "bc4b330da13d574314b1ebf29a9c5efc26cec52861f2fe388fc6deda50efddb3",
+      "gitBlobSha1": "de8607d67e4e91883675345a0247fd8eaa1d13f8",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/PomodoroClockTest.java",
+      "bytes": 14123,
+      "sha256": "4f253e97d96ecba12045fa1c836abbdcbec34b5b854363e7e8948585a5e58b9a",
+      "gitBlobSha1": "b3ad348d7774f866ca1132e5087aedd06051ff88",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/run-daily-tests.mjs",
+      "bytes": 1558,
+      "sha256": "27aacbd0c0e4841c105aac19ab7dd00557ff0d3a7ce5ee914e0adf8280ce4a64",
+      "gitBlobSha1": "4fd4bb01e38a6d2c28623e145e6f047554ce1ddd",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/run-focus-device-tests.mjs",
+      "bytes": 4039,
+      "sha256": "3d96d97947dc9860424dfe5bcaebdbe40830c74c212323407bece53cc2822ccf",
+      "gitBlobSha1": "fa2acc537c7879d56a466e4c4aeae6e0ba74b61f",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/run-notification-controls-tests.mjs",
+      "bytes": 1620,
+      "sha256": "007cf39c6df2695fda66b7ec93de0784d4a82ea29164543af87f5c7f7a243e95",
+      "gitBlobSha1": "0e5652b66fad8c4668809a454ad105ea13c8e3e8",
+      "extracted": true
+    },
+    {
+      "path": "tests/android/run-pomodoro-tests.mjs",
+      "bytes": 1558,
+      "sha256": "12fc61412767269b3ced066e594d479cb728cb6edd18f5107b81c458e6713a34",
+      "gitBlobSha1": "2bb355fc23e52b83142767f85f9c4a810482dc23",
+      "extracted": true
+    },
+    {
+      "path": "tests/completion-day.test.mjs",
+      "bytes": 3643,
+      "sha256": "1c9c3723f37de642100b03acfebf833f97e62a8010ca737820d4775acf06807a",
+      "gitBlobSha1": "792dbd460d75189235ce9dd8d470a164bf289728",
+      "extracted": true
+    },
+    {
+      "path": "tests/delta-sync.test.mjs",
+      "bytes": 15751,
+      "sha256": "24476d59f1d10699ee8c01b274beca3a627d9a59c2b10073fea4f5f1937417ea",
+      "gitBlobSha1": "78079e1512776ca9c49f228ff51a043a65488c99",
+      "extracted": true
+    },
+    {
+      "path": "tests/feedback.test.mjs",
+      "bytes": 5937,
+      "sha256": "527d8ebbcdfc8ea0252320e607a4d85f8a0e91df6eeca7c3762089d704b14486",
+      "gitBlobSha1": "00929fadbfd67493385339f23e767d95e0b4894f",
+      "extracted": true
+    },
+    {
+      "path": "tests/import-official.test.mjs",
+      "bytes": 4684,
+      "sha256": "29dca0388668903aa89e915a0c5bfd3879c9cfc1bcbb1a40b0c3e7c96eb0ac3e",
+      "gitBlobSha1": "83ca6911aa42a90a827f86121e91077d2a6afb05",
+      "extracted": true
+    },
+    {
+      "path": "tests/interaction.test.mjs",
+      "bytes": 3172,
+      "sha256": "905b524a2cc58311fde80586c5d1747c6f1a4b8fa2fb2af6998385b8bbb733c1",
+      "gitBlobSha1": "69829bcb2357443f6aab56bab0da0f1e20640fe1",
+      "extracted": true
+    },
+    {
+      "path": "tests/model.test.mjs",
+      "bytes": 1534,
+      "sha256": "89f7217ebdb46085f9c18de2dc8c38f6ac62857a60279b87d97ac526c7e6d949",
+      "gitBlobSha1": "107cf6cdd7e2e086e9e23c5c9332c2897599876c",
+      "extracted": true
+    },
+    {
+      "path": "tests/native-storage.test.mjs",
+      "bytes": 1912,
+      "sha256": "1528a4b3cfa5e9c968883069fc2664622f2e808a94f36da9d3f7bdff235bd3df",
+      "gitBlobSha1": "4da743343e8aa36d1e4fa4051f13e8953ace846f",
+      "extracted": true
+    },
+    {
+      "path": "tests/navigation-gestures.test.mjs",
+      "bytes": 5316,
+      "sha256": "ea786ff9c6678e43c3ab1dc54b8601626085515dc851761ed72ecd8d7c4bc551",
+      "gitBlobSha1": "318f532a93fa07c7525ce04e90dbfb2e19cff90f",
+      "extracted": true
+    },
+    {
+      "path": "tests/schedule.test.mjs",
+      "bytes": 4564,
+      "sha256": "8e02b86dbe80de228396db3c8ce38b9d9e9882aad1cdfa2a859d8bbc7c75c374",
+      "gitBlobSha1": "af492a2e147ba4d33a377bc19e042f012b592b9f",
+      "extracted": true
+    },
+    {
+      "path": "tests/subtask-time.test.mjs",
+      "bytes": 3849,
+      "sha256": "c5f52e871791b2d3dd516241f39f19970cfdbef8158b8375ab8bd2fef9df95cd",
+      "gitBlobSha1": "3cb554d6f44598944c1678d3c3104745af80c193",
+      "extracted": true
+    },
+    {
+      "path": "tests/sync-transport.test.mjs",
+      "bytes": 3655,
+      "sha256": "ae08121838393c270b8742886be04a0e5484462db00e656bdd3d454671cd584c",
+      "gitBlobSha1": "99203736f0db2f72479ebaede81645bed46effa5",
+      "extracted": true
+    },
+    {
+      "path": "tests/task-editor-enter.test.mjs",
+      "bytes": 7782,
+      "sha256": "4d49c748f2876a3e4504a7f0af61051e4bf6d923a3448605e81d5403bfea591a",
+      "gitBlobSha1": "d2205c21fdb22f8d8a503852fb629473e01d8f9d",
+      "extracted": true
+    },
+    {
+      "path": "tests/task-tree.test.mjs",
+      "bytes": 7227,
+      "sha256": "080aa520699889379919df8132611788f2d7a021344c2b00b6a24e08edd8b106",
+      "gitBlobSha1": "680529c2383e80da6a76ae55b15181a355b4e520",
+      "extracted": true
+    },
+    {
+      "path": "tests/undo-sync.test.mjs",
+      "bytes": 5790,
+      "sha256": "764d47d9c6bb2948cf6bddbdc166c86de42d4a602eb65c3d7b35147a6a8c311e",
+      "gitBlobSha1": "00fdcf7eb776771d18e7d7477741bba7a1edf850",
+      "extracted": true
+    },
+    {
+      "path": "tests/view-history.test.mjs",
+      "bytes": 2795,
+      "sha256": "233b92bdb5c4e5488802c09688e9c02f04a2520597c90bc02be1e0d34503abdd",
+      "gitBlobSha1": "4a48143a08c7e45a735bcd01475bc5a7c7ab38ed",
+      "extracted": true
+    },
+    {
+      "path": "tests/web-launcher.test.mjs",
+      "bytes": 9890,
+      "sha256": "054d66c8288d83151a5208dbe5b7b850a1b6e22400b9c7e01bc44340e3a4d109",
+      "gitBlobSha1": "8d7970a8cf6dd97272c7a23935efa086cbbe7e21",
+      "extracted": true
+    },
+    {
+      "path": "windows/GxTodo.rc",
+      "bytes": 779,
+      "sha256": "8f8b3e421e982b39e43d05eb644657cc4922c3a8f6dc5f581f8915e304ca32d8",
+      "gitBlobSha1": "affe5059a0a5d32b1dd1c23bdaf2fce32662da6b",
+      "extracted": true
+    },
+    {
+      "path": "windows/advanced-test.c",
+      "bytes": 10528,
+      "sha256": "9ee06905d161612bfd144ebc04b9c34c59f03117c30420865580812cbed564d3",
+      "gitBlobSha1": "e70736d3bad6572850f6c6f50dc6558a2a95b6c5",
+      "extracted": true
+    },
+    {
+      "path": "windows/assets/gxtodo-icon.png",
+      "bytes": 2973,
+      "sha256": "e7664ffac8c7d5d777051a1b07013443144cbccc758258d88a2c78dbf842bf6c",
+      "gitBlobSha1": "612b8bbfa20917447e33fa081ab225e7204a57c3",
+      "extracted": true
+    },
+    {
+      "path": "windows/assets/gxtodo-icon.svg",
+      "bytes": 404,
+      "sha256": "af5aef5d7ee641f0e798c2e6733de24bdd9cbe325f4b7caa6df3874261d37ee6",
+      "gitBlobSha1": "c01cd9dc501bcdfd9cc61d5ac873333a0527969c",
+      "extracted": true
+    },
+    {
+      "path": "windows/assets/gxtodo.ico",
+      "bytes": 151707,
+      "sha256": "e7ff3916d821ea793063290dcaa26d8d98f19ba91dc73831666875e8303cc75c",
+      "gitBlobSha1": "bfc4668657b6768badbcebd83ab552351923ec55",
+      "extracted": true
+    },
+    {
+      "path": "windows/catalog.c",
+      "bytes": 10854,
+      "sha256": "5f77d1c8e4ea424d8d1608af73e3a9358103dd9b3b722da01ac3c2ea7fafe79e",
+      "gitBlobSha1": "c54acd735ddf90caeae5c50b92d239549cc7403c",
+      "extracted": true
+    },
+    {
+      "path": "windows/credential-helper.c",
+      "bytes": 2520,
+      "sha256": "8cb6a6a30131089a54591fa0c60855b6f8c1f90b307fa08a458f0d27ac23fc68",
+      "gitBlobSha1": "4496bd1700e929aa863f5429c67840b97a15783f",
+      "extracted": true
+    },
+    {
+      "path": "windows/dashboard.c",
+      "bytes": 8857,
+      "sha256": "fe9c58b5de45064fe05e383ee853d21766a991f5a7e42e66ccaee2289162fd3a",
+      "gitBlobSha1": "52ff91162ccddbd86bfc4756bc54a6e1056390e3",
+      "extracted": true
+    },
+    {
+      "path": "windows/database.c",
+      "bytes": 18371,
+      "sha256": "8e920395aee707e9649ace3e9672d8b741bf4e988c77cdc70b2106bc3f9d796b",
+      "gitBlobSha1": "00d1074ca1dbd4ca5fe45eac06d375a726034ffc",
+      "extracted": true
+    },
+    {
+      "path": "windows/detail.c",
+      "bytes": 49694,
+      "sha256": "a7ef456ae28c747e886c99c16f2e1176e82231bd61bb971f3e6d9c528af6579f",
+      "gitBlobSha1": "da678bd18048b3a95c53fb159fe89d4f3684d626",
+      "extracted": true
+    },
+    {
+      "path": "windows/dialogs.c",
+      "bytes": 19583,
+      "sha256": "3bd64e0236b93f2653c61541f7609173fd8ef254e3217ad0c595d0fb5b117603",
+      "gitBlobSha1": "30105d600935a24295737fcbe4299fb889c17f5b",
+      "extracted": true
+    },
+    {
+      "path": "windows/drag-test.c",
+      "bytes": 29866,
+      "sha256": "efcc5f3beb60721349730e0675a998a2e42cdd19a62536400e501d80ab8e020b",
+      "gitBlobSha1": "dd31d346bb320abc0d4c972c1fd6dbc8ed04cc2e",
+      "extracted": true
+    },
+    {
+      "path": "windows/feedback.c",
+      "bytes": 25018,
+      "sha256": "f912104f48d1ecf8dbbe065a9cf2e5fa376fb6db2da1df280014506e5b464c97",
+      "gitBlobSha1": "68cc12eb03649f0e89012d22d6df7c22844bb9a8",
+      "extracted": true
+    },
+    {
+      "path": "windows/gui.c",
+      "bytes": 53898,
+      "sha256": "8cbe341d9dfc6fc7a2b88029704888ab00a656a77b35c064589eb21110e3dd30",
+      "gitBlobSha1": "bc7748f5adadcdb39e47eae2cf3c52df80a43a9d",
+      "extracted": true
+    },
+    {
+      "path": "windows/main.c",
+      "bytes": 3159,
+      "sha256": "b4dd54756f2b05d5d8c04f978d452e2b831dacd23ded72450a811ec72d2aca77",
+      "gitBlobSha1": "9938c4c938e81c39377ccf31f8103a15fd1ef7d7",
+      "extracted": true
+    },
+    {
+      "path": "windows/native.h",
+      "bytes": 2330,
+      "sha256": "75e104b9ea20004802e99497ec0e1a949af0173609848b63f9f4703c4173188a",
+      "gitBlobSha1": "618261209bfd830768f68ae8b92ae5ce7bd34a21",
+      "extracted": true
+    },
+    {
+      "path": "windows/operations.c",
+      "bytes": 13651,
+      "sha256": "61f02a521236d09786d1dbe2f4305c96d0f1be62cdee1cb833e9944b60afc483",
+      "gitBlobSha1": "530ddd597625fa89c7656c9e8b33428f531853e4",
+      "extracted": true
+    },
+    {
+      "path": "windows/profile.c",
+      "bytes": 1464,
+      "sha256": "c7267bbaaecbd79a365500d644bcb4abde59d4d9743f0055afead0abacab0df1",
+      "gitBlobSha1": "ea6df732e56cf012587ca946fa1ad29eb28a0936",
+      "extracted": true
+    },
+    {
+      "path": "windows/query.c",
+      "bytes": 16748,
+      "sha256": "48efd15523dd2be3f190023781445c7ed097797f80adff0ea07ee7fac3632409",
+      "gitBlobSha1": "810a54de55c2f1958dc7b53e7d675b2db33674f3",
+      "extracted": true
+    },
+    {
+      "path": "windows/repaint-test.c",
+      "bytes": 10141,
+      "sha256": "78878d218f3d87900a219b786b1e0ea234b1c7dbbd63b8f10c32545118c4a18a",
+      "gitBlobSha1": "265e8722486896bf372f7028e2d9d81299d50808",
+      "extracted": true
+    },
+    {
+      "path": "windows/selftest.c",
+      "bytes": 5798,
+      "sha256": "d254b2c469477056c62d1545683faa008afedde5299a75c9704609f5525ee98b",
+      "gitBlobSha1": "2e65c7d3ff93ae84dbc9480ec931f6e23b27d498",
+      "extracted": true
+    },
+    {
+      "path": "windows/storage-test.c",
+      "bytes": 10420,
+      "sha256": "e50dda0acd3ef56f418d3b348e16dd03ad6b7294d039682d2249f595f0174436",
+      "gitBlobSha1": "579668d7287d4c59a691e79809613b9ffe25efcf",
+      "extracted": true
+    },
+    {
+      "path": "windows/storage.c",
+      "bytes": 11750,
+      "sha256": "2483aa5b2fb6502ff1dbf323e64bfc12c026432d2eece93b43d4df96f95a4456",
+      "gitBlobSha1": "a94c587132e8a42138aa86eea6de08a0d15b800e",
+      "extracted": true
+    },
+    {
+      "path": "windows/sync.c",
+      "bytes": 22297,
+      "sha256": "f3748d995808cdc0a765ffe2d5291b4bdad803d3c11ad6b4f298da21352f09f2",
+      "gitBlobSha1": "f0c0fae96e17fd6305a9db2eda19660f9cf82f1b",
+      "extracted": true
+    },
+    {
+      "path": "windows/task-menu.c",
+      "bytes": 7946,
+      "sha256": "e93397dc3ff35068727ce4dd79fff90379c4ee2e4ac21c2b4a897a525ea77b23",
+      "gitBlobSha1": "52dc85b5d300373a7fc03767fa5b66c3346e62df",
+      "extracted": true
+    },
+    {
+      "path": "windows/tasks.c",
+      "bytes": 7666,
+      "sha256": "ab0f23ada141ae9bfedbf5eab7723b234c8fb8adc3f8eab4d7389cfa1b9736f1",
+      "gitBlobSha1": "8dc8eeb7b11904d532feaa9426c56197fc3ae2c4",
+      "extracted": true
+    },
+    {
+      "path": "windows/theme.c",
+      "bytes": 21262,
+      "sha256": "e7b86988057effa75f3e872df0970f76483e2ce9e0d37bdbe676772d85552bd8",
+      "gitBlobSha1": "f0f8e4c5b48343701d3302f76d2b20a45ce35899",
+      "extracted": true
+    },
+    {
+      "path": "windows/ui.h",
+      "bytes": 6239,
+      "sha256": "84ff0f7b46793e010a0c1174c75a3eb840342c078b000b727492cdfc05276864",
+      "gitBlobSha1": "d96f2b1c3461ed067db2862f555bbb7d7197367b",
+      "extracted": true
+    },
+    {
+      "path": "windows/util.c",
+      "bytes": 3459,
+      "sha256": "055fbe113d0bc02bd1e10054bee488c1f9b66679df6c8e29cdb4df913e794309",
+      "gitBlobSha1": "6127209f926e8920abaf2b848d025f956d99f02f",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/README.md",
+      "bytes": 495,
+      "sha256": "dafc98d53284f4f7df7c4076fea0550f9cd8548ef116de8f12a4ab2a5ed3062f",
+      "gitBlobSha1": "ebaa1b005d835b1631094f05767b9c416bbf9014",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/cJSON-LICENSE",
+      "bytes": 1084,
+      "sha256": "a36dda207c36db5818729c54e7ad4e8b0c6fba847491ba64f372c1a2037b6d5c",
+      "gitBlobSha1": "78deb0406d713ab9730e3c2447be1abdbd70b9a2",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/cJSON.c",
+      "bytes": 80368,
+      "sha256": "7879ae840ed0ac04c121d51423148b954dba0d24f0872d17c1a6e572613ef523",
+      "gitBlobSha1": "a38dff694ec99e66ff5aace57e028a2c9201951a",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/cJSON.h",
+      "bytes": 16394,
+      "sha256": "25b0145150d500498e4d209cec69c18c42cf818bffcc54690be3b895a2a16dee",
+      "gitBlobSha1": "cab5feb427725f8e5c82287f7fe59481b609b9b5",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/sqlite3.c",
+      "bytes": 8462111,
+      "sha256": "254d5579c10ae6a7425ddd055abbdecc5d7b7e6b473ddf28729cd831f25bbd8d",
+      "gitBlobSha1": "0b227f0e604da5fa4e26186b6eb4b7ac2a88e732",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/sqlite3.h",
+      "bytes": 611797,
+      "sha256": "61ded34ca2ddf50ad19cf5c55f595db775350be22d09efa5cda359caf2ee93b0",
+      "gitBlobSha1": "33dbec2c09b18d173d707a22049808d20df93e93",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/LICENSE",
+      "bytes": 1002,
+      "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243",
+      "gitBlobSha1": "ab8ee6f71428c3e4646b12b64ad387cde33462e5",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/adler32.c",
+      "bytes": 4964,
+      "sha256": "9cd1443a24ff2a3053961695bd432035c58347386a420d3388232376ebabe211",
+      "gitBlobSha1": "04b81d29bad1691878648d7ae1680726abd905e4",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/compress.c",
+      "bytes": 2613,
+      "sha256": "86f802c16a965e7a28737e3730b4e576c5ba40981753967e3e30916f4dc1b4b1",
+      "gitBlobSha1": "f43bacf7ab97073455a08bfed03408851682bf22",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/crc32.c",
+      "bytes": 31605,
+      "sha256": "8fd16f0a7714d51c89c2eb37eb98ec15e8a4dc57ba343e7b7398b19144039fda",
+      "gitBlobSha1": "6c38f5c04c6a87e711ecb50b668e17131fa8fae2",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/crc32.h",
+      "bytes": 591749,
+      "sha256": "9a2223575183ac2ee8a247f20bf3ac066e8bd0140369556bdbdffc777435749e",
+      "gitBlobSha1": "137df68d616c5ed38913579ba37b4e4c533fa903",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/deflate.c",
+      "bytes": 81731,
+      "sha256": "3b956337350f94c34987750f785587ef33d9c89ceaebb7c2afb189c956360cbe",
+      "gitBlobSha1": "012ea8148e8d21cf515a9ff47d4af719d049b276",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/deflate.h",
+      "bytes": 14041,
+      "sha256": "48baf016326d8d5e3e32ac8153cc7e22f854b8e6834830b167b998a7fb1e7989",
+      "gitBlobSha1": "300c6ada62b82e4984dd59a931c694db8636bd8f",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/gzguts.h",
+      "bytes": 6676,
+      "sha256": "716fa648aca1bb06c219d7b97ad4846d8479206143bc39557bfd8283f5783e04",
+      "gitBlobSha1": "eba72085bb756bc4fac374c59e8f5fdd1e660eab",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inffast.c",
+      "bytes": 12924,
+      "sha256": "e6ef64ce5dc0a4cd5c7ad08ceeb2b2a698b8447f6bd156057caeb2edab68c0cb",
+      "gitBlobSha1": "9354676e786ee7a6a31668adf9d25c712d57e657",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inffast.h",
+      "bytes": 422,
+      "sha256": "05cc5dc9ff1da7b8b52a4bd8bda0d8a5c236a2f39efe84b941516ea13857e6c5",
+      "gitBlobSha1": "49c6d156c5c652dbd9e2e6aff90e20eb279a2b37",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inffixed.h",
+      "bytes": 6332,
+      "sha256": "237ba710f090e432b62ebf963bee8b302867e9691406b2d3f8ee89ee7bfef9b0",
+      "gitBlobSha1": "d6283277694802ce7938f537f12990d6eead4924",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inflate.c",
+      "bytes": 55519,
+      "sha256": "34c998ce0037c0537c04b03b276f680b945f9b2c9d1e01b287605bd6879f7fd2",
+      "gitBlobSha1": "94ecff015a9be7d28d19ba7b2547e2563a1680c5",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inflate.h",
+      "bytes": 6683,
+      "sha256": "e8d4a51b07694bf48cb91979c19974cf6a5ab0b8a09d26ec0d14df349230673e",
+      "gitBlobSha1": "f127b6b1fa5f7d0266e3b502701948dfd3c6abc8",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inftrees.c",
+      "bytes": 13024,
+      "sha256": "5d4f335221d2dc76f17abd2577d92c2d7baf68fa6d7f23373b360830493d1563",
+      "gitBlobSha1": "98cfe164458c40c1d6dd3867039fda7105edafed",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/inftrees.h",
+      "bytes": 2920,
+      "sha256": "0a0fcaf2ae2fae57426bdc06637270e9bba974f35202cadbdba479d946e6409d",
+      "gitBlobSha1": "396f74b5da798ab1daf8039d748c5334735fed58",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/trees.c",
+      "bytes": 40937,
+      "sha256": "f63c68c16c05fcd196050529d1a0e7657960e4136b9987d90a6ac3e58a964b0f",
+      "gitBlobSha1": "6a523ef34e3cf29f5dd01b787660ab48bd6f697d",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/trees.h",
+      "bytes": 8472,
+      "sha256": "bb0a9d3ca88ee00c81adb7c636e73b97085f6ef1b52d6d58edbe2b6dc3adeb4d",
+      "gitBlobSha1": "d35639d82a27807e49ea35c334f8bbcf64720f82",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/zconf.h",
+      "bytes": 16500,
+      "sha256": "f5134250a67d57459234b63858f0d9d3ef8dcc48e9e1028d3f4fdcf6eae677ae",
+      "gitBlobSha1": "62adc8d8431f2f9149ae0b1583915e21a28dd8b5",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/zlib.h",
+      "bytes": 96829,
+      "sha256": "8a5579af72ea4f427ff00a4150f0ccb3fc5c1e4379f726e101133b1ab9fc600c",
+      "gitBlobSha1": "8d4b932eaf6a0fbb8133b3ab49ba5ef587059fa0",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/zutil.c",
+      "bytes": 7179,
+      "sha256": "8ced40d8c88588811edd2bdb35b7439983d5e1f8e9e32b8a3b244731f3c317b7",
+      "gitBlobSha1": "b1c5d2d3c6daf5a4b7a337dafe3e862ca177b41c",
+      "extracted": true
+    },
+    {
+      "path": "windows/vendor/zlib/zutil.h",
+      "bytes": 6677,
+      "sha256": "dddb2dc7a1dc339ecf2c8e089b366f08bb731c0839c7110240d17ce731bb4fea",
+      "gitBlobSha1": "48dd7febae65eeeaad7794f0a9317bcd054c107f",
+      "extracted": true
+    },
+    {
+      "path": "windows/visual-test.c",
+      "bytes": 4373,
+      "sha256": "9edf6e20ae1f8f96209eeffc35beb095fce2e8438825f498ed2c3b748814f843",
+      "gitBlobSha1": "2bbcb5d78053dc7f982ae63045bd679216115153",
+      "extracted": true
+    },
+    {
+      "path": "发布/0.9.2/GxTodo-Android-0.9.2.zip",
+      "bytes": 283528,
+      "sha256": "87a76b257b9da1e1fd9ede7f9022e4e0b4b5d9b798bd688dc86390f7f24eb9e6",
+      "gitBlobSha1": "23125ac6e59674164b026ffa20e3ffa409875bc8",
+      "extracted": false
+    },
+    {
+      "path": "发布/0.9.2/GxTodo-Web-0.9.2-Windows-x64.zip",
+      "bytes": 35863727,
+      "sha256": "6609218038fcb8d59273bbfc95726198f250d39704b5ac151f2b8998efc77e00",
+      "gitBlobSha1": "07472d11825a71fb44b766cdd07f5050d3a94f6f",
+      "extracted": false
+    },
+    {
+      "path": "发布/0.9.2/GxTodo-Windows-0.9.2-x64.zip",
+      "bytes": 696633,
+      "sha256": "94584073622bce77c1eb927e40e1f8893d73b190fc36c03a4430b524d11dbe6d",
+      "gitBlobSha1": "f399c327cade65784bc6cb13563c3813cfc5905b",
+      "extracted": false
+    },
+    {
+      "path": "发布/0.9.2/SHA256SUMS.txt",
+      "bytes": 285,
+      "sha256": "b94587dd9509689fd01968351d5233167d4482dcf055f16122a66372275201c4",
+      "gitBlobSha1": "fe33eb91fc5446015f9c595e230a3eb868679dc3",
+      "extracted": true
+    },
+    {
+      "path": "发布/0.9.2/release-manifest.json",
+      "bytes": 7776,
+      "sha256": "5e6f7dbbe50f21543cf6eb1a6d53173037d63d8d021c1ab58be5d887af3c9ee9",
+      "gitBlobSha1": "a99d4f173f41717e6fad50865a071bee6326d446",
+      "extracted": true
+    },
+    {
+      "path": "发布/0.9.2/发布说明.md",
+      "bytes": 2009,
+      "sha256": "c6ffb3d85b05811c2c031e8cbc86ea118a24de48fdf3020609703c25397a243f",
+      "gitBlobSha1": "1bdfab7beb20570882d33cc4fbd85189161ec07b",
+      "extracted": true
+    },
+    {
+      "path": "发布/0.9.2/验证记录.json",
+      "bytes": 11446,
+      "sha256": "d099142304269e758f376545592659da32ce77df05a9151f006429af2b5e6bb0",
+      "gitBlobSha1": "724b7a83fa6c535cb4661b6c29480de6f3715c86",
+      "extracted": true
+    }
+  ]
+}
