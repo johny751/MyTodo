@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {setTimeout as sleep} from 'node:timers/promises';
 import {DatabaseSync} from 'node:sqlite';
+import {captureRemoteFile} from './remote-file-evidence.mjs';
 
 if (process.env.GITHUB_ACTIONS !== 'true' && process.env.CODESPACES !== 'true') {
   throw new Error('C0-03 Android execution is restricted to authorized GitHub cloud environments');
@@ -165,10 +166,10 @@ try {
       // Diagnostic capture only. Never open, recover, truncate or overwrite the failed database.
       // These files stay inside this case's GitHub artifact, before a main retry changes dbCase.
       const directory = output + '.failures/' + prefix;
-      const evidence = {schema:'mytodo-android-failed-attempt',version:1,
+      const evidence = {schema:'mytodo-android-failed-attempt',version:2,
         sourceSha:receipt.sourceSha,runId:receipt.runId,runAttempt:receipt.runAttempt,
         stage:label,attempt,dbCase:failedDbCase,startedAt:new Date().toISOString(),
-        observations:[],files:[],errors:[],originalDatabaseReplayed:false,
+        observations:[],files:[],errors:[],originalDatabaseReplayed:false,originalDatabasePreserved:false,allObservedFilesVerified:false,
         snapshotSemantics:'Raw files after diagnostic force-stop; no claim of crash-time transaction state'};
       const reference = {stage:label,attempt,dbCase:failedDbCase,directory,status:'incomplete'};
       receipt.failureEvidence.push(reference);
@@ -180,7 +181,7 @@ try {
           const entry = receipt.commands[index];
           evidence.observations.push({label:suffix,exitCode:result.code,signal:result.signal,
             timedOut:entry?.timedOut || false,log:entry?.log,logSha256:entry?.logSha256});
-          return result;
+          return {...result,timedOut:entry?.timedOut || false,log:entry?.log,logSha256:entry?.logSha256};
         } catch (error) {
           // A diagnostic failure must not replace the original instrumentation failure.
           evidence.errors.push({label:suffix,error:String(error)});
@@ -201,7 +202,7 @@ try {
         let stopped = false;
         for (let poll = 1; poll <= 8; poll++) {
           const state = await observe('process-check-' + poll,selected('shell','pidof',packageName),{timeout:5000});
-          if (state?.code === 1 && !state.stdout.trim()) { stopped = true; break; }
+          if (state?.code === 1 && !state.signal && !state.timedOut && !state.stdout.trim() && !state.stderr.trim()) { stopped = true; break; }
           await sleep(250);
         }
         evidence.mainProcessObservedStopped = stopped;
@@ -214,18 +215,14 @@ try {
               .map(name => ({remote:'files/' + name,name:'atomic-' + name})),
           ];
           for (const file of candidates) {
-            const captured = await observe('file-' + file.name,
-              selected('exec-out','run-as',packageName,'cat',file.remote),{binary:true});
-            const item = {remote:file.remote,state:'unavailable',exitCode:captured?.code ?? null};
-            // "Unavailable" includes missing/permission/transport errors; it is not proof of no prior writes.
-            if (captured?.code === 0 && captured.bytes) {
-              const destination = path.join(directory,file.name);
-              await fs.writeFile(destination,captured.bytes,{flag:'wx'});
-              Object.assign(item,{state:'preserved',path:destination,bytes:captured.bytes.length,
-                sha256:hash(captured.bytes)});
-            }
-            evidence.files.push(item);
+            // exec-out may exit 0 while cat errors are returned as stdout. Never use
+            // its status alone as evidence that a remote file was copied.
+            evidence.files.push(await captureRemoteFile({packageName,...file,directory,observe,selected,
+              sqlite:file.name === 'tasks.sqlite'}));
           }
+          evidence.originalDatabasePreserved = evidence.files.some(file => file.remote === failedDirectory + 'tasks.sqlite' && file.state === 'preserved');
+          evidence.allObservedFilesVerified = evidence.files.every(file => file.state === 'preserved' ||
+            (file.before?.valid && file.before.state === 'unavailable' && file.before.reason === 'missing'));
         } else {
           evidence.errors.push({label:'raw-files',error:'Main process exit was not observed; no live-file copy attempted'});
         }
@@ -236,7 +233,8 @@ try {
         const file = path.join(directory,'evidence.json');
         try {
           await fs.writeFile(file,JSON.stringify(evidence,null,2),{flag:'wx'});
-          Object.assign(reference,{status:evidence.errors.length ? 'partial':'recorded',
+          Object.assign(reference,{status:evidence.errors.length || !evidence.originalDatabasePreserved || !evidence.allObservedFilesVerified ? 'partial':'recorded',
+            originalDatabasePreserved:evidence.originalDatabasePreserved === true,
             file,sha256:hash(await fs.readFile(file))});
         } catch (error) {
           reference.error = String(error);

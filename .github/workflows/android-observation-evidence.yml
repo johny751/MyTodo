@@ -1,0 +1,72 @@
+name: MyTodo Android failed-file observation verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, 'android-observation/**']
+    paths:
+      - '.github/workflows/android-observation-evidence.yml'
+      - 'tests/android-observation/**'
+      - 'tests/protocol-harness/android/remote-file-evidence.mjs'
+      - 'tests/protocol-harness/android/run-android.mjs'
+      - 'tests/protocol-harness/android/build-android.mjs'
+      - 'scripts/ci/c004-android-emulator.mjs'
+      - 'scripts/ci/c004-node-path.sh'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-observation-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+  NODE_OPTIONS: --experimental-sqlite
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MYTODO_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_ANDROID_PULSE_INSTALL: '1'
+      MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select existing Node runtime
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Create evidence directory
+        run: mkdir -p "$RUNNER_TEMP/android-observation"
+      - name: Start existing C004 emulator recipe
+        id: emulator
+        run: node scripts/ci/c004-android-emulator.mjs start
+      - name: Build unchanged isolated production test APK
+        run: node tests/protocol-harness/android/build-android.mjs --root "$GITHUB_WORKSPACE" --output-dir "$RUNNER_TEMP/android-observation/build" > "$RUNNER_TEMP/android-observation/build.log" 2>&1
+      - name: Install exact source test APK
+        run: node tests/protocol-harness/android/run-android.mjs --apk "$RUNNER_TEMP/android-observation/build/mytodo-c003-test.apk" --serial "$MYTODO_ANDROID_SERIAL" --output "$RUNNER_TEMP/android-observation/prepared.json" --prepare > "$RUNNER_TEMP/android-observation/install.log" 2>&1
+      - name: Verify remote receipts and rejected copies
+        run: node tests/android-observation/verify-remote-file-evidence.mjs --serial "$MYTODO_ANDROID_SERIAL" --prepared "$RUNNER_TEMP/android-observation/prepared.json.receipt.json" --output "$RUNNER_TEMP/android-observation/verification" > "$RUNNER_TEMP/android-observation/verify.log" 2>&1
+      - name: Finish emulator evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
+        run: node scripts/ci/c004-android-emulator.mjs finish
+      - name: Preserve directed verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: android-observation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/android-observation/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+      - name: Preserve emulator environment receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: android-observation-environment-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android-emulator/
+          if-no-files-found: error
+          retention-days: 30
