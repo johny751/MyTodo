@@ -1,7 +1,7 @@
 """Codespaces GitHub evidence files only; never executes project code, SQLite or builds."""
 import hashlib,io,json,os,pathlib,subprocess,sys,zipfile
 assert os.environ.get('CODESPACES')=='true'
-repo=pathlib.Path('/workspaces/mytodo-d2-candidate').resolve(strict=True)
+repo=pathlib.Path('/workspaces/mytodo-d2-candidate-v2').resolve(strict=True)
 assert pathlib.Path.cwd().resolve()==repo
 run,expected_sha=sys.argv[1:];assert run.isdigit() and len(expected_sha)==40 and all(c in '0123456789abcdef' for c in expected_sha)
 root=repo/'docs/upgrade/d2/evidence'/('run-'+run);root.mkdir(parents=True,exist_ok=True)

@@ -1,7 +1,7 @@
 """Codespaces Git/file-only publication. No project import, SQLite, build or test execution."""
 import hashlib,json,os,pathlib,subprocess,zipfile,sys
 assert os.environ.get('CODESPACES')=='true'
-root=pathlib.Path('/workspaces/mytodo-d2-candidate').resolve(strict=True)
+root=pathlib.Path('/workspaces/mytodo-d2-candidate-v2').resolve(strict=True)
 assert pathlib.Path.cwd().resolve()==root
 base='d4c5af4cbbb9192c19276dd371bd142c2b835534'
 branch='d2/implementation-candidate-1'

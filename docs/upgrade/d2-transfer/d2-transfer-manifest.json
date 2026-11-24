@@ -1,183 +1,183 @@
 {
+  "branch": "d2/implementation-candidate-1",
   "scope": "Text/archive/hash preparation only; no project execution",
-  "publisherSha256": "95d8ea2f10c102322811e2937869ed8a0a04d6aa962cddafe58034e19438c5a2",
+  "zipSha256": "abdacf29e15749043c378cc0ea4e9c4975e53a70d20e788e6189c9bb9a876bd1",
+  "publisherSha256": "8a42b77b3396975c785a161aabb9bb9508381aeda4c874cb2517ac4aa69739a0",
   "files": [
     {
-      "bytes": 6965,
+      "path": ".github/workflows/d2-migration-validation.yml",
       "sha256": "9a29be0613f7e1521e0fe4916a871a3b77a0a924085df9d65840cd8dc45ad08a",
-      "path": ".github/workflows/d2-migration-validation.yml"
+      "bytes": 6965
     },
     {
-      "bytes": 24147,
+      "path": "android/src/local/gxtodo/replica/MigrationRegistry.java",
       "sha256": "4616064e013b18e20b749a62c265152e3295a8d4468f9c8d77db7ca0dd4958f1",
-      "path": "android/src/local/gxtodo/replica/MigrationRegistry.java"
+      "bytes": 24147
     },
     {
-      "bytes": 5698,
+      "path": "android/src/local/gxtodo/replica/PomodoroTasks.java",
       "sha256": "978e374f98c5be5def19f532cee051516a02b9c1df72b1cd34def60e87f77c6f",
-      "path": "android/src/local/gxtodo/replica/PomodoroTasks.java"
+      "bytes": 5698
     },
     {
-      "bytes": 13737,
+      "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
       "sha256": "ab81d41735173f80c059739ce193647bbebf027240e9d5eea746250d5b03734c",
-      "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java"
+      "bytes": 13737
     },
     {
-      "bytes": 740,
-      "sha256": "c4ab01d418158ff624e4b6cb395e2b63086cf01a5f4f2be5b805d58306f6a0da",
-      "path": "android/src/local/gxtodo/replica/ReplicaTaskRecord.java"
+      "path": "android/src/local/gxtodo/replica/ReplicaTaskRecord.java",
+      "sha256": "223696c490d866268d624a0ccf4663684331447b05d42c4034632dfcf8ba2124",
+      "bytes": 739
     },
     {
-      "bytes": 6404,
+      "path": "docs/upgrade/d2/android-storage-adapter.md",
       "sha256": "93bd3ac6168c64d320ad9cdc426d3bf8b10d30cad7dab72bfc22af57ef223772",
-      "path": "docs/upgrade/d2/android-storage-adapter.md"
+      "bytes": 6404
     },
     {
-      "bytes": 7018,
+      "path": "docs/upgrade/d2/architecture.md",
       "sha256": "130b1c684ccd6e88b013a909845f2e6bb79c1c77a9140a845c608db70eb6ec76",
-      "path": "docs/upgrade/d2/architecture.md"
+      "bytes": 7018
     },
     {
-      "bytes": 4756,
+      "path": "docs/upgrade/d2/backup-restore-implementation.md",
       "sha256": "2525a634b9545f51d69663fc93b1a8f75ca93acd9d5cf13dcba27340b7bb4eeb",
-      "path": "docs/upgrade/d2/backup-restore-implementation.md"
+      "bytes": 4756
     },
     {
-      "bytes": 4654,
+      "path": "docs/upgrade/d2/node-storage-adapter.md",
       "sha256": "8b05f420b836c61ce76dee195bb299510126bb72f879ef57346169aad0d1d984",
-      "path": "docs/upgrade/d2/node-storage-adapter.md"
+      "bytes": 4654
     },
     {
-      "bytes": 4268,
+      "path": "docs/upgrade/d2/owner-decisions-and-blockers.md",
       "sha256": "9232fac92a89ee40b4d217e183ef46c2646bf07fee1720bc3922e66f87bcfa8d",
-      "path": "docs/upgrade/d2/owner-decisions-and-blockers.md"
+      "bytes": 4268
     },
     {
-      "bytes": 5738,
+      "path": "docs/upgrade/d2/shared-runtime-contract.md",
       "sha256": "3de87c71b8ee54e68ccbc5dffed402fe779a6c447fe4dcdd4c1532db977e1890",
-      "path": "docs/upgrade/d2/shared-runtime-contract.md"
+      "bytes": 5738
     },
     {
-      "bytes": 7530,
+      "path": "docs/upgrade/d2/windows-storage-adapter.md",
       "sha256": "826004a3bae2e076221e0c16bc38057367cbe082b66273be7372796ca596d037",
-      "path": "docs/upgrade/d2/windows-storage-adapter.md"
+      "bytes": 7530
     },
     {
-      "bytes": 19200,
+      "path": "src/migration-runtime.mjs",
       "sha256": "761c6891608aa0ed2bf3480d16e891736f566541557ddb3f07698da3f069ce76",
-      "path": "src/migration-runtime.mjs"
+      "bytes": 19200
     },
     {
-      "bytes": 5471,
+      "path": "src/sqlite-store.mjs",
       "sha256": "3f8006f44abfaff50d79aac07fce465c55dd24b2e4fa73b94ca662dbcde0427c",
-      "path": "src/sqlite-store.mjs"
+      "bytes": 5471
     },
     {
-      "bytes": 599,
+      "path": "tests/d2/android/AndroidManifest.xml",
       "sha256": "bafd609fd5c6f2f1eba36022ce3697026e65a84f6cf0568cf2b42e707be54d66",
-      "path": "tests/d2/android/AndroidManifest.xml"
+      "bytes": 599
     },
     {
-      "bytes": 5316,
+      "path": "tests/d2/android/build.mjs",
       "sha256": "8c62694619b6ab9998203d547cefd7261fc2dde80b8a573fb236362cfe6a4a07",
-      "path": "tests/d2/android/build.mjs"
+      "bytes": 5316
     },
     {
-      "bytes": 15891,
+      "path": "tests/d2/android/D2StorageInstrumentation.java",
       "sha256": "4c77156dc7dab5ae12d7799a47813f542465a322b9ba5ed270e9fe6225fb5d8b",
-      "path": "tests/d2/android/D2StorageInstrumentation.java"
+      "bytes": 15891
     },
     {
-      "bytes": 9234,
+      "path": "tests/d2/android/runner.mjs",
       "sha256": "ab641e0ac5e5580f06fee77757ee08bd9e26a6032d401fd6e9a2f3370c89c5e2",
-      "path": "tests/d2/android/runner.mjs"
+      "bytes": 9234
     },
     {
-      "bytes": 6383,
+      "path": "tests/d2/android/sidecar-probe.mjs",
       "sha256": "6945b1565f21d2b8bedaa9bdf47b9a4029495a4867022d85e570e8d4d16ba6be",
-      "path": "tests/d2/android/sidecar-probe.mjs"
+      "bytes": 6383
     },
     {
-      "bytes": 6582,
+      "path": "tests/d2/android/sidecar-probe.test.mjs",
       "sha256": "355937104bc42f15433ac8850d6bfa7e1d8afb0110d88485fd771900c2b7b595",
-      "path": "tests/d2/android/sidecar-probe.test.mjs"
+      "bytes": 6582
     },
     {
-      "bytes": 10722,
+      "path": "tests/d2/backup-recovery.mjs",
       "sha256": "14f2e93b7a2cf1f567c553a1ffb5f624eea3f6d5f484c2500635528ecfa69ce2",
-      "path": "tests/d2/backup-recovery.mjs"
+      "bytes": 10722
     },
     {
-      "bytes": 11450,
+      "path": "tests/d2/backup-runner.mjs",
       "sha256": "cb603b9a8545fe11d22a2525ba74d61b7fdea050d9e49d2028707acce1b852d0",
-      "path": "tests/d2/backup-runner.mjs"
+      "bytes": 11450
     },
     {
-      "bytes": 13473,
+      "path": "tests/d2/compare-runner.mjs",
       "sha256": "e6e01acf4f851a90f95073ee367e6384329bfa83ec92573c529ebc6436d53864",
-      "path": "tests/d2/compare-runner.mjs"
+      "bytes": 13473
     },
     {
-      "bytes": 2346,
+      "path": "tests/d2/isolation.mjs",
       "sha256": "f6ea05c860b3f6577e9620490a4525fefdb7b7821822e89f61b7bb4f33e9d7a3",
-      "path": "tests/d2/isolation.mjs"
+      "bytes": 2346
     },
     {
-      "bytes": 7676,
+      "path": "tests/d2/native-build.mjs",
       "sha256": "e352cf7d8bbac10615705185d8997837203472d1c5c3d5ed85af6b66df1a99a1",
-      "path": "tests/d2/native-build.mjs"
+      "bytes": 7676
     },
     {
-      "bytes": 27856,
+      "path": "tests/d2/native-runner.c",
       "sha256": "e96025cc8acb42bccf25defba4052713ee2ea0ea0ce4d1139a0828b5ee9612dc",
-      "path": "tests/d2/native-runner.c"
+      "bytes": 27856
     },
     {
-      "bytes": 18616,
+      "path": "tests/d2/node-runner.mjs",
       "sha256": "c0a6bbee08a9171ded6888d5e9f55278af911735eded13bb34acb49c68d69b3b",
-      "path": "tests/d2/node-runner.mjs"
+      "bytes": 18616
     },
     {
-      "bytes": 1941,
+      "path": "tests/d2/shared-fixture.json",
       "sha256": "dba5a3bfab0127442b5363b66b8aa8bc8448f16150ec0225773c99ae390f170f",
-      "path": "tests/d2/shared-fixture.json"
+      "bytes": 1941
     },
     {
-      "bytes": 3068,
+      "path": "tests/d2/source-scope.mjs",
       "sha256": "f044bbff832d7ac4e9231f79b75c5dbfbf3a8c8c118bd1ee89fdba0ba6af30a0",
-      "path": "tests/d2/source-scope.mjs"
+      "bytes": 3068
     },
     {
-      "bytes": 28584,
+      "path": "windows/database.c",
       "sha256": "5753f44256d2dc909443621e9beab58cd670a8816e88418567ee35657f68ef58",
-      "path": "windows/database.c"
+      "bytes": 28584
     },
     {
-      "bytes": 34793,
+      "path": "windows/migration.c",
       "sha256": "bfa7762d80e1e5dcbc83875a312829504c954fbf047f6f4bca176b6e8179482e",
-      "path": "windows/migration.c"
+      "bytes": 34793
     },
     {
-      "bytes": 2047,
+      "path": "windows/migration.h",
       "sha256": "53ee4f32a02a5bf30626423ab6cd1ee24f756e15e4f63403442814f2e9dd218d",
-      "path": "windows/migration.h"
+      "bytes": 2047
     },
     {
-      "bytes": 2700,
+      "path": "windows/native.h",
       "sha256": "f8bb1cab571c90d153bfd87a32c3e5269c3244ed1a213230aa96c3ae58e488a2",
-      "path": "windows/native.h"
+      "bytes": 2700
     }
   ],
-  "branch": "d2/implementation-candidate-1",
   "baseline": {
-    "windows/native.h": "cf06ccd5ac6c9c60698f5981330b431686c372fa7c96e90d49e8967b6c11d381",
-    "android/src/local/gxtodo/replica/PomodoroTasks.java": "fcabd74e9cde5c2d584aeb89f1ae89e14d637085a73b447dafe25ca03d416864",
-    "android/src/local/gxtodo/replica/ReplicaDatabase.java": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663",
     "windows/database.c": "17c980cca5c5f3a8ff7f02eebd73a29719ea00c1576323eb0b5b1a39348e5840",
-    "src/sqlite-store.mjs": "0f398ec44f2d3ded1c3a1db9adcc7235e150558cf7f58e9a3853770d0f713344"
+    "windows/native.h": "cf06ccd5ac6c9c60698f5981330b431686c372fa7c96e90d49e8967b6c11d381",
+    "android/src/local/gxtodo/replica/ReplicaDatabase.java": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663",
+    "src/sqlite-store.mjs": "0f398ec44f2d3ded1c3a1db9adcc7235e150558cf7f58e9a3853770d0f713344",
+    "android/src/local/gxtodo/replica/PomodoroTasks.java": "fcabd74e9cde5c2d584aeb89f1ae89e14d637085a73b447dafe25ca03d416864"
   },
   "base": "d4c5af4cbbb9192c19276dd371bd142c2b835534",
-  "zipSha256": "a269e37befc108638845bf96ad6bd8a768451b0d31982143b9962b09c64d3766",
   "allowedProductionPaths": [
     "src/sqlite-store.mjs",
     "src/migration-runtime.mjs",
