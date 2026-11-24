@@ -2,8 +2,9 @@
 import hashlib,json,pathlib,re,subprocess,sys,zipfile,io
 repository='johny751/MyTodo'
 root=pathlib.Path(sys.argv[1]).resolve();kind=sys.argv[2];runs=json.loads(sys.argv[3])
-if kind not in ('d4','a'):raise RuntimeError('Unknown evidence domain')
-directory=root/('docs/upgrade/d4-01/evidence' if kind=='d4' else 'docs/a-admission/evidence')
+if kind not in ('d4','d4-font','a'):raise RuntimeError('Unknown evidence domain')
+is_ui=kind.startswith('d4')
+directory=root/('docs/upgrade/d4-01/evidence-font' if kind=='d4-font' else 'docs/upgrade/d4-01/evidence' if is_ui else 'docs/a-admission/evidence')
 directory.mkdir(parents=True,exist_ok=False)
 def api(endpoint,binary=False):
     data=subprocess.check_output(['gh','api','repos/'+repository+'/'+endpoint])
@@ -16,7 +17,7 @@ def write(name,data):
 manifest=[];summary=[]
 for run in runs:
     runid=str(run['id']);meta=api('actions/runs/'+runid)
-    if meta['head_sha']!=run['sha'] or meta['head_branch']!=('d4/ui-candidate-1' if kind=='d4' else 'a/admission-candidate-1') or meta['status']!='completed':raise RuntimeError('Run/source/branch/completion mismatch')
+    if meta['head_sha']!=run['sha'] or meta['head_branch']!=('d4/ui-candidate-1' if is_ui else 'a/admission-candidate-1') or meta['status']!='completed':raise RuntimeError('Run/source/branch/completion mismatch')
     attempt=meta['run_attempt'];prefix='run-'+runid+'-attempt-'+str(attempt)
     manifest.append(write(prefix+'/run.json',meta))
     jobs=api('actions/runs/'+runid+'/attempts/'+str(attempt)+'/jobs?per_page=100');manifest.append(write(prefix+'/jobs.json',jobs))
@@ -39,7 +40,7 @@ for run in runs:
     summary.append({'runId':runid,'attempt':attempt,'sourceSHA':meta['head_sha'],'conclusion':meta['conclusion'],'url':meta['html_url'],'artifacts':artifacts['total_count'],'jobs':[{'name':j['name'],'conclusion':j['conclusion']} for j in jobs['jobs']]})
 write('sha256-manifest.json',{'kind':kind,'files':manifest,'runs':summary})
 write('run-summary.json',summary)
-archive=root/('docs/upgrade/d4-01/d4-receipt-export.zip' if kind=='d4' else 'docs/a-admission/a-receipt-export.zip')
+archive=root/('docs/upgrade/d4-01/d4-font-receipt-export.zip' if kind=='d4-font' else 'docs/upgrade/d4-01/d4-receipt-export.zip' if is_ui else 'docs/a-admission/a-receipt-export.zip')
 with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED) as z:
     for file in sorted(directory.rglob('*')):
         if file.is_file():z.write(file,str(file.relative_to(directory)))

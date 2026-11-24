@@ -21,7 +21,9 @@ const graph=[
 ];
 const known=new Set(graph),modules=new Map(),inputs=[];
 const sha256=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
-async function read(relative){const bytes=await fs.readFile(path.join(ROOT,relative));inputs.push({path:relative,bytes:bytes.length,sha256:sha256(bytes)});return new TextDecoder('utf-8',{fatal:true}).decode(bytes);}
+async function readBytes(relative){const bytes=await fs.readFile(path.join(ROOT,relative));inputs.push({path:relative,bytes:bytes.length,sha256:sha256(bytes)});return bytes;}
+const decode=bytes=>new TextDecoder('utf-8',{fatal:true}).decode(bytes);
+async function read(relative){return decode(await readBytes(relative));}
 const identifier=/^[A-Za-z_$][\w$]*$/;
 function compileModule(relative,source){
  const dependencies=[],bindings=[];
@@ -49,6 +51,15 @@ function visit(relative){if(visited.has(relative))return;if(visiting.has(relativ
 visit('prototypes/d4-01/domain.mjs');if(ordered.length!==graph.length)throw Error('D4 graph includes unused/untracked modules');
 let html=await read('prototypes/d4-01/index.html');
 const css=await read('prototypes/d4-01/styles.css'),pages=await read('prototypes/d4-01/work-pages.js'),app=await read('prototypes/d4-01/app.js');
+const fontPath='prototypes/d4-01/fonts/NotoSansSC-VF.ttf',oflPath='prototypes/d4-01/fonts/OFL.txt',copyrightPath='prototypes/d4-01/fonts/COPYRIGHT.txt';
+const fontBytes=await readBytes(fontPath),fontSha256=sha256(fontBytes);
+if(fontBytes.length!==17773244||fontSha256!=='763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a')throw Error('D4 embedded font differs from the approved local Noto Sans SC asset');
+const oflBytes=await readBytes(oflPath),copyrightBytes=await readBytes(copyrightPath),ofl=decode(oflBytes),copyright=decode(copyrightBytes);
+if(!/SIL\s+OPEN\s+FONT\s+LICENSE\s+(?:Version\s+)?1\.1/i.test(ofl)||!['PREAMBLE','DEFINITIONS','TERMINATION','DISCLAIMER'].every(section=>ofl.includes(section))||!/PERMISSION\s*(?:&|AND)\s*CONDITIONS/i.test(ofl)||!/copyright/i.test(copyright))throw Error('D4 full font license/copyright notice is missing or unsupported');
+const font={family:'Noto Sans SC',sha256:fontSha256,bytes:fontBytes.length,license:'OFL-1.1'};
+const fontFace='/* Noto Sans SC: SIL OFL 1.1; full notices in #d4-font-license and the package. */\n@font-face{font-family:"Noto Sans SC";font-style:normal;font-weight:100 900;font-display:swap;src:url("data:font/ttf;base64,'+fontBytes.toString('base64')+'") format("truetype");}\n';
+const escapeNotice=value=>value.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const fontLicenseMarkup='<template id="d4-font-license" data-license="OFL-1.1"><pre>'+escapeNotice(copyright+'\n\n'+ofl)+'</pre></template>\n';
 html=html.replace(/<link\b[^>]*href\s*=\s*['"](?:\.\/)?styles\.css['"][^>]*>/gi,'');
 html=html.replace(/<script\b[^>]*src\s*=\s*['"](?:\.\/)?(?:domain\.mjs|work-pages\.js|app\.js)['"][^>]*>\s*<\/script\s*>/gi,'');
 if(/<script\b|<link\b[^>]*(?:rel\s*=\s*['"]stylesheet['"]|href\s*=\s*['"](?:https?:|\/\/))/i.test(html))throw Error('D4 HTML contains an unsupported script/stylesheet dependency');
@@ -57,14 +68,16 @@ for(const match of css.matchAll(/url\(\s*(['"]?)([\s\S]*?)\1\s*\)/gi))if(!/^(?:d
 if(/<(?:img|iframe|audio|video|source)\b[^>]*\b(?:src|poster)\s*=\s*['"](?!(?:data:|#))[^'"]+['"]/i.test(html))throw Error('D4 HTML references an unbundled media asset');
 if(!/<\/head\s*>/i.test(html)||!/<\/body\s*>/i.test(html))throw Error('D4 template lacks head/body closing tags');
 const buildTimeUtc=new Date().toISOString();
-const identity={kind:'d4-01-offline-classic-demo',sourceSha,runId,runAttempt,buildTimeUtc,coreVersion:2,storageKey:'mytodo-d4-01-demo-v1',productionLogicChanged:false,productionSyncEnabled:false};
+const identity={kind:'d4-01-offline-classic-demo',sourceSha,runId,runAttempt,buildTimeUtc,coreVersion:2,storageKey:'mytodo-d4-01-demo-v1',font,productionLogicChanged:false,productionSyncEnabled:false};
 const script='"use strict";\n(()=>{\nconst __D4Modules=Object.create(null);\n'+ordered.map(relative=>modules.get(relative).code).join('\n')+'\nglobalThis.DemoDomain=__D4Modules["prototypes/d4-01/domain.mjs"];\nglobalThis.D4_BUILD=Object.freeze('+JSON.stringify(identity)+');\n'+pages+'\n'+app+'\n})();\n';
 new vm.Script(script,{filename:'d4-01-offline-bundle.js'}); // GHA syntax compilation only; no browser/UI code executes here.
-html=html.replace(/<\/head\s*>/i,()=>'<style data-d4-inline="styles">\n'+css+'\n</style>\n</head>');
-html=html.replace(/<\/body\s*>/i,()=>'<script data-d4-inline="classic">\n'+script.replace(/<\/script/gi,'<\\/script')+'\n</script>\n</body>');
+html=html.replace(/<\/head\s*>/i,()=>'<style data-d4-inline="styles">\n'+fontFace+css+'\n</style>\n</head>');
+html=html.replace(/<\/body\s*>/i,()=>fontLicenseMarkup+'<script data-d4-inline="classic">\n'+script.replace(/<\/script/gi,'<\\/script')+'\n</script>\n</body>');
 if(/<script\b[^>]*(?:\bsrc\s*=|\btype\s*=\s*['"]module['"])/i.test(html)||/<link\b[^>]*rel\s*=\s*['"]stylesheet['"]/i.test(html))throw Error('D4 offline artifact retains external/module dependencies');
 await fs.mkdir(output);const artifact=Buffer.from(html,'utf8'),filename='mytodo-d4-01-demo.html';
 await fs.writeFile(path.join(output,filename),artifact,{flag:'wx'});
-const receipt={...identity,status:'built',browserRuntime:'UNVERIFIED until UI acceptance',scriptSyntaxCompiled:true,inputs,dependencyGraph:ordered.map(relative=>({path:relative,dependencies:modules.get(relative).dependencies,exports:modules.get(relative).exports})),artifact:{file:filename,bytes:artifact.length,sha256:sha256(artifact)},limitations:['Discussion prototype and isolated synthetic data only.','No platform final implementation or production storage/sync is activated.','file:// persistence can fall back to memory when the browser restricts localStorage.']};
+await fs.writeFile(path.join(output,'OFL.txt'),oflBytes,{flag:'wx'});await fs.writeFile(path.join(output,'COPYRIGHT.txt'),copyrightBytes,{flag:'wx'});
+const fontLicense={id:'OFL-1.1',fullNoticesEmbedded:true,ofl:{source:oflPath,file:'OFL.txt',bytes:oflBytes.length,sha256:sha256(oflBytes)},copyright:{source:copyrightPath,file:'COPYRIGHT.txt',bytes:copyrightBytes.length,sha256:sha256(copyrightBytes)}};
+const receipt={...identity,status:'built',browserRuntime:'UNVERIFIED until UI acceptance',scriptSyntaxCompiled:true,inputs,fontLicense,dependencyGraph:ordered.map(relative=>({path:relative,dependencies:modules.get(relative).dependencies,exports:modules.get(relative).exports})),artifact:{file:filename,bytes:artifact.length,sha256:sha256(artifact)},limitations:['Discussion prototype and isolated synthetic data only.','No platform final implementation or production storage/sync is activated.','file:// persistence can fall back to memory when the browser restricts localStorage.']};
 await fs.writeFile(path.join(output,'build-receipt.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({status:'built',sourceSha,output,artifact:receipt.artifact,pureModules:ordered.length}));

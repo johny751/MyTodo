@@ -12,6 +12,8 @@ if(createHash('sha256').update(bytes).digest('hex')!==receipt.artifact.sha256)th
 await fs.writeFile(path.join(dir,'open-mytodo-demo.bat'),'@echo off\r\nstart "" "%~dp0mytodo-d4-01-demo.html"\r\n',{flag:'wx'});
 await fs.writeFile(path.join(dir,'README.md'),'# MyTodo D4 可操作体验版\n\n双击 mytodo-d4-01-demo.html，或运行 open-mytodo-demo.bat。无需安装、无需联网。\n\n11 个页面可通过左侧导航访问；手机尺寸使用左上角菜单。任务、子任务、项目、事项、流程、往来、归档和统计操作使用合成数据。提醒显示于应用内提醒中心。\n\n保存仅使用 mytodo-d4-01-demo-v1 专用演示空间；浏览器限制 file:// 保存时退回当前会话内存。设置页可导出合成修改或重置示例。\n\n这是 UI 确认候选，不代表原生 Windows 整合或生产迁移通过。Android issue #1 保持开放。\n\n验证源码：'+env.GITHUB_SHA+'\nActions：https://github.com/johny751/MyTodo/actions/runs/'+env.GITHUB_RUN_ID+'\n',{flag:'wx'});
 const files=['mytodo-d4-01-demo.html','open-mytodo-demo.bat','README.md','build-receipt.json','browser-results.json','synthetic-final-state.json'];
+await fs.copyFile('prototypes/d4-01/fonts/OFL.txt',path.join(dir,'OFL.txt'));
+files.push('OFL.txt','COPYRIGHT.txt');
 const hashes=[];for(const file of files){const b=await fs.readFile(path.join(dir,file));hashes.push(createHash('sha256').update(b).digest('hex')+'  '+file);}
 await fs.writeFile(path.join(dir,'SHA256SUMS.txt'),hashes.join('\n')+'\n',{flag:'wx'});
 execFileSync('zip',['-q','mytodo-d4-experience.zip',...files,'SHA256SUMS.txt'],{cwd:dir});

@@ -1,0 +1,17 @@
+Noto Sans SC variable font — unmodified local installed open-source font.
+
+Copyright notice read from font name table ID 0:
+© 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+
+Family read from name table ID 1: Noto Sans SC.
+License read from name table ID 13: SIL Open Font License, Version 1.1.
+License reference in name table ID 14: http://scripts.sil.org/OFL.
+The complete OFL is included as OFL.txt and also remains in embedded metadata.
+
+Source at preparation: C:/Windows/Fonts/NotoSansSC-VF.ttf.
+Unmodified bytes: 17773244.
+SHA-256: 763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a.
+
+The font is copied without changing its internal names, glyphs or license.
+It is bundled only to make the offline UI and cloud screenshots readable.
+No font or package is downloaded from a new service.
