@@ -92,10 +92,12 @@
 | `identified` | 封存原库身份、schema 及当前停写点 `S`，绑定 plan/implementation 字节；备份 `B` 与 `S` 分开保留 | 只凭 user_version=0 或主库文件存在选计划；旧 writer 未停止；当前头或生产差异尚未核对 |
 | `staged` | 对已声明合成候选使用隔离路径、核对备份原字节/原图与复制基础设施；原工作集保持不变 | 用业务 JSON 重建原 Actor/seq/pending，或把旧 `B` 直接替换 `S` 当前库；发现或无法排除 `B→S` 新 events/ACK/remote progress |
 | `committed` | 新进程重开同一候选，证明 registry/user_version/schema/rows/meta/outbox 同一成功态，失败时保留首错 | 新库/新 Actor 重试替代原失败；registry/checksum 不符；未知 COMMIT 结果未经读回即重跑 |
-| `activated` | 本批只模拟活动指针，不改生产路由；若将来放行，先核对最终目标路径与所有必要组件，同步另行准入 | 实际组件未匹配、旧会话可能迟到，或未核对远端就恢复原 Actor 发送 |
+| `activated` | 候选只规定设计/模拟边界；当前参考工具未实现活动指针切换，不改生产路由；若将来放行，先核对最终目标路径与所有必要组件，同步另行准入 | 实际组件未匹配、旧会话可能迟到，或未核对远端就恢复原 Actor 发送 |
 | `failed-before-activation` | 原库和 `S` 活动入口不变，候选隔离，按原失败身份读回 | 删除/覆盖原库、清理原 pending/WAL/原图；用更早备份掩盖当前源状态 |
 | `failed-after-activation` | 证明无新写入/ACK/通知/远端发布且原库仍等于 `S` 才可回到该原库；有新副作用或不确定则保全两侧前向对账 | 直接降回 `B` 或旧版本库；删除新 events/ACK；把本地 DB 回退解释为撤回已发布远端对象 |
 
 **PROPOSAL。** 任何降级导出生成独立业务副本及逐字段损失/隔离清单，不覆盖主账本，不取得原 Actor 连续性。不可逆或缺损项继续标 `UNKNOWN` 或明确 loss；唯一项目名称匹配只建立可追溯投影，不推造历史 ID/事件。备份后的新进展比较规则以 [BR-01–05](backup-restore-contract.md#本候选补充备份之后的新进展与降级阻断) 为共同门禁。
 
 **OWNER DECISION。** 本次仅冻结候选规则和工具设计，不决定生产 schema/user_version、真实迁移 registry、旧版本支持范围、旧写端接入、反馈升级或正式降级。D1-02 独立工具可验证指定合成 SQL 及保真/阻断断言；生产合并与执行入口仍须另批审核。[独立工具准备设计](d1-01-02-tool-preparation-design.md)
+
+**FACT（CI5 参考工具，非生产入口）。** 本轮已知合成 SQLite 候选的 registry/user_version 同事务、真实错误/进程退出及同路径新进程重开由三端来源库上的 Python reference 验证；三端各97/97。生产 C/Node/Android 存储封装、全部历史 schema 和活动切换继续 UNVERIFIED，详见 [最终限定审查](final-review.md)。

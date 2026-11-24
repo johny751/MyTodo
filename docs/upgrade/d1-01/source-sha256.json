@@ -1,0 +1,219 @@
+{
+  "candidate": "d1-01-candidate.1",
+  "validatedSource": "8239d39220d940bf9c047a1dcaffd2a831cca2fc",
+  "run": "45367557986",
+  "purpose": "document and isolated synthetic tools",
+  "excludes": "This manifest excludes itself and SOURCE-SHA256SUMS.txt; original evidence ZIPs and generated publication/audit receipts have separate seals.",
+  "files": [
+    {
+      "path": ".github/workflows/d1-01-contract-validation.yml",
+      "bytes": 4201,
+      "sha256": "f106bb0ede16d7a3a4d54efb97e4ecdf34a56feb4d27ed2f919ce2b1e3a37908"
+    },
+    {
+      "path": "docs/upgrade/d1-01/backup-restore-contract.md",
+      "bytes": 26457,
+      "sha256": "e03d0e553b950db125825ec73903311902f871407b118ff6a5ab11e0c51e1e44"
+    },
+    {
+      "path": "docs/upgrade/d1-01/consolidated-static-review.md",
+      "bytes": 9952,
+      "sha256": "9da27129069e5c85bea3a9bfad5798384c9944c807640d592fee74058dcde5ed"
+    },
+    {
+      "path": "docs/upgrade/d1-01/coverage-review.md",
+      "bytes": 9906,
+      "sha256": "65aa7125a0c50fd65705fa047dfc3185ee8be492cea373c629983ed673ab8e46"
+    },
+    {
+      "path": "docs/upgrade/d1-01/d1-01-02-tool-preparation-design.md",
+      "bytes": 15098,
+      "sha256": "9d6983030ff33f1e5c099980c8ccf2e52a089994bc0e921d2262d0a019025501"
+    },
+    {
+      "path": "docs/upgrade/d1-01/d1-01-b-open-questions.md",
+      "bytes": 4179,
+      "sha256": "8eae43cb0ff2a1c1308163a76a6c336e94183cff707fbf14af402b80ec8e928c"
+    },
+    {
+      "path": "docs/upgrade/d1-01/data-ownership-and-sync-boundaries.md",
+      "bytes": 13925,
+      "sha256": "d6ebfa89a958d4d2f9c6d50d8dc72614afa505cc84785f0f91a3ac67b43fa06c"
+    },
+    {
+      "path": "docs/upgrade/d1-01/field-compatibility-matrix.md",
+      "bytes": 13403,
+      "sha256": "148eb7c726cdb2f3e326c70a8a6ba2b5ea257a98e8513612d81b872c09c2fe67"
+    },
+    {
+      "path": "docs/upgrade/d1-01/final-review.md",
+      "bytes": 7664,
+      "sha256": "649030823c3c354311077ad50707d994e710f4973249a2d133c637bbeccd0c7a"
+    },
+    {
+      "path": "docs/upgrade/d1-01/migration-versioning-contract.md",
+      "bytes": 28140,
+      "sha256": "a32a3629f22fdaf77c7fa2ffe1175d96734c04f4a4e80e57b014c7fd52c1b302"
+    },
+    {
+      "path": "docs/upgrade/d1-01/README.md",
+      "bytes": 3638,
+      "sha256": "4c9bc22435eb8a6d5db95f77c3d5c0eac7027633fbd5500866953e3d4ac96f0c"
+    },
+    {
+      "path": "docs/upgrade/d1-01/relationship-migration-strategy.md",
+      "bytes": 10388,
+      "sha256": "35fa078d11175f3c5f1d8e87ec7baf0c7c46e9fbe4612a18a8a60842770993e5"
+    },
+    {
+      "path": "docs/upgrade/d1-01/source-and-validation-scope.md",
+      "bytes": 4215,
+      "sha256": "7c4535fcad814496dbec4d4bcd4c070657410a993d8a6abca52920d75d067dc6"
+    },
+    {
+      "path": "docs/upgrade/d1-01/sync-state-migration-protection.md",
+      "bytes": 13515,
+      "sha256": "3a5850d0512673923e463f17ed2ee16969f38ba783026a8247369130bea71050"
+    },
+    {
+      "path": "docs/upgrade/d1-01/time-and-recurrence-contract.md",
+      "bytes": 15223,
+      "sha256": "0dbcc7d3b634572b66accbc13f236fb23cae93284bdf9a0866a49b0b2a0811a6"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unified-data-contract-candidate.md",
+      "bytes": 10190,
+      "sha256": "41c1f028857a09384ad0cf72a128db36b8cf00dba0180ede281cd0c6ad165b2a"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unified-data-contract-draft.md",
+      "bytes": 4273,
+      "sha256": "434afd74e95db78e4af3b3f4e09da1cdc0064eeade6aa5a7272541aed6e7b903"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unresolved-and-blockers.md",
+      "bytes": 8382,
+      "sha256": "96a83c221f54f3440aa4fe13a9cf10f896648acb814af26c92b5ad362ce2aa0f"
+    },
+    {
+      "path": "tests/d1-01/android-runner.mjs",
+      "bytes": 12492,
+      "sha256": "14786683115001e113921b5755d236200e476bf2ae014504bfa8421390a47624"
+    },
+    {
+      "path": "tests/d1-01/android/AndroidManifest.xml",
+      "bytes": 612,
+      "sha256": "99eb6ff9b135872d552d2b26ff113f226b054e1d91ef3455877e69d54af77048"
+    },
+    {
+      "path": "tests/d1-01/android/build.mjs",
+      "bytes": 5393,
+      "sha256": "f4cf2510f03b0842d277c195b3e75b3fd5afd6b6c4a5791722dd4e1fa5ed3ec0"
+    },
+    {
+      "path": "tests/d1-01/android/FixtureInstrumentation.java",
+      "bytes": 21187,
+      "sha256": "0ae112acf210c59cbbbf54b588f716f5c8e88a67f7254dc3764705d43d448abb"
+    },
+    {
+      "path": "tests/d1-01/android/guard.mjs",
+      "bytes": 4819,
+      "sha256": "0d8312533632a75f2fa7dd45d6b0f1c865a805018e982ebd40723fea1e026940"
+    },
+    {
+      "path": "tests/d1-01/android/README.md",
+      "bytes": 4225,
+      "sha256": "66f3d08915518457198521bf5c8e765746d0275cd7e442dd9f65d86ec0b0cbd9"
+    },
+    {
+      "path": "tests/d1-01/build-desktop.mjs",
+      "bytes": 5080,
+      "sha256": "8208280c6456f94bb84c9286de38f72cca70aac06a2e26fdd268aa8429aec960"
+    },
+    {
+      "path": "tests/d1-01/candidate.py",
+      "bytes": 12700,
+      "sha256": "cf7edbd0604c4426d618cee445c24c99bb9d3f8769227a291763ee7e02f5317b"
+    },
+    {
+      "path": "tests/d1-01/ci-run.py",
+      "bytes": 5570,
+      "sha256": "34e41c5e917d3049132dd4fa9c22853c1b2fbadeca176612f38f76b529e9ec59"
+    },
+    {
+      "path": "tests/d1-01/compare.py",
+      "bytes": 9777,
+      "sha256": "61ba9c40789404453f4b51cb5a899d77397e0c6745630a663a449c093b7a92dc"
+    },
+    {
+      "path": "tests/d1-01/emulator.mjs",
+      "bytes": 20881,
+      "sha256": "5b488ca5902b5a84f842dfb35c8638578a97cff9201640c99b9acc7a323b8301"
+    },
+    {
+      "path": "tests/d1-01/factory.py",
+      "bytes": 5918,
+      "sha256": "f8a26d652af928cdbc83eb54aa45531baf85bc44ad6cb534d9a6158f16dff3ee"
+    },
+    {
+      "path": "tests/d1-01/framework_metadata.py",
+      "bytes": 11494,
+      "sha256": "a1e387944f11cef1dd17e9c444850e59f8565a54f880ce8f99bd5ed90cc816d9"
+    },
+    {
+      "path": "tests/d1-01/isolation.py",
+      "bytes": 4155,
+      "sha256": "8a812710fe2444ce806e6635ad1559e110a54c40ba44cac767ff2601f2dd0d3b"
+    },
+    {
+      "path": "tests/d1-01/migration.py",
+      "bytes": 11320,
+      "sha256": "a6890144010ba0269e08354169c7d0c418da10e855cca0e77c5a0b617d4ed678"
+    },
+    {
+      "path": "tests/d1-01/native-generator.c",
+      "bytes": 17673,
+      "sha256": "32ddf98332d942dc452e555a46007661f51356dd8f3261cd829dc7b2a96ac248"
+    },
+    {
+      "path": "tests/d1-01/node-generator.mjs",
+      "bytes": 10088,
+      "sha256": "59ae8ff568817d31f172be4d5503e32d7bc625c74b214d656f563baa5a3d558b"
+    },
+    {
+      "path": "tests/d1-01/select-node.ps1",
+      "bytes": 1123,
+      "sha256": "161a33eaf06418840963b3217ffd40143330d5b27d0ad3be3493ecd706d0511a"
+    },
+    {
+      "path": "tests/d1-01/select-node.sh",
+      "bytes": 808,
+      "sha256": "cc3ea11914d6997bdd8d72b5b246c218df100cb1552113a31e62f8c4a53dbcd1"
+    },
+    {
+      "path": "tests/d1-01/select-python.ps1",
+      "bytes": 1157,
+      "sha256": "3ec1154f34d0b7916c27d7f4b9d3a4cd4e8f61eb2355d7112ff22578e38795da"
+    },
+    {
+      "path": "tests/d1-01/sidecar-probe.mjs",
+      "bytes": 6339,
+      "sha256": "814efed1183f29390b0aff9f42e1f2dd457f4236018c31c984083cc3fe617944"
+    },
+    {
+      "path": "tests/d1-01/sidecar-probe.test.mjs",
+      "bytes": 6582,
+      "sha256": "355937104bc42f15433ac8850d6bfa7e1d8afb0110d88485fd771900c2b7b595"
+    },
+    {
+      "path": "tests/d1-01/storage_cases.py",
+      "bytes": 36777,
+      "sha256": "cffa78da477ae4173ac1f85432d7d4258dfb00ebdeb55e96a21c94b0b4c94008"
+    },
+    {
+      "path": "tests/d1-01/suite.py",
+      "bytes": 12999,
+      "sha256": "2c29bb19286995e562664d45c5f78367d0a568c2bb47fd7ab929e8f264cd344f"
+    }
+  ]
+}

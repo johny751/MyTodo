@@ -51,3 +51,9 @@
 **OWNER DECISION。** 负责人选择最终 contract 编号、时间域/精度、规则缺省与 unresolved 展示、每种旧端最低读写能力、原始证据保留期及生产迁移窗口。后续 D1-02 的新业务模块可引用本候选的 ledger/key/raw/projection/time 原则，其新 kind/字段仍是设计建议，不能自动成为旧协议白名单。数据归属、版本和恢复详见 [归属边界](data-ownership-and-sync-boundaries.md)、[版本契约](migration-versioning-contract.md) 与 [备份恢复](backup-restore-contract.md)。
 
 **PROPOSAL。** 这里的 JSON 整数指 JSON number 的数学整数值；1、1.0、1e0 可以按同一整数值检查候选范围，原字面量仍保存在 raw，不能以投影整数覆盖原值。1.5、布尔和数值字符串不能据此通过整数检查。
+
+## CI5 限定补充：Android Framework 元数据
+
+**FACT（独立合成环境）。** [CI5 45367557986](https://github.com/johny751/MyTodo/actions/runs/45367557986) 的独立 Android Framework SQLite 库含 `android_metadata(locale TEXT)`。Java 在关闭连接前记录原 DDL、列定义及 locale 的 SQL 类型和原字节；封存后由只读比较器与原库核对。该对象与核心三表、反馈四张业务表分开报告，备份与候选副本完整保留。S44–S52 验证精确来源资格、类型/行/结构异常和原库保全，未通过名称猜测、删除表或标准化 locale 来通过测试。
+
+**PROPOSAL / UNVERIFIED。** 将平台/Framework 元数据归入设备本地和来源证据域，不作为新的业务 kind，也不加入旧同步白名单。上述 FACT 限定到本轮独立 API34 夹具；真实旧数据库、其他 Android/厂商版本及生产存储入口是否具有相同对象仍未验证。跨端交接和恢复须保留来源并另行识别目标能力，不能据此将未知系统表普遍放行。

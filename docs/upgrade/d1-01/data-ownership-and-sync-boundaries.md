@@ -58,3 +58,9 @@
 **PROPOSAL O10 / BLOCKER。** LAN、多目标 ACK、业务附件传输仅作为未来独立协议议题。候选模型可以证明单目标状态保全，不能把这一结果解释成 LAN/WebDAV 双通道已安全。未知历史附件式字段完整封存并标 UNKNOWN，不重用反馈资产 ID 作为业务附件身份。
 
 **OWNER DECISION。** 确定可选本地组件、同机/便携包边界、隐私和原图保护、未提交编辑处置、代次恢复策略、跨安装重绑及人工缺损接收流程。所有生产恢复、跨端写回和真实同步资格另行审查。Android issue #1 保持开放，不随 D1-01 收口自动关闭。[issue #1](https://github.com/johny751/MyTodo/issues/1)。
+
+## CI5 限定补充：Android Framework 元数据
+
+**FACT（独立合成环境）。** [CI5 45367557986](https://github.com/johny751/MyTodo/actions/runs/45367557986) 的独立 Android Framework SQLite 库含 `android_metadata(locale TEXT)`。Java 在关闭连接前记录原 DDL、列定义及 locale 的 SQL 类型和原字节；封存后由只读比较器与原库核对。该对象与核心三表、反馈四张业务表分开报告，备份与候选副本完整保留。S44–S52 验证精确来源资格、类型/行/结构异常和原库保全，未通过名称猜测、删除表或标准化 locale 来通过测试。
+
+**PROPOSAL / UNVERIFIED。** 将平台/Framework 元数据归入设备本地和来源证据域，不作为新的业务 kind，也不加入旧同步白名单。上述 FACT 限定到本轮独立 API34 夹具；真实旧数据库、其他 Android/厂商版本及生产存储入口是否具有相同对象仍未验证。跨端交接和恢复须保留来源并另行识别目标能力，不能据此将未知系统表普遍放行。

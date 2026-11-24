@@ -74,6 +74,6 @@
 | Windows原生隔离后端（若实际采用） | 该编译产物/API在云端指定合成case的实际行为 | GUI全部写入、用户多进程、DPAPI、真实设备文件切换和物理断电等 |
 | Android隔离后端（若实际采用） | 实际构建/安装/API、指定测试库和新PID重开的用例范围，明确JVM替身或设备/模拟器 | 替身不证明AndroidAPI；Android首崩/后台/SAF/Keystore/签名覆盖升级和真实设备均需自身证据 |
 
-**UNVERIFIED。** 主 Agent 尚未写入实际回执的后端不标pass；未运行工具能力标 `NOT EXECUTED`，未采集证据标 `INCOMPLETE`。本页不声称JNI、Android instrumentation、Windows生产构建或三端真实存储已验证。Android issue #1仍开放，A中的UNKNOWN/NEEDS INVESTIGATION仍保持原状态。
+**UNVERIFIED。** 主 Agent 尚未写入实际回执的后端不标pass；未运行工具能力标 `NOT EXECUTED`，未采集证据标 `INCOMPLETE`。本页不声称生产JNI/Instrumentation入口、Windows生产构建或三端生产存储封装已验证。本轮独立Android Framework Instrumentation与参考工具已在CI5运行，限定结果见 final-review.md，不能推定生产能力。Android issue #1仍开放，A中的UNKNOWN/NEEDS INVESTIGATION仍保持原状态。
 
 **OWNER DECISION。** 生产D1-02显式列名改动、迁移接入、registry载体/user_version编号、真实旧版本/设备范围、反馈升级、原Actor恢复和正式发布另批审核。工具证据用于评审候选规则与准备程度；不能扩大到真实数据、真实网络、LAN/WebDAV双通道或自动清理生产历史。[备份与恢复候选](backup-restore-contract.md) · [版本与迁移候选](migration-versioning-contract.md)

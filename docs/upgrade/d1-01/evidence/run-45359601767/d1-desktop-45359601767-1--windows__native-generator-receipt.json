@@ -1,0 +1,24 @@
+{
+	"status":	"created",
+	"synthetic":	true,
+	"guard":	"MYTODO_D1_SYNTHETIC_ONLY",
+	"fixtureId":	"synthetic-fixed-v1",
+	"runId":	"45359601767",
+	"candidate":	"d1-01-candidate.1",
+	"generator":	"independent-windows-c-sqlite",
+	"sqliteVersion":	"3.38.2",
+	"rows":	49,
+	"outboxCount":	2,
+	"sourceFile":	"windows-source.sqlite",
+	"rawTextPreserved":	true,
+	"projectionDiagnostics":	[{
+			"key":	"[\"tasks\",\"reminder-case-9\"]",
+			"field":	"reminder_at",
+			"reason":	"unsafe-number: original token may exceed exact cJSON double domain",
+			"storageMode":	"syntheticQuarantineStorage",
+			"sourceCell":	"SQL NULL",
+			"claim":	"safe independent generator limit; current C conversion not observed",
+			"rawTokenPreservedInData":	true
+		}],
+	"limitations":	"Synthetic source only; unsafe numeric SQL projections quarantined without claiming current C conversion; original data/record/meta/event/conflicts TEXT preserved; no production wrapper or compatibility claim."
+}

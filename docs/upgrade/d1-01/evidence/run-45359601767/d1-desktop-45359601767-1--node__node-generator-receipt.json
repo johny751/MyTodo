@@ -1,0 +1,148 @@
+{
+  "status": "created",
+  "synthetic": true,
+  "guard": "MYTODO_D1_SYNTHETIC_ONLY",
+  "fixtureId": "synthetic-fixed-v1",
+  "runId": "45359601767",
+  "candidate": "d1-01-candidate.1",
+  "generator": "independent-node-sqlite",
+  "sqliteVersion": "3.54.1",
+  "rows": 49,
+  "outboxCount": 2,
+  "sourceFile": "node-source.sqlite",
+  "rawTextPreserved": true,
+  "syntheticQuarantineStorage": {
+    "rows": 5,
+    "projectionFields": 5,
+    "candidateInput": "original TEXT only"
+  },
+  "legacyBindingObservations": [
+    {
+      "key": "[\"tasks\",\"parent-case-6\"]",
+      "field": "parent_id",
+      "reason": "legacy-binding-rejected",
+      "inputType": "array",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 8.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"parent-case-7\"]",
+      "field": "parent_id",
+      "reason": "legacy-binding-rejected",
+      "inputType": "object",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 8.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"quadrant-case-9\"]",
+      "field": "quadrant",
+      "reason": "legacy-binding-rejected",
+      "inputType": "boolean",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 10.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"quadrant-case-10\"]",
+      "field": "quadrant",
+      "reason": "legacy-binding-rejected",
+      "inputType": "array",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 10.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"quadrant-case-11\"]",
+      "field": "quadrant",
+      "reason": "legacy-binding-rejected",
+      "inputType": "object",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 10.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    }
+  ],
+  "projectionDiagnostics": [
+    {
+      "key": "[\"tasks\",\"parent-case-6\"]",
+      "field": "parent_id",
+      "reason": "legacy-binding-rejected",
+      "inputType": "array",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 8.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"parent-case-7\"]",
+      "field": "parent_id",
+      "reason": "legacy-binding-rejected",
+      "inputType": "object",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 8.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"quadrant-case-9\"]",
+      "field": "quadrant",
+      "reason": "legacy-binding-rejected",
+      "inputType": "boolean",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 10.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"quadrant-case-10\"]",
+      "field": "quadrant",
+      "reason": "legacy-binding-rejected",
+      "inputType": "array",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 10.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    },
+    {
+      "key": "[\"tasks\",\"quadrant-case-11\"]",
+      "field": "quadrant",
+      "reason": "legacy-binding-rejected",
+      "inputType": "object",
+      "code": "ERR_INVALID_ARG_TYPE",
+      "error": "Provided value cannot be bound to SQLite parameter 10.",
+      "legacyRowInserted": false,
+      "storageMode": "syntheticQuarantineStorage",
+      "sourceCell": "SQL NULL",
+      "claim": "separate synthetic raw storage; no legacy repair or transaction-success claim"
+    }
+  ],
+  "limitations": [
+    "Synthetic generator only; no production storage wrapper.",
+    "Legacy binding rejection and separate syntheticQuarantineStorage are distinct observations; no legacy insertion repair or transaction-success claim.",
+    "No production migration, synchronization, or device compatibility claim."
+  ]
+}

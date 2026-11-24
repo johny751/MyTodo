@@ -1,0 +1,1924 @@
+{
+  "schema": "mytodo-d1-android-runner",
+  "version": 1,
+  "guard": "MYTODO_D1_SYNTHETIC_ONLY",
+  "candidate": "d1-01-candidate.1",
+  "purpose": "independent-synthetic",
+  "runId": "45353907376",
+  "runAttempt": "1",
+  "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+  "fixtureSha256": "f9d601af9c44697a2574fd36634a35d4b72a84a362257067fdf1a6797a97abcb",
+  "status": "failed",
+  "startedAtUtc": "2026-11-24T08:11:17.958Z",
+  "commands": [
+    {
+      "label": "git-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:17.963Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 41,
+      "stderrBytes": 0,
+      "stdoutSha256": "bf921e6617338ad1c2000f96ab27e93caae57176c97519e60976eb21b01a2dd2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "001-git-head.stdout",
+      "stderrFile": "001-git-head.stderr",
+      "completedAtUtc": "2026-11-24T08:11:17.972Z"
+    },
+    {
+      "label": "java-version",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "-version"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:17.979Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 183,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "aa8b8c37cfb8295d241a736330151318fe156c8937b464a27b2c21d638db1862",
+      "stdoutFile": "002-java-version.stdout",
+      "stderrFile": "002-java-version.stderr",
+      "completedAtUtc": "2026-11-24T08:11:18.151Z"
+    },
+    {
+      "label": "javac-version",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+        "-version"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:18.151Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 14,
+      "stderrBytes": 0,
+      "stdoutSha256": "53955dabf9a6a9ac74307e877578ef6a74f0011d24edec0f2fd8495d48609836",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "003-javac-version.stdout",
+      "stderrFile": "003-javac-version.stderr",
+      "completedAtUtc": "2026-11-24T08:11:18.593Z"
+    },
+    {
+      "label": "aapt2-version",
+      "argv": [
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/aapt2",
+        "version"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:18.593Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 50,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "b456c2c4fa3006534da3cb71d3d148b64d3539141f65fcb01e24939cf32a041f",
+      "stdoutFile": "004-aapt2-version.stdout",
+      "stderrFile": "004-aapt2-version.stderr",
+      "completedAtUtc": "2026-11-24T08:11:18.885Z"
+    },
+    {
+      "label": "d8-version",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "-cp",
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/d8.jar",
+        "com.android.tools.r8.D8",
+        "--version"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:18.885Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 111,
+      "stderrBytes": 0,
+      "stdoutSha256": "6e4ed8ecaff21b1c340174dea0de7abdf10fd3b07cde83b7e603a6887e87bc37",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "005-d8-version.stdout",
+      "stderrFile": "005-d8-version.stderr",
+      "completedAtUtc": "2026-11-24T08:11:19.697Z"
+    },
+    {
+      "label": "aapt2-link",
+      "argv": [
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/aapt2",
+        "link",
+        "-o",
+        "/home/runner/work/_temp/d1-android/android/android-build/unsigned.apk",
+        "--manifest",
+        "/home/runner/work/MyTodo/MyTodo/tests/d1-01/android/AndroidManifest.xml",
+        "-I",
+        "/usr/local/lib/android/sdk/platforms/android-34/android.jar",
+        "--java",
+        "/home/runner/work/_temp/d1-android/android/android-build/generated",
+        "-A",
+        "/home/runner/work/_temp/d1-android/android/android-build/assets"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:19.698Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "006-aapt2-link.stdout",
+      "stderrFile": "006-aapt2-link.stderr",
+      "completedAtUtc": "2026-11-24T08:11:22.324Z"
+    },
+    {
+      "label": "javac",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+        "-encoding",
+        "UTF-8",
+        "--release",
+        "17",
+        "-classpath",
+        "/usr/local/lib/android/sdk/platforms/android-34/android.jar",
+        "-d",
+        "/home/runner/work/_temp/d1-android/android/android-build/classes",
+        "/home/runner/work/MyTodo/MyTodo/tests/d1-01/android/FixtureInstrumentation.java"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:22.325Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "007-javac.stdout",
+      "stderrFile": "007-javac.stderr",
+      "completedAtUtc": "2026-11-24T08:11:24.178Z"
+    },
+    {
+      "label": "jar",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/jar",
+        "cf",
+        "/home/runner/work/_temp/d1-android/android/android-build/classes.jar",
+        "-C",
+        "/home/runner/work/_temp/d1-android/android/android-build/classes",
+        "."
+      ],
+      "startedAtUtc": "2026-11-24T08:11:24.178Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "008-jar.stdout",
+      "stderrFile": "008-jar.stderr",
+      "completedAtUtc": "2026-11-24T08:11:24.358Z"
+    },
+    {
+      "label": "d8",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "-cp",
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/d8.jar",
+        "com.android.tools.r8.D8",
+        "--min-api",
+        "26",
+        "--lib",
+        "/usr/local/lib/android/sdk/platforms/android-34/android.jar",
+        "--output",
+        "/home/runner/work/_temp/d1-android/android/android-build/dex",
+        "/home/runner/work/_temp/d1-android/android/android-build/classes.jar"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:24.358Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "009-d8.stdout",
+      "stderrFile": "009-d8.stderr",
+      "completedAtUtc": "2026-11-24T08:11:27.171Z"
+    },
+    {
+      "label": "apk-dex",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/jar",
+        "uf",
+        "/home/runner/work/_temp/d1-android/android/android-build/unsigned.apk",
+        "-C",
+        "/home/runner/work/_temp/d1-android/android/android-build/dex",
+        "classes.dex"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:27.172Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "010-apk-dex.stdout",
+      "stderrFile": "010-apk-dex.stderr",
+      "completedAtUtc": "2026-11-24T08:11:27.321Z"
+    },
+    {
+      "label": "zipalign",
+      "argv": [
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/zipalign",
+        "-f",
+        "-p",
+        "4",
+        "/home/runner/work/_temp/d1-android/android/android-build/unsigned.apk",
+        "/home/runner/work/_temp/d1-android/android/android-build/aligned.apk"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:27.321Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "011-zipalign.stdout",
+      "stderrFile": "011-zipalign.stderr",
+      "completedAtUtc": "2026-11-24T08:11:27.395Z"
+    },
+    {
+      "label": "synthetic-keytool",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/keytool",
+        "-genkeypair",
+        "-keystore",
+        "/home/runner/work/_temp/d1-android/android/android-build/synthetic-d1-signing.p12",
+        "-storetype",
+        "PKCS12",
+        "-storepass",
+        "d1-test-only",
+        "-keypass",
+        "d1-test-only",
+        "-alias",
+        "d1-test",
+        "-keyalg",
+        "RSA",
+        "-keysize",
+        "2048",
+        "-validity",
+        "1",
+        "-dname",
+        "CN=MyTodo D1 independent synthetic CI",
+        "-noprompt"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:27.396Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 148,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "c0950171d1a0c89dd8a2ead9f2023d9d9c504fe64d969dabd0402c5e1d5d0b79",
+      "stdoutFile": "012-synthetic-keytool.stdout",
+      "stderrFile": "012-synthetic-keytool.stderr",
+      "completedAtUtc": "2026-11-24T08:11:28.556Z"
+    },
+    {
+      "label": "apksigner",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "-jar",
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/apksigner.jar",
+        "sign",
+        "--ks",
+        "/home/runner/work/_temp/d1-android/android/android-build/synthetic-d1-signing.p12",
+        "--ks-key-alias",
+        "d1-test",
+        "--ks-pass",
+        "pass:d1-test-only",
+        "--key-pass",
+        "pass:d1-test-only",
+        "--out",
+        "/home/runner/work/_temp/d1-android/android/android-build/mytodo-d1-fixture.apk",
+        "/home/runner/work/_temp/d1-android/android/android-build/aligned.apk"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:28.556Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "013-apksigner.stdout",
+      "stderrFile": "013-apksigner.stderr",
+      "completedAtUtc": "2026-11-24T08:11:29.454Z"
+    },
+    {
+      "label": "apksigner-verify",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "-jar",
+        "/usr/local/lib/android/sdk/build-tools/35.0.0/lib/apksigner.jar",
+        "verify",
+        "--verbose",
+        "--print-certs",
+        "/home/runner/work/_temp/d1-android/android/android-build/mytodo-d1-fixture.apk"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:29.454Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 958,
+      "stderrBytes": 0,
+      "stdoutSha256": "f71174e87b9f21711c3effdda683bc4826ce6391cb2aa6196153310a1e6ab7a6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "014-apksigner-verify.stdout",
+      "stderrFile": "014-apksigner-verify.stderr",
+      "completedAtUtc": "2026-11-24T08:11:29.713Z"
+    },
+    {
+      "label": "apk-list",
+      "argv": [
+        "/usr/lib/jvm/temurin-17-jdk-amd64/bin/jar",
+        "tf",
+        "/home/runner/work/_temp/d1-android/android/android-build/mytodo-d1-fixture.apk"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:29.713Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 156,
+      "stderrBytes": 0,
+      "stdoutSha256": "959d6421785e747284edbb82b9d701298983d4a66dd90250c1e7269438932c82",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "015-apk-list.stdout",
+      "stderrFile": "015-apk-list.stderr",
+      "completedAtUtc": "2026-11-24T08:11:29.826Z"
+    },
+    {
+      "label": "emulator-start",
+      "argv": [
+        "/usr/local/bin/node",
+        "/home/runner/work/MyTodo/MyTodo/tests/d1-01/emulator.mjs",
+        "start"
+      ],
+      "startedAtUtc": "2026-11-24T08:11:29.827Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 123,
+      "stderrBytes": 0,
+      "stdoutSha256": "f822b2c83fcea6e5cb45b14cb5cf11ae4b059effdcd19f5589a3430498ba29f6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "016-emulator-start.stdout",
+      "stderrFile": "016-emulator-start.stderr",
+      "completedAtUtc": "2026-11-24T08:13:40.469Z"
+    },
+    {
+      "label": "install-independent-fixture",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "install",
+        "/home/runner/work/_temp/d1-android/android/android-build/mytodo-d1-fixture.apk"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:40.471Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 86,
+      "stderrBytes": 50,
+      "stdoutSha256": "1bc2508a1d88feb79959055a78b8e68102fcd22a9d1b7c551680fd8851d341dd",
+      "stderrSha256": "0b43830fe6c70c0556e5d0510aae3e171dc955d86b450f13bedec332ce1af30c",
+      "stdoutFile": "017-install-independent-fixture.stdout",
+      "stderrFile": "017-install-independent-fixture.stderr",
+      "completedAtUtc": "2026-11-24T08:13:43.896Z"
+    },
+    {
+      "label": "instrumentation",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "am",
+        "instrument",
+        "-w",
+        "-r",
+        "-e",
+        "runId",
+        "45353907376",
+        "-e",
+        "guard",
+        "MYTODO_D1_SYNTHETIC_ONLY",
+        "local.mytodo.d1fixture/local.mytodo.d1fixture.FixtureInstrumentation"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:43.898Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 57661,
+      "stderrBytes": 0,
+      "stdoutSha256": "90e438bc60ab4e357643eece3f942f91f57eff29a55aadce88d35802c38b6280",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "018-instrumentation.stdout",
+      "stderrFile": "018-instrumentation.stderr",
+      "completedAtUtc": "2026-11-24T08:13:52.506Z"
+    },
+    {
+      "label": "capture-android-generator-receipt.json",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-generator-receipt.json"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:52.507Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 88844,
+      "stderrBytes": 0,
+      "stdoutSha256": "cc9c1f096d14aba13042df1f71d0ebc5d0937d9a4b3a460eafd8cc87cd2bd3d2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "019-capture-android-generator-receipt.json.stdout",
+      "stderrFile": "019-capture-android-generator-receipt.json.stderr",
+      "completedAtUtc": "2026-11-24T08:13:52.643Z"
+    },
+    {
+      "label": "confirm-android-generator-receipt.json",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-generator-receipt.json"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:52.644Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 88844,
+      "stderrBytes": 0,
+      "stdoutSha256": "cc9c1f096d14aba13042df1f71d0ebc5d0937d9a4b3a460eafd8cc87cd2bd3d2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "020-confirm-android-generator-receipt.json.stdout",
+      "stderrFile": "020-confirm-android-generator-receipt.json.stderr",
+      "completedAtUtc": "2026-11-24T08:13:52.756Z"
+    },
+    {
+      "label": "capture-android-source.sqlite",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-source.sqlite"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:52.758Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 65536,
+      "stderrBytes": 0,
+      "stdoutSha256": "87787c2418de5ab97584ab75a18f7ed508efae362236fe3fbdc8734d43dbd060",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "021-capture-android-source.sqlite.stdout",
+      "stderrFile": "021-capture-android-source.sqlite.stderr",
+      "completedAtUtc": "2026-11-24T08:13:52.872Z"
+    },
+    {
+      "label": "confirm-android-source.sqlite",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-source.sqlite"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:52.872Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 65536,
+      "stderrBytes": 0,
+      "stdoutSha256": "87787c2418de5ab97584ab75a18f7ed508efae362236fe3fbdc8734d43dbd060",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "022-confirm-android-source.sqlite.stdout",
+      "stderrFile": "022-confirm-android-source.sqlite.stderr",
+      "completedAtUtc": "2026-11-24T08:13:52.941Z"
+    },
+    {
+      "label": "sidecar-android-source.sqlite-wal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "stat",
+        "-c",
+        "%s",
+        "files/d1-fixtures/android-source.sqlite-wal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:52.942Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 79,
+      "stderrBytes": 0,
+      "stdoutSha256": "30a6d3ac288250f08a87abeb92065b9e0730c89901c623faf327f8f5362f80b8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "023-sidecar-android-source.sqlite-wal.stdout",
+      "stderrFile": "023-sidecar-android-source.sqlite-wal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:53.060Z"
+    },
+    {
+      "label": "failure-private-file-inventory",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "ls",
+        "-la",
+        "files/d1-fixtures"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:53.064Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 574,
+      "stderrBytes": 0,
+      "stdoutSha256": "9528e921aad7e158925f109e31f454abf154fdf1c982da52b4397f93cd129be4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "024-failure-private-file-inventory.stdout",
+      "stderrFile": "024-failure-private-file-inventory.stderr",
+      "completedAtUtc": "2026-11-24T08:13:53.290Z"
+    },
+    {
+      "label": "failure-capture-android-generator-receipt.json",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-generator-receipt.json"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:53.290Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 88844,
+      "stderrBytes": 0,
+      "stdoutSha256": "cc9c1f096d14aba13042df1f71d0ebc5d0937d9a4b3a460eafd8cc87cd2bd3d2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "025-failure-capture-android-generator-receipt.json.stdout",
+      "stderrFile": "025-failure-capture-android-generator-receipt.json.stderr",
+      "completedAtUtc": "2026-11-24T08:13:53.469Z"
+    },
+    {
+      "label": "failure-capture-feedback-original.png",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-original.png"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:53.470Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 68,
+      "stderrBytes": 0,
+      "stdoutSha256": "2816e082b647e4fbf2c83c79161a7674f7b41ab1cbde46539ea976be568ba5f3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "026-failure-capture-feedback-original.png.stdout",
+      "stderrFile": "026-failure-capture-feedback-original.png.stderr",
+      "completedAtUtc": "2026-11-24T08:13:53.602Z"
+    },
+    {
+      "label": "failure-capture-d1-synthetic.json",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/d1-synthetic.json"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:53.603Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 123,
+      "stderrBytes": 0,
+      "stdoutSha256": "522a8755d2481270392f38589c7fbd5938fe526ba209f273c3832945631a79e0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "027-failure-capture-d1-synthetic.json.stdout",
+      "stderrFile": "027-failure-capture-d1-synthetic.json.stderr",
+      "completedAtUtc": "2026-11-24T08:13:53.890Z"
+    },
+    {
+      "label": "failure-capture-android-source.sqlite",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-source.sqlite"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:53.891Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 65536,
+      "stderrBytes": 0,
+      "stdoutSha256": "87787c2418de5ab97584ab75a18f7ed508efae362236fe3fbdc8734d43dbd060",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "028-failure-capture-android-source.sqlite.stdout",
+      "stderrFile": "028-failure-capture-android-source.sqlite.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.018Z"
+    },
+    {
+      "label": "failure-capture-android-source.sqlite-wal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-source.sqlite-wal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.019Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 76,
+      "stderrBytes": 0,
+      "stdoutSha256": "497d4ace56fcb1596ce3a6bd86992eec719c5bead94537b8e7aceb2ffe35f668",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "029-failure-capture-android-source.sqlite-wal.stdout",
+      "stderrFile": "029-failure-capture-android-source.sqlite-wal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.135Z"
+    },
+    {
+      "label": "failure-capture-android-source.sqlite-shm",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-source.sqlite-shm"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.135Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 76,
+      "stderrBytes": 0,
+      "stdoutSha256": "81e1f8f938c3b6d964c20aba0018281bf0d633389a4e753ffa8ec35fa194ba6f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "030-failure-capture-android-source.sqlite-shm.stdout",
+      "stderrFile": "030-failure-capture-android-source.sqlite-shm.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.198Z"
+    },
+    {
+      "label": "failure-capture-android-source.sqlite-journal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/android-source.sqlite-journal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.199Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 80,
+      "stderrBytes": 0,
+      "stdoutSha256": "f73bf5d1812fb2e1626a8500abe0d3d69c4ec7c340bd2f59525428bc898be003",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "031-failure-capture-android-source.sqlite-journal.stdout",
+      "stderrFile": "031-failure-capture-android-source.sqlite-journal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.274Z"
+    },
+    {
+      "label": "failure-capture-feedback-source.sqlite",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-source.sqlite"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.274Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 69632,
+      "stderrBytes": 0,
+      "stdoutSha256": "79faae4b8a611e5a1cfecd93b6129cfbe3702d989081b668d9646bed5246e404",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "032-failure-capture-feedback-source.sqlite.stdout",
+      "stderrFile": "032-failure-capture-feedback-source.sqlite.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.363Z"
+    },
+    {
+      "label": "failure-capture-feedback-source.sqlite-wal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-source.sqlite-wal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.363Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 77,
+      "stderrBytes": 0,
+      "stdoutSha256": "ba31b7ecd79552fecb6f588fb464f104345599cb7d533ab17d68d2ba8c0be6b6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "033-failure-capture-feedback-source.sqlite-wal.stdout",
+      "stderrFile": "033-failure-capture-feedback-source.sqlite-wal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.428Z"
+    },
+    {
+      "label": "failure-capture-feedback-source.sqlite-shm",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-source.sqlite-shm"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.429Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 77,
+      "stderrBytes": 0,
+      "stdoutSha256": "e5a511f96b7fefebcf7ae0b223406c0c831a0e888988c064cf1b33425fd7f0c5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "034-failure-capture-feedback-source.sqlite-shm.stdout",
+      "stderrFile": "034-failure-capture-feedback-source.sqlite-shm.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.484Z"
+    },
+    {
+      "label": "failure-capture-feedback-source.sqlite-journal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-source.sqlite-journal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.485Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 81,
+      "stderrBytes": 0,
+      "stdoutSha256": "4141bc734bee87470d79602f5b9e81c3fc0be123902019c5c8e02ea314a2aecc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "035-failure-capture-feedback-source.sqlite-journal.stdout",
+      "stderrFile": "035-failure-capture-feedback-source.sqlite-journal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.541Z"
+    },
+    {
+      "label": "failure-capture-feedback-validation.sqlite",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-validation.sqlite"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.541Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 77824,
+      "stderrBytes": 0,
+      "stdoutSha256": "4ec9a66c740cf20d252d1984c622d81fbbb767f276805834c923004057419410",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "036-failure-capture-feedback-validation.sqlite.stdout",
+      "stderrFile": "036-failure-capture-feedback-validation.sqlite.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.851Z"
+    },
+    {
+      "label": "failure-capture-feedback-validation.sqlite-wal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-validation.sqlite-wal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.852Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 81,
+      "stderrBytes": 0,
+      "stdoutSha256": "70b86c3cee33616af36fb52f21dcf90a3a694f7b5e055f8bd99898dc97182810",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "037-failure-capture-feedback-validation.sqlite-wal.stdout",
+      "stderrFile": "037-failure-capture-feedback-validation.sqlite-wal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.906Z"
+    },
+    {
+      "label": "failure-capture-feedback-validation.sqlite-shm",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-validation.sqlite-shm"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.906Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 81,
+      "stderrBytes": 0,
+      "stdoutSha256": "0217145db5cbee78c670341201c15e6d8ff850c122673b9d3f4a4f29d9872f14",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "038-failure-capture-feedback-validation.sqlite-shm.stdout",
+      "stderrFile": "038-failure-capture-feedback-validation.sqlite-shm.stderr",
+      "completedAtUtc": "2026-11-24T08:13:54.975Z"
+    },
+    {
+      "label": "failure-capture-feedback-validation.sqlite-journal",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "exec-out",
+        "run-as",
+        "local.mytodo.d1fixture",
+        "cat",
+        "files/d1-fixtures/feedback-validation.sqlite-journal"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:54.977Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 85,
+      "stderrBytes": 0,
+      "stdoutSha256": "e6091277b7b80dfe26f791345b6efff9766ffd22f7098431d01a006a5c764a73",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "039-failure-capture-feedback-validation.sqlite-journal.stdout",
+      "stderrFile": "039-failure-capture-feedback-validation.sqlite-journal.stderr",
+      "completedAtUtc": "2026-11-24T08:13:55.140Z"
+    },
+    {
+      "label": "retained-runtime-errors",
+      "argv": [
+        "/usr/local/lib/android/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "logcat",
+        "-d",
+        "-t",
+        "500",
+        "AndroidRuntime:E",
+        "*:S"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:55.140Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 0,
+      "stderrBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "040-retained-runtime-errors.stdout",
+      "stderrFile": "040-retained-runtime-errors.stderr",
+      "completedAtUtc": "2026-11-24T08:13:55.304Z"
+    },
+    {
+      "label": "emulator-finish",
+      "argv": [
+        "/usr/local/bin/node",
+        "/home/runner/work/MyTodo/MyTodo/tests/d1-01/emulator.mjs",
+        "finish"
+      ],
+      "startedAtUtc": "2026-11-24T08:13:55.304Z",
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 115,
+      "stderrBytes": 0,
+      "stdoutSha256": "80d3ad6574990b980d29c0c982fa2d2dffa0405877384f71aeb8444f6a23ff30",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutFile": "041-emulator-finish.stdout",
+      "stderrFile": "041-emulator-finish.stderr",
+      "completedAtUtc": "2026-11-24T08:13:57.606Z"
+    }
+  ],
+  "firstError": "Error: BLOCKER: live nonempty sidecar at capture\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d1-01/android-runner.mjs:71:103",
+  "outputs": {
+    "android-generator-receipt.json": {
+      "bytes": 88844,
+      "sha256": "cc9c1f096d14aba13042df1f71d0ebc5d0937d9a4b3a460eafd8cc87cd2bd3d2"
+    },
+    "android-source.sqlite": {
+      "bytes": 65536,
+      "sha256": "87787c2418de5ab97584ab75a18f7ed508efae362236fe3fbdc8734d43dbd060"
+    }
+  },
+  "actualProductionEntryLoaded": false,
+  "build": {
+    "schema": "mytodo-d1-independent-apk",
+    "version": 1,
+    "purpose": "independent-synthetic",
+    "guard": "MYTODO_D1_SYNTHETIC_ONLY",
+    "candidate": "d1-01-candidate.1",
+    "runId": "45353907376",
+    "runAttempt": "1",
+    "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+    "fixtureSha256": "f9d601af9c44697a2574fd36634a35d4b72a84a362257067fdf1a6797a97abcb",
+    "applicationId": "local.mytodo.d1fixture",
+    "versionName": "0.0.1-d1-fixture",
+    "versionCode": 1,
+    "builtAtUtc": "2026-11-24T08:11:17.979Z",
+    "buildTimezone": "UTC",
+    "author": "by codex",
+    "gitShort": "a3a6b",
+    "releaseApk": false,
+    "formalSigningUsed": false,
+    "productionSourcesLoaded": false,
+    "feedbackAarLoaded": false,
+    "versionHistory": [
+      {
+        "versionName": "0.0.1-d1-fixture",
+        "versionCode": 1,
+        "changes": "Independent synthetic framework SQLite/JSONObject generator; no UI or production entry"
+      }
+    ],
+    "sources": {
+      "FixtureInstrumentation.java": "e9276aa8265be12c9f558cc0aa31b59ef9b11f3e78dc0ebb219ed3d6fcf47576",
+      "AndroidManifest.xml": "99eb6ff9b135872d552d2b26ff113f226b054e1d91ef3455877e69d54af77048"
+    },
+    "toolchain": {
+      "java-version": {
+        "stdout": "",
+        "stderr": "openjdk version \"17.0.21\" 2026-10-20\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)\n"
+      },
+      "javac-version": {
+        "stdout": "javac 17.0.21\n",
+        "stderr": ""
+      },
+      "aapt2-version": {
+        "stdout": "",
+        "stderr": "Android Asset Packaging Tool (aapt) 2.19-11948202\n"
+      },
+      "d8-version": {
+        "stdout": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go/r8bot (luci-r8-custom-ci-archive-0-77gl))\n",
+        "stderr": ""
+      }
+    },
+    "status": "passed",
+    "apk": "/home/runner/work/_temp/d1-android/android/android-build/mytodo-d1-fixture.apk",
+    "apkSha256": "cb2278547992e49f9f01d86f894cf3fbefb0632372daafd8333aa1b1a8e67653",
+    "apkBytes": 25120,
+    "certificateVerification": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: CN=MyTodo D1 independent synthetic CI\nSigner #1 certificate SHA-256 digest: b933adca3fde1985ad0733ba392a393250ca4f2fbbe9739d85d5efb7f5dff344\nSigner #1 certificate SHA-1 digest: 7b208de8f007b70dc302bc4ae562ee6c3b93edef\nSigner #1 certificate MD5 digest: 335c47d21ad9b7e600f66ff08a399b15\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: a9a0c0e22b79137e5a34e9bf43bc97b12c9b1deb3da21db8880a0d2cad94e71b\nSigner #1 public key SHA-1 digest: 513be4ddaf4b172e27d583a1703588718138b09d\nSigner #1 public key MD5 digest: 4d60e948b446e3bae699d19491c385d8\n",
+    "completedAtUtc": "2026-11-24T08:11:29.826Z"
+  },
+  "emulator": {
+    "schema": "mytodo-d1-android-emulator",
+    "version": 1,
+    "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+    "runId": "45353907376",
+    "runAttempt": "1",
+    "runUrl": "https://github.com/johny751/MyTodo/actions/runs/45353907376",
+    "runner": {
+      "os": "Linux",
+      "arch": "X64",
+      "image": "ubuntu24",
+      "imageVersion": "20261116.376.1",
+      "environment": "github-hosted"
+    },
+    "startedAt": "2026-11-24T08:11:29.858Z",
+    "status": "ready",
+    "exitCode": 0,
+    "serial": "emulator-5554",
+    "requested": {
+      "api": "34",
+      "tag": "google_apis",
+      "abi": "x86_64",
+      "imagePackage": "system-images;android-34;google_apis;x86_64",
+      "serial": "emulator-5554",
+      "avd": "mytodo-d1-api34-x86_64",
+      "expectedRevision": null
+    },
+    "sdk": "/usr/local/lib/android/sdk",
+    "installPolicy": {
+      "enabled": true,
+      "attempted": true,
+      "packages": [
+        "emulator",
+        "system-images;android-34;google_apis;x86_64"
+      ],
+      "source": "official Google Android SDK repository via the preinstalled sdkmanager",
+      "licenseOperation": "existing SDK licenses only"
+    },
+    "gradle": {
+      "usedForBuild": false,
+      "exitCode": 0,
+      "version": "9.9.1",
+      "log": "004-gradle-version.log"
+    },
+    "commands": [
+      {
+        "label": "git-head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "startedAt": "2026-11-24T08:11:29.861Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:29.869Z",
+        "log": "001-git-head.log",
+        "logSha256": "8ccefedfc24d5adc1cd192621884b7e2e44667b354affbdee490eb468cab6b22"
+      },
+      {
+        "label": "java-version",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+          "-version"
+        ],
+        "startedAt": "2026-11-24T08:11:29.870Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:29.917Z",
+        "log": "002-java-version.log",
+        "logSha256": "23fe535917d8e27a06f7458c13c1017829fffc1f19eda9e568632851ef8a15ee"
+      },
+      {
+        "label": "javac-version",
+        "argv": [
+          "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+          "-version"
+        ],
+        "startedAt": "2026-11-24T08:11:29.917Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:30.161Z",
+        "log": "003-javac-version.log",
+        "logSha256": "eab424ec43e8a9c7c2ba277938fb749cd711942e49fc33501d844e14decfd00f"
+      },
+      {
+        "label": "gradle-version",
+        "argv": [
+          "gradle",
+          "--offline",
+          "--version"
+        ],
+        "startedAt": "2026-11-24T08:11:30.161Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:34.809Z",
+        "log": "004-gradle-version.log",
+        "logSha256": "a5542f9b98af924a13944026f44bd9549ab3e3bc9d22b4b4f6e6cd1e1f6a9905"
+      },
+      {
+        "label": "adb-version",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "version"
+        ],
+        "startedAt": "2026-11-24T08:11:34.809Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:34.995Z",
+        "log": "005-adb-version.log",
+        "logSha256": "0b854d7088fc4cc7db110e0ce31341d75b803c32c0dcc238dbbe29b04cb005ea"
+      },
+      {
+        "label": "runner-uid",
+        "argv": [
+          "id",
+          "-u"
+        ],
+        "startedAt": "2026-11-24T08:11:34.995Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:34.999Z",
+        "log": "006-runner-uid.log",
+        "logSha256": "6e13cee497973cf38f2489bc249585d7e2d9950f7b6437413de03760bd34b90f"
+      },
+      {
+        "label": "kvm-runner-access",
+        "argv": [
+          "sudo",
+          "-n",
+          "setfacl",
+          "-m",
+          "u:1001:rw",
+          "/dev/kvm"
+        ],
+        "startedAt": "2026-11-24T08:11:34.999Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:35.013Z",
+        "log": "007-kvm-runner-access.log",
+        "logSha256": "d8760763be63067f00789fcf42648cb7e89259b37690e733415676ec0b8b6596"
+      },
+      {
+        "label": "sdkmanager-version",
+        "argv": [
+          "/usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager",
+          "--version"
+        ],
+        "startedAt": "2026-11-24T08:11:35.014Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:11:37.851Z",
+        "log": "008-sdkmanager-version.log",
+        "logSha256": "39d0744f310c05092cf9a1d4667cb0176493e895e8e2afc3a8fb0309c3952243"
+      },
+      {
+        "label": "install-official-android-packages",
+        "argv": [
+          "/usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager",
+          "--sdk_root=/usr/local/lib/android/sdk",
+          "--channel=0",
+          "--install",
+          "emulator",
+          "system-images;android-34;google_apis;x86_64"
+        ],
+        "startedAt": "2026-11-24T08:11:37.851Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:20.768Z",
+        "log": "009-install-official-android-packages.log",
+        "logSha256": "4ccdc4d17f27fe7ade8fc727b735c8a1b898bffb5bf2985895923b6446f94700"
+      },
+      {
+        "label": "update-official-ubuntu-package-index",
+        "argv": [
+          "sudo",
+          "-n",
+          "apt-get",
+          "-o",
+          "Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources",
+          "-o",
+          "Dir::Etc::sourceparts=-",
+          "update"
+        ],
+        "startedAt": "2026-11-24T08:12:20.768Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:25.730Z",
+        "log": "010-update-official-ubuntu-package-index.log",
+        "logSha256": "3cf92e3b5b00172fb2d2afe4bb452ad35d9b37c6e64408981f9ca8380866b429"
+      },
+      {
+        "label": "install-host-libpulse0",
+        "argv": [
+          "sudo",
+          "-n",
+          "apt-get",
+          "-o",
+          "Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources",
+          "-o",
+          "Dir::Etc::sourceparts=-",
+          "install",
+          "-y",
+          "--no-install-recommends",
+          "libpulse0"
+        ],
+        "startedAt": "2026-11-24T08:12:25.730Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:33.040Z",
+        "log": "011-install-host-libpulse0.log",
+        "logSha256": "8794c50ceb6b6c3c2bbf1862beada646d31431468e8bccbbb295e998493e4946"
+      },
+      {
+        "label": "libpulse0-version",
+        "argv": [
+          "dpkg-query",
+          "-W",
+          "libpulse0"
+        ],
+        "startedAt": "2026-11-24T08:12:33.043Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:33.058Z",
+        "log": "012-libpulse0-version.log",
+        "logSha256": "d1198385327494c5656cb2eda4ae0096ef60c9145853ba4d70640a42c71b7458"
+      },
+      {
+        "label": "emulator-version",
+        "argv": [
+          "/usr/local/lib/android/sdk/emulator/emulator",
+          "-version"
+        ],
+        "startedAt": "2026-11-24T08:12:33.087Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:33.340Z",
+        "log": "013-emulator-version.log",
+        "logSha256": "3b731f3a793eded86771cca52ee803c102721f98c3feee3c833c8c149a0e9b53"
+      },
+      {
+        "label": "emulator-acceleration-check",
+        "argv": [
+          "/usr/local/lib/android/sdk/emulator/emulator",
+          "-accel-check"
+        ],
+        "startedAt": "2026-11-24T08:12:33.340Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:33.378Z",
+        "log": "014-emulator-acceleration-check.log",
+        "logSha256": "abef1c7767af30e9096ebd9510d33968b3870bd281f284cc760d885178db241f"
+      },
+      {
+        "label": "create-clean-avd",
+        "argv": [
+          "/usr/local/lib/android/sdk/cmdline-tools/latest/bin/avdmanager",
+          "create",
+          "avd",
+          "--name",
+          "mytodo-d1-api34-x86_64",
+          "--package",
+          "system-images;android-34;google_apis;x86_64"
+        ],
+        "startedAt": "2026-11-24T08:12:37.748Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:39.196Z",
+        "log": "015-create-clean-avd.log",
+        "logSha256": "17dd27efcfe02f4dfcd0b0505a3cd37bd0d13183caa7bc0ce6e19389abc738c8"
+      },
+      {
+        "label": "start-adb",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "start-server"
+        ],
+        "startedAt": "2026-11-24T08:12:39.196Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:39.390Z",
+        "log": "016-start-adb.log",
+        "logSha256": "c5c3fe2e63d1aa20c86383bfda53a5db72d68096da4cf13efc659f178f78de8a"
+      },
+      {
+        "label": "adb-device-inventory-before",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "devices",
+          "-l"
+        ],
+        "startedAt": "2026-11-24T08:12:39.390Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:39.399Z",
+        "log": "017-adb-device-inventory-before.log",
+        "logSha256": "61bb4458e9b6e3549c689cab54922a736f1a9301398e18fd2f621297e97a09e0"
+      },
+      {
+        "label": "boot-poll-1",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:12:39.402Z",
+        "exitCode": 1,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:39.410Z",
+        "log": "018-boot-poll-1.log",
+        "logSha256": "9f1b747c8640454309e122deef906d7a2714e4c377f910e2e75b88a8050771e5"
+      },
+      {
+        "label": "boot-poll-2",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:12:44.413Z",
+        "exitCode": 1,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:44.417Z",
+        "log": "019-boot-poll-2.log",
+        "logSha256": "9fa4918f5174e75d41e27cf9f00061cf4419ba67a89ea27ded0a5e5aedf0a94b"
+      },
+      {
+        "label": "boot-poll-3",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:12:49.423Z",
+        "exitCode": 1,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:49.431Z",
+        "log": "020-boot-poll-3.log",
+        "logSha256": "9fa4918f5174e75d41e27cf9f00061cf4419ba67a89ea27ded0a5e5aedf0a94b"
+      },
+      {
+        "label": "boot-poll-4",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:12:54.436Z",
+        "exitCode": 1,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:54.444Z",
+        "log": "021-boot-poll-4.log",
+        "logSha256": "9fa4918f5174e75d41e27cf9f00061cf4419ba67a89ea27ded0a5e5aedf0a94b"
+      },
+      {
+        "label": "boot-poll-5",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:12:59.450Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:12:59.555Z",
+        "log": "022-boot-poll-5.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-6",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:04.559Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:04.615Z",
+        "log": "023-boot-poll-6.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-7",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:09.621Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:09.693Z",
+        "log": "024-boot-poll-7.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-8",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:14.698Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:14.756Z",
+        "log": "025-boot-poll-8.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-9",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:19.761Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:19.816Z",
+        "log": "026-boot-poll-9.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-10",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:24.820Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:24.865Z",
+        "log": "027-boot-poll-10.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-11",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:29.870Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:29.948Z",
+        "log": "028-boot-poll-11.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-12",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:34.956Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:35.053Z",
+        "log": "029-boot-poll-12.log",
+        "logSha256": "91523c313400892457e139c197d1c57f234536cb5b82696653b859a0d74fc8ee"
+      },
+      {
+        "label": "boot-poll-13",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "sys.boot_completed"
+        ],
+        "startedAt": "2026-11-24T08:13:40.057Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.097Z",
+        "log": "030-boot-poll-13.log",
+        "logSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288"
+      },
+      {
+        "label": "runtime-api",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "ro.build.version.sdk"
+        ],
+        "startedAt": "2026-11-24T08:13:40.097Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.182Z",
+        "log": "031-runtime-api.log",
+        "logSha256": "ff878ed1db62c97abb04f54567489e1e9e88442764e86b55087729dee1833928"
+      },
+      {
+        "label": "runtime-abi",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "ro.product.cpu.abi"
+        ],
+        "startedAt": "2026-11-24T08:13:40.182Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.230Z",
+        "log": "032-runtime-abi.log",
+        "logSha256": "4c44943e619488b9200514a2a5aa680f68c6e85078962b999ec970c3109da736"
+      },
+      {
+        "label": "runtime-emulator",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "ro.kernel.qemu"
+        ],
+        "startedAt": "2026-11-24T08:13:40.230Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.268Z",
+        "log": "033-runtime-emulator.log",
+        "logSha256": "4f7f677d81e1215972623c887ea9dff996c53a5fdef9fe10d34568197d1d2288"
+      },
+      {
+        "label": "runtime-fingerprint",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "getprop",
+          "ro.build.fingerprint"
+        ],
+        "startedAt": "2026-11-24T08:13:40.268Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.336Z",
+        "log": "034-runtime-fingerprint.log",
+        "logSha256": "74473d75329a883b82ff24d3c1aa0099ad73f29fea967f1001c0aa527d91b27b"
+      },
+      {
+        "label": "runtime-webview",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "dumpsys",
+          "webviewupdate"
+        ],
+        "startedAt": "2026-11-24T08:13:40.337Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.410Z",
+        "log": "035-runtime-webview.log",
+        "logSha256": "eb25c259fb988d2ba5aa18872d088892f6e42bd6f91ed17bf5a138e8684d7927"
+      },
+      {
+        "label": "runtime-sqlite-cli",
+        "argv": [
+          "/usr/local/lib/android/sdk/platform-tools/adb",
+          "-s",
+          "emulator-5554",
+          "shell",
+          "sqlite3",
+          "--version"
+        ],
+        "startedAt": "2026-11-24T08:13:40.411Z",
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null,
+        "finishedAt": "2026-11-24T08:13:40.449Z",
+        "log": "036-runtime-sqlite-cli.log",
+        "logSha256": "9d6d44f8e8b9fd7b252ee3bdac5971adedd6e5c64bbc0cff33de119b13114314"
+      }
+    ],
+    "initial": {
+      "sdkExists": true,
+      "emulatorExists": false,
+      "adbExists": true,
+      "systemImages": [],
+      "targetImageExists": false,
+      "kvmExists": true,
+      "kvmAccessible": false
+    },
+    "kvm": {
+      "accessibleBefore": false,
+      "accessibleAfter": true,
+      "accessMethod": "runner UID ACL",
+      "accelerationCheck": "accel:\n0\nKVM (version 12) is installed and usable.\naccel"
+    },
+    "hostPackages": {
+      "libpulsePresent": false,
+      "installAllowed": true,
+      "libpulse": {
+        "file": "libpulse.so.0",
+        "bytes": 326856,
+        "sha256": "3d78bd6bfcebccb7d4e65bac298c3aef5b0906fc4c6a4bebcd761c845f4c3c4a"
+      },
+      "libpulsePackage": "libpulse0:amd64\t1:16.1+dfsg1-2ubuntu10.1"
+    },
+    "emulatorPackage": {
+      "package": "emulator",
+      "location": "emulator",
+      "revision": "37.3.10",
+      "sourcePropertiesSha256": "399a3ad857aa3ba1d2983745f82d6c438221481c220c3bba0aec577adb313a03",
+      "executable": {
+        "file": "emulator",
+        "bytes": 10144992,
+        "sha256": "5c48296df39c35bad694a361312e3c9915e47d4061eed475b061c98625599173"
+      },
+      "version": "Android emulator version 37.3.10.0 (build_id 16970787) (CL:N/A)\nCopyright (C) 2006-2024 The Android Open Source Project and many others.\nThis program is a derivative of the QEMU CPU emulator (www.qemu.org).\n\n  This software is licensed under the terms of the GNU General Public\n  License version 2, as published by the Free Software Foundation, and\n  may be copied, distributed, and modified under those terms.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details."
+    },
+    "image": {
+      "package": "system-images;android-34;google_apis;x86_64",
+      "location": "system-images/android-34/google_apis/x86_64",
+      "revision": "14",
+      "sourcePropertiesSha256": "bd7597e0dfa855335194fbafaf63bde93aa86bc3b56cea73cd54635715e77abc",
+      "system": {
+        "file": "system.img",
+        "bytes": 4306501632,
+        "sha256": "156534aa2c707edfb57026f7b573a561e513433d7643d9ce3230ae6d65804c7a"
+      }
+    },
+    "emulatorLaunch": {
+      "argv": [
+        "/usr/local/lib/android/sdk/emulator/emulator",
+        "-avd",
+        "mytodo-d1-api34-x86_64",
+        "-port",
+        "5554",
+        "-no-window",
+        "-no-audio",
+        "-no-boot-anim",
+        "-no-snapshot",
+        "-accel",
+        "on",
+        "-gpu",
+        "swiftshader_indirect",
+        "-camera-back",
+        "none",
+        "-camera-front",
+        "none",
+        "-cores",
+        "2",
+        "-memory",
+        "3072",
+        "-no-metrics"
+      ],
+      "pid": 3175,
+      "spawnError": null,
+      "startedAt": "2026-11-24T08:12:39.402Z",
+      "log": "emulator.log",
+      "processExit": null
+    },
+    "runtime": {
+      "api": "34",
+      "abi": "x86_64",
+      "emulator": "1",
+      "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.050/12077443:userdebug/dev-keys",
+      "webview": "Current WebView Update Service state\n  Multiprocess enabled: true\n  Current WebView package (name, version): (com.google.android.webview, 113.0.5672.136)\n  Minimum targetSdkVersion: 33\n  Minimum WebView version code: 567263637\n  Number of relros started: 1\n  Number of relros finished: 1\n  WebView package dirty: false\n  Any WebView package installed: true\n  Preferred WebView package (name, version): (com.google.android.webview, 113.0.5672.136)\n  WebView packages:\n    Valid package com.google.android.webview (versionName: 113.0.5672.136, versionCode: 567263637, targetSdkVersion: 34) is  installed/enabled for all users\n    com.google.android.webview.beta is NOT installed.\n    com.google.android.webview.dev is NOT installed.\n    com.google.android.webview.canary is NOT installed.\n    com.google.android.webview.debug is NOT installed.\n    com.android.webview is NOT installed.",
+      "webviewOptional": true,
+      "webviewPackage": "com.google.android.webview",
+      "webviewVersion": "113.0.5672.136",
+      "sqliteCli": {
+        "exitCode": 0,
+        "version": "3.39.2 2022-07-21 15:24:47 698edb77537b67c41adc68f9b892db56bcf9a55e00371a61420f3ddd668e6603",
+        "role": "Optional device shell probe. Actual framework SQLite version comes from the instrumentation database."
+      }
+    },
+    "finishedAt": "2026-11-24T08:13:40.449Z"
+  },
+  "serial": "emulator-5554",
+  "instrumentationExitCode": 0,
+  "generatorStatus": "passed",
+  "partialFailureFiles": {
+    "android-generator-receipt.json": {
+      "captured": true,
+      "hostName": "failure-android-generator-receipt.json",
+      "bytes": 88844,
+      "sha256": "cc9c1f096d14aba13042df1f71d0ebc5d0937d9a4b3a460eafd8cc87cd2bd3d2",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-original.png": {
+      "captured": true,
+      "hostName": "failure-feedback-original.png",
+      "bytes": 68,
+      "sha256": "2816e082b647e4fbf2c83c79161a7674f7b41ab1cbde46539ea976be568ba5f3",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "d1-synthetic.json": {
+      "captured": true,
+      "hostName": "failure-d1-synthetic.json",
+      "bytes": 123,
+      "sha256": "522a8755d2481270392f38589c7fbd5938fe526ba209f273c3832945631a79e0",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "android-source.sqlite": {
+      "captured": true,
+      "hostName": "failure-android-source.sqlite",
+      "bytes": 65536,
+      "sha256": "87787c2418de5ab97584ab75a18f7ed508efae362236fe3fbdc8734d43dbd060",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "android-source.sqlite-wal": {
+      "captured": true,
+      "hostName": "failure-android-source.sqlite-wal",
+      "bytes": 76,
+      "sha256": "497d4ace56fcb1596ce3a6bd86992eec719c5bead94537b8e7aceb2ffe35f668",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "android-source.sqlite-shm": {
+      "captured": true,
+      "hostName": "failure-android-source.sqlite-shm",
+      "bytes": 76,
+      "sha256": "81e1f8f938c3b6d964c20aba0018281bf0d633389a4e753ffa8ec35fa194ba6f",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "android-source.sqlite-journal": {
+      "captured": true,
+      "hostName": "failure-android-source.sqlite-journal",
+      "bytes": 80,
+      "sha256": "f73bf5d1812fb2e1626a8500abe0d3d69c4ec7c340bd2f59525428bc898be003",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-source.sqlite": {
+      "captured": true,
+      "hostName": "failure-feedback-source.sqlite",
+      "bytes": 69632,
+      "sha256": "79faae4b8a611e5a1cfecd93b6129cfbe3702d989081b668d9646bed5246e404",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-source.sqlite-wal": {
+      "captured": true,
+      "hostName": "failure-feedback-source.sqlite-wal",
+      "bytes": 77,
+      "sha256": "ba31b7ecd79552fecb6f588fb464f104345599cb7d533ab17d68d2ba8c0be6b6",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-source.sqlite-shm": {
+      "captured": true,
+      "hostName": "failure-feedback-source.sqlite-shm",
+      "bytes": 77,
+      "sha256": "e5a511f96b7fefebcf7ae0b223406c0c831a0e888988c064cf1b33425fd7f0c5",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-source.sqlite-journal": {
+      "captured": true,
+      "hostName": "failure-feedback-source.sqlite-journal",
+      "bytes": 81,
+      "sha256": "4141bc734bee87470d79602f5b9e81c3fc0be123902019c5c8e02ea314a2aecc",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-validation.sqlite": {
+      "captured": true,
+      "hostName": "failure-feedback-validation.sqlite",
+      "bytes": 77824,
+      "sha256": "4ec9a66c740cf20d252d1984c622d81fbbb767f276805834c923004057419410",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-validation.sqlite-wal": {
+      "captured": true,
+      "hostName": "failure-feedback-validation.sqlite-wal",
+      "bytes": 81,
+      "sha256": "70b86c3cee33616af36fb52f21dcf90a3a694f7b5e055f8bd99898dc97182810",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-validation.sqlite-shm": {
+      "captured": true,
+      "hostName": "failure-feedback-validation.sqlite-shm",
+      "bytes": 81,
+      "sha256": "0217145db5cbee78c670341201c15e6d8ff850c122673b9d3f4a4f29d9872f14",
+      "qualification": "partial original failure evidence; no successful seal"
+    },
+    "feedback-validation.sqlite-journal": {
+      "captured": true,
+      "hostName": "failure-feedback-validation.sqlite-journal",
+      "bytes": 85,
+      "sha256": "e6091277b7b80dfe26f791345b6efff9766ffd22f7098431d01a006a5c764a73",
+      "qualification": "partial original failure evidence; no successful seal"
+    }
+  },
+  "shutdown": 0,
+  "exitCode": 1,
+  "completedAtUtc": "2026-11-24T08:13:57.606Z"
+}
