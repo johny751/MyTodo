@@ -10,7 +10,7 @@ FACT: D2 work is isolated on `d2/implementation-candidate-1` from the accepted r
 
 ## One implementation contract
 
-PROPOSAL: the first manual step is `mytodo-storage-infrastructure-0001`, contract `d1-01-candidate.1`, algorithm `mytodo-storage-fingerprint-v1`, SQLite user_version 0→1. It adds only the three Registry/Snapshot/Audit tables from [shared-runtime-contract.md](shared-runtime-contract.md). No business normalization, project relinking, time conversion, tombstone pruning or event rewriting occurs. This small infrastructure step establishes the machinery before semantic migrations.
+PROPOSAL: the first manual step is `mytodo-storage-infrastructure-0001`, contract `d1-01-candidate.1`, algorithm `mytodo-storage-fingerprint-v2`, SQLite user_version 0→1. It adds only the three Registry/Snapshot/Audit tables from [shared-runtime-contract.md](shared-runtime-contract.md). No business normalization, project relinking, time conversion, tombstone pruning or event rewriting occurs. This small infrastructure step establishes the machinery before semantic migrations.
 
 FACT (source): Windows C uses the existing `db_open/db_put/db_begin/db_end` adapter; Node uses `createSQLiteStore.call`; Android uses `ReplicaDatabase` and Framework SQLite. Migration implementation modules live under production source paths and expose explicit manual APIs. Test fixtures/fault definitions/build drivers live only under `tests/d2`. No startup migration call or production import of tests is permitted. Platform adapter documents identify the exact source APIs and limitations.
 
@@ -45,3 +45,5 @@ BLOCKER: existing platform constructors/openers may create legacy tables/indexes
 BLOCKER: production build identity distribution, all-writer cross-file barrier, authenticated remote B/S/A evidence, durable multi-file activation and post-activation side-effect fencing are not integrated or enabled. True device power loss, full release app lifecycles and production databases are unverified.
 
 OWNER DECISION: approve exact production operation scope only after reviewing unified evidence and the decision checklist. This work ends at concentrated delivery; no real migration or synchronization enablement follows automatically.
+
+FACT (CI3): v1 cross-engine REAL CAST identity was rejected by the independent comparer. PROPOSAL: one v2 representation uses a NULL middle sentinel with exact bits; D2-CONFLICT-REAL-001 documents the preserved evidence and reason. Windows actual undo capture was extracted without changing its function body or undo begin/finish/apply bodies; the formal Windows source list includes the new file. These changes require CI4 verification.

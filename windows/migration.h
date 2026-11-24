@@ -4,7 +4,7 @@
 
 #define STORAGE_MIGRATION_ID "mytodo-storage-infrastructure-0001"
 #define STORAGE_CONTRACT_ID "d1-01-candidate.1"
-#define STORAGE_ALGORITHM_ID "mytodo-storage-fingerprint-v1"
+#define STORAGE_ALGORITHM_ID "mytodo-storage-fingerprint-v2"
 
 /* The build injects a digest of the actual production source bytes and fixed
    plan identity. A regular app build has no identity and cannot migrate. */

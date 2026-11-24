@@ -18,7 +18,9 @@
 
 Schema 是实际sqlite_master原SQL，包括SQL NULL与自动索引，按BINARY(type,name,tbl_name)排序。source known-layout只接受固定baseline与精确列举reordered三表DDL；核心列/索引属性及meta CHECK(id=1)严格检查，未知CHECK/FK/trigger/view/对象拒绝。Android特例仅 `CREATE TABLE android_metadata (locale TEXT)`、唯一TEXT locale列和单条非NULL非空TEXT值，全表保留。
 
-raw 按固定表/PRAGMA列序和排序行编码：算法/role、tableCount，每表name/columnCount/columnNames/rowCount，逐cell typeof、NULL-aware HEX(CAST AS BLOB)、REAL IEEE754 big-endian16hex（非REAL为NULL）。schema有recordCount，所有计数用S decimal字段。NULL为N;，字符串为S字节数:精确UTF8，不通过JSONObject数值序列化int64或REAL。
+raw 使用统一候选 `mytodo-storage-fingerprint-v2`，按固定表/PRAGMA列序和排序行编码：算法/role、tableCount，每表name/columnCount/columnNames/rowCount。REAL三字段为(real,NULL,精确IEEE754 big-endian16lowerhex)，中间NULL是格式sentinel，不是把业务REAL改SQL NULL；SQL NULL为(null,NULL,NULL)；INTEGER/TEXT/BLOB保留(type,原HEX(CAST AS BLOB),NULL)。schema有recordCount，所有计数用S decimal字段。NULL为N;，字符串为S字节数:精确UTF8，不通过JSONObject数值序列化int64或REAL，也不把引擎相关REAL十进制CAST纳入跨端身份。
+
+**FACT（CI3历史）/PROPOSAL（D2格式修订）。** CI3 Android自身11个API案例成功，但v1 source raw身份包含引擎相关REAL CAST，独立Registry比较未通过；未把它写成cross通过。D2-CONFLICT-REAL-001由root统一决定v2，D1业务/空值/时间/关系/删除/同步合同不变。Java算法常量、build-bound source checksum身份与动态request一起使用v2；旧v1请求在现有A08拒绝且原快照/版本不变，仍保持11个具名案例。旧v1日志/Registry/快照原件保留，不解释为v2、不回写旧库。v2实际结果由下一轮CI实证，不在本机执行。[统一冲突方案](fingerprint-portability-resolution.md)
 
 固定窗口重入验证登记、不可变snapshot、版本、checksum、目标schema和原raw。新业务进展返回blockedDataAdvanced并保留，不自动no-op或回滚；正常启动后编辑的no-op策略仍OWNER DECISION。重入/确认以只读效果的exclusive transaction取得一致视图。
 

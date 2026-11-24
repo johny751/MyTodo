@@ -41,25 +41,25 @@ for(const [file,item] of Object.entries(vendorObserved))if(item.expected!==item.
 
 // Unambiguous source identity: UTF-8 length fields plus exact checkout source
 // bytes, including the actual storage/undo dependencies and bundled SQLite.
-const sourceFiles=['windows/migration.c','windows/migration.h','windows/database.c','windows/native.h','windows/util.c','windows/operations.c','windows/ui.h','windows/vendor/sqlite3.c','windows/vendor/sqlite3.h','windows/vendor/cJSON.c','windows/vendor/cJSON.h'];
+const sourceFiles=['windows/migration.c','windows/migration.h','windows/database.c','windows/native.h','windows/util.c','windows/undo-capture.c','windows/undo-internal.h','windows/operations.c','windows/ui.h','windows/vendor/sqlite3.c','windows/vendor/sqlite3.h','windows/vendor/cJSON.c','windows/vendor/cJSON.h'];
 const chunks=[],sourceReceipt=[];
 const encoded=bytes=>Buffer.concat([Buffer.from('S'+bytes.length+':','utf8'),bytes]);
-for(const identity of ['mytodo-storage-source-build-v1','mytodo-storage-fingerprint-v1','d1-01-candidate.1','mytodo-storage-infrastructure-0001','0','1',String(sourceFiles.length)])chunks.push(encoded(Buffer.from(identity,'utf8')));
+for(const identity of ['mytodo-storage-source-build-v1','mytodo-storage-fingerprint-v2','d1-01-candidate.1','mytodo-storage-infrastructure-0001','0','1',String(sourceFiles.length)])chunks.push(encoded(Buffer.from(identity,'utf8')));
 for(const file of sourceFiles){const bytes=await fs.readFile(path.join(repo,file));chunks.push(encoded(Buffer.from(file,'utf8')),encoded(bytes));sourceReceipt.push({file,bytes:bytes.length,sha256:hash(bytes)});}
 const implementationChecksum=hash(Buffer.concat(chunks));
 const fixtureBytes=await fs.readFile(path.join(here,'shared-fixture.json')),fixtureSha256=hash(fixtureBytes);
 await fs.writeFile(path.join(root,'shared-fixture.json'),fixtureBytes,{flag:'wx'});
 const injected=path.join(build,'build-identity.h');
 await fs.writeFile(injected,'#define MYTODO_STORAGE_BUILD_IDENTITY "'+implementationChecksum+'"\n#define MYTODO_D2_FIXTURE_SHA256 "'+fixtureSha256+'"\n',{flag:'wx'});
-await fs.writeFile(path.join(root,'production-source-identity.json'),JSON.stringify({algorithm:'mytodo-storage-source-build-v1',sourceSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,contractId:'d1-01-candidate.1',migrationId:'mytodo-storage-infrastructure-0001',implementationChecksum,files:sourceReceipt,fixtureSha256},null,2)+'\n',{flag:'wx'});
+await fs.writeFile(path.join(root,'production-source-identity.json'),JSON.stringify({algorithm:'mytodo-storage-source-build-v1',fingerprintAlgorithm:'mytodo-storage-fingerprint-v2',sourceSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,contractId:'d1-01-candidate.1',migrationId:'mytodo-storage-infrastructure-0001',implementationChecksum,files:sourceReceipt,fixtureSha256},null,2)+'\n',{flag:'wx'});
 const exe=path.join(build,'d2-native-runner.exe');
 const args=['/nologo','/TC','/O1','/Gy','/MT','/std:c11','/utf-8','/W3','/D_CRT_SECURE_NO_WARNINGS','/DSQLITE_ENABLE_JSON1','/DSQLITE_THREADSAFE=1','/DSQLITE_OMIT_LOAD_EXTENSION','/FI'+injected,
  '/I'+vendor,'/I'+path.join(vc,'include'),...['ucrt','shared','um'].map(x=>'/I'+path.join(sdk,'Include',sv,x)),'/Fe:'+exe,
- path.join(here,'native-runner.c'),...['database.c','migration.c','util.c','operations.c'].map(x=>path.join(repo,'windows',x)),path.join(vendor,'sqlite3.c'),path.join(vendor,'cJSON.c'),
+ path.join(here,'native-runner.c'),...['database.c','migration.c','util.c','undo-capture.c'].map(x=>path.join(repo,'windows',x)),path.join(vendor,'sqlite3.c'),path.join(vendor,'cJSON.c'),
  '/link','/SUBSYSTEM:CONSOLE','/OPT:REF','/STACK:4194304','/LIBPATH:'+path.join(vc,'lib/x64'),'/LIBPATH:'+path.join(sdk,'Lib',sv,'ucrt/x64'),'/LIBPATH:'+path.join(sdk,'Lib',sv,'um/x64'),
  'advapi32.lib','ole32.lib','shell32.lib','user32.lib'];
 await run(path.join(vc,'bin/Hostx64/x64/cl.exe'),args);
-await fs.writeFile(path.join(root,'native-build-receipt.json'),JSON.stringify({sourceSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,toolchain:vc,windowsSdk:sv,exe,sha256:hash(await fs.readFile(exe)),implementationChecksum,productionEntryCompiled:true,actualSources:['windows/database.c','windows/migration.c','windows/util.c','windows/operations.c'],appState:'actual App with existing undo_capture readiness guard; no GUI startup'},null,2)+'\n',{flag:'wx'});
+await fs.writeFile(path.join(root,'native-build-receipt.json'),JSON.stringify({sourceSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,toolchain:vc,windowsSdk:sv,exe,sha256:hash(await fs.readFile(exe)),implementationChecksum,productionEntryCompiled:true,fingerprintAlgorithm:'mytodo-storage-fingerprint-v2',actualSources:['windows/database.c','windows/migration.c','windows/util.c','windows/undo-capture.c'],appState:'actual App with byte-preserved production undo_capture and shared state; no GUI startup'},null,2)+'\n',{flag:'wx'});
 await run(exe,[root],240000);
 const results=JSON.parse(await fs.readFile(path.join(root,'results.json'),'utf8'));
 if(results.failed!==0||results.passed!==results.total||results.implementationChecksum!==implementationChecksum)throw Error('BLOCKER: actual native suite or build identity verification failed');

@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class MigrationRegistry {
     public static final String STEP="mytodo-storage-infrastructure-0001";
     public static final String CONTRACT="d1-01-candidate.1";
-    public static final String ALGORITHM="mytodo-storage-fingerprint-v1";
+    public static final String ALGORITHM="mytodo-storage-fingerprint-v2";
     public static final String REGISTRY="storage_migration_registry";
     public static final String SNAPSHOTS="storage_migration_snapshots";
     public static final String AUDIT="storage_migration_audit";
@@ -92,8 +92,8 @@ public final class MigrationRegistry {
         Collections.sort(tables);ByteArrayOutputStream out=header("raw");field(out,String.valueOf(tables.size()));
         for(String table:tables){
             List<String> names=columns(db,table);field(out,table);field(out,String.valueOf(names.size()));for(String name:names)field(out,name);
-            StringBuilder sql=new StringBuilder("SELECT ");for(int i=0;i<names.size();i++){if(i!=0)sql.append(',');String name=quoted(names.get(i));sql.append("typeof(").append(name).append("),CASE WHEN ").append(name).append(" IS NULL THEN NULL ELSE hex(CAST(").append(name).append(" AS BLOB)) END,").append(name);}sql.append(" FROM ").append(quoted(table));
-            List<byte[]> rows=new ArrayList<>();try(Cursor c=db.rawQuery(sql.toString(),null)){while(c.moveToNext()){ByteArrayOutputStream encoded=new ByteArrayOutputStream();for(int i=0;i<names.size();i++){String type=c.getString(i*3);field(encoded,type);field(encoded,c.isNull(i*3+1)?null:c.getString(i*3+1));String real=null;if("real".equals(type))real=String.format(Locale.ROOT,"%016x",Double.doubleToRawLongBits(c.getDouble(i*3+2)));field(encoded,real);}rows.add(encoded.toByteArray());}}
+            StringBuilder sql=new StringBuilder("SELECT ");for(int i=0;i<names.size();i++){if(i!=0)sql.append(',');String name=quoted(names.get(i));sql.append("typeof(").append(name).append("),CASE WHEN ").append(name).append(" IS NULL OR typeof(").append(name).append(")=\'real\' THEN NULL ELSE hex(CAST(").append(name).append(" AS BLOB)) END,").append(name);}sql.append(" FROM ").append(quoted(table));
+            List<byte[]> rows=new ArrayList<>();try(Cursor c=db.rawQuery(sql.toString(),null)){while(c.moveToNext()){ByteArrayOutputStream encoded=new ByteArrayOutputStream();for(int i=0;i<names.size();i++){String type=c.getString(i*3);field(encoded,type);field(encoded,"real".equals(type)||"null".equals(type)?null:c.isNull(i*3+1)?null:c.getString(i*3+1));String real=null;if("real".equals(type))real=String.format(Locale.ROOT,"%016x",Double.doubleToRawLongBits(c.getDouble(i*3+2)));field(encoded,real);}rows.add(encoded.toByteArray());}}
             Collections.sort(rows,MigrationRegistry::compareBytes);field(out,String.valueOf(rows.size()));for(byte[] row:rows)out.write(row);
         }return text(out);
     }

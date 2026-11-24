@@ -1,0 +1,15 @@
+# D2-CONFLICT-REAL-001: portable raw snapshot identity
+
+FACT (CI3): source `d57963c35c5a6d06fce3664b5789acb7e6ac2e35`, Actions `45414368180`, retained the v1 Android snapshot with the REAL field `S4:realS6:312E30S16:3ff0000000000001`. The hexadecimal CAST text is `1.0`, while the exact value is binary64 `3ff0000000000001`. Node's N15 independently verified the same adjacent bit pattern with its actual SQLite conversion and recorded a different decimal representation. The cross comparer refused the Android Registry's v1 source raw identity; no comparison assertion was relaxed.
+
+FACT: `CAST(REAL AS BLOB)` includes a SQLite-version-dependent decimal conversion. Consequently, v1 raw payloads containing both that display conversion and exact REAL bits can differ between engines even when the stored REAL value is unchanged. Text-format identity is not a portable REAL-value identity. All CI1–CI3 v1 snapshots, Registry values, failed assertions and official archives remain immutable evidence.
+
+PROPOSAL (one D2 candidate replacement): algorithm `mytodo-storage-fingerprint-v2` keeps the same length-prefixed framing, schema SQL identity, table/column/row counts, row sorting, and three fields per cell. For REAL, encode `(typeof='real', NULL, exact binary64 big-endian lowercase hex)`. For SQL NULL, encode `('null', NULL, NULL)`. For INTEGER/TEXT/BLOB, retain `(typeof, hex(CAST AS BLOB), NULL)`; integers never travel through double and TEXT/BLOB bytes remain intact. A REAL's NULL middle field is a format sentinel, not a conversion of its business value to SQL NULL.
+
+PROPOSAL: use v2 consistently in C, Node, Android, build checksums, independent oracles and migration requests. The exact bits fully preserve the REAL value. The redundant engine-specific display string is omitted from identity. Independently verify every v2 payload and Registry against exact typed values/bits and unchanged original source fields. Add old-v1 request rejection inside existing negative cases; never silently reinterpret a v1 payload or rewrite an old audit/snapshot.
+
+FACT (scope): this revises the unapproved D2 runtime fingerprint candidate. The accepted D1 entity/field/NULL/time/deletion/relationship/synchronization contract remains in place. No business column, SQLite source value, Actor, event, outbox, cursor, ACK, manifest or batch meaning is changed. Migration remains explicit and disabled at startup. The infrastructure step and database version 0→1 remain branch candidates only.
+
+OWNER DECISION: future production activation must approve the v2 snapshot identity and compatibility policy with the exact validated source SHA. Existing v1 candidate synthetic databases are retained for evidence; a real database with an unknown or mismatched Registry/checksum/snapshot is preserved and blocked, not upgraded automatically by this package.
+
+UNVERIFIED until the next authoritative Actions receipt: v2 builds and cross-engine comparisons. Other historical SQLite encodings/versions and real user layouts remain subject to the existing production blockers.

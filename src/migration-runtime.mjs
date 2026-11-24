@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 
 export const MIGRATION_ID='mytodo-storage-infrastructure-0001';
 export const CONTRACT_ID='d1-01-candidate.1';
-export const ALGORITHM_ID='mytodo-storage-fingerprint-v1';
+export const ALGORITHM_ID='mytodo-storage-fingerprint-v2';
 export const INFRASTRUCTURE_DDL=[
  "CREATE TABLE storage_migration_registry(migration_id TEXT PRIMARY KEY,checksum TEXT NOT NULL,contract_id TEXT NOT NULL,source_schema_fingerprint TEXT NOT NULL,source_raw_fingerprint TEXT NOT NULL,source_user_version INTEGER NOT NULL,target_schema_fingerprint TEXT NOT NULL,target_raw_fingerprint TEXT NOT NULL,target_user_version INTEGER NOT NULL,source_snapshot_id TEXT NOT NULL,status TEXT NOT NULL CHECK(status='committed'))",
  'CREATE TABLE storage_migration_snapshots(snapshot_id TEXT PRIMARY KEY,source_schema_fingerprint TEXT NOT NULL,source_raw_fingerprint TEXT NOT NULL,source_user_version INTEGER NOT NULL,schema_payload TEXT NOT NULL,raw_payload TEXT NOT NULL)',
@@ -58,7 +58,7 @@ function rawPayload(db){
  for(const table of CORE_TABLES){
   const columns=db.prepare('PRAGMA table_info('+quote(table)+')').all().map(c=>c.name);
   if(!columns.length)fail('blockedSchema','missing original table '+table);
-  const select=columns.map((name,i)=>`typeof(${quote(name)}) AS t${i},CASE WHEN ${quote(name)} IS NULL THEN NULL ELSE hex(CAST(${quote(name)} AS BLOB)) END AS h${i},CASE WHEN typeof(${quote(name)})='real' THEN ${quote(name)} ELSE NULL END AS r${i}`).join(',');
+  const select=columns.map((name,i)=>`typeof(${quote(name)}) AS t${i},CASE WHEN typeof(${quote(name)}) IN ('null','real') THEN NULL ELSE hex(CAST(${quote(name)} AS BLOB)) END AS h${i},CASE WHEN typeof(${quote(name)})='real' THEN ${quote(name)} ELSE NULL END AS r${i}`).join(',');
   const statement=db.prepare('SELECT '+select+' FROM '+quote(table));
   if(typeof statement.setReadBigInts==='function')statement.setReadBigInts(true);
   const rows=statement.all().map(row=>fields(columns.flatMap((_,i)=>{

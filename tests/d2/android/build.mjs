@@ -12,7 +12,7 @@ export async function build(context,command){
   const tools=path.join(sdk,'build-tools/35.0.0'),platform=path.join(sdk,'platforms/android-34/android.jar'),java=name=>path.join(jdk,'bin',name);
   const productionNames=['ReplicaDatabase.java','MigrationRegistry.java','ReplicaTaskRecord.java','DailyTaskPolicy.java'];
   const base=path.join(repo,'android/src/local/gxtodo/replica'),sources=productionNames.map(n=>path.join(base,n));
-  const identity=[enc('mytodo-storage-fingerprint-v1'),enc('implementation'),enc('mytodo-storage-infrastructure-0001'),enc('d1-01-candidate.1')],inputs=[];
+  const identity=[enc('mytodo-storage-fingerprint-v2'),enc('implementation'),enc('mytodo-storage-infrastructure-0001'),enc('d1-01-candidate.1')],inputs=[];
   for(let i=0;i<sources.length;i++){const bytes=await fs.readFile(sources[i]),text=new TextDecoder('utf-8',{fatal:true}).decode(bytes),relative='android/src/local/gxtodo/replica/'+productionNames[i];identity.push(enc(relative),enc(text));inputs.push({path:relative,bytes:bytes.length,sha256:hash(bytes)});}
   const checksum=hash(Buffer.concat(identity)),fixture=await fs.readFile(path.join(repo,'tests/d2/shared-fixture.json'));
   const classes=path.join(folder,'classes'),dex=path.join(folder,'dex'),assets=path.join(folder,'assets'),generated=path.join(folder,'generated');for(const dir of [classes,dex,assets,generated])await fs.mkdir(dir);

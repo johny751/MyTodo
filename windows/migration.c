@@ -155,7 +155,7 @@ static int raw_table(DB *db,Buffer *payload,const char *table){
  for(size_t i=0;i<count&&ok;i++)ok=text_field(payload,columns[i]);
  if(ok)ok=append(&sql,"SELECT ",7);
  for(size_t i=0;i<count&&ok;i++){
-  char *part=sqlite3_mprintf("%stypeof(\"%w\"),CASE WHEN typeof(\"%w\")='null' THEN NULL ELSE hex(CAST(\"%w\" AS BLOB)) END,\"%w\"",i?",":"",columns[i],columns[i],columns[i],columns[i]);
+  char *part=sqlite3_mprintf("%stypeof(\"%w\"),CASE WHEN typeof(\"%w\") IN('null','real') THEN NULL ELSE hex(CAST(\"%w\" AS BLOB)) END,\"%w\"",i?",":"",columns[i],columns[i],columns[i],columns[i]);
   ok=part&&append(&sql,part,strlen(part));sqlite3_free(part);
  }
  if(ok){char *part=sqlite3_mprintf(" FROM \"%w\"",table);ok=part&&append(&sql,part,strlen(part));sqlite3_free(part);}
@@ -163,7 +163,9 @@ static int raw_table(DB *db,Buffer *payload,const char *table){
  while(ok&&(code=sqlite3_step(stmt))==SQLITE_ROW){Buffer row={0};
   for(size_t i=0;i<count&&ok;i++){
    int at=(int)(i*3);const char *type=(const char*)sqlite3_column_text(stmt,at),*hex=sqlite3_column_type(stmt,at+1)==SQLITE_NULL?0:(const char*)sqlite3_column_text(stmt,at+1);char bits[17];const char *real=0;
-   if(!strcmp(type,"real")){double value=sqlite3_column_double(stmt,at+2);uint64_t u=0;memcpy(&u,&value,sizeof(u));snprintf(bits,sizeof(bits),"%016llx",(unsigned long long)u);real=bits;}
+   /* REAL's NULL middle field is a v2 framing sentinel, not a source write.
+      Its actual binary64 bits carry identity without SQLite display rounding. */
+   if(!strcmp(type,"real")){hex=0;double value=sqlite3_column_double(stmt,at+2);uint64_t u=0;memcpy(&u,&value,sizeof(u));snprintf(bits,sizeof(bits),"%016llx",(unsigned long long)u);real=bits;}
    ok=text_field(&row,type)&&field(&row,hex,hex?(size_t)sqlite3_column_bytes(stmt,at+1):0)&&text_field(&row,real);
   }
   if(ok){Buffer *p=realloc(rows.rows,(rows.n+1)*sizeof(*p));if(!p)ok=0;else{rows.rows=p;rows.rows[rows.n++]=row;memset(&row,0,sizeof(row));}}buffer_free(&row);

@@ -9,17 +9,17 @@ export function logical(db){
  const schema=stmt.all(),tables=schema.filter(x=>x.type==='table'&&!x.name.startsWith('sqlite_')).map(x=>x.name).sort(),data={};
  for(const name of tables){if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name))throw Error('BLOCKER: unknown table identifier');
   const columns=db.prepare('PRAGMA table_info("'+name+'")').all().map(x=>x.name),q=db.prepare('SELECT '+columns.map(c=>'typeof("'+c+'"),hex(CAST("'+c+'" AS BLOB)),"'+c+'"').join(',')+' FROM "'+name+'"');q.setReadBigInts(true);q.setReturnArrays(true);
-  const rows=q.all().map(row=>{const out=[];for(let i=0;i<row.length;i+=3)out.push([row[i],row[i]==='null'?null:row[i+1],row[i]==='real'?cell(row[i+2])[1]:null]);return out;}).sort((a,b)=>Buffer.compare(Buffer.from(JSON.stringify(a)),Buffer.from(JSON.stringify(b))));
+  const rows=q.all().map(row=>{const out=[];for(let i=0;i<row.length;i+=3)out.push([row[i],['null','real'].includes(row[i])?null:row[i+1],row[i]==='real'?cell(row[i+2])[1]:null]);return out;}).sort((a,b)=>Buffer.compare(Buffer.from(JSON.stringify(a)),Buffer.from(JSON.stringify(b))));
   data[name]={columns,rows};
  }
- const version=Number(db.prepare('PRAGMA user_version').get().user_version),payload={schema,data,userVersion:version};return {payload,digest:hash(Buffer.from(JSON.stringify(payload)))};
+ const version=Number(db.prepare('PRAGMA user_version').get().user_version),payload={logicalEncoding:'mytodo-complete-state-v2',schema,data,userVersion:version};return {payload,digest:hash(Buffer.from(JSON.stringify(payload)))};
 }
 function requireIntegrity(db){const rows=db.prepare('PRAGMA integrity_check').all();if(rows.length!==1||rows[0].integrity_check!=='ok'||db.prepare('PRAGMA foreign_key_check').all().length)throw Error('BLOCKER: integrity or foreign key failure');}
 export async function dbProof(file){const db=new DatabaseSync(file,{readOnly:true});try{requireIntegrity(db);return logical(db);}finally{db.close();}}
 export async function snapshot(root,{name,databases,attachments,remote,lease}){
  await rootPath(root);if(!lease?.active||lease.kind!=='synthetic-controlled-writer-barrier')throw Error('BLOCKER: writer and attachment fence absent');
  const folder=await safeFile(root,name,{exists:false});await fs.mkdir(folder);const held=[];
- const manifest={kind:'d2-synthetic-common-snapshot-v1',runId:process.env.GITHUB_RUN_ID,sourceSha:process.env.GITHUB_SHA,remote,databases:[],attachments:[],barrier:'controlled fixture only',createdAtUtc:new Date().toISOString()};
+ const manifest={kind:'d2-synthetic-common-snapshot-v1',logicalEncoding:'mytodo-complete-state-v2',runId:process.env.GITHUB_RUN_ID,sourceSha:process.env.GITHUB_SHA,remote,databases:[],attachments:[],barrier:'controlled fixture only',createdAtUtc:new Date().toISOString()};
  let primaryError=null;try{
   for(const d of databases){await safeFile(root,d.relative);d.writer.exec('BEGIN IMMEDIATE');held.push(d.writer);}
   for(const d of databases){const source=await safeFile(root,d.relative),target=path.join(folder,d.name+'.sqlite'),reader=new DatabaseSync(source,{readOnly:true});try{await backup(reader,target);}finally{reader.close();}
@@ -32,7 +32,7 @@ export async function snapshot(root,{name,databases,attachments,remote,lease}){
 }
 export async function verifyBundle(root,folder){
  await safeFile(root,path.relative(root,folder));const manifestFile=await safeFile(root,path.relative(root,path.join(folder,'manifest.json'))),bytes=await fs.readFile(manifestFile),expected=(await fs.readFile(await safeFile(root,path.relative(root,path.join(folder,'manifest.sha256'))),'utf8')).trim();if(hash(bytes)!==expected)throw Error('BLOCKER: altered manifest');
- const m=JSON.parse(bytes);if(m.kind!=='d2-synthetic-common-snapshot-v1'||m.runId!==process.env.GITHUB_RUN_ID||m.sourceSha!==process.env.GITHUB_SHA)throw Error('BLOCKER: wrong snapshot provenance');
+ const m=JSON.parse(bytes);if(m.kind!=='d2-synthetic-common-snapshot-v1'||m.logicalEncoding!=='mytodo-complete-state-v2'||m.runId!==process.env.GITHUB_RUN_ID||m.sourceSha!==process.env.GITHUB_SHA)throw Error('BLOCKER: wrong snapshot provenance or unsupported value encoding');
  for(const item of [...m.databases,...m.attachments]){const p=await safeFile(root,path.relative(root,path.join(folder,item.file))),b=await fs.readFile(p);if(b.length!==item.bytes||hash(b)!==item.sha256)throw Error('BLOCKER: missing/corrupt component '+item.name);if(item.logicalDigest&&(await dbProof(p)).digest!==item.logicalDigest)throw Error('BLOCKER: raw state mismatch');}
  return m;
 }

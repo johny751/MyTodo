@@ -3,7 +3,7 @@ name: MyTodo D2 real storage migration candidate
 on:
   push:
     branches: ['d2/implementation-candidate-1']
-    paths: ['src/sqlite-store.mjs', 'src/migration-runtime.mjs', 'windows/database.c', 'windows/native.h', 'windows/migration.*', 'android/src/local/gxtodo/replica/**', 'tests/d2/**', '.github/workflows/d2-migration-validation.yml']
+    paths: ['src/sqlite-store.mjs', 'src/migration-runtime.mjs', 'windows/database.c', 'windows/native.h', 'windows/migration.*', 'windows/operations.c', 'windows/undo-capture.c', 'windows/undo-internal.h', 'scripts/build-windows.mjs', 'android/src/local/gxtodo/replica/**', 'tests/d2/**', '.github/workflows/d2-migration-validation.yml']
   workflow_dispatch:
 permissions:
   contents: read
