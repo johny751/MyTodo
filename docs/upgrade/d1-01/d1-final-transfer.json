@@ -1,7 +1,8 @@
 {
   "base": "1a55ea6da9f2012d7ba82d5756ae8f61d87bae47",
   "validatedSource": "8239d39220d940bf9c047a1dcaffd2a831cca2fc",
-  "zipSha256": "c54584c55653bb5eebdf18fb9aabe3fad8dbb0d64a32f24baa9cbcd64b38bce5",
+  "zipSha256": "74018d7c42cd1c4f537ec0a97ad78a468b77304efd85f9c7137aea7e0acd9190",
+  "publisherSha256": "6413e7e9fb00611a6a8ae7346687ccbf67e992e300c6330a455b04a89f6d7be0",
   "runs": [
     "45348588067",
     "45353907376",
@@ -37,8 +38,8 @@
     },
     {
       "path": "docs/upgrade/d1-01/data-ownership-and-sync-boundaries.md",
-      "bytes": 13926,
-      "sha256": "17a3aea66a914767f619e92739c30551b25b561f14133f2eff4fbdbfc9832d04"
+      "bytes": 13925,
+      "sha256": "d6ebfa89a958d4d2f9c6d50d8dc72614afa505cc84785f0f91a3ac67b43fa06c"
     },
     {
       "path": "docs/upgrade/d1-01/field-compatibility-matrix.md",
@@ -52,8 +53,8 @@
     },
     {
       "path": "docs/upgrade/d1-01/migration-versioning-contract.md",
-      "bytes": 28141,
-      "sha256": "17dcc399859e2733f05facfb87a79c677cbd07746132eb9665c9a361b86f1701"
+      "bytes": 28140,
+      "sha256": "a32a3629f22fdaf77c7fa2ffe1175d96734c04f4a4e80e57b014c7fd52c1b302"
     },
     {
       "path": "docs/upgrade/d1-01/README.md",
@@ -67,18 +68,18 @@
     },
     {
       "path": "docs/upgrade/d1-01/source-and-validation-scope.md",
-      "bytes": 4216,
-      "sha256": "21a098ed0fff891dd78d6b1d84a52cea4f10faa508d041a1b856396c73f22217"
+      "bytes": 4215,
+      "sha256": "7c4535fcad814496dbec4d4bcd4c070657410a993d8a6abca52920d75d067dc6"
     },
     {
       "path": "docs/upgrade/d1-01/source-sha256.json",
-      "bytes": 7786,
-      "sha256": "9b6df0323c28f9f555204048395c9cadd9c7f8b33f2ea7d5b75cb240d594abab"
+      "bytes": 7568,
+      "sha256": "22cacb69dd2c305c8e1e6628d4eec3ff16a9cecb1e673f10150d02220d08339d"
     },
     {
       "path": "docs/upgrade/d1-01/SOURCE-SHA256SUMS.txt",
       "bytes": 4337,
-      "sha256": "f721739af8503f2c8da18be994cf233dd0bb8a38c97073d862f85bb04aedd223"
+      "sha256": "71b6df110acee75989f2d35360d1359c7cd293821b19c3331b3d9d9b7e0470da"
     },
     {
       "path": "docs/upgrade/d1-01/sync-state-migration-protection.md",
@@ -92,8 +93,8 @@
     },
     {
       "path": "docs/upgrade/d1-01/unified-data-contract-candidate.md",
-      "bytes": 10191,
-      "sha256": "03be55097285f56dee192e5cf32dea904ab5e9f1a06c17b48fb86c6d0444552d"
+      "bytes": 10190,
+      "sha256": "41c1f028857a09384ad0cf72a128db36b8cf00dba0180ede281cd0c6ad165b2a"
     },
     {
       "path": "docs/upgrade/d1-01/unified-data-contract-draft.md",
@@ -105,6 +106,5 @@
       "bytes": 8382,
       "sha256": "96a83c221f54f3440aa4fe13a9cf10f896648acb814af26c92b5ad362ce2aa0f"
     }
-  ],
-  "publisherSha256": "aa2ef6160644b23edc5bf3dbac7f95b89f186cd5f6b970c80e5f2365c98fb11b"
+  ]
 }

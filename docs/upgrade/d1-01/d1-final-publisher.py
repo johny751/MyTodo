@@ -1,7 +1,7 @@
 """Codespaces-only validated byte publication. Does not import or execute project tests/SQLite."""
 import hashlib,json,os,pathlib,subprocess,zipfile,sys,re
 assert os.environ.get('CODESPACES')=='true'
-root=pathlib.Path('/tmp/d1-closeout-ready').resolve(strict=True)
+root=pathlib.Path('/tmp/d1-closeout-ready-v2').resolve(strict=True)
 assert pathlib.Path.cwd().resolve()==root and (root/'.git').is_file()
 base='1a55ea6da9f2012d7ba82d5756ae8f61d87bae47'
 validated=sys.argv[1];assert len(validated)==40 and all(c in '0123456789abcdef' for c in validated)
