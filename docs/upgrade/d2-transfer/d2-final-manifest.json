@@ -1,0 +1,78 @@
+{
+  "validatedSource": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "zipSha256": "5b310c37e03650ab0bc2d38e3b9dfdce640d673315e65953899602a7478e8ba0",
+  "files": [
+    {
+      "bytes": 7658,
+      "sha256": "4ab6df8c7760c9d4080e1b31212b5ae9fcd1a83b5b4808c7e77954f11d467c1a",
+      "path": "docs/upgrade/d2/android-storage-adapter.md"
+    },
+    {
+      "bytes": 7798,
+      "sha256": "2e0ef4b35d4f09d38d0c1a1100571489dc9225570572a4897b46b583e395febd",
+      "path": "docs/upgrade/d2/architecture.md"
+    },
+    {
+      "bytes": 6244,
+      "sha256": "0f69d6fd259e244b8bd85c41e2e329a80bbb128946cd4708ba8d64ac6c2ae267",
+      "path": "docs/upgrade/d2/backup-restore-implementation.md"
+    },
+    {
+      "bytes": 9907,
+      "sha256": "d9ed6d99c5874e3f6514ba56449d85aafad16f28a18a31c169511cd4cfdbbf8d",
+      "path": "docs/upgrade/d2/final-review.md"
+    },
+    {
+      "bytes": 3320,
+      "sha256": "bbfb417365dcb731429396f38a9a31c35001de11155f4f66c2de186f3a9a1560",
+      "path": "docs/upgrade/d2/fingerprint-portability-resolution.md"
+    },
+    {
+      "bytes": 7422,
+      "sha256": "5cc0a8f45857fa0ae4ef67cd95a35a596cd5c1cf301a59de35639cc7d22f533a",
+      "path": "docs/upgrade/d2/node-storage-adapter.md"
+    },
+    {
+      "bytes": 4320,
+      "sha256": "a260bffc3d4f799c782b5c7a410ece1e8be58b921daeb4a207b628441165d813",
+      "path": "docs/upgrade/d2/owner-decisions-and-blockers.md"
+    },
+    {
+      "bytes": 2214,
+      "sha256": "a2e1709327bf057c4060e800d3718c68ff059549f68ede75f61c707ecbfa2500",
+      "path": "docs/upgrade/d2/README.md"
+    },
+    {
+      "bytes": 6449,
+      "sha256": "64e70557bbc9d9ea5cea47d9e9449c8796007a96804f3d2647a84e5d5344117a",
+      "path": "docs/upgrade/d2/shared-runtime-contract.md"
+    },
+    {
+      "bytes": 9806,
+      "sha256": "4989f2394a40d4e2c055c451144b14a70c93ab078979faaf6fc15de4ddfcfb65",
+      "path": "docs/upgrade/d2/windows-storage-adapter.md"
+    },
+    {
+      "bytes": 2765,
+      "sha256": "5ef4258eb561262a1c6afa3255a1202021c40223ad5d3733f65f6c5f23e36af1",
+      "path": "docs/upgrade/d2/windows-undo-extraction.md"
+    }
+  ],
+  "productionPaths": [
+    "src/sqlite-store.mjs",
+    "src/migration-runtime.mjs",
+    "windows/database.c",
+    "windows/native.h",
+    "windows/migration.c",
+    "windows/migration.h",
+    "windows/operations.c",
+    "windows/undo-capture.c",
+    "windows/undo-internal.h",
+    "scripts/build-windows.mjs",
+    "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+    "android/src/local/gxtodo/replica/MigrationRegistry.java",
+    "android/src/local/gxtodo/replica/ReplicaTaskRecord.java",
+    "android/src/local/gxtodo/replica/PomodoroTasks.java"
+  ],
+  "publisherSha256": "7f77f803f0b9709267999150a36c82ba1667023ad3eb2c7dea2d5cdc024989ce"
+}
