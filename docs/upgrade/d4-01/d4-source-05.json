@@ -1,0 +1,110 @@
+{
+  "files": [
+    {
+      "path": ".github/workflows/d4-ui-candidate.yml",
+      "sha256": "8f18eb70a972f2f2af0507adc3ae358f990855ecb543e3d3b03cd73e240623eb",
+      "bytes": 2668
+    },
+    {
+      "path": "docs/upgrade/d4-01/architecture.md",
+      "sha256": "992be5aca62840ced4ac8189246f865e9a62f0d3bffe0750925e1493e8211efa",
+      "bytes": 2657
+    },
+    {
+      "path": "docs/upgrade/d4-01/collect-evidence.py",
+      "sha256": "919b8508d054aac820425251dbda399ee18eab322ce71bd2b95ae277c468c28c",
+      "bytes": 3846
+    },
+    {
+      "path": "docs/upgrade/d4-01/d4-source-01.json",
+      "sha256": "7cc8ef4f546676c5be42cbbaaecbed5251080cfd835a8f1bfbb464d337899f63",
+      "bytes": 3042
+    },
+    {
+      "path": "docs/upgrade/d4-01/history.md",
+      "sha256": "2f580f1768d6537890917033d3b28f3452bd973c7f75c18eae3cafb36b32bfe1",
+      "bytes": 1345
+    },
+    {
+      "path": "docs/upgrade/d4-01/reuse-and-review-gate.md",
+      "sha256": "2561ad4f0ac4e575f5744dc6f3e6e2360085f5263b13c9f1b1decdd55ee1066b",
+      "bytes": 1493
+    },
+    {
+      "path": "docs/upgrade/d4-01/task-reuse.md",
+      "sha256": "de5e0f050816e7cf5187c57159e41800728ebfe4397f91563bd79e1dc005d01a",
+      "bytes": 9725
+    },
+    {
+      "path": "docs/upgrade/d4-01/work-modules.md",
+      "sha256": "c49732cb95d43dee13eae707433446ef1da1a0c3867da4a9e42c2fc0faa88d22",
+      "bytes": 8763
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "sha256": "79c520e756c94ac7eb8dbfb63582ee35177e6216d3729eb810226c039e48006a",
+      "bytes": 35116
+    },
+    {
+      "path": "prototypes/d4-01/domain.mjs",
+      "sha256": "90568611f1e229918b7336aeee1c2ce71c02ad1f8eac70957d152f754f5e45a4",
+      "bytes": 11939
+    },
+    {
+      "path": "prototypes/d4-01/index.html",
+      "sha256": "05be48461348ec7fbc11ef51f9fdfe8151d5decf00a4430e9029a9c01968bf84",
+      "bytes": 779
+    },
+    {
+      "path": "prototypes/d4-01/styles.css",
+      "sha256": "2660d7133f7c448a7a991f9089467e92c1e83b1724e4a40d363f3fa507356405",
+      "bytes": 24509
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "sha256": "c048235244dd01388ad3992b4029cc70ba5ef1fa72204b6d49e80511894ec667",
+      "bytes": 50606
+    },
+    {
+      "path": "tests/d4-ui/build-demo.mjs",
+      "sha256": "e1ae01dea382167831dd0981c500ff9c388f867d5da712a8e8c6e8ebe76def00",
+      "bytes": 7452
+    },
+    {
+      "path": "tests/d4-ui/domain.test.mjs",
+      "sha256": "535180856df0580275cba49b23e09152d122401caf91d8ba52d7e11eb85ac32a",
+      "bytes": 15858
+    },
+    {
+      "path": "tests/d4-ui/interaction-cases.mjs",
+      "sha256": "84048477bf3b724eb3abc495c5ae08777545dfcfb7b8250ecc60d1853e3d10f4",
+      "bytes": 13847
+    },
+    {
+      "path": "tests/d4-ui/package-demo.mjs",
+      "sha256": "7d67cd16056e0014e755c94303f26063d3c8869ce79b494096149f5af069eb78",
+      "bytes": 2628
+    },
+    {
+      "path": "tests/d4-ui/run-browser.mjs",
+      "sha256": "30d17fdbc1303edaf6b258b3b3f080fcb98f4bda81fad019cb03fb68396ff551",
+      "bytes": 8233
+    },
+    {
+      "path": "tests/d4-ui/scope.mjs",
+      "sha256": "551f128dbced55db7dcd342ad261819c26b03373e9ee5d32801da2f00bff3177",
+      "bytes": 1016
+    },
+    {
+      "path": "tests/d4-ui/work-cases.mjs",
+      "sha256": "9f6114396888812f74c11199b3dfe8163e179d3cb17ea1c9023b9c404e74eb43",
+      "bytes": 6932
+    }
+  ],
+  "base": "d4c5af4cbbb9192c19276dd371bd142c2b835534",
+  "archive": "d4-source-05.zip",
+  "message": "D4 align independent repeat test fixtures and retain precise oracle",
+  "branch": "d4/ui-candidate-1",
+  "sha256": "fe159adf553b3d36c314bc4c112ef0312868c12c5500ccd37aee48180d9ebc06",
+  "allowed": "(?:prototypes/d4-01/.+|tests/d4-ui/.+|docs/upgrade/d4-01/.+|\\.github/workflows/d4-ui-candidate\\.yml)"
+}
