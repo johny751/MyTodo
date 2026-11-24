@@ -1,0 +1,100 @@
+name: MyTodo D1-01 isolated candidate validation
+on:
+  push:
+    branches: ['d1-01/closeout-candidate-1']
+    paths: ['tests/d1-01/**', '.github/workflows/d1-01-contract-validation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mytodo-d1-01-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+jobs:
+  desktop:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - name: Preserve reviewed Git source bytes in the fresh Windows checkout
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          if ($LASTEXITCODE -ne 0) { throw 'Git autocrlf configuration failed' }
+          git config --global core.eol lf
+          if ($LASTEXITCODE -ne 0) { throw 'Git eol configuration failed' }
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - name: Select proven preinstalled Python and Node
+        shell: pwsh
+        run: |
+          ./tests/d1-01/select-python.ps1
+          ./tests/d1-01/select-node.ps1
+      - name: Build independent C and Node generators; run isolated contract and recovery cases
+        shell: pwsh
+        run: |
+          & $env:D1_PYTHON tests/d1-01/ci-run.py desktop "$env:RUNNER_TEMP/d1-desktop"
+          exit $LASTEXITCODE
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d1-desktop-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d1-desktop/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MYTODO_D1_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_D1_ANDROID_PULSE_INSTALL: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - name: Select preinstalled Node
+        run: bash tests/d1-01/select-node.sh
+      - name: Run independent framework SQLite generator and synthetic cases
+        run: python3 tests/d1-01/ci-run.py android "$RUNNER_TEMP/d1-android"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d1-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d1-android/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d1-emulator-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d1-android-emulator/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+  compare:
+    needs: [desktop, android]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: d1-desktop-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d1-desktop-input/
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: d1-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d1-android-input/
+      - name: Compare all three native databases and self-contained feedback restore
+        run: python3 tests/d1-01/compare.py "$RUNNER_TEMP/d1-desktop-input" "$RUNNER_TEMP/d1-android-input" "$RUNNER_TEMP/d1-comparison"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d1-comparison-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d1-comparison/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

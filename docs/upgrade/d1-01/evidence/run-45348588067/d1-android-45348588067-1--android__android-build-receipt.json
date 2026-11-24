@@ -1,0 +1,57 @@
+{
+  "schema": "mytodo-d1-independent-apk",
+  "version": 1,
+  "purpose": "independent-synthetic",
+  "guard": "MYTODO_D1_SYNTHETIC_ONLY",
+  "candidate": "d1-01-candidate.1",
+  "runId": "45348588067",
+  "runAttempt": "1",
+  "sourceSha": "cd0f324e1119a1e0b33f05a582f9c34c13c0ee02",
+  "fixtureSha256": "af09948950b13bb2127f597a60cb31f8c6097f6bfec13866a0758bf029f9fe46",
+  "applicationId": "local.mytodo.d1fixture",
+  "versionName": "0.0.1-d1-fixture",
+  "versionCode": 1,
+  "builtAtUtc": "2026-11-24T07:31:08.376Z",
+  "buildTimezone": "UTC",
+  "author": "by codex",
+  "gitShort": "cd0f3",
+  "releaseApk": false,
+  "formalSigningUsed": false,
+  "productionSourcesLoaded": false,
+  "feedbackAarLoaded": false,
+  "versionHistory": [
+    {
+      "versionName": "0.0.1-d1-fixture",
+      "versionCode": 1,
+      "changes": "Independent synthetic framework SQLite/JSONObject generator; no UI or production entry"
+    }
+  ],
+  "sources": {
+    "FixtureInstrumentation.java": "e9276aa8265be12c9f558cc0aa31b59ef9b11f3e78dc0ebb219ed3d6fcf47576",
+    "AndroidManifest.xml": "99eb6ff9b135872d552d2b26ff113f226b054e1d91ef3455877e69d54af77048"
+  },
+  "toolchain": {
+    "java-version": {
+      "stdout": "",
+      "stderr": "openjdk version \"17.0.21\" 2026-10-20\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)\n"
+    },
+    "javac-version": {
+      "stdout": "javac 17.0.21\n",
+      "stderr": ""
+    },
+    "aapt2-version": {
+      "stdout": "",
+      "stderr": "Android Asset Packaging Tool (aapt) 2.19-11948202\n"
+    },
+    "d8-version": {
+      "stdout": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go/r8bot (luci-r8-custom-ci-archive-0-77gl))\n",
+      "stderr": ""
+    }
+  },
+  "status": "passed",
+  "apk": "/home/runner/work/_temp/d1-android/android/android-build/mytodo-d1-fixture.apk",
+  "apkSha256": "dc82020c3ef1195c09c8a274b1e007149064b5c4ad1c42ae1cc6bec3c7f281f1",
+  "apkBytes": 25120,
+  "certificateVerification": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: CN=MyTodo D1 independent synthetic CI\nSigner #1 certificate SHA-256 digest: b0c5254cd0a9ad63b2613cd0d78107911fc7eb2e54e5f473f4fa53956a4eb75a\nSigner #1 certificate SHA-1 digest: 0f0bae966a32d5971a91e80dee8b0651b66056be\nSigner #1 certificate MD5 digest: 1ab5455da12f95b3d34b8c6c0eb2ca79\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: 1089cba5bc8c667ca43e2e4c72753c0e58fb33c084cefd6496ece3f1a357b0f6\nSigner #1 public key SHA-1 digest: db68a4bc5b646019a56068305566dc849254a00e\nSigner #1 public key MD5 digest: 46978e2feae781728190d30e8bdcdc55\n",
+  "completedAtUtc": "2026-11-24T07:31:25.125Z"
+}

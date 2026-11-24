@@ -1,0 +1,1 @@
+{"errors":[],"mode":"desktop","productionTouched":false,"profiles":[{"cases":88,"failed":0,"passed":88,"profile":"windows","status":"passed"},{"cases":88,"failed":0,"passed":88,"profile":"node","status":"passed"}],"runAttempt":"1","runId":"45359601767","sourceSha":"39287608f87cae99e69ea352eaec032c4e3e174a","status":"passed"}

@@ -1,0 +1,1154 @@
+{
+  "runId": "45353907376",
+  "attempt": 1,
+  "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+  "conclusion": "failure",
+  "url": "https://github.com/johny751/MyTodo/actions/runs/45353907376",
+  "jobs": [
+    {
+      "id": 138306849205,
+      "name": "desktop",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45353907376/job/138306849205"
+    },
+    {
+      "id": 138306849583,
+      "name": "android",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45353907376/job/138306849583"
+    },
+    {
+      "id": 138308253945,
+      "name": "compare",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45353907376/job/138308253945"
+    }
+  ],
+  "archives": [
+    {
+      "name": "d1-android-45353907376-1.zip",
+      "artifactId": 14901512537,
+      "bytes": 212947,
+      "sha256": "f5577cb57a4c990aff4593076a28b697ce16106c20f6fd6c23d7ef6cff1ff3f1",
+      "officialDigest": "sha256:f5577cb57a4c990aff4593076a28b697ce16106c20f6fd6c23d7ef6cff1ff3f1"
+    },
+    {
+      "name": "d1-comparison-45353907376-1.zip",
+      "artifactId": 14901134058,
+      "bytes": 1506,
+      "sha256": "ea29eaac16dac625a68a442706bc6f60e5f0ef642f80fc01eedae739056a6273",
+      "officialDigest": "sha256:ea29eaac16dac625a68a442706bc6f60e5f0ef642f80fc01eedae739056a6273"
+    },
+    {
+      "name": "d1-emulator-45353907376-1.zip",
+      "artifactId": 14900989384,
+      "bytes": 23165,
+      "sha256": "e0965d608fb19820bcc06dc26fec8fc846a77e15710a7d51f077537424281ee1",
+      "officialDigest": "sha256:e0965d608fb19820bcc06dc26fec8fc846a77e15710a7d51f077537424281ee1"
+    },
+    {
+      "name": "d1-desktop-45353907376-1.zip",
+      "artifactId": 14900379646,
+      "bytes": 2532971,
+      "sha256": "74cd46569bdedc4ddd437349a2901e21ac861676443c34e8287020fec612da9f",
+      "officialDigest": "sha256:74cd46569bdedc4ddd437349a2901e21ac861676443c34e8287020fec612da9f"
+    }
+  ],
+  "receipts": [
+    {
+      "artifact": "d1-android-45353907376-1",
+      "entry": "android/android-build-receipt.json",
+      "bytes": 3063,
+      "sha256": "52b1e6111cd849b9298077f94d0a3a5d5b353e204699fcefa254ce32a32a4fe6",
+      "receipt": {
+        "schema": "mytodo-d1-independent-apk",
+        "status": "passed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1",
+        "fixtureSha256": "f9d601af9c44697a2574fd36634a35d4b72a84a362257067fdf1a6797a97abcb"
+      }
+    },
+    {
+      "artifact": "d1-android-45353907376-1",
+      "entry": "android/android-generator-receipt.json",
+      "bytes": 88844,
+      "sha256": "cc9c1f096d14aba13042df1f71d0ebc5d0937d9a4b3a460eafd8cc87cd2bd3d2",
+      "receipt": {
+        "schema": "mytodo-d1-android-generator",
+        "status": "passed",
+        "runId": "45353907376",
+        "actualFramework": true,
+        "actualProductionEntryLoaded": false,
+        "sqliteVersion": "3.39.2",
+        "fixtureSha256": "f9d601af9c44697a2574fd36634a35d4b72a84a362257067fdf1a6797a97abcb"
+      }
+    },
+    {
+      "artifact": "d1-android-45353907376-1",
+      "entry": "android/android-runner-receipt.json",
+      "bytes": 69104,
+      "sha256": "9e83d6a9d64e9f8d446216bc65faa287bceb8ea2e680f748a7ad795edef02aa9",
+      "receipt": {
+        "schema": "mytodo-d1-android-runner",
+        "status": "failed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1",
+        "actualProductionEntryLoaded": false,
+        "exitCode": 1,
+        "firstError": "Error: BLOCKER: live nonempty sidecar at capture\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d1-01/android-runner.mjs:71:103",
+        "fixtureSha256": "f9d601af9c44697a2574fd36634a35d4b72a84a362257067fdf1a6797a97abcb"
+      }
+    },
+    {
+      "artifact": "d1-android-45353907376-1",
+      "entry": "job-receipt.json",
+      "bytes": 813,
+      "sha256": "75c9fc557b33ab123d03b5d8419ee9bd9d1704bc2b55e9bb8c196e2817f8e43c",
+      "receipt": {
+        "status": "failed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1"
+      }
+    },
+    {
+      "artifact": "d1-comparison-45353907376-1",
+      "entry": "comparison-report.json",
+      "bytes": 7218,
+      "sha256": "c92ceab821115a7549b5bb8bf543ac4028f443ad33e641bf26fa176e6c013103",
+      "receipt": {
+        "status": "failed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1",
+        "passed": 0,
+        "failed": 12,
+        "cases": [
+          {
+            "id": "C-windows",
+            "name": "Same source/run native profile and file seal",
+            "status": "failed",
+            "error": "unsupported operand type(s) for +: 'PosixPath' and 'str'"
+          },
+          {
+            "id": "C-node",
+            "name": "Same source/run native profile and file seal",
+            "status": "failed",
+            "error": "unsupported operand type(s) for +: 'PosixPath' and 'str'"
+          },
+          {
+            "id": "C-android",
+            "name": "Same source/run native profile and file seal",
+            "status": "failed",
+            "error": "unsupported operand type(s) for +: 'PosixPath' and 'str'"
+          },
+          {
+            "id": "X-windows-windows",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'windows'"
+          },
+          {
+            "id": "X-windows-node",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'windows'"
+          },
+          {
+            "id": "X-windows-android",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'windows'"
+          },
+          {
+            "id": "X-node-windows",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'node'"
+          },
+          {
+            "id": "X-node-node",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'node'"
+          },
+          {
+            "id": "X-node-android",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'node'"
+          },
+          {
+            "id": "X-android-windows",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'android'"
+          },
+          {
+            "id": "X-android-node",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'android'"
+          },
+          {
+            "id": "X-android-android",
+            "name": "Directed candidate and original-byte comparison",
+            "status": "failed",
+            "error": "'android'"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d1-desktop-45353907376-1",
+      "entry": "job-receipt.json",
+      "bytes": 327,
+      "sha256": "ed916daf10327008433bcbb41d71678b64a78a6788f8f7ea50cb16b0e45c09a4",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1"
+      }
+    },
+    {
+      "artifact": "d1-desktop-45353907376-1",
+      "entry": "node/case-report-node.json",
+      "bytes": 147553,
+      "sha256": "71b2b3b16f0906c3cf4d9683198fc0b9810ae9417dd43c274415cc8061b8455f",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1",
+        "namedCases": 88,
+        "passed": 88,
+        "failed": 0,
+        "cases": [
+          {
+            "id": "T01",
+            "name": "Presence is independent of validity",
+            "status": "passed"
+          },
+          {
+            "id": "T02",
+            "name": "Invalid scalar parents never become roots",
+            "status": "passed"
+          },
+          {
+            "id": "T03",
+            "name": "Quadrant boundaries reject coercion",
+            "status": "passed"
+          },
+          {
+            "id": "T04",
+            "name": "Mathematical JSON integers accepted without fractional coercion",
+            "status": "passed"
+          },
+          {
+            "id": "T05",
+            "name": "Boolean fields reject truthiness",
+            "status": "passed"
+          },
+          {
+            "id": "T06",
+            "name": "Reminder zero negative and unsafe integer distinct",
+            "status": "passed"
+          },
+          {
+            "id": "T07",
+            "name": "UTF8 identity byte boundaries",
+            "status": "passed"
+          },
+          {
+            "id": "T08",
+            "name": "Duplicate JSON keys are preserved as a blocked raw source",
+            "status": "passed"
+          },
+          {
+            "id": "T09",
+            "name": "Array order duplicates and empty are retained",
+            "status": "passed"
+          },
+          {
+            "id": "T10",
+            "name": "Unknown nested big integer remains exact",
+            "status": "passed"
+          },
+          {
+            "id": "T11",
+            "name": "Gregorian leap centuries",
+            "status": "passed"
+          },
+          {
+            "id": "T12",
+            "name": "Fixed offset epoch zero and negative civil",
+            "status": "passed"
+          },
+          {
+            "id": "T13",
+            "name": "Year one and 9999 interpretable but not schedulable",
+            "status": "passed"
+          },
+          {
+            "id": "T14",
+            "name": "Invalid civil dates and platform offsets rejected",
+            "status": "passed"
+          },
+          {
+            "id": "T15",
+            "name": "Explicit absolute offsets identify one instant",
+            "status": "passed"
+          },
+          {
+            "id": "T16",
+            "name": "Unspecified offsets and excessive precision blocked",
+            "status": "passed"
+          },
+          {
+            "id": "T17",
+            "name": "Far calendar millisecond precision exact",
+            "status": "passed"
+          },
+          {
+            "id": "T18",
+            "name": "ISO weekdays invertible with duplicates retained",
+            "status": "passed"
+          },
+          {
+            "id": "T19",
+            "name": "Calendar reference: Sunday belongs to Monday-based week",
+            "status": "passed"
+          },
+          {
+            "id": "T20",
+            "name": "Month end clamp returns to original anchor",
+            "status": "passed"
+          },
+          {
+            "id": "T21",
+            "name": "Yearly leap anchor retained",
+            "status": "passed"
+          },
+          {
+            "id": "T22",
+            "name": "Weekly interval is anchored to Monday",
+            "status": "passed"
+          },
+          {
+            "id": "T23",
+            "name": "Weekdays interval ambiguity is blocked",
+            "status": "passed"
+          },
+          {
+            "id": "T24",
+            "name": "Until is inclusive on calendar day",
+            "status": "passed"
+          },
+          {
+            "id": "T25",
+            "name": "Invalid repeat types are not clamped",
+            "status": "passed"
+          },
+          {
+            "id": "T26",
+            "name": "Next calculation cannot authorize old schedule domain",
+            "status": "passed"
+          },
+          {
+            "id": "T27",
+            "name": "Calendar overflow ends without normalization",
+            "status": "passed"
+          },
+          {
+            "id": "T28",
+            "name": "Reminder day validates entire civil start",
+            "status": "passed"
+          },
+          {
+            "id": "T29",
+            "name": "Stored reminder mismatch is a diagnostic only",
+            "status": "passed"
+          },
+          {
+            "id": "T30",
+            "name": "Completed and absent rules never backfill notifications",
+            "status": "passed"
+          },
+          {
+            "id": "T31",
+            "name": "Instant math integer and enormous range rejection",
+            "status": "passed"
+          },
+          {
+            "id": "T32",
+            "name": "Unknown completion controls cannot authorize reminders",
+            "status": "passed"
+          },
+          {
+            "id": "R01",
+            "name": "Archived uniquely named project is eligible",
+            "status": "passed"
+          },
+          {
+            "id": "R02",
+            "name": "Repeated project names remain ambiguous",
+            "status": "passed"
+          },
+          {
+            "id": "R03",
+            "name": "Missing project remains missing",
+            "status": "passed"
+          },
+          {
+            "id": "R04",
+            "name": "No trimming case folding or Unicode normalization",
+            "status": "passed"
+          },
+          {
+            "id": "R05",
+            "name": "Conflicts and incomplete snapshots do not resolve",
+            "status": "passed"
+          },
+          {
+            "id": "R06",
+            "name": "Parent cycle and true missing are preserved",
+            "status": "passed"
+          },
+          {
+            "id": "R07",
+            "name": "Deleted target remains a tombstone reference",
+            "status": "passed"
+          },
+          {
+            "id": "R08",
+            "name": "Missing ancestor root provenance remains unknown",
+            "status": "passed"
+          },
+          {
+            "id": "R09",
+            "name": "Reference max 64 ancestor boundary is explicit",
+            "status": "passed"
+          },
+          {
+            "id": "P01",
+            "name": "Native source retains all raw TEXT and tombstones",
+            "status": "passed"
+          },
+          {
+            "id": "P02",
+            "name": "Pending body bytes and event semantic correspondence separate",
+            "status": "passed"
+          },
+          {
+            "id": "P04",
+            "name": "JSON event equality never conflates boolean and number",
+            "status": "passed"
+          },
+          {
+            "id": "S01",
+            "name": "atomic migration registry and user_version 1001",
+            "status": "passed"
+          },
+          {
+            "id": "S02",
+            "name": "same immutable migration id/checksum does not repeat",
+            "status": "passed"
+          },
+          {
+            "id": "S03",
+            "name": "different implementation checksum rejected before SQL",
+            "status": "passed"
+          },
+          {
+            "id": "S04",
+            "name": "source raw fingerprint drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S05",
+            "name": "successful registry checksum drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S06",
+            "name": "registry missing successful migration row rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S07",
+            "name": "registered target user_version drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S08",
+            "name": "unknown source schema table rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S09",
+            "name": "explicit columns survive a synthetic extra column; positional SQL fails",
+            "status": "passed"
+          },
+          {
+            "id": "S10",
+            "name": "real error at after_schema; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S11",
+            "name": "real error at after_rows; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S12",
+            "name": "real error at before_registry; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S13",
+            "name": "real error at before_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S14",
+            "name": "real error at after_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S15",
+            "name": "real kill at after_schema; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S16",
+            "name": "real kill at after_rows; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S17",
+            "name": "real kill at before_registry; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S18",
+            "name": "real kill at before_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S19",
+            "name": "real kill at after_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S20",
+            "name": "SQLite backup API reads committed active-WAL snapshot",
+            "status": "passed"
+          },
+          {
+            "id": "S21",
+            "name": "backup database and original image bytes verified",
+            "status": "passed"
+          },
+          {
+            "id": "S22",
+            "name": "backup database bitflip rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S23",
+            "name": "trusted manifest byte drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S24",
+            "name": "missing original image rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S25",
+            "name": "original image bitflip rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S26",
+            "name": "unchanged backup can only become an offline candidate",
+            "status": "passed"
+          },
+          {
+            "id": "S27",
+            "name": "older backup blocked after event progress",
+            "status": "passed"
+          },
+          {
+            "id": "S28",
+            "name": "older backup blocked after ack progress",
+            "status": "passed"
+          },
+          {
+            "id": "S29",
+            "name": "older backup blocked after pending progress",
+            "status": "passed"
+          },
+          {
+            "id": "S30",
+            "name": "older backup blocked after remote progress",
+            "status": "passed"
+          },
+          {
+            "id": "S31",
+            "name": "older backup blocked after epoch progress",
+            "status": "passed"
+          },
+          {
+            "id": "S32",
+            "name": "older backup blocked after actor progress",
+            "status": "passed"
+          },
+          {
+            "id": "S33",
+            "name": "unknown remote evidence cannot authorize restored continuity",
+            "status": "passed"
+          },
+          {
+            "id": "S34",
+            "name": "database without synthetic guard rejected without write",
+            "status": "passed"
+          },
+          {
+            "id": "S35",
+            "name": "outside synthetic root and RUNNER_TEMP itself rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S36",
+            "name": "symlink database input rejected without following write target",
+            "status": "passed"
+          },
+          {
+            "id": "S37",
+            "name": "unknown extra source column rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S38",
+            "name": "unknown source user_version rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S39",
+            "name": "real SQLite RAISE(ROLLBACK) preserves primary and cleanup errors",
+            "status": "passed"
+          },
+          {
+            "id": "S40",
+            "name": "all synthetic cases keep platform-generated source frozen",
+            "status": "passed"
+          },
+          {
+            "id": "S41",
+            "name": "self-contained backup remains verifiable after original asset removal",
+            "status": "passed"
+          },
+          {
+            "id": "S42",
+            "name": "candidate projection drift rejected by registered target checksum",
+            "status": "passed"
+          },
+          {
+            "id": "S43",
+            "name": "source remains frozen after asset independence and target drift cases",
+            "status": "passed"
+          },
+          {
+            "id": "P03",
+            "name": "Frozen native source unchanged by entire test suite",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d1-desktop-45353907376-1",
+      "entry": "node/node-generator-receipt.json",
+      "bytes": 5697,
+      "sha256": "f008b42ab7d32c9950af7dee3d01c529411caacbdf592de29e9de56224ecc554",
+      "receipt": {
+        "status": "created",
+        "runId": "45353907376",
+        "sqliteVersion": "3.54.1"
+      }
+    },
+    {
+      "artifact": "d1-desktop-45353907376-1",
+      "entry": "windows/case-report-windows.json",
+      "bytes": 148226,
+      "sha256": "bc24d8a1761c93dbfa8274a7c02a69084cd74c5cc1692f2b7733b8b03ed4bce1",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "a3a6bd4cfec6f143b53b9e2df922e6bbc96afb1d",
+        "runId": "45353907376",
+        "runAttempt": "1",
+        "namedCases": 88,
+        "passed": 88,
+        "failed": 0,
+        "cases": [
+          {
+            "id": "T01",
+            "name": "Presence is independent of validity",
+            "status": "passed"
+          },
+          {
+            "id": "T02",
+            "name": "Invalid scalar parents never become roots",
+            "status": "passed"
+          },
+          {
+            "id": "T03",
+            "name": "Quadrant boundaries reject coercion",
+            "status": "passed"
+          },
+          {
+            "id": "T04",
+            "name": "Mathematical JSON integers accepted without fractional coercion",
+            "status": "passed"
+          },
+          {
+            "id": "T05",
+            "name": "Boolean fields reject truthiness",
+            "status": "passed"
+          },
+          {
+            "id": "T06",
+            "name": "Reminder zero negative and unsafe integer distinct",
+            "status": "passed"
+          },
+          {
+            "id": "T07",
+            "name": "UTF8 identity byte boundaries",
+            "status": "passed"
+          },
+          {
+            "id": "T08",
+            "name": "Duplicate JSON keys are preserved as a blocked raw source",
+            "status": "passed"
+          },
+          {
+            "id": "T09",
+            "name": "Array order duplicates and empty are retained",
+            "status": "passed"
+          },
+          {
+            "id": "T10",
+            "name": "Unknown nested big integer remains exact",
+            "status": "passed"
+          },
+          {
+            "id": "T11",
+            "name": "Gregorian leap centuries",
+            "status": "passed"
+          },
+          {
+            "id": "T12",
+            "name": "Fixed offset epoch zero and negative civil",
+            "status": "passed"
+          },
+          {
+            "id": "T13",
+            "name": "Year one and 9999 interpretable but not schedulable",
+            "status": "passed"
+          },
+          {
+            "id": "T14",
+            "name": "Invalid civil dates and platform offsets rejected",
+            "status": "passed"
+          },
+          {
+            "id": "T15",
+            "name": "Explicit absolute offsets identify one instant",
+            "status": "passed"
+          },
+          {
+            "id": "T16",
+            "name": "Unspecified offsets and excessive precision blocked",
+            "status": "passed"
+          },
+          {
+            "id": "T17",
+            "name": "Far calendar millisecond precision exact",
+            "status": "passed"
+          },
+          {
+            "id": "T18",
+            "name": "ISO weekdays invertible with duplicates retained",
+            "status": "passed"
+          },
+          {
+            "id": "T19",
+            "name": "Calendar reference: Sunday belongs to Monday-based week",
+            "status": "passed"
+          },
+          {
+            "id": "T20",
+            "name": "Month end clamp returns to original anchor",
+            "status": "passed"
+          },
+          {
+            "id": "T21",
+            "name": "Yearly leap anchor retained",
+            "status": "passed"
+          },
+          {
+            "id": "T22",
+            "name": "Weekly interval is anchored to Monday",
+            "status": "passed"
+          },
+          {
+            "id": "T23",
+            "name": "Weekdays interval ambiguity is blocked",
+            "status": "passed"
+          },
+          {
+            "id": "T24",
+            "name": "Until is inclusive on calendar day",
+            "status": "passed"
+          },
+          {
+            "id": "T25",
+            "name": "Invalid repeat types are not clamped",
+            "status": "passed"
+          },
+          {
+            "id": "T26",
+            "name": "Next calculation cannot authorize old schedule domain",
+            "status": "passed"
+          },
+          {
+            "id": "T27",
+            "name": "Calendar overflow ends without normalization",
+            "status": "passed"
+          },
+          {
+            "id": "T28",
+            "name": "Reminder day validates entire civil start",
+            "status": "passed"
+          },
+          {
+            "id": "T29",
+            "name": "Stored reminder mismatch is a diagnostic only",
+            "status": "passed"
+          },
+          {
+            "id": "T30",
+            "name": "Completed and absent rules never backfill notifications",
+            "status": "passed"
+          },
+          {
+            "id": "T31",
+            "name": "Instant math integer and enormous range rejection",
+            "status": "passed"
+          },
+          {
+            "id": "T32",
+            "name": "Unknown completion controls cannot authorize reminders",
+            "status": "passed"
+          },
+          {
+            "id": "R01",
+            "name": "Archived uniquely named project is eligible",
+            "status": "passed"
+          },
+          {
+            "id": "R02",
+            "name": "Repeated project names remain ambiguous",
+            "status": "passed"
+          },
+          {
+            "id": "R03",
+            "name": "Missing project remains missing",
+            "status": "passed"
+          },
+          {
+            "id": "R04",
+            "name": "No trimming case folding or Unicode normalization",
+            "status": "passed"
+          },
+          {
+            "id": "R05",
+            "name": "Conflicts and incomplete snapshots do not resolve",
+            "status": "passed"
+          },
+          {
+            "id": "R06",
+            "name": "Parent cycle and true missing are preserved",
+            "status": "passed"
+          },
+          {
+            "id": "R07",
+            "name": "Deleted target remains a tombstone reference",
+            "status": "passed"
+          },
+          {
+            "id": "R08",
+            "name": "Missing ancestor root provenance remains unknown",
+            "status": "passed"
+          },
+          {
+            "id": "R09",
+            "name": "Reference max 64 ancestor boundary is explicit",
+            "status": "passed"
+          },
+          {
+            "id": "P01",
+            "name": "Native source retains all raw TEXT and tombstones",
+            "status": "passed"
+          },
+          {
+            "id": "P02",
+            "name": "Pending body bytes and event semantic correspondence separate",
+            "status": "passed"
+          },
+          {
+            "id": "P04",
+            "name": "JSON event equality never conflates boolean and number",
+            "status": "passed"
+          },
+          {
+            "id": "S01",
+            "name": "atomic migration registry and user_version 1001",
+            "status": "passed"
+          },
+          {
+            "id": "S02",
+            "name": "same immutable migration id/checksum does not repeat",
+            "status": "passed"
+          },
+          {
+            "id": "S03",
+            "name": "different implementation checksum rejected before SQL",
+            "status": "passed"
+          },
+          {
+            "id": "S04",
+            "name": "source raw fingerprint drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S05",
+            "name": "successful registry checksum drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S06",
+            "name": "registry missing successful migration row rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S07",
+            "name": "registered target user_version drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S08",
+            "name": "unknown source schema table rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S09",
+            "name": "explicit columns survive a synthetic extra column; positional SQL fails",
+            "status": "passed"
+          },
+          {
+            "id": "S10",
+            "name": "real error at after_schema; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S11",
+            "name": "real error at after_rows; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S12",
+            "name": "real error at before_registry; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S13",
+            "name": "real error at before_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S14",
+            "name": "real error at after_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S15",
+            "name": "real kill at after_schema; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S16",
+            "name": "real kill at after_rows; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S17",
+            "name": "real kill at before_registry; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S18",
+            "name": "real kill at before_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S19",
+            "name": "real kill at after_commit; same-path new-PID reopen",
+            "status": "passed"
+          },
+          {
+            "id": "S20",
+            "name": "SQLite backup API reads committed active-WAL snapshot",
+            "status": "passed"
+          },
+          {
+            "id": "S21",
+            "name": "backup database and original image bytes verified",
+            "status": "passed"
+          },
+          {
+            "id": "S22",
+            "name": "backup database bitflip rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S23",
+            "name": "trusted manifest byte drift rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S24",
+            "name": "missing original image rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S25",
+            "name": "original image bitflip rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S26",
+            "name": "unchanged backup can only become an offline candidate",
+            "status": "passed"
+          },
+          {
+            "id": "S27",
+            "name": "older backup blocked after event progress",
+            "status": "passed"
+          },
+          {
+            "id": "S28",
+            "name": "older backup blocked after ack progress",
+            "status": "passed"
+          },
+          {
+            "id": "S29",
+            "name": "older backup blocked after pending progress",
+            "status": "passed"
+          },
+          {
+            "id": "S30",
+            "name": "older backup blocked after remote progress",
+            "status": "passed"
+          },
+          {
+            "id": "S31",
+            "name": "older backup blocked after epoch progress",
+            "status": "passed"
+          },
+          {
+            "id": "S32",
+            "name": "older backup blocked after actor progress",
+            "status": "passed"
+          },
+          {
+            "id": "S33",
+            "name": "unknown remote evidence cannot authorize restored continuity",
+            "status": "passed"
+          },
+          {
+            "id": "S34",
+            "name": "database without synthetic guard rejected without write",
+            "status": "passed"
+          },
+          {
+            "id": "S35",
+            "name": "outside synthetic root and RUNNER_TEMP itself rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S36",
+            "name": "symlink database input rejected without following write target",
+            "status": "passed"
+          },
+          {
+            "id": "S37",
+            "name": "unknown extra source column rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S38",
+            "name": "unknown source user_version rejected",
+            "status": "passed"
+          },
+          {
+            "id": "S39",
+            "name": "real SQLite RAISE(ROLLBACK) preserves primary and cleanup errors",
+            "status": "passed"
+          },
+          {
+            "id": "S40",
+            "name": "all synthetic cases keep platform-generated source frozen",
+            "status": "passed"
+          },
+          {
+            "id": "S41",
+            "name": "self-contained backup remains verifiable after original asset removal",
+            "status": "passed"
+          },
+          {
+            "id": "S42",
+            "name": "candidate projection drift rejected by registered target checksum",
+            "status": "passed"
+          },
+          {
+            "id": "S43",
+            "name": "source remains frozen after asset independence and target drift cases",
+            "status": "passed"
+          },
+          {
+            "id": "P03",
+            "name": "Frozen native source unchanged by entire test suite",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d1-desktop-45353907376-1",
+      "entry": "windows/native-generator-receipt.json",
+      "bytes": 965,
+      "sha256": "1a85bdd871bbbd274f86690c37502d420259547dcfb500f94720905abad6433a",
+      "receipt": {
+        "status": "created",
+        "runId": "45353907376",
+        "sqliteVersion": "3.38.2"
+      }
+    }
+  ],
+  "scope": "original GitHub artifact ZIPs and JSON receipts; file handling only; no project tests or SQLite executed in Codespaces"
+}

@@ -1,0 +1,3372 @@
+{
+  "schema": "mytodo-d1-android-generator",
+  "version": 1,
+  "candidate": "d1-01-candidate.1",
+  "guard": "MYTODO_D1_SYNTHETIC_ONLY",
+  "synthetic": true,
+  "actualFramework": true,
+  "actualProductionEntryLoaded": false,
+  "pid": 2443,
+  "androidApi": 34,
+  "fingerprint": "google\/sdk_gphone64_x86_64\/emu64xa:14\/UE1A.230829.050\/12077443:userdebug\/dev-keys",
+  "runId": "45367557986",
+  "fixtureId": "synthetic-fixed-v1",
+  "fixtureSha256": "e29b960dd9c51304a540790af1eaaf1c5509f52666debfcf163b3f2e914338bf",
+  "buildMetadata": {
+    "schema": "mytodo-d1-independent-apk",
+    "version": 1,
+    "purpose": "independent-synthetic",
+    "guard": "MYTODO_D1_SYNTHETIC_ONLY",
+    "candidate": "d1-01-candidate.1",
+    "runId": "45367557986",
+    "runAttempt": "1",
+    "sourceSha": "8239d39220d940bf9c047a1dcaffd2a831cca2fc",
+    "fixtureSha256": "e29b960dd9c51304a540790af1eaaf1c5509f52666debfcf163b3f2e914338bf",
+    "applicationId": "local.mytodo.d1fixture",
+    "versionName": "0.0.1-d1-fixture",
+    "versionCode": 1,
+    "builtAtUtc": "2026-11-24T09:41:27.429Z",
+    "buildTimezone": "UTC",
+    "author": "by codex",
+    "gitShort": "8239d",
+    "releaseApk": false,
+    "formalSigningUsed": false,
+    "productionSourcesLoaded": false,
+    "feedbackAarLoaded": false,
+    "versionHistory": [
+      {
+        "versionName": "0.0.1-d1-fixture",
+        "versionCode": 1,
+        "changes": "Independent synthetic framework SQLite\/JSONObject generator; no UI or production entry"
+      }
+    ],
+    "sources": {
+      "FixtureInstrumentation.java": "0ae112acf210c59cbbbf54b588f716f5c8e88a67f7254dc3764705d43d448abb",
+      "AndroidManifest.xml": "99eb6ff9b135872d552d2b26ff113f226b054e1d91ef3455877e69d54af77048"
+    },
+    "toolchain": {
+      "java-version": {
+        "stdout": "",
+        "stderr": "openjdk version \"17.0.21\" 2026-10-20\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)\n"
+      },
+      "javac-version": {
+        "stdout": "javac 17.0.21\n",
+        "stderr": ""
+      },
+      "aapt2-version": {
+        "stdout": "",
+        "stderr": "Android Asset Packaging Tool (aapt) 2.19-11948202\n"
+      },
+      "d8-version": {
+        "stdout": "D8 8.6.2-dev (build abaab469b5ebd4dd2bb91ba0ed6f45277faae4ca from go\/r8bot (luci-r8-custom-ci-archive-0-77gl))\n",
+        "stderr": ""
+      }
+    }
+  },
+  "core": {
+    "sqliteVersion": "3.39.2",
+    "integrityCheck": [
+      "ok"
+    ],
+    "userVersion": 0,
+    "rowsCount": 49,
+    "outboxCount": 2,
+    "observations": [
+      {
+        "key": "[\"tasks\",\"parent-case-0\"]",
+        "originalDataSha256": "23fc389b30dc9378b1e5215104647933e4b5fb5876ce36b33f20e72fc0790363",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-1\"]",
+        "originalDataSha256": "0d0d77dfaf69349b05b2fc1fa265dbec974226ba93b6881be3b0face26123014",
+        "parentId": {
+          "presence": true,
+          "isNull": true,
+          "jsonType": "json-null",
+          "javaClass": "org.json.JSONObject$1",
+          "optStringNullDefault": "null",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-2\"]",
+        "originalDataSha256": "bdc2278c5f11627841cd8ca2cf116d8b0481a928320756af091c6d5e4e7c5aa4",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-3\"]",
+        "originalDataSha256": "059221b16fd7b73fb3ae32f8ce4fe6c49ce9846f294eafa4b8ae22ca76e7247a",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "0",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-4\"]",
+        "originalDataSha256": "772c9a55b9f834fda2776973b3cfde86064f97026c8d6aab72482664a1944609",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "parent",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-5\"]",
+        "originalDataSha256": "1cec5d22cf9a61519042434948e9406acf1795319d05f932b96f9a60cce21565",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-6\"]",
+        "originalDataSha256": "4ce9eac12e3b5014baf671a2ff9130c9cc37e07a42f69b92808d28af8565d5a7",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "array",
+          "javaClass": "org.json.JSONArray",
+          "optStringNullDefault": "[]",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent-case-7\"]",
+        "originalDataSha256": "7dd1008a08baaa368c7530a9325c115d295a08f6d39de61e80be6cc0d70dd22e",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "object",
+          "javaClass": "org.json.JSONObject",
+          "optStringNullDefault": "{}",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-11-24T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-0\"]",
+        "originalDataSha256": "3d1516a25d1a049d8bc2adb9ad2a2704651a85533e0ff8da5966c1f3a2804bbe",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-1\"]",
+        "originalDataSha256": "2b08fa10deb9f41199540a304b9dbd41850ccc285d0ba7d08a931cc6f2f266b6",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": true,
+          "jsonType": "json-null",
+          "javaClass": "org.json.JSONObject$1",
+          "optStringNullDefault": "null",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-2\"]",
+        "originalDataSha256": "1252e9fd220bbb6ce88692224c102989c0af5b6f50c7d7772db7c705c3b800a3",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-3\"]",
+        "originalDataSha256": "3c93eddad2acb9672b06c462c52eabcd307a02af9dc0ca6a82d8847d746b2dd4",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "0",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-4\"]",
+        "originalDataSha256": "66d175a81496614a00ca347ffa871f359091cef40776f6b217631046d18b8d0b",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "3",
+          "optIntDefault0": 3,
+          "optLongDefault0": 3,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-5\"]",
+        "originalDataSha256": "000676a6d1ab9127b66a3ab90a812a67badeec1005564f61864ab34813c76d4c",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "4",
+          "optIntDefault0": 4,
+          "optLongDefault0": 4,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-6\"]",
+        "originalDataSha256": "42f4a4a1b819d72de2d755e26b5c09e8cd8b5726b4200b3deb03b724cf6af749",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "-1",
+          "optIntDefault0": -1,
+          "optLongDefault0": -1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-7\"]",
+        "originalDataSha256": "8058cafd7847e0adcba209ddf7446c05f1585de89e1ad6bbfac1379cc3237ef6",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Double",
+          "optStringNullDefault": "1.5",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-8\"]",
+        "originalDataSha256": "86df8fac8c2f384eaec1836182c55ce8d731f8d00ba42f7b4027d579331c2d4c",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2",
+          "optIntDefault0": 2,
+          "optLongDefault0": 2,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-9\"]",
+        "originalDataSha256": "313fd46f11a8bfb50af7a4175003005a569f23fff570dea498cbe531c6aff0e6",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "true",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": true
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-10\"]",
+        "originalDataSha256": "d6dd73245a3968f8616673cf48323cb828383bde21c766d08340a897f40c46a4",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "array",
+          "javaClass": "org.json.JSONArray",
+          "optStringNullDefault": "[]",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"quadrant-case-11\"]",
+        "originalDataSha256": "558f79892416b2e0234952187b751cea2eacbe685bbfe52b95188dd1a24a84bb",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "object",
+          "javaClass": "org.json.JSONObject",
+          "optStringNullDefault": "{}",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-0\"]",
+        "originalDataSha256": "814d28ebef7f9202497eb84b58eee1f785d7fe0436b77a549d3a5e805474823b",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-1\"]",
+        "originalDataSha256": "fee5511b0739ce3d731b058ebafa04d88d97ef8992ebd6809608d5c9dc399532",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": true,
+          "jsonType": "json-null",
+          "javaClass": "org.json.JSONObject$1",
+          "optStringNullDefault": "null",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-2\"]",
+        "originalDataSha256": "bc91e02535878fa30d759fb5868b4756c9f07a86ad1621eef490edf8152f9f7f",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-3\"]",
+        "originalDataSha256": "1bb7c50e5778f9870511d151dceeafc2dfb500257944b3f570c38602b90b248c",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "0",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-4\"]",
+        "originalDataSha256": "aa86be2d33227114e0ab1d471014308aca4ac9b7087682c1fcffafc643a02cff",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-5\"]",
+        "originalDataSha256": "84f64e0194d4f3214477d0fb4ad74f854824a413e3289d1d2a0a3a5910184f36",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "-1",
+          "optIntDefault0": -1,
+          "optLongDefault0": -1,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-6\"]",
+        "originalDataSha256": "d03388e5226f26a969e7561db50562d5d1268e1dbc69df8983794e9666527e55",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Double",
+          "optStringNullDefault": "1.5",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-7\"]",
+        "originalDataSha256": "ec879150814d2951bb59ada9812973690c0b41bd1eedb9e61a2b35b015c1bdbd",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "1",
+          "optIntDefault0": 1,
+          "optLongDefault0": 1,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-8\"]",
+        "originalDataSha256": "dc338251c73d9d2d9c6add36a4b486be4405daf5185295fba61a2fdd3870f707",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"reminder-case-9\"]",
+        "originalDataSha256": "80df8cec6286adc87700951fe5acd00579f04bc24ff9d56076c42a7533c39804",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Long",
+          "optStringNullDefault": "9007199254740992",
+          "optIntDefault0": 0,
+          "optLongDefault0": 9007199254740992,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"parent\"]",
+        "originalDataSha256": "7119047d4db59eb84388d5a18368c8c5ae504f1bb5f5bf5c3b56f3a4ed82ec04",
+        "parentId": {
+          "presence": true,
+          "isNull": true,
+          "jsonType": "json-null",
+          "javaClass": "org.json.JSONObject$1",
+          "optStringNullDefault": "null",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "0",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "2026-01-31T09:00",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"child\"]",
+        "originalDataSha256": "3312786f1609195665dc30f970d7c81ab1ad6c7a207cbb1c8593f3bffa2ac6bb",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "parent",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "number",
+          "javaClass": "java.lang.Integer",
+          "optStringNullDefault": "2",
+          "optIntDefault0": 2,
+          "optLongDefault0": 2,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "boolean",
+          "javaClass": "java.lang.Boolean",
+          "optStringNullDefault": "false",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"orphan\"]",
+        "originalDataSha256": "f2a4e1ad5a3f18d5c45e3c6786b9d6be04bda4e21545ba1793e67263f16e58c8",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "missing",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"cycle-a\"]",
+        "originalDataSha256": "39dc2a1b850578918f7e322cd01f019e22780a3446059efdeacd2a8106dbfeb9",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "cycle-b",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"cycle-b\"]",
+        "originalDataSha256": "af32a67fb8ed7bb8eb43240c87002e0a8fca15df969e5155595b21f35831f04c",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "cycle-a",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"self\"]",
+        "originalDataSha256": "552df5b4f220dc6ca05fb40d66e26cfe0472026d3f7af782b8f99490f10c0116",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "self",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"deleted-task\"]",
+        "originalDataSha256": "8ff0024f9fa3e8544439bd2e11bc24033d8b28bd9905eefce90a3daa44a8faab",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"generated\"]",
+        "originalDataSha256": "2d8e18ebe049d47747a2b0ebb32093ae2b5607743522f1a8b393be063bb1e79d",
+        "parentId": {
+          "presence": true,
+          "isNull": false,
+          "jsonType": "string",
+          "javaClass": "java.lang.String",
+          "optStringNullDefault": "parent",
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"unknown-field\"]",
+        "originalDataSha256": "db5873605a675507bf6a1a07deaaae376b621118011fd3df672b18ad85e00cfb",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tasks\",\"conflict\"]",
+        "originalDataSha256": "045916a56329dd66dfb95137aaf93bc97295e7e39baafbec2b0ddac6901ddee9",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"projects\",\"p-unique\"]",
+        "originalDataSha256": "27b150caa6b2fee4eede21d4027359a9ce5b6db98986d1b48dd0fb51c445a6e4",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"projects\",\"p-dup-1\"]",
+        "originalDataSha256": "04b1b664b55bbccee42d31ae6811279126e136c42df6b1145201e96ab159d53a",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"projects\",\"p-dup-2\"]",
+        "originalDataSha256": "dac2e9e150f980f20340de7cb850b7d10e84c844e2a606182c8c713357223b0e",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"projects\",\"p-deleted\"]",
+        "originalDataSha256": "ec153b782f5b1e80e50c745246b5fed3527961aec3aa8f76205bf9c23edc9528",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"projects\",\"p-composed\"]",
+        "originalDataSha256": "69ec26e35b64dec0a64d5b6b5386fd3a0d1f596779bc1f02915b3b42a4cc1231",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"projects\",\"p-decomposed\"]",
+        "originalDataSha256": "9c7cb73ceacfba228d7d55f44db9a1cc0dda36390861973a97400c336ac54e36",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"notes\",\"note-1\"]",
+        "originalDataSha256": "e28f9930ee82aeb9f503a43c9f3e36d0acc123d5cff34e6a69d7d434e75d026d",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"tags\",\"标签\"]",
+        "originalDataSha256": "c6be5d14e2d37a371232cc5e5237605f307a334e9747b3a351c530316697f1cc",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      },
+      {
+        "key": "[\"places\",\"地点\"]",
+        "originalDataSha256": "df0794c69c7de8cdc002b42dbb763d3860ab33cba9415669cb373b5aba973fe0",
+        "parentId": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "quadrant": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "reminderAt": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "done": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        },
+        "start": {
+          "presence": false,
+          "isNull": true,
+          "jsonType": "missing",
+          "javaClass": null,
+          "optStringNullDefault": null,
+          "optIntDefault0": 0,
+          "optLongDefault0": 0,
+          "optBooleanDefaultFalse": false
+        }
+      }
+    ],
+    "originalMetaSha256": "621908074466de2106e70d83943c2632c5192df1a95d18fba72a322a9420ce17",
+    "path": "\/data\/data\/local.mytodo.d1fixture\/files\/d1-fixtures\/android-source.sqlite",
+    "rawTextPreserved": true
+  },
+  "sqliteVersion": "3.39.2",
+  "rowsCount": 49,
+  "outboxCount": 2,
+  "files": {
+    "android-source.sqlite": {
+      "path": "\/data\/data\/local.mytodo.d1fixture\/files\/d1-fixtures\/android-source.sqlite",
+      "bytes": 65536,
+      "sha256": "87787c2418de5ab97584ab75a18f7ed508efae362236fe3fbdc8734d43dbd060",
+      "writersClosed": true,
+      "sidecars": [
+        {
+          "name": "android-source.sqlite-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "name": "android-source.sqlite-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "name": "android-source.sqlite-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ],
+      "snapshotMethod": "fresh independent fixture; all SQLite handles closed before capture",
+      "sqliteMasterObjects": [
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_entities_1",
+          "tblName": "entities",
+          "rootpage": 7,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "task_filter",
+          "tblName": "entities",
+          "rootpage": 8,
+          "sql": "CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e444558207461736b5f66696c746572204f4e20656e746974696573286b696e642c64656c657465642c646f6e652c7175616472616e742c737461727429",
+          "sqlUtf8Sha256": "9b58542c2ae82ea91f447926ea1432745220fa46f7e99686d3da0819efd35e2e"
+        },
+        {
+          "type": "index",
+          "name": "task_parent",
+          "tblName": "entities",
+          "rootpage": 10,
+          "sql": "CREATE INDEX task_parent ON entities(parent_id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e444558207461736b5f706172656e74204f4e20656e74697469657328706172656e745f696429",
+          "sqlUtf8Sha256": "d78c91746549936da69b3788d966332cbc31f1368f66169d316f56fe659e8452"
+        },
+        {
+          "type": "index",
+          "name": "task_reminders",
+          "tblName": "entities",
+          "rootpage": 9,
+          "sql": "CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e444558207461736b5f72656d696e64657273204f4e20656e746974696573286b696e642c64656c657465642c646f6e652c72656d696e6465725f617429",
+          "sqlUtf8Sha256": "ba08373c23b71fc685b6d55964764e8f9776bdf1cf796afe19d9a04d565e297d"
+        },
+        {
+          "type": "table",
+          "name": "android_metadata",
+          "tblName": "android_metadata",
+          "rootpage": 3,
+          "sql": "CREATE TABLE android_metadata (locale TEXT)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c4520616e64726f69645f6d6574616461746120286c6f63616c65205445585429",
+          "sqlUtf8Sha256": "a4ab2fc96f4e5ed5ab1bb31713f21eccefaffb9f5a01291906bb7f4cd5ded950"
+        },
+        {
+          "type": "table",
+          "name": "d1_synthetic_guard",
+          "tblName": "d1_synthetic_guard",
+          "rootpage": 4,
+          "sql": "CREATE TABLE d1_synthetic_guard(token TEXT NOT NULL,fixture_id TEXT NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c452064315f73796e7468657469635f677561726428746f6b656e2054455854204e4f54204e554c4c2c666978747572655f69642054455854204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "33b7de0eef2972d19ed5ef88f7ac63c850f8df96ee6c21b84923c96df6822b38"
+        },
+        {
+          "type": "table",
+          "name": "entities",
+          "tblName": "entities",
+          "rootpage": 6,
+          "sql": "CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c4520656e746974696573286b65792054455854205052494d415259204b45592c6b696e642054455854204e4f54204e554c4c2c69642054455854204e4f54204e554c4c2c646174612054455854204e4f54204e554c4c2c7265636f72642054455854204e4f54204e554c4c2c64656c6574656420494e5445474552204e4f54204e554c4c2c636f6e666c696374732054455854204e4f54204e554c4c2c706172656e745f696420544558542c646f6e6520494e54454745522c7175616472616e7420494e54454745522c72656d696e6465725f617420494e54454745522c7374617274205445585429",
+          "sqlUtf8Sha256": "a01a4f20ad5b31e7627cd52282c0cd462efb72ef15add76b3f5aa4038da34722"
+        },
+        {
+          "type": "table",
+          "name": "meta",
+          "tblName": "meta",
+          "rootpage": 5,
+          "sql": "CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45206d65746128696420494e5445474552205052494d415259204b455920434845434b2869643d31292c76616c75652054455854204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "a9698b2bfe8b1722f01cc2e1f10108d2084ddf29a475f288dcb4a7b1fcec60ad"
+        },
+        {
+          "type": "table",
+          "name": "outbox",
+          "tblName": "outbox",
+          "rootpage": 11,
+          "sql": "CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45206f7574626f7828696420494e5445474552205052494d415259204b45592c6576656e742054455854204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "bb26610fab1d608ddca3d807ef445b9e1b57c15b1f39ad19c80c49542f09d70b"
+        }
+      ],
+      "frameworkSchema": {
+        "schemaObjects": [
+          {
+            "type": "table",
+            "name": "android_metadata",
+            "tblName": "android_metadata",
+            "rootpage": 3,
+            "sql": "CREATE TABLE android_metadata (locale TEXT)",
+            "sqlStorageClass": "text",
+            "sqlUtf8Hex": "435245415445205441424c4520616e64726f69645f6d6574616461746120286c6f63616c65205445585429",
+            "sqlUtf8Sha256": "a4ab2fc96f4e5ed5ab1bb31713f21eccefaffb9f5a01291906bb7f4cd5ded950"
+          }
+        ],
+        "tableInfo": [
+          {
+            "cid": 0,
+            "name": "locale",
+            "type": "TEXT",
+            "notnull": 0,
+            "dfltValue": null,
+            "pk": 0
+          }
+        ],
+        "localeRows": [
+          {
+            "storageClass": "text",
+            "utf8Hex": "656e5f5553",
+            "utf8Sha256": "674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b",
+            "bytes": 5
+          }
+        ],
+        "metadataTablePresent": true,
+        "localeColumnPresent": true,
+        "localeRowsRead": true,
+        "observationOnly": true,
+        "localeByteInput": "CAST(locale AS BLOB); storageClass recorded independently"
+      }
+    },
+    "feedback-source.sqlite": {
+      "path": "\/data\/data\/local.mytodo.d1fixture\/files\/d1-fixtures\/feedback-source.sqlite",
+      "bytes": 69632,
+      "sha256": "79faae4b8a611e5a1cfecd93b6129cfbe3702d989081b668d9646bed5246e404",
+      "writersClosed": true,
+      "sidecars": [
+        {
+          "name": "feedback-source.sqlite-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "name": "feedback-source.sqlite-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "name": "feedback-source.sqlite-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ],
+      "snapshotMethod": "fresh independent fixture; all SQLite handles closed before capture",
+      "sqliteMasterObjects": [
+        {
+          "type": "index",
+          "name": "feedback_asset_refs",
+          "tblName": "links",
+          "rootpage": 17,
+          "sql": "CREATE INDEX feedback_asset_refs ON links(asset_id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e44455820666565646261636b5f61737365745f72656673204f4e206c696e6b732861737365745f696429",
+          "sqlUtf8Sha256": "cb6240bbd16793f93ffa09c091a0d81a45f810a1492850a47b63044fa796f1c6"
+        },
+        {
+          "type": "index",
+          "name": "feedback_note_numbers",
+          "tblName": "records",
+          "rootpage": 16,
+          "sql": "CREATE UNIQUE INDEX feedback_note_numbers ON records(number) WHERE bucket='notes'",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520554e4951554520494e44455820666565646261636b5f6e6f74655f6e756d62657273204f4e207265636f726473286e756d62657229205748455245206275636b65743d276e6f74657327",
+          "sqlUtf8Sha256": "a24a277ada58961623acf3ef1618c4f8caf1e5d0fbe46150b501d60a33d4e3df"
+        },
+        {
+          "type": "index",
+          "name": "feedback_order",
+          "tblName": "records",
+          "rootpage": 14,
+          "sql": "CREATE INDEX feedback_order ON records(bucket,deleted,updated_at DESC,id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e44455820666565646261636b5f6f72646572204f4e207265636f726473286275636b65742c64656c657465642c757064617465645f617420444553432c696429",
+          "sqlUtf8Sha256": "fff9d8d7d851355d344540bd0b7d81562f76927ee9c0d9d49a37176446f6ef00"
+        },
+        {
+          "type": "index",
+          "name": "feedback_status_order",
+          "tblName": "records",
+          "rootpage": 15,
+          "sql": "CREATE INDEX feedback_status_order ON records(bucket,deleted,state,updated_at DESC,id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e44455820666565646261636b5f7374617475735f6f72646572204f4e207265636f726473286275636b65742c64656c657465642c73746174652c757064617465645f617420444553432c696429",
+          "sqlUtf8Sha256": "94574dd43575463c1061f334cd4acc916fb3f1206e8d956aa4c7a935cb7b117c"
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_assets_1",
+          "tblName": "assets",
+          "rootpage": 8,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_assets_2",
+          "tblName": "assets",
+          "rootpage": 9,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_links_1",
+          "tblName": "links",
+          "rootpage": 11,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_records_1",
+          "tblName": "records",
+          "rootpage": 6,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_settings_1",
+          "tblName": "settings",
+          "rootpage": 13,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "table",
+          "name": "android_metadata",
+          "tblName": "android_metadata",
+          "rootpage": 3,
+          "sql": "CREATE TABLE android_metadata (locale TEXT)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c4520616e64726f69645f6d6574616461746120286c6f63616c65205445585429",
+          "sqlUtf8Sha256": "a4ab2fc96f4e5ed5ab1bb31713f21eccefaffb9f5a01291906bb7f4cd5ded950"
+        },
+        {
+          "type": "table",
+          "name": "assets",
+          "tblName": "assets",
+          "rootpage": 7,
+          "sql": "CREATE TABLE assets(id TEXT PRIMARY KEY NOT NULL,file_name TEXT NOT NULL UNIQUE,mime TEXT NOT NULL,size INTEGER NOT NULL,sha256 TEXT NOT NULL,width INTEGER NOT NULL,height INTEGER NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45206173736574732869642054455854205052494d415259204b4559204e4f54204e554c4c2c66696c655f6e616d652054455854204e4f54204e554c4c20554e495155452c6d696d652054455854204e4f54204e554c4c2c73697a6520494e5445474552204e4f54204e554c4c2c7368613235362054455854204e4f54204e554c4c2c776964746820494e5445474552204e4f54204e554c4c2c68656967687420494e5445474552204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "c6530c71d53cc3443646dbf72b9594979f2613a4a41b97f67f5a71283d48dadd"
+        },
+        {
+          "type": "table",
+          "name": "d1_synthetic_guard",
+          "tblName": "d1_synthetic_guard",
+          "rootpage": 4,
+          "sql": "CREATE TABLE d1_synthetic_guard(token TEXT NOT NULL,fixture_id TEXT NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c452064315f73796e7468657469635f677561726428746f6b656e2054455854204e4f54204e554c4c2c666978747572655f69642054455854204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "33b7de0eef2972d19ed5ef88f7ac63c850f8df96ee6c21b84923c96df6822b38"
+        },
+        {
+          "type": "table",
+          "name": "links",
+          "tblName": "links",
+          "rootpage": 10,
+          "sql": "CREATE TABLE links(bucket TEXT NOT NULL,record_id TEXT NOT NULL,asset_id TEXT NOT NULL,PRIMARY KEY(bucket,record_id,asset_id),FOREIGN KEY(bucket,record_id) REFERENCES records(bucket,id) ON DELETE CASCADE,FOREIGN KEY(asset_id) REFERENCES assets(id))",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45206c696e6b73286275636b65742054455854204e4f54204e554c4c2c7265636f72645f69642054455854204e4f54204e554c4c2c61737365745f69642054455854204e4f54204e554c4c2c5052494d415259204b4559286275636b65742c7265636f72645f69642c61737365745f6964292c464f524549474e204b4559286275636b65742c7265636f72645f696429205245464552454e434553207265636f726473286275636b65742c696429204f4e2044454c45544520434153434144452c464f524549474e204b45592861737365745f696429205245464552454e434553206173736574732869642929",
+          "sqlUtf8Sha256": "df2763b2bf7da2beccb9ddaf66429a6af403e9d823669651406d066cf649a0c4"
+        },
+        {
+          "type": "table",
+          "name": "records",
+          "tblName": "records",
+          "rootpage": 5,
+          "sql": "CREATE TABLE records(bucket TEXT NOT NULL,id TEXT NOT NULL,payload TEXT NOT NULL,updated_at INTEGER NOT NULL,state TEXT NOT NULL,search TEXT NOT NULL,deleted INTEGER NOT NULL,number INTEGER,PRIMARY KEY(bucket,id))",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45207265636f726473286275636b65742054455854204e4f54204e554c4c2c69642054455854204e4f54204e554c4c2c7061796c6f61642054455854204e4f54204e554c4c2c757064617465645f617420494e5445474552204e4f54204e554c4c2c73746174652054455854204e4f54204e554c4c2c7365617263682054455854204e4f54204e554c4c2c64656c6574656420494e5445474552204e4f54204e554c4c2c6e756d62657220494e54454745522c5052494d415259204b4559286275636b65742c69642929",
+          "sqlUtf8Sha256": "3a824cb7d97b30ad396f6a93dc4653190eea930474eac3f02084cd10a00e484d"
+        },
+        {
+          "type": "table",
+          "name": "settings",
+          "tblName": "settings",
+          "rootpage": 12,
+          "sql": "CREATE TABLE settings(key TEXT PRIMARY KEY NOT NULL,value INTEGER NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c452073657474696e6773286b65792054455854205052494d415259204b4559204e4f54204e554c4c2c76616c756520494e5445474552204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "e79de00154c964afd9dd8d7a25376b4072420c571506339de945771cdfde8fb6"
+        }
+      ],
+      "frameworkSchema": {
+        "schemaObjects": [
+          {
+            "type": "table",
+            "name": "android_metadata",
+            "tblName": "android_metadata",
+            "rootpage": 3,
+            "sql": "CREATE TABLE android_metadata (locale TEXT)",
+            "sqlStorageClass": "text",
+            "sqlUtf8Hex": "435245415445205441424c4520616e64726f69645f6d6574616461746120286c6f63616c65205445585429",
+            "sqlUtf8Sha256": "a4ab2fc96f4e5ed5ab1bb31713f21eccefaffb9f5a01291906bb7f4cd5ded950"
+          }
+        ],
+        "tableInfo": [
+          {
+            "cid": 0,
+            "name": "locale",
+            "type": "TEXT",
+            "notnull": 0,
+            "dfltValue": null,
+            "pk": 0
+          }
+        ],
+        "localeRows": [
+          {
+            "storageClass": "text",
+            "utf8Hex": "656e5f5553",
+            "utf8Sha256": "674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b",
+            "bytes": 5
+          }
+        ],
+        "metadataTablePresent": true,
+        "localeColumnPresent": true,
+        "localeRowsRead": true,
+        "observationOnly": true,
+        "localeByteInput": "CAST(locale AS BLOB); storageClass recorded independently"
+      }
+    },
+    "feedback-validation.sqlite": {
+      "path": "\/data\/data\/local.mytodo.d1fixture\/files\/d1-fixtures\/feedback-validation.sqlite",
+      "bytes": 77824,
+      "sha256": "4ec9a66c740cf20d252d1984c622d81fbbb767f276805834c923004057419410",
+      "writersClosed": true,
+      "sidecars": [
+        {
+          "name": "feedback-validation.sqlite-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "name": "feedback-validation.sqlite-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "name": "feedback-validation.sqlite-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ],
+      "snapshotMethod": "fresh independent fixture; all SQLite handles closed before capture",
+      "sqliteMasterObjects": [
+        {
+          "type": "index",
+          "name": "feedback_asset_refs",
+          "tblName": "links",
+          "rootpage": 17,
+          "sql": "CREATE INDEX feedback_asset_refs ON links(asset_id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e44455820666565646261636b5f61737365745f72656673204f4e206c696e6b732861737365745f696429",
+          "sqlUtf8Sha256": "cb6240bbd16793f93ffa09c091a0d81a45f810a1492850a47b63044fa796f1c6"
+        },
+        {
+          "type": "index",
+          "name": "feedback_note_numbers",
+          "tblName": "records",
+          "rootpage": 16,
+          "sql": "CREATE UNIQUE INDEX feedback_note_numbers ON records(number) WHERE bucket='notes'",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520554e4951554520494e44455820666565646261636b5f6e6f74655f6e756d62657273204f4e207265636f726473286e756d62657229205748455245206275636b65743d276e6f74657327",
+          "sqlUtf8Sha256": "a24a277ada58961623acf3ef1618c4f8caf1e5d0fbe46150b501d60a33d4e3df"
+        },
+        {
+          "type": "index",
+          "name": "feedback_order",
+          "tblName": "records",
+          "rootpage": 14,
+          "sql": "CREATE INDEX feedback_order ON records(bucket,deleted,updated_at DESC,id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e44455820666565646261636b5f6f72646572204f4e207265636f726473286275636b65742c64656c657465642c757064617465645f617420444553432c696429",
+          "sqlUtf8Sha256": "fff9d8d7d851355d344540bd0b7d81562f76927ee9c0d9d49a37176446f6ef00"
+        },
+        {
+          "type": "index",
+          "name": "feedback_status_order",
+          "tblName": "records",
+          "rootpage": 15,
+          "sql": "CREATE INDEX feedback_status_order ON records(bucket,deleted,state,updated_at DESC,id)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "43524541544520494e44455820666565646261636b5f7374617475735f6f72646572204f4e207265636f726473286275636b65742c64656c657465642c73746174652c757064617465645f617420444553432c696429",
+          "sqlUtf8Sha256": "94574dd43575463c1061f334cd4acc916fb3f1206e8d956aa4c7a935cb7b117c"
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_archive_entries_1",
+          "tblName": "archive_entries",
+          "rootpage": 19,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_assets_1",
+          "tblName": "assets",
+          "rootpage": 8,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_assets_2",
+          "tblName": "assets",
+          "rootpage": 9,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_links_1",
+          "tblName": "links",
+          "rootpage": 11,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_records_1",
+          "tblName": "records",
+          "rootpage": 6,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_settings_1",
+          "tblName": "settings",
+          "rootpage": 13,
+          "sql": null,
+          "sqlStorageClass": "null",
+          "sqlUtf8Hex": null,
+          "sqlUtf8Sha256": null
+        },
+        {
+          "type": "table",
+          "name": "android_metadata",
+          "tblName": "android_metadata",
+          "rootpage": 3,
+          "sql": "CREATE TABLE android_metadata (locale TEXT)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c4520616e64726f69645f6d6574616461746120286c6f63616c65205445585429",
+          "sqlUtf8Sha256": "a4ab2fc96f4e5ed5ab1bb31713f21eccefaffb9f5a01291906bb7f4cd5ded950"
+        },
+        {
+          "type": "table",
+          "name": "archive_entries",
+          "tblName": "archive_entries",
+          "rootpage": 18,
+          "sql": "CREATE TABLE archive_entries(name TEXT PRIMARY KEY NOT NULL,size INTEGER NOT NULL,sha256 TEXT NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c4520617263686976655f656e7472696573286e616d652054455854205052494d415259204b4559204e4f54204e554c4c2c73697a6520494e5445474552204e4f54204e554c4c2c7368613235362054455854204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "b6689ee3b484158bb89014d61f8ab24e615c1acd0b1814cb41e4c2146e76e5a8"
+        },
+        {
+          "type": "table",
+          "name": "assets",
+          "tblName": "assets",
+          "rootpage": 7,
+          "sql": "CREATE TABLE assets(id TEXT PRIMARY KEY NOT NULL,file_name TEXT NOT NULL UNIQUE,mime TEXT NOT NULL,size INTEGER NOT NULL,sha256 TEXT NOT NULL,width INTEGER NOT NULL,height INTEGER NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45206173736574732869642054455854205052494d415259204b4559204e4f54204e554c4c2c66696c655f6e616d652054455854204e4f54204e554c4c20554e495155452c6d696d652054455854204e4f54204e554c4c2c73697a6520494e5445474552204e4f54204e554c4c2c7368613235362054455854204e4f54204e554c4c2c776964746820494e5445474552204e4f54204e554c4c2c68656967687420494e5445474552204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "c6530c71d53cc3443646dbf72b9594979f2613a4a41b97f67f5a71283d48dadd"
+        },
+        {
+          "type": "table",
+          "name": "d1_synthetic_guard",
+          "tblName": "d1_synthetic_guard",
+          "rootpage": 4,
+          "sql": "CREATE TABLE d1_synthetic_guard(token TEXT NOT NULL,fixture_id TEXT NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c452064315f73796e7468657469635f677561726428746f6b656e2054455854204e4f54204e554c4c2c666978747572655f69642054455854204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "33b7de0eef2972d19ed5ef88f7ac63c850f8df96ee6c21b84923c96df6822b38"
+        },
+        {
+          "type": "table",
+          "name": "links",
+          "tblName": "links",
+          "rootpage": 10,
+          "sql": "CREATE TABLE links(bucket TEXT NOT NULL,record_id TEXT NOT NULL,asset_id TEXT NOT NULL,PRIMARY KEY(bucket,record_id,asset_id),FOREIGN KEY(bucket,record_id) REFERENCES records(bucket,id) ON DELETE CASCADE,FOREIGN KEY(asset_id) REFERENCES assets(id))",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45206c696e6b73286275636b65742054455854204e4f54204e554c4c2c7265636f72645f69642054455854204e4f54204e554c4c2c61737365745f69642054455854204e4f54204e554c4c2c5052494d415259204b4559286275636b65742c7265636f72645f69642c61737365745f6964292c464f524549474e204b4559286275636b65742c7265636f72645f696429205245464552454e434553207265636f726473286275636b65742c696429204f4e2044454c45544520434153434144452c464f524549474e204b45592861737365745f696429205245464552454e434553206173736574732869642929",
+          "sqlUtf8Sha256": "df2763b2bf7da2beccb9ddaf66429a6af403e9d823669651406d066cf649a0c4"
+        },
+        {
+          "type": "table",
+          "name": "records",
+          "tblName": "records",
+          "rootpage": 5,
+          "sql": "CREATE TABLE records(bucket TEXT NOT NULL,id TEXT NOT NULL,payload TEXT NOT NULL,updated_at INTEGER NOT NULL,state TEXT NOT NULL,search TEXT NOT NULL,deleted INTEGER NOT NULL,number INTEGER,PRIMARY KEY(bucket,id))",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c45207265636f726473286275636b65742054455854204e4f54204e554c4c2c69642054455854204e4f54204e554c4c2c7061796c6f61642054455854204e4f54204e554c4c2c757064617465645f617420494e5445474552204e4f54204e554c4c2c73746174652054455854204e4f54204e554c4c2c7365617263682054455854204e4f54204e554c4c2c64656c6574656420494e5445474552204e4f54204e554c4c2c6e756d62657220494e54454745522c5052494d415259204b4559286275636b65742c69642929",
+          "sqlUtf8Sha256": "3a824cb7d97b30ad396f6a93dc4653190eea930474eac3f02084cd10a00e484d"
+        },
+        {
+          "type": "table",
+          "name": "settings",
+          "tblName": "settings",
+          "rootpage": 12,
+          "sql": "CREATE TABLE settings(key TEXT PRIMARY KEY NOT NULL,value INTEGER NOT NULL)",
+          "sqlStorageClass": "text",
+          "sqlUtf8Hex": "435245415445205441424c452073657474696e6773286b65792054455854205052494d415259204b4559204e4f54204e554c4c2c76616c756520494e5445474552204e4f54204e554c4c29",
+          "sqlUtf8Sha256": "e79de00154c964afd9dd8d7a25376b4072420c571506339de945771cdfde8fb6"
+        }
+      ],
+      "frameworkSchema": {
+        "schemaObjects": [
+          {
+            "type": "table",
+            "name": "android_metadata",
+            "tblName": "android_metadata",
+            "rootpage": 3,
+            "sql": "CREATE TABLE android_metadata (locale TEXT)",
+            "sqlStorageClass": "text",
+            "sqlUtf8Hex": "435245415445205441424c4520616e64726f69645f6d6574616461746120286c6f63616c65205445585429",
+            "sqlUtf8Sha256": "a4ab2fc96f4e5ed5ab1bb31713f21eccefaffb9f5a01291906bb7f4cd5ded950"
+          }
+        ],
+        "tableInfo": [
+          {
+            "cid": 0,
+            "name": "locale",
+            "type": "TEXT",
+            "notnull": 0,
+            "dfltValue": null,
+            "pk": 0
+          }
+        ],
+        "localeRows": [
+          {
+            "storageClass": "text",
+            "utf8Hex": "656e5f5553",
+            "utf8Sha256": "674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b",
+            "bytes": 5
+          }
+        ],
+        "metadataTablePresent": true,
+        "localeColumnPresent": true,
+        "localeRowsRead": true,
+        "observationOnly": true,
+        "localeByteInput": "CAST(locale AS BLOB); storageClass recorded independently"
+      }
+    }
+  },
+  "feedbackOriginal": {
+    "name": "feedback-original.png",
+    "bytes": 68,
+    "sha256": "2816e082b647e4fbf2c83c79161a7674f7b41ab1cbde46539ea976be568ba5f3",
+    "synthetic": true
+  },
+  "feedbackSource": {
+    "sqliteVersion": "3.39.2",
+    "integrityCheck": [
+      "ok"
+    ],
+    "userVersion": 0,
+    "recordsCount": 3,
+    "assetsCount": 1,
+    "restoreGeneration": 0,
+    "actualFeedbackAarLoaded": false,
+    "role": "independent synthetic persistent-store DDL fixture",
+    "rawPayloads": {
+      "note": "{\"id\":\"synthetic-note\",\"number\":1,\"createdAt\":0,\"updatedAt\":1,\"revision\":1,\"body\":\"synthetic feedback\",\"category\":null,\"status\":\"pending\",\"assetIds\":[\"synthetic-image\"],\"deletedAt\":null,\"deleteToken\":null}",
+      "draft": "{\"id\":\"synthetic-draft\",\"targetId\":\"synthetic-note\",\"baseRevision\":1,\"isNew\":false,\"createdAt\":0,\"updatedAt\":1,\"revision\":1,\"note\":{\"id\":\"synthetic-note\",\"number\":1,\"createdAt\":0,\"updatedAt\":1,\"revision\":1,\"body\":\"synthetic feedback\",\"category\":null,\"status\":\"pending\",\"assetIds\":[\"synthetic-image\"],\"deletedAt\":null,\"deleteToken\":null},\"assetIds\":[\"synthetic-image\"],\"inheritedAssetIds\":[\"synthetic-image\"]}",
+      "metaBucket": "{\"id\":\"feedback_sequence\",\"nextNumber\":2,\"createdAt\":0,\"updatedAt\":1,\"revision\":1}"
+    }
+  },
+  "feedbackValidation": {
+    "sqliteVersion": "3.39.2",
+    "integrityCheck": [
+      "ok"
+    ],
+    "userVersion": 0,
+    "recordsCount": 3,
+    "assetsCount": 1,
+    "restoreGeneration": 0,
+    "actualFeedbackAarLoaded": false,
+    "role": "independent synthetic validation-store DDL fixture",
+    "rawPayloads": {
+      "note": "{\"id\":\"synthetic-note\",\"number\":1,\"createdAt\":0,\"updatedAt\":1,\"revision\":1,\"body\":\"synthetic feedback\",\"category\":null,\"status\":\"pending\",\"assetIds\":[\"synthetic-image\"],\"deletedAt\":null,\"deleteToken\":null}",
+      "draft": "{\"id\":\"synthetic-draft\",\"targetId\":\"synthetic-note\",\"baseRevision\":1,\"isNew\":false,\"createdAt\":0,\"updatedAt\":1,\"revision\":1,\"note\":{\"id\":\"synthetic-note\",\"number\":1,\"createdAt\":0,\"updatedAt\":1,\"revision\":1,\"body\":\"synthetic feedback\",\"category\":null,\"status\":\"pending\",\"assetIds\":[\"synthetic-image\"],\"deletedAt\":null,\"deleteToken\":null},\"assetIds\":[\"synthetic-image\"],\"inheritedAssetIds\":[\"synthetic-image\"]}",
+      "metaBucket": "{\"id\":\"feedback_sequence\",\"nextNumber\":2,\"createdAt\":0,\"updatedAt\":1,\"revision\":1}"
+    }
+  },
+  "status": "passed",
+  "completedAtUtc": "2026-11-24T09:44:15.103301Z"
+}
