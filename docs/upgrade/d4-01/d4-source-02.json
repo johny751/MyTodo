@@ -1,0 +1,100 @@
+{
+  "sha256": "d6f35a994824934e365d1055b18d3427fc4bef7a57e55c18b47af83ae33f4f14",
+  "archive": "d4-source-02.zip",
+  "files": [
+    {
+      "bytes": 2648,
+      "path": ".github/workflows/d4-ui-candidate.yml",
+      "sha256": "0d35bb8483efe23e7ed87bbef93ca86a260ea3ed8afc2df40661006ac1ad0683"
+    },
+    {
+      "bytes": 2657,
+      "path": "docs/upgrade/d4-01/architecture.md",
+      "sha256": "992be5aca62840ced4ac8189246f865e9a62f0d3bffe0750925e1493e8211efa"
+    },
+    {
+      "bytes": 3042,
+      "path": "docs/upgrade/d4-01/d4-source-01.json",
+      "sha256": "7cc8ef4f546676c5be42cbbaaecbed5251080cfd835a8f1bfbb464d337899f63"
+    },
+    {
+      "bytes": 997,
+      "path": "docs/upgrade/d4-01/history.md",
+      "sha256": "3c5143fb207b19d84b36040ae23ac1e01f930f531ed7a9c3a6812a2ed8542672"
+    },
+    {
+      "bytes": 9140,
+      "path": "docs/upgrade/d4-01/task-reuse.md",
+      "sha256": "8eb46027ee51e269c37c45815ee7e3ac9f3c964b1722a501cead31fb139f710d"
+    },
+    {
+      "bytes": 8763,
+      "path": "docs/upgrade/d4-01/work-modules.md",
+      "sha256": "c49732cb95d43dee13eae707433446ef1da1a0c3867da4a9e42c2fc0faa88d22"
+    },
+    {
+      "bytes": 35116,
+      "path": "prototypes/d4-01/app.js",
+      "sha256": "79c520e756c94ac7eb8dbfb63582ee35177e6216d3729eb810226c039e48006a"
+    },
+    {
+      "bytes": 11939,
+      "path": "prototypes/d4-01/domain.mjs",
+      "sha256": "90568611f1e229918b7336aeee1c2ce71c02ad1f8eac70957d152f754f5e45a4"
+    },
+    {
+      "bytes": 779,
+      "path": "prototypes/d4-01/index.html",
+      "sha256": "05be48461348ec7fbc11ef51f9fdfe8151d5decf00a4430e9029a9c01968bf84"
+    },
+    {
+      "bytes": 24509,
+      "path": "prototypes/d4-01/styles.css",
+      "sha256": "2660d7133f7c448a7a991f9089467e92c1e83b1724e4a40d363f3fa507356405"
+    },
+    {
+      "bytes": 50606,
+      "path": "prototypes/d4-01/work-pages.js",
+      "sha256": "c048235244dd01388ad3992b4029cc70ba5ef1fa72204b6d49e80511894ec667"
+    },
+    {
+      "bytes": 7452,
+      "path": "tests/d4-ui/build-demo.mjs",
+      "sha256": "e1ae01dea382167831dd0981c500ff9c388f867d5da712a8e8c6e8ebe76def00"
+    },
+    {
+      "bytes": 15821,
+      "path": "tests/d4-ui/domain.test.mjs",
+      "sha256": "a7d68ac90fecd108bc7b3a331809e558a6816605fc39e744dc95b6cded6c7076"
+    },
+    {
+      "bytes": 13847,
+      "path": "tests/d4-ui/interaction-cases.mjs",
+      "sha256": "84048477bf3b724eb3abc495c5ae08777545dfcfb7b8250ecc60d1853e3d10f4"
+    },
+    {
+      "bytes": 2628,
+      "path": "tests/d4-ui/package-demo.mjs",
+      "sha256": "7d67cd16056e0014e755c94303f26063d3c8869ce79b494096149f5af069eb78"
+    },
+    {
+      "bytes": 8233,
+      "path": "tests/d4-ui/run-browser.mjs",
+      "sha256": "30d17fdbc1303edaf6b258b3b3f080fcb98f4bda81fad019cb03fb68396ff551"
+    },
+    {
+      "bytes": 1016,
+      "path": "tests/d4-ui/scope.mjs",
+      "sha256": "551f128dbced55db7dcd342ad261819c26b03373e9ee5d32801da2f00bff3177"
+    },
+    {
+      "bytes": 6932,
+      "path": "tests/d4-ui/work-cases.mjs",
+      "sha256": "9f6114396888812f74c11199b3dfe8163e179d3cb17ea1c9023b9c404e74eb43"
+    }
+  ],
+  "base": "d4c5af4cbbb9192c19276dd371bd142c2b835534",
+  "message": "D4 fix independent child archive and precise form validation",
+  "allowed": "(?:prototypes/d4-01/.+|tests/d4-ui/.+|docs/upgrade/d4-01/.+|\\.github/workflows/d4-ui-candidate\\.yml)",
+  "branch": "d4/ui-candidate-1"
+}
