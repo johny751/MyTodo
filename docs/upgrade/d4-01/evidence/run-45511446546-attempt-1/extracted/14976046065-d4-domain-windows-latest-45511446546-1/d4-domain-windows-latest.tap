@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: D4 actual baseline function identities and V2 namespace are retained
+ok 1 - D4 actual baseline function identities and V2 namespace are retained
+  ---
+  duration_ms: 1.8811
+  type: 'test'
+  ...
+# Subtest: D4 root and nested CRUD preserve containing arrays and inherited mature fields
+ok 2 - D4 root and nested CRUD preserve containing arrays and inherited mature fields
+  ---
+  duration_ms: 492.6315
+  type: 'test'
+  ...
+# Subtest: D4 invalid schedule edits roll back the entire draft and its classifications
+ok 3 - D4 invalid schedule edits roll back the entire draft and its classifications
+  ---
+  duration_ms: 1.9104
+  type: 'test'
+  ...
+# Subtest: D4 completion delegates to mature repeat logic and resets/retimes descendants once
+ok 4 - D4 completion delegates to mature repeat logic and resets/retimes descendants once
+  ---
+  duration_ms: 2.2855
+  type: 'test'
+  ...
+# Subtest: D4 edit-done uses the mature next occurrence rather than bypassing it
+ok 5 - D4 edit-done uses the mature next occurrence rather than bypassing it
+  ---
+  duration_ms: 0.8744
+  type: 'test'
+  ...
+# Subtest: D4 monthly repeats preserve January anchor through February and March
+ok 6 - D4 monthly repeats preserve January anchor through February and March
+  ---
+  duration_ms: 0.7715
+  type: 'test'
+  ...
+# Subtest: D4 repeat capacity failure preserves the pending original state
+ok 7 - D4 repeat capacity failure preserves the pending original state
+  ---
+  duration_ms: 3.8845
+  type: 'test'
+  ...
+# Subtest: D4 reminder calculations use Shanghai rule semantics and completion disables reminder
+ok 8 - D4 reminder calculations use Shanghai rule semantics and completion disables reminder
+  ---
+  duration_ms: 1.8165
+  type: 'test'
+  ...
+# Subtest: D4 search/filter use mature NFKC AND search, nested content and name-based groups
+ok 9 - D4 search/filter use mature NFKC AND search, nested content and name-based groups
+  ---
+  duration_ms: 135.9327
+  type: 'test'
+  ...
+# Subtest: D4 manual root and sibling moves reuse mature ordering without promoting children
+ok 10 - D4 manual root and sibling moves reuse mature ordering without promoting children
+  ---
+  duration_ms: 2.381
+  type: 'test'
+  ...
+# Subtest: D4 persistence reads/writes only its isolated key and restores core plus mock data
+ok 11 - D4 persistence reads/writes only its isolated key and restores core plus mock data
+  ---
+  duration_ms: 1.6038
+  type: 'test'
+  ...
+# Subtest: D4 file-style storage restriction and quota failures keep current edits in memory
+ok 12 - D4 file-style storage restriction and quota failures keep current edits in memory
+  ---
+  duration_ms: 0.8113
+  type: 'test'
+  ...
+# Subtest: D4 malformed/foreign demo record is preserved and never read as production state
+ok 13 - D4 malformed/foreign demo record is preserved and never read as production state
+  ---
+  duration_ms: 0.7891
+  type: 'test'
+  ...
+# Subtest: D4 batch core edits and independent mock updates keep V2 fields and observer snapshots
+ok 14 - D4 batch core edits and independent mock updates keep V2 fields and observer snapshots
+  ---
+  duration_ms: 1.064
+  type: 'test'
+  ...
+# Subtest: D4 export/import boundary uses mature V2 normalization and refuses invalid state atomically
+ok 15 - D4 export/import boundary uses mature V2 normalization and refuses invalid state atomically
+  ---
+  duration_ms: 1.4514
+  type: 'test'
+  ...
+# Subtest: D4 nested workspace batch persists one combined envelope and emits one event
+ok 16 - D4 nested workspace batch persists one combined envelope and emits one event
+  ---
+  duration_ms: 0.9305
+  type: 'test'
+  ...
+# Subtest: D4 workspace batch rolls back core and mock, with no persistence/event, and rejects async
+ok 17 - D4 workspace batch rolls back core and mock, with no persistence/event, and rejects async
+  ---
+  duration_ms: 0.8419
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 779.1477

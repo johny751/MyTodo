@@ -1,0 +1,199 @@
+{
+  "kind": "d4-01-offline-classic-demo",
+  "sourceSha": "acae31552afde5ad68fbb9ae09de0a97ffd439a7",
+  "runId": "45511446546",
+  "runAttempt": "1",
+  "buildTimeUtc": "2026-11-24T23:37:17.930Z",
+  "coreVersion": 2,
+  "storageKey": "mytodo-d4-01-demo-v1",
+  "productionLogicChanged": false,
+  "productionSyncEnabled": false,
+  "status": "built",
+  "browserRuntime": "UNVERIFIED until UI acceptance",
+  "scriptSyntaxCompiled": true,
+  "inputs": [
+    {
+      "path": "src/task-tree.mjs",
+      "bytes": 1581,
+      "sha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9"
+    },
+    {
+      "path": "src/schedule.mjs",
+      "bytes": 6620,
+      "sha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b"
+    },
+    {
+      "path": "src/model.mjs",
+      "bytes": 8792,
+      "sha256": "837f10b5b1486e3be7f276cc8c00758afd420c9d49537b28d3d96341f1bf8c97"
+    },
+    {
+      "path": "src/sync-core.mjs",
+      "bytes": 5116,
+      "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a"
+    },
+    {
+      "path": "src/task-editor.mjs",
+      "bytes": 3110,
+      "sha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad"
+    },
+    {
+      "path": "src/personal-ui.mjs",
+      "bytes": 5868,
+      "sha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a"
+    },
+    {
+      "path": "prototypes/d4-01/domain.mjs",
+      "bytes": 11939,
+      "sha256": "90568611f1e229918b7336aeee1c2ce71c02ad1f8eac70957d152f754f5e45a4"
+    },
+    {
+      "path": "prototypes/d4-01/index.html",
+      "bytes": 779,
+      "sha256": "05be48461348ec7fbc11ef51f9fdfe8151d5decf00a4430e9029a9c01968bf84"
+    },
+    {
+      "path": "prototypes/d4-01/styles.css",
+      "bytes": 24509,
+      "sha256": "2660d7133f7c448a7a991f9089467e92c1e83b1724e4a40d363f3fa507356405"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "bytes": 50606,
+      "sha256": "c048235244dd01388ad3992b4029cc70ba5ef1fa72204b6d49e80511894ec667"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "bytes": 35116,
+      "sha256": "79c520e756c94ac7eb8dbfb63582ee35177e6216d3729eb810226c039e48006a"
+    }
+  ],
+  "dependencyGraph": [
+    {
+      "path": "src/task-tree.mjs",
+      "dependencies": [],
+      "exports": [
+        "taskEntries",
+        "flattenTasks",
+        "findTaskEntry",
+        "findTask",
+        "moveSubtask",
+        "rekeyDescendants"
+      ]
+    },
+    {
+      "path": "src/schedule.mjs",
+      "dependencies": [
+        "src/task-tree.mjs"
+      ],
+      "exports": [
+        "parseTime",
+        "formatTime",
+        "normalizeRepeat",
+        "normalizeReminder",
+        "reminderTime",
+        "nextOccurrence",
+        "stableId",
+        "setTaskDone",
+        "repeatLabel",
+        "reminderLabel",
+        "taskStats"
+      ]
+    },
+    {
+      "path": "src/model.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/schedule.mjs"
+      ],
+      "exports": [
+        "isEntityId",
+        "QUADRANTS",
+        "dayKey",
+        "dateRange",
+        "shiftDate",
+        "DEFAULT_SETTINGS",
+        "normalizeSettings",
+        "matchesQuery",
+        "taskSearchText",
+        "searchAll",
+        "compareOrder",
+        "moveTask",
+        "completionDay",
+        "visibleTasks",
+        "normalizeState",
+        "seedState"
+      ]
+    },
+    {
+      "path": "src/sync-core.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/model.mjs"
+      ],
+      "exports": [
+        "emptyState",
+        "mergeStates",
+        "decodeRemote",
+        "encodeRemote",
+        "syncExchange",
+        "syncError"
+      ]
+    },
+    {
+      "path": "src/task-editor.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/sync-core.mjs"
+      ],
+      "exports": [
+        "saveTaskRecord",
+        "quickSubtask",
+        "handleTaskEditorEnter",
+        "blockTaskFormSubmit",
+        "saveTaskEditorDraft",
+        "applyPlaceDraft"
+      ]
+    },
+    {
+      "path": "src/personal-ui.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/schedule.mjs"
+      ],
+      "exports": [
+        "scheduleFields",
+        "captureSchedule",
+        "statsPage",
+        "validateSchedule"
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/domain.mjs",
+      "dependencies": [
+        "src/model.mjs",
+        "src/schedule.mjs",
+        "src/task-tree.mjs",
+        "src/task-editor.mjs",
+        "src/personal-ui.mjs"
+      ],
+      "exports": [
+        "STORAGE_KEY",
+        "STORAGE_KIND",
+        "QUADRANTS",
+        "helpers",
+        "createRepository"
+      ]
+    }
+  ],
+  "artifact": {
+    "file": "mytodo-d4-01-demo.html",
+    "bytes": 155336,
+    "sha256": "90e499ceeef94142f15dd526e5c32e052ead1a9a2740d4bcf30b76c9e46176ea"
+  },
+  "limitations": [
+    "Discussion prototype and isolated synthetic data only.",
+    "No platform final implementation or production storage/sync is activated.",
+    "file:// persistence can fall back to memory when the browser restricts localStorage."
+  ]
+}

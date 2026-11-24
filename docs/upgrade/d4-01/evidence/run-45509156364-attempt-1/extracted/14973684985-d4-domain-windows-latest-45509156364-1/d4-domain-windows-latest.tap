@@ -1,0 +1,51 @@
+✔ D4 actual baseline function identities and V2 namespace are retained (2.795ms)
+✔ D4 root and nested CRUD preserve containing arrays and inherited mature fields (640.2838ms)
+✔ D4 invalid schedule edits roll back the entire draft and its classifications (2.1567ms)
+✔ D4 completion delegates to mature repeat logic and resets/retimes descendants once (2.6838ms)
+✖ D4 edit-done uses the mature next occurrence rather than bypassing it (2.3374ms)
+✔ D4 monthly repeats preserve January anchor through February and March (0.895ms)
+✔ D4 repeat capacity failure preserves the pending original state (4.0693ms)
+✔ D4 reminder calculations use Shanghai rule semantics and completion disables reminder (1.7421ms)
+✔ D4 search/filter use mature NFKC AND search, nested content and name-based groups (139.5006ms)
+✔ D4 manual root and sibling moves reuse mature ordering without promoting children (3.577ms)
+✔ D4 persistence reads/writes only its isolated key and restores core plus mock data (1.523ms)
+✔ D4 file-style storage restriction and quota failures keep current edits in memory (0.6874ms)
+✔ D4 malformed/foreign demo record is preserved and never read as production state (0.7305ms)
+✔ D4 batch core edits and independent mock updates keep V2 fields and observer snapshots (1.2113ms)
+✔ D4 export/import boundary uses mature V2 normalization and refuses invalid state atomically (1.3814ms)
+✔ D4 nested workspace batch persists one combined envelope and emits one event (0.8889ms)
+✔ D4 workspace batch rolls back core and mock, with no persistence/event, and rejects async (0.7545ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 951.6984
+
+✖ failing tests:
+
+test at tests\d4-ui\domain.test.mjs:57:1
+✖ D4 edit-done uses the mature next occurrence rather than bypassing it (2.3374ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '2026-11-26T09:00'
+  - '2026-11-26T10:00'
+                ^
+  
+      at TestContext.<anonymous> (file:///D:/a/MyTodo/MyTodo/tests/d4-ui/domain.test.mjs:61:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '2026-11-26T09:00',
+    expected: '2026-11-26T10:00',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
