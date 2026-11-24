@@ -19,20 +19,22 @@ const receipt={schema:'mytodo-d1-android-runner',version:1,guard:GUARD,candidate
 const packageName='local.mytodo.d1fixture';let adb,serial,emulatorAttempted=false;
 
 async function command(label,exe,args,{allowFailure=false,timeout=240000,input}={}) {
-  const entry={label,argv:[exe,...args],startedAtUtc:new Date().toISOString()};receipt.commands.push(entry);
+  const inputBytes=input===undefined?null:Buffer.isBuffer(input)?input:Buffer.from(input,'utf8');
+  const entry={label,argv:[exe,...args],stdinBytes:inputBytes?.length??0,stdinSha256:inputBytes?hash(inputBytes):null,
+    startedAtUtc:new Date().toISOString()};receipt.commands.push(entry);
   const result=await new Promise(resolve=>{
     const child=spawn(exe,args,{env:environment,windowsHide:true,stdio:['pipe','pipe','pipe']});const stdout=[],stderr=[];let spawnError=null,settled=false;
     let total=0;const timer=setTimeout(()=>{entry.timedOut=true;child.kill('SIGKILL');},timeout);
     child.stdout.on('data',b=>{total+=b.length;if(total>32*1024*1024){entry.sizeLimit=true;child.kill('SIGKILL');}stdout.push(b);});
-    child.stderr.on('data',b=>stderr.push(b));child.stdin.on('error',e=>{entry.stdinError=String(e);});child.stdin.end(input);
-    const finish=(exitCode,signal)=>{if(settled)return;settled=true;clearTimeout(timer);resolve({exitCode,signal,spawnError,timedOut:entry.timedOut===true,sizeLimit:entry.sizeLimit===true,stdout:Buffer.concat(stdout),stderr:Buffer.concat(stderr)});};
+    child.stderr.on('data',b=>stderr.push(b));child.stdin.on('error',e=>{entry.stdinError=String(e);});child.stdin.end(inputBytes??undefined);
+    const finish=(exitCode,signal)=>{if(settled)return;settled=true;clearTimeout(timer);resolve({exitCode,signal,spawnError,timedOut:entry.timedOut===true,sizeLimit:entry.sizeLimit===true,stdinError:entry.stdinError??null,stdout:Buffer.concat(stdout),stderr:Buffer.concat(stderr)});};
     child.on('error',e=>{spawnError=String(e);finish(null,null);});child.on('close',finish);
   });
   const prefix=String(receipt.commands.length).padStart(3,'0')+'-'+label;
   await writeFresh(path.join(logs,prefix+'.stdout'),result.stdout);await writeFresh(path.join(logs,prefix+'.stderr'),result.stderr);
   Object.assign(entry,{exitCode:result.exitCode,signal:result.signal,spawnError:result.spawnError,stdoutBytes:result.stdout.length,stderrBytes:result.stderr.length,
     stdoutSha256:hash(result.stdout),stderrSha256:hash(result.stderr),stdoutFile:prefix+'.stdout',stderrFile:prefix+'.stderr',completedAtUtc:new Date().toISOString()});
-  if(!allowFailure&&(result.exitCode!==0||entry.timedOut||entry.sizeLimit))throw new Error(label+' failed; see retained stdout/stderr');return result;
+  if(!allowFailure&&(result.exitCode!==0||entry.timedOut||entry.sizeLimit||entry.stdinError))throw new Error(label+' failed; see retained stdout/stderr');return result;
 }
 async function selected(label,args,options){return command(label,adb,['-s',serial,...args],options);}
 async function fetch(name,{db=false}={}) {
@@ -73,7 +75,7 @@ try {
     const bytes=await fetch(name,{db:true});if(bytes.length!==sealed.bytes||hash(bytes)!==sealed.sha256)throw new Error('BLOCKER: closed database hash mismatch');
     for(const suffix of ['-wal','-shm','-journal']) {
       const expected=createSidecarProbe(name+suffix);
-      const observed=await selected('sidecar-'+name+suffix,['exec-out','run-as',packageName,'sh','-c',expected.shellArgument],{allowFailure:true});
+      const observed=await selected('sidecar-'+name+suffix,['shell','-T','run-as',packageName,'sh'],{allowFailure:true,input:expected.stdinBytes});
       receipt.sidecarProbes??=[];
       try {receipt.sidecarProbes.push(verifySidecarProbe(expected,observed));}
       catch(error) {receipt.sidecarProbes.push(error.evidence??{fileName:expected.fileName,remotePath:expected.remotePath,nonce:expected.nonce,allowed:false,error:String(error)});throw error;}
@@ -98,8 +100,8 @@ try {
         const logged=receipt.commands.at(-1);
         const rawLog={stdoutFile:logged.stdoutFile,stderrFile:logged.stderrFile,stdoutBytes:capture.stdout.length,
           stderrBytes:capture.stderr.length,stdoutSha256:hash(capture.stdout),stderrSha256:hash(capture.stderr),
-          hostExitCode:capture.exitCode,hostSignal:capture.signal,timedOut:capture.timedOut,sizeLimit:capture.sizeLimit};
-        if(capture.exitCode!==0||capture.stderr.length||capture.timedOut||capture.sizeLimit) {
+          hostExitCode:capture.exitCode,hostSignal:capture.signal,timedOut:capture.timedOut,sizeLimit:capture.sizeLimit,stdinError:capture.stdinError};
+        if(capture.exitCode!==0||capture.stderr.length||capture.timedOut||capture.sizeLimit||capture.stdinError) {
           receipt.partialFailureFiles[name]={captured:false,fileBytesVerified:false,rawLog,
             reason:'capture command failed, timed out, exceeded limit or emitted stderr; raw output retained only'};continue;
         }

@@ -17,7 +17,8 @@ def main(desktop,android,output):
     for profile,folder in folders.items():
         folder=root_path(folder)
         def load(profile=profile,folder=folder):
-            receipt=json.loads((folder/'case-report-'+profile+'.json').read_text(encoding='utf-8'))
+            receipt_file=folder / ('case-report-'+profile+'.json')
+            receipt=json.loads(receipt_file.read_text(encoding='utf-8'))
             equal(receipt['sourceSha'],os.environ['GITHUB_SHA']);equal(receipt['runId'],os.environ['GITHUB_RUN_ID']);equal(receipt['runAttempt'],os.environ['GITHUB_RUN_ATTEMPT'])
             if receipt['status']!='passed' or receipt['failed'] or not receipt['cases']:raise AssertionError('native profile cases not passed')
             ids=[case['id'] for case in receipt['cases']]
@@ -37,7 +38,8 @@ def main(desktop,android,output):
             equal(value['profile'],profile);equal(value['fixtureId'],'synthetic-fixed-v1')
             equal([v[0] for v in value['sourceColumnObservations']],[v[0] for v in value['rawFields']])
             exports[profile]=value
-            generator=json.loads((folder/('native' if profile=='windows' else profile)+'-generator-receipt.json').read_text(encoding='utf-8'))
+            generator_file=folder / (('native' if profile=='windows' else profile)+'-generator-receipt.json')
+            generator=json.loads(generator_file.read_text(encoding='utf-8'))
             report['nativeGenerators'][profile]=generator
             equal(generator['guard'],'MYTODO_D1_SYNTHETIC_ONLY');equal(generator['candidate'],'d1-01-candidate.1')
             equal(generator['fixtureId'],'synthetic-fixed-v1');equal(generator['runId'],os.environ['GITHUB_RUN_ID'])

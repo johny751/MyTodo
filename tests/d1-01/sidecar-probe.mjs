@@ -7,6 +7,7 @@ const digest=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 const buffer=value=>Buffer.isBuffer(value)?value:Buffer.from(value??'','utf8');
 
 export function shellQuote(value) {
+  // Literal assignments inside the stdin program only; not adb argv quoting.
   if(typeof value!=='string'||value.includes('\0'))throw new Error('BLOCKER: invalid shell argument');
   return "'"+value.replaceAll("'","'\\''")+"'";
 }
@@ -14,8 +15,8 @@ export function shellQuote(value) {
 export function createSidecarProbe(fileName,nonce=crypto.randomBytes(16).toString('hex')) {
   if(!ALLOWED.has(fileName)||!/^[a-f0-9]{32}$/.test(nonce))throw new Error('BLOCKER: fixed sidecar name and hex nonce required');
   const remotePath='files/d1-fixtures/'+fileName;
-  // This entire script is passed as one single-quoted sh -c argument because
-  // adb exec-out joins argv into an outer Android shell command.
+  // Send this program as UTF-8 stdin to fixed `adb shell -T run-as ... sh`
+  // argv. Never pass the script as a command argument or apply outer quoting.
   const script=[
     'namespace=files/d1-fixtures',
     'file='+shellQuote(remotePath),
@@ -46,7 +47,9 @@ export function createSidecarProbe(fileName,nonce=crypto.randomBytes(16).toStrin
     'printf \'%s\\n\' "PATH:$file" "STATE:$state" "STAT_RC:$stat_rc" "SIZE:$size" "PROBE_RC:$probe_rc" "D1_SIDECAR_END:$nonce"',
     'exit "$probe_rc"',
   ].join('\n');
-  return {fileName,remotePath,nonce,script,shellArgument:shellQuote(script),scriptSha256:digest(Buffer.from(script,'utf8'))};
+  const stdinBytes=Buffer.from(script+'\n','utf8');
+  return {fileName,remotePath,nonce,script,stdinBytes,transport:'adb-shell-v2-stdin-no-pty',
+    scriptSha256:digest(Buffer.from(script,'utf8')),stdinSha256:digest(stdinBytes)};
 }
 
 function reject(reason,evidence) {
@@ -64,8 +67,9 @@ export function verifySidecarProbe(probe,result) {
     throw new Error('BLOCKER: invalid expected sidecar probe identity');
   const stdout=buffer(result.stdout),stderr=buffer(result.stderr);
   const evidence={fileName:probe.fileName,remotePath:probe.remotePath,nonce:probe.nonce,scriptSha256:probe.scriptSha256,
+    transport:probe.transport,stdinBytes:probe.stdinBytes.length,stdinSha256:probe.stdinSha256,
     hostExitCode:result.exitCode??null,hostSignal:result.signal??null,spawnError:result.spawnError??null,
-    timedOut:!!result.timedOut,sizeLimit:!!result.sizeLimit,
+    timedOut:!!result.timedOut,sizeLimit:!!result.sizeLimit,stdinError:result.stdinError??null,
     stdoutBytes:stdout.length,stderrBytes:stderr.length,stdoutSha256:digest(stdout),stderrSha256:digest(stderr),
     completeFrame:false,state:null,remoteStatRc:null,remoteProbeRc:null,size:null,allowed:false};
   // Parsing never changes the saved raw output; CRLF normalization is only for
@@ -94,6 +98,7 @@ export function verifySidecarProbe(probe,result) {
   }
   if(evidence.timedOut)reject('sidecar probe timed out',evidence);
   if(evidence.sizeLimit)reject('sidecar probe exceeded stdout size limit',evidence);
+  if(evidence.stdinError)reject('sidecar probe stdin transport failed',evidence);
   if(result.exitCode!==0||result.signal||result.spawnError)reject('sidecar probe host transport failed',evidence);
   if(stderr.length)reject('sidecar probe emitted stderr',evidence);
   if(probeRc!==0||state==='ERROR')reject('remote sidecar probe failed',evidence);

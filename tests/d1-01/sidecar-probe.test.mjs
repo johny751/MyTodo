@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import {createSidecarProbe,shellQuote,verifySidecarProbe} from './sidecar-probe.mjs';
 
 if(process.env.GITHUB_ACTIONS!=='true')throw new Error('D1 project unit tests run only in authorized GitHub Actions jobs');
@@ -7,7 +8,7 @@ const nonce='0123456789abcdef0123456789abcdef';
 const probe=createSidecarProbe('android-source.sqlite-wal',nonce);
 const frame=({state='ABSENT',stat='NA',size='NA',rc='0',token=nonce,path=probe.remotePath}={})=>
   `D1_SIDECAR_BEGIN:${token}\nPATH:${path}\nSTATE:${state}\nSTAT_RC:${stat}\nSIZE:${size}\nPROBE_RC:${rc}\nD1_SIDECAR_END:${token}\n`;
-const result=(stdout,options={})=>({exitCode:0,signal:null,spawnError:null,timedOut:false,sizeLimit:false,stdout:Buffer.from(stdout),stderr:Buffer.alloc(0),...options});
+const result=(stdout,options={})=>({exitCode:0,signal:null,spawnError:null,timedOut:false,sizeLimit:false,stdinError:null,stdout:Buffer.from(stdout),stderr:Buffer.alloc(0),...options});
 const blocked=(packet,pattern=/BLOCKER/)=>assert.throws(()=>verifySidecarProbe(probe,packet),pattern);
 
 test('framed absent proves remote classification independently of host stat rc',()=>{
@@ -68,17 +69,25 @@ test('host transport failures cannot be accepted by a valid remote frame',()=>{
     assert.equal(error.evidence.completeFrame,true);assert.equal(error.evidence.sizeLimit,true);
     assert.equal(error.evidence.allowed,false);return true;
   });
+  assert.throws(()=>verifySidecarProbe(probe,result(frame(),{stdinError:'synthetic broken pipe'})),error=>{
+    assert.match(error.message,/stdin transport/);assert.equal(error.evidence.hostExitCode,0);
+    assert.equal(error.evidence.completeFrame,true);assert.equal(error.evidence.stdinError,'synthetic broken pipe');
+    assert.equal(error.evidence.allowed,false);return true;
+  });
 });
 test('noise and inconsistent absent packets are rejected',()=>{
   blocked(result('unframed diagnostic\n'+frame()),/frame/);
   blocked(result(frame({stat:'0',size:'0'})),/inconsistent absent/);
 });
-test('fixed filename scope and single-quoted remote script prevent outer shell expansion',()=>{
+test('fixed filename scope and exact UTF8 stdin avoid an outer script argument',()=>{
   assert.throws(()=>createSidecarProbe('../production.sqlite-wal',nonce),/fixed sidecar/);
   assert.throws(()=>createSidecarProbe('android-source.sqlite-wal','bad nonce'),/hex nonce/);
   assert.equal(shellQuote("a'b"),"'a'\\''b'");
-  assert.equal(probe.shellArgument,shellQuote(probe.script));
-  assert.ok(probe.shellArgument.startsWith("'")&&probe.shellArgument.endsWith("'"));
+  assert.equal('shellArgument' in probe,false);
+  assert.ok(Buffer.isBuffer(probe.stdinBytes));
+  assert.deepEqual(probe.stdinBytes,Buffer.from(probe.script+'\n','utf8'));
+  assert.equal(probe.stdinSha256,crypto.createHash('sha256').update(probe.stdinBytes).digest('hex'));
+  assert.equal(probe.transport,'adb-shell-v2-stdin-no-pty');
   assert.ok(probe.script.includes('stat_rc=$?'));assert.ok(probe.script.includes('[ -L "$file" ]'));
   assert.ok(probe.script.includes('[ ! -f "$file" ]'));assert.ok(probe.script.includes('[ ! -d "$namespace" ]'));
 });
