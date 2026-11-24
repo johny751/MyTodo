@@ -1,0 +1,110 @@
+{
+  "base": "1a55ea6da9f2012d7ba82d5756ae8f61d87bae47",
+  "validatedSource": "8239d39220d940bf9c047a1dcaffd2a831cca2fc",
+  "zipSha256": "c54584c55653bb5eebdf18fb9aabe3fad8dbb0d64a32f24baa9cbcd64b38bce5",
+  "runs": [
+    "45348588067",
+    "45353907376",
+    "45359601767",
+    "45362018398",
+    "45367557986"
+  ],
+  "files": [
+    {
+      "path": "docs/upgrade/d1-01/backup-restore-contract.md",
+      "bytes": 26457,
+      "sha256": "e03d0e553b950db125825ec73903311902f871407b118ff6a5ab11e0c51e1e44"
+    },
+    {
+      "path": "docs/upgrade/d1-01/consolidated-static-review.md",
+      "bytes": 9952,
+      "sha256": "9da27129069e5c85bea3a9bfad5798384c9944c807640d592fee74058dcde5ed"
+    },
+    {
+      "path": "docs/upgrade/d1-01/coverage-review.md",
+      "bytes": 9906,
+      "sha256": "65aa7125a0c50fd65705fa047dfc3185ee8be492cea373c629983ed673ab8e46"
+    },
+    {
+      "path": "docs/upgrade/d1-01/d1-01-02-tool-preparation-design.md",
+      "bytes": 15098,
+      "sha256": "9d6983030ff33f1e5c099980c8ccf2e52a089994bc0e921d2262d0a019025501"
+    },
+    {
+      "path": "docs/upgrade/d1-01/d1-01-b-open-questions.md",
+      "bytes": 4179,
+      "sha256": "8eae43cb0ff2a1c1308163a76a6c336e94183cff707fbf14af402b80ec8e928c"
+    },
+    {
+      "path": "docs/upgrade/d1-01/data-ownership-and-sync-boundaries.md",
+      "bytes": 13926,
+      "sha256": "17a3aea66a914767f619e92739c30551b25b561f14133f2eff4fbdbfc9832d04"
+    },
+    {
+      "path": "docs/upgrade/d1-01/field-compatibility-matrix.md",
+      "bytes": 13403,
+      "sha256": "148eb7c726cdb2f3e326c70a8a6ba2b5ea257a98e8513612d81b872c09c2fe67"
+    },
+    {
+      "path": "docs/upgrade/d1-01/final-review.md",
+      "bytes": 7664,
+      "sha256": "649030823c3c354311077ad50707d994e710f4973249a2d133c637bbeccd0c7a"
+    },
+    {
+      "path": "docs/upgrade/d1-01/migration-versioning-contract.md",
+      "bytes": 28141,
+      "sha256": "17dcc399859e2733f05facfb87a79c677cbd07746132eb9665c9a361b86f1701"
+    },
+    {
+      "path": "docs/upgrade/d1-01/README.md",
+      "bytes": 3638,
+      "sha256": "4c9bc22435eb8a6d5db95f77c3d5c0eac7027633fbd5500866953e3d4ac96f0c"
+    },
+    {
+      "path": "docs/upgrade/d1-01/relationship-migration-strategy.md",
+      "bytes": 10388,
+      "sha256": "35fa078d11175f3c5f1d8e87ec7baf0c7c46e9fbe4612a18a8a60842770993e5"
+    },
+    {
+      "path": "docs/upgrade/d1-01/source-and-validation-scope.md",
+      "bytes": 4216,
+      "sha256": "21a098ed0fff891dd78d6b1d84a52cea4f10faa508d041a1b856396c73f22217"
+    },
+    {
+      "path": "docs/upgrade/d1-01/source-sha256.json",
+      "bytes": 7786,
+      "sha256": "9b6df0323c28f9f555204048395c9cadd9c7f8b33f2ea7d5b75cb240d594abab"
+    },
+    {
+      "path": "docs/upgrade/d1-01/SOURCE-SHA256SUMS.txt",
+      "bytes": 4337,
+      "sha256": "f721739af8503f2c8da18be994cf233dd0bb8a38c97073d862f85bb04aedd223"
+    },
+    {
+      "path": "docs/upgrade/d1-01/sync-state-migration-protection.md",
+      "bytes": 13515,
+      "sha256": "3a5850d0512673923e463f17ed2ee16969f38ba783026a8247369130bea71050"
+    },
+    {
+      "path": "docs/upgrade/d1-01/time-and-recurrence-contract.md",
+      "bytes": 15223,
+      "sha256": "0dbcc7d3b634572b66accbc13f236fb23cae93284bdf9a0866a49b0b2a0811a6"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unified-data-contract-candidate.md",
+      "bytes": 10191,
+      "sha256": "03be55097285f56dee192e5cf32dea904ab5e9f1a06c17b48fb86c6d0444552d"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unified-data-contract-draft.md",
+      "bytes": 4273,
+      "sha256": "434afd74e95db78e4af3b3f4e09da1cdc0064eeade6aa5a7272541aed6e7b903"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unresolved-and-blockers.md",
+      "bytes": 8382,
+      "sha256": "96a83c221f54f3440aa4fe13a9cf10f896648acb814af26c92b5ad362ce2aa0f"
+    }
+  ],
+  "publisherSha256": "aa2ef6160644b23edc5bf3dbac7f95b89f186cd5f6b970c80e5f2365c98fb11b"
+}
