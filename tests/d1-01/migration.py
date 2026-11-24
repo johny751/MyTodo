@@ -2,6 +2,7 @@
 import json, os, pathlib, sqlite3, sys, re, uuid
 from isolation import CANDIDATE, GUARD, json_bytes, logical_dump, open_db, root_path, safe_file, sha, write_json
 from candidate import parse_raw, project
+from framework_metadata import framework_domain
 
 MIGRATION='synthetic-candidate-projection-v1'
 SQL='''CREATE TABLE d1_raw_sources(ledger_id TEXT NOT NULL,kind TEXT NOT NULL,entity_id TEXT NOT NULL,source_key TEXT UNIQUE NOT NULL,raw_data TEXT NOT NULL,raw_sha256 TEXT NOT NULL,PRIMARY KEY(ledger_id,kind,entity_id));
@@ -11,21 +12,25 @@ CREATE TABLE d1_migration_registry(migration_id TEXT PRIMARY KEY,checksum TEXT N
 
 def checksum():
     here=pathlib.Path(__file__).parent
-    return sha(b''.join(name.encode('utf-8')+b'\0'+(here/name).read_bytes() for name in ('migration.py','candidate.py','isolation.py','factory.py')))
+    return sha(b''.join(name.encode('utf-8')+b'\0'+(here/name).read_bytes() for name in ('migration.py','candidate.py','isolation.py','factory.py','framework_metadata.py')))
 def original_dump(db):return {k:v for k,v in logical_dump(db).items() if not k.startswith('d1_') or k=='d1_synthetic_guard'}
 def rows(db):return [dict(r) for r in db.execute('SELECT * FROM entities ORDER BY key')]
 def target_hash(db):return sha(json_bytes({k:v for k,v in logical_dump(db).items() if k in {'d1_raw_sources','d1_projection','d1_relations'}}))
-def source_schema_check(db):
+def source_schema_check(root, db):
     from factory import SCHEMA
-    core={'meta','entities','outbox','d1_synthetic_guard'}
+    framework = framework_domain(root, db)
     def signature(c):
         return sorted((r[0],r[1],r[2],re.sub(r'\s+',' ',r[3]).strip() if r[3] else None)
-                      for r in c.execute('SELECT type,name,tbl_name,sql FROM sqlite_master') if r[2] in core)
+                      for r in c.execute('SELECT type,name,tbl_name,sql FROM sqlite_master')
+                      if r[1] not in framework['tables'] and r[2] not in framework['tables'])
     reference=sqlite3.connect(':memory:')
     try:
         reference.executescript(SCHEMA)
+        if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='d1_migration_registry'").fetchone():
+            reference.executescript(SQL)
         if signature(db)!=signature(reference):raise RuntimeError('BLOCKER: unknown source schema fingerprint')
     finally:reference.close()
+    return framework
 
 def migrate(root,file,fault=None,expected_checksum=None):
     r=root_path(root);p=safe_file(r,file);db=open_db(r,p,write=True)
@@ -40,7 +45,7 @@ def migrate(root,file,fault=None,expected_checksum=None):
         if fault=='error:'+name:raise RuntimeError('injected-primary-'+name)
     try:
         if expected_checksum!=actual:raise RuntimeError('BLOCKER: implementation checksum mismatch')
-        source_schema_check(db)
+        attempt['frameworkMetadata'] = source_schema_check(r, db)
         source_hash=sha(json_bytes(original_dump(db)))
         existing=db.execute("SELECT name FROM sqlite_master WHERE name='d1_migration_registry'").fetchone()
         if existing:
@@ -50,7 +55,7 @@ def migrate(root,file,fault=None,expected_checksum=None):
             attempt['status']='idempotent';write_json(audit,attempt);return attempt
         if db.execute('PRAGMA user_version').fetchone()[0]!=0:raise RuntimeError('BLOCKER: unknown source schema version')
         names={v[0] for v in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
-        if names!={'meta','entities','outbox','d1_synthetic_guard'}:raise RuntimeError('BLOCKER: unknown source schema')
+        if names!={'meta','entities','outbox','d1_synthetic_guard', *attempt['frameworkMetadata']['tables']}:raise RuntimeError('BLOCKER: unknown source schema')
         stage('before_begin');db.execute('PRAGMA foreign_keys=ON');db.execute('BEGIN IMMEDIATE')
         # execute statements individually: sqlite3.executescript would implicitly commit.
         for statement in SQL.split(';'):

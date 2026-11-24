@@ -3,6 +3,7 @@
 Source databases stay frozen. Every mutation targets a fresh SQLite-backup copy.
 Fault workers really exit; probe workers are separate new processes on the same path.
 """
+import copy
 import json
 import os
 import pathlib
@@ -15,6 +16,7 @@ from migration import (
     MIGRATION, checksum, migrate, original_dump, restore_gate, snapshot,
     target_hash, verify_backup, verify_original_bytes,
 )
+from framework_metadata import observe as framework_observe
 
 HERE = pathlib.Path(__file__).resolve().parent
 REMOTE = {'synthetic': True, 'scope': 'synthetic-scope', 'epoch': 'synthetic-epoch',
@@ -554,6 +556,136 @@ def run_storage_cases(root, source_path, record):
            lambda: drift('S42', 'UPDATE d1_projection SET projection=? WHERE source_key=?',
                          ('{}', fixture['rows'][0]['key'])))
     record('S43', 'source remains frozen after asset independence and target drift cases', source_frozen)
+
+    def schema_objects(path):
+        db = open_db(root, path)
+        try:
+            return [list(row) for row in db.execute('SELECT type,name,tbl_name,rootpage,sql '
+                                                    'FROM sqlite_master ORDER BY type,name,tbl_name')]
+        finally:
+            db.close()
+
+    def metadata_copy(case_id):
+        path = case_copy(case_id)
+        db = open_db(root, path, write=True)
+        try:
+            if not db.execute("SELECT 1 FROM sqlite_master WHERE name='android_metadata'").fetchone():
+                # Deliberately manufactured negative input, never a source fix.
+                db.execute('CREATE TABLE android_metadata (locale TEXT)')
+                db.execute("INSERT INTO android_metadata(locale) VALUES('synthetic-native-spoof')")
+        finally:
+            db.close()
+        return path
+
+    def metadata_profile():
+        path = case_copy('S44')
+        db = open_db(root, path)
+        try:
+            before_metadata = framework_observe(db)
+        finally:
+            db.close()
+        if before_metadata['schemaObjects']:
+            before = _dump(root, path)
+            result = migrate(root, path)
+            db = open_db(root, path)
+            try:
+                assert framework_observe(db) == before_metadata
+                assert result['frameworkMetadata']['frameworkPresent'] is True
+            finally:
+                db.close()
+            assert _dump(root, path) == before
+            return {'profile': 'authenticated Android Framework', 'originalTableAndTypedLocaleRetained': True,
+                    'authority': result['frameworkMetadata']['authority']}
+        path = metadata_copy('S44-native-spoof')
+        before, objects = _dump(root, path), schema_objects(path)
+        rejection = _reject(lambda: migrate(root, path), 'Android Framework metadata')
+        assert _dump(root, path) == before and schema_objects(path) == objects
+        return {'profile': 'native C/Node', 'manufacturedFrameworkNameRejected': True, 'rejection': rejection}
+
+    record('S44', 'Framework locale retained only in authenticated Android; native spoof rejected', metadata_profile)
+
+    def metadata_invalid(case_id, sql, parameters=()):
+        path = metadata_copy(case_id)
+        db = open_db(root, path, write=True)
+        try:
+            db.execute(sql, parameters)
+            before_metadata = framework_observe(db)
+        finally:
+            db.close()
+        before, objects = _dump(root, path), schema_objects(path)
+        rejection = _reject(lambda: migrate(root, path), 'BLOCKER')
+        db = open_db(root, path)
+        try:
+            assert framework_observe(db) == before_metadata
+        finally:
+            db.close()
+        assert _dump(root, path) == before and schema_objects(path) == objects
+        return {'actualSQLMutation': sql, 'rejection': rejection, 'originalNegativeRowsAndSchemaRetained': True}
+
+    record('S45', 'extra Framework locale column rejected without schema cleanup',
+           lambda: metadata_invalid('S45', 'ALTER TABLE android_metadata ADD COLUMN synthetic_extra TEXT'))
+    record('S46', 'BLOB locale storage class rejected without coercion',
+           lambda: metadata_invalid('S46', 'UPDATE android_metadata SET locale=?', (sqlite3.Binary(b'en_US'),)))
+    record('S47', 'second Framework locale row rejected without deleting duplicates',
+           lambda: metadata_invalid('S47', "INSERT INTO android_metadata(locale) VALUES('synthetic-second')"))
+    record('S48', 'changed TEXT locale rejected against original Java bytes',
+           lambda: metadata_invalid('S48', "UPDATE android_metadata SET locale='synthetic-changed'"))
+    record('S49', 'unknown index on Framework metadata rejected',
+           lambda: metadata_invalid('S49', 'CREATE INDEX synthetic_locale_index ON android_metadata(locale)'))
+    record('S50', 'unknown source view is not hidden by table-only fingerprint',
+           lambda: unknown_schema('S50', 'CREATE VIEW synthetic_unknown_view AS SELECT id FROM meta'))
+
+    def forged_framework_receipts():
+        from isolation import root_path as guarded_root
+        forged_parent = guarded_root(root / 'S51-forged-native-domain', create=True)
+        forged = guarded_root(forged_parent / 'android', create=True)
+        _fresh_bytes(forged, 'fixture.json', safe_file(root, 'fixture.json').read_bytes())
+        file = _fresh_bytes(forged, 'android-source.sqlite', source.read_bytes())
+        db = open_db(forged, file, write=True)
+        try:
+            if not db.execute("SELECT 1 FROM sqlite_master WHERE name='android_metadata'").fetchone():
+                db.execute('CREATE TABLE android_metadata (locale TEXT)')
+                db.execute("INSERT INTO android_metadata(locale) VALUES('synthetic-spoof')")
+        finally:
+            db.close()
+        _fresh_bytes(forged, 'node-generator-receipt.json', json_bytes({'generator': 'independent-node-sqlite', 'status': 'created'}))
+        fake = {'actualFramework': True, 'status': 'passed', 'guard': GUARD,
+                'candidate': 'd1-01-candidate.1', 'runId': os.environ['GITHUB_RUN_ID']}
+        _fresh_bytes(forged, 'android-generator-receipt.json', json_bytes(fake))
+        _fresh_bytes(forged, 'android-runner-receipt.json', json_bytes(fake))
+        before = _dump(forged, file)
+        rejection = _reject(lambda: migrate(forged, file), 'native C/Node profile')
+        assert _dump(forged, file) == before
+        result = {'rootNamedAndroid': True, 'forgedActualFrameworkJSONRejected': True,
+                  'nativeDomainAndOriginalRowsRetained': True, 'rejection': rejection}
+        if (root / 'android-generator-receipt.json').exists():
+            proof_parent = guarded_root(root / 'S51-contradictory-capture-domain', create=True)
+            proof_root = guarded_root(proof_parent / 'android', create=True)
+            for name in ('fixture.json', 'android-source.sqlite', 'android-generator-receipt.json', 'android-runner-receipt.json'):
+                _fresh_bytes(proof_root, name, safe_file(root, name).read_bytes())
+            generator_path = safe_file(proof_root, 'android-generator-receipt.json')
+            runner_path = safe_file(proof_root, 'android-runner-receipt.json')
+            generator_bytes, runner_bytes = generator_path.read_bytes(), runner_path.read_bytes()
+            baseline_runner = json.loads(runner_bytes)
+            proof_database = safe_file(proof_root, 'android-source.sqlite')
+            baseline_state = _dump(proof_root, proof_database)
+            observed = copy.deepcopy(baseline_runner)
+            observed['exitCode'] = False  # Python False == 0 must not authorize Framework data.
+            runner_path.write_bytes(json_bytes(observed))
+            refused = _reject(lambda: migrate(proof_root, proof_database), 'Android Framework metadata')
+            assert _dump(proof_root, proof_database) == baseline_state
+            generator_path.write_bytes(generator_bytes);runner_path.write_bytes(runner_bytes)
+            positive_candidate = _copy(proof_root, proof_database, 'S51-valid-capture-candidate.sqlite')
+            valid = migrate(proof_root, positive_candidate)
+            assert valid['status'] == 'committed' and _dump(proof_root, positive_candidate) == baseline_state
+            assert _dump(proof_root, proof_database) == baseline_state
+            result['authenticatedAndroidContradictions'] = [
+                {'mode': 'bool-exit-zero', 'rejection': refused, 'sourceRowsUnchanged': True}]
+            result['sameProofAcceptsUnmodifiedCapture'] = True
+        return result
+
+    record('S51', 'Android filename/root and forged Framework JSON cannot authorize native domain', forged_framework_receipts)
+    record('S52', 'platform source remains frozen after all Framework metadata mutations', source_frozen)
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ import json, os, pathlib, shutil, sys, traceback
 from isolation import root_path, safe_file, sha, write_json, open_db, json_bytes, logical_dump
 from suite import equal, json_equal
 from migration import snapshot, verify_backup, original_dump
+from framework_metadata import framework_domain
 
 def main(desktop,android,output):
     out=root_path(output,create=True);d=root_path(desktop);a=root_path(android)
@@ -67,9 +68,12 @@ def main(desktop,android,output):
         def feedback_domain():
             db=open_db(folder,'feedback-source.sqlite');validation=open_db(folder,'feedback-validation.sqlite')
             try:
-                equal(set(logical_dump(db)),{'records','assets','links','settings','d1_synthetic_guard'})
-                equal(set(logical_dump(validation)),{'records','assets','links','settings','archive_entries','d1_synthetic_guard'})
-                return {'persistentTables':4,'restoreTemporaryArchiveEntries':True,'distinctFromTaskLedger':True}
+                persistent_framework=framework_domain(folder, db, 'feedback-source.sqlite')
+                validation_framework=framework_domain(folder, validation, 'feedback-validation.sqlite')
+                equal(set(logical_dump(db)),{'records','assets','links','settings','d1_synthetic_guard', *persistent_framework['tables']})
+                equal(set(logical_dump(validation)),{'records','assets','links','settings','archive_entries','d1_synthetic_guard', *validation_framework['tables']})
+                return {'persistentBusinessTables':4,'restoreTemporaryArchiveEntries':True,'distinctFromTaskLedger':True,
+                        'persistentFramework':persistent_framework,'validationFramework':validation_framework}
             finally:db.close();validation.close()
         record('F01','Android independent feedback and restore-only table domains',feedback_domain)
         def feedback_restore():
@@ -79,10 +83,14 @@ def main(desktop,android,output):
             m=snapshot(evidence,'feedback-source.sqlite','feedback-backup.sqlite',assets=['feedback-original.png'])
             mp=evidence/'feedback-backup.sqlite.manifest.json';trusted=sha(mp.read_bytes());equal(verify_backup(evidence,mp,trusted),m)
             source=open_db(evidence,'feedback-source.sqlite');backup=open_db(evidence,'feedback-backup.sqlite')
-            try:equal(logical_dump(source),logical_dump(backup))
+            try:
+                source_framework=framework_domain(evidence, source, 'feedback-source.sqlite', authority_root=folder)
+                backup_framework=framework_domain(evidence, backup, 'feedback-source.sqlite', authority_root=folder)
+                equal(logical_dump(source),logical_dump(backup));equal(source_framework['observation'],backup_framework['observation'])
             finally:source.close();backup.close()
             copied=safe_file(evidence,m['assets'][0]['path']);equal(copied.read_bytes(),(evidence/'feedback-original.png').read_bytes())
-            return {'completeFeedbackTablesRestored':True,'originalImageBytesRestored':True,'sha256':sha(copied.read_bytes()),'scope':'independent fixture domain; production AAR restoration not invoked'}
+            return {'completeFeedbackTablesRestored':True,'originalImageBytesRestored':True,'sha256':sha(copied.read_bytes()),
+                    'frameworkMetadataRetained':backup_framework,'scope':'independent fixture domain; production AAR restoration not invoked'}
         record('F02','Feedback all rows and exact original image bytes restored',feedback_restore)
     report['passed']=sum(v['status']=='passed' for v in report['cases']);report['failed']=len(report['cases'])-report['passed'];report['status']='passed' if not report['failed'] else 'failed'
     write_json(out/'comparison-report.json',report)
