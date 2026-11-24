@@ -1,0 +1,72 @@
+name: D4 UI candidate synthetic validation
+on:
+  push:
+    branches: [d4/ui-candidate-1]
+    paths: [prototypes/d4-01/**, tests/d4-ui/**, .github/workflows/d4-ui-candidate.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  domain:
+    if: github.ref == 'refs/heads/d4/ui-candidate-1'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Scope and frozen production guard
+        shell: bash
+        run: |
+          node tests/d4-ui/scope.mjs
+      - name: Mature pure domain tests
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test tests/d4-ui/domain.test.mjs 2>&1 | tee "$RUNNER_TEMP/d4-domain-${{ matrix.os }}.tap"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d4-domain-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d4-domain-${{ matrix.os }}.tap
+          if-no-files-found: error
+  browser:
+    if: github.ref == 'refs/heads/d4/ui-candidate-1'
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build offline Windows and Web demo
+        run: node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Real DOM interactions and responsive screenshots
+        run: node tests/d4-ui/run-browser.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Package verified experience
+        run: node tests/d4-ui/package-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d4-ui-experience-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/mytodo-d4-01-demo.html
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.json
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.md
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.bat
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.txt
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.zip
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/screenshots
+          if-no-files-found: error

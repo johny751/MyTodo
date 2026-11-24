@@ -1,0 +1,10 @@
+import {execFileSync} from 'node:child_process';
+const git=args=>execFileSync('git',args,{encoding:'utf8',windowsHide:true}).trim();
+if(process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_REF!=='refs/heads/d4/ui-candidate-1'||process.env.EXPECTED_SOURCE_SHA!==process.env.GITHUB_SHA||git(['rev-parse','HEAD'])!==process.env.GITHUB_SHA)throw Error('Wrong UI candidate identity');
+const base=git(['rev-parse','origin/master']);
+git(['diff','--check','origin/master...HEAD']);
+const files=git(['diff','--name-only','origin/master...HEAD']).split('\n').filter(Boolean);
+const allowed=/^(?:prototypes\/d4-01\/|tests\/d4-ui\/|docs\/upgrade\/d4-01\/|\.github\/workflows\/d4-ui-candidate\.yml$)/;
+if(files.some(f=>!allowed.test(f)))throw Error('Unauthorized scope: '+files.filter(f=>!allowed.test(f)).join(','));
+git(['diff','--exit-code','origin/master...HEAD','--','src','windows','android','package.json']);
+console.log(JSON.stringify({status:'passed',base,sourceSHA:process.env.GITHUB_SHA,files,productionDiff:0}));
