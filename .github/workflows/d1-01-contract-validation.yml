@@ -9,11 +9,20 @@ permissions:
 concurrency:
   group: mytodo-d1-01-${{ github.ref }}
   cancel-in-progress: false
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
 jobs:
   desktop:
     runs-on: windows-latest
     timeout-minutes: 35
     steps:
+      - name: Preserve reviewed Git source bytes in the fresh Windows checkout
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          if ($LASTEXITCODE -ne 0) { throw 'Git autocrlf configuration failed' }
+          git config --global core.eol lf
+          if ($LASTEXITCODE -ne 0) { throw 'Git eol configuration failed' }
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with: {ref: '${{ github.sha }}', persist-credentials: false}
       - name: Select proven preinstalled Python and Node
