@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test tests/d4-ui/domain.test.mjs 2>&1 | tee "$RUNNER_TEMP/d4-domain-${{ matrix.os }}.tap"
+          node --test --test-reporter=tap tests/d4-ui/domain.test.mjs 2>&1 | tee "$RUNNER_TEMP/d4-domain-${{ matrix.os }}.tap"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -55,9 +55,9 @@ test('D4 completion delegates to mature repeat logic and resets/retimes descenda
 });
 
 test('D4 edit-done uses the mature next occurrence rather than bypassing it',()=>{
- const r=repository();r.createTask({id:'repeat-update',title:'更新完成',repeat:{frequency:'daily',interval:1}});
+ const start='2026-11-25T10:00',r=repository();r.createTask({id:'repeat-update',title:'更新完成',start,repeat:{frequency:'daily',interval:1}});
  r.updateTask('repeat-update',{done:true});assert.equal(r.state.tasks.length,2);
- const direct={...empty(),tasks:[task('expected',{repeat:{frequency:'daily',interval:1}})]};setTaskDone(direct,'expected',true,FIXED_NOW);
+ const direct={...empty(),tasks:[task('expected',{start,repeat:{frequency:'daily',interval:1}})]};setTaskDone(direct,'expected',true,FIXED_NOW);
  assert.equal(r.state.tasks.find(t=>!t.done).start,direct.tasks.find(t=>!t.done).start);
 });
 

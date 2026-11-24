@@ -7,3 +7,5 @@ FACT：CI1 源码 bc9bc28a0359d7b42bdb59e18e7cb0668eca6dcf，Actions 45507711884
 PROPOSAL/候选修正：Demo effective archive 由独立 archiveOwn 与祖先 archiveInherited 计算，批量提交保留原始 own 标记；归档父任务隐藏整树，恢复父任务保留先前独立归档的子任务。继承父任务归档的子项提示先恢复父任务。原树、ID 和成熟字段不变。加入真实 UI 先归档子任务、再归档/恢复父任务、最后恢复子任务的断言。
 
 测试接入修正：工作事项编辑字段限定当前弹窗，避免误填同名页面筛选字段；既有成功断言保持。真实控件验证仍仅 Actions，后续结果另列。
+
+FACT：CI2 源码 8f8f4183c1eaf97a4a361c4108d4ee1bd26789b9，Actions 45509156364 failed。Ubuntu 纯业务测试 16/17，edit-done 参考夹具输入与 Demo 默认开始时间不同；修订为同一显式开始时间，精确相等断言保留，模块语义未改。另改 TAP reporter 以保留结构化测试日志。后续运行待核验。
