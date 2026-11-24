@@ -1,0 +1,19 @@
+{
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "runId": "45425446577",
+  "runAttempt": "1",
+  "toolchain": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.52.37025",
+  "windowsSdk": "10.0.26100.0",
+  "exe": "D:\\a\\_temp\\d2-45425446577-win32\\native-build\\d2-native-runner.exe",
+  "sha256": "48c61a4cf5f4e373ca7769378753cdbb101311f11cbfb9e7f99d0b22d4de5a12",
+  "implementationChecksum": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d",
+  "productionEntryCompiled": true,
+  "fingerprintAlgorithm": "mytodo-storage-fingerprint-v2",
+  "actualSources": [
+    "windows/database.c",
+    "windows/migration.c",
+    "windows/util.c",
+    "windows/undo-capture.c"
+  ],
+  "appState": "actual App with byte-preserved production undo_capture and shared state; no GUI startup"
+}

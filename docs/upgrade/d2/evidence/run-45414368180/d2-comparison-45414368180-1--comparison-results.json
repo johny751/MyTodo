@@ -1,0 +1,123 @@
+{
+  "schema": "d2-cross-comparison-v1",
+  "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+  "runId": "45414368180",
+  "status": "failed",
+  "cases": [
+    {
+      "name": "windows-independent-source-registry-raw-target-validation",
+      "status": "failed",
+      "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-windows-input/cross-source.sqlite'",
+      "stack": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-windows-input/cross-source.sqlite'\n    at async Object.lstat (node:internal/fs/promises:1028:18)\n    at async safeFile (file:///home/runner/work/MyTodo/MyTodo/tests/d2/isolation.mjs:20:48)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:57:38\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:98)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:56:83"
+    },
+    {
+      "name": "node-independent-source-registry-raw-target-validation",
+      "status": "passed",
+      "evidence": {
+        "producer": {
+          "passed": 16,
+          "buildIdentity": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8"
+        },
+        "source": {
+          "objects": [
+            [
+              "index",
+              "sqlite_autoindex_entities_1",
+              "entities",
+              null
+            ],
+            [
+              "index",
+              "task_filter",
+              "entities",
+              "CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)"
+            ],
+            [
+              "index",
+              "task_parent",
+              "entities",
+              "CREATE INDEX task_parent ON entities(parent_id)"
+            ],
+            [
+              "index",
+              "task_reminders",
+              "entities",
+              "CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)"
+            ],
+            [
+              "table",
+              "entities",
+              "entities",
+              "CREATE TABLE entities (key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)"
+            ],
+            [
+              "table",
+              "meta",
+              "meta",
+              "CREATE TABLE meta (id INTEGER PRIMARY KEY CHECK(id=1), value TEXT NOT NULL)"
+            ],
+            [
+              "table",
+              "outbox",
+              "outbox",
+              "CREATE TABLE outbox (id INTEGER PRIMARY KEY,event TEXT NOT NULL)"
+            ]
+          ],
+          "schemaPayload": "S29:mytodo-storage-fingerprint-v1S6:schemaS1:7S5:indexS27:sqlite_autoindex_entities_1S8:entitiesN;S5:indexS11:task_filterS8:entitiesS70:CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)S5:indexS11:task_parentS8:entitiesS47:CREATE INDEX task_parent ON entities(parent_id)S5:indexS14:task_remindersS8:entitiesS70:CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)S5:tableS8:entitiesS8:entitiesS245:CREATE TABLE entities (key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)S5:tableS4:metaS4:metaS75:CREATE TABLE meta (id INTEGER PRIMARY KEY CHECK(id=1), value TEXT NOT NULL)S5:tableS6:outboxS6:outboxS64:CREATE TABLE outbox (id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+          "rawPayload": "S29:mytodo-storage-fingerprint-v1S3:rawS1:3S8:entitiesS2:12S3:keyS4:kindS2:idS4:dataS6:recordS7:deletedS9:conflictsS9:parent_idS4:doneS8:quadrantS11:reminder_atS5:startS1:3S4:textS50:5B227461736B222C2273796E7468657469632D626C6F62225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D626C6F62N;S4:blobS8:00FF4142N;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS0:N;S7:integerS2:31N;S7:integerS4:2D32N;S7:integerS38:39323233333732303336383534373735383037N;S4:nullN;N;S4:textS50:5B227461736B222C2273796E7468657469632D7265616C225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7265616CN;S4:textS60:7B227469746C65223A22E99D9EE6B395E58E86E58FB2E6A087E9878F227DN;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS28:6D697373696E672D706172656E74N;S4:nullN;N;S4:realS36:312E30303030303030303030303030303032S16:3ff0000000000001S4:textS20:6E6F742D612D74696D65N;S4:textS20:323032362D30322D3330N;S4:textS50:5B227461736B222C2273796E7468657469632D7461736B225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7461736BN;S4:textS190:7B227469746C65223A22E59088E68890E8BEB9E7958C2065CC8120F09F9880222C2270726F6A656374223A22E9878DE5A48DE5908DE7A7B0222C226D697373696E6750726F6A6563744964223A6E756C6C2C22756E6B6E6F776E223A22227DN;S4:textS56:7B226669656C6473223A7B7D2C2264656C65746564223A6E756C6C7DN;S7:integerS2:31N;S4:textS4:5B5DN;S4:nullN;N;S7:integerS2:30N;S7:integerS2:34N;S4:nullN;N;S4:textS0:N;S4:metaS1:2S2:idS5:valueS1:1S7:integerS2:31N;S4:textS590:7B2276657273696F6E223A322C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A392C22636C6F636B223A32312C227175657565223A332C22766563746F72223A7B2272656D6F7465223A377D2C22637572736F7273223A7B2273796E7468657469632D72656D6F7465223A357D2C2273657474696E6773223A7B7D2C2273636F7065223A6E756C6C2C2265706F6368223A6E756C6C2C2270656E64696E67223A7B2273796E7468657469632D6576656E74223A7B22736571223A387D7D2C22696E697469616C697A6564223A747275652C227265766973696F6E223A342C22646174615265766973696F6E223A322C226D616E6966657374223A7B226261746368223A2273796E7468657469632D32227D2C2261636B223A367DN;S6:outboxS1:2S2:idS5:eventS1:2S7:integerS2:38N;S4:textS108:7B226964223A2273796E7468657469632D70656E64696E67222C227061796C6F6164223A6E756C6C2C22756E6B6E6F776E223A22227DN;S7:integerS2:39N;S4:textS138:7B226964223A2273796E7468657469632D746F6D6273746F6E65222C2264656C65746564223A747275652C226163746F72223A2273796E7468657469632D6163746F72227DN;",
+          "schemaFingerprint": "7747e02fac0aef18c3f4421d88beaa10f4a3444afc694cec2233489c89146fa5",
+          "rawFingerprint": "6e5ef120dd788e11e9eec3ab2695cbb6804c1ce7aed07f13086751f5c46c51a1",
+          "userVersion": 0,
+          "snapshotId": "323008b20abba34648796edd532a92e2cb0f71855bcfec3004e3dad69437b337"
+        },
+        "target": {
+          "schemaFingerprint": "339f5bb5fbfbe3e0f9cf823eb72719e648c2b66248e0f49a1f02e8c0d2920a44",
+          "rawFingerprint": "6e5ef120dd788e11e9eec3ab2695cbb6804c1ce7aed07f13086751f5c46c51a1",
+          "userVersion": 1
+        },
+        "implementationChecksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8",
+        "androidLocalMetadata": null
+      }
+    },
+    {
+      "name": "android-independent-source-registry-raw-target-validation",
+      "status": "failed",
+      "primaryError": "Error: registry immutable evidence",
+      "stack": "Error: registry immutable evidence\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:63:3\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:98)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:56:83"
+    },
+    {
+      "name": "cross-core-windows-node",
+      "status": "failed",
+      "primaryError": "Error: missing platform results",
+      "stack": "Error: missing platform results\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:126\n    at check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:104)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:88"
+    },
+    {
+      "name": "cross-core-node-android",
+      "status": "failed",
+      "primaryError": "Error: missing platform results",
+      "stack": "Error: missing platform results\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:126\n    at check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:104)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:88"
+    },
+    {
+      "name": "cross-core-android-windows",
+      "status": "failed",
+      "primaryError": "Error: missing platform results",
+      "stack": "Error: missing platform results\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:126\n    at check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:104)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:88"
+    },
+    {
+      "name": "backup-and-restore-result-evidence",
+      "status": "passed",
+      "evidence": {
+        "passed": 24,
+        "failed": 0,
+        "limitations": [
+          "Fixture-controlled global barrier only; real cross-file writer fencing remains BLOCKER.",
+          "Remote evidence is synthetic and carries no real authentication/authority.",
+          "Directory fsync, device power loss and production file activation remain UNVERIFIED.",
+          "No Actor resume or production restoration enabled."
+        ]
+      }
+    }
+  ],
+  "passed": 2,
+  "failed": 5
+}

@@ -31,3 +31,5 @@ FACT (source): the laboratory same-snapshot recovery accepts only the fixed clos
 BLOCKER: no common production barrier has been proven for every business writer, native search maintenance, Android feedback/image writer and sync callback. No authenticated remote A is connected. No production multi-file durable pointer/rename protocol is installed. Directory fsync portability, device power loss, storage exhaustion during every journal write and full application restart are UNVERIFIED. Do not deploy this test-only activation routine into a production caller.
 
 OWNER DECISION: select and approve each platform's real writer lease, consistent backup API, durable component activation strategy and remote evidence authority, with explicit impact and rollback/reconciliation boundaries. No such permission is implied by D2 branch validation.
+
+FACT (CI4): Source d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7, Actions 45425446577, attempt 1. Complete-state-v2 laboratory 25/25 passed; real writer/remote/durability gates remain blocked. Earlier pending-CI4 wording records the source checkpoint before this run.

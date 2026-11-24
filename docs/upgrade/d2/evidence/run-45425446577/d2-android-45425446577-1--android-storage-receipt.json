@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "syntheticOnly": true,
+  "framework": "d2-real-storage-api-v1",
+  "contractId": "d1-01-candidate.1",
+  "runId": "45425446577",
+  "runAttempt": "1",
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "implementationChecksum": "fbda0fcd50ec6a876ccc2427f64292f3ff8b6ec9195650a531ff5d922f2737ad",
+  "actualProductionStorageApi": true,
+  "productionAppEntryLoaded": false,
+  "actualFramework": true,
+  "cases": [
+    {
+      "id": "A01-no-startup-migration",
+      "status": "passed"
+    },
+    {
+      "id": "A02-real-invoke-CAS",
+      "status": "passed"
+    },
+    {
+      "id": "A03-infrastructure-atomic-repeat",
+      "status": "passed"
+    },
+    {
+      "id": "A04-before-commit-real-rollback",
+      "status": "passed"
+    },
+    {
+      "id": "A05-unknown-commit-new-handle",
+      "status": "passed"
+    },
+    {
+      "id": "A06-raw-advance-preserved",
+      "status": "passed"
+    },
+    {
+      "id": "A07-target-DDL-drift",
+      "status": "passed"
+    },
+    {
+      "id": "A08-build-identity-refusal",
+      "status": "passed"
+    },
+    {
+      "id": "A09-shared-cross-raw",
+      "status": "passed"
+    },
+    {
+      "id": "A10-reordered-real-api",
+      "status": "passed"
+    },
+    {
+      "id": "A11-real-SQL-primary-preserved",
+      "status": "passed"
+    }
+  ],
+  "files": {
+    "cross-source.sqlite": {
+      "writersClosed": true,
+      "bytes": 40960,
+      "sha256": "0c42a40fc4145032ac845e924f8c7385cc7f40b6f8d14337c4b18734e42fce41",
+      "sidecars": [
+        {
+          "suffix": "-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ]
+    },
+    "cross-target.sqlite": {
+      "writersClosed": true,
+      "bytes": 65536,
+      "sha256": "4ebf942773407b1b9f1d723f10b711d3474e21b404feec50c92edd2e564176c0",
+      "sidecars": [
+        {
+          "suffix": "-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ]
+    }
+  },
+  "oldV1RequestRejection": "java.lang.IllegalStateException: BLOCKER: unsupported fixed plan",
+  "sharedFixtureSha256": "dba5a3bfab0127442b5363b66b8aa8bc8448f16150ec0225773c99ae390f170f",
+  "realSqlPrimaryObservation": "android.database.sqlite.SQLiteConstraintException: d2-primary-sql-error (code 1811 SQLITE_CONSTRAINT_TRIGGER)",
+  "realSqlSuppressedObservations": [],
+  "externalAttemptAudits": {
+    "migration-audit.jsonl": {
+      "bytes": 1929,
+      "sha256": "7c14a3de6af7e570f2372e2e794d925db37c8ec9e999273f5abcb548a60d8790"
+    },
+    "rollback-first-error.jsonl": {
+      "bytes": 1812,
+      "sha256": "90f94d5f6428df6d4ada1aef251dab2354944b1c1654b8331e2ad0a51d8beaa6"
+    },
+    "unknown-first-error.jsonl": {
+      "bytes": 2447,
+      "sha256": "11bf3a8ca07c87afffba017f6ff904b29b315b47d079192a71ae7901c5e2d972"
+    }
+  },
+  "passed": 11,
+  "failed": 0,
+  "sqliteVersion": "3.39.2"
+}

@@ -29,3 +29,5 @@ Unknown COMMIT: never blindly retry. Reopen the same database path with a new ac
 Production entry adapters may expose explicit manual methods and checked close, but no constructor/startup migration. Explicit-column INSERT changes keep the existing bind values, CAS, transaction, ACK/outbox and deletion semantics. Actual APIs and errors must be tested independently on each platform. D1 Python reference is comparison context, not production evidence.
 
 PROPOSAL: v2 supersedes only the D2 unapproved v1 snapshot representation; see fingerprint-portability-resolution.md for CI3 evidence and compatibility. The D1 business data contract remains unchanged. Old v1 requests/payloads must be rejected and preserved.
+
+FACT (CI4): Source d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7, Actions 45425446577, attempt 1. The v2 manual runtime and independent cross checks passed; version 0 to 1 is still a production candidate. Earlier pending-CI4 wording records the source checkpoint before this run.

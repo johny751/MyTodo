@@ -1,0 +1,74 @@
+{
+  "runId": "45407366991",
+  "attempt": "1",
+  "sourceSha": "843e1ee91af1bdcad3919771803919a15fc46f6e",
+  "conclusion": "failure",
+  "url": "https://github.com/johny751/MyTodo/actions/runs/45407366991",
+  "jobs": [
+    {
+      "id": 138491585485,
+      "name": "scope",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491585485"
+    },
+    {
+      "id": 138491684543,
+      "name": "compare",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491684543"
+    },
+    {
+      "id": 138491684985,
+      "name": "node",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491684985"
+    },
+    {
+      "id": 138491685073,
+      "name": "backup",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491685073"
+    },
+    {
+      "id": 138491685743,
+      "name": "windows",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491685743"
+    },
+    {
+      "id": 138491685748,
+      "name": "android",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491685748"
+    }
+  ],
+  "archives": [
+    {
+      "name": "d2-scope-45407366991-1.zip",
+      "artifactId": 14926930735,
+      "bytes": 3120,
+      "sha256": "9f604633813da71fab23a5a13b41eba9e3567431e262ec5ab998a19c7394fbc9",
+      "officialDigest": "sha256:9f604633813da71fab23a5a13b41eba9e3567431e262ec5ab998a19c7394fbc9"
+    }
+  ],
+  "officialLogs": {
+    "bytes": 32563,
+    "sha256": "f07f1fc3d0782097621b8408fb888693aad8508373a7a87be3bdec6a6433501d"
+  },
+  "receipts": [
+    {
+      "artifact": "d2-scope-45407366991-1",
+      "entry": "source-scope-receipt.json",
+      "bytes": 8166,
+      "sha256": "4f2d93e36bfa81b3ea263a65e7ab6ce9ee968e06bd4fd52f2da54a9b15c2428d",
+      "receipt": {
+        "status": "failed",
+        "sourceSha": "843e1ee91af1bdcad3919771803919a15fc46f6e",
+        "runId": "45407366991",
+        "runAttempt": "1",
+        "primaryError": "Error: Command failed: git diff --check d4c5af4cbbb9192c19276dd371bd142c2b835534 843e1ee91af1bdcad3919771803919a15fc46f6e"
+      }
+    }
+  ],
+  "scope": "Original artifact ZIPs/API JSON/logs; GitHub file evidence only, no project execution"
+}

@@ -1,0 +1,501 @@
+{
+  "runId": "45414368180",
+  "attempt": "1",
+  "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+  "conclusion": "failure",
+  "url": "https://github.com/johny751/MyTodo/actions/runs/45414368180",
+  "jobs": [
+    {
+      "id": 138516450908,
+      "name": "scope",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516450908"
+    },
+    {
+      "id": 138516556667,
+      "name": "backup",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556667"
+    },
+    {
+      "id": 138516556760,
+      "name": "android",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556760"
+    },
+    {
+      "id": 138516556806,
+      "name": "windows",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556806"
+    },
+    {
+      "id": 138516556839,
+      "name": "node",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556839"
+    },
+    {
+      "id": 138519020153,
+      "name": "compare",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138519020153"
+    }
+  ],
+  "archives": [
+    {
+      "name": "d2-node-45414368180-1.zip",
+      "artifactId": 14932650194,
+      "bytes": 93137,
+      "sha256": "ca629060fd5b7eb2aeaff02b70be14e25ebe7e040d0a88ed58ed7ac9c9307475",
+      "officialDigest": "sha256:ca629060fd5b7eb2aeaff02b70be14e25ebe7e040d0a88ed58ed7ac9c9307475"
+    },
+    {
+      "name": "d2-backup-45414368180-1.zip",
+      "artifactId": 14932575516,
+      "bytes": 133603,
+      "sha256": "beceeeda09ac79e6cf25b2072d00a72ad3d7e6342f83a8d94fec88a36ee05c2a",
+      "officialDigest": "sha256:beceeeda09ac79e6cf25b2072d00a72ad3d7e6342f83a8d94fec88a36ee05c2a"
+    },
+    {
+      "name": "d2-comparison-45414368180-1.zip",
+      "artifactId": 14932271074,
+      "bytes": 2794,
+      "sha256": "ca82bea0793a88a9cbe73095d5a25cda21b4ab66a057f303b6a89f55408599fa",
+      "officialDigest": "sha256:ca82bea0793a88a9cbe73095d5a25cda21b4ab66a057f303b6a89f55408599fa"
+    },
+    {
+      "name": "d2-android-45414368180-1.zip",
+      "artifactId": 14932106683,
+      "bytes": 250512,
+      "sha256": "4d9e507f944042155db005678723b15deae9e12a96bdc02cdd6ba5bf419384d2",
+      "officialDigest": "sha256:4d9e507f944042155db005678723b15deae9e12a96bdc02cdd6ba5bf419384d2"
+    },
+    {
+      "name": "d2-scope-45414368180-1.zip",
+      "artifactId": 14931375754,
+      "bytes": 3214,
+      "sha256": "8f231e066ab4549608a0402a0be86d65f74bac6596574235064f4a500ad76e48",
+      "officialDigest": "sha256:8f231e066ab4549608a0402a0be86d65f74bac6596574235064f4a500ad76e48"
+    },
+    {
+      "name": "d2-emulator-45414368180-1.zip",
+      "artifactId": 14931362132,
+      "bytes": 22780,
+      "sha256": "42d347dc57b387985a7066ef0ca2737500d0d2d6328d02a0a58cf848e484ae43",
+      "officialDigest": "sha256:42d347dc57b387985a7066ef0ca2737500d0d2d6328d02a0a58cf848e484ae43"
+    },
+    {
+      "name": "d2-windows-45414368180-1.zip",
+      "artifactId": 14929918233,
+      "bytes": 827096,
+      "sha256": "20dce84dee13c5e23bf8c33a45e5a1cb75141f08cac8e025e916a35fc8984e05",
+      "officialDigest": "sha256:20dce84dee13c5e23bf8c33a45e5a1cb75141f08cac8e025e916a35fc8984e05"
+    }
+  ],
+  "officialLogs": {
+    "bytes": 82789,
+    "sha256": "64c8c0d8b01cc903ad4157216401d489420e7303f3b6f75dc522d4bd267ab571"
+  },
+  "receipts": [
+    {
+      "artifact": "d2-node-45414368180-1",
+      "entry": "node-report.json",
+      "bytes": 49631,
+      "sha256": "4773768297936ce8bf5c3b19499f778a9bc8b24458bda47fd6816a4c7ead894a",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "passed": 16,
+        "failed": 0,
+        "actualProductionEntry": true,
+        "startupMigration": false,
+        "implementationChecksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8",
+        "cases": [
+          {
+            "id": "N01",
+            "name": "Actual production commit with no startup migration",
+            "status": "passed"
+          },
+          {
+            "id": "N02",
+            "name": "Explicit named writes tolerate extra columns; migration refuses unknown layout",
+            "status": "passed"
+          },
+          {
+            "id": "N03",
+            "name": "All three reverse-column fixtures use actual named writer and manual step",
+            "status": "passed"
+          },
+          {
+            "id": "N04",
+            "name": "Infrastructure registry/snapshot/audit/version commit preserves all original raw cells",
+            "status": "passed"
+          },
+          {
+            "id": "N05",
+            "name": "Exact fixed-window repeat is idempotent with no new database rows",
+            "status": "passed"
+          },
+          {
+            "id": "N06",
+            "name": "Real ACK still cleans original queue; later migration blocksDataAdvanced without rewriting",
+            "status": "passed"
+          },
+          {
+            "id": "N07",
+            "name": "Unknown trigger source rejected before transaction",
+            "status": "passed"
+          },
+          {
+            "id": "N08",
+            "name": "Unrecorded or incorrect implementation identity rejected without writes",
+            "status": "passed"
+          },
+          {
+            "id": "N09",
+            "name": "Actual SQLite RAISE(ROLLBACK) preserves primary and cleanup errors",
+            "status": "passed"
+          },
+          {
+            "id": "N10",
+            "name": "Unknown COMMIT response confirmed by a fresh same-path handle beforeCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N11",
+            "name": "Unknown COMMIT response confirmed by a fresh same-path handle afterCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N12",
+            "name": "Actual process death and independent same-database reopen beforeCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N13",
+            "name": "Actual process death and independent same-database reopen afterCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N14",
+            "name": "Common raw historical boundary fixture after a proven actual API write",
+            "status": "passed"
+          },
+          {
+            "id": "N15",
+            "name": "Exact adjacent REAL64 bits and full independent canonical raw oracle",
+            "status": "passed"
+          },
+          {
+            "id": "N16",
+            "name": "Independent target schema rejects later infrastructure index drift",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-node-45414368180-1",
+      "entry": "production-source-identity.json",
+      "bytes": 1018,
+      "sha256": "5f0f1544f29fa85fd0afedda951db5b9f27a611386bdf6c5c4a9f18e0d644216",
+      "receipt": {
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "implementationChecksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8"
+      }
+    },
+    {
+      "artifact": "d2-backup-45414368180-1",
+      "entry": "backup-results.json",
+      "bytes": 6654,
+      "sha256": "2da8284013d46157d75cae3ad595ef593fa8e854565dc685053da77b340682fb",
+      "receipt": {
+        "schema": "d2-backup-results-v1",
+        "status": "passed",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "passed": 24,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "SQLite-WAL-committed-included-uncommitted-excluded",
+            "status": "passed"
+          },
+          {
+            "name": "common-snapshot-core-feedback-attachment-raw-integrity",
+            "status": "passed"
+          },
+          {
+            "name": "reject-missing-attachment",
+            "status": "passed"
+          },
+          {
+            "name": "reject-altered-component-and-manifest",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-actor",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-pending",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-cursor",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-manifest",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-ack",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-clock",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-outbox",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-original-attachment",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-incomplete-component-set",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-remote-unknown",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-remote-advanced",
+            "status": "passed"
+          },
+          {
+            "name": "reject-open-writer-and-WAL-before-activation",
+            "status": "passed"
+          },
+          {
+            "name": "same-database-restore-fresh-process-reopen",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterStage",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterSourceRetained",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterActivation",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterReopen",
+            "status": "passed"
+          },
+          {
+            "name": "unknown-activation-refuses-new-progress-and-old-backup",
+            "status": "passed"
+          },
+          {
+            "name": "recovery-binds-sealed-remote-progress",
+            "status": "passed"
+          },
+          {
+            "name": "repeat-backup-refuses-existing-path",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-comparison-45414368180-1",
+      "entry": "comparison-results.json",
+      "bytes": 9544,
+      "sha256": "5a8b58136b000492b31588d1a98b1eb3cb5105836654d45c5c2170f78577440e",
+      "receipt": {
+        "schema": "d2-cross-comparison-v1",
+        "status": "failed",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "passed": 2,
+        "failed": 5,
+        "cases": [
+          {
+            "name": "windows-independent-source-registry-raw-target-validation",
+            "status": "failed",
+            "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-windows-input/cross-source.sqlite'"
+          },
+          {
+            "name": "node-independent-source-registry-raw-target-validation",
+            "status": "passed"
+          },
+          {
+            "name": "android-independent-source-registry-raw-target-validation",
+            "status": "failed",
+            "primaryError": "Error: registry immutable evidence"
+          },
+          {
+            "name": "cross-core-windows-node",
+            "status": "failed",
+            "primaryError": "Error: missing platform results"
+          },
+          {
+            "name": "cross-core-node-android",
+            "status": "failed",
+            "primaryError": "Error: missing platform results"
+          },
+          {
+            "name": "cross-core-android-windows",
+            "status": "failed",
+            "primaryError": "Error: missing platform results"
+          },
+          {
+            "name": "backup-and-restore-result-evidence",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-android-45414368180-1",
+      "entry": "android-build-receipt.json",
+      "bytes": 1948,
+      "sha256": "6446b2a99459f81f034329fe8bb5aecb869368b1a19d0c43a6253d9809d9e8dd",
+      "receipt": {
+        "status": "built",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "productionAppEntryLoaded": false,
+        "implementationChecksum": "1d38339b59cdd97f26ea7e62cfeca1060c519d75e8932aacbceb1361dba8c157"
+      }
+    },
+    {
+      "artifact": "d2-android-45414368180-1",
+      "entry": "android-runner-receipt.json",
+      "bytes": 43903,
+      "sha256": "73113683e5bf01c42c98d683d47e760da9ac26123b7be66595f4de38e7be1ecc",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "productionAppEntryLoaded": false,
+        "firstError": null
+      }
+    },
+    {
+      "artifact": "d2-android-45414368180-1",
+      "entry": "android-storage-receipt.json",
+      "bytes": 3127,
+      "sha256": "6693aa6b7982dcc645defff364bcfa80980efde736dd46a7731fd04b20b91170",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "passed": 11,
+        "failed": 0,
+        "actualProductionStorageApi": true,
+        "actualFramework": true,
+        "productionAppEntryLoaded": false,
+        "implementationChecksum": "1d38339b59cdd97f26ea7e62cfeca1060c519d75e8932aacbceb1361dba8c157",
+        "cases": [
+          {
+            "id": "A01-no-startup-migration",
+            "status": "passed"
+          },
+          {
+            "id": "A02-real-invoke-CAS",
+            "status": "passed"
+          },
+          {
+            "id": "A03-infrastructure-atomic-repeat",
+            "status": "passed"
+          },
+          {
+            "id": "A04-before-commit-real-rollback",
+            "status": "passed"
+          },
+          {
+            "id": "A05-unknown-commit-new-handle",
+            "status": "passed"
+          },
+          {
+            "id": "A06-raw-advance-preserved",
+            "status": "passed"
+          },
+          {
+            "id": "A07-target-DDL-drift",
+            "status": "passed"
+          },
+          {
+            "id": "A08-build-identity-refusal",
+            "status": "passed"
+          },
+          {
+            "id": "A09-shared-cross-raw",
+            "status": "passed"
+          },
+          {
+            "id": "A10-reordered-real-api",
+            "status": "passed"
+          },
+          {
+            "id": "A11-real-SQL-primary-preserved",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-scope-45414368180-1",
+      "entry": "source-scope-receipt.json",
+      "bytes": 8557,
+      "sha256": "50157e6ccc69c61adf9dcc7126215901be605c9ff426de60ff9b2c1b346e2ea5",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1"
+      }
+    },
+    {
+      "artifact": "d2-windows-45414368180-1",
+      "entry": "native-first-error.json",
+      "bytes": 3322,
+      "sha256": "79db47c93a900000f52aa39829dbe0870fd84d2ca71ff691b885591982c4c528",
+      "receipt": {
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35"
+      }
+    },
+    {
+      "artifact": "d2-windows-45414368180-1",
+      "entry": "production-source-identity.json",
+      "bytes": 2155,
+      "sha256": "b8e0ecb82ebcc7cba18b4e3b0e4ca56d1a5dac36a404b4aec5f3e2def8144be8",
+      "receipt": {
+        "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+        "runId": "45414368180",
+        "runAttempt": "1",
+        "implementationChecksum": "5db67f19f548c85296059f98325d29e53f5eba80b6b0e7bfd0f251f700c6b125"
+      }
+    }
+  ],
+  "scope": "Original artifact ZIPs/API JSON/logs; GitHub file evidence only, no project execution"
+}

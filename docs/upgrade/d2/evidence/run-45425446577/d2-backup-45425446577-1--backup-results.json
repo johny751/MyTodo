@@ -1,0 +1,258 @@
+{
+  "schema": "d2-backup-results-v1",
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "runId": "45425446577",
+  "runAttempt": "1",
+  "status": "passed",
+  "cases": [
+    {
+      "name": "SQLite-WAL-committed-included-uncommitted-excluded",
+      "status": "passed",
+      "evidence": {
+        "actualNodeSQLiteBackup": true,
+        "committed": true,
+        "uncommitted": false
+      }
+    },
+    {
+      "name": "common-snapshot-core-feedback-attachment-raw-integrity",
+      "status": "passed",
+      "evidence": {
+        "kind": "d2-synthetic-common-snapshot-v1",
+        "logicalEncoding": "mytodo-complete-state-v2",
+        "runId": "45425446577",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "remote": {
+          "actor": "synthetic-actor",
+          "ack": 6,
+          "cursor": 5,
+          "manifest": "synthetic-2",
+          "clock": 21
+        },
+        "databases": [
+          {
+            "name": "core",
+            "source": "core.sqlite",
+            "file": "core.sqlite",
+            "bytes": 20480,
+            "sha256": "227d34c6a0d00ace34082bcbd12caf29a845a5fc4153d3b089c5a964afbd133e",
+            "logicalDigest": "ba45d034c01b4a2b8c307a9280eeda788ee3b403c244b7ee9176102c6117f3bd"
+          },
+          {
+            "name": "feedback",
+            "source": "feedback.sqlite",
+            "file": "feedback.sqlite",
+            "bytes": 8192,
+            "sha256": "fbb2a9b912e004b60f1550be24e7bc644cc75d1dc9921eaaf519fdabc01672f3",
+            "logicalDigest": "c9963b12a6fe227e2838942e1a135fac46655c2017628cefb4c04abb31351d43"
+          }
+        ],
+        "attachments": [
+          {
+            "name": "android-original-image",
+            "source": "original-image.bin",
+            "file": "attachment-0.bin",
+            "bytes": 9,
+            "sha256": "a5fb735dc60e1435a5cf29913c8a24e0726d37e9edd4987e11aeb4ec277f1351"
+          }
+        ],
+        "barrier": "controlled fixture only",
+        "createdAtUtc": "2026-11-24T15:26:20.464Z"
+      }
+    },
+    {
+      "name": "reject-missing-attachment",
+      "status": "passed",
+      "evidence": {
+        "refused": true
+      }
+    },
+    {
+      "name": "reject-altered-component-and-manifest",
+      "status": "passed",
+      "evidence": {
+        "refused": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-actor",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-pending",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-cursor",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-manifest",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-ack",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-clock",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-outbox",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedLocalAdvanced"
+      }
+    },
+    {
+      "name": "B-S-A-refuses-progressed-original-attachment",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedAttachmentAdvanced"
+      }
+    },
+    {
+      "name": "B-S-A-refuses-incomplete-component-set",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedComponentSet"
+      }
+    },
+    {
+      "name": "B-S-A-remote-unknown",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedRemoteUnknown"
+      }
+    },
+    {
+      "name": "B-S-A-remote-advanced",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedRemoteAdvanced"
+      }
+    },
+    {
+      "name": "reject-open-writer-and-WAL-before-activation",
+      "status": "passed",
+      "evidence": {
+        "refused": true,
+        "registeredActualWriterOpen": true
+      }
+    },
+    {
+      "name": "same-database-restore-fresh-process-reopen",
+      "status": "passed",
+      "evidence": {
+        "result": "restored",
+        "freshProcess": {
+          "status": "passed",
+          "freshProcess": true,
+          "samePath": true,
+          "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7"
+        },
+        "retainedSources": true
+      }
+    },
+    {
+      "name": "recover-interruption-afterStage",
+      "status": "passed",
+      "evidence": {
+        "phase": "afterStage",
+        "status": "recoveredSamePath",
+        "repeat": "recoveredSamePath"
+      }
+    },
+    {
+      "name": "recover-interruption-afterSourceRetained",
+      "status": "passed",
+      "evidence": {
+        "phase": "afterSourceRetained",
+        "status": "recoveredSamePath",
+        "repeat": "recoveredSamePath"
+      }
+    },
+    {
+      "name": "recover-interruption-afterActivation",
+      "status": "passed",
+      "evidence": {
+        "phase": "afterActivation",
+        "status": "recoveredSamePath",
+        "repeat": "recoveredSamePath"
+      }
+    },
+    {
+      "name": "recover-interruption-afterReopen",
+      "status": "passed",
+      "evidence": {
+        "phase": "afterReopen",
+        "status": "recoveredSamePath",
+        "repeat": "recoveredSamePath"
+      }
+    },
+    {
+      "name": "unknown-activation-refuses-new-progress-and-old-backup",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedDataAdvanced",
+        "currentPreserved": true
+      }
+    },
+    {
+      "name": "recovery-binds-sealed-remote-progress",
+      "status": "passed",
+      "evidence": {
+        "status": "blockedRecoveryEvidence"
+      }
+    },
+    {
+      "name": "repeat-backup-refuses-existing-path",
+      "status": "passed",
+      "evidence": {
+        "refused": true
+      }
+    },
+    {
+      "name": "unsupported-backup-value-encoding-is-refused-with-source-preserved",
+      "status": "passed",
+      "evidence": {
+        "rejected": true,
+        "sourcePreserved": true
+      }
+    }
+  ],
+  "productionRestoreEnabled": false,
+  "passed": 25,
+  "failed": 0,
+  "limitations": [
+    "Fixture-controlled global barrier only; real cross-file writer fencing remains BLOCKER.",
+    "Remote evidence is synthetic and carries no real authentication/authority.",
+    "Directory fsync, device power loss and production file activation remain UNVERIFIED.",
+    "No Actor resume or production restoration enabled."
+  ]
+}

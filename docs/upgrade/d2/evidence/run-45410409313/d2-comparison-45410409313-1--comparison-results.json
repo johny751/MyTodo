@@ -1,0 +1,52 @@
+{
+  "schema": "d2-cross-comparison-v1",
+  "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+  "runId": "45410409313",
+  "status": "failed",
+  "cases": [
+    {
+      "name": "windows-independent-source-registry-raw-target-validation",
+      "status": "failed",
+      "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-windows-input/cross-source.sqlite'",
+      "stack": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-windows-input/cross-source.sqlite'\n    at async Object.lstat (node:internal/fs/promises:1028:18)\n    at async safeFile (file:///home/runner/work/MyTodo/MyTodo/tests/d2/isolation.mjs:20:48)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:57:38\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:98)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:56:83"
+    },
+    {
+      "name": "node-independent-source-registry-raw-target-validation",
+      "status": "failed",
+      "primaryError": "Error: Node real suite failed",
+      "stack": "Error: Node real suite failed\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at producer (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:38:155)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:65:26\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:98)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:56:83"
+    },
+    {
+      "name": "android-independent-source-registry-raw-target-validation",
+      "status": "failed",
+      "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-android-input/cross-source.sqlite'",
+      "stack": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-android-input/cross-source.sqlite'\n    at async Object.lstat (node:internal/fs/promises:1028:18)\n    at async safeFile (file:///home/runner/work/MyTodo/MyTodo/tests/d2/isolation.mjs:20:48)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:57:38\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:98)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:56:83"
+    },
+    {
+      "name": "cross-core-windows-node",
+      "status": "failed",
+      "primaryError": "Error: missing platform results",
+      "stack": "Error: missing platform results\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:126\n    at check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:104)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:88"
+    },
+    {
+      "name": "cross-core-node-android",
+      "status": "failed",
+      "primaryError": "Error: missing platform results",
+      "stack": "Error: missing platform results\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:126\n    at check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:104)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:88"
+    },
+    {
+      "name": "cross-core-android-windows",
+      "status": "failed",
+      "primaryError": "Error: missing platform results",
+      "stack": "Error: missing platform results\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:126\n    at check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:104)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:69:88"
+    },
+    {
+      "name": "backup-and-restore-result-evidence",
+      "status": "failed",
+      "primaryError": "Error: backup framework failed or source identity mismatch",
+      "stack": "Error: backup framework failed or source identity mismatch\n    at assert (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:53:38)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:70:175\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:54:98)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/compare-runner.mjs:70:1"
+    }
+  ],
+  "passed": 0,
+  "failed": 7
+}

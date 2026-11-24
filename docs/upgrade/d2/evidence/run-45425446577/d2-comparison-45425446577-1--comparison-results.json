@@ -1,0 +1,274 @@
+{
+  "schema": "d2-cross-comparison-v1",
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "runId": "45425446577",
+  "status": "passed",
+  "cases": [
+    {
+      "name": "windows-independent-source-registry-raw-target-validation",
+      "status": "passed",
+      "evidence": {
+        "producer": {
+          "passed": 30,
+          "buildIdentity": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d"
+        },
+        "source": {
+          "objects": [
+            [
+              "index",
+              "sqlite_autoindex_entities_1",
+              "entities",
+              null
+            ],
+            [
+              "index",
+              "task_filter",
+              "entities",
+              "CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)"
+            ],
+            [
+              "index",
+              "task_parent",
+              "entities",
+              "CREATE INDEX task_parent ON entities(parent_id)"
+            ],
+            [
+              "index",
+              "task_reminders",
+              "entities",
+              "CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)"
+            ],
+            [
+              "table",
+              "entities",
+              "entities",
+              "CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)"
+            ],
+            [
+              "table",
+              "meta",
+              "meta",
+              "CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)"
+            ],
+            [
+              "table",
+              "outbox",
+              "outbox",
+              "CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)"
+            ]
+          ],
+          "schemaPayload": "S29:mytodo-storage-fingerprint-v2S6:schemaS1:7S5:indexS27:sqlite_autoindex_entities_1S8:entitiesN;S5:indexS11:task_filterS8:entitiesS70:CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)S5:indexS11:task_parentS8:entitiesS47:CREATE INDEX task_parent ON entities(parent_id)S5:indexS14:task_remindersS8:entitiesS70:CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)S5:tableS8:entitiesS8:entitiesS244:CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)S5:tableS4:metaS4:metaS73:CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)S5:tableS6:outboxS6:outboxS63:CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+          "rawPayload": "S29:mytodo-storage-fingerprint-v2S3:rawS1:3S8:entitiesS2:12S3:keyS4:kindS2:idS4:dataS6:recordS7:deletedS9:conflictsS9:parent_idS4:doneS8:quadrantS11:reminder_atS5:startS1:3S4:textS50:5B227461736B222C2273796E7468657469632D626C6F62225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D626C6F62N;S4:blobS8:00FF4142N;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS0:N;S7:integerS2:31N;S7:integerS4:2D32N;S7:integerS38:39323233333732303336383534373735383037N;S4:nullN;N;S4:textS50:5B227461736B222C2273796E7468657469632D7265616C225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7265616CN;S4:textS60:7B227469746C65223A22E99D9EE6B395E58E86E58FB2E6A087E9878F227DN;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS28:6D697373696E672D706172656E74N;S4:nullN;N;S4:realN;S16:3ff0000000000001S4:textS20:6E6F742D612D74696D65N;S4:textS20:323032362D30322D3330N;S4:textS50:5B227461736B222C2273796E7468657469632D7461736B225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7461736BN;S4:textS190:7B227469746C65223A22E59088E68890E8BEB9E7958C2065CC8120F09F9880222C2270726F6A656374223A22E9878DE5A48DE5908DE7A7B0222C226D697373696E6750726F6A6563744964223A6E756C6C2C22756E6B6E6F776E223A22227DN;S4:textS56:7B226669656C6473223A7B7D2C2264656C65746564223A6E756C6C7DN;S7:integerS2:31N;S4:textS4:5B5DN;S4:nullN;N;S7:integerS2:30N;S7:integerS2:34N;S4:nullN;N;S4:textS0:N;S4:metaS1:2S2:idS5:valueS1:1S7:integerS2:31N;S4:textS590:7B2276657273696F6E223A322C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A392C22636C6F636B223A32312C227175657565223A332C22766563746F72223A7B2272656D6F7465223A377D2C22637572736F7273223A7B2273796E7468657469632D72656D6F7465223A357D2C2273657474696E6773223A7B7D2C2273636F7065223A6E756C6C2C2265706F6368223A6E756C6C2C2270656E64696E67223A7B2273796E7468657469632D6576656E74223A7B22736571223A387D7D2C22696E697469616C697A6564223A747275652C227265766973696F6E223A342C22646174615265766973696F6E223A322C226D616E6966657374223A7B226261746368223A2273796E7468657469632D32227D2C2261636B223A367DN;S6:outboxS1:2S2:idS5:eventS1:2S7:integerS2:38N;S4:textS108:7B226964223A2273796E7468657469632D70656E64696E67222C227061796C6F6164223A6E756C6C2C22756E6B6E6F776E223A22227DN;S7:integerS2:39N;S4:textS138:7B226964223A2273796E7468657469632D746F6D6273746F6E65222C2264656C65746564223A747275652C226163746F72223A2273796E7468657469632D6163746F72227DN;",
+          "schemaFingerprint": "01a321397d41af838bd0f81bd7b86829245abbc5e2a6e12924515580422d7e26",
+          "rawFingerprint": "9d1a10e81f4be0c543a9ad122a76afdd70d8e942380dae5651fe8a857c9e0c8e",
+          "userVersion": 0,
+          "snapshotId": "9b7ccb0e8f0a1aaf16eda09acac0be33277c1d2d652818c800b006f35410a209"
+        },
+        "target": {
+          "schemaFingerprint": "3eaeff71fc7bfdd74c77876ff0ffcd632e11737be0f2e652312ab537b0619c2a",
+          "rawFingerprint": "9d1a10e81f4be0c543a9ad122a76afdd70d8e942380dae5651fe8a857c9e0c8e",
+          "userVersion": 1
+        },
+        "implementationChecksum": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d",
+        "androidLocalMetadata": null
+      }
+    },
+    {
+      "name": "node-independent-source-registry-raw-target-validation",
+      "status": "passed",
+      "evidence": {
+        "producer": {
+          "passed": 16,
+          "buildIdentity": "10d526916b302e70d8c750007b00b25329e5640a76e3fd45888c1b1463eaddc7"
+        },
+        "source": {
+          "objects": [
+            [
+              "index",
+              "sqlite_autoindex_entities_1",
+              "entities",
+              null
+            ],
+            [
+              "index",
+              "task_filter",
+              "entities",
+              "CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)"
+            ],
+            [
+              "index",
+              "task_parent",
+              "entities",
+              "CREATE INDEX task_parent ON entities(parent_id)"
+            ],
+            [
+              "index",
+              "task_reminders",
+              "entities",
+              "CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)"
+            ],
+            [
+              "table",
+              "entities",
+              "entities",
+              "CREATE TABLE entities (key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)"
+            ],
+            [
+              "table",
+              "meta",
+              "meta",
+              "CREATE TABLE meta (id INTEGER PRIMARY KEY CHECK(id=1), value TEXT NOT NULL)"
+            ],
+            [
+              "table",
+              "outbox",
+              "outbox",
+              "CREATE TABLE outbox (id INTEGER PRIMARY KEY,event TEXT NOT NULL)"
+            ]
+          ],
+          "schemaPayload": "S29:mytodo-storage-fingerprint-v2S6:schemaS1:7S5:indexS27:sqlite_autoindex_entities_1S8:entitiesN;S5:indexS11:task_filterS8:entitiesS70:CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)S5:indexS11:task_parentS8:entitiesS47:CREATE INDEX task_parent ON entities(parent_id)S5:indexS14:task_remindersS8:entitiesS70:CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)S5:tableS8:entitiesS8:entitiesS245:CREATE TABLE entities (key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)S5:tableS4:metaS4:metaS75:CREATE TABLE meta (id INTEGER PRIMARY KEY CHECK(id=1), value TEXT NOT NULL)S5:tableS6:outboxS6:outboxS64:CREATE TABLE outbox (id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+          "rawPayload": "S29:mytodo-storage-fingerprint-v2S3:rawS1:3S8:entitiesS2:12S3:keyS4:kindS2:idS4:dataS6:recordS7:deletedS9:conflictsS9:parent_idS4:doneS8:quadrantS11:reminder_atS5:startS1:3S4:textS50:5B227461736B222C2273796E7468657469632D626C6F62225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D626C6F62N;S4:blobS8:00FF4142N;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS0:N;S7:integerS2:31N;S7:integerS4:2D32N;S7:integerS38:39323233333732303336383534373735383037N;S4:nullN;N;S4:textS50:5B227461736B222C2273796E7468657469632D7265616C225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7265616CN;S4:textS60:7B227469746C65223A22E99D9EE6B395E58E86E58FB2E6A087E9878F227DN;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS28:6D697373696E672D706172656E74N;S4:nullN;N;S4:realN;S16:3ff0000000000001S4:textS20:6E6F742D612D74696D65N;S4:textS20:323032362D30322D3330N;S4:textS50:5B227461736B222C2273796E7468657469632D7461736B225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7461736BN;S4:textS190:7B227469746C65223A22E59088E68890E8BEB9E7958C2065CC8120F09F9880222C2270726F6A656374223A22E9878DE5A48DE5908DE7A7B0222C226D697373696E6750726F6A6563744964223A6E756C6C2C22756E6B6E6F776E223A22227DN;S4:textS56:7B226669656C6473223A7B7D2C2264656C65746564223A6E756C6C7DN;S7:integerS2:31N;S4:textS4:5B5DN;S4:nullN;N;S7:integerS2:30N;S7:integerS2:34N;S4:nullN;N;S4:textS0:N;S4:metaS1:2S2:idS5:valueS1:1S7:integerS2:31N;S4:textS590:7B2276657273696F6E223A322C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A392C22636C6F636B223A32312C227175657565223A332C22766563746F72223A7B2272656D6F7465223A377D2C22637572736F7273223A7B2273796E7468657469632D72656D6F7465223A357D2C2273657474696E6773223A7B7D2C2273636F7065223A6E756C6C2C2265706F6368223A6E756C6C2C2270656E64696E67223A7B2273796E7468657469632D6576656E74223A7B22736571223A387D7D2C22696E697469616C697A6564223A747275652C227265766973696F6E223A342C22646174615265766973696F6E223A322C226D616E6966657374223A7B226261746368223A2273796E7468657469632D32227D2C2261636B223A367DN;S6:outboxS1:2S2:idS5:eventS1:2S7:integerS2:38N;S4:textS108:7B226964223A2273796E7468657469632D70656E64696E67222C227061796C6F6164223A6E756C6C2C22756E6B6E6F776E223A22227DN;S7:integerS2:39N;S4:textS138:7B226964223A2273796E7468657469632D746F6D6273746F6E65222C2264656C65746564223A747275652C226163746F72223A2273796E7468657469632D6163746F72227DN;",
+          "schemaFingerprint": "7c1ef3afc37b7af5f63d49bfb0dd6fb7baa65c16ece4461825f44503578fbabf",
+          "rawFingerprint": "9d1a10e81f4be0c543a9ad122a76afdd70d8e942380dae5651fe8a857c9e0c8e",
+          "userVersion": 0,
+          "snapshotId": "225678d2ecb38ca77e05b01c75ea3f84059ddb1b451695c9f248edca7180c65a"
+        },
+        "target": {
+          "schemaFingerprint": "06d08308b1b20f1786895f51732e0fd8a516a59a1f554289d32ad41e0a8c9fa5",
+          "rawFingerprint": "9d1a10e81f4be0c543a9ad122a76afdd70d8e942380dae5651fe8a857c9e0c8e",
+          "userVersion": 1
+        },
+        "implementationChecksum": "10d526916b302e70d8c750007b00b25329e5640a76e3fd45888c1b1463eaddc7",
+        "androidLocalMetadata": null
+      }
+    },
+    {
+      "name": "android-independent-source-registry-raw-target-validation",
+      "status": "passed",
+      "evidence": {
+        "producer": {
+          "passed": 11,
+          "buildIdentity": "fbda0fcd50ec6a876ccc2427f64292f3ff8b6ec9195650a531ff5d922f2737ad"
+        },
+        "source": {
+          "objects": [
+            [
+              "index",
+              "sqlite_autoindex_entities_1",
+              "entities",
+              null
+            ],
+            [
+              "index",
+              "task_filter",
+              "entities",
+              "CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)"
+            ],
+            [
+              "index",
+              "task_parent",
+              "entities",
+              "CREATE INDEX task_parent ON entities(parent_id)"
+            ],
+            [
+              "index",
+              "task_reminders",
+              "entities",
+              "CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)"
+            ],
+            [
+              "table",
+              "android_metadata",
+              "android_metadata",
+              "CREATE TABLE android_metadata (locale TEXT)"
+            ],
+            [
+              "table",
+              "entities",
+              "entities",
+              "CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)"
+            ],
+            [
+              "table",
+              "meta",
+              "meta",
+              "CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)"
+            ],
+            [
+              "table",
+              "outbox",
+              "outbox",
+              "CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)"
+            ]
+          ],
+          "schemaPayload": "S29:mytodo-storage-fingerprint-v2S6:schemaS1:8S5:indexS27:sqlite_autoindex_entities_1S8:entitiesN;S5:indexS11:task_filterS8:entitiesS70:CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)S5:indexS11:task_parentS8:entitiesS47:CREATE INDEX task_parent ON entities(parent_id)S5:indexS14:task_remindersS8:entitiesS70:CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)S5:tableS16:android_metadataS16:android_metadataS43:CREATE TABLE android_metadata (locale TEXT)S5:tableS8:entitiesS8:entitiesS244:CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)S5:tableS4:metaS4:metaS73:CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)S5:tableS6:outboxS6:outboxS63:CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+          "rawPayload": "S29:mytodo-storage-fingerprint-v2S3:rawS1:4S16:android_metadataS1:1S6:localeS1:1S4:textS10:656E5F5553N;S8:entitiesS2:12S3:keyS4:kindS2:idS4:dataS6:recordS7:deletedS9:conflictsS9:parent_idS4:doneS8:quadrantS11:reminder_atS5:startS1:3S4:textS50:5B227461736B222C2273796E7468657469632D626C6F62225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D626C6F62N;S4:blobS8:00FF4142N;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS0:N;S7:integerS2:31N;S7:integerS4:2D32N;S7:integerS38:39323233333732303336383534373735383037N;S4:nullN;N;S4:textS50:5B227461736B222C2273796E7468657469632D7265616C225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7265616CN;S4:textS60:7B227469746C65223A22E99D9EE6B395E58E86E58FB2E6A087E9878F227DN;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:textS28:6D697373696E672D706172656E74N;S4:nullN;N;S4:realN;S16:3ff0000000000001S4:textS20:6E6F742D612D74696D65N;S4:textS20:323032362D30322D3330N;S4:textS50:5B227461736B222C2273796E7468657469632D7461736B225DN;S4:textS8:7461736BN;S4:textS28:73796E7468657469632D7461736BN;S4:textS190:7B227469746C65223A22E59088E68890E8BEB9E7958C2065CC8120F09F9880222C2270726F6A656374223A22E9878DE5A48DE5908DE7A7B0222C226D697373696E6750726F6A6563744964223A6E756C6C2C22756E6B6E6F776E223A22227DN;S4:textS56:7B226669656C6473223A7B7D2C2264656C65746564223A6E756C6C7DN;S7:integerS2:31N;S4:textS4:5B5DN;S4:nullN;N;S7:integerS2:30N;S7:integerS2:34N;S4:nullN;N;S4:textS0:N;S4:metaS1:2S2:idS5:valueS1:1S7:integerS2:31N;S4:textS590:7B2276657273696F6E223A322C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A392C22636C6F636B223A32312C227175657565223A332C22766563746F72223A7B2272656D6F7465223A377D2C22637572736F7273223A7B2273796E7468657469632D72656D6F7465223A357D2C2273657474696E6773223A7B7D2C2273636F7065223A6E756C6C2C2265706F6368223A6E756C6C2C2270656E64696E67223A7B2273796E7468657469632D6576656E74223A7B22736571223A387D7D2C22696E697469616C697A6564223A747275652C227265766973696F6E223A342C22646174615265766973696F6E223A322C226D616E6966657374223A7B226261746368223A2273796E7468657469632D32227D2C2261636B223A367DN;S6:outboxS1:2S2:idS5:eventS1:2S7:integerS2:38N;S4:textS108:7B226964223A2273796E7468657469632D70656E64696E67222C227061796C6F6164223A6E756C6C2C22756E6B6E6F776E223A22227DN;S7:integerS2:39N;S4:textS138:7B226964223A2273796E7468657469632D746F6D6273746F6E65222C2264656C65746564223A747275652C226163746F72223A2273796E7468657469632D6163746F72227DN;",
+          "schemaFingerprint": "282c2e1705dc786e4f8115856e021a6d286ccde7a86fbcd720455b856e5b9086",
+          "rawFingerprint": "fbc12fb852e35314087c648316dceacd4b07a0202b106757f3e6e1a36dce0e52",
+          "userVersion": 0,
+          "snapshotId": "2824be8eab7ecef5d0f8d8848e6f16f05d9d491ad37aebc318e7be21e110c8b6"
+        },
+        "target": {
+          "schemaFingerprint": "68dda308d22bcb34926a822e5ad66a932204fc87f266ab8fc6ca4f6beb4e23cc",
+          "rawFingerprint": "fbc12fb852e35314087c648316dceacd4b07a0202b106757f3e6e1a36dce0e52",
+          "userVersion": 1
+        },
+        "implementationChecksum": "fbda0fcd50ec6a876ccc2427f64292f3ff8b6ec9195650a531ff5d922f2737ad",
+        "androidLocalMetadata": {
+          "columns": [
+            "locale"
+          ],
+          "rows": [
+            [
+              [
+                "text",
+                "656E5F5553",
+                null
+              ]
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "cross-core-windows-node",
+      "status": "passed",
+      "evidence": {
+        "coreRawEqual": true,
+        "androidMetadata": "separate recognized device-local domain"
+      }
+    },
+    {
+      "name": "cross-core-node-android",
+      "status": "passed",
+      "evidence": {
+        "coreRawEqual": true,
+        "androidMetadata": "separate recognized device-local domain"
+      }
+    },
+    {
+      "name": "cross-core-android-windows",
+      "status": "passed",
+      "evidence": {
+        "coreRawEqual": true,
+        "androidMetadata": "separate recognized device-local domain"
+      }
+    },
+    {
+      "name": "backup-and-restore-result-evidence",
+      "status": "passed",
+      "evidence": {
+        "passed": 25,
+        "failed": 0,
+        "limitations": [
+          "Fixture-controlled global barrier only; real cross-file writer fencing remains BLOCKER.",
+          "Remote evidence is synthetic and carries no real authentication/authority.",
+          "Directory fsync, device power loss and production file activation remain UNVERIFIED.",
+          "No Actor resume or production restoration enabled."
+        ]
+      }
+    }
+  ],
+  "passed": 7,
+  "failed": 0
+}

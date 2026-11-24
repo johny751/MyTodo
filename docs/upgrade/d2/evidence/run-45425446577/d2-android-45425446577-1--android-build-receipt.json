@@ -1,0 +1,52 @@
+{
+  "framework": "d2-real-storage-api-v1",
+  "contractId": "d1-01-candidate.1",
+  "runId": "45425446577",
+  "runAttempt": "1",
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "implementationChecksum": "fbda0fcd50ec6a876ccc2427f64292f3ff8b6ec9195650a531ff5d922f2737ad",
+  "implementationSources": [
+    {
+      "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+      "bytes": 13737,
+      "sha256": "ab81d41735173f80c059739ce193647bbebf027240e9d5eea746250d5b03734c"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/MigrationRegistry.java",
+      "bytes": 24238,
+      "sha256": "7972fe7255201b3f97562b84ba04ca777a99085006612951695d01a1d6a88807"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReplicaTaskRecord.java",
+      "bytes": 739,
+      "sha256": "223696c490d866268d624a0ccf4663684331447b05d42c4034632dfcf8ba2124"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/DailyTaskPolicy.java",
+      "bytes": 3772,
+      "sha256": "2965d80c1c96ab19d12612331ca521086a36ff03e336cba1a91496539bc8a83e"
+    }
+  ],
+  "sharedFixtureSha256": "dba5a3bfab0127442b5363b66b8aa8bc8448f16150ec0225773c99ae390f170f",
+  "productionStorageSourcesCompiled": true,
+  "productionAppEntryLoaded": false,
+  "applicationId": "local.mytodo.d2storage",
+  "versionName": "0.0.1-d2-storage",
+  "versionCode": 1,
+  "builtAtUtc": "2026-11-24T15:26:23.225Z",
+  "buildTimezone": "UTC",
+  "author": "by codex",
+  "gitShort": "d86ae",
+  "versionHistory": [
+    {
+      "versionName": "0.0.1-d2-storage",
+      "versionCode": 1,
+      "changes": "Independent synthetic caller of branch production storage API; no launcher, INTERNET or startup migration"
+    }
+  ],
+  "status": "built",
+  "apk": "/home/runner/work/_temp/d2-45425446577-android/android-build/mytodo-d2-storage.apk",
+  "apkBytes": 37414,
+  "apkSha256": "ce540b8516dda1d39c83ceaf6b52e32ebf978192ff45027607564d5c861f1225",
+  "formalReleaseSigning": false
+}

@@ -1,0 +1,426 @@
+{
+  "runId": "45410409313",
+  "attempt": "1",
+  "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+  "conclusion": "failure",
+  "url": "https://github.com/johny751/MyTodo/actions/runs/45410409313",
+  "jobs": [
+    {
+      "id": 138502317199,
+      "name": "scope",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502317199"
+    },
+    {
+      "id": 138502447367,
+      "name": "windows",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447367"
+    },
+    {
+      "id": 138502447443,
+      "name": "backup",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447443"
+    },
+    {
+      "id": 138502447474,
+      "name": "node",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447474"
+    },
+    {
+      "id": 138502447673,
+      "name": "android",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447673"
+    },
+    {
+      "id": 138502997956,
+      "name": "compare",
+      "conclusion": "failure",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502997956"
+    }
+  ],
+  "archives": [
+    {
+      "name": "d2-comparison-45410409313-1.zip",
+      "artifactId": 14928800343,
+      "bytes": 1065,
+      "sha256": "9bc02e1163d63b5fe13ec1320d4520dbdddd2b88fcdf3124c01706c71efd404f",
+      "officialDigest": "sha256:9bc02e1163d63b5fe13ec1320d4520dbdddd2b88fcdf3124c01706c71efd404f"
+    },
+    {
+      "name": "d2-scope-45410409313-1.zip",
+      "artifactId": 14928795165,
+      "bytes": 3069,
+      "sha256": "ec6a3f3834eeb8b3b6c79c7e1ab75ca0a6afaf6ff402c972c330cd0bc6130a5e",
+      "officialDigest": "sha256:ec6a3f3834eeb8b3b6c79c7e1ab75ca0a6afaf6ff402c972c330cd0bc6130a5e"
+    },
+    {
+      "name": "d2-windows-45410409313-1.zip",
+      "artifactId": 14928465188,
+      "bytes": 789046,
+      "sha256": "cd6823ce4890c3b4bcb59d88d5085933633864440f77f7257fb978f0a6dec85c",
+      "officialDigest": "sha256:cd6823ce4890c3b4bcb59d88d5085933633864440f77f7257fb978f0a6dec85c"
+    },
+    {
+      "name": "d2-android-45410409313-1.zip",
+      "artifactId": 14927302370,
+      "bytes": 10058,
+      "sha256": "6f5430567e4775790e9dbc8d01c6c694a2165d32b11b2a4af7ea301459519c86",
+      "officialDigest": "sha256:6f5430567e4775790e9dbc8d01c6c694a2165d32b11b2a4af7ea301459519c86"
+    },
+    {
+      "name": "d2-node-45410409313-1.zip",
+      "artifactId": 14927174419,
+      "bytes": 89903,
+      "sha256": "9dd05a7f4dcb8b57d7598d024c5acceaf0bd680ec272c626165beb7d93ee9225",
+      "officialDigest": "sha256:9dd05a7f4dcb8b57d7598d024c5acceaf0bd680ec272c626165beb7d93ee9225"
+    },
+    {
+      "name": "d2-backup-45410409313-1.zip",
+      "artifactId": 14925769307,
+      "bytes": 119184,
+      "sha256": "9df344dbadea0714bd65ff3e746d76f1e191938a76d36c74f6c15a1ded1587c3",
+      "officialDigest": "sha256:9df344dbadea0714bd65ff3e746d76f1e191938a76d36c74f6c15a1ded1587c3"
+    }
+  ],
+  "officialLogs": {
+    "bytes": 82009,
+    "sha256": "a107f823d8a25d93fc785c4c4ed64c0ac4d0597ee9d72093b6f5238eeedd95e9"
+  },
+  "receipts": [
+    {
+      "artifact": "d2-comparison-45410409313-1",
+      "entry": "comparison-results.json",
+      "bytes": 4660,
+      "sha256": "73532d8dffdce14cf7d7ab8848384e73cb71fd8ac5013ed618e3c56302f3c549",
+      "receipt": {
+        "schema": "d2-cross-comparison-v1",
+        "status": "failed",
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "passed": 0,
+        "failed": 7,
+        "cases": [
+          {
+            "name": "windows-independent-source-registry-raw-target-validation",
+            "status": "failed",
+            "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-windows-input/cross-source.sqlite'"
+          },
+          {
+            "name": "node-independent-source-registry-raw-target-validation",
+            "status": "failed",
+            "primaryError": "Error: Node real suite failed"
+          },
+          {
+            "name": "android-independent-source-registry-raw-target-validation",
+            "status": "failed",
+            "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-android-input/cross-source.sqlite'"
+          },
+          {
+            "name": "cross-core-windows-node",
+            "status": "failed",
+            "primaryError": "Error: missing platform results"
+          },
+          {
+            "name": "cross-core-node-android",
+            "status": "failed",
+            "primaryError": "Error: missing platform results"
+          },
+          {
+            "name": "cross-core-android-windows",
+            "status": "failed",
+            "primaryError": "Error: missing platform results"
+          },
+          {
+            "name": "backup-and-restore-result-evidence",
+            "status": "failed",
+            "primaryError": "Error: backup framework failed or source identity mismatch"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-scope-45410409313-1",
+      "entry": "source-scope-receipt.json",
+      "bytes": 8023,
+      "sha256": "fb3ec2131da59a9837dd4c30c1b27c820e87fcd5dfa89736e9a4a38372e90f44",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "runAttempt": "1"
+      }
+    },
+    {
+      "artifact": "d2-windows-45410409313-1",
+      "entry": "native-first-error.json",
+      "bytes": 3322,
+      "sha256": "3414b5a8055362019ef796e81cb5470bbcbd5187d6937f0800fa639134dad4bb",
+      "receipt": {
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8"
+      }
+    },
+    {
+      "artifact": "d2-windows-45410409313-1",
+      "entry": "production-source-identity.json",
+      "bytes": 2155,
+      "sha256": "523da5030c96b09d44870ca7b850bb003e39e855dfccf71f285f2c16185e70ed",
+      "receipt": {
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "runAttempt": "1",
+        "implementationChecksum": "5db67f19f548c85296059f98325d29e53f5eba80b6b0e7bfd0f251f700c6b125"
+      }
+    },
+    {
+      "artifact": "d2-android-45410409313-1",
+      "entry": "android-runner-receipt.json",
+      "bytes": 4509,
+      "sha256": "295c285899ffe87644463e21d6bb5bf028f85df3c48247fd584845dcb3f4579c",
+      "receipt": {
+        "status": "failed",
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "runAttempt": "1",
+        "productionAppEntryLoaded": false,
+        "firstError": "Error: d2-javac failed; original command streams retained\n    at command (file:///home/runner/work/MyTodo/MyTodo/tests/d2/android/runner.mjs:34:121)\n    at async build (file:///home/runner/work/MyTodo/MyTodo/tests/d2/android/build.mjs:28:3)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/android/runner.mjs:47:17"
+      }
+    },
+    {
+      "artifact": "d2-node-45410409313-1",
+      "entry": "node-report.json",
+      "bytes": 48765,
+      "sha256": "888bf111f4ea95cd5d8416bb3132a5b3c926ddb72a3a22cb3e2e64279c9b5de0",
+      "receipt": {
+        "status": "failed",
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "runAttempt": "1",
+        "passed": 15,
+        "failed": 1,
+        "actualProductionEntry": true,
+        "startupMigration": false,
+        "implementationChecksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8",
+        "cases": [
+          {
+            "id": "N01",
+            "name": "Actual production commit with no startup migration",
+            "status": "passed"
+          },
+          {
+            "id": "N02",
+            "name": "Explicit named writes tolerate extra columns; migration refuses unknown layout",
+            "status": "passed"
+          },
+          {
+            "id": "N03",
+            "name": "All three reverse-column fixtures use actual named writer and manual step",
+            "status": "passed"
+          },
+          {
+            "id": "N04",
+            "name": "Infrastructure registry/snapshot/audit/version commit preserves all original raw cells",
+            "status": "passed"
+          },
+          {
+            "id": "N05",
+            "name": "Exact fixed-window repeat is idempotent with no new database rows",
+            "status": "passed"
+          },
+          {
+            "id": "N06",
+            "name": "Real ACK still cleans original queue; later migration blocksDataAdvanced without rewriting",
+            "status": "passed"
+          },
+          {
+            "id": "N07",
+            "name": "Unknown trigger source rejected before transaction",
+            "status": "passed"
+          },
+          {
+            "id": "N08",
+            "name": "Unrecorded or incorrect implementation identity rejected without writes",
+            "status": "passed"
+          },
+          {
+            "id": "N09",
+            "name": "Actual SQLite RAISE(ROLLBACK) preserves primary and cleanup errors",
+            "status": "passed"
+          },
+          {
+            "id": "N10",
+            "name": "Unknown COMMIT response confirmed by a fresh same-path handle beforeCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N11",
+            "name": "Unknown COMMIT response confirmed by a fresh same-path handle afterCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N12",
+            "name": "Actual process death and independent same-database reopen beforeCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N13",
+            "name": "Actual process death and independent same-database reopen afterCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N14",
+            "name": "Common raw historical boundary fixture after a proven actual API write",
+            "status": "passed"
+          },
+          {
+            "id": "N15",
+            "name": "One-ULP REAL drift changes raw fingerprint even when SQLite CAST text is unchanged",
+            "status": "failed",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [Object: null prototype] {\n+   h: '312E3233343536373839303132333435',\n-   h: '312E32333435363738393031323334353033',\n    t: 'real'\n  }\n\n    at file:///home/runner/work/MyTodo/MyTodo/tests/d2/node-runner.mjs:79:439\n    at async record (file:///home/runner/work/MyTodo/MyTodo/tests/d2/node-runner.mjs:54:90)\n    at async main (file:///home/runner/work/MyTodo/MyTodo/tests/d2/node-runner.mjs:78:2)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/d2/node-runner.mjs:87:148"
+          },
+          {
+            "id": "N16",
+            "name": "Independent target schema rejects later infrastructure index drift",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-node-45410409313-1",
+      "entry": "production-source-identity.json",
+      "bytes": 1018,
+      "sha256": "3651537b6f4a234c365b638eac6a3ed6780e3d9bdf247a7b76506ff242237028",
+      "receipt": {
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "runAttempt": "1",
+        "implementationChecksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8"
+      }
+    },
+    {
+      "artifact": "d2-backup-45410409313-1",
+      "entry": "backup-results.json",
+      "bytes": 9583,
+      "sha256": "5b5f6d7b32ab467ea3fcc728ee2345fe5676587efd2a870db3d3f2090c69f70a",
+      "receipt": {
+        "schema": "d2-backup-results-v1",
+        "status": "failed",
+        "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+        "runId": "45410409313",
+        "runAttempt": "1",
+        "passed": 17,
+        "failed": 7,
+        "cases": [
+          {
+            "name": "SQLite-WAL-committed-included-uncommitted-excluded",
+            "status": "passed"
+          },
+          {
+            "name": "common-snapshot-core-feedback-attachment-raw-integrity",
+            "status": "passed"
+          },
+          {
+            "name": "reject-missing-attachment",
+            "status": "passed"
+          },
+          {
+            "name": "reject-altered-component-and-manifest",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-actor",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-pending",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-cursor",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-manifest",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-ack",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-clock",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-outbox",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-original-attachment",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-incomplete-component-set",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-remote-unknown",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-remote-advanced",
+            "status": "passed"
+          },
+          {
+            "name": "reject-open-WAL-before-activation",
+            "status": "passed"
+          },
+          {
+            "name": "same-database-restore-fresh-process-reopen",
+            "status": "failed",
+            "primaryError": "Error: BLOCKER: live database sidecar; all writers must close before activation"
+          },
+          {
+            "name": "recover-interruption-afterStage",
+            "status": "failed",
+            "primaryError": "Error: fault not hit"
+          },
+          {
+            "name": "recover-interruption-afterSourceRetained",
+            "status": "failed",
+            "primaryError": "Error: fault not hit"
+          },
+          {
+            "name": "recover-interruption-afterActivation",
+            "status": "failed",
+            "primaryError": "Error: fault not hit"
+          },
+          {
+            "name": "recover-interruption-afterReopen",
+            "status": "failed",
+            "primaryError": "Error: fault not hit"
+          },
+          {
+            "name": "unknown-activation-refuses-new-progress-and-old-backup",
+            "status": "failed",
+            "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-45410409313-backup/d2-unknown-progress/restore-journal.json'"
+          },
+          {
+            "name": "recovery-binds-sealed-remote-progress",
+            "status": "failed",
+            "primaryError": "Error: ENOENT: no such file or directory, lstat '/home/runner/work/_temp/d2-45410409313-backup/d2-forged-remote/restore-journal.json'"
+          },
+          {
+            "name": "repeat-backup-refuses-existing-path",
+            "status": "passed"
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Original artifact ZIPs/API JSON/logs; GitHub file evidence only, no project execution"
+}

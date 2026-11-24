@@ -1,0 +1,394 @@
+{
+  "classification": "FACT: official isolated validation; no production migration approval",
+  "validatedSource": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "base": "d4c5af4cbbb9192c19276dd371bd142c2b835534",
+  "branch": "d2/implementation-candidate-1",
+  "runId": "45425446577",
+  "runAttempt": "1",
+  "url": "https://github.com/johny751/MyTodo/actions/runs/45425446577",
+  "conclusion": "success",
+  "counts": {
+    "windows": {
+      "passed": 30,
+      "failed": 0
+    },
+    "node": {
+      "passed": 16,
+      "failed": 0
+    },
+    "android": {
+      "passed": 11,
+      "failed": 0
+    },
+    "backup": {
+      "passed": 25,
+      "failed": 0
+    },
+    "comparison": {
+      "passed": 7,
+      "failed": 0
+    }
+  },
+  "history": [
+    {
+      "runId": "45407366991",
+      "attempt": "1",
+      "sourceSha": "843e1ee91af1bdcad3919771803919a15fc46f6e",
+      "conclusion": "failure",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45407366991",
+      "jobs": [
+        {
+          "id": 138491585485,
+          "name": "scope",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491585485"
+        },
+        {
+          "id": 138491684543,
+          "name": "compare",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491684543"
+        },
+        {
+          "id": 138491684985,
+          "name": "node",
+          "conclusion": "skipped",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491684985"
+        },
+        {
+          "id": 138491685073,
+          "name": "backup",
+          "conclusion": "skipped",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491685073"
+        },
+        {
+          "id": 138491685743,
+          "name": "windows",
+          "conclusion": "skipped",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491685743"
+        },
+        {
+          "id": 138491685748,
+          "name": "android",
+          "conclusion": "skipped",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45407366991/job/138491685748"
+        }
+      ],
+      "archives": [
+        {
+          "name": "d2-scope-45407366991-1.zip",
+          "artifactId": 14926930735,
+          "bytes": 3120,
+          "sha256": "9f604633813da71fab23a5a13b41eba9e3567431e262ec5ab998a19c7394fbc9",
+          "officialDigest": "sha256:9f604633813da71fab23a5a13b41eba9e3567431e262ec5ab998a19c7394fbc9"
+        }
+      ],
+      "officialLogs": {
+        "bytes": 32563,
+        "sha256": "f07f1fc3d0782097621b8408fb888693aad8508373a7a87be3bdec6a6433501d"
+      }
+    },
+    {
+      "runId": "45410409313",
+      "attempt": "1",
+      "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+      "conclusion": "failure",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45410409313",
+      "jobs": [
+        {
+          "id": 138502317199,
+          "name": "scope",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502317199"
+        },
+        {
+          "id": 138502447367,
+          "name": "windows",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447367"
+        },
+        {
+          "id": 138502447443,
+          "name": "backup",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447443"
+        },
+        {
+          "id": 138502447474,
+          "name": "node",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447474"
+        },
+        {
+          "id": 138502447673,
+          "name": "android",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502447673"
+        },
+        {
+          "id": 138502997956,
+          "name": "compare",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45410409313/job/138502997956"
+        }
+      ],
+      "archives": [
+        {
+          "name": "d2-comparison-45410409313-1.zip",
+          "artifactId": 14928800343,
+          "bytes": 1065,
+          "sha256": "9bc02e1163d63b5fe13ec1320d4520dbdddd2b88fcdf3124c01706c71efd404f",
+          "officialDigest": "sha256:9bc02e1163d63b5fe13ec1320d4520dbdddd2b88fcdf3124c01706c71efd404f"
+        },
+        {
+          "name": "d2-scope-45410409313-1.zip",
+          "artifactId": 14928795165,
+          "bytes": 3069,
+          "sha256": "ec6a3f3834eeb8b3b6c79c7e1ab75ca0a6afaf6ff402c972c330cd0bc6130a5e",
+          "officialDigest": "sha256:ec6a3f3834eeb8b3b6c79c7e1ab75ca0a6afaf6ff402c972c330cd0bc6130a5e"
+        },
+        {
+          "name": "d2-windows-45410409313-1.zip",
+          "artifactId": 14928465188,
+          "bytes": 789046,
+          "sha256": "cd6823ce4890c3b4bcb59d88d5085933633864440f77f7257fb978f0a6dec85c",
+          "officialDigest": "sha256:cd6823ce4890c3b4bcb59d88d5085933633864440f77f7257fb978f0a6dec85c"
+        },
+        {
+          "name": "d2-android-45410409313-1.zip",
+          "artifactId": 14927302370,
+          "bytes": 10058,
+          "sha256": "6f5430567e4775790e9dbc8d01c6c694a2165d32b11b2a4af7ea301459519c86",
+          "officialDigest": "sha256:6f5430567e4775790e9dbc8d01c6c694a2165d32b11b2a4af7ea301459519c86"
+        },
+        {
+          "name": "d2-node-45410409313-1.zip",
+          "artifactId": 14927174419,
+          "bytes": 89903,
+          "sha256": "9dd05a7f4dcb8b57d7598d024c5acceaf0bd680ec272c626165beb7d93ee9225",
+          "officialDigest": "sha256:9dd05a7f4dcb8b57d7598d024c5acceaf0bd680ec272c626165beb7d93ee9225"
+        },
+        {
+          "name": "d2-backup-45410409313-1.zip",
+          "artifactId": 14925769307,
+          "bytes": 119184,
+          "sha256": "9df344dbadea0714bd65ff3e746d76f1e191938a76d36c74f6c15a1ded1587c3",
+          "officialDigest": "sha256:9df344dbadea0714bd65ff3e746d76f1e191938a76d36c74f6c15a1ded1587c3"
+        }
+      ],
+      "officialLogs": {
+        "bytes": 82009,
+        "sha256": "a107f823d8a25d93fc785c4c4ed64c0ac4d0597ee9d72093b6f5238eeedd95e9"
+      }
+    },
+    {
+      "runId": "45414368180",
+      "attempt": "1",
+      "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+      "conclusion": "failure",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45414368180",
+      "jobs": [
+        {
+          "id": 138516450908,
+          "name": "scope",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516450908"
+        },
+        {
+          "id": 138516556667,
+          "name": "backup",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556667"
+        },
+        {
+          "id": 138516556760,
+          "name": "android",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556760"
+        },
+        {
+          "id": 138516556806,
+          "name": "windows",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556806"
+        },
+        {
+          "id": 138516556839,
+          "name": "node",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138516556839"
+        },
+        {
+          "id": 138519020153,
+          "name": "compare",
+          "conclusion": "failure",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45414368180/job/138519020153"
+        }
+      ],
+      "archives": [
+        {
+          "name": "d2-node-45414368180-1.zip",
+          "artifactId": 14932650194,
+          "bytes": 93137,
+          "sha256": "ca629060fd5b7eb2aeaff02b70be14e25ebe7e040d0a88ed58ed7ac9c9307475",
+          "officialDigest": "sha256:ca629060fd5b7eb2aeaff02b70be14e25ebe7e040d0a88ed58ed7ac9c9307475"
+        },
+        {
+          "name": "d2-backup-45414368180-1.zip",
+          "artifactId": 14932575516,
+          "bytes": 133603,
+          "sha256": "beceeeda09ac79e6cf25b2072d00a72ad3d7e6342f83a8d94fec88a36ee05c2a",
+          "officialDigest": "sha256:beceeeda09ac79e6cf25b2072d00a72ad3d7e6342f83a8d94fec88a36ee05c2a"
+        },
+        {
+          "name": "d2-comparison-45414368180-1.zip",
+          "artifactId": 14932271074,
+          "bytes": 2794,
+          "sha256": "ca82bea0793a88a9cbe73095d5a25cda21b4ab66a057f303b6a89f55408599fa",
+          "officialDigest": "sha256:ca82bea0793a88a9cbe73095d5a25cda21b4ab66a057f303b6a89f55408599fa"
+        },
+        {
+          "name": "d2-android-45414368180-1.zip",
+          "artifactId": 14932106683,
+          "bytes": 250512,
+          "sha256": "4d9e507f944042155db005678723b15deae9e12a96bdc02cdd6ba5bf419384d2",
+          "officialDigest": "sha256:4d9e507f944042155db005678723b15deae9e12a96bdc02cdd6ba5bf419384d2"
+        },
+        {
+          "name": "d2-scope-45414368180-1.zip",
+          "artifactId": 14931375754,
+          "bytes": 3214,
+          "sha256": "8f231e066ab4549608a0402a0be86d65f74bac6596574235064f4a500ad76e48",
+          "officialDigest": "sha256:8f231e066ab4549608a0402a0be86d65f74bac6596574235064f4a500ad76e48"
+        },
+        {
+          "name": "d2-emulator-45414368180-1.zip",
+          "artifactId": 14931362132,
+          "bytes": 22780,
+          "sha256": "42d347dc57b387985a7066ef0ca2737500d0d2d6328d02a0a58cf848e484ae43",
+          "officialDigest": "sha256:42d347dc57b387985a7066ef0ca2737500d0d2d6328d02a0a58cf848e484ae43"
+        },
+        {
+          "name": "d2-windows-45414368180-1.zip",
+          "artifactId": 14929918233,
+          "bytes": 827096,
+          "sha256": "20dce84dee13c5e23bf8c33a45e5a1cb75141f08cac8e025e916a35fc8984e05",
+          "officialDigest": "sha256:20dce84dee13c5e23bf8c33a45e5a1cb75141f08cac8e025e916a35fc8984e05"
+        }
+      ],
+      "officialLogs": {
+        "bytes": 82789,
+        "sha256": "64c8c0d8b01cc903ad4157216401d489420e7303f3b6f75dc522d4bd267ab571"
+      }
+    },
+    {
+      "runId": "45425446577",
+      "attempt": "1",
+      "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+      "conclusion": "success",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45425446577",
+      "jobs": [
+        {
+          "id": 138556051320,
+          "name": "scope",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556051320"
+        },
+        {
+          "id": 138556172889,
+          "name": "backup",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556172889"
+        },
+        {
+          "id": 138556172902,
+          "name": "windows",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556172902"
+        },
+        {
+          "id": 138556173054,
+          "name": "android",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556173054"
+        },
+        {
+          "id": 138556173098,
+          "name": "node",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556173098"
+        },
+        {
+          "id": 138558565818,
+          "name": "compare",
+          "conclusion": "success",
+          "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138558565818"
+        }
+      ],
+      "archives": [
+        {
+          "name": "d2-comparison-45425446577-1.zip",
+          "artifactId": 14936872476,
+          "bytes": 3215,
+          "sha256": "2e788ab4f0ab37b7db5b11856de48bcd1260e72c53f32ed815d7327f23ef6e7b",
+          "officialDigest": "sha256:2e788ab4f0ab37b7db5b11856de48bcd1260e72c53f32ed815d7327f23ef6e7b"
+        },
+        {
+          "name": "d2-windows-45425446577-1.zip",
+          "artifactId": 14936781687,
+          "bytes": 1449996,
+          "sha256": "a47c0279cb5c9b92a8d24f6623d7b0796f6094a538e66001bf8b5a5dd69e0472",
+          "officialDigest": "sha256:a47c0279cb5c9b92a8d24f6623d7b0796f6094a538e66001bf8b5a5dd69e0472"
+        },
+        {
+          "name": "d2-node-45425446577-1.zip",
+          "artifactId": 14936447657,
+          "bytes": 93127,
+          "sha256": "2f85e8bd28666c55d06af5045fdc4d0c0f4d1addfb786918eaf361c22abe984e",
+          "officialDigest": "sha256:2f85e8bd28666c55d06af5045fdc4d0c0f4d1addfb786918eaf361c22abe984e"
+        },
+        {
+          "name": "d2-android-45425446577-1.zip",
+          "artifactId": 14935774496,
+          "bytes": 251913,
+          "sha256": "29b936ced058b0ca78679773ecb707e06e69cd1e9a93d46a5adb7e14c143111d",
+          "officialDigest": "sha256:29b936ced058b0ca78679773ecb707e06e69cd1e9a93d46a5adb7e14c143111d"
+        },
+        {
+          "name": "d2-scope-45425446577-1.zip",
+          "artifactId": 14935589277,
+          "bytes": 3804,
+          "sha256": "5dd23d4920d49b8956dc46f0bab9595bc4bf47c18915149adc057187d8d9cca7",
+          "officialDigest": "sha256:5dd23d4920d49b8956dc46f0bab9595bc4bf47c18915149adc057187d8d9cca7"
+        },
+        {
+          "name": "d2-emulator-45425446577-1.zip",
+          "artifactId": 14935564823,
+          "bytes": 22692,
+          "sha256": "9ae0727a617822deb74c62f7347e36bb807b5b3b45b530b26b1abe5a077e3c40",
+          "officialDigest": "sha256:9ae0727a617822deb74c62f7347e36bb807b5b3b45b530b26b1abe5a077e3c40"
+        },
+        {
+          "name": "d2-backup-45425446577-1.zip",
+          "artifactId": 14935108650,
+          "bytes": 141577,
+          "sha256": "6d3aaeaa1c441de186c482f1f26d4b4616a4cb61f0564a52a62d854bfd0e7404",
+          "officialDigest": "sha256:6d3aaeaa1c441de186c482f1f26d4b4616a4cb61f0564a52a62d854bfd0e7404"
+        }
+      ],
+      "officialLogs": {
+        "bytes": 81051,
+        "sha256": "3b4033f5847507a2af3e0baeb2f1a0648422d13a7f1aeaf2631ed945953746e4"
+      }
+    }
+  ],
+  "androidIssue1": "open",
+  "runtimeAlgorithm": "mytodo-storage-fingerprint-v2",
+  "backupValueEncoding": "mytodo-complete-state-v2",
+  "scope": "No real user databases, production merge, sync/ACK semantics change, LAN/WebDAV tests or dual channel",
+  "limitations": [
+    "Fixture-controlled backup fence and synthetic remote evidence",
+    "Full release GUI/lifecycle and true power loss remain unverified",
+    "Backup cleanup supplemental errors and independent attempt gate coverage are limited"
+  ]
+}

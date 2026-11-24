@@ -1,0 +1,67 @@
+{
+  "algorithm": "mytodo-storage-source-build-v1",
+  "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+  "runId": "45410409313",
+  "runAttempt": "1",
+  "contractId": "d1-01-candidate.1",
+  "migrationId": "mytodo-storage-infrastructure-0001",
+  "implementationChecksum": "5db67f19f548c85296059f98325d29e53f5eba80b6b0e7bfd0f251f700c6b125",
+  "files": [
+    {
+      "file": "windows/migration.c",
+      "bytes": 34793,
+      "sha256": "bfa7762d80e1e5dcbc83875a312829504c954fbf047f6f4bca176b6e8179482e"
+    },
+    {
+      "file": "windows/migration.h",
+      "bytes": 2047,
+      "sha256": "53ee4f32a02a5bf30626423ab6cd1ee24f756e15e4f63403442814f2e9dd218d"
+    },
+    {
+      "file": "windows/database.c",
+      "bytes": 28584,
+      "sha256": "5753f44256d2dc909443621e9beab58cd670a8816e88418567ee35657f68ef58"
+    },
+    {
+      "file": "windows/native.h",
+      "bytes": 2700,
+      "sha256": "f8bb1cab571c90d153bfd87a32c3e5269c3244ed1a213230aa96c3ae58e488a2"
+    },
+    {
+      "file": "windows/util.c",
+      "bytes": 3459,
+      "sha256": "055fbe113d0bc02bd1e10054bee488c1f9b66679df6c8e29cdb4df913e794309"
+    },
+    {
+      "file": "windows/operations.c",
+      "bytes": 13651,
+      "sha256": "61f02a521236d09786d1dbe2f4305c96d0f1be62cdee1cb833e9944b60afc483"
+    },
+    {
+      "file": "windows/ui.h",
+      "bytes": 6239,
+      "sha256": "84ff0f7b46793e010a0c1174c75a3eb840342c078b000b727492cdfc05276864"
+    },
+    {
+      "file": "windows/vendor/sqlite3.c",
+      "bytes": 8462111,
+      "sha256": "254d5579c10ae6a7425ddd055abbdecc5d7b7e6b473ddf28729cd831f25bbd8d"
+    },
+    {
+      "file": "windows/vendor/sqlite3.h",
+      "bytes": 611797,
+      "sha256": "61ded34ca2ddf50ad19cf5c55f595db775350be22d09efa5cda359caf2ee93b0"
+    },
+    {
+      "file": "windows/vendor/cJSON.c",
+      "bytes": 80368,
+      "sha256": "7879ae840ed0ac04c121d51423148b954dba0d24f0872d17c1a6e572613ef523"
+    },
+    {
+      "file": "windows/vendor/cJSON.h",
+      "bytes": 16394,
+      "sha256": "25b0145150d500498e4d209cec69c18c42cf818bffcc54690be3b895a2a16dee"
+    }
+  ],
+  "fixtureSha256": "dba5a3bfab0127442b5363b66b8aa8bc8448f16150ec0225773c99ae390f170f"
+}

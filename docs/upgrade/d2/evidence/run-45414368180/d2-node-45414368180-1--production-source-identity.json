@@ -1,0 +1,33 @@
+{
+  "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+  "runId": "45414368180",
+  "runAttempt": "1",
+  "platform": "node",
+  "framework": "d2-real-storage-api-v1",
+  "checksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8",
+  "implementationChecksum": "3061f86fb5aedd7c0bd87c877a574d0d01eb999b76b5d5c5f0e97de392ac26c8",
+  "files": [
+    {
+      "name": "src/sqlite-store.mjs",
+      "bytes": 5471,
+      "sha256": "3f8006f44abfaff50d79aac07fce465c55dd24b2e4fa73b94ca662dbcde0427c"
+    },
+    {
+      "name": "src/migration-runtime.mjs",
+      "bytes": 19200,
+      "sha256": "761c6891608aa0ed2bf3480d16e891736f566541557ddb3f07698da3f069ce76"
+    }
+  ],
+  "sources": [
+    {
+      "name": "src/sqlite-store.mjs",
+      "bytes": 5471,
+      "sha256": "3f8006f44abfaff50d79aac07fce465c55dd24b2e4fa73b94ca662dbcde0427c"
+    },
+    {
+      "name": "src/migration-runtime.mjs",
+      "bytes": 19200,
+      "sha256": "761c6891608aa0ed2bf3480d16e891736f566541557ddb3f07698da3f069ce76"
+    }
+  ]
+}

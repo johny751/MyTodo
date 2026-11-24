@@ -1,0 +1,642 @@
+{
+  "runId": "45425446577",
+  "attempt": "1",
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "conclusion": "success",
+  "url": "https://github.com/johny751/MyTodo/actions/runs/45425446577",
+  "jobs": [
+    {
+      "id": 138556051320,
+      "name": "scope",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556051320"
+    },
+    {
+      "id": 138556172889,
+      "name": "backup",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556172889"
+    },
+    {
+      "id": 138556172902,
+      "name": "windows",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556172902"
+    },
+    {
+      "id": 138556173054,
+      "name": "android",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556173054"
+    },
+    {
+      "id": 138556173098,
+      "name": "node",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138556173098"
+    },
+    {
+      "id": 138558565818,
+      "name": "compare",
+      "conclusion": "success",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45425446577/job/138558565818"
+    }
+  ],
+  "archives": [
+    {
+      "name": "d2-comparison-45425446577-1.zip",
+      "artifactId": 14936872476,
+      "bytes": 3215,
+      "sha256": "2e788ab4f0ab37b7db5b11856de48bcd1260e72c53f32ed815d7327f23ef6e7b",
+      "officialDigest": "sha256:2e788ab4f0ab37b7db5b11856de48bcd1260e72c53f32ed815d7327f23ef6e7b"
+    },
+    {
+      "name": "d2-windows-45425446577-1.zip",
+      "artifactId": 14936781687,
+      "bytes": 1449996,
+      "sha256": "a47c0279cb5c9b92a8d24f6623d7b0796f6094a538e66001bf8b5a5dd69e0472",
+      "officialDigest": "sha256:a47c0279cb5c9b92a8d24f6623d7b0796f6094a538e66001bf8b5a5dd69e0472"
+    },
+    {
+      "name": "d2-node-45425446577-1.zip",
+      "artifactId": 14936447657,
+      "bytes": 93127,
+      "sha256": "2f85e8bd28666c55d06af5045fdc4d0c0f4d1addfb786918eaf361c22abe984e",
+      "officialDigest": "sha256:2f85e8bd28666c55d06af5045fdc4d0c0f4d1addfb786918eaf361c22abe984e"
+    },
+    {
+      "name": "d2-android-45425446577-1.zip",
+      "artifactId": 14935774496,
+      "bytes": 251913,
+      "sha256": "29b936ced058b0ca78679773ecb707e06e69cd1e9a93d46a5adb7e14c143111d",
+      "officialDigest": "sha256:29b936ced058b0ca78679773ecb707e06e69cd1e9a93d46a5adb7e14c143111d"
+    },
+    {
+      "name": "d2-scope-45425446577-1.zip",
+      "artifactId": 14935589277,
+      "bytes": 3804,
+      "sha256": "5dd23d4920d49b8956dc46f0bab9595bc4bf47c18915149adc057187d8d9cca7",
+      "officialDigest": "sha256:5dd23d4920d49b8956dc46f0bab9595bc4bf47c18915149adc057187d8d9cca7"
+    },
+    {
+      "name": "d2-emulator-45425446577-1.zip",
+      "artifactId": 14935564823,
+      "bytes": 22692,
+      "sha256": "9ae0727a617822deb74c62f7347e36bb807b5b3b45b530b26b1abe5a077e3c40",
+      "officialDigest": "sha256:9ae0727a617822deb74c62f7347e36bb807b5b3b45b530b26b1abe5a077e3c40"
+    },
+    {
+      "name": "d2-backup-45425446577-1.zip",
+      "artifactId": 14935108650,
+      "bytes": 141577,
+      "sha256": "6d3aaeaa1c441de186c482f1f26d4b4616a4cb61f0564a52a62d854bfd0e7404",
+      "officialDigest": "sha256:6d3aaeaa1c441de186c482f1f26d4b4616a4cb61f0564a52a62d854bfd0e7404"
+    }
+  ],
+  "officialLogs": {
+    "bytes": 81051,
+    "sha256": "3b4033f5847507a2af3e0baeb2f1a0648422d13a7f1aeaf2631ed945953746e4"
+  },
+  "receipts": [
+    {
+      "artifact": "d2-comparison-45425446577-1",
+      "entry": "comparison-results.json",
+      "bytes": 19301,
+      "sha256": "6f49e619947101cc7861e7bfff77636b55bc53a349b6693d9bba8f0f66768c05",
+      "receipt": {
+        "schema": "d2-cross-comparison-v1",
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "passed": 7,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "windows-independent-source-registry-raw-target-validation",
+            "status": "passed"
+          },
+          {
+            "name": "node-independent-source-registry-raw-target-validation",
+            "status": "passed"
+          },
+          {
+            "name": "android-independent-source-registry-raw-target-validation",
+            "status": "passed"
+          },
+          {
+            "name": "cross-core-windows-node",
+            "status": "passed"
+          },
+          {
+            "name": "cross-core-node-android",
+            "status": "passed"
+          },
+          {
+            "name": "cross-core-android-windows",
+            "status": "passed"
+          },
+          {
+            "name": "backup-and-restore-result-evidence",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-windows-45425446577-1",
+      "entry": "native-build-receipt.json",
+      "bytes": 836,
+      "sha256": "ab16ad42eb68d8614020339dbba0b928dd80dba4fed65f0bf96bf9e355f189ed",
+      "receipt": {
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "implementationChecksum": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d"
+      }
+    },
+    {
+      "artifact": "d2-windows-45425446577-1",
+      "entry": "production-source-identity.json",
+      "bytes": 2527,
+      "sha256": "df31585b3fbc196f1b17e56e202edf7b1780acb1d3b4c074af3a95977f9b9178",
+      "receipt": {
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "implementationChecksum": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d"
+      }
+    },
+    {
+      "artifact": "d2-windows-45425446577-1",
+      "entry": "results.json",
+      "bytes": 12271,
+      "sha256": "5f7d7cfa810c21b9fb67e9952f0cff625d4a0df208fbbfcde2237225744a8202",
+      "receipt": {
+        "schema": "d2-native-results-v1",
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "passed": 30,
+        "failed": 0,
+        "total": 30,
+        "implementationChecksum": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d",
+        "cases": [
+          {
+            "name": "baseline-migration",
+            "passed": true
+          },
+          {
+            "name": "reordered-explicit-columns",
+            "passed": true
+          },
+          {
+            "name": "typed-byte-preservation",
+            "passed": true
+          },
+          {
+            "name": "empty-original-tables",
+            "passed": true
+          },
+          {
+            "name": "fixed-window-reentry",
+            "passed": true
+          },
+          {
+            "name": "data-advanced-reentry",
+            "passed": true
+          },
+          {
+            "name": "unknown-extra-column",
+            "passed": true
+          },
+          {
+            "name": "unknown-extra-index",
+            "passed": true
+          },
+          {
+            "name": "unknown-trigger",
+            "passed": true
+          },
+          {
+            "name": "unknown-view",
+            "passed": true
+          },
+          {
+            "name": "unknown-version",
+            "passed": true
+          },
+          {
+            "name": "gui-layout-refused",
+            "passed": true
+          },
+          {
+            "name": "missing-build-identity",
+            "passed": true
+          },
+          {
+            "name": "source-snapshot-race",
+            "passed": true
+          },
+          {
+            "name": "real-authorizer-failure",
+            "passed": true
+          },
+          {
+            "name": "real-commit-hook-failure",
+            "passed": true
+          },
+          {
+            "name": "before-commit-failure",
+            "passed": true
+          },
+          {
+            "name": "after-commit-unknown",
+            "passed": true
+          },
+          {
+            "name": "unknown-data-advanced",
+            "passed": true
+          },
+          {
+            "name": "partial-registry-refused",
+            "passed": true
+          },
+          {
+            "name": "real-rollback-failure",
+            "passed": true
+          },
+          {
+            "name": "actual-close-busy",
+            "passed": true
+          },
+          {
+            "name": "actual-api-rollback",
+            "passed": true
+          },
+          {
+            "name": "actual-api-lock-contention",
+            "passed": true
+          },
+          {
+            "name": "snapshot-tamper-refused",
+            "passed": true
+          },
+          {
+            "name": "real-binary64-fingerprint",
+            "passed": true
+          },
+          {
+            "name": "shared-cross-source-target",
+            "passed": true
+          },
+          {
+            "name": "original-raw-mutation-rollback",
+            "passed": true
+          },
+          {
+            "name": "process-crash-before-commit",
+            "passed": true
+          },
+          {
+            "name": "process-crash-after-commit",
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-node-45425446577-1",
+      "entry": "node-report.json",
+      "bytes": 49776,
+      "sha256": "a0c830790891d4a418f9b772eba901c25c454b30efdc9b86d13781176437b403",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "passed": 16,
+        "failed": 0,
+        "actualProductionEntry": true,
+        "startupMigration": false,
+        "implementationChecksum": "10d526916b302e70d8c750007b00b25329e5640a76e3fd45888c1b1463eaddc7",
+        "cases": [
+          {
+            "id": "N01",
+            "name": "Actual production commit with no startup migration",
+            "status": "passed"
+          },
+          {
+            "id": "N02",
+            "name": "Explicit named writes tolerate extra columns; migration refuses unknown layout",
+            "status": "passed"
+          },
+          {
+            "id": "N03",
+            "name": "All three reverse-column fixtures use actual named writer and manual step",
+            "status": "passed"
+          },
+          {
+            "id": "N04",
+            "name": "Infrastructure registry/snapshot/audit/version commit preserves all original raw cells",
+            "status": "passed"
+          },
+          {
+            "id": "N05",
+            "name": "Exact fixed-window repeat is idempotent with no new database rows",
+            "status": "passed"
+          },
+          {
+            "id": "N06",
+            "name": "Real ACK still cleans original queue; later migration blocksDataAdvanced without rewriting",
+            "status": "passed"
+          },
+          {
+            "id": "N07",
+            "name": "Unknown trigger source rejected before transaction",
+            "status": "passed"
+          },
+          {
+            "id": "N08",
+            "name": "Unrecorded or incorrect implementation identity and old-v1 plan rejected without writes",
+            "status": "passed"
+          },
+          {
+            "id": "N09",
+            "name": "Actual SQLite RAISE(ROLLBACK) preserves primary and cleanup errors",
+            "status": "passed"
+          },
+          {
+            "id": "N10",
+            "name": "Unknown COMMIT response confirmed by a fresh same-path handle beforeCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N11",
+            "name": "Unknown COMMIT response confirmed by a fresh same-path handle afterCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N12",
+            "name": "Actual process death and independent same-database reopen beforeCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N13",
+            "name": "Actual process death and independent same-database reopen afterCommit",
+            "status": "passed"
+          },
+          {
+            "id": "N14",
+            "name": "Common raw historical boundary fixture after a proven actual API write",
+            "status": "passed"
+          },
+          {
+            "id": "N15",
+            "name": "Exact adjacent REAL64 bits and full independent canonical raw oracle",
+            "status": "passed"
+          },
+          {
+            "id": "N16",
+            "name": "Independent target schema rejects later infrastructure index drift",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-node-45425446577-1",
+      "entry": "production-source-identity.json",
+      "bytes": 1018,
+      "sha256": "3efd6235ff6aa894b98a8283da68b3a483e4c4ded3c686ae91f09c1f3a3906c0",
+      "receipt": {
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "implementationChecksum": "10d526916b302e70d8c750007b00b25329e5640a76e3fd45888c1b1463eaddc7"
+      }
+    },
+    {
+      "artifact": "d2-android-45425446577-1",
+      "entry": "android-build-receipt.json",
+      "bytes": 1948,
+      "sha256": "9f5ee50d39182f06d103b009701d4db318976a98f2852c217b640d0fda4d55b6",
+      "receipt": {
+        "status": "built",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "productionAppEntryLoaded": false,
+        "implementationChecksum": "fbda0fcd50ec6a876ccc2427f64292f3ff8b6ec9195650a531ff5d922f2737ad"
+      }
+    },
+    {
+      "artifact": "d2-android-45425446577-1",
+      "entry": "android-runner-receipt.json",
+      "bytes": 44000,
+      "sha256": "00e15a10b8c92b7ed17cfd8ee66114fe7d9b2895ce7b55783f979119b7400fe3",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "productionAppEntryLoaded": false,
+        "firstError": null
+      }
+    },
+    {
+      "artifact": "d2-android-45425446577-1",
+      "entry": "android-storage-receipt.json",
+      "bytes": 3222,
+      "sha256": "2978f437d2e0012fb2d1f433af79c447c762f7832b81edd5a3eb962c7d14c7fa",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "passed": 11,
+        "failed": 0,
+        "actualProductionStorageApi": true,
+        "actualFramework": true,
+        "productionAppEntryLoaded": false,
+        "implementationChecksum": "fbda0fcd50ec6a876ccc2427f64292f3ff8b6ec9195650a531ff5d922f2737ad",
+        "cases": [
+          {
+            "id": "A01-no-startup-migration",
+            "status": "passed"
+          },
+          {
+            "id": "A02-real-invoke-CAS",
+            "status": "passed"
+          },
+          {
+            "id": "A03-infrastructure-atomic-repeat",
+            "status": "passed"
+          },
+          {
+            "id": "A04-before-commit-real-rollback",
+            "status": "passed"
+          },
+          {
+            "id": "A05-unknown-commit-new-handle",
+            "status": "passed"
+          },
+          {
+            "id": "A06-raw-advance-preserved",
+            "status": "passed"
+          },
+          {
+            "id": "A07-target-DDL-drift",
+            "status": "passed"
+          },
+          {
+            "id": "A08-build-identity-refusal",
+            "status": "passed"
+          },
+          {
+            "id": "A09-shared-cross-raw",
+            "status": "passed"
+          },
+          {
+            "id": "A10-reordered-real-api",
+            "status": "passed"
+          },
+          {
+            "id": "A11-real-SQL-primary-preserved",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "artifact": "d2-scope-45425446577-1",
+      "entry": "source-scope-receipt.json",
+      "bytes": 10657,
+      "sha256": "6232499155351bc944828bd5935ccbd9e74f90276e886fa5f0083cc6bbdd0721",
+      "receipt": {
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1"
+      }
+    },
+    {
+      "artifact": "d2-backup-45425446577-1",
+      "entry": "backup-results.json",
+      "bytes": 6918,
+      "sha256": "627d1be979621ec6bffc9639d38c72528ddeb4aaa99f99f5c1fce6733ff22182",
+      "receipt": {
+        "schema": "d2-backup-results-v1",
+        "status": "passed",
+        "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+        "runId": "45425446577",
+        "runAttempt": "1",
+        "passed": 25,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "SQLite-WAL-committed-included-uncommitted-excluded",
+            "status": "passed"
+          },
+          {
+            "name": "common-snapshot-core-feedback-attachment-raw-integrity",
+            "status": "passed"
+          },
+          {
+            "name": "reject-missing-attachment",
+            "status": "passed"
+          },
+          {
+            "name": "reject-altered-component-and-manifest",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-actor",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-pending",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-cursor",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-manifest",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-ack",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-clock",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-outbox",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-progressed-original-attachment",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-refuses-incomplete-component-set",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-remote-unknown",
+            "status": "passed"
+          },
+          {
+            "name": "B-S-A-remote-advanced",
+            "status": "passed"
+          },
+          {
+            "name": "reject-open-writer-and-WAL-before-activation",
+            "status": "passed"
+          },
+          {
+            "name": "same-database-restore-fresh-process-reopen",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterStage",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterSourceRetained",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterActivation",
+            "status": "passed"
+          },
+          {
+            "name": "recover-interruption-afterReopen",
+            "status": "passed"
+          },
+          {
+            "name": "unknown-activation-refuses-new-progress-and-old-backup",
+            "status": "passed"
+          },
+          {
+            "name": "recovery-binds-sealed-remote-progress",
+            "status": "passed"
+          },
+          {
+            "name": "repeat-backup-refuses-existing-path",
+            "status": "passed"
+          },
+          {
+            "name": "unsupported-backup-value-encoding-is-refused-with-source-preserved",
+            "status": "passed"
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Original artifact ZIPs/API JSON/logs; GitHub file evidence only, no project execution"
+}

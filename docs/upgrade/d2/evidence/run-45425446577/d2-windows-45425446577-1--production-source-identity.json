@@ -1,0 +1,78 @@
+{
+  "algorithm": "mytodo-storage-source-build-v1",
+  "fingerprintAlgorithm": "mytodo-storage-fingerprint-v2",
+  "sourceSha": "d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7",
+  "runId": "45425446577",
+  "runAttempt": "1",
+  "contractId": "d1-01-candidate.1",
+  "migrationId": "mytodo-storage-infrastructure-0001",
+  "implementationChecksum": "93de9946f5867da0d2ec4c60c749c7cc8f86a8343a7eb3d73bae16efa9b2b31d",
+  "files": [
+    {
+      "file": "windows/migration.c",
+      "bytes": 34969,
+      "sha256": "d1a9b2401fe6befb044e60ce0ee9822ca8677bf612e78da86d9a2da65e1c5bf4"
+    },
+    {
+      "file": "windows/migration.h",
+      "bytes": 2047,
+      "sha256": "0b633ce7b0164b2d5075e1b4f8328fbea3f61e365573aede5c2f44247be489df"
+    },
+    {
+      "file": "windows/database.c",
+      "bytes": 28584,
+      "sha256": "5753f44256d2dc909443621e9beab58cd670a8816e88418567ee35657f68ef58"
+    },
+    {
+      "file": "windows/native.h",
+      "bytes": 2700,
+      "sha256": "f8bb1cab571c90d153bfd87a32c3e5269c3244ed1a213230aa96c3ae58e488a2"
+    },
+    {
+      "file": "windows/util.c",
+      "bytes": 3459,
+      "sha256": "055fbe113d0bc02bd1e10054bee488c1f9b66679df6c8e29cdb4df913e794309"
+    },
+    {
+      "file": "windows/undo-capture.c",
+      "bytes": 351,
+      "sha256": "9919091d2ddf3b79a08c062c76667f2c4a8fff9db6d4d750b5e890441e63e623"
+    },
+    {
+      "file": "windows/undo-internal.h",
+      "bytes": 733,
+      "sha256": "e5513ac64a19acfa76d1f01b3c24dc7e0c698ea037aee0e5c6bd7dc7eb8a3238"
+    },
+    {
+      "file": "windows/operations.c",
+      "bytes": 13327,
+      "sha256": "7baf179a2bbaab75b5633a9e8ca513398111542a09b65a2709a3c3a6c9504550"
+    },
+    {
+      "file": "windows/ui.h",
+      "bytes": 6239,
+      "sha256": "84ff0f7b46793e010a0c1174c75a3eb840342c078b000b727492cdfc05276864"
+    },
+    {
+      "file": "windows/vendor/sqlite3.c",
+      "bytes": 8462111,
+      "sha256": "254d5579c10ae6a7425ddd055abbdecc5d7b7e6b473ddf28729cd831f25bbd8d"
+    },
+    {
+      "file": "windows/vendor/sqlite3.h",
+      "bytes": 611797,
+      "sha256": "61ded34ca2ddf50ad19cf5c55f595db775350be22d09efa5cda359caf2ee93b0"
+    },
+    {
+      "file": "windows/vendor/cJSON.c",
+      "bytes": 80368,
+      "sha256": "7879ae840ed0ac04c121d51423148b954dba0d24f0872d17c1a6e572613ef523"
+    },
+    {
+      "file": "windows/vendor/cJSON.h",
+      "bytes": 16394,
+      "sha256": "25b0145150d500498e4d209cec69c18c42cf818bffcc54690be3b895a2a16dee"
+    }
+  ],
+  "fixtureSha256": "dba5a3bfab0127442b5363b66b8aa8bc8448f16150ec0225773c99ae390f170f"
+}

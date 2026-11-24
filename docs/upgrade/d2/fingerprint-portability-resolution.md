@@ -13,3 +13,5 @@ FACT (scope): this revises the unapproved D2 runtime fingerprint candidate. The 
 OWNER DECISION: future production activation must approve the v2 snapshot identity and compatibility policy with the exact validated source SHA. Existing v1 candidate synthetic databases are retained for evidence; a real database with an unknown or mismatched Registry/checksum/snapshot is preserved and blocked, not upgraded automatically by this package.
 
 UNVERIFIED until the next authoritative Actions receipt: v2 builds and cross-engine comparisons. Other historical SQLite encodings/versions and real user layouts remain subject to the existing production blockers.
+
+FACT (CI4): Source d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7, Actions 45425446577, attempt 1. Independent cross comparison 7/7 passed with v2; all v1 failures remain preserved. Earlier pending-CI4 wording records the source checkpoint before this run.

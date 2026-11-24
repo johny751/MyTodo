@@ -27,3 +27,5 @@
 **UNVERIFIED / OWNER DECISION**。旧引擎中的 CAST 碰撞回归仍须绑定实际 bundled C/其他版本的独立运行证据；本次 Node 修订不宣称该历史前提已经验证通过，也不取消 REAL64 第三字段或未知历史数据的保护要求。
 
 UNVERIFIED / OWNER DECISION：生产发布包如何提供记录过的 build identity、真实用户库规模与历史 schema、全部 writer 的停写、跨文件/附件一致性、掉电与真实设备恢复、凭据及同步身份放行仍须后续证据。这里只落地首个基础设施 step，不部署、不合并 master，不把合成 raw 异常夹具称为合法历史复制事件，也不关闭 Android issue #1。
+
+FACT (CI4): Source d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7, Actions 45425446577, attempt 1. Node actual API suite 16/16 and full payload/bit oracle passed. Earlier pending-CI4 wording records the source checkpoint before this run.

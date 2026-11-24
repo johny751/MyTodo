@@ -39,3 +39,5 @@ Observer 是生产无test依赖的诊断接口。外部caller保存attemptStarte
 目前源码定义11个具名真实API案例，实际计数由CI回执决定：构造无自动迁移、真实invoke/CAS、原raw+基础设施/重入、真实TX回滚、未知结果同/新句柄、raw进展保留、DDL漂移拒绝、缺build身份拒绝、公共cross raw、reordered布局和真实SQL primary错误保留。不预填passed。
 
 **UNVERIFIED / BLOCKER（生产）。** 真机/用户库、全部writers屏障、进程kill/掉电、COMMIT内部故障、生产同库恢复/活动指针、真实认证、LAN/WebDAV/双目标、旧版数据和Android issue #1仍待证据/授权。本APK是隔离真实存储调用，不是生产APP上线，不merge master/main、不接startup、不启用同步。
+
+**FACT（CI4）。** 验证源码 d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7、Actions 45425446577 attempt1，Android真实存储11/11、最终跨端比较7/7。A08的旧v1拒绝与快照/版本不变属于源码定义，现由这次权威运行验证；CI3的原失败仍保留。结果限隔离数据库和独立APK，不是生产迁移认证。

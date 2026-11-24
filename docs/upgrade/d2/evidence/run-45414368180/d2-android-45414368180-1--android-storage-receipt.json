@@ -1,0 +1,125 @@
+{
+  "status": "passed",
+  "syntheticOnly": true,
+  "framework": "d2-real-storage-api-v1",
+  "contractId": "d1-01-candidate.1",
+  "runId": "45414368180",
+  "runAttempt": "1",
+  "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35",
+  "implementationChecksum": "1d38339b59cdd97f26ea7e62cfeca1060c519d75e8932aacbceb1361dba8c157",
+  "actualProductionStorageApi": true,
+  "productionAppEntryLoaded": false,
+  "actualFramework": true,
+  "cases": [
+    {
+      "id": "A01-no-startup-migration",
+      "status": "passed"
+    },
+    {
+      "id": "A02-real-invoke-CAS",
+      "status": "passed"
+    },
+    {
+      "id": "A03-infrastructure-atomic-repeat",
+      "status": "passed"
+    },
+    {
+      "id": "A04-before-commit-real-rollback",
+      "status": "passed"
+    },
+    {
+      "id": "A05-unknown-commit-new-handle",
+      "status": "passed"
+    },
+    {
+      "id": "A06-raw-advance-preserved",
+      "status": "passed"
+    },
+    {
+      "id": "A07-target-DDL-drift",
+      "status": "passed"
+    },
+    {
+      "id": "A08-build-identity-refusal",
+      "status": "passed"
+    },
+    {
+      "id": "A09-shared-cross-raw",
+      "status": "passed"
+    },
+    {
+      "id": "A10-reordered-real-api",
+      "status": "passed"
+    },
+    {
+      "id": "A11-real-SQL-primary-preserved",
+      "status": "passed"
+    }
+  ],
+  "files": {
+    "cross-source.sqlite": {
+      "writersClosed": true,
+      "bytes": 40960,
+      "sha256": "0c42a40fc4145032ac845e924f8c7385cc7f40b6f8d14337c4b18734e42fce41",
+      "sidecars": [
+        {
+          "suffix": "-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ]
+    },
+    "cross-target.sqlite": {
+      "writersClosed": true,
+      "bytes": 65536,
+      "sha256": "99c53dc048411e6be91cb58c6441abeaf2bf6b4bd8bb933b804516b1faa6fceb",
+      "sidecars": [
+        {
+          "suffix": "-wal",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-shm",
+          "exists": false,
+          "bytes": 0
+        },
+        {
+          "suffix": "-journal",
+          "exists": false,
+          "bytes": 0
+        }
+      ]
+    }
+  },
+  "sharedFixtureSha256": "dba5a3bfab0127442b5363b66b8aa8bc8448f16150ec0225773c99ae390f170f",
+  "realSqlPrimaryObservation": "android.database.sqlite.SQLiteConstraintException: d2-primary-sql-error (code 1811 SQLITE_CONSTRAINT_TRIGGER)",
+  "realSqlSuppressedObservations": [],
+  "externalAttemptAudits": {
+    "migration-audit.jsonl": {
+      "bytes": 1929,
+      "sha256": "8d407ae89f4854086ebe1c2a4e8abae675661d5bb69c3e2e9b16bc571e7da48c"
+    },
+    "rollback-first-error.jsonl": {
+      "bytes": 1812,
+      "sha256": "598990a6e3c37755a85bafae6b276171e45e3c5c230e0b4a17b83836bcbfadcd"
+    },
+    "unknown-first-error.jsonl": {
+      "bytes": 2447,
+      "sha256": "4a85f735d5c665315b9ee9f2aed0dd77fda4673f6f1b2ef685c8866950989ca5"
+    }
+  },
+  "passed": 11,
+  "failed": 0,
+  "sqliteVersion": "3.39.2"
+}

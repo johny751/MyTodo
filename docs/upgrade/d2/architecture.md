@@ -16,7 +16,7 @@ FACT (source): Windows C uses the existing `db_open/db_put/db_begin/db_end` adap
 
 PROPOSAL: each manual request binds the Migration ID, contract/algorithm IDs, implementation checksum and immutable source snapshot. Build identity is derived from actual implementation/dependency source bytes plus plan identity, rather than a made-up constant. Source and target schema fingerprints retain sqlite_master SQL bytes, all automatic indexes and NULL SQL. The independent expected target is the source plus exactly six infrastructure objects. Source SQL/columns/indexes must also match the fixed reviewed layout whitelist. Hashing an arbitrary schema does not authorize migration.
 
-PROPOSAL: raw snapshots preserve original SQLite storage type, CAST-to-BLOB bytes, REAL IEEE754 bits, original record/conflicts/meta/outbox bytes, and NULL independently from empty string. The shared fixture includes tombstones, pending events, missing relationships, invalid historical scalars, BLOB, Unicode, 64-bit integer and a one-ULP REAL boundary. These are synthetic boundary specimens, not assertions about the frequency or interpretation of real historic data.
+PROPOSAL: raw snapshots preserve original SQLite storage type, original CAST-to-BLOB bytes for INTEGER/TEXT/BLOB, and (real, NULL sentinel, exact IEEE754 bits) for REAL, original record/conflicts/meta/outbox bytes, and NULL independently from empty string. The shared fixture includes tombstones, pending events, missing relationships, invalid historical scalars, BLOB, Unicode, 64-bit integer and a one-ULP REAL boundary. These are synthetic boundary specimens, not assertions about the frequency or interpretation of real historic data.
 
 ## Transaction, errors and recovery
 
@@ -47,3 +47,5 @@ BLOCKER: production build identity distribution, all-writer cross-file barrier, 
 OWNER DECISION: approve exact production operation scope only after reviewing unified evidence and the decision checklist. This work ends at concentrated delivery; no real migration or synchronization enablement follows automatically.
 
 FACT (CI3): v1 cross-engine REAL CAST identity was rejected by the independent comparer. PROPOSAL: one v2 representation uses a NULL middle sentinel with exact bits; D2-CONFLICT-REAL-001 documents the preserved evidence and reason. Windows actual undo capture was extracted without changing its function body or undo begin/finish/apply bodies; the formal Windows source list includes the new file. These changes require CI4 verification.
+
+FACT (CI4): Source d86aecd56a1c0dfa4d66a982703b3c93bdc5e9d7, Actions 45425446577, attempt 1. All six Actions jobs passed; full release/lifecycle and real user migrations remain outside validation. Earlier pending-CI4 wording records the source checkpoint before this run.
