@@ -4,6 +4,7 @@ import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {cloudRoot,GUARD,CANDIDATE,hash,freshDirectory,writeFresh} from './android/guard.mjs';
 import {build} from './android/build.mjs';
+import {createSidecarProbe,verifySidecarProbe} from './sidecar-probe.mjs';
 
 if(process.argv.length!==3)throw new Error('Use: node tests/d1-01/android-runner.mjs <syntheticRoot>');
 // All command execution and writes occur after positive cloud/root/run/fixture guards.
@@ -24,7 +25,7 @@ async function command(label,exe,args,{allowFailure=false,timeout=240000,input}=
     let total=0;const timer=setTimeout(()=>{entry.timedOut=true;child.kill('SIGKILL');},timeout);
     child.stdout.on('data',b=>{total+=b.length;if(total>32*1024*1024){entry.sizeLimit=true;child.kill('SIGKILL');}stdout.push(b);});
     child.stderr.on('data',b=>stderr.push(b));child.stdin.on('error',e=>{entry.stdinError=String(e);});child.stdin.end(input);
-    const finish=(exitCode,signal)=>{if(settled)return;settled=true;clearTimeout(timer);resolve({exitCode,signal,spawnError,stdout:Buffer.concat(stdout),stderr:Buffer.concat(stderr)});};
+    const finish=(exitCode,signal)=>{if(settled)return;settled=true;clearTimeout(timer);resolve({exitCode,signal,spawnError,timedOut:entry.timedOut===true,sizeLimit:entry.sizeLimit===true,stdout:Buffer.concat(stdout),stderr:Buffer.concat(stderr)});};
     child.on('error',e=>{spawnError=String(e);finish(null,null);});child.on('close',finish);
   });
   const prefix=String(receipt.commands.length).padStart(3,'0')+'-'+label;
@@ -46,6 +47,10 @@ async function fetch(name,{db=false}={}) {
 let exitCode=1;
 try {
   const head=(await command('git-head','git',['rev-parse','HEAD'])).stdout.toString('utf8').trim();if(head!==process.env.GITHUB_SHA)throw new Error('BLOCKER: checkout/source SHA mismatch');
+  const unit=await command('sidecar-probe-unit-tests',process.execPath,['--test',path.join(here,'sidecar-probe.test.mjs')]);
+  receipt.sidecarProbeUnitTests={status:'passed',node:process.version,stdoutBytes:unit.stdout.length,stderrBytes:unit.stderr.length,
+    stdoutSha256:hash(unit.stdout),stderrSha256:hash(unit.stderr),
+    moduleSha256:hash(await fs.readFile(path.join(here,'sidecar-probe.mjs'))),testSha256:hash(await fs.readFile(path.join(here,'sidecar-probe.test.mjs')))};
   const artifact=await build(context,command);receipt.build=artifact;
   const sdk=process.env.ANDROID_SDK_ROOT||process.env.ANDROID_HOME;adb=path.join(sdk,'platform-tools','adb');
   emulatorAttempted=true;
@@ -67,9 +72,11 @@ try {
     const sealed=report.files?.[name];if(!sealed||!sealed.writersClosed||sealed.sidecars.some(item=>item.exists&&item.bytes!==0))throw new Error('BLOCKER: database capture not sealed');
     const bytes=await fetch(name,{db:true});if(bytes.length!==sealed.bytes||hash(bytes)!==sealed.sha256)throw new Error('BLOCKER: closed database hash mismatch');
     for(const suffix of ['-wal','-shm','-journal']) {
-      const probe=await selected('sidecar-'+name+suffix,['exec-out','run-as',packageName,'stat','-c','%s','files/d1-fixtures/'+name+suffix],{allowFailure:true});
-      if(probe.exitCode===0){if(probe.stderr.length||probe.stdout.toString('utf8').trim()!=='0')throw new Error('BLOCKER: live nonempty sidecar at capture');}
-      else if(!/No such file or directory/i.test(probe.stderr.toString('utf8')+probe.stdout.toString('utf8')))throw new Error('BLOCKER: sidecar absence could not be confirmed');
+      const expected=createSidecarProbe(name+suffix);
+      const observed=await selected('sidecar-'+name+suffix,['exec-out','run-as',packageName,'sh','-c',expected.shellArgument],{allowFailure:true});
+      receipt.sidecarProbes??=[];
+      try {receipt.sidecarProbes.push(verifySidecarProbe(expected,observed));}
+      catch(error) {receipt.sidecarProbes.push(error.evidence??{fileName:expected.fileName,remotePath:expected.remotePath,nonce:expected.nonce,allowed:false,error:String(error)});throw error;}
     }
   }
   const image=await fetch('feedback-original.png');if(image.length!==report.feedbackOriginal.bytes||hash(image)!==report.feedbackOriginal.sha256)throw new Error('BLOCKER: original image hash mismatch');
@@ -80,21 +87,34 @@ try {
   receipt.firstError=String(error.stack||error);receipt.status='failed';
   if(adb&&serial) {
     await selected('failure-private-file-inventory',['exec-out','run-as',packageName,'ls','-la','files/d1-fixtures'],{allowFailure:true}).catch(e=>{receipt.failureCollectionError=String(e);});
-    // Preserve partial original bytes before emulator shutdown. A partial capture
-    // remains a failure; it does not gain the successful closed-snapshot seal.
+    // Retain raw command streams before shutdown. Unframed failure output does
+    // not prove original file bytes; SQLite-header streams are partial candidates.
     receipt.partialFailureFiles={};
     const partialNames=['android-generator-receipt.json','feedback-original.png','d1-synthetic.json',
       ...['android-source.sqlite','feedback-source.sqlite','feedback-validation.sqlite'].flatMap(name=>[name,name+'-wal',name+'-shm',name+'-journal'])];
     for(const name of partialNames) {
       try {
         const capture=await selected('failure-capture-'+name,['exec-out','run-as',packageName,'cat','files/d1-fixtures/'+name],{allowFailure:true});
-        if(capture.exitCode!==0||capture.stderr.length) {receipt.partialFailureFiles[name]={captured:false,reason:'command failed or emitted stderr; original logs retained'};continue;}
+        const logged=receipt.commands.at(-1);
+        const rawLog={stdoutFile:logged.stdoutFile,stderrFile:logged.stderrFile,stdoutBytes:capture.stdout.length,
+          stderrBytes:capture.stderr.length,stdoutSha256:hash(capture.stdout),stderrSha256:hash(capture.stderr),
+          hostExitCode:capture.exitCode,hostSignal:capture.signal,timedOut:capture.timedOut,sizeLimit:capture.sizeLimit};
+        if(capture.exitCode!==0||capture.stderr.length||capture.timedOut||capture.sizeLimit) {
+          receipt.partialFailureFiles[name]={captured:false,fileBytesVerified:false,rawLog,
+            reason:'capture command failed, timed out, exceeded limit or emitted stderr; raw output retained only'};continue;
+        }
+        if(!name.endsWith('.sqlite')) {
+          receipt.partialFailureFiles[name]={captured:false,fileBytesVerified:false,rawLog,
+            reason:'unframed exec-out cannot prove remote file existence or content; non-DB output retained as command stdout only'};continue;
+        }
         if(name.endsWith('.sqlite')&&(capture.stdout.length<100||capture.stdout.subarray(0,16).toString('ascii')!=='SQLite format 3\0')) {
-          receipt.partialFailureFiles[name]={captured:false,reason:'invalid/partial SQLite header; command stdout retained'};continue;
+          receipt.partialFailureFiles[name]={captured:false,fileBytesVerified:false,rawLog,reason:'invalid/partial SQLite header; command stdout retained'};continue;
         }
         await writeFresh(path.join(context.root,'failure-'+name),capture.stdout);
-        receipt.partialFailureFiles[name]={captured:true,hostName:'failure-'+name,bytes:capture.stdout.length,sha256:hash(capture.stdout),qualification:'partial original failure evidence; no successful seal'};
-      } catch(captureError){receipt.partialFailureFiles[name]={captured:false,error:String(captureError)};}
+        receipt.partialFailureFiles[name]={captured:true,fileBytesVerified:false,sealed:false,sqliteHeaderObserved:true,rawLog,
+          hostName:'failure-'+name,bytes:capture.stdout.length,sha256:hash(capture.stdout),
+          qualification:'partial SQLite candidate stdout bytes; header observed, completeness and successful file seal unverified'};
+      } catch(captureError){receipt.partialFailureFiles[name]={captured:false,fileBytesVerified:false,error:String(captureError)};}
     }
   }
 } finally {
