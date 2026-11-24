@@ -1,0 +1,51 @@
+name: A admission independent synthetic validation
+on:
+  push:
+    branches: [a/admission-candidate-1]
+    paths: [admission/**, tests/admission/**, tests/run-admission.mjs, .github/workflows/a-admission-validation.yml]
+  workflow_dispatch:
+    inputs:
+      expectedSourceSha:
+        description: Exact candidate source SHA to validate
+        required: true
+        type: string
+      baseSourceSha:
+        description: Full accepted D2 base SHA for the independent A branch
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: a-admission-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  admission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.event_name == 'push' && github.sha || inputs.expectedSourceSha }}
+      BASE_SOURCE_SHA: ${{ github.event_name == 'push' && 'b94f522993f44b83727926ec9db4caa374ffdc71' || inputs.baseSourceSha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Guard source and run independent Node admission tools
+        shell: bash
+        run: |
+          set -o pipefail
+          node tests/run-admission.mjs "$RUNNER_TEMP/a-admission-$GITHUB_RUN_ID" 2> >(tee "$RUNNER_TEMP/a-admission.stderr.log" >&2) | tee "$RUNNER_TEMP/a-admission.stdout.log"
+      - name: Preserve complete source, WAL, audit and failed evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a-admission-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/a-admission-${{ github.run_id }}
+            ${{ runner.temp }}/a-admission.stdout.log
+            ${{ runner.temp }}/a-admission.stderr.log
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,0 +1,15 @@
+# Release identity and remote admission decisions
+
+Updated 2026-11-25 Asia/Shanghai. No real release activation, remote call, credential read or ACK change is included.
+
+PROPOSAL: a formal release admission record should bind exact application source SHA, reviewed migration plan/algorithm, implementation and dependency bytes, actual executable/APK digest, platform/toolchain/runtime identity, application version and a trusted signature/distribution lineage. Android must retain its signing key, increment versionCode, record build-injected APK time with timezone and known version history. Missing evidence is explicitly unknown; tool execution time is not APK compilation time. The current A tool-source checksum is not a substitute for that signed release manifest.
+
+OWNER DECISION: choose who signs and approves the release admission record, where the complete runtime/dependency identity is supplied, and how the running platform verifies it before a manual migration. Never silently accept a caller-provided checksum or source hash as authorization to migrate user data. Unknown/mismatched release, plan, binary or signing lineage preserves the current source and blocks.
+
+PROPOSAL: authenticated remote A must bind project/account/component lineage, device/Actor, relevant ACK/outbox/cursor/manifest/batch progress, revision/generation and an authority freshness proof. Fetching and comparing A must occur under an approved service scope and cannot itself advance ACK or mutate sync. A disconnected, stale, unauthenticated or advanced A is blocked; equality of caller-supplied booleans or two untrusted JSON objects is not authority.
+
+OWNER DECISION: select the actual service/authority, authentication method, freshness/nonce policy, lease duration and operational recovery authority. Real LAN/WebDAV, credentials and dual-channel behavior remain outside this package. No fake authentication or real remote test is performed.
+
+PROPOSAL: supplement existing D2 failure artifacts with immutable external attempt records carrying source Snapshot/component identity, build identity, SHA/run/attempt, writer lease generation, first error, rollback/close/audit errors and uncertain outcome. Hash-chained append-only records make local modification detectable; signed or independently anchored authority is a separate decision. Unknown outcome must inspect the current source, not copy old B over progressed state or resume Actor.
+
+FACT (source): A implements and tests that supplemental serialization/attempt-binding format independently, with a terminal outcome and caller-held final digest/count to distinguish a complete log from a valid truncated prefix. Trust in an independently signed or transported caller anchor remains undecided. Existing D2 historical audits/reports are not rewritten. Its previous runner limitation concerning String(error) versus secondary cleanup properties remains history; A's supplemental tool closes a format gap, not all production durability or caller-wiring gaps.
