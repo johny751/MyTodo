@@ -35,6 +35,7 @@ public final class FixtureInstrumentation extends Instrumentation {
   private Bundle args;
   private File namespace;
   private final JSONObject receipt=new JSONObject();
+  private final JSONObject schemaByFile=new JSONObject();
 
   @Override public void onCreate(Bundle arguments) {super.onCreate(arguments);args=arguments;start();}
 
@@ -47,6 +48,47 @@ public final class FixtureInstrumentation extends Instrumentation {
   }
   private static String digest(byte[] data)throws Exception {
     StringBuilder result=new StringBuilder();for(byte b:MessageDigest.getInstance("SHA-256").digest(data))result.append(String.format(java.util.Locale.ROOT,"%02x",b&255));return result.toString();
+  }
+  private static String hex(byte[] data) {
+    StringBuilder value=new StringBuilder();for(byte b:data){value.append(Character.forDigit((b&255)>>>4,16));value.append(Character.forDigit(b&15,16));}return value.toString();
+  }
+  /** Observe framework objects without changing schema, locale or rows. */
+  private void observeSchema(SQLiteDatabase db,File target)throws Exception {
+    JSONArray allObjects=new JSONArray(),related=new JSONArray(),tableInfo=new JSONArray(),localeRows=new JSONArray();
+    boolean metadataTable=false,localeColumn=false;
+    try(Cursor c=db.rawQuery("SELECT type,name,tbl_name,rootpage,sql,typeof(sql),CAST(sql AS BLOB) FROM sqlite_master ORDER BY type,name,tbl_name",null)) {
+      while(c.moveToNext()) {
+        JSONObject object=new JSONObject().put("type",c.getString(0)).put("name",c.getString(1)).put("tblName",c.getString(2))
+          .put("rootpage",c.getLong(3)).put("sql",c.isNull(4)?JSONObject.NULL:c.getString(4)).put("sqlStorageClass",c.getString(5));
+        if(c.isNull(6))object.put("sqlUtf8Hex",JSONObject.NULL).put("sqlUtf8Sha256",JSONObject.NULL);
+        else {byte[] sql=c.getBlob(6);object.put("sqlUtf8Hex",hex(sql)).put("sqlUtf8Sha256",digest(sql));}
+        allObjects.put(object);
+        if("android_metadata".equals(c.getString(1))||"android_metadata".equals(c.getString(2)))related.put(object);
+        if("table".equals(c.getString(0))&&"android_metadata".equals(c.getString(1)))metadataTable=true;
+      }
+    }
+    // An absent table has an empty PRAGMA result; no replacement table is made.
+    try(Cursor c=db.rawQuery("PRAGMA table_info(android_metadata)",null)) {
+      while(c.moveToNext()) {
+        tableInfo.put(new JSONObject().put("cid",c.getLong(0)).put("name",c.getString(1)).put("type",c.getString(2))
+          .put("notnull",c.getLong(3)).put("dfltValue",c.isNull(4)?JSONObject.NULL:c.getString(4)).put("pk",c.getLong(5)));
+        if("locale".equals(c.getString(1)))localeColumn=true;
+      }
+    }
+    if(metadataTable&&localeColumn) {
+      try(Cursor c=db.rawQuery("SELECT typeof(locale),CAST(locale AS BLOB) FROM android_metadata",null)) {
+        while(c.moveToNext()) {
+          JSONObject row=new JSONObject().put("storageClass",c.getString(0));
+          if(c.isNull(1))row.put("utf8Hex",JSONObject.NULL).put("utf8Sha256",JSONObject.NULL).put("bytes",JSONObject.NULL);
+          else {byte[] original=c.getBlob(1);row.put("utf8Hex",hex(original)).put("utf8Sha256",digest(original)).put("bytes",original.length);}
+          localeRows.put(row);
+        }
+      }
+    }
+    JSONObject framework=new JSONObject().put("schemaObjects",related).put("tableInfo",tableInfo).put("localeRows",localeRows)
+      .put("metadataTablePresent",metadataTable).put("localeColumnPresent",localeColumn).put("localeRowsRead",metadataTable&&localeColumn)
+      .put("observationOnly",true).put("localeByteInput","CAST(locale AS BLOB); storageClass recorded independently");
+    schemaByFile.put(target.getName(),new JSONObject().put("sqliteMasterObjects",allObjects).put("frameworkSchema",framework));
   }
   private static Object nullable(Object value){return value==null?JSONObject.NULL:value;}
   private static void freshWrite(File file,byte[] content)throws Exception {
@@ -125,6 +167,7 @@ public final class FixtureInstrumentation extends Instrumentation {
         .put("path",target.getCanonicalPath()).put("rawTextPreserved",true);
       receipt.put("core",result).put("sqliteVersion",result.getString("sqliteVersion"))
         .put("rowsCount",result.getLong("rowsCount")).put("outboxCount",result.getLong("outboxCount"));
+      observeSchema(db,target);
     } finally {db.close();}
     seal(target);
   }
@@ -163,6 +206,7 @@ public final class FixtureInstrumentation extends Instrumentation {
         .put("assetsCount",count(db,"assets")).put("restoreGeneration",0).put("actualFeedbackAarLoaded",false)
         .put("role",validation?"independent synthetic validation-store DDL fixture":"independent synthetic persistent-store DDL fixture")
         .put("rawPayloads",new JSONObject().put("note",note).put("draft",draft).put("metaBucket",meta)));
+      observeSchema(db,target);
     } finally {db.close();}
     seal(target);
   }
@@ -176,6 +220,8 @@ public final class FixtureInstrumentation extends Instrumentation {
     if(data.length<100||!new String(data,0,16,StandardCharsets.US_ASCII).equals("SQLite format 3\u0000"))throw new Exception("BLOCKER: invalid SQLite header");
     JSONObject output=new JSONObject().put("path",target.getCanonicalPath()).put("bytes",data.length).put("sha256",digest(data))
       .put("writersClosed",true).put("sidecars",sidecars).put("snapshotMethod","fresh independent fixture; all SQLite handles closed before capture");
+    JSONObject schema=schemaByFile.getJSONObject(target.getName());
+    output.put("sqliteMasterObjects",schema.getJSONArray("sqliteMasterObjects")).put("frameworkSchema",schema.getJSONObject("frameworkSchema"));
     JSONObject files=receipt.optJSONObject("files");if(files==null){files=new JSONObject();receipt.put("files",files);}files.put(target.getName(),output);
   }
   @Override public void onStart() {
