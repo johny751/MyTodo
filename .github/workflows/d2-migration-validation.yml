@@ -1,4 +1,5 @@
 name: MyTodo D2 real storage migration candidate
+# CI2: revalidate after correcting the sealed transfer manifest to LF.
 on:
   push:
     branches: ['d2/implementation-candidate-1']
