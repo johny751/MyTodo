@@ -1,0 +1,42 @@
+{
+  "zipSha256": "696fbf279acd53e50eae105789e3fe7b38d6f5ea2e772164b05d30e017c96172",
+  "sourceSha": "7ac7d7c08c63d53b010b772974272c222cddbcc8",
+  "applierSha256": "12c698278a89d2504618744506e371c5a0211f89d154dcf2934ff476336a25ac",
+  "files": [
+    {
+      "bytes": 28128,
+      "sha256": "9789ff5764c3c7bab0f96520c672544ccd267d23c269577fbba686af2fa6bcfe",
+      "path": "tests/d2/native-runner.c"
+    },
+    {
+      "bytes": 22402,
+      "sha256": "d15ecbd3c52c1c84761d6839ae11b32d0c2ec0c5702f88b341ecfdf6a99f55be",
+      "path": "tests/d2/node-runner.mjs"
+    },
+    {
+      "bytes": 15892,
+      "sha256": "ac71e5b81dd70e6aa8797d40f41b8814a84e4a627fed4478b896139bbdb1f797",
+      "path": "tests/d2/android/D2StorageInstrumentation.java"
+    },
+    {
+      "bytes": 11693,
+      "sha256": "785e163919e2451ccefd0c7db213ba167163b47a60f10c25ce7e911d847e0976",
+      "path": "tests/d2/backup-recovery.mjs"
+    },
+    {
+      "bytes": 11782,
+      "sha256": "eb38a011728b704b96ca9a01c46956df4e7f54299d89f8d28c243a12de514ab8",
+      "path": "tests/d2/backup-runner.mjs"
+    },
+    {
+      "bytes": 6008,
+      "sha256": "f373e8a2f2755d790cdb0ae842bd9cb2d47247ea6758d0e7b8fa22c911f41086",
+      "path": "docs/upgrade/d2/node-storage-adapter.md"
+    },
+    {
+      "bytes": 5470,
+      "sha256": "ebcb72bd34a53df5866fc8ea400b34211f2fed3dacf32a271b749859bc097c61",
+      "path": "docs/upgrade/d2/backup-restore-implementation.md"
+    }
+  ]
+}
