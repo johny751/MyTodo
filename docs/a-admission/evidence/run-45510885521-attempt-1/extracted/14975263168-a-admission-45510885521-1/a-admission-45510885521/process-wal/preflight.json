@@ -1,0 +1,111 @@
+{
+  "framework": "mytodo-a-readonly-preflight-v1",
+  "productionAdmission": false,
+  "sourceSqliteOpened": false,
+  "status": "capturedForReview",
+  "sourceAccessed": true,
+  "attemptId": "c33eb63f-cdff-4fff-ae12-b281388fe382",
+  "auditFile": "audit-c33eb63f-cdff-4fff-ae12-b281388fe382.jsonl",
+  "barrier": {
+    "generation": 1,
+    "inventoryDigest": "78a926453a8de731b4d086af7869116fa27dd651756a0cc95f645bee51aa150a",
+    "writerIds": [
+      "wal-child"
+    ]
+  },
+  "sourceBefore": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 4096,
+      "sha256": "89a2318c76452be80e1d743f163f3dd96623b2b05604aa06985c6b5501238362",
+      "dev": "2049",
+      "ino": "567683",
+      "mtimeNs": "1795563184328176174"
+    },
+    {
+      "suffix": "-wal",
+      "present": true,
+      "bytes": 65952,
+      "sha256": "d49109a7356ad717819b1cdf419669b8fe640021e8bcf865da659d95a7f3a19a",
+      "dev": "2049",
+      "ino": "567684",
+      "mtimeNs": "1795563184334085196"
+    },
+    {
+      "suffix": "-shm",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "e89293d562f1e41f916148f95603a14d0efdcc4f7309f053feba19092777d20f",
+      "dev": "2049",
+      "ino": "567685",
+      "mtimeNs": "1795563184330085204"
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceComponentDigest": "7e051e01e45767e4623e12db21c696a9aebe728dbb13fc4c61e77175b0ea13b0",
+  "shadowDirectory": "shadow-b4cc3d32-326b-463c-be21-9fec9e67011d",
+  "snapshot": {
+    "algorithmId": "mytodo-storage-fingerprint-v2",
+    "schemaFingerprint": "01a321397d41af838bd0f81bd7b86829245abbc5e2a6e12924515580422d7e26",
+    "rawFingerprint": "c8e7bd3e71079ccf3a2c9c0cdd6ddcb4fa6276e2a1ab235c3fd5e465d8228358",
+    "userVersion": 0,
+    "snapshotId": "7f3ce442cfb2bf0e0a43720372c7a75afddb47d394dece9a98823247cf9bb18d",
+    "schemaPayload": "S29:mytodo-storage-fingerprint-v2S6:schemaS1:7S5:indexS27:sqlite_autoindex_entities_1S8:entitiesN;S5:indexS11:task_filterS8:entitiesS70:CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)S5:indexS11:task_parentS8:entitiesS47:CREATE INDEX task_parent ON entities(parent_id)S5:indexS14:task_remindersS8:entitiesS70:CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)S5:tableS8:entitiesS8:entitiesS244:CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)S5:tableS4:metaS4:metaS73:CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)S5:tableS6:outboxS6:outboxS63:CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+    "rawPayload": "S29:mytodo-storage-fingerprint-v2S3:rawS1:3S8:entitiesS2:12S3:keyS4:kindS2:idS4:dataS6:recordS7:deletedS9:conflictsS9:parent_idS4:doneS8:quadrantS11:reminder_atS5:startS1:0S4:metaS1:2S2:idS5:valueS1:1S7:integerS2:31N;S4:textS594:7B2276657273696F6E223A322C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A322C22636C6F636B223A332C227175657565223A392C22766563746F72223A7B2273796E7468657469632D6163746F72223A327D2C22637572736F7273223A7B2273796E7468657469632D72656D6F7465223A357D2C2270656E64696E67223A7B2273796E7468657469632D70656E64696E67223A317D2C2273636F7065223A6E756C6C2C2265706F6368223A6E756C6C2C22696E697469616C697A6564223A747275652C227265766973696F6E223A342C22646174615265766973696F6E223A322C226D616E6966657374223A7B226261746368223A2273796E7468657469632D32227D2C2261636B223A362C2273657474696E6773223A7B7D7DN;S6:outboxS1:2S2:idS5:eventS1:2S7:integerS2:38N;S4:textS270:7B226B6579223A225B5C227461736B735C222C5C2273796E7468657469632D7461736B5C225D222C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A312C22636C6F636B223A312C22636F6E74657874223A7B7D2C2276616C756573223A7B227469746C65223A2273796E746865746963207461736B2031227D7DN;S7:integerS2:39N;S4:textS270:7B226B6579223A225B5C227461736B735C222C5C2273796E7468657469632D7461736B5C225D222C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A322C22636C6F636B223A322C22636F6E74657874223A7B7D2C2276616C756573223A7B227469746C65223A2273796E746865746963207461736B2032227D7DN;",
+    "metadata": {
+      "actor": "synthetic-actor",
+      "metaVersion": 2,
+      "seq": "2",
+      "clock": "3",
+      "queue": "9",
+      "outboxRows": 2,
+      "rawMetaSha256": "0add2b3ca83c7d5b771c03fd50f2ccc8a04f03c2d67176ea61c7a7d332a3c21b",
+      "replicationProtected": true
+    },
+    "candidateOnly": true
+  },
+  "sourceAfter": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 4096,
+      "sha256": "89a2318c76452be80e1d743f163f3dd96623b2b05604aa06985c6b5501238362",
+      "dev": "2049",
+      "ino": "567683",
+      "mtimeNs": "1795563184328176174"
+    },
+    {
+      "suffix": "-wal",
+      "present": true,
+      "bytes": 65952,
+      "sha256": "d49109a7356ad717819b1cdf419669b8fe640021e8bcf865da659d95a7f3a19a",
+      "dev": "2049",
+      "ino": "567684",
+      "mtimeNs": "1795563184334085196"
+    },
+    {
+      "suffix": "-shm",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "e89293d562f1e41f916148f95603a14d0efdcc4f7309f053feba19092777d20f",
+      "dev": "2049",
+      "ino": "567685",
+      "mtimeNs": "1795563184330085204"
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceUnchanged": true,
+  "auditAnchor": {
+    "attemptId": "c33eb63f-cdff-4fff-ae12-b281388fe382",
+    "entries": 6,
+    "finalDigest": "8c41810ed05e0a9ab6eb0658c770796720c2c1418af2b09ae5087cb5b8f9a025",
+    "closed": true
+  }
+}

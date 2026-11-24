@@ -1,0 +1,80 @@
+{
+  "framework": "mytodo-a-readonly-preflight-v1",
+  "productionAdmission": false,
+  "sourceSqliteOpened": false,
+  "status": "blockedIntegrity",
+  "sourceAccessed": true,
+  "attemptId": "d9efc577-1fc8-4b93-85e9-3ac8987d59e1",
+  "auditFile": "audit-d9efc577-1fc8-4b93-85e9-3ac8987d59e1.jsonl",
+  "barrier": {
+    "generation": 1,
+    "inventoryDigest": "bf8b1820c32b39364ce05492db9f30ce3fd8b6afd1d306abaf6718602b2d57f4",
+    "writerIds": [
+      "core"
+    ]
+  },
+  "sourceBefore": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "13f22b059224251884c3cc00c166462db0d158ea7c63c83fd0f802bde6b9eaef",
+      "dev": "2049",
+      "ino": "567810",
+      "mtimeNs": "1795563184611084673"
+    },
+    {
+      "suffix": "-wal",
+      "present": false
+    },
+    {
+      "suffix": "-shm",
+      "present": false
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceComponentDigest": "cc6a7f8934dfed361392609c39aad44cb3a9c8328e1ffbd564f9025e99825bca",
+  "shadowDirectory": "shadow-0dc7906b-6767-454f-9dd2-2ac90df62701",
+  "error": {
+    "name": "Error",
+    "message": "database disk image is malformed",
+    "stack": "Error: database disk image is malformed\n    at captureShadowSnapshot (file:///home/runner/work/MyTodo/MyTodo/admission/snapshot.mjs:49:59)\n    at readShadow (file:///home/runner/work/MyTodo/MyTodo/admission/preflight.mjs:20:108)\n    at preflight (file:///home/runner/work/MyTodo/MyTodo/admission/preflight.mjs:38:18)\n    at async inspect (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:18:57)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:47:750\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:17:104)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:47:1",
+    "code": "ERR_SQLITE_ERROR",
+    "errcode": "11",
+    "errstr": "database disk image is malformed",
+    "status": "blockedIntegrity"
+  },
+  "sourceAfter": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "13f22b059224251884c3cc00c166462db0d158ea7c63c83fd0f802bde6b9eaef",
+      "dev": "2049",
+      "ino": "567810",
+      "mtimeNs": "1795563184611084673"
+    },
+    {
+      "suffix": "-wal",
+      "present": false
+    },
+    {
+      "suffix": "-shm",
+      "present": false
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceUnchanged": true,
+  "auditAnchor": {
+    "attemptId": "d9efc577-1fc8-4b93-85e9-3ac8987d59e1",
+    "entries": 6,
+    "finalDigest": "7c5d5f6ae17352981bc58b1f744c8bf8e649ac6c5c639543a60add81d9c8bffd",
+    "closed": true
+  }
+}

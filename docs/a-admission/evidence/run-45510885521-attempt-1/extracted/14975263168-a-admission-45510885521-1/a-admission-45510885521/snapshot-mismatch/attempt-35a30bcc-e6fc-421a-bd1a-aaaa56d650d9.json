@@ -1,0 +1,97 @@
+{
+  "framework": "mytodo-a-readonly-preflight-v1",
+  "productionAdmission": false,
+  "sourceSqliteOpened": false,
+  "status": "blockedSnapshotAdvanced",
+  "sourceAccessed": true,
+  "attemptId": "35a30bcc-e6fc-421a-bd1a-aaaa56d650d9",
+  "auditFile": "audit-35a30bcc-e6fc-421a-bd1a-aaaa56d650d9.jsonl",
+  "barrier": {
+    "generation": 1,
+    "inventoryDigest": "bf8b1820c32b39364ce05492db9f30ce3fd8b6afd1d306abaf6718602b2d57f4",
+    "writerIds": [
+      "core"
+    ]
+  },
+  "sourceBefore": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "30d6118433d2e5c1ca294b203c01097e74f1a87e65cd8b72860f2707d4890059",
+      "dev": "2049",
+      "ino": "567825",
+      "mtimeNs": "1795563184634084629"
+    },
+    {
+      "suffix": "-wal",
+      "present": false
+    },
+    {
+      "suffix": "-shm",
+      "present": false
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceComponentDigest": "b299348c4f4fa43652b69ea6499c75c6ae45e8a6e40a1967054069cfe91778d6",
+  "shadowDirectory": "shadow-7ed8b4fc-5b14-47d4-b571-c719979f52cb",
+  "snapshot": {
+    "algorithmId": "mytodo-storage-fingerprint-v2",
+    "schemaFingerprint": "01a321397d41af838bd0f81bd7b86829245abbc5e2a6e12924515580422d7e26",
+    "rawFingerprint": "501cd2f6c1bca928345e847a364be04efe5a7673d8bf998018ea536ef637c040",
+    "userVersion": 0,
+    "snapshotId": "873419fb829f8ae3cac22c6c1033eeb84935121a8f59cd6c9bba381e7a524c85",
+    "schemaPayload": "S29:mytodo-storage-fingerprint-v2S6:schemaS1:7S5:indexS27:sqlite_autoindex_entities_1S8:entitiesN;S5:indexS11:task_filterS8:entitiesS70:CREATE INDEX task_filter ON entities(kind,deleted,done,quadrant,start)S5:indexS11:task_parentS8:entitiesS47:CREATE INDEX task_parent ON entities(parent_id)S5:indexS14:task_remindersS8:entitiesS70:CREATE INDEX task_reminders ON entities(kind,deleted,done,reminder_at)S5:tableS8:entitiesS8:entitiesS244:CREATE TABLE entities(key TEXT PRIMARY KEY,kind TEXT NOT NULL,id TEXT NOT NULL,data TEXT NOT NULL,record TEXT NOT NULL,deleted INTEGER NOT NULL,conflicts TEXT NOT NULL,parent_id TEXT,done INTEGER,quadrant INTEGER,reminder_at INTEGER,start TEXT)S5:tableS4:metaS4:metaS73:CREATE TABLE meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)S5:tableS6:outboxS6:outboxS63:CREATE TABLE outbox(id INTEGER PRIMARY KEY,event TEXT NOT NULL)",
+    "rawPayload": "S29:mytodo-storage-fingerprint-v2S3:rawS1:3S8:entitiesS2:12S3:keyS4:kindS2:idS4:dataS6:recordS7:deletedS9:conflictsS9:parent_idS4:doneS8:quadrantS11:reminder_atS5:startS1:1S4:textS30:73796E7468657469632D7479706564N;S4:textS10:7461736B73N;S4:textS30:73796E7468657469632D7479706564N;S4:textS58:207B227469746C65223A22E59088E688902065CC8120F09F9880227D20N;S4:textS4:7B7DN;S7:integerS2:30N;S4:textS4:5B5DN;S4:blobS8:610062FFN;S7:integerS32:39303037313939323534373430393933N;S4:realN;S16:3ff0000000000001S7:integerS38:39323233333732303336383534373735383037N;S4:nullN;N;S4:metaS1:2S2:idS5:valueS1:1S7:integerS2:31N;S4:textS594:7B2276657273696F6E223A322C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A322C22636C6F636B223A332C227175657565223A392C22766563746F72223A7B2273796E7468657469632D6163746F72223A327D2C22637572736F7273223A7B2273796E7468657469632D72656D6F7465223A357D2C2270656E64696E67223A7B2273796E7468657469632D70656E64696E67223A317D2C2273636F7065223A6E756C6C2C2265706F6368223A6E756C6C2C22696E697469616C697A6564223A747275652C227265766973696F6E223A342C22646174615265766973696F6E223A322C226D616E6966657374223A7B226261746368223A2273796E7468657469632D32227D2C2261636B223A362C2273657474696E6773223A7B7D7DN;S6:outboxS1:2S2:idS5:eventS1:1S7:integerS2:38N;S4:textS270:7B226B6579223A225B5C227461736B735C222C5C2273796E7468657469632D7461736B5C225D222C226163746F72223A2273796E7468657469632D6163746F72222C22736571223A312C22636C6F636B223A312C22636F6E74657874223A7B7D2C2276616C756573223A7B227469746C65223A2273796E746865746963207461736B2031227D7DN;",
+    "metadata": {
+      "actor": "synthetic-actor",
+      "metaVersion": 2,
+      "seq": "2",
+      "clock": "3",
+      "queue": "9",
+      "outboxRows": 1,
+      "rawMetaSha256": "0add2b3ca83c7d5b771c03fd50f2ccc8a04f03c2d67176ea61c7a7d332a3c21b",
+      "replicationProtected": true
+    },
+    "candidateOnly": true
+  },
+  "error": {
+    "name": "Error",
+    "message": "Approved source snapshot changed",
+    "stack": "Error: Approved source snapshot changed\n    at preflight (file:///home/runner/work/MyTodo/MyTodo/admission/preflight.mjs:39:87)\n    at async inspect (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:18:57)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:48:127\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:17:104)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:48:1",
+    "status": "blockedSnapshotAdvanced"
+  },
+  "sourceAfter": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "30d6118433d2e5c1ca294b203c01097e74f1a87e65cd8b72860f2707d4890059",
+      "dev": "2049",
+      "ino": "567825",
+      "mtimeNs": "1795563184634084629"
+    },
+    {
+      "suffix": "-wal",
+      "present": false
+    },
+    {
+      "suffix": "-shm",
+      "present": false
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceUnchanged": true,
+  "auditAnchor": {
+    "attemptId": "35a30bcc-e6fc-421a-bd1a-aaaa56d650d9",
+    "entries": 7,
+    "finalDigest": "16314892e03f16b3d184b2e82b9fe9b45684d737ca7ce778cddfef91b7ebcc11",
+    "closed": true
+  }
+}

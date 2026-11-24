@@ -1,0 +1,110 @@
+{
+  "framework": "a-admission-source-scope-v1",
+  "sourceSha": "8fb3260b6207169a7a0bdd43bde1585aa4a3ab53",
+  "baseSourceSha": "b94f522993f44b83727926ec9db4caa374ffdc71",
+  "runId": "45510885521",
+  "runAttempt": "1",
+  "status": "passed",
+  "changedFiles": [
+    {
+      "file": ".github/workflows/a-admission-validation.yml",
+      "bytes": 1925,
+      "sha256": "0c646b8d588059c2dc4efc9f1883d94826cc576f0fd23d6401a55bcb6dd1bdfd"
+    },
+    {
+      "file": "admission/audit.mjs",
+      "bytes": 3634,
+      "sha256": "27ef424fbc6ed4a4159ca767b582a79543297b0ef678f3610a4673d59cd14fee"
+    },
+    {
+      "file": "admission/guard.mjs",
+      "bytes": 3444,
+      "sha256": "ec79284c18caeb6c1235cab0d116643b1378d0f68d2b37d1b17b4ac281368b1f"
+    },
+    {
+      "file": "admission/identity.mjs",
+      "bytes": 1616,
+      "sha256": "b0e394775f177dd9a3bd135cf3586efc21efda3c45ce0dfee1734228ef7e0766"
+    },
+    {
+      "file": "admission/preflight.mjs",
+      "bytes": 5676,
+      "sha256": "3413ad91b0fb49d7aac4526f204f0587a4987ea7e6fd3514fe280e21c6560a34"
+    },
+    {
+      "file": "admission/snapshot.mjs",
+      "bytes": 7399,
+      "sha256": "7ed99340ca9bc177606c37cd8ffee8b3ac1baa4d4287f5fe171bcfe6c0e12237"
+    },
+    {
+      "file": "admission/writer-lease.mjs",
+      "bytes": 3666,
+      "sha256": "a60bfb17243cdcb44c0c4cade0ca00fa8123162ed82f74f594cf1ba8efd08b67"
+    },
+    {
+      "file": "docs/a-admission/README.md",
+      "bytes": 1999,
+      "sha256": "c280181211970f119469ab67692c2bb13c59380a2d3830b13655c31ce2a7603f"
+    },
+    {
+      "file": "docs/a-admission/a-source-01.json",
+      "bytes": 3266,
+      "sha256": "965c305df991a9c05ec8515edd07ef550089a92a7a0b66b835c2d7f528eeb682"
+    },
+    {
+      "file": "docs/a-admission/a-source-01.zip",
+      "bytes": 31839,
+      "sha256": "b2e13f2edffebc89b943bdda118491482fdc76a3dfa62181ce025234da0a4be0"
+    },
+    {
+      "file": "docs/a-admission/architecture.md",
+      "bytes": 7324,
+      "sha256": "8f70920831cb79daf1c238ec3e2a707c3de8d4d1faf3e5394485c6b44a28feed"
+    },
+    {
+      "file": "docs/a-admission/collect-evidence.py",
+      "bytes": 3846,
+      "sha256": "919b8508d054aac820425251dbda399ee18eab322ce71bd2b95ae277c468c28c"
+    },
+    {
+      "file": "docs/a-admission/focused-writer-review.md",
+      "bytes": 2994,
+      "sha256": "dfae4a65ae267accd00bdd289a8aee28ef34ec14a754f3f8a6e40e1927c5818c"
+    },
+    {
+      "file": "docs/a-admission/publish-a-01.py",
+      "bytes": 2587,
+      "sha256": "7da9ac521faaef6e2f8213cb31de3abf2238dcc4e67bc844dcdb9fd29dfd4965"
+    },
+    {
+      "file": "docs/a-admission/release-and-remote-decisions.md",
+      "bytes": 3006,
+      "sha256": "5bfe060a010173385350c1eecdc6ec1dcd5220777c5263e2aca5ed718d98138a"
+    },
+    {
+      "file": "docs/a-admission/validation-and-status.md",
+      "bytes": 3443,
+      "sha256": "497f8f53baccdcacfb2a93a8a0dcb5a1e086e9eebc12a42346bba8115f0d567f"
+    },
+    {
+      "file": "tests/admission/factory.mjs",
+      "bytes": 3347,
+      "sha256": "d880a2a85e3d653c34a5577d78ca211f7805227af80284d5356945e47c957dbd"
+    },
+    {
+      "file": "tests/admission/source-scope.mjs",
+      "bytes": 1651,
+      "sha256": "0042420f6fdd2cb5de0edc6a60fe84986d8e5083c70bbce368710f7cd19df43c"
+    },
+    {
+      "file": "tests/admission/wal-child.mjs",
+      "bytes": 1037,
+      "sha256": "88afb2b054fee43bd6771f59aa5f950d0ac7721584ad33e61102f0fef029b8bf"
+    },
+    {
+      "file": "tests/run-admission.mjs",
+      "bytes": 20045,
+      "sha256": "4c7d58e4e34ecce59825c065e5f3263e25d0acaafeaa65b19ff47154822f125b"
+    }
+  ]
+}

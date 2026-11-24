@@ -1,0 +1,16 @@
+[
+  {
+    "runId": "45510885521",
+    "attempt": 1,
+    "sourceSHA": "8fb3260b6207169a7a0bdd43bde1585aa4a3ab53",
+    "conclusion": "success",
+    "url": "https://github.com/johny751/MyTodo/actions/runs/45510885521",
+    "artifacts": 1,
+    "jobs": [
+      {
+        "name": "admission",
+        "conclusion": "success"
+      }
+    ]
+  }
+]

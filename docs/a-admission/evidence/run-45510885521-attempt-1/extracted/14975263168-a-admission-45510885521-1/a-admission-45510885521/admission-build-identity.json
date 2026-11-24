@@ -1,0 +1,43 @@
+{
+  "framework": "mytodo-a-admission-source-v1",
+  "fingerprintAlgorithm": "mytodo-storage-fingerprint-v2",
+  "contractId": "d1-01-candidate.1",
+  "toolChecksum": "5d0db4455955617082efc4e17173e916c5e6c48677277e99f490334f51cd0cc7",
+  "sourceSha": "8fb3260b6207169a7a0bdd43bde1585aa4a3ab53",
+  "runId": "45510885521",
+  "runAttempt": "1",
+  "files": [
+    {
+      "file": "admission/guard.mjs",
+      "bytes": 3444,
+      "sha256": "ec79284c18caeb6c1235cab0d116643b1378d0f68d2b37d1b17b4ac281368b1f"
+    },
+    {
+      "file": "admission/audit.mjs",
+      "bytes": 3634,
+      "sha256": "27ef424fbc6ed4a4159ca767b582a79543297b0ef678f3610a4673d59cd14fee"
+    },
+    {
+      "file": "admission/identity.mjs",
+      "bytes": 1616,
+      "sha256": "b0e394775f177dd9a3bd135cf3586efc21efda3c45ce0dfee1734228ef7e0766"
+    },
+    {
+      "file": "admission/writer-lease.mjs",
+      "bytes": 3666,
+      "sha256": "a60bfb17243cdcb44c0c4cade0ca00fa8123162ed82f74f594cf1ba8efd08b67"
+    },
+    {
+      "file": "admission/snapshot.mjs",
+      "bytes": 7399,
+      "sha256": "7ed99340ca9bc177606c37cd8ffee8b3ac1baa4d4287f5fe171bcfe6c0e12237"
+    },
+    {
+      "file": "admission/preflight.mjs",
+      "bytes": 5676,
+      "sha256": "3413ad91b0fb49d7aac4526f204f0587a4987ea7e6fd3514fe280e21c6560a34"
+    }
+  ],
+  "nodeVersion": "v24.22.3",
+  "sqliteCertification": "Node prototype only; not three-platform production admission"
+}

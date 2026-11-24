@@ -1,0 +1,12 @@
+{
+  "syntheticOnly": true,
+  "sourceSha": "8fb3260b6207169a7a0bdd43bde1585aa4a3ab53",
+  "runId": "45510885521",
+  "pid": 2694,
+  "committedIds": [
+    8,
+    9
+  ],
+  "uncommittedId": 10,
+  "exitCode": 90
+}

@@ -1,0 +1,20 @@
+{
+  "framework": "mytodo-a-readonly-preflight-v1",
+  "productionAdmission": false,
+  "sourceSqliteOpened": false,
+  "status": "blockedWriterOrSource",
+  "sourceAccessed": false,
+  "attemptId": "b13785bf-51b6-4699-b000-3cd29f007910",
+  "auditFile": "audit-b13785bf-51b6-4699-b000-3cd29f007910.jsonl",
+  "error": {
+    "name": "Error",
+    "message": "Missing, forged or stale writer lease",
+    "stack": "Error: Missing, forged or stale writer lease\n    at WriterRegistry.verify (file:///home/runner/work/MyTodo/MyTodo/admission/writer-lease.mjs:21:161)\n    at verifyClosedLease (file:///home/runner/work/MyTodo/MyTodo/admission/writer-lease.mjs:24:178)\n    at preflight (file:///home/runner/work/MyTodo/MyTodo/admission/preflight.mjs:27:65)\n    at inspect (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:18:63)\n    at file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:32:403\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:17:104)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:32:1"
+  },
+  "auditAnchor": {
+    "attemptId": "b13785bf-51b6-4699-b000-3cd29f007910",
+    "entries": 2,
+    "finalDigest": "ea8a02884800b2fd2a60766a4f05ff4bd305fdd7818619b7ce7080aa37f9e2c9",
+    "closed": true
+  }
+}

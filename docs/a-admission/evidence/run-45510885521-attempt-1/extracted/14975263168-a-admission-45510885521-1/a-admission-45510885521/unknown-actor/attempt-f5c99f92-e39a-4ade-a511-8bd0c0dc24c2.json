@@ -1,0 +1,77 @@
+{
+  "framework": "mytodo-a-readonly-preflight-v1",
+  "productionAdmission": false,
+  "sourceSqliteOpened": false,
+  "status": "blockedActorMetadata",
+  "sourceAccessed": true,
+  "attemptId": "f5c99f92-e39a-4ade-a511-8bd0c0dc24c2",
+  "auditFile": "audit-f5c99f92-e39a-4ade-a511-8bd0c0dc24c2.jsonl",
+  "barrier": {
+    "generation": 1,
+    "inventoryDigest": "bf8b1820c32b39364ce05492db9f30ce3fd8b6afd1d306abaf6718602b2d57f4",
+    "writerIds": [
+      "core"
+    ]
+  },
+  "sourceBefore": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "d1b666061293664ec0ec6eef28dc3d672c848c6dd537d040feb3a20793869b77",
+      "dev": "2049",
+      "ino": "567777",
+      "mtimeNs": "1795563184513084858"
+    },
+    {
+      "suffix": "-wal",
+      "present": false
+    },
+    {
+      "suffix": "-shm",
+      "present": false
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceComponentDigest": "3579032848038ba409f38a991e5d915058a1386ebaf9597464d483ada0c53289",
+  "shadowDirectory": "shadow-9edb9ea5-c0ea-4ca8-a27a-fb060af671f4",
+  "error": {
+    "name": "Error",
+    "message": "Unknown Actor, metadata version or counters",
+    "stack": "Error: Unknown Actor, metadata version or counters\n    at blocked (file:///home/runner/work/MyTodo/MyTodo/admission/snapshot.mjs:18:42)\n    at metadata (file:///home/runner/work/MyTodo/MyTodo/admission/snapshot.mjs:38:152)\n    at captureShadowSnapshot (file:///home/runner/work/MyTodo/MyTodo/admission/snapshot.mjs:57:163)\n    at readShadow (file:///home/runner/work/MyTodo/MyTodo/admission/preflight.mjs:20:108)\n    at preflight (file:///home/runner/work/MyTodo/MyTodo/admission/preflight.mjs:38:18)\n    at async inspect (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:18:57)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:45:151\n    at async check (file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:17:104)\n    at async file:///home/runner/work/MyTodo/MyTodo/tests/run-admission.mjs:45:3",
+    "status": "blockedActorMetadata"
+  },
+  "sourceAfter": [
+    {
+      "suffix": "",
+      "present": true,
+      "bytes": 32768,
+      "sha256": "d1b666061293664ec0ec6eef28dc3d672c848c6dd537d040feb3a20793869b77",
+      "dev": "2049",
+      "ino": "567777",
+      "mtimeNs": "1795563184513084858"
+    },
+    {
+      "suffix": "-wal",
+      "present": false
+    },
+    {
+      "suffix": "-shm",
+      "present": false
+    },
+    {
+      "suffix": "-journal",
+      "present": false
+    }
+  ],
+  "sourceUnchanged": true,
+  "auditAnchor": {
+    "attemptId": "f5c99f92-e39a-4ade-a511-8bd0c0dc24c2",
+    "entries": 6,
+    "finalDigest": "7024206675b5c20ff0a3d168f8abde5fb8296f320afffe6b558d7cdb4d35ccea",
+    "closed": true
+  }
+}
