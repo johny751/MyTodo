@@ -1,0 +1,41 @@
+# Windows C manual storage adapter candidate
+
+Updated 2026-11-24 Asia/Shanghai. Scope is branch `d2/implementation-candidate-1`, candidate `d1-01-candidate.1`. D1 results and release evidence remain frozen. Nothing invokes migration from `db_open`, GUI startup, sync or Actor lifecycle.
+
+## Production changes
+
+`windows/database.c` changes only the three positional INSERTs to explicit entity, meta and outbox column lists. Existing value binds, UPSERT projections, transaction ownership and local event/outbox behavior remain the same. `db_close_checked` adds close result propagation. A busy close retains the actual live SQLite handle and preserves the prior operation error plus its close diagnostic; the old void entry delegates to it.
+
+`windows/migration.c` and `migration.h` expose manual snapshot, execute, same-file reopen and unknown-COMMIT resolve methods. The snapshot contains exact schema/raw payloads, fingerprints, user_version and snapshot ID. Its additional in-memory databasePath binds recovery to the original SQLite main filename and is not part of cross-platform fingerprint encoding.
+
+Capture opens a read transaction when the caller has none, or reuses the caller's existing transaction, so schema/version/raw rows are a single SQLite snapshot. Execution requires caller-free transaction ownership, then uses one `BEGIN IMMEDIATE`, rechecks the original snapshot, creates the fixed infrastructure, stores its immutable source payload, verifies independently constructed target schema and unchanged raw data, writes registry/audit, sets user_version and commits. Any transaction failure retains the first error; rollback errors are separate in the caller-owned result. The caller must persist that result outside SQLite. A callback is diagnostic infrastructure; production contains no test definitions or fault imports.
+
+The fixed schema whitelist consists of the three original tables, the three task indexes and the entities automatic index. Tables accept baseline complete DDL or the three explicitly enumerated reversed-column DDL fixtures. Comparison collapses whitespace, removes CREATE-prefix IF NOT EXISTS and normalizes whitespace around `() , =`; source fingerprints preserve the actual SQL bytes. Core column names/types/nullability/default/key metadata remain exact. Full DDL acceptance excludes extra CHECK/FK/trigger behavior. Unknown columns, indexes, views, triggers, user versions and schema objects are rejected without cleanup. Windows GUI `query.c` adds four native search tables, ten additional native indexes and two triggers: that layout is explicitly **blockedSchema**, outside this candidate. No claim of GUI database migration support is made.
+
+## Fingerprint and identity boundaries
+
+The encoding is the shared runtime contract: every sequence starts with algorithm and role, each string uses its UTF-8 byte length and NULL is distinct. Schema includes the record count and all automatic indexes. Raw includes table/column/row counts; original tables are ordered alphabetically, column identities follow actual PRAGMA order, and complete encoded row bytes are sorted. Cells include SQLite typeof, uppercase SQL HEX with explicit NULL and actual REAL binary64 bits in lowercase big-endian hexadecimal. Integer cells are never read through double or cJSON. BLOB, embedded NUL/invalid text bytes, illegal historical scalar fields and existing replication state are fingerprinted as storage bytes without business JSON parsing.
+
+The expected target is independently assembled from original schema payload records plus the six fixed infrastructure table/index records; actual schema bytes are compared before COMMIT and on reopened confirmation. Infrastructure contents are excluded from raw digest and verified separately. Reentry requires exactly one matching registry, snapshot and successful audit, build identity, version and target schema. Later original-data edits return blockedDataAdvanced with no writes. This is the accepted strict D1 snapshot policy; routine startup after later edits remains a future owner decision.
+
+Migration refuses missing or mismatched `MYTODO_STORAGE_BUILD_IDENTITY`. The Actions-only build hashes exact checkout bytes of migration, database, native header, util, operations, UI header, SQLite/cJSON sources and headers, with explicit length fields and fixed plan/version/algorithm identity. It injects the resulting digest into compilation and records every input digest. The test fixture hash is a separate test-only macro. The production source imports no tests and does not manufacture a default checksum. This candidate's standalone application build does not activate a migration entry point.
+
+## Unknown COMMIT
+
+`db_migration_reopen` opens the exact original filename through a new actual SQLite handle with READWRITE/FULLMUTEX and no CREATE, schema initialization or old-file restoration. Resolution accepts exact original schema/version/raw with no registry as notCommitted, or matching registry/immutable snapshot/audit/version/independent target schema/raw as committed. Partial identities return blockedUnknown; later edits or ACK/outbox changes return blockedDataAdvanced. Both external attempts remain caller-owned evidence. No result grants sync/Actor resumption.
+
+## Actions-only validation
+
+Run on a GitHub-hosted Windows runner with `EXPECTED_SOURCE_SHA` equal to `GITHUB_SHA`:
+
+```powershell
+node tests/d2/native-build.mjs "$env:RUNNER_TEMP/d2-$env:GITHUB_RUN_ID-win32"
+```
+
+The script creates or verifies `.d2-synthetic-only.json`, rejects the wrong source/run/platform/root, verifies reviewed vendor checkout hashes, records MSVC/SDK and production source identities, compiles actual production storage/undo dependencies with MSVC, and runs the native executable. `/Gy` and `/OPT:REF` omit unused GUI functions. The harness supplies the actual zero-initialized App state so the existing undo_capture readiness guard is exercised without GUI activation; storage is not mocked.
+
+The 30 synthetic cases cover actual db_open initialization, db_put/db_local on reversed columns, db_begin/db_end, close-busy diagnostics, real lock contention, baseline/reordered/empty/raw boundary migration, reentry, later edits, known-layout rejection, build/snapshot identity refusal, real authorizer/commit-hook/rollback failures, rollback of raw mutation, same-file recovery and two actual child-process exits before/after COMMIT. Child stdout/stderr and flushed stage audits survive process exit. Test data is synthetic and says nothing about the frequency of malformed real histories.
+
+`shared-fixture.json` is copied from the checked repository and bound by its exact hash. After demonstrating a real storage API write, the shared case executes that fixed raw synthetic history and uses SQLite backup to seal `cross-source.sqlite` and `cross-target.sqlite`. `cross-fingerprints.json` records both production snapshots for root's cross-platform comparison. `results.json`, per-case source/target/attempt/recovery payloads, build commands, stdout/stderr, first-error receipts and source identity evidence are retained under the marked Actions root.
+
+At authoring time only text/static reads and file hashes were used locally. Compilation and test results must be obtained from Actions; this document does not claim they passed. No real database, LAN/WebDAV, credentials, migrations, sync activation or attachment writer was accessed. D2 backup/barrier work is documented separately and this migration adapter does not authorize that activation.

@@ -21,6 +21,7 @@
 #include "vendor/zlib/zlib.h"
 typedef cJSON J;
 typedef struct { sqlite3 *sql; wchar_t dir[32768]; char error[1024]; } DB;
+int db_close_checked(DB *d);
 J *get(J *j,const char *k); const char *str(J *j,const char *k); double num(J *j,const char *k); int truth(J *j,const char *k); void set(J *j,const char *k,J *v); void ss(J *j,const char *k,const char *s); void sn(J *j,const char *k,double n); J *dup(J *j); char *json(J *j); int eq(J *a,J *b); wchar_t *wide(const char *s); char *utf8(const wchar_t *s); void uuid(char *s); void now(char *s); int64_t time_ms(const char *s); void format_ms(int64_t n,char *s); char *read_file(const wchar_t *p); int write_file(const wchar_t *p,const char *s); void join(wchar_t *out,const wchar_t *dir,const wchar_t *name); int ensure_dir(const wchar_t *p); void sha256(const char *s,char *out);
 #define PROTOCOL_MAX_COUNTER INT64_C(9007199254740991)
 int protocol_actor_valid(const char *actor); int protocol_counter_valid(double value,int positive); int protocol_counter_map_valid(J *map,int limit); int protocol_text_valid(const char *text); int protocol_json_without_nul(const char *json_text); int protocol_event_valid(J *event);

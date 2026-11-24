@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.mytodo.d2storage" android:versionCode="1" android:versionName="0.0.1-d2-storage">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="34" />
+  <application android:label="MyTodo D2 real storage API test" android:debuggable="true" android:allowBackup="false" android:usesCleartextTraffic="false" />
+  <instrumentation android:name="local.gxtodo.replica.D2StorageInstrumentation" android:targetPackage="local.mytodo.d2storage" android:label="Manual production storage API synthetic tests" />
+</manifest>

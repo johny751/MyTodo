@@ -114,10 +114,6 @@ public final class PomodoroTasks {
     }
 
     static JSONObject taskRecord(JSONObject task, String inheritedParent) throws Exception {
-        String parent = task.isNull("parentId") ? inheritedParent : task.optString("parentId", inheritedParent);
-        return new JSONObject().put("id", task.getString("id"))
-            .put("title", task.optString("title", "").isEmpty() ? "未命名任务" : task.optString("title"))
-            .put("done", task.optBoolean("done"))
-            .put("parentId", parent == null || parent.isEmpty() ? JSONObject.NULL : parent);
+        return ReplicaTaskRecord.taskRecord(task, inheritedParent);
     }
 }

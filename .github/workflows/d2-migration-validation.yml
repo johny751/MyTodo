@@ -1,0 +1,117 @@
+name: MyTodo D2 real storage migration candidate
+on:
+  push:
+    branches: ['d2/implementation-candidate-1']
+    paths: ['src/sqlite-store.mjs', 'src/migration-runtime.mjs', 'windows/database.c', 'windows/native.h', 'windows/migration.*', 'android/src/local/gxtodo/replica/**', 'tests/d2/**', '.github/workflows/d2-migration-validation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mytodo-d2-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+jobs:
+  scope:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', fetch-depth: 0, persist-credentials: false}
+      - name: Select proven preinstalled Node
+        run: bash tests/d1-01/select-node.sh
+      - name: Check frozen baseline, branch scope and source bytes
+        run: node tests/d2/source-scope.mjs "$RUNNER_TEMP/d2-$GITHUB_RUN_ID-scope"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-scope-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-${{ github.run_id }}-scope/', include-hidden-files: true, if-no-files-found: error, retention-days: 30}
+  windows:
+    needs: scope
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - name: Preserve exact reviewed source line endings
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          if ($LASTEXITCODE -ne 0) { throw 'Git source configuration failed' }
+          git config --global core.eol lf
+          if ($LASTEXITCODE -ne 0) { throw 'Git source line endings failed' }
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - name: Select proven preinstalled Node
+        shell: pwsh
+        run: ./tests/d1-01/select-node.ps1
+      - name: Compile actual Windows storage and execute isolated migrations
+        shell: pwsh
+        run: |
+          node tests/d2/native-build.mjs "$env:RUNNER_TEMP/d2-$env:GITHUB_RUN_ID-win32"
+          exit $LASTEXITCODE
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-windows-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-${{ github.run_id }}-win32/', include-hidden-files: true, if-no-files-found: error, retention-days: 30}
+  node:
+    needs: scope
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - run: bash tests/d1-01/select-node.sh
+      - name: Execute actual Node production store with synthetic history
+        run: node tests/d2/node-runner.mjs "$RUNNER_TEMP/d2-$GITHUB_RUN_ID-node"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-node-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-${{ github.run_id }}-node/', include-hidden-files: true, if-no-files-found: error, retention-days: 30}
+  android:
+    needs: scope
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env: {MYTODO_D1_ANDROID_IMAGE_INSTALL: '1', MYTODO_D1_ANDROID_PULSE_INSTALL: '1'}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - run: bash tests/d1-01/select-node.sh
+      - name: Build isolated APK and exercise actual Android production storage APIs
+        run: node tests/d2/android/runner.mjs "$RUNNER_TEMP/d2-$GITHUB_RUN_ID-android"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-android-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-${{ github.run_id }}-android/', include-hidden-files: true, if-no-files-found: error, retention-days: 30}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-emulator-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d1-android-emulator/', include-hidden-files: true, if-no-files-found: warn, retention-days: 30}
+  backup:
+    needs: scope
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - run: bash tests/d1-01/select-node.sh
+      - name: Validate complete synthetic backup, B-S-A and same-database recovery
+        run: node tests/d2/backup-runner.mjs run "$RUNNER_TEMP/d2-$GITHUB_RUN_ID-backup"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-backup-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-${{ github.run_id }}-backup/', include-hidden-files: true, if-no-files-found: error, retention-days: 30}
+  compare:
+    needs: [windows, node, android, backup]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - run: bash tests/d1-01/select-node.sh
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with: {name: 'd2-windows-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-windows-input/'}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with: {name: 'd2-node-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-node-input/'}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with: {name: 'd2-android-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-android-input/'}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with: {name: 'd2-backup-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-backup-input/'}
+      - name: Independently verify producer identity, source values, Registry and target schema
+        run: node tests/d2/compare-runner.mjs "$RUNNER_TEMP/d2-windows-input" "$RUNNER_TEMP/d2-node-input" "$RUNNER_TEMP/d2-android-input" "$RUNNER_TEMP/d2-backup-input" "$RUNNER_TEMP/d2-$GITHUB_RUN_ID-comparison"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with: {name: 'd2-comparison-${{ github.run_id }}-${{ github.run_attempt }}', path: '${{ runner.temp }}/d2-${{ github.run_id }}-comparison/', include-hidden-files: true, if-no-files-found: error, retention-days: 30}
