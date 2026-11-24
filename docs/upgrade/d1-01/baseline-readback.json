@@ -1,0 +1,2487 @@
+{
+  "date": "2026-11-24",
+  "timeZone": "Asia/Shanghai",
+  "repository": "johny751/MyTodo",
+  "branch": "master",
+  "head": "d9e58b04484ce14a1bfc3021757b2167df2b0407",
+  "remoteMaster": "d9e58b04484ce14a1bfc3021757b2167df2b0407",
+  "status": "",
+  "tree": "dd2d667263e0836aac0e89c2294eabf9cb32ce22",
+  "trackedPaths": 752,
+  "stage0ReviewedShaFromPublishedVerification": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+  "stage0Decision": "CONDITIONAL-GO",
+  "stage0Documents": [
+    {
+      "path": "docs/upgrade/phase0-final-review/actions-readback.json",
+      "bytes": 28579,
+      "sha256": "3fd9a2ec4f6a14ecbb3183e2afd5f7ccd3463fc29a46bf109b81e2038a9acafe",
+      "blob": "9d0e03284f0a5eea4a6c501a57e3fa50d11aef04",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/android-stability-risk.md",
+      "bytes": 16240,
+      "sha256": "b1dc394e1196df2ad0ca1aba9014bb841c139e6ff32e4bc4c3bf2d57e0b309fa",
+      "blob": "027c40e312279e864abca6c0a3a8d5adbaefd52c",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md",
+      "bytes": 5900,
+      "sha256": "acaf204aa13fbe007fe469f1045fb3399f0f2e01b614bf47850d8d78f9a57412",
+      "blob": "db528bf7aaeaf1d382261bcb4a21529d20d12008",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/phase0-final-report.md",
+      "bytes": 16937,
+      "sha256": "099d1fa3e43e55deea06f86cedf1d049b423a37fe939fd1956f8a9998c362934",
+      "blob": "c2bf08deb1c3ece0d4ce1519531c11db08dab546",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/production-source-baseline.md",
+      "bytes": 10244,
+      "sha256": "a6758e62c34bc9ac0897198f285b3e23e12853d1e80663b348ee1d39ea8110d5",
+      "blob": "0413770fcb5282fe0f995acad8f3fba1a04461a9",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/README.md",
+      "bytes": 2067,
+      "sha256": "9fbf0ec9b4dc8fb0af74cca6fa1dcb858e94cbcc5d128487d7767e19f9232409",
+      "blob": "6c589ec33960835a2fe096dffa110383ca1db4c9",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/source-identity.json",
+      "bytes": 393199,
+      "sha256": "41f4e8f40d6a4c28c7f40e375e4e5a22ce9f20fb24bbf1f634d1aae445aaf023",
+      "blob": "f3117ca485714c9d3ec07c8bc9317304703557d1",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/sync-safety-review.md",
+      "bytes": 12118,
+      "sha256": "737fd7d86d228fd78362560e417353d4a80d4fa7382f53b1d0be028d71b800ce",
+      "blob": "724ad03249dff46859ef09a4653f6eec82383d5d",
+      "previousReleaseMatches": true
+    },
+    {
+      "path": "docs/upgrade/phase0-final-review/verification.json",
+      "bytes": 138322,
+      "sha256": "5e36d00fcdf7212d35e3e13064e2a587804b405a3d10e458d7bacfffcd0be74a",
+      "blob": "f7cb5aa77b18421eb12ddafdd38cce0d17dde843",
+      "previousReleaseMatches": true
+    }
+  ],
+  "comparisons": {
+    "stage0Publication": {
+      "ref": "d9e58b04484ce14a1bfc3021757b2167df2b0407",
+      "ancestor": true,
+      "paths": []
+    },
+    "stage0ReviewedSource": {
+      "ref": "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+      "ancestor": true,
+      "paths": [
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/actions-readback.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/android-stability-risk.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/phase0-final-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/production-source-baseline.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/sync-safety-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/verification.json"
+        }
+      ]
+    },
+    "c005": {
+      "ref": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+      "ancestor": true,
+      "paths": [
+        {
+          "status": "A",
+          "path": ".github/workflows/android-observation-evidence.yml"
+        },
+        {
+          "status": "A",
+          "path": ".github/workflows/c0-06-android-interruption.yml"
+        },
+        {
+          "status": "A",
+          "path": ".github/workflows/c0-06-bootstrap.yml"
+        },
+        {
+          "status": "A",
+          "path": ".github/workflows/c0-06-migration.yml"
+        },
+        {
+          "status": "A",
+          "path": ".github/workflows/c0-07-fault-recovery.yml"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-05-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-05-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-05-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-05-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/final-core-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/final-kill-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/final-matrix-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/latest-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/evidence/c006-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-compatibility.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/report-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-c006-core.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-archive.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-android-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-selected-db-contract-independent-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-binary-rehash.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-final-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-node-native-reopens-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-archive-auditor-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-network-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-a27-local-text-integrity-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-a26-failure-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-android-crash-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-semantic-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-feb-android-deep-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-android-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-publication.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-source-identity-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-strengthened-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/initial-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-final-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-readme.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c006-android-interruption.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c006-bootstrap-supplement.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c006-integration-notes.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c006-scenario-matrix.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c007-fault-recovery-draft.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c007-integration-gaps-draft.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/actions-readback.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/android-stability-risk.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/phase0-final-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/production-source-baseline.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/sync-safety-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/verification.json"
+        },
+        {
+          "status": "M",
+          "path": "src/delta-sync.mjs"
+        },
+        {
+          "status": "M",
+          "path": "src/sqlite-store.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/android-observation/verify-remote-file-evidence.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/README.md"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/android-kill/android-kill-entry.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/android-kill/android-kill-runner.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/android-kill/prepare-android-kill.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/bootstrap/js-worker.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/bootstrap/runner.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/android-entry.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/android-runner.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/fixture-server.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/js-worker.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/prepare-android.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/runner.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/seal-evidence.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/c006-harness/summarize.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/windows/README.md"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/windows/build-native.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/windows/migration-native.c"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/windows/native-runner.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/c006/windows/workflow-snippet.yml"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/C007CommitObserver.java"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/C007Faults.java"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/c007-android-entry.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/c007-android-worker.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/prepare-c007-android.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/build-c007-windows.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-evidence.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-js-worker.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-same-db-controller.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-sql-faults.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-windows-worker.c"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/make-c007-network-scenarios.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/make-c007-scenario.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/run-c007-suite.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/protocol-harness/android/remote-file-evidence.mjs"
+        },
+        {
+          "status": "M",
+          "path": "tests/protocol-harness/android/run-android.mjs"
+        },
+        {
+          "status": "M",
+          "path": "windows/database.c"
+        },
+        {
+          "status": "M",
+          "path": "windows/sync.c"
+        }
+      ]
+    },
+    "c006": {
+      "ref": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+      "ancestor": true,
+      "paths": [
+        {
+          "status": "A",
+          "path": ".github/workflows/c0-07-fault-recovery.yml"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/final-core-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/final-kill-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/final-matrix-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/audit/latest-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/evidence/c006-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-compatibility.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/c0-06-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-06/reports/report-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-c006-core.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-archive.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-android-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-selected-db-contract-independent-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-binary-rehash.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-final-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-node-native-reopens-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-archive-auditor-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-network-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-a27-local-text-integrity-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-a26-failure-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-android-crash-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-semantic-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-feb-android-deep-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-android-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-publication.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-source-identity-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-strengthened-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/initial-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-final-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-readme.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c007-fault-recovery-draft.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c007-integration-gaps-draft.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/actions-readback.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/android-stability-risk.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/phase0-final-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/production-source-baseline.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/sync-safety-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/verification.json"
+        },
+        {
+          "status": "M",
+          "path": "src/sqlite-store.mjs"
+        },
+        {
+          "status": "M",
+          "path": "tests/c006/android-kill/android-kill-runner.mjs"
+        },
+        {
+          "status": "M",
+          "path": "tests/c006/c006-harness/android-runner.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/C007CommitObserver.java"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/C007Faults.java"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/c007-android-entry.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/c007-android-worker.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/android/prepare-c007-android.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/build-c007-windows.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-evidence.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-js-worker.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-same-db-controller.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-sql-faults.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/c007-windows-worker.c"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/make-c007-network-scenarios.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/make-c007-scenario.mjs"
+        },
+        {
+          "status": "A",
+          "path": "tests/fault-harness/run-c007-suite.mjs"
+        },
+        {
+          "status": "M",
+          "path": "windows/database.c"
+        },
+        {
+          "status": "M",
+          "path": "windows/sync.c"
+        }
+      ]
+    },
+    "c007Production": {
+      "ref": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+      "ancestor": true,
+      "paths": [
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-c006-core.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-archive.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-android-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-selected-db-contract-independent-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-binary-rehash.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-final-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-node-native-reopens-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-archive-auditor-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-network-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-a27-local-text-integrity-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-a26-failure-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-android-crash-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-semantic-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-feb-android-deep-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-android-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-publication.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-source-identity-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-strengthened-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/initial-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-final-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-readme.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/actions-readback.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/android-stability-risk.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/phase0-final-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/production-source-baseline.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/sync-safety-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/verification.json"
+        },
+        {
+          "status": "M",
+          "path": "tests/c006/android-kill/android-kill-runner.mjs"
+        },
+        {
+          "status": "M",
+          "path": "tests/c006/c006-harness/android-runner.mjs"
+        },
+        {
+          "status": "M",
+          "path": "tests/fault-harness/c007-windows-worker.c"
+        }
+      ]
+    },
+    "c007Executed": {
+      "ref": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+      "ancestor": true,
+      "paths": [
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-c006-core.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-archive.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-android-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-selected-db-contract-independent-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-binary-rehash.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-final-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-node-native-reopens-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-archive-auditor-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-network-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-a27-local-text-integrity-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-a26-failure-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-android-crash-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-semantic-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-feb-android-deep-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-android-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-publication.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-source-identity-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-strengthened-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/initial-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-final-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-readme.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/actions-readback.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/android-stability-risk.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/phase0-final-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/production-source-baseline.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/sync-safety-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/verification.json"
+        },
+        {
+          "status": "M",
+          "path": "tests/c006/android-kill/android-kill-runner.mjs"
+        },
+        {
+          "status": "M",
+          "path": "tests/c006/c006-harness/android-runner.mjs"
+        }
+      ]
+    },
+    "latestCore": {
+      "ref": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+      "ancestor": true,
+      "paths": [
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-case-results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-environment.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-c006-core.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-19ce-node-native-reopens.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/audit-c007-archive.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-core-android-semantic-audit.ps1"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-19ce-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-a27-diagnosis.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-android-kill-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-kill-semantic-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-edf-selected-db-contract-evidence-v2.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c006-selected-db-contract-independent-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-binary-rehash.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-bootstrap-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-final-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-node-native-reopens-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-19ce-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-archive-auditor-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-android-final-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-network-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-node-windows-evidence-audit-v3.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-evidence-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-de7-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-a27-local-text-integrity-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-android-kill-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-edf-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-baseline-qualified.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-a26-failure-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-c006-core-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-core-matrix-manifest-coverage.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-android-crash-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-integrity-only-raw.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-matrix-semantic-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-production-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-f9-regression-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-feb-android-deep-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-final-source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-android-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-first-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-publication.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-db-source-bytes.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-selected-source-identity-independent-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/c007-strengthened-red-integrity-audit.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-evidence/initial-runs.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-final-independent-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-provenance.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-readme.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/c0-07-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/README.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/actions-readback.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/android-stability-risk.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/d1-entry-decision.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/phase0-final-report.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/production-source-baseline.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/source-identity.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/sync-safety-review.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/upgrade/phase0-final-review/verification.json"
+        }
+      ]
+    }
+  },
+  "criticalBlobs": {
+    "src/sync-server.mjs": {
+      "current": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+      "references": {
+        "stage0Publication": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "stage0ReviewedSource": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "c005": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "c006": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "c007Production": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "c007Executed": "682b74fa92ec3550f10e0e3d6202a3f469d88d98",
+        "latestCore": "682b74fa92ec3550f10e0e3d6202a3f469d88d98"
+      }
+    },
+    "windows/credential-helper.c": {
+      "current": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+      "references": {
+        "stage0Publication": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "stage0ReviewedSource": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "c005": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "c006": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "c007Production": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "c007Executed": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e",
+        "latestCore": "466bfa85d1bd1e8822c3bcaf236d1dc9d301f84e"
+      }
+    },
+    "src/delta-sync.mjs": {
+      "current": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+      "references": {
+        "stage0Publication": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "stage0ReviewedSource": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "c005": "b7384402da1a821a03989c9c4bd73d49091c9b32",
+        "c006": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "c007Production": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "c007Executed": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7",
+        "latestCore": "e7872ccdf830cc4a631a9ab4a6177e3580eed1f7"
+      }
+    },
+    "src/sqlite-store.mjs": {
+      "current": "a4325116f184312ddae822ca56f178eb57aaec40",
+      "references": {
+        "stage0Publication": "a4325116f184312ddae822ca56f178eb57aaec40",
+        "stage0ReviewedSource": "a4325116f184312ddae822ca56f178eb57aaec40",
+        "c005": "791fcef0f03813956e3e83be16a462f4b65f17f4",
+        "c006": "791fcef0f03813956e3e83be16a462f4b65f17f4",
+        "c007Production": "a4325116f184312ddae822ca56f178eb57aaec40",
+        "c007Executed": "a4325116f184312ddae822ca56f178eb57aaec40",
+        "latestCore": "a4325116f184312ddae822ca56f178eb57aaec40"
+      }
+    },
+    "src/model.mjs": {
+      "current": "7141bde098d4bd709939de5786133a32a1598c78",
+      "references": {
+        "stage0Publication": "7141bde098d4bd709939de5786133a32a1598c78",
+        "stage0ReviewedSource": "7141bde098d4bd709939de5786133a32a1598c78",
+        "c005": "7141bde098d4bd709939de5786133a32a1598c78",
+        "c006": "7141bde098d4bd709939de5786133a32a1598c78",
+        "c007Production": "7141bde098d4bd709939de5786133a32a1598c78",
+        "c007Executed": "7141bde098d4bd709939de5786133a32a1598c78",
+        "latestCore": "7141bde098d4bd709939de5786133a32a1598c78"
+      }
+    },
+    "src/replica.mjs": {
+      "current": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+      "references": {
+        "stage0Publication": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "stage0ReviewedSource": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "c005": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "c006": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "c007Production": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "c007Executed": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0",
+        "latestCore": "b910ebb83f2847a64e5d63fc986abc2c94cd0bb0"
+      }
+    },
+    "src/sync-core.mjs": {
+      "current": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+      "references": {
+        "stage0Publication": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "stage0ReviewedSource": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "c005": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "c006": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "c007Production": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "c007Executed": "fddcb587c0783e7267693e6b8d2e8db383a82f95",
+        "latestCore": "fddcb587c0783e7267693e6b8d2e8db383a82f95"
+      }
+    },
+    "src/sync-client.mjs": {
+      "current": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+      "references": {
+        "stage0Publication": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "stage0ReviewedSource": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "c005": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "c006": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "c007Production": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "c007Executed": "fe11e627d17fe3efb3452b31ce646b2ce44bf900",
+        "latestCore": "fe11e627d17fe3efb3452b31ce646b2ce44bf900"
+      }
+    },
+    "windows/database.c": {
+      "current": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+      "references": {
+        "stage0Publication": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+        "stage0ReviewedSource": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+        "c005": "8676394a39e8f59a4acd7c598765e4abb5d02118",
+        "c006": "8676394a39e8f59a4acd7c598765e4abb5d02118",
+        "c007Production": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+        "c007Executed": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f",
+        "latestCore": "796d6bb4d8601b06a61cac1e8b66c8601da63a6f"
+      }
+    },
+    "windows/sync.c": {
+      "current": "208144931154968925d6bf41ba3bba49606c534b",
+      "references": {
+        "stage0Publication": "208144931154968925d6bf41ba3bba49606c534b",
+        "stage0ReviewedSource": "208144931154968925d6bf41ba3bba49606c534b",
+        "c005": "6ffec70d80bd3884f49bc86d8b33e10aca797b2b",
+        "c006": "204dc29845a6c06d628bb3f7c66cea3e058ab61a",
+        "c007Production": "208144931154968925d6bf41ba3bba49606c534b",
+        "c007Executed": "208144931154968925d6bf41ba3bba49606c534b",
+        "latestCore": "208144931154968925d6bf41ba3bba49606c534b"
+      }
+    },
+    "windows/native.h": {
+      "current": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+      "references": {
+        "stage0Publication": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "stage0ReviewedSource": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "c005": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "c006": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "c007Production": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "c007Executed": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691",
+        "latestCore": "a9c23e56e329a75efefdbf1f9efdd4c2db30f691"
+      }
+    },
+    "android/src/local/gxtodo/replica/ReplicaDatabase.java": {
+      "current": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+      "references": {
+        "stage0Publication": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "stage0ReviewedSource": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "c005": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "c006": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "c007Production": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "c007Executed": "d31030e0c247e97c51bd7b48bc917ecb32638052",
+        "latestCore": "d31030e0c247e97c51bd7b48bc917ecb32638052"
+      }
+    },
+    "android/src/local/gxtodo/replica/SyncStore.java": {
+      "current": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+      "references": {
+        "stage0Publication": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "stage0ReviewedSource": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "c005": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "c006": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "c007Production": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "c007Executed": "37cec1ba0eacf03cbec742b7a581778c17f99c23",
+        "latestCore": "37cec1ba0eacf03cbec742b7a581778c17f99c23"
+      }
+    },
+    "android/src/local/gxtodo/replica/MainActivity.java": {
+      "current": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+      "references": {
+        "stage0Publication": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "stage0ReviewedSource": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "c005": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "c006": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "c007Production": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "c007Executed": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73",
+        "latestCore": "0e7136b0a51fa8a3e9cb7d94b3f91e75efd7df73"
+      }
+    },
+    ".github/workflows/c0-04-protocol.yml": {
+      "current": "468080a0b98717e0dd4cb036bf842727ee13b964",
+      "references": {
+        "stage0Publication": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "stage0ReviewedSource": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "c005": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "c006": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "c007Production": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "c007Executed": "468080a0b98717e0dd4cb036bf842727ee13b964",
+        "latestCore": "468080a0b98717e0dd4cb036bf842727ee13b964"
+      }
+    },
+    ".github/workflows/c0-05-credentials.yml": {
+      "current": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+      "references": {
+        "stage0Publication": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "stage0ReviewedSource": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "c005": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "c006": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "c007Production": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "c007Executed": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6",
+        "latestCore": "f3127ef40064bf84581be7fa0c9f9c3c190c56e6"
+      }
+    },
+    ".github/workflows/c0-06-migration.yml": {
+      "current": "166864d813410829cfb3338a8260579865a20c5f",
+      "references": {
+        "stage0Publication": "166864d813410829cfb3338a8260579865a20c5f",
+        "stage0ReviewedSource": "166864d813410829cfb3338a8260579865a20c5f",
+        "c006": "166864d813410829cfb3338a8260579865a20c5f",
+        "c007Production": "166864d813410829cfb3338a8260579865a20c5f",
+        "c007Executed": "166864d813410829cfb3338a8260579865a20c5f",
+        "latestCore": "166864d813410829cfb3338a8260579865a20c5f"
+      }
+    },
+    ".github/workflows/c0-07-fault-recovery.yml": {
+      "current": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6",
+      "references": {
+        "stage0Publication": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6",
+        "stage0ReviewedSource": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6",
+        "c007Production": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6",
+        "c007Executed": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6",
+        "latestCore": "f9947bf4b9866d4b5833b0b70954a89fe47b6ac6"
+      }
+    },
+    ".github/workflows/phase0-baseline.yml": {
+      "current": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+      "references": {
+        "stage0Publication": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "stage0ReviewedSource": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "c005": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "c006": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "c007Production": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "c007Executed": "2914c223dbd95f360520149f3ca9e8bbf718fa41",
+        "latestCore": "2914c223dbd95f360520149f3ca9e8bbf718fa41"
+      }
+    }
+  },
+  "runs": [
+    {
+      "runId": 45117818661,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "failure",
+        "databaseId": 45117818661,
+        "event": "push",
+        "headSha": "d02e416f6f353eb018a72446d4851722f2f956c6",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45117818661",
+        "workflowName": "MyTodo C0-03 real production protocol vectors"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45140238501,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45140238501,
+        "event": "push",
+        "headSha": "56a2cf19ddb4758044e1cdb76bc53ab78aa46cbc",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45140238501",
+        "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45140238535,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45140238535,
+        "event": "push",
+        "headSha": "56a2cf19ddb4758044e1cdb76bc53ab78aa46cbc",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45140238535",
+        "workflowName": "MyTodo phase 0 cloud baseline"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45158226148,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45158226148,
+        "event": "push",
+        "headSha": "648f550812a18ad203aa32ebabc06625bcb24c0d",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45158226148",
+        "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45170150079,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45170150079,
+        "event": "push",
+        "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45170150079",
+        "workflowName": "MyTodo C0-06 actual legacy recovery"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45170150057,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45170150057,
+        "event": "push",
+        "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45170150057",
+        "workflowName": "MyTodo C0-06 Android internal migration interruption"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45170150092,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45170150092,
+        "event": "push",
+        "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45170150092",
+        "workflowName": "MyTodo C0-06 snapshot bootstrap and edit CAS"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45170150066,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45170150066,
+        "event": "push",
+        "headSha": "1b9c41fbc543f4e31c1e1a22c3b0fe0419eb4e35",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45170150066",
+        "workflowName": "MyTodo phase 0 cloud baseline"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45186305386,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45186305386,
+        "event": "push",
+        "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45186305386",
+        "workflowName": "MyTodo C0-05 real Windows DPAPI interoperability"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45186305196,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45186305196,
+        "event": "push",
+        "headSha": "f9ca0f1a1e086c84e7fdf83cd4ca1683db85e277",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45186305196",
+        "workflowName": "MyTodo C0-04 three-platform production protocol matrix"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45190559178,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45190559178,
+        "event": "push",
+        "headSha": "de7ce40ccac3e963108a3a9af7c875186f822cce",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45190559178",
+        "workflowName": "MyTodo C0-07 real transaction and publication recovery"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45194185453,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "failure",
+        "databaseId": 45194185453,
+        "event": "push",
+        "headSha": "edfde91eba174f9f8c20657ded4657c8841d0f83",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45194185453",
+        "workflowName": "MyTodo C0-06 actual legacy recovery"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45199685003,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45199685003,
+        "event": "push",
+        "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45199685003",
+        "workflowName": "MyTodo C0-06 actual legacy recovery"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45199685578,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45199685578,
+        "event": "push",
+        "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45199685578",
+        "workflowName": "MyTodo C0-06 Android internal migration interruption"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45199685144,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45199685144,
+        "event": "push",
+        "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45199685144",
+        "workflowName": "MyTodo C0-06 snapshot bootstrap and edit CAS"
+      },
+      "error": ""
+    },
+    {
+      "runId": 45199684912,
+      "exit": 0,
+      "result": {
+        "attempt": 1,
+        "conclusion": "success",
+        "databaseId": 45199684912,
+        "event": "push",
+        "headSha": "19ceea620d1f7c21d89e5c65f1aa9fcac437caaa",
+        "status": "completed",
+        "url": "https://github.com/johny751/MyTodo/actions/runs/45199684912",
+        "workflowName": "MyTodo phase 0 cloud baseline"
+      },
+      "error": ""
+    }
+  ],
+  "currentMasterRuns": {
+    "exit": 0,
+    "result": [],
+    "error": ""
+  },
+  "issue": {
+    "exit": 0,
+    "result": {
+      "number": 1,
+      "state": "OPEN",
+      "title": "Android instrumentation intermittent crashes: preserve failed original databases",
+      "updatedAt": "2026-11-23T12:39:03Z",
+      "url": "https://github.com/johny751/MyTodo/issues/1"
+    },
+    "error": ""
+  },
+  "latestCommit": [
+    "d9e58b04484ce14a1bfc3021757b2167df2b0407",
+    "bc3f44d1e76a988dbe269edcf1c606eebec37293",
+    "docs: record phase 0 final review and D1 entry recommendation"
+  ]
+}
