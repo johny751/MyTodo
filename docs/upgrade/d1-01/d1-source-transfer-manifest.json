@@ -1,0 +1,177 @@
+{
+  "base": "1a55ea6da9f2012d7ba82d5756ae8f61d87bae47",
+  "candidate": "d1-01-candidate.1",
+  "zipSha256": "885edb021ca6dd689b978b09c574f305bdbc55934231fc3e949e9e0e4c5d3905",
+  "files": [
+    {
+      "path": ".github/workflows/d1-01-contract-validation.yml",
+      "bytes": 3792,
+      "sha256": "441950b4b6335f635684bd5a09c96ef65b1ca84acd749d57696028380ecb2e09"
+    },
+    {
+      "path": "docs/upgrade/d1-01/backup-restore-contract.md",
+      "bytes": 26457,
+      "sha256": "e03d0e553b950db125825ec73903311902f871407b118ff6a5ab11e0c51e1e44"
+    },
+    {
+      "path": "docs/upgrade/d1-01/consolidated-static-review.md",
+      "bytes": 6004,
+      "sha256": "92fc6704d8ee9c930f55cabf41c59ffed51044518e6129bcf11bc1ff3ea740e4"
+    },
+    {
+      "path": "docs/upgrade/d1-01/d1-01-02-tool-preparation-design.md",
+      "bytes": 14951,
+      "sha256": "8104e612f35abe65531605c1ad7de0b8720837943172ec0423d1b4d9e21306a5"
+    },
+    {
+      "path": "docs/upgrade/d1-01/d1-01-b-open-questions.md",
+      "bytes": 4179,
+      "sha256": "8eae43cb0ff2a1c1308163a76a6c336e94183cff707fbf14af402b80ec8e928c"
+    },
+    {
+      "path": "docs/upgrade/d1-01/data-ownership-and-sync-boundaries.md",
+      "bytes": 12871,
+      "sha256": "d57033a5bb2645d172dbc3df8a7797925c65b52a5f8c65cad1775b8a54e02301"
+    },
+    {
+      "path": "docs/upgrade/d1-01/field-compatibility-matrix.md",
+      "bytes": 13403,
+      "sha256": "148eb7c726cdb2f3e326c70a8a6ba2b5ea257a98e8513612d81b872c09c2fe67"
+    },
+    {
+      "path": "docs/upgrade/d1-01/migration-versioning-contract.md",
+      "bytes": 27702,
+      "sha256": "0120e313437c69ae8cf5c6a59e062fb07edfcfdf01b032fc8b5cae90f5d1902e"
+    },
+    {
+      "path": "docs/upgrade/d1-01/relationship-migration-strategy.md",
+      "bytes": 10388,
+      "sha256": "35fa078d11175f3c5f1d8e87ec7baf0c7c46e9fbe4612a18a8a60842770993e5"
+    },
+    {
+      "path": "docs/upgrade/d1-01/sync-state-migration-protection.md",
+      "bytes": 13515,
+      "sha256": "3a5850d0512673923e463f17ed2ee16969f38ba783026a8247369130bea71050"
+    },
+    {
+      "path": "docs/upgrade/d1-01/time-and-recurrence-contract.md",
+      "bytes": 15223,
+      "sha256": "0dbcc7d3b634572b66accbc13f236fb23cae93284bdf9a0866a49b0b2a0811a6"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unified-data-contract-candidate.md",
+      "bytes": 9136,
+      "sha256": "a1bc9ee15aec1150d41f1b7cd0e09f3d38f8192c519f4794dc54f2d26dcf9fd6"
+    },
+    {
+      "path": "docs/upgrade/d1-01/unified-data-contract-draft.md",
+      "bytes": 4273,
+      "sha256": "434afd74e95db78e4af3b3f4e09da1cdc0064eeade6aa5a7272541aed6e7b903"
+    },
+    {
+      "path": "tests/d1-01/android-runner.mjs",
+      "bytes": 10545,
+      "sha256": "522676f561ed760e814c76c5790f4badf1e51d9765372c84e35fbee070e2c90f"
+    },
+    {
+      "path": "tests/d1-01/build-desktop.mjs",
+      "bytes": 3859,
+      "sha256": "f7c181f11eea2993f9a5ee4e180e56a16464bede9e03b0968b424488fcd5945f"
+    },
+    {
+      "path": "tests/d1-01/candidate.py",
+      "bytes": 12700,
+      "sha256": "cf7edbd0604c4426d618cee445c24c99bb9d3f8769227a291763ee7e02f5317b"
+    },
+    {
+      "path": "tests/d1-01/ci-run.py",
+      "bytes": 5570,
+      "sha256": "34e41c5e917d3049132dd4fa9c22853c1b2fbadeca176612f38f76b529e9ec59"
+    },
+    {
+      "path": "tests/d1-01/compare.py",
+      "bytes": 8876,
+      "sha256": "0cda7d4acb8f0b9ddcb5f5f27eadd21b647ff469080b6d407c65928c7bef8982"
+    },
+    {
+      "path": "tests/d1-01/emulator.mjs",
+      "bytes": 20881,
+      "sha256": "5b488ca5902b5a84f842dfb35c8638578a97cff9201640c99b9acc7a323b8301"
+    },
+    {
+      "path": "tests/d1-01/factory.py",
+      "bytes": 5918,
+      "sha256": "f8a26d652af928cdbc83eb54aa45531baf85bc44ad6cb534d9a6158f16dff3ee"
+    },
+    {
+      "path": "tests/d1-01/isolation.py",
+      "bytes": 4155,
+      "sha256": "8a812710fe2444ce806e6635ad1559e110a54c40ba44cac767ff2601f2dd0d3b"
+    },
+    {
+      "path": "tests/d1-01/migration.py",
+      "bytes": 10927,
+      "sha256": "9f9e27d561162bc3d6b1f6f97805ecedba265d26e1ccb01e7e1598863e4dedd7"
+    },
+    {
+      "path": "tests/d1-01/native-generator.c",
+      "bytes": 17673,
+      "sha256": "32ddf98332d942dc452e555a46007661f51356dd8f3261cd829dc7b2a96ac248"
+    },
+    {
+      "path": "tests/d1-01/node-generator.mjs",
+      "bytes": 10088,
+      "sha256": "59ae8ff568817d31f172be4d5503e32d7bc625c74b214d656f563baa5a3d558b"
+    },
+    {
+      "path": "tests/d1-01/select-node.ps1",
+      "bytes": 1123,
+      "sha256": "161a33eaf06418840963b3217ffd40143330d5b27d0ad3be3493ecd706d0511a"
+    },
+    {
+      "path": "tests/d1-01/select-node.sh",
+      "bytes": 808,
+      "sha256": "cc3ea11914d6997bdd8d72b5b246c218df100cb1552113a31e62f8c4a53dbcd1"
+    },
+    {
+      "path": "tests/d1-01/select-python.ps1",
+      "bytes": 1157,
+      "sha256": "3ec1154f34d0b7916c27d7f4b9d3a4cd4e8f61eb2355d7112ff22578e38795da"
+    },
+    {
+      "path": "tests/d1-01/storage_cases.py",
+      "bytes": 28536,
+      "sha256": "ef4a2e26af3d431eee8ed22e36318ec92c0780acc37c256ed1ee5c436dc09102"
+    },
+    {
+      "path": "tests/d1-01/suite.py",
+      "bytes": 12999,
+      "sha256": "2c29bb19286995e562664d45c5f78367d0a568c2bb47fd7ab929e8f264cd344f"
+    },
+    {
+      "path": "tests/d1-01/android/AndroidManifest.xml",
+      "bytes": 612,
+      "sha256": "99eb6ff9b135872d552d2b26ff113f226b054e1d91ef3455877e69d54af77048"
+    },
+    {
+      "path": "tests/d1-01/android/build.mjs",
+      "bytes": 5393,
+      "sha256": "f4cf2510f03b0842d277c195b3e75b3fd5afd6b6c4a5791722dd4e1fa5ed3ec0"
+    },
+    {
+      "path": "tests/d1-01/android/FixtureInstrumentation.java",
+      "bytes": 17780,
+      "sha256": "e9276aa8265be12c9f558cc0aa31b59ef9b11f3e78dc0ebb219ed3d6fcf47576"
+    },
+    {
+      "path": "tests/d1-01/android/guard.mjs",
+      "bytes": 4819,
+      "sha256": "0d8312533632a75f2fa7dd45d6b0f1c865a805018e982ebd40723fea1e026940"
+    },
+    {
+      "path": "tests/d1-01/android/README.md",
+      "bytes": 4225,
+      "sha256": "66f3d08915518457198521bf5c8e765746d0275cd7e442dd9f65d86ec0b0cbd9"
+    }
+  ]
+}
