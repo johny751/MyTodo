@@ -39,7 +39,7 @@ public final class D2StorageInstrumentation extends Instrumentation {
         JSONObject data=new JSONObject().put("id",id).put("title","真实API合成任务 "+id).put("quadrant",2).put("done",false).put("parentId",JSONObject.NULL).put("reminderAt",JSONObject.NULL).put("start","");
         JSONObject row=new JSONObject().put("key",new JSONArray().put("tasks").put(id).toString()).put("data",data).put("record",new JSONObject().put("events",new JSONArray())).put("deleted",false).put("conflicts",new JSONArray());
         JSONObject event=new JSONObject().put("id",id).put("synthetic",true);long queue=meta.getLong("queue")+1;meta.put("queue",queue);
-        return (JSONObject)db.invoke(new JSONObject().put("action","commit").put("expected",meta.getLong("revision")).put("meta",meta).put("rows",new JSONArray().put(row)).put("outbox",new JSONArray().put(new JSONObject().put("id",queue).put("event",event)));
+        return (JSONObject)db.invoke(new JSONObject().put("action","commit").put("expected",meta.getLong("revision")).put("meta",meta).put("rows",new JSONArray().put(row)).put("outbox",new JSONArray().put(new JSONObject().put("id",queue).put("event",event))));
     }
     void record(String id,Case action)throws Exception {
         JSONObject entry=new JSONObject().put("id",id).put("status","failed");cases.put(entry);

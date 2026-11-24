@@ -47,10 +47,17 @@ export async function restoreDecision(root,bundle,{current,remote,lease}){
 // In this laboratory all database handles and attachment writers are controlled by the caller.
 // No production path/Actor resume/remote progress mutation capability is exposed.
 export async function activateSameSnapshot(root,bundle,options,{fault=null}={}){
+ if(options.lease?.databaseHandlesClosed!==true||options.lease?.attachmentWritersClosed!==true)throw Error('BLOCKER: registered database or attachment writer still open');
  const decision=await restoreDecision(root,bundle,options);if(decision.status!=='eligibleSameSnapshot')return decision;
  const stage=await safeFile(root,'restore-stage',{exists:false});await fs.mkdir(stage);const journal={kind:'d2-synthetic-restore-journal',runId:process.env.GITHUB_RUN_ID,sourceSha:process.env.GITHUB_SHA,bundleFolder:bundle.folder,manifestSha256:hash(Buffer.from(json(decision.manifest))),remote:decision.manifest.remote,state:'prepared',items:[]};
  for(const item of [...decision.manifest.databases,...decision.manifest.attachments]){const current=await safeFile(root,item.source),candidate=path.join(stage,item.file),retained=current+'.d2-retained';await safeFile(root,path.relative(root,retained),{exists:false});try{await fs.access(retained);throw Error('BLOCKER: retained path occupied');}catch(e){if(e.code!=='ENOENT')throw e;}
-  if(item.logicalDigest){for(const suffix of ['-wal','-shm','-journal']){const side=await fs.stat(current+suffix).catch(e=>{if(e.code==='ENOENT')return null;throw e;});if(side&&side.size!==0)throw Error('BLOCKER: live database sidecar; all writers must close before activation');}}
+  if(item.logicalDigest){
+   // The read-only decision probe can create WAL/SHM even after the original
+   // writers closed. Seal via SQLite's supported checkpoint/checked close,
+   // within the fixture-owned closed-writer fence; never delete live sidecars.
+   const handle=new DatabaseSync(current);let primary=null;try{const before=logical(handle).digest;requireIntegrity(handle);const check=handle.prepare('PRAGMA wal_checkpoint(TRUNCATE)').get();if(check.busy!==0)throw Error('BLOCKER: checkpoint busy');if(before!==item.logicalDigest||logical(handle).digest!==before)throw Error('BLOCKER: checkpoint changed raw snapshot');}catch(e){primary=e;throw e;}finally{try{handle.close();}catch(e){if(primary)primary.closeError=e;else throw e;}}
+   for(const suffix of ['-wal','-shm','-journal']){const side=await fs.stat(current+suffix).catch(e=>{if(e.code==='ENOENT')return null;throw e;});if(side&&side.size!==0)throw Error('BLOCKER: live database sidecar; all writers must close before activation');}
+  }
   await fs.copyFile(path.join(bundle.folder,item.file),candidate,fs.constants.COPYFILE_EXCL);journal.items.push({current,candidate,retained,retainedSha256:hash(await fs.readFile(current)),sha256:item.sha256,logicalDigest:item.logicalDigest??null});}
  const jpath=await writeFresh(root,'restore-journal.json',json(journal));const save=async()=>{const f=await fs.open(jpath,'w');try{await f.writeFile(json(journal));await f.sync();}finally{await f.close();}};
  const hit=p=>{if(fault===p)throw Error('injected '+p);};hit('afterStage');
@@ -60,7 +67,7 @@ export async function activateSameSnapshot(root,bundle,options,{fault=null}={}){
  journal.state='confirmed';await save();hit('afterReopen');return {status:'restored',journal};
 }
 export async function recoverSameSnapshot(root,{remote,lease}){
- if(!lease?.active||remote===null||remote===undefined)return {status:'blockedRecoveryEvidence'};
+ if(!lease?.active||lease.databaseHandlesClosed!==true||lease.attachmentWritersClosed!==true||remote===null||remote===undefined)return {status:'blockedRecoveryEvidence'};
  const file=await safeFile(root,'restore-journal.json'),journal=JSON.parse(await fs.readFile(file,'utf8'));if(journal.kind!=='d2-synthetic-restore-journal'||journal.runId!==process.env.GITHUB_RUN_ID||journal.sourceSha!==process.env.GITHUB_SHA)throw Error('BLOCKER: journal provenance');
  const sealed=await verifyBundle(root,journal.bundleFolder);if(hash(Buffer.from(json(sealed)))!==journal.manifestSha256||JSON.stringify(sealed.remote)!==JSON.stringify(journal.remote)||JSON.stringify(remote)!==JSON.stringify(sealed.remote))return {status:'blockedRecoveryEvidence'};
  for(const item of journal.items){for(const p of [item.current,item.candidate,item.retained])await safeFile(root,path.relative(root,p),{exists:false});

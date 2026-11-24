@@ -18,4 +18,10 @@
 
 **FACT（源码）/ UNVERIFIED（运行）**。报告为 `node-report.json`，身份另存 `production-source-identity.json`。原 worker stdout/stderr、caller audit、失败数据库、`cross-source.sqlite`/`cross-target.sqlite` 与 payload SHA 清单保留。真实 API、反序/额外列、事务/版本/幂等、real primary/rollback error、未知响应与进程死亡重开、REAL 1ulp、target schema 漂移均有独立命名断言；实际通过/失败数只能来自 Actions 原始报告。
 
+**FACT（CI2 原证据）**。[运行 45410409313](https://github.com/johny751/MyTodo/actions/runs/45410409313)、源码前缀 `7ac7d7c` 的 Node 报告为 15/16，唯一 N15 失败。相邻 REAL 的实际 CAST 文本分别为 `1.23456789012345` 与 `1.2345678901234503`，否定该用例原先假设的“此引擎一定把相邻值都折为相同 15 位文本”。原失败及原 CAST HEX 保留；不能把这一具体观测泛化为每个 SQLite 版本的格式规则。
+
+**PROPOSAL / UNVERIFIED（新用例运行）**。N15 保持一个具名用例，改用确切相邻 binary64 位 `3ff0000000000001` 和 `3ff0000000000002`。数据库必须读回这两组原位、ULP 距离必须为 1，两个完整 raw payload 与 SHA 必须分别逐字匹配独立新只读句柄的规范 oracle；schema/user_version 不变，而 raw payload/指纹必须变化。实际 CAST HEX 和是否碰撞如实报告，不能人为写成相等。oracle 不调用生产编码器，原 payload 另存 `real/oracle-0-raw.lp`、`real/oracle-1-raw.lp`。生产 runtime 与 D1 字段语义没有修改。
+
+**UNVERIFIED / OWNER DECISION**。旧引擎中的 CAST 碰撞回归仍须绑定实际 bundled C/其他版本的独立运行证据；本次 Node 修订不宣称该历史前提已经验证通过，也不取消 REAL64 第三字段或未知历史数据的保护要求。
+
 UNVERIFIED / OWNER DECISION：生产发布包如何提供记录过的 build identity、真实用户库规模与历史 schema、全部 writer 的停写、跨文件/附件一致性、掉电与真实设备恢复、凭据及同步身份放行仍须后续证据。这里只落地首个基础设施 step，不部署、不合并 master，不把合成 raw 异常夹具称为合法历史复制事件，也不关闭 Android issue #1。

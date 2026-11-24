@@ -13,6 +13,39 @@ import {rootPath,safeFile,hash,json,writeFresh,FRAMEWORK} from './isolation.mjs'
 
 const HERE=path.dirname(fileURLToPath(import.meta.url));
 const requestFor=(store,snapshot=store.captureD2Snapshot())=>{const build=store.getD2BuildIdentity(process.env.GITHUB_SHA);return {request:{migrationId:MIGRATION_ID,contractId:CONTRACT_ID,algorithmId:ALGORITHM_ID,implementationChecksum:build.implementationChecksum,sourceSnapshot:snapshot},build};};
+// Independent test oracle: a new read-only handle and rowid/cell queries.
+// It does not import a production encoder or hash a production payload.
+function canonicalRawOracle(file){
+ const db=new DatabaseSync(file,{readOnly:true}),encode=value=>{
+  if(value===null)return Buffer.from('N;');
+  assert.equal(typeof value,'string');const bytes=Buffer.from(value,'utf8');
+  return Buffer.concat([Buffer.from(`S${bytes.length}:`),bytes]);
+ },q=value=>'"'+value.replaceAll('"','""')+'"',tables=['entities','meta','outbox'];
+ const chunks=[encode('mytodo-storage-fingerprint-v1'),encode('raw'),encode(String(tables.length))];
+ db.exec('BEGIN');
+ try{
+  for(const table of tables){
+   const columns=db.prepare(`PRAGMA table_info(${q(table)})`).all().map(v=>v.name);
+   chunks.push(encode(table),encode(String(columns.length)),...columns.map(encode));
+   const rowids=db.prepare(`SELECT rowid AS physical_id FROM ${q(table)}`);rowids.setReadBigInts(true);
+   const encodedRows=[];
+   for(const identity of rowids.all()){
+    const cells=[];
+    for(const column of columns){
+     const sql=`SELECT typeof(${q(column)}) AS storage_type,CASE WHEN ${q(column)} IS NULL THEN NULL ELSE hex(CAST(${q(column)} AS BLOB)) END AS original_hex,CASE WHEN typeof(${q(column)})='real' THEN ${q(column)} ELSE NULL END AS real_value FROM ${q(table)} WHERE rowid=?`;
+     const statement=db.prepare(sql);statement.setReadBigInts(true);const cell=statement.get(identity.physical_id);
+     let ieee=null;
+     if(cell.storage_type==='real'){const binary=Buffer.alloc(8);binary.writeDoubleBE(cell.real_value);ieee=binary.toString('hex');}
+     cells.push(encode(cell.storage_type),encode(cell.original_hex),encode(ieee));
+    }
+    encodedRows.push(Buffer.concat(cells));
+   }
+   encodedRows.sort(Buffer.compare);chunks.push(encode(String(encodedRows.length)),...encodedRows);
+  }
+  const bytes=Buffer.concat(chunks);
+  return {rawPayload:bytes.toString('utf8'),rawFingerprint:hash(bytes),userVersion:db.prepare('PRAGMA user_version').get().user_version};
+ }finally{db.exec('ROLLBACK');db.close();}
+}
 function seedAPI(store){
  const meta=structuredClone(store.call({action:'inspect',keys:[]}).meta),rows=[],outbox=[];
  for(const [kind,id,values] of [['tasks','node-real-task',{title:'真实Node入口合成任务 e\u0301 😀',parentId:null,quadrant:1,done:false,reminderAt:-1,notes:'原始备注',unknown:{keep:true}}],['notes','node-real-note',{body:'独立便签'}],['tasks','node-tombstone',{title:'保留墓碑',_deleted:true}]]){
@@ -75,8 +108,41 @@ async function main(input){
   const finalReader=new DatabaseSync(path.join(targetDirectory,'tasks.sqlite'),{readOnly:true});try{await backup(finalReader,await safeFile(root,'cross-target.sqlite',{exists:false}));}finally{finalReader.close();}
   report.crossSourceFile='cross-source.sqlite';report.crossTargetFile='cross-target.sqlite';report.implementationChecksum=current.request.implementationChecksum;
   return {actualApiProof:f.proof,rawFixtureId:definition.fixtureId,sourceRawFingerprint:before.rawFingerprint,coreRawPreserved:true,fixtureDoesNotClaimRealHistory:true};}finally{f.store.closeChecked();}});
- await record('N15','One-ULP REAL drift changes raw fingerprint even when SQLite CAST text is unchanged',async()=>{const f=await fixture(root,'real');try{const db=new DatabaseSync(f.file),key=entityKey('tasks','node-real-task'),value=1.23456789012345,bits=Buffer.alloc(8);bits.writeDoubleBE(value);bits.writeBigUInt64BE(bits.readBigUInt64BE()+1n);const next=bits.readDoubleBE();
-  try{db.prepare('UPDATE entities SET quadrant=? WHERE key=?').run(value,key);const a=captureD2Snapshot(db),castA=db.prepare('SELECT typeof(quadrant) t,hex(CAST(quadrant AS BLOB)) h FROM entities WHERE key=?').get(key);db.prepare('UPDATE entities SET quadrant=? WHERE key=?').run(next,key);const b=captureD2Snapshot(db),castB=db.prepare('SELECT typeof(quadrant) t,hex(CAST(quadrant AS BLOB)) h FROM entities WHERE key=?').get(key);assert.deepEqual(castA,castB);assert.equal(castA.t,'real');assert.notEqual(a.rawFingerprint,b.rawFingerprint);return {sameSQLiteCast:castA.h,oneUlpChangedRawDigest:true};}finally{db.close();}}finally{f.store.closeChecked();}});
+ await record('N15','Exact adjacent REAL64 bits and full independent canonical raw oracle',async()=>{
+  const f=await fixture(root,'real');
+  try{
+   const db=new DatabaseSync(f.file),key=entityKey('tasks','node-real-task');
+   const expectedBits=['3ff0000000000001','3ff0000000000002'];
+   const observations=[];
+   try{
+    for(let i=0;i<expectedBits.length;i++){
+     const exactValue=Buffer.from(expectedBits[i],'hex').readDoubleBE();
+     db.prepare('UPDATE entities SET quadrant=? WHERE key=?').run(exactValue,key);
+     const actualCell=db.prepare('SELECT typeof(quadrant) t,hex(CAST(quadrant AS BLOB)) h,quadrant value FROM entities WHERE key=?').get(key);
+     assert.equal(actualCell.t,'real');const returnedBits=Buffer.alloc(8);returnedBits.writeDoubleBE(actualCell.value);
+     assert.equal(returnedBits.toString('hex'),expectedBits[i]);
+     const captured=captureD2Snapshot(db),oracle=canonicalRawOracle(f.file);
+     assert.equal(captured.rawPayload,oracle.rawPayload);assert.equal(captured.rawFingerprint,oracle.rawFingerprint);
+     assert.equal(captured.userVersion,oracle.userVersion);assert.equal(captured.userVersion,0);
+     await writeFresh(root,path.relative(root,path.join(f.directory,`oracle-${i}-raw.lp`)),oracle.rawPayload);
+     observations.push({expectedReal64beHex:expectedBits[i],actualReal64beHex:returnedBits.toString('hex'),
+      actualCastHex:actualCell.h,rawFingerprint:captured.rawFingerprint,oracleFingerprint:oracle.rawFingerprint,
+      rawPayload:captured.rawPayload,schemaPayload:captured.schemaPayload,schemaFingerprint:captured.schemaFingerprint,userVersion:captured.userVersion});
+    }
+    assert.equal(BigInt('0x'+observations[1].actualReal64beHex)-BigInt('0x'+observations[0].actualReal64beHex),1n);
+    assert.equal(observations[0].schemaPayload,observations[1].schemaPayload);
+    assert.equal(observations[0].schemaFingerprint,observations[1].schemaFingerprint);
+    assert.equal(observations[0].userVersion,observations[1].userVersion);
+    assert.notEqual(observations[0].rawPayload,observations[1].rawPayload);
+    assert.notEqual(observations[0].rawFingerprint,observations[1].rawFingerprint);
+    return {sqliteVersion:db.prepare('SELECT sqlite_version() version').get().version,
+     real64BitDistance:'1',fullPayloadAndDigestMatchIndependentOracle:true,schemaAndVersionUnchanged:true,
+     castTextCollisionObserved:observations[0].actualCastHex===observations[1].actualCastHex,
+     castTextEqualityRequired:false,observations:observations.map(({rawPayload,schemaPayload,...evidence})=>evidence),
+     historicalCastCollisionPremise:'UNVERIFIED on other engines; CI2 failure preserved, no universal text-precision claim'};
+   }finally{db.close();}
+  }finally{f.store.closeChecked();}
+ });
  await record('N16','Independent target schema rejects later infrastructure index drift',async()=>{const f=await fixture(root,'target-drift');try{assert.equal(f.store.migrateStorageInfrastructure(f.request,{buildIdentity:f.build}).status,'committed');const db=new DatabaseSync(f.file);try{db.exec('CREATE INDEX synthetic_target_drift ON storage_migration_audit(result)');}finally{db.close();}const before=f.store.captureD2Snapshot();assert.equal(f.store.migrateStorageInfrastructure(f.request,{buildIdentity:f.build}).status,'blockedUnknown');assert.deepEqual(f.store.captureD2Snapshot(),before);return {targetDriftNotRepaired:true};}finally{f.store.closeChecked();}});
  report.passed=report.cases.filter(c=>c.status==='passed').length;report.failed=report.cases.length-report.passed;report.status=report.failed?'failed':'passed';
  await fs.writeFile(path.join(root,'node-report.json'),json(report));

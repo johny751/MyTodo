@@ -1,5 +1,11 @@
 /* Actions-only synthetic harness. Links the actual Windows storage adapter,
    migration engine, util and undo_capture implementation. No storage mocks. */
+/* Keep underscored CRT APIs (_commit/_fileno), but suppress its optional POSIX
+   dup declaration in this test translation unit. Production dup(J *) stays. */
+#ifdef _CRT_DECLARE_NONSTDC_NAMES
+#undef _CRT_DECLARE_NONSTDC_NAMES
+#endif
+#define _CRT_DECLARE_NONSTDC_NAMES 0
 #include "../../windows/ui.h"
 #include "../../windows/migration.h"
 #include <string.h>
