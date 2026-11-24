@@ -1,0 +1,95 @@
+{
+  "message": "A independent synthetic preflight writer fence and audit admission tools",
+  "archive": "a-source-01.zip",
+  "allowed": "(?:admission/.+|tests/admission/.+|tests/run-admission\\.mjs|docs/a-admission/.+|\\.github/workflows/a-admission-validation\\.yml)",
+  "base": "b94f522993f44b83727926ec9db4caa374ffdc71",
+  "branch": "a/admission-candidate-1",
+  "files": [
+    {
+      "path": ".github/workflows/a-admission-validation.yml",
+      "sha256": "0c646b8d588059c2dc4efc9f1883d94826cc576f0fd23d6401a55bcb6dd1bdfd",
+      "bytes": 1925
+    },
+    {
+      "path": "admission/audit.mjs",
+      "sha256": "27ef424fbc6ed4a4159ca767b582a79543297b0ef678f3610a4673d59cd14fee",
+      "bytes": 3634
+    },
+    {
+      "path": "admission/guard.mjs",
+      "sha256": "ec79284c18caeb6c1235cab0d116643b1378d0f68d2b37d1b17b4ac281368b1f",
+      "bytes": 3444
+    },
+    {
+      "path": "admission/identity.mjs",
+      "sha256": "b0e394775f177dd9a3bd135cf3586efc21efda3c45ce0dfee1734228ef7e0766",
+      "bytes": 1616
+    },
+    {
+      "path": "admission/preflight.mjs",
+      "sha256": "3413ad91b0fb49d7aac4526f204f0587a4987ea7e6fd3514fe280e21c6560a34",
+      "bytes": 5676
+    },
+    {
+      "path": "admission/snapshot.mjs",
+      "sha256": "7ed99340ca9bc177606c37cd8ffee8b3ac1baa4d4287f5fe171bcfe6c0e12237",
+      "bytes": 7399
+    },
+    {
+      "path": "admission/writer-lease.mjs",
+      "sha256": "a60bfb17243cdcb44c0c4cade0ca00fa8123162ed82f74f594cf1ba8efd08b67",
+      "bytes": 3666
+    },
+    {
+      "path": "docs/a-admission/architecture.md",
+      "sha256": "8f70920831cb79daf1c238ec3e2a707c3de8d4d1faf3e5394485c6b44a28feed",
+      "bytes": 7324
+    },
+    {
+      "path": "docs/a-admission/collect-evidence.py",
+      "sha256": "919b8508d054aac820425251dbda399ee18eab322ce71bd2b95ae277c468c28c",
+      "bytes": 3846
+    },
+    {
+      "path": "docs/a-admission/focused-writer-review.md",
+      "sha256": "dfae4a65ae267accd00bdd289a8aee28ef34ec14a754f3f8a6e40e1927c5818c",
+      "bytes": 2994
+    },
+    {
+      "path": "docs/a-admission/README.md",
+      "sha256": "c280181211970f119469ab67692c2bb13c59380a2d3830b13655c31ce2a7603f",
+      "bytes": 1999
+    },
+    {
+      "path": "docs/a-admission/release-and-remote-decisions.md",
+      "sha256": "5bfe060a010173385350c1eecdc6ec1dcd5220777c5263e2aca5ed718d98138a",
+      "bytes": 3006
+    },
+    {
+      "path": "docs/a-admission/validation-and-status.md",
+      "sha256": "497f8f53baccdcacfb2a93a8a0dcb5a1e086e9eebc12a42346bba8115f0d567f",
+      "bytes": 3443
+    },
+    {
+      "path": "tests/admission/factory.mjs",
+      "sha256": "d880a2a85e3d653c34a5577d78ca211f7805227af80284d5356945e47c957dbd",
+      "bytes": 3347
+    },
+    {
+      "path": "tests/admission/source-scope.mjs",
+      "sha256": "0042420f6fdd2cb5de0edc6a60fe84986d8e5083c70bbce368710f7cd19df43c",
+      "bytes": 1651
+    },
+    {
+      "path": "tests/admission/wal-child.mjs",
+      "sha256": "88afb2b054fee43bd6771f59aa5f950d0ac7721584ad33e61102f0fef029b8bf",
+      "bytes": 1037
+    },
+    {
+      "path": "tests/run-admission.mjs",
+      "sha256": "4c7d58e4e34ecce59825c065e5f3263e25d0acaafeaa65b19ff47154822f125b",
+      "bytes": 20045
+    }
+  ],
+  "sha256": "b2e13f2edffebc89b943bdda118491482fdc76a3dfa62181ce025234da0a4be0"
+}
