@@ -1,0 +1,158 @@
+{
+  "files": [
+    {
+      "path": "src/migration-runtime.mjs",
+      "bytes": 19219,
+      "sha256": "c85eeb70b703e3da400b0a3c05de88b99cf72e3b91af296a66e229e2caa75a2a"
+    },
+    {
+      "path": "windows/migration.c",
+      "bytes": 34969,
+      "sha256": "d1a9b2401fe6befb044e60ce0ee9822ca8677bf612e78da86d9a2da65e1c5bf4"
+    },
+    {
+      "path": "windows/migration.h",
+      "bytes": 2047,
+      "sha256": "0b633ce7b0164b2d5075e1b4f8328fbea3f61e365573aede5c2f44247be489df"
+    },
+    {
+      "path": "windows/operations.c",
+      "bytes": 13327,
+      "sha256": "7baf179a2bbaab75b5633a9e8ca513398111542a09b65a2709a3c3a6c9504550"
+    },
+    {
+      "path": "windows/undo-capture.c",
+      "bytes": 351,
+      "sha256": "9919091d2ddf3b79a08c062c76667f2c4a8fff9db6d4d750b5e890441e63e623"
+    },
+    {
+      "path": "windows/undo-internal.h",
+      "bytes": 733,
+      "sha256": "e5513ac64a19acfa76d1f01b3c24dc7e0c698ea037aee0e5c6bd7dc7eb8a3238"
+    },
+    {
+      "path": "scripts/build-windows.mjs",
+      "bytes": 4142,
+      "sha256": "1fe24d3022854994d34f09df46434b4a3c640d1cf6eaac23e4f11982b5623114"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/MigrationRegistry.java",
+      "bytes": 24238,
+      "sha256": "7972fe7255201b3f97562b84ba04ca777a99085006612951695d01a1d6a88807"
+    },
+    {
+      "path": "tests/d2/native-build.mjs",
+      "bytes": 7855,
+      "sha256": "30d4147922a75212b50f72796fb78fc85108cf2998ecb554be21ae7e1e527e14"
+    },
+    {
+      "path": "tests/d2/native-runner.c",
+      "bytes": 29530,
+      "sha256": "96e36b7fa2b1d539496674050ab86eeb63286e27ba8e44cdcaa9a26bcd6057c0"
+    },
+    {
+      "path": "tests/d2/node-runner.mjs",
+      "bytes": 22748,
+      "sha256": "8949bc477610a824485cafbd7873205d445b3309782d93edcc1169e030b3ccae"
+    },
+    {
+      "path": "tests/d2/android/build.mjs",
+      "bytes": 5316,
+      "sha256": "7b7d2896563873f8be0c75570b567bcec1d7c462c300a1c4f3296f6eb781b9e5"
+    },
+    {
+      "path": "tests/d2/android/D2StorageInstrumentation.java",
+      "bytes": 16374,
+      "sha256": "756478de4fa8405394da9b96053ba5704cd9aa19c0b70069efdbcc7b4cccaa65"
+    },
+    {
+      "path": "tests/d2/compare-runner.mjs",
+      "bytes": 13772,
+      "sha256": "bdaac326c456448b3ebf30de548de284d0bfe874e093dafc616f812ffcb54ab1"
+    },
+    {
+      "path": "tests/d2/backup-recovery.mjs",
+      "bytes": 11874,
+      "sha256": "33b22b34254cc7a80a48ae25584a5fb5b821143156e172c271632876f2ab1550"
+    },
+    {
+      "path": "tests/d2/backup-runner.mjs",
+      "bytes": 12604,
+      "sha256": "d5f6d5c64851237d17837c6b4679e2c1be648f1189e32a072f722a7a594eca32"
+    },
+    {
+      "path": "tests/d2/source-scope.mjs",
+      "bytes": 3359,
+      "sha256": "3c30664b3561119e7244b0f84b433c5f91a1f348b58c40e8c6a6783f579340d1"
+    },
+    {
+      "path": ".github/workflows/d2-migration-validation.yml",
+      "bytes": 7142,
+      "sha256": "c2fbfdc06a31bd797b8e13784b2e59da0571036ffd1ce8a7b888144b912ba4f8"
+    },
+    {
+      "path": "docs/upgrade/d2/node-storage-adapter.md",
+      "bytes": 7189,
+      "sha256": "5b74f1a1d4048b8e5c2e97d2dffd815656af83b7946a6c9045981cfdd65e3c04"
+    },
+    {
+      "path": "docs/upgrade/d2/windows-storage-adapter.md",
+      "bytes": 9531,
+      "sha256": "0792bcc3c01395e82bea5485cc924300ff2c012f490ffb88fe781fa2ef399f24"
+    },
+    {
+      "path": "docs/upgrade/d2/android-storage-adapter.md",
+      "bytes": 7311,
+      "sha256": "5ca232e2a79738c10238271bdc475ce4bcb9fba9d9d62d462a4fe69d87cdbecf"
+    },
+    {
+      "path": "docs/upgrade/d2/shared-runtime-contract.md",
+      "bytes": 6173,
+      "sha256": "e27d69a293e53d4a5c6df3e1bc85d9c2520bfe7a810731f757221df136307342"
+    },
+    {
+      "path": "docs/upgrade/d2/architecture.md",
+      "bytes": 7457,
+      "sha256": "c4d6ab0a83902b4eaca31100ce640337e7968c99863f04d36eca15d23ba9f9e9"
+    },
+    {
+      "path": "docs/upgrade/d2/owner-decisions-and-blockers.md",
+      "bytes": 4320,
+      "sha256": "a260bffc3d4f799c782b5c7a410ece1e8be58b921daeb4a207b628441165d813"
+    },
+    {
+      "path": "docs/upgrade/d2/backup-restore-implementation.md",
+      "bytes": 5980,
+      "sha256": "079a56a2f2119a14ed023b74d893851c021e50ce72ff10059716dda55f7c9eea"
+    },
+    {
+      "path": "docs/upgrade/d2/fingerprint-portability-resolution.md",
+      "bytes": 3068,
+      "sha256": "755d1a69a5237d026206bf6a6e98db51b5cba5a5118bd4eac1b0f668beef25c4"
+    },
+    {
+      "path": "docs/upgrade/d2/windows-undo-extraction.md",
+      "bytes": 2550,
+      "sha256": "90db245e685660ba0669a69cf877453a622a9b1f34c2d3c35d3f91d31a80df79"
+    }
+  ],
+  "zipSha256": "eb6cbb30ca454d4dcfc3037e8d0fa60ce57be206b0df6b3b19510dc75495e765",
+  "approvedProductionPaths": [
+    "src/sqlite-store.mjs",
+    "src/migration-runtime.mjs",
+    "windows/database.c",
+    "windows/native.h",
+    "windows/migration.c",
+    "windows/migration.h",
+    "windows/operations.c",
+    "windows/undo-capture.c",
+    "windows/undo-internal.h",
+    "scripts/build-windows.mjs",
+    "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+    "android/src/local/gxtodo/replica/MigrationRegistry.java",
+    "android/src/local/gxtodo/replica/ReplicaTaskRecord.java",
+    "android/src/local/gxtodo/replica/PomodoroTasks.java"
+  ],
+  "applierSha256": "1b5eb2967f22cab511013656523fb706b299f2aae953fa95ea7e708f790c6ba4",
+  "sourceSha": "d57963c35c5a6d06fce3664b5789acb7e6ac2e35"
+}
