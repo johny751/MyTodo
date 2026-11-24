@@ -471,9 +471,13 @@ def run_storage_cases(root, source_path, record):
         outside = root.parent / 'D1-OUTSIDE-MUST-NOT-CREATE.sqlite'
         existed = outside.exists()
         rejected_file = _reject(lambda: safe_file(root, outside, must_exist=False), 'BLOCKER')
-        rejected_root = _reject(lambda: root_path(root.parent), 'BLOCKER')
+        # The parent is a legitimate marked aggregate root in this workflow.
+        # The actual forbidden ancestor is RUNNER_TEMP itself, without weakening
+        # the separate out-of-profile file assertion above.
+        rejected_root = _reject(lambda: root_path(pathlib.Path(os.environ['RUNNER_TEMP'])), 'BLOCKER')
         assert outside.exists() == existed
         return {'fileRejection': rejected_file, 'rootRejection': rejected_root,
+                'testedForbiddenRoot':str(pathlib.Path(os.environ['RUNNER_TEMP'])),
                 'outsidePathNotCreated': not existed}
 
     record('S35', 'outside synthetic root and RUNNER_TEMP itself rejected', outside_path)
