@@ -1,38 +1,60 @@
-# 数据归属与同步边界草案
+# 数据归属、命名空间与同步边界候选
 
-草案日期为 2026-11-24（Asia/Shanghai）。依据 D1-01-A `6a4b179f361602f47429bc9aa88e51c0b61395e3` 的静态盘点。源码证据描述现状，设计建议、待设备验证和负责人决策描述后续工作。运行结论为 `NOT TESTED`。[D1-01-A 数据归属](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/current-data-model-inventory.md#L19-L28)
+2026-11-24（Asia/Shanghai）。候选标识 `d1-01-candidate.1`。本页标识 `FACT/PROPOSAL/UNVERIFIED/OWNER DECISION/BLOCKER` 分别表示静态事实、候选规则、未验证、负责人决定和放行阻断。本候选及合成工具不接入生产应用，不读取真实用户库、凭据、WebDAV 或 LAN。
 
-## 归属、身份与生命周期
+本页使用 [统一候选](unified-data-contract-candidate.md) 的 ledger 与 raw/projection 定义。Windows C、Node 和 Android 的实际独立合成 SQLite 观察可用于限定工具证据，实际用户设备和完整生产应用仍须独立证据。
 
-| 数据类别 | 已有源码证据 | 设计建议 | 尚待设备验证 | 需要负责人决策 |
-| --- | --- | --- | --- | --- |
-| 跨设备同步业务 | `tasks`（含子任务）、`notes`、`projects`、`tags`、`places`。`entities.data` 是合并后的业务投影，规范化 UI 还可能折叠值 | 以账本和 kind 原始 ID 限定身份。按来源保存原始复制记录、字段存在性和映射状态，另生成可用投影。新业务读端只消费有效投影。合并和删除以原复制记录为据，投影可重建 | 原生/UI 按旧值重建一致性、未知字段可见范围、旧记录读写往返和关联异常 | 是否采用只读投影作为兼容层，哪些异常影响单个字段、单行或整次写入 |
-| 账号级设备本地 | `meta.settings`，Windows/Node/Web/Android 提醒台账及同步配置 | 保留对应账本身份。提醒的事件已发、延时、去重键原样保存。提醒规则与排程计算仍是业务和派生层。配置留原保护域，接入恢复需独立授权。在旧代码仍读 `meta.settings` 时保持其物理位置与本机作用域 | 提醒回执格式、设备迁移后的权限和通知去重，受保护配置在原用户或同设备能否复用，浏览器 origin 及 Android profile 的现场状态 | 设置与提醒台账的跨设备复制是否永远关闭，同机恢复是否默认保留本地回执，凭据的单独恢复权限 |
-| 应用或浏览器 origin 级设备本地 | 应用级 `accounts.json` 账户目录与当前选择，Windows `feedback/ideas.json`，Web 的 `gxtodo.feedback.v1` 和 `gxtodo.feedback.before-import.v1`，Android 设备级工具偏好、原生番茄钟和 Feedback Kit | 保留来源平台、安装或浏览器 origin，以及应用级账户路由与各账本的对应关系，继续独立于账本同步。只有明确的本地导入/恢复流程可以选取组件。平台反馈的删除、状态和时间字段按各自格式解释 | Web origin/端口改变后的存留，多个账号共用模块的实际隔离，Android 反馈内部载体和便携 ZIP 的转换 | 哪些本地模块可随整机恢复，哪些可由用户单独选择，是否允许跨 origin 或平台重新绑定 |
-| 派生数据 | `entities` SQL 投影列、Windows 搜索表和索引、三端统计、Android 小组件和日摘要。现有查询口径与 SQL NULL 等表现有差别 | 存储快照可保留现有投影供比对，有证据表明可重算的部分用指定版本算法重建。旧值按原列保存，计算失败标记错误。持久化番茄钟日累计缺少逐段原始事件，作为原始可得业务证据归本地数据 | SQL NULL 与空串在索引过滤中的影响、查询结果、统计时区、Windows 搜索父级缓存、Android 小组件刷新 | 哪些派生结构可在授权迁移中重建，是否保持平台现有搜索和统计差异 |
-| 可再取得的缓存 | WebView/浏览器 `storage.cache`，本地 `cachedManifest`（值与 ETag）。`sync-base.json` 可能在 v1 兼容路径读作旧合并基线 | 缓存可备查。正式恢复以完整账本和重新取得的远端证据为准。归档保留 `cachedManifest` 的原字段及存在性，恢复会话获得授权后再按现行协议重新校验。旧基线的原文件、缺失与 JSON null 分开标记 | 失效、故障重启、scope/epoch 改变后的读取行为 | 本地备份需要携带哪些缓存作诊断，以及缓存存续期限 |
-| 临时运行状态 | 未持久化任务编辑器、撤销队列、tab/窗口导航、HTTP 回调、Android `Bundle` 与系统通知和暂存。Android 已入 `drafts` 的反馈草稿属于设备本地持久数据 | 待处理写入在未来采集时应受停写屏障管理。已提交值纳入一致性点，未提交内容可单独记录存在性或风险。运行句柄、回调、租约持有权、正在显示的通知和恢复中的临时工作不进入激活候选 | 休眠、退出、重启、恢复切换时各原生 writer 是否实际停写，编辑和未完成操作如何提示 | 对中断前的未提交本地编辑，采用主动完成提交还是明确提示后暂缓备份 |
-| 同步基础设施 | `entities.record`、`conflicts`、墓碑，`meta.actor/seq/clock/queue/vector/cursors/scope/epoch/pending` 和 `outbox`。`lease` 是持久化协调状态，远端 manifest/batch/snapshot 在单 WebDAV 域 | 将整个 `entities/record/outbox/meta` 作为连续性单元保留。区分归档的协调字段和可获得的未来执行权限。使用原账本身份核验，并在满足独占与远端对账门槛后才允许续传。业务导出只用于可读业务交接 | 同库重开、旧备份对账、Win 过期会话返回后的 ACK 和缓存提交、原始 pending 与实际 outbox 前缀逐项匹配 | 原 Actor 延续需要哪些排他证据，历史克隆隔离期限，以及丢失设备的重新加入策略 |
+## 来源、账本和组件归属
 
-对应盘点见 [三端字段与复制层](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L93-L111)、[Windows 文件和运行态](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/windows-storage-inventory.md#L151-L165)、[Node/Web 文件和运行态](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L42-L60)、[Android 文件、设置和运行态](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L62-L76)。
+| 归属 | FACT 与固定证据 | PROPOSAL |
+| --- | --- | --- |
+| 跨设备业务 | 五个 kind 为 tasks（含子任务）、notes、projects、tags、places；普通导出筛活体，record 与 data 的信息层不同。[A 主模型](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/current-data-model-inventory.md#L19-L28) | 业务逻辑身份为 `(ledgerId,kind,id)`。来源字节、业务标准投影、关系诊断及墓碑分开保存。新候选只能读取已验证字段，不把显示默认写回历史来源。 |
+| 应用级账户路由 | 根 accounts.json 含账号集合、目录及 activeId，Android 明确是应用级注册；各端创建时间载体不同。[A Windows](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/windows-storage-inventory.md#L155-L157)；[A Node](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L44-L46)；[A Android](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L66) | 按安装/本机数据根保存路由及当前选择，并分别映射各账本。它不属于某一个账号的业务，也不因为名称相同自动与另一安装合并。无证的旧 createdAt 不补造。 |
+| 账号及 origin 本地 | meta.settings、每账号同步配置与提醒回执；浏览器提醒键按 origin/accountId 区分。[A Node 本地载体](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L48-L56) | 记录本地账号、安装或 origin，以及账本对应。meta.settings 的原物理位置保留。提醒规则是业务，发过/稍后/去重账本是本地；统计不能补造回执。 |
+| 应用或 origin 的反馈/工具 | Windows feedback/ideas.json、Web 两个无账号后缀反馈键、Android android-tools 与 Feedback Kit 均是本地载体。[A Windows](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/windows-storage-inventory.md#L163-L164)；[A Web](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L53)；[A Android](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L73-L74) | 保留安装/origin/module/namespace。反馈字段、状态、时间与软删按各自格式，不能只因同名 notes/status/id 就进入任务域。跨安装、跨 origin 或跨平台重绑是独立决定。 |
+| 派生数据 | entities 查询列、Windows 搜索表、三端任务统计、小组件与摘要由源和算法派生；计时日累计是已落盘聚合。[A 归属](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/current-data-model-inventory.md#L23-L24) | 只把有足够输入和算法身份的结构列为可重建。保存旧列观察供核对，无法从业务重建的番茄钟累计归本地原始可得数据，不能删除后重新统计。 |
+| 缓存 | storage.cache 是运行内存；cachedManifest 是持久 value/ETag 缓存；sync-base.json 可能是旧合并基线。[A Node](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L50-L55)；[A cachedManifest](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L132) | 分别记录缓存类别与 presence。缓存用于诊断，不授权远端当前状态；旧基线不能因名字像缓存就抛弃。缓存缺失、null、有效值及解析失败分开。 |
+| 临时运行状态 | 编辑草稿、撤销、导航、HTTP/桥回调、Bundle、运行服务及通知，持久性各异；Feedback drafts 已在 SQLite。[A Node](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L54-L55)；[A Android](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L74) | 已提交值属一致性点；未提交内容记录存在/丢失风险，不能据已存任务补造。运行句柄、请求、旧会话权限和系统显示通知不进入激活候选。持久反馈草稿作为独立本地组件保存。 |
+| 同步基础设施 | record/events、conflicts、墓碑、meta 复制身份/进度/pending、outbox 与持久 lease；现行单 WebDAV，无逐目标 ACK。[A Windows](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/windows-storage-inventory.md#L124-L149) | 整个账本、元数据及未确认队列是连续性单元。归档旧 lease 不复制会话权限；原 Actor 续传需独占与进度对账证据。保护矩阵见 [同步状态保护](sync-state-migration-protection.md)。 |
 
-## Android 番茄钟与反馈
+**PROPOSAL O01。** 存储类别是归属，不等于可以独立恢复。主账本业务、复制记录、outbox/meta 位于同一一致性域，不能恢复业务到较旧点却复用较新 pending/cursor。应用路由可指向多个账本；被选择的本地组件必须记录其保护域和共同一致性要求。[备份恢复契约](backup-restore-contract.md)。
 
-| 归属 | 已有源码证据 | 设计建议 | 尚待设备验证 | 需要负责人决策 |
-| --- | --- | --- | --- | --- |
-| `android-tools` 的 `timer.state` | 全应用 SharedPreferences，包含 `task` 快照及 `sessionActive/mode/running/completed/completionPending/durationMinutes/elapsedMillis/lastElapsedRealtimeMillis/lastWallMillis/bootId` 和按北京 epoch day 的 `focusedMillisByDay/completedSessionsByDay`。现有裁剪最长保留含当日在内 32 天 | 按安装及来源记录保存原持久化对象和日累计。显示或匹配任务时使用 `accountId` 与任务 `id`，保留标题、账号名和完成态选择快照。缺目标时展示原始快照及未解析标记。旧设备开机单调时钟和未完成计时只在可信的原安装/启动上下文经验证后继续。其他情况先只读呈现已记录状态并请求人工选定重新开始方式 | 真机重启、回拨/前拨、跨安装开机计数和日桶裁剪。持久动作、通知记录和单调计时之间的一致性 | 跨安装要保留哪些累计与偏好，是否允许重新开启计时，由谁确认可能的重复完成通知 |
-| Feedback Kit 的 `notes` 和 `drafts` | `feedback-kit.db` 的 `records` 包含 bucket 及原 payload。`notes` 包含 `number/status/origin/assetIds/deletedAt/deleteToken`。`drafts` 有 `targetId/baseRevision/isNew/note/assetIds/inheritedAssetIds` | 保存反馈原记录、修订、原状态/顺序和软删除。草稿保留基线修订，恢复后待编辑者核对再打开。草稿提交须检查目标与修订关系。`notes` bucket 使用反馈域独立身份，避免误用任务便签或同步墓碑的路径 | 升级/重启/还原后草稿是否仍关联原编辑基线，软删及撤销的持续行为，未知扩展字段，便携 ZIP 的归一化范围 | 默认包含反馈草稿还是模块独立可选，文档与图片的保护、保留时长和跨设备恢复权限 |
-| Feedback Kit 的资产与关系 | `assets` 记录 `file_name/mime/size/sha256/width/height`，`links(bucket,record_id,asset_id)` 连接记录和内容，`payload.assetIds` 提供数组顺序。实体图像在本机 `files/feedback-kit/images/` | 按模块及 namespace 保存 ID、链接表、原 payload、原图字节及其哈希。对应草稿、当前笔记、历史软删或撤销的仍可达资产一起纳入。内容校验完成后才允许发布本地恢复候选。URI、索引与显示派生可按本机授权重建 | 真机存储权限、跨目录文件与 SQLite 是否一致、非法/缺图的错误与恢复，部分 ZIP 的支持范围 | 附件内容的加密、容量限制、异常时整模块阻断还是仅只读预览 |
-| Feedback Kit 恢复状态 | `feedback_sequence`、`feedback_delete_batch` 及 `settings.restore_generation` 有各自持久入口。`restore_<id>/validation.db` 的 `archive_entries` 属暂存 | 将持久代次和删除批放进同一反馈快照，保留原值和来源。原样归档与恢复后本机的代次变更分开登记。复用反馈库入口前验证其组件级代次逻辑，挂起旧草稿、运行队列和过期共享 URI。暂存库仅作失败证据或在验证过的本次作业中消费 | AAR 还原成功/失败、进程退出和重试时各模块句柄是否陈旧，代次是否按预期递增，持久 `feedback_delete_batch` 所需字段和附件是否完整 | 同设备精确恢复与便携恢复是否分别提供、代次重新登记的策略、失败暂存的访问和保留时长 |
+**BLOCKER O02。** 来源 ledger/install/origin/module/namespace 或一致性点不明时禁止把它归并为已确认的现有组件。不通过 UI 文案、文件名、hash 相同或同名 ID 推断归属。文件摘要证明字节完整性，不能证明来源授权、关系正确或实际可解密。
 
-对应盘点见 [Android 番茄钟字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L104-L119)、[反馈四表及恢复暂存](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L121-L143)、[反馈 payload、草稿和图片](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L145-L156)。
+## Android 番茄钟
 
-## 同步与权限边界
+**FACT。** android-tools.timer.state 是全应用 SharedPreferences 中的版本化 JSON。task 保存 accountId/id/accountName/title/done 快照；单记录计时有 sessionActive、mode、running、completed、completionPending、durationMinutes、elapsedMillis、lastElapsedRealtimeMillis、lastWallMillis、bootId；focusedMillisByDay/completedSessionsByDay 为北京时间 epoch-day 的日聚合，当前裁剪最多含当日 32 天，没有逐次 session 或跨端事件。[A 计时字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L104-L119)。
 
-| 主题 | 已有源码证据 | 设计建议 | 尚待设备验证 | 需要负责人决策 |
-| --- | --- | --- | --- | --- |
-| 单 WebDAV 目标 | `scope/epoch`、manifest 版本及 `actor/seq` 属现有复制协议。WebDAV 发布确认后 ACK 受 `pending.through` 约束并在本地物理清理已确认 outbox。恢复时可用证据尚不足以重建全部历史收据 | 现行复制流保持原语义。备份如想恢复连续性，应复制或核对完全相同的队列、批次原文、epoch 与边界，按核验过的条件恢复现行客户端。待确认事项留在本地隔离状态 | Windows 过期会话与迟到响应、不同客户端重开原库时的一致性、历史 `pending` 对账、同一 Actor 双活拒绝 | 原 Actor/账本恢复资格和隔离责任人，未知或冲突状态如何人工处理 |
-| LAN 与新业务附件 | 当前已盘点路径只支持五类业务 kind 及单 WebDAV。反馈图片是本机独立内容。历史未知字段中的附件样数据仍为 `UNKNOWN` | 双通道、多目标 ACK 或独立内容传输均作为未来另审议题。设计阶段将二进制原件、模型引用和目标投递收据分开建模。未来删除内容必须能证明关联和保留规则已满足 | 独立发送和恢复收据、内容缺失完整性、真正多目标数据留存、旧端未知字段读写 | 是否及何时另立 LAN、双通道和附件传输协议，兼容期保留方式 |
-| 凭据与本机权限 | Windows C 和 Windows Node 使用 DPAPI，Android `sync-config.enc` 依赖 Keystore，Node 自带平台相关保护。Web/Android 对页面返回部分配置，导出无完整凭据 | 普通备份可记录脱敏配置和保护器类型。经独立权限批准可另行保存适当加密配置并声明绑定条件。用于证明完整性的清单及复位日志需避免泄露可直接认证的材料。恢复验收之前先暂停同步和通知 | 真实操作账号、Keystore、DPAPI、Android OS 权限与重签/迁移后的可用性 `UNKNOWN` | 认证恢复空缺时的重新配置流程和授权，备份包的访问和保护责任 |
+**PROPOSAL O03。** 保留 JSON 原值、类型、版本、安装身份和日桶。任务关系只以已识别本地 accountId 与 tasks.id 核对，显示名称/标题是选择快照。任务缺失保留快照与诊断；不凭快照创建任务。聚合无法反推完整会话、已裁剪历史或逐次任务关联，声明不可逆。
 
-对应盘点见 [三端复制元数据、附件及反馈](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L93-L111)、[Node 受保护配置](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L44-L56)、[D1-01-A 未确认事项](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L7-L21)、[阶段 0 同步审查](../phase0-final-review/sync-safety-review.md)。[备份恢复草案](backup-restore-contract.md) 定义允许恢复的证据条件，双通道或生产运行扩大须另行审批。Android issue #1 保持 `OPEN RISK`。[Android issue #1](https://github.com/johny751/MyTodo/issues/1)
+**PROPOSAL O04。** 墙钟、单调时钟、bootId 分别表达。恢复归档不能授权跨安装继续旧计时或再次发送完成通知。原安装/启动上下文的续计需实际设备验证；其他场景候选只读呈现已记录值，重新计时通过未来明确的用户操作。completionPending 不是同步 pending 或 ACK。
+
+**UNVERIFIED。** 真机重启、时钟调整、旧 API boot 回退、SharedPreferences/通知耐久性和账号切换后的历史关联未由合成模型验证。[A 计时未知](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L16)。
+
+## Android 反馈、草稿、图片及恢复代次
+
+**FACT。** MyTodo 已定位入口使用默认 Feedback Kit namespace；AAR 另支持独立 namespace。feedback-kit.db 有 records/assets/links/settings；records 的 bucket/id 和主业务 tasks/notes 独立。settings.restore_generation 与主 meta 不是同一版本/身份。恢复暂存 validation.db 另有 archive_entries。[A 固定 AAR 及四表](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L121-L143)。
+
+**PROPOSAL O05。** 反馈身份按 `(installId,module,namespace,bucket,id)` 保存，namespace 无证时保留 unknown，不强制改 default。notes 完整 payload、revision、状态和软删除时间/token 留存；drafts 保留目标、baseRevision、完整 note、assetIds/inheritedAssetIds。反馈 meta 中 feedback_sequence、feedback_delete_batch 与其可达草稿/资产纳入一致快照，不与 WebDAV tombstone/outbox 混用。
+
+**FACT。** 图片位于 files/feedback-kit/images；assets 提供 file_name/mime/size/sha256/width/height，links 维护关联但没有顺序列，顺序来自 payload.assetIds。便携 ZIP 有转换路径，不能推定它与全部内部 payload 一一等同。[A payload 与原图](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L145-L156)。
+
+**PROPOSAL O06。** 保存实际原图 bytes、准确长度/摘要、资产 ID/文件名/尺寸、links 与原 payload 次序；覆盖当前笔记、草稿、软删和撤销仍可达资产。只有 hash、URI、标题、缩略图或缺失原图时不能声称完整恢复。模型的二进制夹具只证明夹具字节保存规则，不证明 SAF、FileProvider、图片解码或真机权限。
+
+**PROPOSAL O07。** 原 restore_generation、删除批和序号原样归档。恢复作业的候选代次/切换记录另行登记，不能覆盖原代次作为历史修复。暂存数据库/展开目录仅属于本次验证作业或失败证据，不直接作为激活库；旧句柄、草稿队列及共享 URI 在真实恢复前需隔离并经组件行为验证。
+
+**BLOCKER O08。** 缺原图、资产校验不符、记录/links/payload 不一致、组件 namespace 不明、草稿基线或代次冲突时阻止整组件自动激活。可交付只读缺损报告，不能把异常整形、清孤儿或删除草稿写成已无损恢复。暂存失败保留来源和错误，不更换成默认空反馈库。
+
+**UNVERIFIED。** 历史 AAR、便携 ZIP 的完整转换差异、真机文件目录一致性、soft-delete 撤销、代次切换耐久性及 SAF 生命期保留 A 原状态。[A 反馈未知](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L15-L16)。
+
+## 凭据及新增同步边界
+
+**FACT。** Windows C/Node 使用 DPAPI，其他 Node 平台保护依赖本地 sync-key，Android sync-config.enc 依赖 Keystore；界面和业务导出不包含完整可认证材料。[A 配置保护](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/node-web-storage-inventory.md#L49)；[A Android 配置](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/android-storage-inventory.md#L68)。
+
+**PROPOSAL O09 / BLOCKER。** 合成工具只使用明确的虚构配置与字节夹具。真实凭据、DPAPI blob、Keystore 内容、真实账号/密码/token 不读取、上传或试解密。生产备份的受保护配置范围、访问权限和重新认证必须由后续授权明确；配置缺损不按默认 enabled 或凭 hash 放行。
+
+**FACT。** 已盘点业务没有任务附件实体或传输路径；反馈图片为本机独立内容；现有 outbox 没有每目标投递回执。[A 附件与双目标边界](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L17)。
+
+**PROPOSAL O10 / BLOCKER。** LAN、多目标 ACK、业务附件传输仅作为未来独立协议议题。候选模型可以证明单目标状态保全，不能把这一结果解释成 LAN/WebDAV 双通道已安全。未知历史附件式字段完整封存并标 UNKNOWN，不重用反馈资产 ID 作为业务附件身份。
+
+**OWNER DECISION。** 确定可选本地组件、同机/便携包边界、隐私和原图保护、未提交编辑处置、代次恢复策略、跨安装重绑及人工缺损接收流程。所有生产恢复、跨端写回和真实同步资格另行审查。Android issue #1 保持开放，不随 D1-01 收口自动关闭。[issue #1](https://github.com/johny751/MyTodo/issues/1)。

@@ -1,63 +1,63 @@
-# D1-01-B 关系迁移策略草案
+# 关系映射与迁移保护候选
 
-日期为 2026-11-24（Asia/Shanghai）。源码证据锁定在 D1-01-A 提交 `6a4b179f361602f47429bc9aa88e51c0b61395e3`。下述关系是供评审的逻辑投影。本批只提交设计文档，所有设备、数据库和同步验证均为 `NOT TESTED`。D1B-03 是本页待负责人决策的事项。 [D1-01-A 盘点总览](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/current-data-model-inventory.md)
+2026-11-24（Asia/Shanghai）。候选标识 `d1-01-candidate.1`。本页收敛 D1-01-B 的保守关系建议，供独立合成验证和负责人审核。`FACT` 为固定源码或 A 盘点事实；`PROPOSAL` 为候选规则；`UNVERIFIED` 为未取得证据；`OWNER DECISION` 为尚待负责人决定；`BLOCKER` 为阻止自动建立关系或放行生产的条件。合成模型结果只证明候选规则在该模型中的表现。
 
-## 关系与可追溯输入
+本页共用 [统一候选](unified-data-contract-candidate.md) 的 identity/raw/projection/presence 定义，三端实际合成 SQLite 类型观察单列，不以标准投影抹去旧平台绑定差异。
 
-| 关系 | 已有源码证据 | 设计建议 |
+## 事实及证据边界
+
+| 标识 | 已确认内容 | 固定证据 |
 | --- | --- | --- |
-| 任务 → 项目 | `tasks.project` 按名称筛选，`projects.id` 是独立身份。三端没有用 SQL 外键约束这条关系。归档与墓碑语义不同。 [D1-01-A 项目字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L65-L79) | 每条任务保留 `project` 的原始来源、presence 和原名。只有在同一作用域、同一快照中恰好一个符合条件的 ID 时，才在逻辑投影中建立任务到该 ID 的关联。 |
-| 任务 → 标签、地点 | `tasks.tags` 是名称数组，`tasks.place` 是名称字符串。标签和地点按名称构造实体 ID，业务导出用字符串目录表达。 [D1-01-A 分类关联差异](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-differences.md#L31-L46) | 标签按原始数组位置分别解析，保留重复、次序和异常元素。地点与标签各自使用对应 kind 目录。禁止根据名称拼接一个目录中不存在的目标。 |
-| 任务 → 父任务 | 页面和业务导出用 `subtasks`，复制行用 `parentId`，SQL 用 `parent_id` 查询。根级回退会遮蔽原孤儿或环。 [D1-01-A 父子字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L19-L41) | `tasks` 保持单一实体 kind。按原 `parentId` 校验同作用域父任务身份。逻辑树、异常标识和源父引用分别保存。 |
-| 循环实例 → 生成来源、系列 | `generatedFrom` 保存来源任务 ID，`seriesId` 沿用系列标识或首次来源 ID，复制子任务可保存空值。JS 业务投影对这两个字段有长度限制，且活跃树和 Windows 含墓碑读端的判重边界不同。 [D1-01-A 循环来源字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L54-L63) | 把生成来源看作有方向的历史边，把系列标识看作同一作用域内的分组值。保留已发实例和其 ID、时间及复制记录。 |
+| FACT | 现有五类业务 kind 为 `tasks/notes/projects/tags/places`；复制事件 key 解码为 `[kind,id]`，子任务仍是 `tasks` 行。现有 SQL 没有任务到项目或父任务的业务外键。 | [事件验证](https://github.com/johny751/MyTodo/blob/bc3f44d1e76a988dbe269edcf1c606eebec37293/src/replica.mjs#L65-L71)；[A 实体及字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L17-L41) |
+| FACT | `task.project` 和 `task.place` 是名称输入，`task.tags` 是名称数组；项目有独立 ID。目录改名与删除路径不等于存在全域唯一名称或 SQL FK。 | [A 项目、标签、地点](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L65-L79)；[A 分类差异](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-differences.md#L37-L46) |
+| FACT | 复制行 `parentId`、SQL `parent_id`、导出 `subtasks` 处于不同层；根级回退会遮蔽失配引用。循环任务保有 `generatedFrom/seriesId`，原生与共享 JS 的判重、截断与墓碑筛选不同。 | [A 父子和循环差异](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-differences.md#L31-L57)；[A 循环字段](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L54-L63) |
+| FACT | 现存 `record.events` 是合并后保有的事件字段，因果覆盖时旧字段可移除，空事件被过滤。因此它不是已发生全部修改的完整历史。 | [复制合并](https://github.com/johny751/MyTodo/blob/bc3f44d1e76a988dbe269edcf1c606eebec37293/src/replica.mjs#L73-L79) |
+| UNVERIFIED | 用户旧库的重名、悬空父链、截断实例、未知扩展及实际 schema 分布。只有规范化导出时无法推知其之前的关系原件。 | [A 未确认事项](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L7-L14) |
 
-## 解析前置条件
+## 身份、输入与解析记录
 
-1. 对单一账户账本冻结一致读视图。记录账本身份、可用的修订号、素材类别及快照标识。已绑定的 `scope` 和 `epoch` 原样记录，缺失时保持缺失。采用可识别的同一账本边界，避免把显示名称相同的账户或 WebDAV 文件夹当作相同作用域。目标的实体身份以该作用域内原 kind 和 ID 表达。原 key 与 `data.id` 不一致、重复或不能归属时，不产生自动关联。
-2. 优先依据能够定位的复制记录和同一快照的合并结果，保留字段原值、presence、原始来源及可用的冲突候选。单独留存 SQL 投影和原业务导出路径。SQL `parent_id IS NULL`、默认视图值、继承值和搜索文本只用于差异核对。合并结果存在会影响关系判断的未解分歧时标记 `conflict`，候选 ID 不落入有效关系。
-3. 标准目标只在 `resolved` 时存在。结果记录具体字段路径、标签元素位置、比对策略版本、状态和可得候选 ID。`unset` 下继续区分字段缺失、JSON `null`、空字符串及空数组。非字符串、无效 ID、无效 Unicode 等标记 `invalid`，保存原始值。只收到有损导出，或目录快照、身份、原名完整性不足时标记 `unknown`，保持 D1-01-A 的 `UNKNOWN`/`NEEDS INVESTIGATION`。草案状态是解析结果的语义，后续物理存储和编码另审。 [D1-01-A 空值证据](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-differences.md#L5-L29) · [未知清单](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L8-L13)
+**PROPOSAL R01。** 候选逻辑身份为 `(ledgerId,kind,id)`。`ledgerId` 是经证据识别的账本边界，不由账号显示名、目录名、Actor、WebDAV folder 或同名项目推导。序列化形式由统一候选规范定义；原 `key/kind/id/data.id` 分别保留。反馈域的同名 ID 不进入主账本身份空间。
 
-## 项目名称解析
+**PROPOSAL R02。** 每次解析使用同账本一致且声明完整性的快照，记录 `candidateId`、账本、快照/读取边界、源实体、源字段路径、原始载体定位、presence、原值及候选目标。标签还记录原元素位置、重复和次序。字符串输入显式保有 `rawName`；不以标准目标反查出的新名称替代它。原始 JSON/SQL 字节及类型保留规则见 [字段矩阵](field-compatibility-matrix.md)。
 
-**设计建议。** 按同一作用域和快照的有效 `projects` 实体建名称索引。候选的源 `name` 必须与任务源 `project` 的 Unicode 字符序列完全相等，且目标身份有效。比对不经过搜索归一化，也不忽略大小写、空格或 Unicode 规范形差异。草案推荐把有归档标记且未删除的项目计入候选，单独记录归档状态。墓碑记录只用于解释历史来源。如果冲突、无效目标身份或不完整快照会改变候选数量，阻止自动关联。
+**PROPOSAL R03。** 关系结果采用冻结 B 的语义：`resolved/unset/missing/ambiguous/invalid/conflict/unknown`；父链和历史出处另有 `deletedTarget/cycle/depthExceeded` 诊断。只有 `resolved` 具有可用标准目标。非 resolved 的目标保持无值，原字段仍完整存在。记录状态不得把 JSON null、字段缺失、空串、SQL NULL 和空数组合并成一种原始状态。此处枚举描述候选逻辑，现行 wire 不新增这些字段。
 
-| 输入及候选情况 | 解析结果 | 保留内容 |
+**BLOCKER R04。** 账本身份不明、重复原 key、原 key 与原实体 ID 不符、目标 ID 非法、会影响候选数的冲突、原名被截断或快照不完整时禁止自动匹配。可输出只读诊断，不伪造目标、不补造项目、不将未知写成 missing。`missing` 只表示完整且有效的指定快照中没有合法匹配。
+
+## 项目、标签及地点
+
+**PROPOSAL R05。** 项目匹配仅比较同一 ledger 的 `projects`。原名称按 Unicode 字符序列精确相等；不 trim、不折叠大小写、不做 Unicode NFC/NFKC、不使用搜索规格化、不移除标点。候选必须具有合法且唯一的原身份。未删除的归档项目参与候选，并记录归档状态；墓碑不作为活跃匹配对象，只附历史诊断。此规则继承冻结 B 的推荐，仍不是生产部署批准。
+
+| 标识与条件 | 标准结果 | 必须保留 |
 | --- | --- | --- |
-| 有效非空名称，完整快照中恰好一个符合条件的项目 | `resolved`，保存逻辑目标 ID | 原名称、原始来源、presence、快照标识及匹配准则版本。唯一匹配只证明该快照的对应关系。 |
-| 恰好存在两个或以上不同项目 ID | `ambiguous`，目标为空 | 原名称和可定位候选 ID。不以最近编辑、创建时间、列表顺序、归档状态或平台优先权挑选。 |
-| 完整快照无符合条件的项目 | `missing`，目标为空 | 原名称；若仅有同名墓碑，则附候选墓碑身份作为诊断。 |
-| 空字符串、JSON `null` 或字段缺失 | `unset`，保持各自 presence，目标为空 | 原空值表现。历史 UI 继承时，可展示其独立的兼容视图；继承值不生成明确外键。 |
-| 有冲突、无效值或有损/不完整来源 | `conflict`、`invalid` 或 `unknown`，目标为空 | 保留候选及诊断。项目名称内容若已被规范化或截断，缺少的部分不能补回。 |
+| PROPOSAL：合法非空 rawName，完整快照恰好 1 个合法项目 ID | `resolved`，仅给该 ID | rawName、presence、源字段、候选身份、归档状态、匹配策略与快照 |
+| PROPOSAL：2 个以上不同合法 ID 同名 | `ambiguous`，不给目标 | rawName 与全部可定位候选；不按时间、顺序、平台或归档选择 |
+| PROPOSAL：完整快照无匹配 | `missing`，不给目标 | rawName；有同名墓碑时保留其身份作为诊断 |
+| PROPOSAL：空串、JSON null、缺失 | `unset`，不给目标 | 各自原始 presence；旧 UI 继承只是兼容展示 |
+| BLOCKER：冲突、坏身份、有损或不完整材料影响候选 | `conflict/invalid/unknown`，不给目标 | 原件、问题路径及已有候选，不输出假唯一结果 |
 
-例如任务原名为 `产品`，快照中存在项目 `p1` 和 `p2`，且两者名称均为 `产品`，则结果为 `ambiguous`，保留 `p1`、`p2`。只有 `p1` 且快照完整时才产生 `resolved`。只有名称为 `产品 ` 的项目时，原名为 `产品` 的任务结果为 `missing`。候选示例均为文字说明，未执行。 [D1-01-A 项目、标签、地点及关联](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-field-mapping.md#L65-L79)
+**PROPOSAL R06。** `tags` 按每个原数组元素的对应位置，用相同准则查 `kind=tags`；`place` 只查 `kind=places`。不同 kind 的同名 ID 不互相匹配。标签筛选视图可以对 resolved ID 去重，来源数组不能被去重覆盖。旧实现以名称构造 ID 不授权候选凭名称创建一个不存在的目录 ID。
 
-## 标签、地点与变化处理
+**PROPOSAL R07。** 重算关系只新增当前快照的投影。目录重命名、删除或归档后，旧 rawName、事件、旧解析结果仍按其快照保留。它不自动改任务、不触发墓碑、级联删除或新同步事件。人工修复如获未来批准，必须记录决定人、时间、理由、原值/候选/快照、所选完整身份及受影响版本；源值变化后重新核验，历史决定不覆盖原证据。
 
-- `tasks.tags` 中每个有效名称只同对应作用域的 `tags` 目录比对，采用项目同样的唯一性和精确匹配准则。记录原始元素、位置、重复项和解析状态。供筛选的派生集合可以对已解析 ID 去重，但审计及以旧形态回显仍依据原顺序和原名称。`[]` 表示明确无标签，`null` 和缺失保留各自语义。
-- `tasks.place` 只查 `places`。有效名称无匹配时记录 `missing`，多个不同 ID 记录 `ambiguous`。保留来源中标签/地点实体的原 key、ID、`name` 及墓碑，既有 ID 以名称生成也无法保证所有历史资料中 ID 和 `name` 相等。若缺少源目录行且只有字符串列表，先标明证据等级，不能据显示值构造正式目标身份。
-- 保留源端改名、墓碑、归档及分类改写的原事件。快照中已删除的类别不会自动删任务，也不生成新的事件或替换名称。只有比较用的派生关联可以基于后续快照重算，结果和旧快照各自记账。人工确认如将来允许，记录确认人、理由、时间、源实体/字段/值、原候选、所选目标身份和比对快照。源值或目标语义变化时重新核验，旧的人工决定留证。
-- **旧读端兼容建议。** 边缘投影保留现有名称、数组及顺序，旧读端仍使用 `project`、`place`、`tags`。以未来 ID 反查当前显示名无法还原旧名称或旧列表。评审中的关系状态、候选或目标 ID 不进入现行复制事件、待发批次或旧备份字段。多版本期间是否允许修改隔离投影仍需随版本契约决策。 [D1-01-A 分类改名与删除证据](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-differences.md#L37-L46)
+## 父任务及循环历史
 
-## `parentId`、子任务与循环来源
+**PROPOSAL R08。** `parentId` 仅解析同 ledger、`kind=tasks` 的目标。有效唯一活跃目标还须通过自引用、完整父链环检测及经批准深度界限后才 resolved。`parentId:null` 只有在已识别载体明确根语义时为根。事件补丁缺字段表示未修改该字段，不能变成新的根。SQL NULL 或旧导出升根本身不能证明原始根。
 
-| 场景 | 设计建议与回退边界 |
-| --- | --- |
-| `parentId` 是有效任务 ID，且存在唯一活跃父任务 | 验证同一作用域、原 `kind=tasks` 和完整父链。无自引用、无环且满足经批准的树深约束时投影为 `resolved`。保留原父 ID 与 `order`。将子任务渲染成嵌套列表只影响展示。 |
-| 明确根级、字段缺失、空字符串、SQL NULL | 仅能取得有明确根语义的源值时投影为根，如可追溯的合并字段 `parentId:null`。缺失、空字符串和 SQL NULL 单独记录；如果缺失来自某条事件补丁，它表示该事件未修改该字段。历史上的根级展示可以延续为兼容视图，保持原值和结论的区别。 |
-| 父行缺失、墓碑、超深、自引用或环 | 完整快照缺父记 `missing`，已知父墓碑记 `deletedTarget`。环、自引用记 `cycle`，深度超界记 `depthExceeded`。覆盖不完整时用 `unknown`，不根据缓存数据同时判定可达和无环。关系投影不把异常边写成 null，不改子任务顺序、不连到类似名称的任务，也不依据某个视图的根级回退触发级联删除。 |
-| 仅有嵌套 `subtasks` 导出 | 保留原层级和位置，可提供该导出范围内的树结构视图。标明数据来源是导出投影。导出前的孤儿引用、环和墓碑仍为 `UNKNOWN`。同时取得嵌套路径及原父引用且不一致时保留两份，需人工厘清才作修复。 |
-| `generatedFrom` | 以原字符串做同一作用域任务 ID 精确查找。唯一有效来源可记为历史出处；若该来源有可定位墓碑，明确记为 `deletedTarget` 并保留墓碑身份，不将其当作活跃依赖或恢复来源。找不到、疑似截断、循环或冲突分别保留诊断，不按日期、ID 前缀或相似标题补造。 |
-| `seriesId`、`repeat` 与已生成状态 | 保留原分组串与 `repeat` 规则及每个实例的 `start`、`createdAt`、墓碑和子树 ID。系列标识可对应首个生成源，但可存为分组字段而无需依赖活跃目标。空 series 或空 `generatedFrom` 的现存任务不能仅凭同名或同频率归组。转换逻辑不重新执行发生器、不重发生成事件、不合并同一源的多条历史实例。 |
+**PROPOSAL R09。** 完整快照缺父为 missing；可定位父墓碑为 deletedTarget；自引用或环为 cycle；深度超界为 depthExceeded；不完整来源为 unknown。保留原 parentId/parent_id、嵌套路径、子任务 order 和所有冲突。兼容 UI 可在带诊断的根视图显示孤儿，但不把原边写 null，也不恢复墓碑父节点。
 
-待获批的未来验证应覆盖移除或更新父关系后旧祖先的搜索缓存刷新，以及 C 读端含墓碑的判重和 JS 活跃树判重差异。兼容路径仍用原 `parentId` / 原 `subtasks` 形态、`seriesId` 与 `generatedFrom`。历史投影截断或抹去的原始关联须从更完整的原件补证。 [D1-01-A 父子和循环差异](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/cross-platform-differences.md#L31-L57) · [原始未知状态](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L9-L12)
+**PROPOSAL R10。** `generatedFrom` 是同 ledger 任务 ID 的历史边。唯一可验证来源可呈现出处；来源墓碑保留为 deletedTarget，不成为活跃依赖或恢复模板。`seriesId` 保留原分组串，不要求等于存在的活跃任务 ID。仅凭标题、日期、ID 前缀、频率或相同 series 字符串不合并历史任务。保留所有已生成实例、重复实例、时间、子树与墓碑；候选映射不调用循环发生器、不重新排程、不重发事件。
 
-## 可逆性、设备验证与负责人决策
+**BLOCKER R11。** 只有树形导出时，可显示导出范围树，但必须标为投影来源。原先的坏边、环、墓碑和被切掉的 series/generatedFrom 仍为 UNKNOWN。不能把兼容树或一条有效历史边当作完整来源恢复证明。
 
-| 类别 | 评审重点 |
-| --- | --- |
-| 设计建议 · 可逆 | 同一份输入、同一快照和同一匹配策略应产生同一关联结果。只要原字段、类别元数据及原始来源完整保留，逻辑投影可以丢弃并重建。来自投影或导出的字段不可冒充原复制记录。 |
-| 设计建议 · 不可逆条件 | 只留目标 ID 会丢掉原名称、空值形态、标签重复和顺序。重组后只留树会丢弃坏边和墓碑。只剩旧导出或截断字段时，无法恢复缺失历史。按原值缺失标注 `unknown`，不自动把不完整资料列为已无损恢复。 |
-| 尚待设备验证 · `NOT TESTED` | 验证三端同快照分类解析、多端改名/删除/归档期间的唯一性、遗留快照到投影的稳定性、旧读端读写回环、树环及截断、循环判重差异、Windows 搜索缓存刷新。现有用户同名/悬空目录、异常父链和截断实例的分布保持 `UNKNOWN`。 |
-| 需要负责人决策 · D1B-03 | 确认精确名称规则及归档参与候选，确认仅同账本映射及按快照留证，决定人工确认权限和审计撤销方式，并选择 unresolved 关系在未来界面中的展示。建议在验证通过前限制为独立投影，不用物理外键或级联修复历史行。 |
+## 主外键建议及可逆性
 
-本页和 [字段兼容矩阵](field-compatibility-matrix.md) 共用原始来源、presence 与逻辑投影的定义。审批前后的版本边界见 [迁移版本设计](migration-versioning-contract.md)。
+**PROPOSAL R12。** 未来物理投影表可对有效实体使用复合主键 `(ledgerId,kind,id)`；关系表的源与目标引用携带完整复合键，区分项目/标签/地点/任务。关系自身身份还须定位源字段和标签位置、解析快照，避免覆盖多次解析。原始复制记录、SQL 观察、异常原字段、墓碑及未解析关系存储在独立来源层，不以 active-only FK 拒绝它们。
+
+**PROPOSAL R13。** SQLite 合成布局可以验证 resolved 关系引用完整目标键及 FK 完整性。FK 只应用于有效候选投影，不能为了通过 `foreign_key_check` 清除原悬空值、把非法 parentId 改 NULL、删子任务、丢墓碑、重新命名分类或新建假目录。历史出处的墓碑关系以原证据表达，不塞入活跃关系表。真实库 schema 与生产 FK 实施不属于本候选授权。
+
+**PROPOSAL R14。** 同输入、同完整快照、同候选规则应得同结果。丢弃投影后只要原材料完整即可重算；仅存目标 ID 不能还原 rawName、presence、顺序、重复和历史快照。既有原件丢失、已清事件或截断关系属于不可逆或未知，报告损失/隔离范围，不宣称已无损。
+
+**OWNER DECISION。** 确认精确匹配与归档候选策略、深度界限、人工修复权限、审计保留及非 resolved 的 UI 呈现；批准真实库/新写端之前另审生产安全证据。候选合成验证可以按 R01–R14 检查规则确定性和原材料不变，不能证明实际历史分布、旧客户端往返、Windows 搜索缓存刷新或多设备关系一致性。
+
+**UNVERIFIED / BLOCKER。** 实机旧祖先搜索缓存、三端循环边界、旧 APK/GUI 导出回写、真机 FK/备份切换及 Android issue #1 均未因本页或合成模型解决。[A 未确认事项](https://github.com/johny751/MyTodo/blob/6a4b179f361602f47429bc9aa88e51c0b61395e3/docs/upgrade/d1-01/inventory-open-questions.md#L7-L21)；[同步状态保护](sync-state-migration-protection.md)。
