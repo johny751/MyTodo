@@ -88,6 +88,44 @@ jobs:
         with:
           name: c004-desktop-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/c004-desktop-input/
+      - name: Start external Android lifecycle evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome == 'success' }}
+        continue-on-error: true
+        env:
+          DIAGNOSTIC_SHARD: ${{ matrix.shard }}
+        run: |
+          evidence="$RUNNER_TEMP/c004-android-emulator/lifecycle"
+          mkdir -p "$evidence"
+          environment="$RUNNER_TEMP/c004-android-emulator/environment.json"
+          adb=$(node -p "require(process.argv[1]).sdk + '/platform-tools/adb'" "$environment")
+          serial=$(node -p "require(process.argv[1]).serial" "$environment")
+          printf 'source_sha=%s\nrun_id=%s\nrun_attempt=%s\nshard=%s\nserial=%s\nstarted_at=%s\n' \
+            "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" "$DIAGNOSTIC_SHARD" "$serial" "$(date -u +%FT%T.%NZ)" > "$evidence/identity.txt"
+          printf '%s\n' "$adb" > "$evidence/adb-path.txt"
+          printf '%s\n' "$serial" > "$evidence/serial.txt"
+          capture() {
+            label="$1"; shift
+            if timeout 15s "$adb" -s "$serial" "$@" > "$evidence/before-$label.txt" 2>&1; then code=0; else code=$?; fi
+            printf '%s\t%s\t%s\n' "$(date -u +%FT%T.%NZ)" "before-$label" "$code" >> "$evidence/command-status.tsv"
+          }
+          # External observation only: do not clear buffers, alter device settings,
+          # invoke instrumentation, inspect SQLite, or change the frozen harness.
+          nohup "$adb" -s "$serial" logcat -b all -v threadtime '*:V' \
+            > "$evidence/logcat-all.txt" 2> "$evidence/logcat-stderr.txt" < /dev/null &
+          logger_pid=$!
+          printf '%s\n' "$logger_pid" > "$evidence/logger.pid"
+          capture device-time shell date -u +%FT%T.%NZ
+          capture activities shell dumpsys activity activities
+          capture processes shell dumpsys activity processes
+          capture displays shell dumpsys window displays
+          capture webview shell dumpsys webviewupdate
+          capture rotation shell settings get system user_rotation
+          if kill -0 "$logger_pid" 2>/dev/null; then
+            printf 'started pid=%s\n' "$logger_pid" > "$evidence/logger-status.txt"
+          else
+            printf 'not-running-after-start pid=%s\n' "$logger_pid" > "$evidence/logger-status.txt"
+            exit 1
+          fi
       - name: Run Android generation and cross-platform reception
         if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
         run: >-
@@ -95,6 +133,55 @@ jobs:
           --desktop "$RUNNER_TEMP/c004-desktop-input"
           --android-environment "$RUNNER_TEMP/c004-android-emulator/environment.json"
           --output "$RUNNER_TEMP/c004-android"
+      - name: Finish external Android lifecycle evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome == 'success' }}
+        continue-on-error: true
+        run: |
+          evidence="$RUNNER_TEMP/c004-android-emulator/lifecycle"
+          mkdir -p "$evidence"
+          environment="$RUNNER_TEMP/c004-android-emulator/environment.json"
+          adb=$(node -p "require(process.argv[1]).sdk + '/platform-tools/adb'" "$environment")
+          serial=$(node -p "require(process.argv[1]).serial" "$environment")
+          capture() {
+            label="$1"; shift
+            if timeout 15s "$adb" -s "$serial" "$@" > "$evidence/after-$label.txt" 2>&1; then code=0; else code=$?; fi
+            printf '%s\t%s\t%s\n' "$(date -u +%FT%T.%NZ)" "after-$label" "$code" >> "$evidence/command-status.tsv"
+          }
+          capture device-time shell date -u +%FT%T.%NZ
+          capture activities shell dumpsys activity activities
+          capture processes shell dumpsys activity processes
+          capture displays shell dumpsys window displays
+          capture package shell dumpsys package local.gxtodo.protocolharness
+          capture webview shell dumpsys webviewupdate
+          capture logcat-tail logcat -d -b all -v threadtime '*:V'
+          if [[ -f "$evidence/logger.pid" ]]; then
+            logger_pid=$(cat "$evidence/logger.pid")
+            if [[ "$logger_pid" =~ ^[0-9]+$ && -r "/proc/$logger_pid/cmdline" ]]; then
+              logger_command=$(tr '\0' ' ' < "/proc/$logger_pid/cmdline")
+              printf '%s\n' "$logger_command" > "$evidence/logger-command.txt"
+              if [[ "$logger_command" == "$adb -s $serial logcat -b all -v threadtime *:V " ]]; then
+                kill "$logger_pid" || true
+                for poll in {1..30}; do
+                  if ! kill -0 "$logger_pid" 2>/dev/null; then break; fi
+                  sleep 0.1
+                done
+                printf 'stop-requested pid=%s\n' "$logger_pid" >> "$evidence/logger-status.txt"
+                if kill -0 "$logger_pid" 2>/dev/null; then
+                  printf 'still-running-after-stop; log hashes may precede final writes\n' >> "$evidence/logger-status.txt"
+                else
+                  printf 'stop-observed\n' >> "$evidence/logger-status.txt"
+                fi
+              else
+                printf 'pid-command-mismatch; process left untouched\n' >> "$evidence/logger-status.txt"
+              fi
+            else
+              printf 'logger-already-exited\n' >> "$evidence/logger-status.txt"
+            fi
+          else
+            printf 'logger-pid-not-recorded\n' >> "$evidence/logger-status.txt"
+          fi
+          printf 'finished_at=%s\n' "$(date -u +%FT%T.%NZ)" >> "$evidence/identity.txt"
+          find "$evidence" -maxdepth 1 -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > "$evidence/SHA256SUMS"
       - name: Stop the Android emulator and finish the environment evidence
         if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
         run: node scripts/ci/c004-android-emulator.mjs finish
