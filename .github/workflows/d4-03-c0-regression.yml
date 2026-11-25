@@ -81,7 +81,7 @@ jobs:
         run: bash scripts/ci/c004-node-path.sh
       - name: Inspect and start the Android test emulator
         id: emulator
-        run: node scripts/ci/c004-android-emulator.mjs start
+        run: node tests/d4-03-platforms/c004-android-emulator.mjs start
       - name: Load the desktop artifacts from this workflow attempt
         if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
@@ -184,7 +184,7 @@ jobs:
           find "$evidence" -maxdepth 1 -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > "$evidence/SHA256SUMS"
       - name: Stop the Android emulator and finish the environment evidence
         if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
-        run: node scripts/ci/c004-android-emulator.mjs finish
+        run: node tests/d4-03-platforms/c004-android-emulator.mjs finish
       - name: Preserve raw emulator environment evidence
         if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
