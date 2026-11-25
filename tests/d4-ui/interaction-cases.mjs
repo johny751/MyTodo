@@ -62,7 +62,7 @@ export async function runCases(api){
   assert.ok(createdId,'create case did not produce a task');await open(createdId);editedTitle=title+' · 已编辑';
   await api.fill(field('title'),editedTitle);await api.fill(field('reminderMode'),'custom');await api.fill(field('reminderAt'),today+'T09:40');await api.submit('form[data-form="task-edit"]');
   const edited=await byId(createdId);assert.equal(edited.title,editedTitle);assert.equal(edited.repeat.anchor,today+'T10:00');assert.equal(edited.reminder.mode,'custom');assert.equal(edited.reminder.at,today+'T09:40');
-  await open(createdId);await api.fill('form[data-form="subtask-add"] input[name="title"]','D4 合成子步骤 '+runId);await api.submit('form[data-form="subtask-add"]');
+  await open(createdId);await api.fill('form[data-form="subtask-add"] textarea[name="title"]','D4 合成子步骤 '+runId);await api.submit('form[data-form="subtask-add"]');
   const parent=await byId(createdId);assert.equal(parent.subtasks.length,1);childId=parent.subtasks[0].id;assert.equal(parent.subtasks[0].project,parent.project);assert.deepEqual(parent.subtasks[0].tags,parent.tags);
   assert.equal((await core()).tasks.some(t=>t.id===childId),false);await api.click('.modal [data-action="task-toggle"][data-id="'+childId+'"]');assert.equal((await byId(childId)).done,true);
   assert.equal(await read('window.D4Prototype.repo.demo.taskLinks['+JSON.stringify(childId)+'].projectId'),'project-product');await close();return {id:createdId,childId,nestedArrayPreserved:true,customReminder:edited.reminder.at};
