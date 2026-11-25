@@ -70,6 +70,24 @@ try {
     await cmd('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});touching=false;await wait(550);await settle();
    }finally{if(touching)await cmd('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});}
   },
+  async mouseDrag(source,target,{pointerType='mouse',after=false}={}){
+   assert.ok(['mouse','pen'].includes(pointerType),'Mouse drag requires a real mouse or pen protocol channel');
+   const fraction=after ? .95 : .1;
+   await touchPoint(target,{fraction,scroll:true});await touchPoint(source,{scroll:true});
+   const p=await touchPoint(source),to=await touchPoint(target,{fraction}),id=await evaluate(`document.querySelector(${JSON.stringify(source)}).closest('.task-row')?.dataset.taskId`);let pressed=false;
+   try{
+    await cmd('Input.dispatchMouseEvent',{type:'mouseMoved',x:p.x,y:p.y,pointerType,buttons:0});
+    await evaluate('(()=>{window.__d4PointerProbe=null;document.addEventListener("pointerdown",event=>{window.__d4PointerProbe={pointerType:event.pointerType,trusted:event.isTrusted};},{capture:true,once:true});return true;})()');
+    await cmd('Input.dispatchMouseEvent',{type:'mousePressed',x:p.x,y:p.y,pointerType,button:'left',buttons:1,clickCount:1});pressed=true;
+    assert.deepEqual(await evaluate('window.__d4PointerProbe'),{pointerType,trusted:true},'The requested CDP channel emits a trusted pointer event');
+    assert.ok(await evaluate(`Array.from(document.querySelectorAll('.task-row.dragging')).some(row=>row.dataset.taskId===${JSON.stringify(id)})`),'Mouse or pen handle press activates the requested task');
+    for(let i=1;i<=12;i++){await cmd('Input.dispatchMouseEvent',{type:'mouseMoved',x:p.x+(to.x-p.x)*i/12,y:p.y+(to.y-p.y)*i/12,pointerType,button:'left',buttons:1});await wait(20);}
+    const hit=await evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(target)}),hit=document.elementFromPoint(${to.x},${to.y});return !!el&&!!hit&&(el===hit||el.contains(hit));})()`);
+    assert.ok(hit,'Mouse or pen release coordinates must still hit the requested target');
+    await cmd('Input.dispatchMouseEvent',{type:'mouseReleased',x:to.x,y:to.y,pointerType,button:'left',buttons:0,clickCount:1});pressed=false;await settle();
+    assert.equal(await evaluate('!!document.querySelector(".dragging,.drag-ghost,.drop-target,.swiping")'),false,'Mouse or pen release leaves no active gesture decoration');
+   }finally{if(pressed){await api.key(null,'Escape');await cmd('Input.dispatchMouseEvent',{type:'mouseReleased',x:to.x,y:to.y,pointerType,button:'left',buttons:0,clickCount:1});}await evaluate('delete window.__d4PointerProbe');}
+  },
   async holdScroll(source,list,hold){
    await touchPoint(source,{scroll:true});const p=await touchPoint(source),to=await touchPoint(list,{edge:true});
    assert.ok(to.scrollHeight>to.clientHeight&&to.scrollTop+to.clientHeight<to.scrollHeight-1,'Synthetic list must have actual room to scroll downward');

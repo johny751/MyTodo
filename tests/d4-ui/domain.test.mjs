@@ -115,6 +115,61 @@ test('D4 malformed/foreign demo record is preserved and never read as production
  }
 });
 
+test('D4 raw unsupported reminder times are rejected before normalization for roots and descendants',()=>{
+ const unsupported=['2026-11-25T09:10:00','2026-11-25T09:10:37','2026-11-25T09:10:37.123','2026-11-25T09:10Z','2026-02-30T09:10'];
+ for(const at of unsupported)for(const nested of [false,true]){
+  const incoming=empty(),reminded=task('raw-reminder',{reminder:{mode:'custom',minutes:0,days:0,at}});
+  incoming.tasks=[nested?task('parent',{subtasks:[reminded]}):reminded];
+  const original=JSON.stringify(incoming);
+  assert.throws(()=>repository({state:incoming}),error=>/reminder\.at/.test(error.message)&&/raw-reminder/.test(error.message)&&/分钟/.test(error.message));
+  assert.equal(JSON.stringify(incoming),original);
+ }
+ const valid=empty();valid.tasks=[task('minute',{reminder:{mode:'custom',at:'2026-11-25T09:10'}})];
+ const r=repository({state:valid});assert.equal(r.reminderAt('minute'),Date.parse('2026-11-25T09:10:00+08:00'));
+ const before=r.getTask('minute');r.updateTask('minute',{title:'只改标题'},before);
+ assert.deepEqual(r.getTask('minute').reminder,before.reminder);assert.equal(r.getTask('minute').reminderAt,before.reminderAt);
+});
+
+test('D4 rejected raw reminder storage stays byte-exact through fallback session writes',()=>{
+ const state=empty();state.tasks=[task('stored-parent',{subtasks:[task('stored-child',{reminder:{mode:'custom',at:'2026-11-25T09:10:37'}})]})];
+ const raw=JSON.stringify({kind:STORAGE_KIND,version:1,state,demo:{meetings:[]}},null,2),storage=memoryStorage({[STORAGE_KEY]:raw});
+ const r=repository({storage});assert.equal(r.persistence().loaded,false);assert.equal(r.persistence().mode,'memory');
+ assert.match(r.persistence().loadError,/stored-child.*reminder\.at/);assert.equal(storage.map.get(STORAGE_KEY),raw);
+ r.createTask({id:'session-only',title:'备用会话草稿'});r.updateDemo({meetings:[{id:'session-only'}]});r.reset();
+ assert.equal(storage.map.get(STORAGE_KEY),raw);assert.equal(storage.writes.length,0);
+ assert.deepEqual([...new Set(storage.reads)],[STORAGE_KEY]);
+});
+
+test('D4 reminder rejection rolls back replace reset transactions and batches without events or writes',()=>{
+ const seed=empty();seed.tasks=[task('original',{subtasks:[task('nested')]})];
+ const storage=memoryStorage(),r=repository({state:seed,storage}),events=[];r.subscribe((_state,event)=>events.push(event.type));
+ const before=r.state,beforeDemo=r.demo,invalid=structuredClone(before);
+ invalid.tasks[0].subtasks[0].reminder={mode:'custom',at:'2026-11-25T09:10:37'};
+ const operations=[()=>r.replaceState(invalid,{preserveDemo:false}),()=>r.reset(invalid),()=>r.transaction(s=>{s.tasks=structuredClone(invalid.tasks);}),
+  ()=>r.batch(()=>{r.updateTask('original',{title:'未提交'});r.updateDemo({meetings:[{id:'uncommitted'}]});try{r.replaceState(invalid);}catch{};})];
+ for(const operation of operations){assert.throws(operation,/reminder\.at/);assert.deepEqual(r.state,before);assert.deepEqual(r.demo,beforeDemo);assert.equal(storage.writes.length,0);assert.equal(events.length,0);}
+ assert.equal(invalid.tasks[0].subtasks[0].reminder.at,'2026-11-25T09:10:37');
+});
+
+test('D4 task edits reject raw reminder patches and editor baselines before frozen three-way merging',()=>{
+ const seed=empty();seed.tasks=[task('editable',{reminder:{mode:'custom',at:'2026-11-25T09:10'}})];
+ const storage=memoryStorage(),r=repository({state:seed,storage}),before=r.state,base=r.getTask('editable');
+ const raw={mode:'custom',at:'2026-11-25T09:10:37'},badBase={...structuredClone(base),reminder:raw};
+ const operations=[()=>r.createTask({id:'bad-new',title:'拒绝新建',reminder:raw}),()=>r.updateTask('editable',{reminder:raw}),
+  ()=>r.updateTask('editable',{reminder:raw},base),()=>r.updateTask('editable',{title:'不会覆盖'},badBase),
+  ()=>r.updateTask('editable',{reminder:base.reminder},badBase)];
+ for(const operation of operations){assert.throws(operation,/reminder\.at/);assert.deepEqual(r.state,before);assert.equal(storage.writes.length,0);}
+ assert.equal(badBase.reminder.at,'2026-11-25T09:10:37');
+});
+
+test('D4 reminder preflight keeps existing tree bounds and rejects cyclic raw input',()=>{
+ const chain=depth=>{const state=empty();let node=task('depth-0');state.tasks=[node];for(let i=1;i<=depth;i++){const child=task('depth-'+i);node.subtasks=[child];node=child;}return state;};
+ assert.equal(flattenTasks(repository({state:chain(64)}).state.tasks).length,65);
+ assert.throws(()=>repository({state:chain(65)}),/64/);
+ const cyclic=empty(),node=task('cycle');cyclic.tasks=[node];node.subtasks=[node];assert.throws(()=>repository({state:cyclic}),/循环|重复引用/);
+ const tooMany=empty();tooMany.tasks=Array.from({length:100001},(_,i)=>task('limit-'+i));assert.throws(()=>repository({state:tooMany}),/100,000/);
+});
+
 test('D4 batch core edits and independent mock updates keep V2 fields and observer snapshots',()=>{
  const r=repository(),events=[],stop=r.subscribe((s,e)=>{events.push(e.type);s.tasks.length=0;});r.createTask({id:'batch',title:'批量任务',project:'旧名称'});
  r.transaction(core=>{core.tasks[0].project='新名称';core.projects[0].name='新名称';});r.updateDemo({meetings:[{id:'m',projectId:'mock-project',status:'planned'}]});

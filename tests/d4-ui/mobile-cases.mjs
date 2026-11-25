@@ -19,10 +19,63 @@ export async function runMobileCases(api){
  await api.tap('[data-action=close-modal]');
  await api.check('M-swipe-cancel Touch move does not commit before release and cancellation preserves task',async()=>{const before=await read('D4Prototype.repo.getTask("d4-task-0")'),p=await api.point('[data-task-id="d4-task-0"] .task-title');await api.swipe([p.x,p.y],[p.x+100,p.y],{cancel:true,beforeRelease:async()=>{assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0")'),before);assert.equal(await read('!!document.querySelector(".task-menu-actions")'),false);}});assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0")'),before);});
  await api.check('M-zoom-cross Single quadrant has three live cross-move drop targets',async()=>{await api.tap('[data-action=quadrant-focus][data-id="0"]');const before=await read('D4Prototype.repo.getTask("d4-task-0")');assert.equal(await read('document.querySelectorAll(".quadrant-peek").length'),3);await api.drag('.single-quadrant [data-task-id="d4-task-0"] .task-title','.quadrant-peek[data-quadrant="1"]',{hold:3200});const after=await read('D4Prototype.repo.getTask("d4-task-0")');assert.equal(after.quadrant,1);for(const key of Object.keys(before).filter(k=>!['quadrant','order'].includes(k)))assert.deepEqual(after[key],before[key],key);await api.tap('[data-action=quadrant-back]');await api.tap('[data-task-id="d4-task-0"] [data-action=task-menu]');await api.tap('[data-action=task-move][data-id="d4-task-0|0"]');});
- await api.check('M-subtasks Touch and keyboard sort siblings without promoting or completing children',async()=>{await api.tap('[data-task-id="d4-task-0"] [data-action=task-open]');const before=await read('D4Prototype.repo.getTask("d4-task-0")');await api.drag('[data-subtask-list] [data-task-id="d4-sub-0"] .drag-handle','[data-subtask-list] [data-task-id="d4-sub-1"]',{hold:100,after:true});const after=await read('D4Prototype.repo.getTask("d4-task-0")');assert.deepEqual(after.subtasks.map(t=>t.id),['d4-sub-1','d4-sub-0']);for(const t of before.subtasks){const next=after.subtasks.find(x=>x.id===t.id);for(const key of Object.keys(t).filter(k=>k!=='order'))assert.deepEqual(next[key],t[key],key);}assert.equal(await read('D4Prototype.repo.state.tasks.some(t=>t.id==="d4-sub-0")'),false);await api.key('[data-task-id="d4-sub-0"] .drag-handle','ArrowUp');assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0").subtasks.map(t=>t.id)'),['d4-sub-0','d4-sub-1']);
+ await api.check('M-subtasks Touch order, one commit, immediate close and real keyboard order preserve siblings',async()=>{
+  await api.tap('[data-task-id="d4-task-0"] [data-action=task-open]');
+  const before=await read('D4Prototype.repo.getTask("d4-task-0")'),draft=before.notes+'\n子任务排序期间保留的父任务草稿';
+  await api.fill('[data-form=task-edit] [name=notes]',draft);
+  await api.drag('[data-subtask-list] [data-task-id="d4-sub-0"] .drag-handle','[data-subtask-list] [data-task-id="d4-sub-1"]',{hold:100,after:true});
+  const after=await read('D4Prototype.repo.getTask("d4-task-0")');
+  assert.deepEqual(after.subtasks.map(t=>t.id),['d4-sub-1','d4-sub-0']);
+  assert.deepEqual(await read('[...document.querySelectorAll("[data-subtask-list] .task-row")].map(row=>row.dataset.taskId)'),['d4-sub-1','d4-sub-0'],'The visible sibling list follows touch order immediately');
+  assert.equal(after.notes,before.notes,'Sorting does not silently save the parent draft');
+  assert.equal(await read('document.querySelector("[data-form=task-edit] [name=notes]").value'),draft,'Sorting retains the unsaved parent field');
+  for(const t of before.subtasks){const next=after.subtasks.find(x=>x.id===t.id);for(const key of Object.keys(t).filter(k=>k!=='order'))assert.deepEqual(next[key],t[key],key);}
+  assert.equal(await read('D4Prototype.repo.state.tasks.some(t=>t.id==="d4-sub-0")'),false);
+  // A real zero-movement handle touch commits once. Compatibility MouseEvents
+  // must not start a second drag; its synthetic trailing click remains blocked.
+  await read('(()=>{const probe={batches:0};probe.stop=D4Prototype.repo.subscribe((state,detail)=>{if(detail.type==="batch")probe.batches++;});window.__d4SubtaskGestureProbe=probe;return true;})()');
+  try{
+   const immediateStart=await read('performance.now()');
+   await api.tap('[data-subtask-list] [data-task-id="d4-sub-0"] .drag-handle');
+   assert.equal(await read('window.__d4SubtaskGestureProbe.batches'),1,'One real handle touch causes one repository batch');
+   const replay=await read('(()=>{const handle=document.querySelector("[data-subtask-list] [data-task-id=\\"d4-sub-0\\"] .drag-handle"),r=handle.getBoundingClientRect(),options={bubbles:true,cancelable:true,clientX:r.left+r.width/2,clientY:r.top+r.height/2,button:0};handle.dispatchEvent(new MouseEvent("mousedown",{...options,buttons:1}));handle.dispatchEvent(new MouseEvent("mouseup",{...options,buttons:0}));const target=handle.closest(".task-row").querySelector(".task-title"),event=new MouseEvent("click",{bubbles:true,cancelable:true});target.dispatchEvent(event);return {batches:window.__d4SubtaskGestureProbe.batches,prevented:event.defaultPrevented,dirty:!!document.querySelector(".dragging,.drag-ghost,.drop-target,.swiping")};})()');
+   assert.equal(replay.batches,1,'Compatibility mouse replay cannot submit a second order change');
+   assert.equal(replay.prevented,true,'The original task trailing click is still suppressed');
+   assert.equal(replay.dirty,false,'Touch and compatibility events leave no active gesture decoration');
+   assert.equal(await read('document.querySelector("[data-form=task-edit] [name=id]").value'),'d4-task-0','The trailing click does not open a child detail');
+   assert.equal(await read('document.querySelector("[data-form=task-edit] [name=notes]").value'),draft,'Handle touch retains the parent draft');
+   const closePoint=await api.point('[data-action=close-modal]');
+   assert.equal(await read('(()=>{const target=document.querySelector("[data-action=close-modal]"),hit=document.elementFromPoint('+closePoint.x+','+closePoint.y+');return !!hit&&(hit===target||target.contains(hit));})()'),true,'The immediate close tap hits the actual close button');
+   await api.tap('[data-action=close-modal]',closePoint);
+   const immediateElapsed=(await read('performance.now()'))-immediateStart;
+   assert.ok(immediateElapsed<500,'Real close elapsed '+immediateElapsed.toFixed(1)+'ms; it must complete inside the original 500ms trailing-click window');
+   assert.equal(await read('!!document.querySelector("[data-form=task-edit]")'),false,'Real close dismisses the subtask editor');
+   assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0").subtasks.map(t=>t.id)'),['d4-sub-1','d4-sub-0'],'Closing preserves the touch order');
+   assert.equal(await read('D4Prototype.repo.getTask("d4-task-0").notes'),draft,'The explicit close saves the retained draft');
+  }finally{await read('(()=>{window.__d4SubtaskGestureProbe?.stop();delete window.__d4SubtaskGestureProbe;return true;})()');}
+  // Focus is not a touch: ArrowUp must perform the move itself and exercise
+  // the existing keyboard action close behavior instead of a boundary toast.
+  await api.tap('[data-task-id="d4-task-0"] [data-action=task-open]');
+  assert.equal(await read('(()=>{const handle=document.querySelector("[data-subtask-list] [data-task-id=\\"d4-sub-0\\"] .drag-handle");handle.focus();return document.activeElement===handle;})()'),true);
+  await api.key(null,'ArrowUp');
+  assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0").subtasks.map(t=>t.id)'),['d4-sub-0','d4-sub-1'],'The keyboard itself moves the second child upward');
+  assert.equal(await read('!!document.querySelector("[data-form=task-edit]")'),false,'Successful keyboard reorder retains its close behavior');
+ });
+ for(const pointerType of ['mouse','pen'])await api.check('M-'+pointerType+' Real CDP pointer sorting preserves task identity',async()=>{
+  await api.tap('[data-task-id="d4-task-0"] [data-action=task-open]');
+  const before=await read('D4Prototype.repo.getTask("d4-task-0")'),source='[data-subtask-list] [data-task-id="d4-sub-0"] .drag-handle',target='[data-subtask-list] [data-task-id="d4-sub-1"]';
+  await api.configure(412,915,false);
+  try{
+   await api.mouseDrag(source,target,{pointerType,after:true});
+   assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0").subtasks.map(t=>t.id)'),['d4-sub-1','d4-sub-0']);
+   assert.deepEqual(await read('[...document.querySelectorAll("[data-subtask-list] .task-row")].map(row=>row.dataset.taskId)'),['d4-sub-1','d4-sub-0']);
+   await api.mouseDrag(source,target,{pointerType,after:false});
+   const after=await read('D4Prototype.repo.getTask("d4-task-0")');
+   assert.deepEqual(after.subtasks.map(t=>t.id),['d4-sub-0','d4-sub-1']);
+   for(const t of before.subtasks){const next=after.subtasks.find(x=>x.id===t.id);for(const key of Object.keys(t).filter(k=>k!=='order'))assert.deepEqual(next[key],t[key],key);}
+  }finally{await api.configure(412,915,true);}
   await api.tap('[data-action=close-modal]');
-  assert.equal(await read('!!document.querySelector("[data-form=task-edit]")'),false,'Subtask editor must close before returning to the board');
-  assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0").subtasks.map(t=>t.id)'),['d4-sub-0','d4-sub-1'],'Closing the editor preserves the final sibling order');
+  assert.equal(await read('!!document.querySelector("[data-form=task-edit]")'),false);
  });
  await api.check('M-large Real scroll and held drag auto-scroll preserve every task',async()=>{assert.equal(await read('!!document.querySelector("#modal-root .modal-shade")'),false,'Long-list drag starts on an unobstructed board');await read('(()=>{D4Prototype.repo.batch(()=>{for(let i=0;i<45;i++)D4Prototype.repo.createTask({id:"d403-scroll-"+i,title:"合成长列表 "+i,quadrant:0,start:DemoDomain.helpers.dayKey()+"T12:00"});});return true;})()');await api.tap('[data-action=quadrant-focus][data-id="0"]');const list='[data-quadrant="0"] .quadrant-list',before=await read('D4Prototype.repo.state.tasks.length');await api.holdScroll('[data-task-id="d4-task-0"] .task-title',list,3200);assert.ok(await read('document.querySelector('+JSON.stringify(list)+').scrollTop')>0);assert.equal(await read('D4Prototype.repo.state.tasks.length'),before);await api.screenshot('mobile-long-list-scroll');await api.tap('[data-action=quadrant-back]');});
 }

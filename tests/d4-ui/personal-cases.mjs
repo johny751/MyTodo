@@ -313,6 +313,93 @@ export async function runPersonalCases(a) {
     await close();
   });
 
+  await a.check('Workspace import refuses nested second-bearing reminder before clearing raw JSON or replacing any domain', async () => {
+    await a.navigate('data-system');
+    const original = await a.eval('({kind:DemoDomain.STORAGE_KIND,version:1,state:D4Prototype.repo.state,demo:D4Prototype.repo.demo})');
+    const incoming = structuredClone(original), parent = incoming.state.tasks[0];
+    parent.subtasks.push({...structuredClone(parent), id:'d4-import-raw-reminder', title:'含秒合成导入', repeat:null, reminder:{mode:'custom',at:'2031-11-25T09:10:37'}, subtasks:[]});
+    const raw = JSON.stringify(incoming, null, 2);
+    await a.click('[data-action="personal-workspace-import"]');
+    await a.fill('.modal [name="json"]', raw);
+    const stored = await a.eval('localStorage.getItem(DemoDomain.STORAGE_KEY)');
+    await a.submit('[data-form="personal-workspace-import"]');
+    assert.deepEqual(await a.eval('D4Prototype.repo.state'), original.state);
+    assert.deepEqual(await a.eval('D4Prototype.repo.demo'), original.demo);
+    assert.equal(await a.eval('localStorage.getItem(DemoDomain.STORAGE_KEY)'), stored);
+    assert.equal(await a.eval('document.querySelector("[data-form=personal-workspace-import] [name=json]").value'), raw);
+    assert.match(await a.eval('document.querySelector("#toast").textContent'), /d4-import-raw-reminder.*reminder\.at.*分钟/);
+    // Correcting the same real form to an unchanged supported workspace succeeds.
+    await a.fill('.modal [name="json"]', JSON.stringify(original));
+    await a.submit('[data-form="personal-workspace-import"]');
+    assert.equal(await a.eval('!!document.querySelector("[data-form=personal-workspace-import]")'), false);
+    assert.deepEqual(await a.eval('D4Prototype.repo.state'), original.state);
+    assert.deepEqual((await demo()).workspaceBackup.state, original.state);
+  });
+
+  await a.check('Workspace snapshot restore rejects second-bearing reminder and retains current state plus backup', async () => {
+    await a.navigate('data-system');
+    const original = await a.eval('D4Prototype.repo.demo');
+    try {
+      await a.eval(`(()=>{const r=D4Prototype.repo,backup={state:r.state,demo:r.demo,at:new Date().toISOString()};delete backup.demo.personal.workspaceBackup;backup.state.tasks[0].reminder={mode:'custom',at:'2031-11-25T09:10:37'};r.updateDemo(d=>{d.personal.workspaceBackup=backup;});return true;})()`);
+      const before = await a.eval('({state:D4Prototype.repo.state,demo:D4Prototype.repo.demo,raw:localStorage.getItem(DemoDomain.STORAGE_KEY)})');
+      await a.click('[data-action="personal-workspace-restore"]');
+      await a.click('[data-action="personal-workspace-restore-confirm"]');
+      assert.deepEqual(await a.eval('D4Prototype.repo.state'), before.state);
+      assert.deepEqual(await a.eval('D4Prototype.repo.demo'), before.demo);
+      assert.equal(await a.eval('localStorage.getItem(DemoDomain.STORAGE_KEY)'), before.raw);
+      assert.equal(await a.eval('!!document.querySelector("[data-action=personal-workspace-restore-confirm]")'), true);
+      assert.match(await a.eval('document.querySelector("#toast").textContent'), /reminder\.at.*分钟/);
+      await close();
+    } finally {
+      await a.eval('D4Prototype.repo.updateDemo(d=>{d.personal.workspaceBackup='+JSON.stringify(original.personal.workspaceBackup)+';})');
+    }
+  });
+
+  await a.check('Rejected raw reminder storage shows a persistent load warning and never overwrites its original bytes', async () => {
+    const previous = await a.eval('localStorage.getItem(DemoDomain.STORAGE_KEY)');
+    assert.ok(previous, 'Existing isolated workspace is available for exact restoration');
+    const viewport = await a.eval('({width:innerWidth,height:innerHeight,mobile:matchMedia("(pointer:coarse)").matches})');
+    const incoming = JSON.parse(previous);
+    const longId = 'd4-' + 'x'.repeat(117);
+    incoming.state.tasks[0].id=longId;
+    incoming.state.tasks[0].reminder={mode:'custom',at:'2031-11-25T09:10:37'};
+    const raw = JSON.stringify(incoming, null, 2);
+    try {
+      await a.eval('localStorage.setItem(DemoDomain.STORAGE_KEY,'+JSON.stringify(raw)+')');
+      await a.configure(360,640,true);
+      await a.reload();
+      assert.equal(await a.eval('D4Prototype.repo.persistence().loaded'), false);
+      assert.match(await a.eval('D4Prototype.repo.persistence().loadError'), /reminder\.at.*分钟/);
+      assert.match(await a.eval('document.querySelector("[data-storage-load-error][role=alert]").textContent'), /存储原件未覆盖/);
+      assert.equal(await a.eval('localStorage.getItem(DemoDomain.STORAGE_KEY)'), raw);
+      await a.navigate('settings');
+      assert.match(await a.eval('document.querySelector("[data-storage-load-error]").textContent'), /备用体验数据/);
+      await a.submit('[data-form="settings"]');
+      assert.equal(await a.eval('localStorage.getItem(DemoDomain.STORAGE_KEY)'), raw);
+      const geometry = await a.eval(`(()=>{const notice=document.querySelector('[data-storage-load-error]'),page=document.querySelector('.workspace>.page'),error=notice.querySelector('p'),text=error.firstChild,id=${JSON.stringify(longId)},start=text.textContent.indexOf(id);if(start<0)throw Error('Missing complete long task ID in load notice');const range=document.createRange();range.setStart(text,start);range.setEnd(text,start+id.length);const box=notice.getBoundingClientRect(),main=page.getBoundingClientRect();return {width:innerWidth,height:innerHeight,notice:{left:box.left,right:box.right,top:box.top,bottom:box.bottom,height:box.height,clientWidth:notice.clientWidth,clientHeight:notice.clientHeight,scrollWidth:notice.scrollWidth,scrollHeight:notice.scrollHeight},page:{top:main.top,bottom:main.bottom,height:main.height},idRects:Array.from(range.getClientRects()).map(r=>({left:r.left,right:r.right,height:r.height}))};})()`);
+      assert.equal(geometry.width,360);assert.equal(geometry.height,640);
+      assert.ok(geometry.notice.height>0&&geometry.notice.height<=Math.min(geometry.height*.3,240)+1,'Load warning stays within its viewport height budget');
+      assert.ok(geometry.notice.left>=0&&geometry.notice.right<=geometry.width+1&&geometry.notice.top>=0&&geometry.notice.bottom<=geometry.height,'Warning remains inside the small viewport');
+      assert.ok(geometry.notice.scrollHeight>geometry.notice.clientHeight,'Long warning requires vertical scrolling instead of clipping');
+      assert.ok(geometry.notice.scrollWidth<=geometry.notice.clientWidth+1,'Long task ID does not create horizontal overflow');
+      assert.ok(geometry.idRects.length>1&&geometry.idRects.every(r=>r.height>0&&r.left>=geometry.notice.left-1&&r.right<=geometry.notice.right+1),'Complete long ID wraps into lines inside the warning');
+      assert.ok(geometry.page.top>=geometry.notice.bottom-1&&geometry.page.height>=100&&geometry.page.bottom<=geometry.height+1,'Main content retains a separate usable scroll area below the warning');
+      const end = await a.eval(`(()=>{const notice=document.querySelector('[data-storage-load-error]');notice.scrollTop=notice.scrollHeight;const box=notice.getBoundingClientRect(),last=notice.lastElementChild.getBoundingClientRect();return {top:notice.scrollTop,max:notice.scrollHeight-notice.clientHeight,lastBottom:last.bottom,bottom:box.bottom};})()`);
+      assert.ok(end.top>0&&Math.abs(end.top-end.max)<=1&&end.lastBottom<=end.bottom+1,'Scrolling reaches the final original-storage preservation message');
+      await a.eval('document.querySelector("[data-storage-load-error]").scrollTop=0');
+      await a.screenshot('reminder-original-storage-protected');
+    } finally {
+      try {
+        await a.eval('localStorage.setItem(DemoDomain.STORAGE_KEY,'+JSON.stringify(previous)+')');
+        await a.reload();
+      } finally {
+        await a.configure(viewport.width,viewport.height,viewport.mobile);
+      }
+    }
+    assert.equal(await a.eval('D4Prototype.repo.persistence().loaded'), true);
+    assert.equal(await a.eval('!!document.querySelector("[data-storage-load-error]")'), false);
+  });
+
   await a.check('Workspace import rejects malformed timer or draft before replacing core or demo', async () => {
     await a.navigate('data-system');
     const before = await read(), p = await demo();
