@@ -21,6 +21,7 @@
 /* Reserve the measured reminder dock without blocking task/peek hit targets. */
 .workspace{display:flex;flex-direction:column;min-height:0;height:100vh;height:100dvh;padding-bottom:var(--reminder-dock-space,0px);overflow:hidden}
 .workspace>.topbar{flex:0 0 auto}
+.workspace>[data-storage-load-error]{flex:0 1 auto;min-height:0;max-height:30vh;max-height:min(30dvh,240px);overflow:auto;overscroll-behavior:contain;overflow-wrap:anywhere}
 .workspace>.page{flex:1;min-height:0;width:100%;margin:0 auto;overflow-y:auto;scroll-padding-bottom:8px}
 #reminder-notice:not(:empty){max-height:25vh;max-height:min(25dvh,240px);overflow-y:auto;overscroll-behavior:contain}
 .workspace>.page .board.single-quadrant{height:max(180px,calc(100dvh - 330px - var(--reminder-dock-space,0px)));min-height:180px}

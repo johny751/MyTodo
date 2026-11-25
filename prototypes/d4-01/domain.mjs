@@ -14,6 +14,30 @@ export const helpers=Object.freeze({dayKey:matureDayKey,dateRange,shiftDate,norm
 const clone=value=>structuredClone(value);
 const own=(value,key)=>Object.prototype.hasOwnProperty.call(value,key);
 const editableFields=new Set(['title','quadrant','start','end','allDay','repeat','reminder','weight','review','project','place','tags','notes']);
+// The frozen scheduler accepts minute precision. Refuse lossy synthetic input
+// before normalization or three-way editing can silently clear its original at.
+function assertReminderInputs(tasks){
+ const seen=new WeakSet();let count=0;
+ function visit(list,depth){
+  if(!Array.isArray(list))return;
+  for(const task of list){
+   if(++count>100000)throw new Error('任务和子任务总数超过 100,000 条，请先整理数据');
+   if(depth>64)throw new Error('子任务嵌套超过 64 层，未保存此次修改');
+   if(!task||typeof task!=='object')continue;
+   if(seen.has(task))throw new Error('任务结构包含循环或重复引用，未保存此次修改');
+   seen.add(task);
+   const rule=task.reminder;
+   if(rule&&['offset','day','custom'].includes(rule.mode)&&rule.at!==undefined&&rule.at!==null&&rule.at!==''&&!Number.isFinite(parseTime(rule.at))){
+    const id=typeof task.id==='string'?task.id.slice(0,120):'未命名';
+    throw new Error('任务 '+id+' 的 reminder.at 不能原样读取：当前版本仅支持分钟精度的有效北京时间；原输入未修改，请保留原始备份');
+   }
+   if(Array.isArray(task.subtasks)&&task.subtasks.length>100)throw new Error('每条任务最多容纳 100 个直接子任务');
+   visit(task.subtasks,depth+1);
+  }
+ }
+ visit(tasks,0);
+}
+export function normalizeSyntheticState(input){assertReminderInputs(input?.tasks);return normalizeState(input);}
 function mockObject(value){
  if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('演示扩展必须是对象');
  for(const key of Object.keys(value))if(['__proto__','prototype','constructor'].includes(key))throw new Error('无效的演示扩展字段');
@@ -38,10 +62,11 @@ export function createRepository(seedStorage=null){
   const uuid=globalThis.crypto?.randomUUID?.();
   return 'd4-demo-'+(uuid||Date.now().toString(36)+'-'+(++serial).toString(36)+'-'+Math.random().toString(36).slice(2,10));
  };
- const initialState=normalizeState(clone(options.state||seedState(matureDayKey(new Date(now())))));
+ const initialState=normalizeSyntheticState(clone(options.state||seedState(matureDayKey(new Date(now())))));
  const initialDemo=mockObject(options.demo||{});
  let state=clone(initialState),demo=clone(initialDemo),storage=null;
- const persistenceInfo={key:STORAGE_KEY,mode:'memory',loaded:false,error:null};
+ const persistenceInfo={key:STORAGE_KEY,mode:'memory',loaded:false,error:null,loadError:null};
+ let loadingSaved=false;
  const listeners=new Set();
  let batchDepth=0,batchDirty=false,batchSnapshot=null,batchFailure=null;
  try{
@@ -49,14 +74,16 @@ export function createRepository(seedStorage=null){
   if(storage&&typeof storage.getItem==='function'&&typeof storage.setItem==='function'){
    persistenceInfo.mode='localStorage';const raw=storage.getItem(STORAGE_KEY);
    if(raw!==null&&raw!==undefined){
+    loadingSaved=true;
     const saved=JSON.parse(raw);
     if(saved.kind!==STORAGE_KIND||saved.version!==1)throw new Error('不支持的演示存储格式');
-    state=normalizeState(saved.state);demo=mockObject(saved.demo||{});persistenceInfo.loaded=true;
+    state=normalizeSyntheticState(saved.state);demo=mockObject(saved.demo||{});persistenceInfo.loaded=true;
    }
   }else storage=null;
  }catch(error){
   state=clone(initialState);demo=clone(initialDemo);storage=null;
   persistenceInfo.mode='memory';persistenceInfo.error=String(error.message||error);
+  if(loadingSaved)persistenceInfo.loadError=persistenceInfo.error;
  }
  function persist(){
   if(!storage)return;
@@ -69,7 +96,7 @@ export function createRepository(seedStorage=null){
  function syncCallback(fn){if(typeof fn!=='function'||Object.prototype.toString.call(fn)==='[object AsyncFunction]')throw new Error('工作区修改必须是同步函数');}
  function syncResult(value){if(value&&typeof value.then==='function')throw new Error('工作区修改不能返回 Promise/async 结果');return value;}
  function commit(mutator,type='transaction'){
-  return protectedChange(()=>{const next=clone(state),value=syncResult(mutator(next)),normalized=normalizeState(next);
+  return protectedChange(()=>{const next=clone(state),value=syncResult(mutator(next)),normalized=normalizeSyntheticState(next);
    state=normalized;publish(type);return value;});
  }
  function required(tasks,id){const entry=findTaskEntry(tasks,id);if(!entry)throw new Error('任务不存在');return entry;}
@@ -83,7 +110,7 @@ export function createRepository(seedStorage=null){
   if(task.place&&!core.places.includes(task.place))core.places.push(task.place);
   if(task.project&&!core.projects.some(p=>p.name===task.project))core.projects.push({id:freshId(core),name:task.project,description:'',archived:false});
  }
- function checkedSaved(core,id){const normalized=normalizeState(core),task=required(normalized.tasks,id).task;validateTask(task);return task;}
+ function checkedSaved(core,id){const normalized=normalizeSyntheticState(core),task=required(normalized.tasks,id).task;validateTask(task);return task;}
  function changedFields(base,patch){
   if(!patch||typeof patch!=='object'||Array.isArray(patch))throw new Error('任务修改必须是对象');
   const updated=clone(base);
@@ -113,6 +140,7 @@ export function createRepository(seedStorage=null){
     const base={id,order:0,title:'',quadrant:parent?.quadrant??0,done:false,start:parent?.start||matureDayKey(new Date(stamp))+'T09:00',end:'',allDay:parent?.allDay||false,repeat:null,reminder:null,weight:0,review:'',project:parent?.project||'',place:parent?.place||'',tags:parent?[...parent.tags]:[],notes:'',subtasks:[],seriesId:'',generatedFrom:'',createdAt:stamp,completedAt:'',reminderAt:null};
     const patch={...fields};delete patch.id;
     const updated=changedFields(base,patch);
+     assertReminderInputs([updated]);
     saveTaskRecord(core,updated,null,parentId);classifications(core,updated);checkedSaved(core,id);
     if(own(fields,'done')&&fields.done===true)matureSetTaskDone(core,id,true,stamp);
    },'createTask');return taskResult(id);
@@ -125,6 +153,8 @@ export function createRepository(seedStorage=null){
    commit(core=>{
     if(base!==null&&(!base||typeof base!=='object'||Array.isArray(base)||base.id!==id))throw new Error('任务编辑基线与任务 ID 不匹配');
     const task=required(core.tasks,id).task,wasDone=task.done,updated=changedFields(base===null?task:base,patch);
+     if(base!==null)assertReminderInputs([base]);
+     assertReminderInputs([updated]);
     // A captured editor base uses the frozen three-way save, including conflict
     // copies and the current containing array. Two-argument callers are unchanged.
     const saved=saveTaskRecord(core,updated,base===null?null:clone(base));classifications(core,saved);checkedSaved(core,id);
@@ -136,13 +166,13 @@ export function createRepository(seedStorage=null){
   moveTask(id,quadrant,beforeId=null){let moved;commit(core=>{const entry=required(core.tasks,id);if(entry.parent)throw new Error('子任务请使用同级排序接口');moved=matureMoveTask(core.tasks,id,quadrant,beforeId);},'moveTask');return moved;},
   moveSubtask(parentId,id,beforeId=null){let moved;commit(core=>{moved=matureMoveSubtask(core.tasks,parentId,id,beforeId);},'moveSubtask');return moved;},
   transaction(mutator){return protectedChange(()=>{syncCallback(mutator);commit(mutator,'transaction');return clone(state);});},
-  replaceState(next,{preserveDemo=true}={}){return protectedChange(()=>{const normalized=normalizeState(clone(next));state=normalized;if(!preserveDemo)demo=clone(initialDemo);publish('replaceState');return clone(state);});},
+  replaceState(next,{preserveDemo=true}={}){return protectedChange(()=>{const normalized=normalizeSyntheticState(clone(next));state=normalized;if(!preserveDemo)demo=clone(initialDemo);publish('replaceState');return clone(state);});},
   updateDemo(patchOrMutator){
    return protectedChange(()=>{const next=clone(demo);if(typeof patchOrMutator==='function')syncCallback(patchOrMutator);
     const result=syncResult(typeof patchOrMutator==='function'?patchOrMutator(next):Object.assign(next,mockObject(patchOrMutator)));
     demo=mockObject(result&&typeof result==='object'?result:next);publish('updateDemo');return clone(demo);});
   },
-  reset(next=initialState){return protectedChange(()=>{state=normalizeState(clone(next));demo=clone(initialDemo);publish('reset');return clone(state);});},
+  reset(next=initialState){return protectedChange(()=>{state=normalizeSyntheticState(clone(next));demo=clone(initialDemo);publish('reset');return clone(state);});},
   batch(fn){
    return protectedChange(()=>{
     syncCallback(fn);const outer=batchDepth===0;
