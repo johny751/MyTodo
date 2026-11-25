@@ -30,4 +30,3 @@ Status: PROPOSAL implemented in the isolated candidate; execution remains UNVERI
 - FACT: old H01/H02/H03/H04/H08/H09/H10 rows in historical readiness reports must be read with `static-repair-record.md` and the exact candidate source; they are not a current blanket statement that those static fixes are absent.
 - UNVERIFIED: H05 was the highest achievable remaining focused repair found in this review. Its implementation and new regression assertions still require exact-source cloud evidence before it is marked passed.
 - OWNER DECISION: retain the separation between preserved navigation drafts, deliberate Cancel, and save-before-close/Back. Production durable recovery after a storage failure is outside the synthetic provider's scope; the current candidate requires retaining/exporting the memory session and reports that limit.
-
