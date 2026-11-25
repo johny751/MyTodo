@@ -12,30 +12,35 @@ def git(*args):return subprocess.check_output(['git',*args],cwd=root,text=True).
 def api(endpoint):return subprocess.check_output(['gh','api',endpoint],cwd=root,text=True)
 def save(name,data):
     target=evidence/name
+    if target.exists():return json.loads(target.read_text(encoding='utf-8'))
     target.write_text(data,encoding='utf-8')
     return json.loads(data)
 
 assert git('branch','--show-current')==branch
-assert not git('status','--porcelain'),'Preserve dirty worktree'
-assert not evidence.exists(),'Never overwrite original evidence'
+status=git('status','--porcelain')
+assert not status or all(line.startswith('?? docs/upgrade/d4-03/evidence-billing-01/') for line in status.splitlines()),'Preserve unrelated dirty worktree'
+assert not (evidence/'publication-receipt.json').exists(),'Never overwrite completed receipt'
 guard=['src','windows','android','package.json','server.mjs','tests/protocol-harness','tests/protocol-vectors','.github/workflows/c0-04-protocol.yml']
 assert not git('diff','--name-only',baseline,source,'--',*guard),'Production/protocol changed'
 assert not git('diff','--name-only',source,'HEAD','--','prototypes','tests','.github','src','windows','android'),'Code changed after frozen candidate source'
 allowed=re.compile(r'^(prototypes/(d4-01|d4-03-platforms)/|tests/(d4-ui|d4-03-platforms)/|docs/upgrade/(d4-01|d4-03)/|\.github/workflows/d4-(ui-candidate|03-candidate|03-c0-regression)\.yml$)')
 changed=git('diff','--name-only',baseline+'...'+source).splitlines()
 assert all(allowed.match(path) for path in changed),'Unauthorized branch changes'
-shutil.copytree('/workspaces/d403-evidence-billing-01',evidence)
+if not evidence.exists():shutil.copytree('/workspaces/d403-evidence-billing-01',evidence)
 preserved={'/workspaces/d403-intake.log':'source04-original-whitespace-failure.log',
  '/workspaces/d403-intake-dirty.patch':'source04-preserved-dirty.patch',
  '/workspaces/d403-preserve.txt':'source04-whitespace-repair.txt',
  '/workspaces/d403-preserve-push.txt':'source04-whitespace-repair-push.txt',
  '/workspaces/d403-publish06.txt':'source06-publication.txt'}
-for path,name in preserved.items():shutil.copyfile(path,evidence/name)
+for path,name in preserved.items():
+    if not (evidence/name).exists():shutil.copyfile(path,evidence/name)
+first_failure=pathlib.Path('/workspaces/d403-final-publication-first-failure.txt')
+if first_failure.exists():shutil.copyfile(first_failure,evidence/'publication-collector-first-failure.txt')
 master=save('master-ref.json',api('repos/'+repo+'/git/ref/heads/master'))
 issue=save('android-issue-1.json',api('repos/'+repo+'/issues/1'))
 assert issue['state']=='open','Issue #1 must remain open'
 compare=save('compare-candidate-source.json',api('repos/'+repo+'/compare/'+baseline+'...'+source))
-assert compare['base_commit']['sha']==baseline and compare['head_commit']['sha']==source
+assert compare['base_commit']['sha']==baseline and compare['commits'][-1]['sha']==source
 receipt={'kind':'D4-03 blocked candidate publication','stageStatus':'NOT CLOSED',
  'branch':branch,'baseline':baseline,'d4Baseline':'03a72afca3f538cd0903624c89cb0d8bb068e470',
  'candidateSourceSHA':source,'attemptedSourceSHA':'288b0b97d9974e3797a5099c97d5aeb1c3e26dc9',
