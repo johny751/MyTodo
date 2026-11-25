@@ -15,3 +15,4 @@ FACT：CI3 源码 acae31552afde5ad68fbb9ae09de0a97ffd439a7，Actions45511446546 
 PROPOSAL：使用本机已安装、name表明确OFL1.1的未修改Noto Sans SC，SHA763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a；只在Actions构建内联data字体，不下载新依赖或新服务。font-src仅允许data，connect仍none。新增明确font加载和身份断言；请求记录省略内联Base64，仅保留类型/长度，避免报告体膨胀。原业务断言保持。下一轮结果仍待验证。
 
 FACT：source intake04在文件大小校验拒绝（换行规范化后清单缓存旧长度），未提交；部分授权文本写入保留在原mytodo-d4-ui detached工作树及d4-publish3.log。修正发布器先全包校验后写入，在mytodo-d4-ui-v2发布source05成功。原Git历史与intake04不删除。
+FACT：CI4 source438407793cb7bdb1f780719805e8aa651018b365 / Actions45514411150 failed。格式门禁遇到已封存CI2原日志行尾空白及CI3原Windows启动BAT的CRLF，浏览器未执行。原件不能改写。后续将唯一原件extracted目录标为Git binary diff，同时scope以冻结manifest SHA6d836331b0be1fb395f068446ebeb3f58c8a691404f9dc9d7a808fdfd8328c65和逐文件bytes/SHA-256校验不可变证据；所有可编辑源码格式门禁保留。未减少业务、字体或外部网络断言。

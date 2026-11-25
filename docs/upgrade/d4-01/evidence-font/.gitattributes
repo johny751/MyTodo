@@ -1,0 +1,3 @@
+# Preserve original artifact bytes; immutable extracted evidence is checked by SHA.
+* -text
+**/extracted/** -diff

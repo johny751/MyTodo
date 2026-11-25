@@ -5,7 +5,7 @@ root=pathlib.Path(sys.argv[1]).resolve();kind=sys.argv[2];runs=json.loads(sys.ar
 if kind not in ('d4','d4-font','a'):raise RuntimeError('Unknown evidence domain')
 is_ui=kind.startswith('d4')
 directory=root/('docs/upgrade/d4-01/evidence-font' if kind=='d4-font' else 'docs/upgrade/d4-01/evidence' if is_ui else 'docs/a-admission/evidence')
-directory.mkdir(parents=True,exist_ok=False)
+directory.mkdir(parents=True,exist_ok=True) # Allows a predeclared .gitattributes; write() still refuses every overwrite.
 def api(endpoint,binary=False):
     data=subprocess.check_output(['gh','api','repos/'+repository+'/'+endpoint])
     return data if binary else json.loads(data)
