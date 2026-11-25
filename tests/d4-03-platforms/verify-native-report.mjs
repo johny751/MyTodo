@@ -6,6 +6,8 @@ const input=path.resolve(process.argv[2]),out=path.resolve(process.argv[3]);
 const r=JSON.parse(await fs.readFile(input,'utf8'));
 const identity=JSON.parse(await fs.readFile(path.resolve(process.argv[4]),'utf8'));
 const required=[
+ 'android-native-work-project-item-lifecycle',
+ 'android-native-work-time-preservation-recreation',
  'android-native-floating-selection-lifecycle-copy-paste',
  "android-native-documentsui-cancel-preserves-draft",
  "android-native-documentsui-feedback-original-reload",
