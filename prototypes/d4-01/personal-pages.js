@@ -8,6 +8,7 @@
   var documentId = 'document-' + Date.now() + '-' + Math.random().toString(36).slice(2);
   var sequence = 0;
   var lastReminderCheck = 0;
+  var reminderDockObserver = null, reminderDockHost = null, reminderDockListening = false;
   var MINUTE = 60000, DAY = 86400000, OFFSET = 28800000;
   function clone(x) { return structuredClone(x); }
   function uid(prefix) { return prefix + '-' + (window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Date.now().toString(36) + '-' + (++sequence)); }
@@ -176,11 +177,33 @@
     Object.keys(receipts).forEach(function (key) { if (!active.has(key)) delete receipts[key]; });
     return {ledger: receipts, notices: notices};
   }
+  function measureReminderDock() {
+    var host = document.querySelector('#reminder-notice'), space = 0;
+    if (host && host.children.length) {
+      var box = host.getBoundingClientRect(), bottom = parseFloat(window.getComputedStyle(host).bottom) || 0;
+      if (box.height > 0) space = Math.ceil(box.height + Math.max(0, bottom) + 8);
+    }
+    var value = space + 'px', style = document.documentElement.style;
+    if (style.getPropertyValue('--reminder-dock-space') !== value) style.setProperty('--reminder-dock-space', value);
+  }
+  function observeReminderDock(host) {
+    if (!reminderDockObserver && window.ResizeObserver) reminderDockObserver = new window.ResizeObserver(measureReminderDock);
+    if (reminderDockObserver && reminderDockHost !== host) {
+      reminderDockObserver.disconnect(); reminderDockObserver.observe(host); reminderDockHost = host;
+    }
+    if (!reminderDockListening) {
+      window.addEventListener('resize', measureReminderDock);
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', measureReminderDock);
+      reminderDockListening = true;
+    }
+    measureReminderDock();
+  }
   function renderReminders(ctx) {
     var host = document.querySelector('#reminder-notice');
     if (!host) return;
     var notices = personal(ctx).reminderNotices || [];
     host.innerHTML = notices.map(function (n) { return '<article class="reminder-card" data-reminder-key="' + esc(ctx, n.key) + '"><strong>合成待办提醒</strong><p>' + esc(ctx, n.title) + '</p><div class="page-actions">' + button(ctx, '查看', 'personal-reminder-open', n.key) + button(ctx, '10 分钟后', 'personal-reminder-snooze', n.key) + button(ctx, '知道了', 'personal-reminder-dismiss', n.key) + '</div></article>'; }).join('');
+    observeReminderDock(host);
   }
   function checkReminders(ctx, injectedWall) {
     var wall = Number.isFinite(injectedWall) ? injectedWall : Date.now(); lastReminderCheck = Date.now();
@@ -252,7 +275,9 @@
   function syncData(ctx) { return personal(ctx).sync || {enabled: false, autoSync: true, folder: 'DemoOnly', status: 'idle', pending: 3, lastSync: '', error: '', history: [], conflicts: []}; }
   function syncPage(ctx) {
     var s = syncData(ctx), labels = {idle: '尚未模拟', success: '模拟成功', error: '模拟失败', conflict: '有模拟冲突'}, unresolved = s.conflicts.filter(function (x) { return x.chosen == null; });
-    return heading(ctx, '同步中心', '恢复同步入口，当前页面使用隔离状态提供器。', button(ctx, '模拟成功', 'personal-sync-success', '', 'primary') + button(ctx, '模拟错误', 'personal-sync-error') + button(ctx, '模拟冲突', 'personal-sync-conflict')) + '<p class="help-text" role="note">合成环境 · 所有操作只改变体验状态。真实同步与远端设备连接尚未启用。</p><section class="panel" data-provider="synthetic"><h2>当前状态</h2><dl class="detail-grid"><dt>状态</dt><dd data-sync-status="' + s.status + '">' + labels[s.status] + '</dd><dt>上次模拟时间</dt><dd>' + esc(ctx, s.lastSync || '尚无') + '</dd><dt>合成待同步数量</dt><dd data-sync-pending>' + s.pending + '</dd><dt>当前设备</dt><dd>' + esc(ctx, (personal(ctx).devices || [{name: '当前体验设备'}]).find(function (d) { return d.current; }).name) + '</dd><dt>错误原因</dt><dd>' + esc(ctx, s.error || '无') + '</dd></dl></section><form data-form="personal-sync-config" class="panel work-form"><h2>模拟配置</h2><label class="field"><span><input name="enabled" type="checkbox"' + (s.enabled ? ' checked' : '') + '> 启用本地模拟状态</span></label><label class="field"><span><input name="autoSync" type="checkbox"' + (s.autoSync ? ' checked' : '') + '> 保留自动同步偏好</span></label>' + field(ctx, '演示目录名称', 'folder', s.folder, 'text', 60) + '<p class="form-help">不会保存真实账号或应用密码；该偏好不会启动网络同步。</p><button class="button" type="submit">保存模拟配置</button></form><section class="panel"><h2>冲突版本 · ' + unresolved.length + ' 项待选择</h2>' + (s.conflicts.length ? s.conflicts.map(function (c) { return '<article><h3>' + esc(ctx, c.title) + '</h3><p>' + esc(ctx, c.field) + ' · 所有候选版本保留</p>' + c.values.map(function (v, index) { return button(ctx, '采用：' + v, 'personal-sync-choice', c.id + '|' + index, c.chosen === index ? 'primary' : ''); }).join('') + (c.chosen != null ? '<p>已记录本地模拟选择：' + esc(ctx, c.values[c.chosen]) + '</p>' : '') + '</article>'; }).join('') : '<p>当前没有模拟冲突。</p>') + '</section><section class="panel"><h2>模拟历史</h2>' + (s.history.length ? '<ol class="activity-list">' + s.history.map(function (h) { return '<li>' + esc(ctx, h.message) + ' · ' + esc(ctx, h.at) + '</li>'; }).join('') + '</ol>' : '<p>还没有模拟操作记录。</p>') + '</section>';
+    var devices = personal(ctx).devices, currentDevice = Array.isArray(devices) ? devices.find(function (d) { return d && d.current; }) : null;
+    var deviceName = currentDevice && currentDevice.name ? currentDevice.name : '当前体验设备（合成）';
+    return heading(ctx, '同步中心', '恢复同步入口，当前页面使用隔离状态提供器。', button(ctx, '模拟成功', 'personal-sync-success', '', 'primary') + button(ctx, '模拟错误', 'personal-sync-error') + button(ctx, '模拟冲突', 'personal-sync-conflict')) + '<p class="help-text" role="note">合成环境 · 所有操作只改变体验状态。真实同步与远端设备连接尚未启用。</p><section class="panel" data-provider="synthetic"><h2>当前状态</h2><dl class="detail-grid"><dt>状态</dt><dd data-sync-status="' + s.status + '">' + labels[s.status] + '</dd><dt>上次模拟时间</dt><dd>' + esc(ctx, s.lastSync || '尚无') + '</dd><dt>合成待同步数量</dt><dd data-sync-pending>' + s.pending + '</dd><dt>当前设备</dt><dd>' + esc(ctx, deviceName) + '</dd><dt>错误原因</dt><dd>' + esc(ctx, s.error || '无') + '</dd></dl></section><form data-form="personal-sync-config" class="panel work-form"><h2>模拟配置</h2><label class="field"><span><input name="enabled" type="checkbox"' + (s.enabled ? ' checked' : '') + '> 启用本地模拟状态</span></label><label class="field"><span><input name="autoSync" type="checkbox"' + (s.autoSync ? ' checked' : '') + '> 保留自动同步偏好</span></label>' + field(ctx, '演示目录名称', 'folder', s.folder, 'text', 60) + '<p class="form-help">不会保存真实账号或应用密码；该偏好不会启动网络同步。</p><button class="button" type="submit">保存模拟配置</button></form><section class="panel"><h2>冲突版本 · ' + unresolved.length + ' 项待选择</h2>' + (s.conflicts.length ? s.conflicts.map(function (c) { return '<article><h3>' + esc(ctx, c.title) + '</h3><p>' + esc(ctx, c.field) + ' · 所有候选版本保留</p>' + c.values.map(function (v, index) { return button(ctx, '采用：' + v, 'personal-sync-choice', c.id + '|' + index, c.chosen === index ? 'primary' : ''); }).join('') + (c.chosen != null ? '<p>已记录本地模拟选择：' + esc(ctx, c.values[c.chosen]) + '</p>' : '') + '</article>'; }).join('') : '<p>当前没有模拟冲突。</p>') + '</section><section class="panel"><h2>模拟历史</h2>' + (s.history.length ? '<ol class="activity-list">' + s.history.map(function (h) { return '<li>' + esc(ctx, h.message) + ' · ' + esc(ctx, h.at) + '</li>'; }).join('') + '</ol>' : '<p>还没有模拟操作记录。</p>') + '</section>';
   }
   function simulate(ctx, mode) {
     return update(ctx, function (p) {

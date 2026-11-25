@@ -17,3 +17,11 @@
 
 .drag-handle{padding:4px;color:#698195;font-size:16px;min-width:20px;cursor:grab;touch-action:none}.swiping .task-row-content{transform:translateX(var(--swipe-x))}.task-row.swiping{position:relative;overflow:hidden}.swipe-feedback{position:absolute;bottom:2px;left:10px;color:#284a64;background:#fff;font-size:11px}.subtask-list{max-height:42vh;overflow:auto;overscroll-behavior:contain}.quadrant-peeks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}.quadrant-peek{border:1px solid var(--accent);border-radius:6px;padding:10px;color:var(--accent);min-height:65px}.quadrant-peek button{font-size:12px;text-align:left}.quadrant-peek small{display:block;font-size:10px;margin-top:5px}.task-breadcrumb{margin-bottom:12px}.board.single-quadrant{height:calc(100dvh - 330px);min-height:320px}
 @media(max-width:700px){.board:not(.single-quadrant) .drag-handle{display:none}.single-quadrant .drag-handle{min-width:24px}.quadrant-peek{padding:8px 5px}.quadrant-peeks{gap:5px}}
+
+/* Reserve the measured reminder dock without blocking task/peek hit targets. */
+.workspace{display:flex;flex-direction:column;min-height:0;height:100vh;height:100dvh;padding-bottom:var(--reminder-dock-space,0px);overflow:hidden}
+.workspace>.topbar{flex:0 0 auto}
+.workspace>.page{flex:1;min-height:0;width:100%;margin:0 auto;overflow-y:auto;scroll-padding-bottom:8px}
+#reminder-notice:not(:empty){max-height:25vh;max-height:min(25dvh,240px);overflow-y:auto;overscroll-behavior:contain}
+.workspace>.page .board.single-quadrant{height:max(180px,calc(100dvh - 330px - var(--reminder-dock-space,0px)));min-height:180px}
+@media(max-width:650px){.workspace>.page .board:not(.single-quadrant){height:calc(100dvh - 218px - var(--reminder-dock-space,0px))}}
