@@ -158,7 +158,16 @@ public final class PreviewInstrumentation extends Instrumentation {
                     require(Boolean.TRUE.equals(js("document.querySelector("+JSONObject.quote(host+" .catalog-list")+").children.length>0")), "Existing " + kind + " candidates");
                     String candidateId="projects".equals(kind)
                         ? (String)js("document.querySelector("+JSONObject.quote(host+" [data-action=catalog-pick]")+").dataset.id") : null;
-                    if ("tags".equals(kind)) { markAutocompleteKeys("before-arrowdown-enter"); sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER)); markAutocompleteKeys("after-arrowdown-enter"); }
+                    if ("tags".equals(kind)) {
+                        int eventStart=((Number)js("window.__d403AutocompleteDebug.read().events.length")).intValue();
+                        markAutocompleteKeys("before-arrowdown-enter");
+                        sendAutocompleteKey(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_DOWN);
+                        sendAutocompleteKey(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_DPAD_DOWN);
+                        sendAutocompleteKey(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_ENTER);
+                        sendAutocompleteKey(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_ENTER);
+                        markAutocompleteKeys("after-arrowdown-enter");
+                        awaitAutocompleteKeyDelivery(eventStart);
+                    }
                     else tap(host+" [data-action=catalog-pick]");
                     require(Boolean.TRUE.equals(js("(function(){var closed=document.querySelector("+JSONObject.quote(host+" [role=combobox]")+").getAttribute('aria-expanded')==='false';window.__d403AutocompleteDebug.sample('selection-assertion',null,{kind:"+JSONObject.quote(kind)+",closed:closed});return closed;})()")), "Candidate selection closed " + kind);
                     if ("projects".equals(kind)) {
@@ -385,7 +394,8 @@ public final class PreviewInstrumentation extends Instrumentation {
                 long subtaskDownUptime=-1,subtaskAssertionReadUptime=-1;
                 try (NativeDragTouch touch=new NativeDragTouch("subtask-order")) {
                     try {
-                        subtaskDownUptime=touch.down(start);SystemClock.sleep(100);
+                        subtaskDownUptime=touch.down(start);
+                        awaitSubtaskTouchDelivery(subtaskTrace,subtaskDownUptime);
                         subtaskAssertionReadUptime=SystemClock.uptimeMillis();
                         require(Boolean.TRUE.equals(js("!!document.querySelector('[data-task-id=d403-native-child-a].dragging')")),"Real handle touch activates the child drag");
                         touch.move(after,300);touch.up(after);
@@ -997,6 +1007,36 @@ public final class PreviewInstrumentation extends Instrumentation {
         } catch(Throwable error) { try{proof.put("installError",error.toString());}catch(Exception ignored){} }
         return proof;
     }
+    /** Wait for this one injected down to reach the renderer; never wait for activation to turn true. */
+    private void awaitSubtaskTouchDelivery(JSONObject proof,long downUptime) throws Exception {
+        final long deadline=downUptime+5000L;
+        JSONArray reads=new JSONArray();
+        proof.put("deliveryReads",reads).put("deliveryDeadlineUptimeMillis",deadline)
+            .put("deliveryObservationIntervalMs",25);
+        while(true) {
+            JSONObject observed=(JSONObject)js("(function(){var p=window.__d403SubtaskDragTrace;if(!p)return {missing:true};var v=p.read();return {dropped:v.dropped,events:v.rows.filter(r=>r.stage==='window-bubble'&&r.type==='touchstart'&&r.trusted===true)};})()");
+            observed.put("readUptimeMillis",SystemClock.uptimeMillis());reads.put(observed);
+            require(!observed.optBoolean("missing")&&observed.optInt("dropped",-1)==0,"Complete first-down delivery trace is available");
+            JSONArray events=observed.getJSONArray("events");
+            if(events.length()>0) {
+                require(SystemClock.uptimeMillis()<=deadline,"Renderer touchstart delivery is observed before the deadline");
+                require(events.length()==1,"Exactly one trusted touchstart reaches the renderer for the one native down");
+                JSONObject event=events.getJSONObject(0),handle=event.getJSONObject("capturedHandle");
+                JSONArray path=event.getJSONArray("path");boolean targetsHandle=false;
+                for(int i=0;i<path.length();i++)if(!path.isNull(i)&&path.getJSONObject(i).optInt("nodeId",-1)==handle.getInt("nodeId"))targetsHandle=true;
+                require(targetsHandle&&event.getBoolean("sameHandle")&&event.getBoolean("sameRow"),"The delivered touchstart targets the original connected child handle");
+                // Capture the synchronous handler result at the event's bubble boundary.
+                // Delayed activation cannot make this retained observation pass later.
+                JSONArray dragging=event.getJSONArray("dragging");boolean childActive=false;
+                for(int i=0;i<dragging.length();i++)if("d403-native-child-a".equals(dragging.getJSONObject(i).optString("taskId")))childActive=true;
+                require(childActive,"The child is already dragging when its real touchstart finishes propagation");
+                proof.put("deliveredTouchstart",event).put("deliveryConfirmedUptimeMillis",SystemClock.uptimeMillis());
+                return;
+            }
+            require(SystemClock.uptimeMillis()<deadline,"The single injected child-handle down reaches the renderer within its observation deadline");
+            SystemClock.sleep(25);
+        }
+    }
     private void finishSubtaskDragTrace(JSONObject proof,long downUptime,long assertionReadUptime) {
         try {
             proof.put("nativeDownUptimeMillis",downUptime).put("activationAssertionReadRequestedUptimeMillis",assertionReadUptime)
@@ -1300,6 +1340,34 @@ public final class PreviewInstrumentation extends Instrumentation {
     private void markAutocompleteKeys(String stage) throws Exception {
         autocompleteNativeKeys.put(new JSONObject().put("stage",stage).put("wallMillis",System.currentTimeMillis())
             .put("uptimeMillis",SystemClock.uptimeMillis()).put("elapsedRealtimeMillis",SystemClock.elapsedRealtime()));
+    }
+    /** Observe renderer delivery of the one native key sequence before checking its effect. */
+    private void sendAutocompleteKey(int action,int keyCode) throws Exception {
+        String label=(keyCode==KeyEvent.KEYCODE_ENTER?"enter":"arrowdown")+(action==KeyEvent.ACTION_DOWN?"-down":"-up");
+        markAutocompleteKeys("before-"+label);
+        sendKeySync(new KeyEvent(action,keyCode));
+        markAutocompleteKeys("after-"+label);
+    }
+    private void awaitAutocompleteKeyDelivery(int eventStart) throws Exception {
+        long deadline=SystemClock.elapsedRealtime()+10000;
+        JSONObject observed=null;
+        do {
+            observed=(JSONObject)js("(function(){var d=window.__d403AutocompleteDebug,t=d.read(),rows=t.events.slice("+eventStart+"),keys=rows.filter(r=>r.stage==='capture'&&r.event&&['keydown','keyup'].includes(r.event.type)),expected=['keydown:ArrowDown','keyup:ArrowDown','keydown:Enter','keyup:Enter'];"+
+                "var sequence=keys.map(r=>r.event.type+':'+r.event.key),valid=keys.every((r,i)=>sequence[i]===expected[i]&&r.event.isTrusted&&!r.event.isComposing&&r.event.target?.catalog==='tags'&&r.event.target?.name==='tagQuery'&&r.active?.name==='tagQuery'&&r.documentHasFocus);"+
+                "var end=rows.find(r=>r.stage==='bubble'&&r.event?.type==='keyup'&&r.event.key==='Enter'&&r.event.isTrusted&&r.event.target?.catalog==='tags'&&r.event.target?.name==='tagQuery');"+
+                "return {sequence:sequence,valid:valid,dropped:t.dropped,complete:keys.length===4&&valid&&!!end,enterBubbleSeen:!!end};})()");
+            require(observed.getInt("dropped")==0,"Autocomplete key delivery trace is complete: "+observed);
+            require(observed.getBoolean("valid")&&observed.getJSONArray("sequence").length()<=4,"Autocomplete receives exactly the single trusted native key sequence: "+observed);
+            if(observed.getBoolean("complete")) {
+                require(SystemClock.elapsedRealtime()<=deadline,"Native key delivery is observed before its deadline: "+observed);
+                js("window.__d403AutocompleteDebug.sample('native-key-delivery-complete',null,"+observed.toString()+")");
+                return;
+            }
+            // Read-only polling interval; no input is repeated or synthesized.
+            SystemClock.sleep(25);
+        } while(SystemClock.elapsedRealtime()<deadline);
+        js("window.__d403AutocompleteDebug.sample('native-key-delivery-timeout',null,"+observed.toString()+")");
+        throw new AssertionError("Single native ArrowDown/Enter sequence did not reach the tags combobox: "+observed);
     }
     private void finishAutocompleteTrace() {
         try {

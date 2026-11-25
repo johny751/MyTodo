@@ -100,11 +100,77 @@ final class NativeSelectionLifecycleChecks {
         void pasteIntoNote(String selected,String stage) throws Exception {
             h.openPage("notes");h.tap("[data-action=personal-note-new]");
             require("".equals(h.js("document.querySelector('"+BODY+"').value")),"New note input starts empty without typing clipboard text");
-            h.tap(BODY);longPress(domPoint(BODY,false));Target paste=waitMenu("Paste");
+            h.tap(BODY);float[] pastePoint=awaitPastePoint(stage);
+            JSONObject press=new JSONObject().put("stage",stage+"-paste-long-press").put("invocationCount",1)
+                .put("attempted",true).put("returned",false).put("startedUptimeMillis",SystemClock.uptimeMillis());actions.put(press);
+            try{longPress(pastePoint);press.put("returned",true);}finally{press.put("finishedUptimeMillis",SystemClock.uptimeMillis());}
+            Target paste=waitMenu("Paste");
             actions.put(new JSONObject().put("stage",stage+"-paste-menu").put("menu",paste.json()));tapScreen(paste.bounds.exactCenterX(),paste.bounds.exactCenterY());h.settle();
             require(selected.equals(h.js("document.querySelector('"+BODY+"').value")),"Real native Paste inserts the exact observed selected text: "+stage);
             require(ownedClipSignature.equals(signature(readClip())),"Paste retains the copied clipboard payload");
             actions.put(new JSONObject().put("stage",stage+"-paste-result").put("exact",true).put("text",selected));save();
+        }
+        float[] awaitPastePoint(String stage) throws Exception {
+            JSONArray observations=new JSONArray();
+            JSONObject readiness=new JSONObject().put("stage",stage+"-paste-point-readiness").put("observations",observations)
+                .put("longPressInvocationCount",0).put("keyboardDismissed",false).put("selectionAssigned",false);
+            actions.put(readiness);
+            long started=SystemClock.uptimeMillis(),end=started+6000,stableSince=0;int stableCount=0;String previous=null;
+            while(SystemClock.uptimeMillis()<end) {
+                final int[] web=new int[4],decor=new int[4],imeBottom={0};final boolean[] flags=new boolean[4];final Rect frame=new Rect();
+                h.instrumentation().runOnMainSync(()->{
+                    android.webkit.WebView view=h.main().previewWebView();android.view.View root=h.main().getWindow().getDecorView();
+                    view.getLocationOnScreen(web);web[2]=view.getWidth();web[3]=view.getHeight();
+                    root.getLocationOnScreen(decor);decor[2]=root.getWidth();decor[3]=root.getHeight();view.getWindowVisibleDisplayFrame(frame);
+                    flags[0]=!h.main().isDestroyed()&&h.main().hasWindowFocus();flags[1]=view.isShown();
+                    android.view.WindowInsets insets=root.getRootWindowInsets();flags[2]=insets!=null;
+                    flags[3]=insets!=null&&insets.isVisible(android.view.WindowInsets.Type.ime());
+                    if(insets!=null)imeBottom[0]=insets.getInsets(android.view.WindowInsets.Type.ime()).bottom;
+                });
+                Rect safe=new Rect(web[0],web[1],web[0]+web[2],web[1]+web[3]);boolean safeVisible=safe.intersect(frame);
+                if(flags[3]&&imeBottom[0]>0)safe.bottom=Math.min(safe.bottom,decor[1]+decor[3]-imeBottom[0]);
+                JSONArray windows=new JSONArray();List<AccessibilityWindowInfo> list=h.instrumentation().getUiAutomation().getWindows();
+                boolean imeWindow=false,ownedFocus=false;
+                try {for(AccessibilityWindowInfo window:list){
+                    Rect rect=new Rect();window.getBoundsInScreen(rect);AccessibilityNodeInfo root=window.getRoot();
+                    try {
+                        String owner=root==null||root.getPackageName()==null?"":root.getPackageName().toString();
+                        windows.put(new JSONObject().put("id",window.getId()).put("type",window.getType()).put("layer",window.getLayer())
+                            .put("focused",window.isFocused()).put("package",owner).put("rect",new JSONArray(new int[]{rect.left,rect.top,rect.right,rect.bottom})));
+                        if(window.isFocused()&&h.instrumentation().getTargetContext().getPackageName().equals(owner))ownedFocus=true;
+                        if(window.getType()==AccessibilityWindowInfo.TYPE_INPUT_METHOD){imeWindow=true;if(Rect.intersects(safe,rect))safe.bottom=Math.min(safe.bottom,rect.top);}
+                    }finally{if(root!=null)root.recycle();}
+                }}finally{for(AccessibilityWindowInfo window:list)window.recycle();}
+                JSONObject nativeView=new JSONObject().put("web",new JSONArray(web)).put("decor",new JSONArray(decor))
+                    .put("visibleFrame",new JSONArray(new int[]{frame.left,frame.top,frame.right,frame.bottom}))
+                    .put("safeRect",new JSONArray(new int[]{safe.left,safe.top,safe.right,safe.bottom}))
+                    .put("mainFocused",flags[0]).put("webShown",flags[1]).put("imeKnown",flags[2]).put("imeVisible",flags[3])
+                    .put("imeBottom",imeBottom[0]).put("imeWindowPresent",imeWindow).put("ownedFocusedWindow",ownedFocus).put("windows",windows);
+                JSONObject dom=(JSONObject)h.js("(function(){var el=document.querySelector('"+BODY+"'),v=visualViewport;if(!el||!v)return {ready:false,reason:'textarea or visual viewport missing'};"
+                    +"var r=el.getBoundingClientRect(),scale="+web[2]+"/innerWidth;var l=Math.max(r.left,0,("+safe.left+"-"+web[0]+")/scale)+4,t=Math.max(r.top,0,("+safe.top+"-"+web[1]+")/scale)+4;"
+                    +"var right=Math.min(r.right,innerWidth,v.width,("+safe.right+"-"+web[0]+")/scale)-4,bottom=Math.min(r.bottom,innerHeight,v.height,("+safe.bottom+"-"+web[1]+")/scale)-4;"
+                    +"var x=(l+right)/2,y=(t+bottom)/2,hit=document.elementFromPoint(x,y);var simple=Math.abs(v.scale-1)<.001&&Math.abs(v.offsetLeft)<.5&&Math.abs(v.offsetTop)<.5&&Math.abs(v.width-innerWidth)<.5;"
+                    +"return {ready:scale>0&&simple&&right>l&&bottom>t&&el===document.activeElement&&document.hasFocus()&&el.contains(hit),focused:el===document.activeElement,documentFocused:document.hasFocus(),"
+                    +"empty:el.value==='',rect:[r.left,r.top,r.right,r.bottom],viewport:[innerWidth,innerHeight,v.width,v.height,v.scale,v.offsetLeft,v.offsetTop],visibleRect:[l,t,right,bottom],point:[x,y],scale:scale};})()");
+                boolean ready=safeVisible&&!safe.isEmpty()&&flags[0]&&flags[1]&&flags[2]&&flags[3]&&imeWindow&&ownedFocus&&dom.optBoolean("ready")&&dom.optBoolean("empty");
+                float x=0,y=0;boolean ownTop=false;int topLayer=Integer.MIN_VALUE;
+                if(ready){JSONArray point=dom.getJSONArray("point");double scale=dom.getDouble("scale");x=web[0]+(float)(point.getDouble(0)*scale);y=web[1]+(float)(point.getDouble(1)*scale);
+                    for(int i=0;i<windows.length();i++){JSONObject window=windows.getJSONObject(i);JSONArray rect=window.getJSONArray("rect");
+                        if(x>=rect.getInt(0)&&x<rect.getInt(2)&&y>=rect.getInt(1)&&y<rect.getInt(3)&&window.getInt("layer")>topLayer){topLayer=window.getInt("layer");ownTop=window.getInt("type")==AccessibilityWindowInfo.TYPE_APPLICATION&&h.instrumentation().getTargetContext().getPackageName().equals(window.getString("package"));}}
+                    ready=safe.contains((int)x,(int)y)&&ownTop;
+                }
+                long now=SystemClock.uptimeMillis();String fingerprint=nativeView.toString()+dom.toString();
+                if(ready){if(fingerprint.equals(previous)){stableCount++;}else{stableSince=now;stableCount=1;}previous=fingerprint;}else{previous=null;stableCount=0;stableSince=0;}
+                observations.put(new JSONObject().put("uptimeMillis",now).put("native",nativeView).put("dom",dom).put("ready",ready)
+                    .put("pointOwnedByApplicationWindow",ownTop).put("screenX",x).put("screenY",y).put("stableCount",stableCount));
+                if(ready&&stableCount>=3&&now-stableSince>=240&&now<=end){
+                    readiness.put("readinessWaitMs",now-started).put("stableForMs",now-stableSince).put("pointReady",true)
+                        .put("screenX",x).put("screenY",y);return new float[]{x,y};
+                }
+                SystemClock.sleep(120);
+            }
+            readiness.put("readinessWaitMs",SystemClock.uptimeMillis()-started);save();
+            throw new AssertionError("Focused empty note did not expose a stable native-owned point above the visible IME within 6000 ms");
         }
         String selectHeading(String stage) throws Exception {
             // A detached Range only measures existing glyph bounds. It never changes DOM selection.
