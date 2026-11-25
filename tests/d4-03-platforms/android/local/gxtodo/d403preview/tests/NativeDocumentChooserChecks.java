@@ -151,7 +151,7 @@ final class NativeDocumentChooserChecks {
 
     private static final class Case {
         final Host h;final String name,token,fileName,title,body;
-        final JSONObject receipt=new JSONObject();final JSONArray requests=new JSONArray(),selectors=new JSONArray(),cleanupRows=new JSONArray();
+        final JSONObject receipt=new JSONObject();final JSONArray requests=new JSONArray(),resolutionProbes=new JSONArray(),selectors=new JSONArray(),cleanupRows=new JSONArray();
         String oldState,oldDemo,oldStorage,storageKey;byte[] bytes;String base64,sha;Uri fixtureUri;String pickerPackage;
         boolean snapshotReady,serviceFlagsChanged;int originalServiceFlags;
         Case(Host h,String name) {
@@ -163,7 +163,7 @@ final class NativeDocumentChooserChecks {
             oldState=(String)h.js("JSON.stringify(D4Prototype.repo.state)");oldDemo=(String)h.js("JSON.stringify(D4Prototype.repo.demo)");
             storageKey=(String)h.js("D4Prototype.storageKey");Object raw=h.js("localStorage.getItem(D4Prototype.storageKey)");oldStorage=raw==JSONObject.NULL?null:(String)raw;snapshotReady=true;
             receipt.put("case",name).put("syntheticOnly",true).put("coreBeforeSha256",hash(oldState.getBytes(StandardCharsets.UTF_8)))
-                .put("requests",requests).put("selectors",selectors).put("cleanup",cleanupRows);
+                .put("requests",requests).put("resolutionProbes",resolutionProbes).put("selectors",selectors).put("cleanup",cleanupRows);
             AccessibilityServiceInfo service=h.instrumentation().getUiAutomation().getServiceInfo();require(service!=null,"Observe existing accessibility service configuration");
             originalServiceFlags=service.flags;service.flags|=AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
             h.instrumentation().getUiAutomation().setServiceInfo(service);serviceFlagsChanged=true;
@@ -276,7 +276,21 @@ final class NativeDocumentChooserChecks {
             h.instrumentation().addMonitor(monitor);installed=true;h.tap(selector);
             long end=SystemClock.elapsedRealtime()+10000;while(request.get()==null&&SystemClock.elapsedRealtime()<end)SystemClock.sleep(100);
             Intent intent=request.get();require(intent!=null&&requestCount.get()==1,"One actual file-input tap starts exactly one OPEN_DOCUMENT request");
-            ResolveInfo resolved=h.instrumentation().getTargetContext().getPackageManager().resolveActivity(intent,PackageManager.MATCH_DEFAULT_ONLY);
+            Context queryContext=h.instrumentation().getTargetContext();
+            String[] observedMimeTypes=intent.getStringArrayExtra(Intent.EXTRA_MIME_TYPES);
+            JSONObject resolution=new JSONObject().put("queryContextPackage",queryContext.getPackageName())
+                .put("queryContextUid",queryContext.getApplicationInfo().uid).put("processUid",android.os.Process.myUid())
+                .put("observedForegroundPackage",String.valueOf(activePackage(h))).put("requestCount",requestCount.get())
+                .put("action",intent.getAction()).put("type",intent.getType()).put("flags",intent.getFlags())
+                .put("component",String.valueOf(intent.getComponent())).put("openable",intent.hasCategory(Intent.CATEGORY_OPENABLE))
+                .put("localOnly",intent.getBooleanExtra(Intent.EXTRA_LOCAL_ONLY,false)).put("multiple",intent.getBooleanExtra(Intent.EXTRA_ALLOW_MULTIPLE,false))
+                .put("mimeTypes",new JSONArray(observedMimeTypes==null?new ArrayList<String>():Arrays.asList(observedMimeTypes)));
+            c.resolutionProbes.put(resolution);c.save();
+            ResolveInfo resolved=queryContext.getPackageManager().resolveActivity(intent,PackageManager.MATCH_DEFAULT_ONLY);
+            resolution.put("resolved",resolved!=null&&resolved.activityInfo!=null);
+            if(resolved!=null&&resolved.activityInfo!=null)resolution.put("resolvedPackage",resolved.activityInfo.packageName)
+                .put("resolvedActivity",resolved.activityInfo.name).put("resolvedApplicationFlags",resolved.activityInfo.applicationInfo.flags);
+            c.save();
             require(resolved!=null&&resolved.activityInfo!=null,"Actual chooser intent resolves to a system activity");
             require((resolved.activityInfo.applicationInfo.flags&(ApplicationInfo.FLAG_SYSTEM|ApplicationInfo.FLAG_UPDATED_SYSTEM_APP))!=0,"Document chooser belongs to the observed system package");
             c.pickerPackage=resolved.activityInfo.packageName;

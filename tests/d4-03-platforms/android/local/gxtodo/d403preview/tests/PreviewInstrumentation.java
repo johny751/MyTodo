@@ -334,6 +334,13 @@ public final class PreviewInstrumentation extends Instrumentation {
                     try {
                         touch.down(start); SystemClock.sleep(longHold());
                         require(Boolean.TRUE.equals(js("!!document.querySelector('.dragging')&&!!document.querySelector('.drag-ghost')")),"Real long hold activates drag before movement");
+                        // A reminder reconciliation can resize the live list
+                        // during the hold without replacing its rows. Retain
+                        // the original target and then hit its current edge.
+                        observed.put("edgeBeforeHold",new JSONObject().put("x",edge[0]).put("y",edge[1]));
+                        edge=dragDropPoint(list,false);
+                        observed.put("edgeAfterActivation",new JSONObject().put("x",edge[0]).put("y",edge[1]));
+                        write("native-held-drag-observation.json",observed.toString(2));
                         touch.move(edge,450); SystemClock.sleep(800);
                         double scrollHeld=((Number)js("document.querySelector("+JSONObject.quote(list)+").scrollTop")).doubleValue();
                         boolean active=Boolean.TRUE.equals(js("!!document.querySelector('.dragging')&&!!document.querySelector('.drag-ghost')"));
@@ -654,7 +661,7 @@ public final class PreviewInstrumentation extends Instrumentation {
     }
     /** Observe clipping and real hit testing; no scrolling is performed by this helper. */
     private float[] dragDropPoint(String selector,boolean afterRow) throws Exception {
-        JSONObject r=(JSONObject)js("(function(){var e=document.querySelector("+JSONObject.quote(selector)+");if(!e)throw Error('Missing drag target');var r=e.getBoundingClientRect(),v=visualViewport,l=Math.max(0,r.left),t=Math.max(0,r.top),b=Math.min(innerHeight,v.height,r.bottom),right=Math.min(innerWidth,r.right);for(var p=e.parentElement;p;p=p.parentElement){var c=getComputedStyle(p),q=p.getBoundingClientRect();if(/^(auto|scroll|hidden|clip)$/.test(c.overflowX)){l=Math.max(l,q.left+p.clientLeft);right=Math.min(right,q.left+p.clientLeft+p.clientWidth);}if(/^(auto|scroll|hidden|clip)$/.test(c.overflowY)){t=Math.max(t,q.top+p.clientTop);b=Math.min(b,q.top+p.clientTop+p.clientHeight);}}var x=(l+right)/2,y=b-12,hit=document.elementFromPoint(x,y);return {x:x,y:y,visible:right-l>4&&b-t>24,hitMatches:!!hit&&(hit===e||e.contains(hit)),belowRowCenter:y>r.top+r.height/2,innerWidth:innerWidth,innerHeight:innerHeight,visualViewport:{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}};})()");
+        JSONObject r=(JSONObject)js("(function(){var e=document.querySelector("+JSONObject.quote(selector)+");if(!e)throw Error('Missing drag target');var r=e.getBoundingClientRect(),v=visualViewport,l=Math.max(0,r.left),t=Math.max(0,r.top),b=Math.min(innerHeight,v.height,r.bottom),right=Math.min(innerWidth,r.right);for(var p=e.parentElement;p;p=p.parentElement){var c=getComputedStyle(p),q=p.getBoundingClientRect();if(/^(auto|scroll|hidden|clip)$/.test(c.overflowX)){l=Math.max(l,q.left+p.clientLeft);right=Math.min(right,q.left+p.clientLeft+p.clientWidth);}if(/^(auto|scroll|hidden|clip)$/.test(c.overflowY)){t=Math.max(t,q.top+p.clientTop);b=Math.min(b,q.top+p.clientTop+p.clientHeight);}}var x=(l+right)/2,y=b-12,hit=document.elementFromPoint(x,y);return {x:x,y:y,visible:right-l>4&&b-t>24,hitMatches:!!hit&&(hit===e||e.contains(hit)),belowRowCenter:y>r.top+r.height/2,rect:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},clip:{left:l,top:t,right:right,bottom:b},scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,reminderDockSpace:getComputedStyle(document.documentElement).getPropertyValue('--reminder-dock-space'),wallMillis:Date.now(),innerWidth:innerWidth,innerHeight:innerHeight,visualViewport:{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}};})()");
         touchTargets.put(new JSONObject().put("selector",selector).put("purpose",afterRow?"drop-after-row":"held-bottom-edge").put("observation",r));
         write("touch-targets.json",touchTargets.toString(2));
         requireSimpleViewport(r,"Native held/drop target");
