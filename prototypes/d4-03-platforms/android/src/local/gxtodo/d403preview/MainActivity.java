@@ -6,6 +6,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceRequest;
@@ -55,8 +57,25 @@ public final class MainActivity extends Activity {
                 } catch (Exception e) { return denied(); }
             }
         });
+        if (Build.VERSION.SDK_INT >= 29) {
+            // Reserve one bounded left-edge navigation segment, within Android's
+            // 200dp per-edge budget. All other system Back areas remain available.
+            web.addOnLayoutChangeListener((view, left, top, right, bottom,
+                oldLeft, oldTop, oldRight, oldBottom) -> updateNavigationGestureSegment());
+            web.post(this::updateNavigationGestureSegment);
+        }
         setContentView(web);
         web.loadUrl("https://" + HOST + "/index.html");
+    }
+    private void updateNavigationGestureSegment() {
+        if (Build.VERSION.SDK_INT < 29 || web == null) return;
+        float density = getResources().getDisplayMetrics().density;
+        int width = Math.min(web.getWidth(), Math.round(22f * density));
+        int top = Math.min(web.getHeight(), Math.round(80f * density));
+        int bottom = Math.min(web.getHeight(), top + Math.round(200f * density));
+        web.setSystemGestureExclusionRects(width > 0 && bottom > top
+            ? Collections.singletonList(new Rect(0, top, width, bottom))
+            : Collections.emptyList());
     }
     private static boolean local(Uri uri) {
         return "https".equals(uri.getScheme()) && HOST.equals(uri.getHost()) && uri.getPort() == -1;
