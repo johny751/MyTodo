@@ -16,5 +16,9 @@ if not defined D4_PREVIEW_BROWSER (
   exit /b 2
 )
 set "D4_PREVIEW_URL=file:///%D4_PREVIEW_HTML:\=/%"
-start "" "%D4_PREVIEW_BROWSER%" --app="%D4_PREVIEW_URL%" --user-data-dir="%LOCALAPPDATA%\MyTodo-D4-03-Preview\browser-profile" --no-first-run --no-default-browser-check --disable-background-networking --disable-sync --disable-component-update
+rem Only the explicit hosted Actions observation enables a loopback debug endpoint.
+rem This never accepts a replacement executable, arbitrary flags or headless mode.
+set "D4_PREVIEW_CI_FLAGS="
+if "%GITHUB_ACTIONS%"=="true" if "%RUNNER_OS%"=="Windows" if "%RUNNER_ENVIRONMENT%"=="github-hosted" if "%D4_PREVIEW_CI_INSPECT%"=="1" set "D4_PREVIEW_CI_FLAGS=--remote-debugging-address=127.0.0.1 --remote-debugging-port=0"
+start "" "%D4_PREVIEW_BROWSER%" --app="%D4_PREVIEW_URL%" --user-data-dir="%LOCALAPPDATA%\MyTodo-D4-03-Preview\browser-profile" --no-first-run --no-default-browser-check --disable-background-networking --disable-sync --disable-component-update %D4_PREVIEW_CI_FLAGS%
 exit /b 0
