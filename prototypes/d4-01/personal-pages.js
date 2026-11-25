@@ -8,6 +8,7 @@
   var documentId = 'document-' + Date.now() + '-' + Math.random().toString(36).slice(2);
   var sequence = 0;
   var lastReminderCheck = 0;
+  var nativeTimerContext = null, nativeTimerListening = false;
   var reminderDockObserver = null, reminderDockHost = null, reminderDockListening = false;
   var MINUTE = 60000, DAY = 86400000, OFFSET = 28800000;
   function clone(x) { return structuredClone(x); }
@@ -63,7 +64,7 @@
   }
 
   // Synthetic clock: same-document monotonic elapsed time; reload uses a wall anchor.
-  // Android continues to use its original PomodoroClock/SystemClock/service implementation.
+  // The Android isolated preview uses its native provider; browsers retain this Web clock.
   function createClock(now) {
     return {version: 1, mode: 'countdown', focusMode: 'countdown', phase: 'focus', status: 'idle', durationMinutes: 25, breakMinutes: 5, elapsedMillis: 0, anchor: clone(now), sessionId: '', startedAt: '', taskId: '', completionPending: false, history: [], focusedMillisByDay: {}, completedSessionsByDay: {}};
   }
@@ -134,22 +135,119 @@
     else throw new Error('未知计时操作');
     anchor(t, now); return t;
   }
-  function timer(ctx) { return advance(personal(ctx).timer || createClock(time()), time()); }
+  function nativeTimer() { return window.D4NativeTimer || null; }
+  function legacyTimerPending(ctx) {
+    var p = personal(ctx);
+    return !!p.timer && JSON.stringify(p.timer) !== JSON.stringify(p.nativeTimerLegacyArchive);
+  }
+  function nativeTimerBlocked(ctx) {
+    var info = nativeTimer().info();
+    return !info.ready || info.busy || !!info.error || legacyTimerPending(ctx);
+  }
+  function nativeTimerNotice(ctx) {
+    var info = nativeTimer().info(), message = info.error || (!info.ready ? '正在读取原生计时状态…' : info.busy ? '正在保存计时操作…' : '网页与原生界面共用此会话；已确认的状态由 Android 保存。');
+    var html = '<div id="personal-native-state" role="' + (info.error ? 'alert' : 'status') + '" data-provider="android-native"><p class="help-text">' + esc(ctx, message) + '</p>';
+    if (info.error) html += button(ctx, '重新读取计时状态', 'personal-timer-refresh', '', '', info.busy);
+    if (info.ready && info.state.completionPending) html += '<p>本轮' + (info.state.phase === 'break' ? '休息' : '专注') + '已完成，记录已保存。</p>' + button(ctx, '确认完成', 'personal-timer-claim-completion', '', '', nativeTimerBlocked(ctx));
+    if (legacyTimerPending(ctx)) {
+      var old = personal(ctx).timer;
+      html += '<p class="help-text">发现旧版网页计时记录：' + esc(ctx, timerStatus(old) || old.status || '未记录状态') + '，历史 ' + (Array.isArray(old.history) ? old.history.length : 0) + ' 条。原记录保持原样，尚未转换。启用后由统一计时继续，旧会话不会自动恢复。</p>' + button(ctx, '保留旧记录并启用统一计时', 'personal-timer-adopt', '', '', info.busy);
+    }
+    return html + '</div>';
+  }
+  function updateNativeTimerView(ctx) {
+    var provider = nativeTimer();
+    if (!provider) return;
+    var info = provider.info(), host = document.querySelector('#personal-timer-content');
+    if (!host) return;
+    var t = info.state || createClock(time());
+    var notice = nativeTimerNotice(ctx), panels = host.querySelector('#personal-native-panels');
+    if (!panels) { host.innerHTML = notice + '<div id="personal-native-panels"></div>'; panels = host.querySelector('#personal-native-panels'); host.nativeNotice = notice; }
+    else if (host.nativeNotice !== notice) { host.querySelector('#personal-native-state').outerHTML = notice; host.nativeNotice = notice; }
+    var minutes = Object.keys(t.focusedMillisByDay).map(function (day) { return [day, Math.floor(t.focusedMillisByDay[day] / MINUTE), t.completedSessionsByDay[day] || 0]; });
+    var signature = JSON.stringify([t.status, t.mode, t.phase, t.taskId, t.sessionId, t.history, minutes]);
+    // Elapsed snapshots update text only, so held touches, focus and history scrolling stay stable.
+    if (panels.nativeSignature !== signature) { panels.innerHTML = timerBody(ctx, t); panels.nativeSignature = signature; }
+    var display = panels.querySelector('#personal-timer-display');
+    if (display) display.textContent = timerText(t);
+    var panel = panels.querySelector('#personal-timer');
+    if (panel) { panel.dataset.provider = 'android-native'; panel.dataset.sessionId = t.sessionId; panel.dataset.revision = String(t.revision == null ? '' : t.revision); panel.dataset.phase = t.phase; }
+    var active = t.status === 'running' || t.status === 'paused', blocked = nativeTimerBlocked(ctx);
+    panels.querySelectorAll('.timer-panel button').forEach(function (el) {
+      var action = el.dataset.action.slice('personal-timer-'.length);
+      el.disabled = blocked || ((action === 'start' || action === 'break') ? active : action === 'pause' ? t.status !== 'running' : action === 'resume' ? t.status !== 'paused' : (action === 'end' || action === 'finish') ? !active : false);
+    });
+    var form = document.querySelector('[data-form="personal-timer-config"]');
+    if (form) {
+      var submit = form.querySelector('[type="submit"]');
+      if (submit) submit.disabled = nativeTimerBlocked(ctx);
+      // Native refreshes never discard a partially edited configuration.
+      if (info.ready && form.dataset.dirty !== 'true') {
+        ['durationMinutes', 'breakMinutes', 'taskId'].forEach(function (name) { var field = form.elements.namedItem(name); if (field) field.value = t[name]; });
+        form.elements.namedItem('mode').value = t.focusMode;
+      }
+    }
+  }
+  function observeNativeTimer(ctx) {
+    if (!nativeTimer()) return;
+    nativeTimerContext = ctx;
+    if (!nativeTimerListening) {
+      nativeTimerListening = true;
+      nativeTimer().subscribe(function () { if (nativeTimerContext) updateNativeTimerView(nativeTimerContext); });
+    }
+  }
+  function timer(ctx) {
+    if (nativeTimer()) { observeNativeTimer(ctx); return nativeTimer().info().state || createClock(time()); }
+    return advance(personal(ctx).timer || createClock(time()), time());
+  }
   function timerText(t) { var millis = t.mode === 'countup' ? t.elapsedMillis : Math.max(0, (t.phase === 'break' ? t.breakMinutes : t.durationMinutes) * MINUTE - t.elapsedMillis), seconds = Math.floor(millis / 1000); return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0'); }
   function timerStatus(t) { return ({idle: '待开始', running: '计时中', paused: '已暂停', completed: '本轮已完成', ended: '提前结束'})[t.status]; }
   function timerBody(ctx, t) {
     var active = t.status === 'running' || t.status === 'paused', task = window.DemoDomain.helpers.flattenTasks(core(ctx).tasks).find(function (x) { return x.id === t.taskId; });
     var days = Object.keys(t.focusedMillisByDay).sort(function (a, b) { return +b - +a; });
-    return '<section class="panel timer-panel" id="personal-timer" data-status="' + t.status + '"><p class="eyebrow">' + (t.phase === 'break' ? '休息倒计时' : t.mode === 'countup' ? '专注正计时' : '专注倒计时') + '</p><output id="personal-timer-display" class="timer-display" aria-label="当前计时时间">' + timerText(t) + '</output><p id="personal-timer-status" role="status">' + timerStatus(t) + '</p><p>' + esc(ctx, task ? '关联任务：' + task.title : t.taskId ? '关联任务已删除，计时记录保留' : '未关联任务') + '</p><div class="page-actions">' + button(ctx, '开始', 'personal-timer-start', '', 'primary', active) + button(ctx, '暂停', 'personal-timer-pause', '', '', t.status !== 'running') + button(ctx, '继续', 'personal-timer-resume', '', '', t.status !== 'paused') + button(ctx, '提前结束', 'personal-timer-end', '', '', !active) + (t.mode === 'countup' ? button(ctx, '完成本轮', 'personal-timer-finish', '', '', !active) : '') + button(ctx, '开始休息', 'personal-timer-break', '', '', active) + button(ctx, '重置', 'personal-timer-reset') + '</div></section><section class="panel"><h2>最近计时记录</h2>' + (t.history.length ? '<ol class="activity-list">' + t.history.map(function (h) { return '<li><strong>' + (h.phase === 'break' ? '休息' : '专注') + ' · ' + Math.floor(h.elapsedMillis / 60000) + ' 分钟</strong><span>' + (h.outcome === 'completed' ? '已完成' : '提前结束') + ' · ' + esc(ctx, new Date(h.finishedAt).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'})) + '</span></li>'; }).join('') + '</ol>' : '<p>完成或结束一轮计时后可查看记录。</p>') + '</section><section class="panel"><h2>个人专注统计 · 北京时间（完成轮次仅含倒计时）</h2>' + (days.length ? '<ul>' + days.map(function (d) { return '<li>' + dayLabel(+d) + ' · ' + Math.floor(t.focusedMillisByDay[d] / 60000) + ' 分钟 · ' + (t.completedSessionsByDay[d] || 0) + ' 轮完成</li>'; }).join('') + '</ul>' : '<p>还没有专注记录。</p>') + '</section>';
+    return '<section class="panel timer-panel" id="personal-timer" data-status="' + t.status + '"><p class="eyebrow">' + (t.phase === 'break' ? '休息倒计时' : t.mode === 'countup' ? '专注正计时' : '专注倒计时') + '</p><output id="personal-timer-display" class="timer-display" aria-label="当前计时时间">' + timerText(t) + '</output><p id="personal-timer-status" role="status">' + timerStatus(t) + '</p><p>' + esc(ctx, task ? '关联任务：' + task.title : t.taskId ? '关联任务已删除，计时记录保留' : '未关联任务') + '</p><div class="page-actions">' + button(ctx, '开始', 'personal-timer-start', '', 'primary', active) + button(ctx, '暂停', 'personal-timer-pause', '', '', t.status !== 'running') + button(ctx, '继续', 'personal-timer-resume', '', '', t.status !== 'paused') + button(ctx, '提前结束', 'personal-timer-end', '', '', !active) + (t.mode === 'countup' ? button(ctx, '完成本轮', 'personal-timer-finish', '', '', !active) : '') + button(ctx, '开始休息', 'personal-timer-break', '', '', active) + button(ctx, '重置', 'personal-timer-reset') + '</div></section><section class="panel"><h2>最近计时记录</h2>' + (t.history.length ? '<ol class="activity-list timer-history-list">' + t.history.map(function (h) { return '<li data-session-id="' + esc(ctx, h.id) + '"><strong>' + (h.phase === 'break' ? '休息' : '专注') + ' · ' + Math.floor(h.elapsedMillis / 60000) + ' 分钟</strong><span>' + (h.outcome === 'completed' ? '已完成' : '提前结束') + ' · ' + esc(ctx, new Date(h.finishedAt).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'})) + '</span></li>'; }).join('') + '</ol>' : '<p>完成或结束一轮计时后可查看记录。</p>') + '</section><section class="panel"><h2>个人专注统计 · 北京时间（完成轮次仅含倒计时）</h2>' + (days.length ? '<ul>' + days.map(function (d) { return '<li>' + dayLabel(+d) + ' · ' + Math.floor(t.focusedMillisByDay[d] / 60000) + ' 分钟 · ' + (t.completedSessionsByDay[d] || 0) + ' 轮完成</li>'; }).join('') + '</ul>' : '<p>还没有专注记录。</p>') + '</section>';
   }
-  function pomodoroPage(ctx) {
+  function webPomodoroPage(ctx) {
     var t = timer(ctx), tasks = window.DemoDomain.helpers.flattenTasks(core(ctx).tasks).filter(function (x) { return !x.done; });
     var preview = window.GxD4Preview && window.GxD4Preview.isPreview && window.GxD4Preview.isPreview();
     return heading(ctx, '番茄钟', '计时状态独立于页面，切换页面或重新打开体验后继续恢复。', preview ? button(ctx, '原生番茄钟隔离体验', 'personal-native-timer') : '') + '<p class="help-text">合成体验计时；Android 通知、锁屏、后台及重启行为需原生验证。休息计时为本轮新增体验。</p>' + (preview ? '<p class="help-text">原生体验使用独立计时状态，与下面的网页计时各自保存。</p>' : '') + '<div id="personal-timer-content">' + timerBody(ctx, t) + '</div><form data-form="personal-timer-config" class="panel work-form"><h2>计时设置</h2><div class="form-grid"><label class="field"><span>计时模式</span><select name="mode"><option value="countdown"' + (t.mode === 'countdown' ? ' selected' : '') + '>倒计时</option><option value="countup"' + (t.mode === 'countup' ? ' selected' : '') + '>正计时</option></select></label><label class="field"><span>专注分钟</span><input name="durationMinutes" type="number" min="1" max="180" value="' + t.durationMinutes + '" required></label><label class="field"><span>休息分钟</span><input name="breakMinutes" type="number" min="1" max="180" value="' + t.breakMinutes + '" required></label><label class="field"><span>关联任务</span><select name="taskId"><option value="">不关联</option>' + tasks.map(function (x) { return '<option value="' + esc(ctx, x.id) + '"' + (t.taskId === x.id ? ' selected' : '') + '>' + esc(ctx, x.title) + '</option>'; }).join('') + '</select></label></div><button class="button" type="submit">保存计时设置</button></form>';
   }
-  function mutateTimer(ctx, action, values) { return update(ctx, function (p) { p.timer = command(p.timer || createClock(time()), action, values, time()); }, ({start: '已开始计时', pause: '已暂停', resume: '已继续计时', end: '已提前结束', finish: '本轮已完成', break: '已开始休息', reset: '已重置计时', configure: '已保存计时设置'})[action]); }
+  function pomodoroPage(ctx) {
+    var html = webPomodoroPage(ctx);
+    if (!nativeTimer()) return html;
+    observeNativeTimer(ctx);
+    html = html.replace('原生番茄钟隔离体验', '打开原生计时控制')
+      .replace('计时状态独立于页面，切换页面或重新打开体验后继续恢复。', '网页与原生界面共用 Android 持久计时会话。')
+      .replace('合成体验计时；Android 通知、锁屏、后台及重启行为需原生验证。休息计时为本轮新增体验。', '隔离体验：Android 单调时钟计时，工作和休息分别记录；生产通知与锁屏提醒尚未接入。')
+      .replace('<p class="help-text">原生体验使用独立计时状态，与下面的网页计时各自保存。</p>', '')
+      .replace('<div id="personal-timer-content">', '<div id="personal-timer-content">' + nativeTimerNotice(ctx));
+    queueMicrotask(function () { updateNativeTimerView(ctx); nativeTimer().refresh().catch(function () {}); });
+    return html;
+  }
+  function mutateTimer(ctx, action, values) {
+    var messages = {start: '已开始计时', pause: '已暂停', resume: '已继续计时', end: '已提前结束', finish: '本轮已完成', break: '已开始休息', reset: '已重置计时', configure: '已保存计时设置', 'claim-completion': '已确认本轮完成'};
+    if (!nativeTimer()) return update(ctx, function (p) { p.timer = command(p.timer || createClock(time()), action, values, time()); }, messages[action]);
+    observeNativeTimer(ctx);
+    if (nativeTimerBlocked(ctx)) throw new Error('请先读取计时状态或处理保留的旧记录；当前操作尚未保存');
+    var form = document.querySelector('[data-form="personal-timer-config"]');
+    if (action === 'configure' && form) form.dataset.dirty = 'true';
+    var input = Object.assign({}, values || {});
+    if (action === 'configure') { input.durationMinutes = Number(input.durationMinutes); input.breakMinutes = Number(input.breakMinutes); }
+    return nativeTimer().command(action, input).then(function () {
+      if (action === 'configure' && form && form.isConnected) {
+        var unchanged = ['mode', 'durationMinutes', 'breakMinutes', 'taskId'].every(function (name) { return String(form.elements.namedItem(name).value) === String(input[name]); });
+        if (unchanged) form.dataset.dirty = '';
+      }
+      updateNativeTimerView(ctx); ctx.toast(messages[action]); return true;
+    });
+  }
   function tick(ctx) {
     if (Date.now() - lastReminderCheck >= 5000) checkReminders(ctx);
+    if (nativeTimer()) {
+      observeNativeTimer(ctx);
+      if (!document.hidden) nativeTimer().refresh().catch(function () {});
+      return false;
+    }
     var saved = personal(ctx).timer;
     if (!saved || saved.status !== 'running') return false;
     var t = advance(saved, time());
@@ -322,6 +420,12 @@
     if (action === 'personal-note-new' || action === 'personal-note-edit') return noteForm(ctx, action === 'personal-note-new' ? '' : id);
     if (action === 'personal-note-delete' || action === 'personal-feedback-delete') { var kind = action.includes('feedback') ? 'feedback' : 'note'; ctx.modal('<h2>删除这条' + (kind === 'feedback' ? '意见' : '便签') + '？</h2><p>仅删除当前合成条目。</p><div class="form-actions">' + button(ctx, '取消', 'personal-close') + button(ctx, '确认删除', 'personal-' + kind + '-delete-confirm', id, 'danger') + '</div>'); return true; }
     if (action === 'personal-note-delete-confirm') { ctx.transaction(function (s) { s.notes = s.notes.filter(function (n) { return n.id !== id; }); }); ctx.closeModal(); ctx.toast('已删除便签'); return true; }
+    if (action === 'personal-timer-refresh' && nativeTimer()) return nativeTimer().refresh().then(function () { updateNativeTimerView(ctx); return true; });
+    if (action === 'personal-timer-adopt' && nativeTimer()) {
+      if (nativeTimer().info().busy) throw new Error('上一项计时操作尚未确认');
+      update(ctx, function (p) { if (p.timer) p.nativeTimerLegacyArchive = clone(p.timer); }, '旧网页记录已保留，统一计时已启用');
+      updateNativeTimerView(ctx); return true;
+    }
     if (action.startsWith('personal-timer-')) return mutateTimer(ctx, action.slice('personal-timer-'.length));
     if (action === 'personal-feedback-new' || action === 'personal-feedback-edit') return feedbackForm(ctx, action === 'personal-feedback-new' ? '' : id);
     if (action === 'personal-feedback-draft') return feedbackForm(ctx, '', feedbackData(ctx).draft);
