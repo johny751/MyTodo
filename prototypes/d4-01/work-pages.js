@@ -185,7 +185,12 @@
       (route === 'analytics' || route === 'archive' ? field(ctx,'从日期','from',v.from,'date') + field(ctx,'到日期','to',v.to,'date') : '') +
       '<button class="button" type="submit">应用筛选</button>' + button(ctx, '清除', 'work-reset-filter', route) + '</form>';
   }
-  function table(headers, rows) { return '<div class="table-wrap"><table class="data-table"><thead><tr>' + headers.map(function (h) { return '<th scope="col">' + h + '</th>'; }).join('') + '</tr></thead><tbody>' + rows.join('') + '</tbody></table></div>'; }
+  function table(headers, rows) {
+    // Keep one set of cells and actions for desktop tables and phone records.
+    // Labels are fixed presentation text from the table definition, never data.
+    var records=rows.map(function(row){var column=0;return row.replace(/<td(\s[^>]*)?>/g,function(tag,attributes){var label=String(headers[column++] || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');return '<td'+(attributes || '')+' data-label="'+label+'">';});});
+    return '<div class="table-wrap work-record-wrap"><table class="data-table work-record-table"><thead><tr>' + headers.map(function (h) { return '<th scope="col">' + h + '</th>'; }).join('') + '</tr></thead><tbody>' + records.join('') + '</tbody></table></div>';
+  }
   function taskRows(ctx, tasks, unlinkAction, ownerId) {
     return tasks.map(function (t) { return '<li class="linked-task">' + button(ctx, t.title, 'work-open-task', t.id, 'text') + ' ' + pill(ctx, done(t) ? 'done' : 'pending') + (unlinkAction ? ' ' + button(ctx, '移除关联', unlinkAction, ownerId + '|' + t.id, 'text') : '') + '</li>'; }).join('');
   }

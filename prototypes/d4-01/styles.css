@@ -33,3 +33,21 @@
 .work-time-field .inline-setting{display:flex;align-items:flex-start;gap:8px;font-size:12px}
 .work-time-field .inline-setting input{flex:none;margin-top:3px}
 @media(max-width:480px){.work-time-field{grid-template-columns:minmax(0,1fr);padding:10px 12px}.work-time-field legend{font-size:13px}}
+
+/* On phones, show the same work records as readable, labelled groups. */
+@media(max-width:700px){
+ .work-record-wrap{overflow:visible}
+ .work-record-table{display:block;width:100%;min-width:0}
+ .work-record-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .work-record-table tbody{display:block}
+ .work-record-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 16px;padding:16px;border-bottom:1px solid var(--line)}
+ .work-record-table tbody tr:last-child{border-bottom:0}
+ .work-record-table tbody td{display:block;min-width:0;width:auto;padding:0;border:0;white-space:normal;overflow-wrap:anywhere;font-size:13px}
+ .work-record-table tbody td:before{content:attr(data-label);display:block;margin-bottom:3px;color:var(--muted);font-size:11px;font-weight:400}
+ .work-record-table tbody td:first-child,.work-record-table tbody td:last-child,.work-record-table tbody td[data-label*="时间"]{grid-column:1/-1}
+ .work-record-table tbody td:first-child:before,.work-record-table tbody td.row-actions:before{display:none}
+ .work-record-table tbody td:first-child>.button.text{width:100%;font-size:15px;font-weight:600;justify-content:flex-start;text-align:left;padding:0;white-space:normal;min-height:44px}
+ .work-record-table tbody td small{display:block;margin-top:3px}
+ .work-record-table tbody td.row-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;padding-top:10px;border-top:1px solid #edf1f5}
+ .work-record-table .row-actions .button{min-width:44px;min-height:44px;padding:8px 12px}
+}
