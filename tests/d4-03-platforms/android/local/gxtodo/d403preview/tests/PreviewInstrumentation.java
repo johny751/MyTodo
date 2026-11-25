@@ -5,12 +5,14 @@ import android.app.Instrumentation;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.webkit.WebView;
 import local.gxtodo.d403preview.BuildInfo;
@@ -36,6 +38,7 @@ public final class PreviewInstrumentation extends Instrumentation {
     private final JSONArray rows = new JSONArray();
     private final JSONArray touchTargets = new JSONArray();
     private final JSONArray touchGeometries = new JSONArray();
+    private final JSONArray autocompleteNativeKeys = new JSONArray();
     private int passed, failed;
     private interface Check { void run() throws Exception; }
     @Override public void onCreate(Bundle args) { super.onCreate(args); start(); }
@@ -82,7 +85,7 @@ public final class PreviewInstrumentation extends Instrumentation {
                 shot("android-task-menu"); back();
                 require(Boolean.TRUE.equals(js("!document.querySelector('.modal')")), "Android back closed only menu");
             });
-            for (String route : new String[]{"tasks","notes","pomodoro","projects","work-items","templates","processes","analytics","settings","sync","feedback"}) {
+            for (String route : new String[]{"tasks","notes","pomodoro","projects","work-items","templates","processes","analytics","settings","sync","feedback","dashboard","contacts","archive","devices","data-system","about","catalogs","timeline"}) {
                 final String page = route;
                 check("android-touch-edge-drawer-" + page, () -> {
                     home(); js("D4Prototype.navigate(" + JSONObject.quote(page) + ")"); settle(); edgeOpen();
@@ -128,6 +131,8 @@ public final class PreviewInstrumentation extends Instrumentation {
                 shot("android-after-task-move");
             });
             check("android-touch-and-keyboard-autocomplete", () -> {
+                beginAutocompleteTrace();
+                try {
                 home(); tap("[data-task-id='d4-task-0'] .task-title");
                 for (String kind : new String[]{"tags","projects","places"}) {
                     String host = "[data-catalog='"+kind+"']";
@@ -136,15 +141,16 @@ public final class PreviewInstrumentation extends Instrumentation {
                     require(Boolean.TRUE.equals(js("document.querySelector("+JSONObject.quote(host+" .catalog-list")+").children.length>0")), "Existing " + kind + " candidates");
                     String candidateId="projects".equals(kind)
                         ? (String)js("document.querySelector("+JSONObject.quote(host+" [data-action=catalog-pick]")+").dataset.id") : null;
-                    if ("tags".equals(kind)) { sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER)); }
+                    if ("tags".equals(kind)) { markAutocompleteKeys("before-arrowdown-enter"); sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER)); markAutocompleteKeys("after-arrowdown-enter"); }
                     else tap(host+" [data-action=catalog-pick]");
-                    require(Boolean.TRUE.equals(js("document.querySelector("+JSONObject.quote(host+" [role=combobox]")+").getAttribute('aria-expanded')==='false'")), "Candidate selection closed " + kind);
+                    require(Boolean.TRUE.equals(js("(function(){var closed=document.querySelector("+JSONObject.quote(host+" [role=combobox]")+").getAttribute('aria-expanded')==='false';window.__d403AutocompleteDebug.sample('selection-assertion',null,{kind:"+JSONObject.quote(kind)+",closed:closed});return closed;})()")), "Candidate selection closed " + kind);
                     if ("projects".equals(kind)) {
                         require(candidateId.equals(js("document.querySelector('[data-form=task-edit] [data-catalog=projects] [name=projectId]').value")), "Exact tapped project identity selected, not name or underlying filter");
                         require(Boolean.TRUE.equals(js("(function(){var h=document.querySelector('[data-form=task-edit] [data-catalog=projects]');var p=D4Prototype.repo.state.projects.find(p=>p.id===h.querySelector('[name=projectId]').value);return !!p&&!p.archived&&p.name===h.querySelector('[role=combobox]').value;})()")), "Selected project ID resolves to the active entity and visible name");
                     }
                 }
                 shot("android-task-autocomplete"); back();
+                } finally { finishAutocompleteTrace(); }
             });
             check("android-page-switch-restores-task-draft", () -> {
                 home(); tap("[data-task-id='d4-task-0'] .task-title");
@@ -195,6 +201,106 @@ public final class PreviewInstrumentation extends Instrumentation {
                 require(!timer("poll").getBoolean("completionDelivered"),"Repeated poll does not duplicate completion");
                 require(timer("snapshot").getInt("completedSessionsToday")==baseline.getInt("completedSessionsToday")+1,"Single completion statistic");
                 launch(); shot("android-after-background");
+            });
+            check("android-touch-single-quadrant-edge-navigation", () -> {
+                home(); int quadrant=((Number)js("D4Prototype.repo.getTask('d4-task-0').quadrant")).intValue();
+                tap("[data-action=quadrant-focus][data-id='"+quadrant+"']");
+                require(Boolean.TRUE.equals(js("!!document.querySelector('.single-quadrant [data-quadrant=\""+quadrant+"\"]')")),"Single quadrant opened through real touch");
+                edgeOpen(); shot("android-single-quadrant-drawer"); back();
+                require(Boolean.TRUE.equals(js("!document.querySelector('.app-shell.nav-open')&&!!document.querySelector('.single-quadrant [data-quadrant=\""+quadrant+"\"]')")),"Back closes drawer while retaining the same single quadrant");
+                tap("[data-action=quadrant-back]");
+                require(Boolean.TRUE.equals(js("!document.querySelector('.single-quadrant')&&document.querySelectorAll('.board [data-quadrant]').length===4")),"Visible return button restores overview");
+            });
+            check("android-touch-single-quadrant-cross-move", () -> {
+                home(); manualSort(); int source=((Number)js("D4Prototype.repo.getTask('d4-task-0').quadrant")).intValue(), destination=(source+1)%4;
+                Object raw=rawMovedTask(); int total=((Number)js("D4Prototype.repo.state.tasks.length")).intValue();
+                tap("[data-action=quadrant-focus][data-id='"+source+"']");
+                require(((Number)js("document.querySelectorAll('.quadrant-peek').length")).intValue()==3,"Single quadrant exposes all three other targets");
+                String target=".quadrant-peek[data-quadrant='"+destination+"']";
+                point(target,true); settle();
+                float[] from=point(".single-quadrant [data-task-id='d4-task-0'] .task-title",false), to=point(target,false);
+                gesture(from[0],from[1],to[0],to[1],longHold(),360); settle();
+                require(((Number)js("D4Prototype.repo.getTask('d4-task-0').quadrant")).intValue()==destination,"Actual single-quadrant drag commits destination");
+                require(raw.equals(rawMovedTask())&&((Number)js("D4Prototype.repo.state.tasks.length")).intValue()==total,"Cross move preserves task identity, all other raw fields and task count");
+                require(Boolean.TRUE.equals(js("!document.querySelector('.single-quadrant [data-task-id=\"d4-task-0\"]')")),"Source list removes the moved task");
+                shot("android-single-quadrant-cross-move"); tap("[data-action=quadrant-back]");
+                tap("[data-action=task-menu][data-id='d4-task-0']");
+                tap("[data-action=task-move][data-id='d4-task-0|"+source+"']");
+                require(((Number)js("D4Prototype.repo.getTask('d4-task-0').quadrant")).intValue()==source&&raw.equals(rawMovedTask()),"Real task menu moves the original entity back without changing other fields");
+            });
+            check("android-touch-note-create-edit-delete", () -> {
+                home(); Object tasks=js("JSON.stringify(D4Prototype.repo.state.tasks)"), notes=js("JSON.stringify(D4Prototype.repo.state.notes)");
+                int count=((Number)js("D4Prototype.repo.state.notes.length")).intValue();
+                openPageByTouch("notes"); tap("[data-action=personal-note-new]");
+                typeText("[data-form=personal-note] [name=body]","Native note created");
+                tap("[data-form=personal-note] button[type=submit]");
+                require(((Number)js("D4Prototype.repo.state.notes.length")).intValue()==count+1,"Real note save creates exactly one independent entity");
+                JSONObject note=(JSONObject)js("D4Prototype.repo.state.notes.find(n=>n.body==='Native note created')");
+                String id=note.getString("id"), createdAt=note.getString("createdAt");
+                require(Boolean.TRUE.equals(js("document.querySelector('[data-note-id=\""+id+"\"] .note-body').textContent==='Native note created'")),"Created note appears in the visible list");
+                tap("[data-action=personal-note-edit][data-id='"+id+"']");
+                typeText("[data-form=personal-note] [name=body]","Native note edited");
+                tap("[data-form=personal-note] button[type=submit]");
+                note=(JSONObject)js("D4Prototype.repo.state.notes.find(n=>n.id==="+JSONObject.quote(id)+")");
+                require("Native note edited".equals(note.getString("body"))&&createdAt.equals(note.getString("createdAt")),"Real edit retains ID and original creation time");
+                openPageByTouch("tasks"); openPageByTouch("notes");
+                require(Boolean.TRUE.equals(js("document.querySelector('[data-note-id=\""+id+"\"] .note-body').textContent==='Native note edited'")),"Edited note survives actual page navigation");
+                shot("android-note-edited"); tap("[data-action=personal-note-delete][data-id='"+id+"']");
+                require(((Number)js("D4Prototype.repo.state.notes.length")).intValue()==count+1,"Delete prompt does not delete before confirmation");
+                tap("[data-action=personal-note-delete-confirm][data-id='"+id+"']");
+                require(notes.equals(js("JSON.stringify(D4Prototype.repo.state.notes)"))&&tasks.equals(js("JSON.stringify(D4Prototype.repo.state.tasks)")),"Confirmed deletion removes only the new note, preserving original notes and every task");
+                require(Boolean.TRUE.equals(js("!document.querySelector('[data-note-id=\""+id+"\"]')")),"Deleted note leaves the visible list");
+            });
+            check("android-touch-feedback-local-text-submit", () -> {
+                home(); Object tasks=js("JSON.stringify(D4Prototype.repo.state.tasks)"); openPageByTouch("feedback");
+                int count=((Number)js("(D4Prototype.repo.demo.personal?.feedback?.ideas||[]).length")).intValue();
+                tap("[data-action=personal-feedback-new]");
+                typeText("[data-form=personal-feedback] [name=title]","Native local feedback");
+                typeText("[data-form=personal-feedback] [name=body]","Text submitted through Android touch and keyboard");
+                tap("[data-form=personal-feedback] button[type=submit]");
+                require(((Number)js("D4Prototype.repo.demo.personal.feedback.ideas.length")).intValue()==count+1,"Real feedback submit saves exactly one local idea");
+                JSONObject idea=(JSONObject)js("D4Prototype.repo.demo.personal.feedback.ideas.find(i=>i.title==='Native local feedback')");
+                String id=idea.getString("id");
+                require("Text submitted through Android touch and keyboard".equals(idea.getString("body"))&&"pending".equals(idea.getString("status"))&&idea.getJSONArray("images").length()==0,"Submitted text and pending status match the form, without fabricated attachments");
+                openPageByTouch("tasks"); openPageByTouch("feedback");
+                require(Boolean.TRUE.equals(js("document.querySelector('[data-feedback-id=\""+id+"\"] .note-body').textContent==='Text submitted through Android touch and keyboard'")),"Saved feedback is visible after navigation");
+                require(tasks.equals(js("JSON.stringify(D4Prototype.repo.state.tasks)")),"Feedback remains in its independent synthetic domain");
+                shot("android-feedback-local-submitted");
+            });
+            check("android-touch-sync-state-and-devices", () -> {
+                home(); Object tasks=js("JSON.stringify(D4Prototype.repo.state.tasks)"); openPageByTouch("sync");
+                require(Boolean.TRUE.equals(js("(function(){var p=document.querySelector('[data-provider=synthetic]'),labels=Array.from(p.querySelectorAll('dt')).map(x=>x.textContent);return ['状态','上次模拟时间','合成待同步数量','当前设备','错误原因'].every(x=>labels.includes(x))&&Array.from(p.querySelectorAll('dd')).every(x=>x.textContent.trim().length>0);})()")),"Sync state, timestamp, pending count, current device and error fields are visible");
+                int pending=((Number)js("D4Prototype.repo.demo.personal?.sync?.pending??3")).intValue();
+                tap("[data-action=personal-sync-error]");
+                require(Boolean.TRUE.equals(js("document.querySelector('[data-sync-status=error]').textContent==='模拟失败'&&document.querySelector('[data-provider=synthetic]').textContent.includes(D4Prototype.repo.demo.personal.sync.error)&&D4Prototype.repo.demo.personal.sync.error.length>0")),"Actual simulated-error button exposes exact error state");
+                require(((Number)js("D4Prototype.repo.demo.personal.sync.pending")).intValue()==pending,"Error preserves the pending synthetic count");
+                tap("[data-action=personal-sync-success]");
+                JSONObject sync=(JSONObject)js("D4Prototype.repo.demo.personal.sync");
+                require("success".equals(sync.getString("status"))&&sync.getInt("pending")==0&&!sync.getString("lastSync").isEmpty()&&sync.getString("error").isEmpty(),"Actual simulated-success button updates local fields and clears the error");
+                require(Boolean.TRUE.equals(js("document.querySelector('[data-sync-status=success]').textContent==='模拟成功'&&document.querySelector('[data-sync-pending]').textContent==='0'&&document.querySelector('[data-provider=synthetic]').textContent.includes(D4Prototype.repo.demo.personal.sync.lastSync)&&document.querySelectorAll('.activity-list li').length>=2")),"Visible status, pending count, timestamp and history follow the saved synthetic state");
+                shot("android-sync-local-state"); openPageByTouch("devices");
+                require(Boolean.TRUE.equals(js("(function(){var ds=D4Prototype.repo.demo.personal.devices,cards=document.querySelectorAll('[data-device-id]');return ds.length>0&&cards.length===ds.length&&ds.every(d=>{var e=Array.from(cards).find(x=>x.dataset.deviceId===d.id);return !!e&&e.querySelector('h2').textContent===d.name&&e.textContent.includes(d.type)&&e.textContent.includes(d.id)&&e.textContent.includes(d.connected?'模拟已连接':'模拟未连接')&&e.textContent.includes(d.lastSync||'尚无');});})()")),"Device name, identity, type, connection and last-sync fields match each synthetic device");
+                require(Boolean.TRUE.equals(js("D4Prototype.repo.demo.personal.devices.some(d=>d.current&&d.connected&&d.lastSync===D4Prototype.repo.demo.personal.sync.lastSync)")),"Current synthetic device reflects the actual simulated success");
+                require(tasks.equals(js("JSON.stringify(D4Prototype.repo.state.tasks)")),"Simulated synchronization does not mutate task data");
+                shot("android-synthetic-devices");
+            });
+            check("android-native-timer-real-early-end-button", () -> {
+                home(); openPageByTouch("pomodoro");
+                Instrumentation.ActivityMonitor monitor=addMonitor(NativeTimerActivity.class.getName(),null,false); Activity opened;
+                try { tap("[data-action=personal-native-timer]"); opened=monitor.waitForActivityWithTimeout(20000); }
+                finally { removeMonitor(monitor); }
+                require(opened instanceof NativeTimerActivity,"Actual page button opens native timer for early end");
+                NativeTimerActivity activity=(NativeTimerActivity)opened; int completed=timer("snapshot").getInt("completedSessionsToday");
+                nativeTap(activity,40302); SystemClock.sleep(1200);
+                require(timer("snapshot").getBoolean("running")&&timer("snapshot").getLong("elapsedMillis")>0,"Actual start button begins an advancing session");
+                nativeTap(activity,40306); JSONObject stopped=timer("snapshot");
+                require(!stopped.getBoolean("running")&&!stopped.getBoolean("completed")&&stopped.getLong("elapsedMillis")==0&&stopped.getInt("completedSessionsToday")==completed,"Actual early-end button resets active time without recording a completed session");
+                AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();
+                require(root!=null&&nativeTextContains(root,"已暂停 / 待开始"),"Native status visibly reflects early end");
+                shot("android-native-early-end"); back();
+                require("pomodoro".equals(js("D4Prototype.getRoute()")),"Android Back returns from native timer to its page");
+                stopped=timer("reopen-for-isolated-test");
+                require(!stopped.getBoolean("running")&&!stopped.getBoolean("completed")&&stopped.getLong("elapsedMillis")==0,"Actual early-end state persists across store reopen");
             });
         } catch (Throwable fatal) { record("instrumentation-setup-or-fatal", fatal, 0); }
         try {
@@ -247,6 +353,55 @@ public final class PreviewInstrumentation extends Instrumentation {
         return new float[]{(float)rect.getDouble("x"),(float)rect.getDouble("y")};
     }
     private void tap(String selector) throws Exception { point(selector,true);SystemClock.sleep(200);float[] p=point(selector,false);gesture(p[0],p[1],p[0],p[1],0,0);settle(); }
+    private void beginAutocompleteTrace() throws Exception {
+        js("(function(){var rows=[],dropped=0;function describe(e){return e&&e.nodeType===1?{tag:e.tagName,name:e.getAttribute('name'),action:e.getAttribute('data-action'),catalog:e.closest('[data-catalog]')?.dataset.catalog||null}:null;}"+
+            "function sample(stage,event,extra){if(rows.length>=512){dropped++;return;}var active=document.activeElement,v=window.visualViewport;rows.push({wallMillis:Date.now(),performanceMillis:performance.now(),stage:stage,event:event?{type:event.type,key:event.key||null,code:event.code||null,keyCode:event.keyCode||0,isComposing:!!event.isComposing,defaultPrevented:event.defaultPrevented,isTrusted:event.isTrusted,target:describe(event.target)}:null,active:describe(active),documentHasFocus:document.hasFocus(),viewport:v?{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}:null,catalogs:Array.from(document.querySelectorAll('[data-form=task-edit] [data-catalog]')).map(h=>{var i=h.querySelector('[role=combobox]'),hidden=h.querySelector('[name=tags],[name=projectId]');return {kind:h.dataset.catalog,value:i?.value||'',expanded:i?.getAttribute('aria-expanded'),focused:active===i,hiddenValue:hidden?.value||null,candidates:Array.from(h.querySelectorAll('.catalog-list button')).map(b=>({id:b.dataset.id,selected:b.classList.contains('selected')}))};}),extra:extra||null});}"+
+            "var types=['pointerdown','pointerup','click','focusin','focusout','keydown','keyup','beforeinput','input','compositionstart','compositionend'];var capture=e=>sample('capture',e),bubble=e=>sample('bubble',e);types.forEach(t=>{document.addEventListener(t,capture,true);document.addEventListener(t,bubble,false);});"+
+            "var observer=new MutationObserver(records=>{var relevant=records.filter(r=>r.target.nodeType===1&&r.target.closest('[data-catalog]'));if(relevant.length)sample('catalog-mutations',null,{records:relevant.map(r=>({type:r.type,attribute:r.attributeName,oldValue:r.oldValue,target:describe(r.target)}))});});observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeOldValue:true,attributeFilter:['aria-expanded','class']});"+
+            "window.__d403AutocompleteDebug={sample:sample,read:()=>({events:rows,dropped:dropped}),dispose:()=>{observer.disconnect();types.forEach(t=>{document.removeEventListener(t,capture,true);document.removeEventListener(t,bubble,false);});}};sample('trace-start',null);return true;})()");
+    }
+    private void markAutocompleteKeys(String stage) throws Exception {
+        autocompleteNativeKeys.put(new JSONObject().put("stage",stage).put("wallMillis",System.currentTimeMillis())
+            .put("uptimeMillis",SystemClock.uptimeMillis()).put("elapsedRealtimeMillis",SystemClock.elapsedRealtime()));
+    }
+    private void finishAutocompleteTrace() {
+        try {
+            JSONObject trace=(JSONObject)js("(function(){var d=window.__d403AutocompleteDebug;if(!d)return {missing:true};d.sample('final-read',null);var result=d.read();d.dispose();delete window.__d403AutocompleteDebug;return result;})()");
+            trace.put("nativeKeyDispatch",autocompleteNativeKeys);
+            if(Build.VERSION.SDK_INT>=30){final boolean[] known=new boolean[1],visible=new boolean[1];runOnMainSync(()->{WindowInsets i=main.previewWebView().getRootWindowInsets();known[0]=i!=null;visible[0]=i!=null&&i.isVisible(WindowInsets.Type.ime());});trace.put("finalImeObservation",new JSONObject().put("known",known[0]).put("visible",visible[0]));}
+            write("autocomplete-event-trace.json",trace.toString(2));
+        } catch(Throwable error) { try { write("autocomplete-trace-error.log",error.toString()); } catch(Exception ignored) {} }
+    }
+    private void openPageByTouch(String route) throws Exception {
+        edgeOpen(); tap(".side-nav [data-action=go][data-id='"+route+"']");
+        require(route.equals(js("D4Prototype.getRoute()")),"Real drawer item opens "+route);
+        require(Boolean.TRUE.equals(js("!document.querySelector('.app-shell.nav-open')")),"Real page selection closes the drawer");
+    }
+    private void typeText(String selector,String text) throws Exception {
+        require(text.matches("[ -~]*"),"Native keyboard helper accepts deterministic ASCII text only");
+        dismissImeIfVisible(); tap(selector);
+        require(Boolean.TRUE.equals(js("document.activeElement===document.querySelector("+JSONObject.quote(selector)+")")),"Actual tap focuses the requested text field");
+        long now=SystemClock.uptimeMillis();
+        sendKeySync(new KeyEvent(now,now,KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_A,0,KeyEvent.META_CTRL_ON));
+        sendKeySync(new KeyEvent(now,SystemClock.uptimeMillis(),KeyEvent.ACTION_UP,KeyEvent.KEYCODE_A,0,KeyEvent.META_CTRL_ON));
+        sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DEL));
+        sendKeySync(new KeyEvent(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_DEL));
+        sendStringSync(text); settle();
+        require(text.equals(js("document.querySelector("+JSONObject.quote(selector)+").value")),"Native key events replace the field with the exact expected text");
+        dismissImeIfVisible();
+        require(text.equals(js("document.querySelector("+JSONObject.quote(selector)+").value")),"Dismissing the observed IME retains the form and text");
+    }
+    private void dismissImeIfVisible() throws Exception {
+        require(Build.VERSION.SDK_INT>=30,"Native text evidence requires observed API30+ IME visibility");
+        final boolean[] visible=new boolean[1],known=new boolean[1];
+        runOnMainSync(()->{WindowInsets insets=main.previewWebView().getRootWindowInsets();known[0]=insets!=null;if(insets!=null)visible[0]=insets.isVisible(WindowInsets.Type.ime());});
+        require(known[0],"IME visibility must be observed before sending Back");
+        if(visible[0]) {
+            back();
+            runOnMainSync(()->{WindowInsets insets=main.previewWebView().getRootWindowInsets();known[0]=insets!=null;visible[0]=insets!=null&&insets.isVisible(WindowInsets.Type.ime());});
+            require(known[0]&&!visible[0],"Real Android Back dismisses the visible keyboard");
+        }
+    }
     private void edgeOpen() throws Exception { gesture(3,150,140,152,0,300);settle();require(Boolean.TRUE.equals(js("!!document.querySelector('.app-shell.nav-open')")),"Actual left-edge touch opened drawer before a menu interaction"); }
     private void gesture(float sx,float sy,float ex,float ey,long hold,long duration) throws Exception {
         JSONObject geometry=(JSONObject)js("(function(){var v=window.visualViewport;return {innerWidth:innerWidth,innerHeight:innerHeight,devicePixelRatio:devicePixelRatio,visualViewport:v?{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}:null};})()");
