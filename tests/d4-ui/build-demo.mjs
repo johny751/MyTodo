@@ -50,7 +50,7 @@ const ordered=[],visiting=new Set(),visited=new Set();
 function visit(relative){if(visited.has(relative))return;if(visiting.has(relative))throw Error('D4 cyclic pure graph '+relative);visiting.add(relative);for(const dependency of modules.get(relative).dependencies)visit(dependency);visiting.delete(relative);visited.add(relative);ordered.push(relative);}
 visit('prototypes/d4-01/domain.mjs');if(ordered.length!==graph.length)throw Error('D4 graph includes unused/untracked modules');
 let html=await read('prototypes/d4-01/index.html');
-const css=await read('prototypes/d4-01/styles.css'),pages=await read('prototypes/d4-01/work-pages.js'),app=await read('prototypes/d4-01/app.js'),personal=await read('prototypes/d4-01/personal-pages.js'),mobile=await read('prototypes/d4-01/mobile-controls.js'),legacy=await read('prototypes/d4-01/legacy-pages.js');
+const css=await read('prototypes/d4-01/styles.css'),pages=await read('prototypes/d4-01/work-pages.js'),app=await read('prototypes/d4-01/app.js'),nativeTimer=await read('prototypes/d4-01/native-timer-adapter.js'),personal=await read('prototypes/d4-01/personal-pages.js'),mobile=await read('prototypes/d4-01/mobile-controls.js'),legacy=await read('prototypes/d4-01/legacy-pages.js');
 const fontPath='prototypes/d4-01/fonts/NotoSansSC-VF.ttf',oflPath='prototypes/d4-01/fonts/OFL.txt',copyrightPath='prototypes/d4-01/fonts/COPYRIGHT.txt';
 const fontBytes=await readBytes(fontPath),fontSha256=sha256(fontBytes);
 if(fontBytes.length!==17773244||fontSha256!=='763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a')throw Error('D4 embedded font differs from the approved local Noto Sans SC asset');
@@ -61,7 +61,7 @@ const fontFace='/* Noto Sans SC: SIL OFL 1.1; full notices in #d4-font-license a
 const escapeNotice=value=>value.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const fontLicenseMarkup='<template id="d4-font-license" data-license="OFL-1.1"><pre>'+escapeNotice(copyright+'\n\n'+ofl)+'</pre></template>\n';
 html=html.replace(/<link\b[^>]*href\s*=\s*['"](?:\.\/)?styles\.css['"][^>]*>/gi,'');
-html=html.replace(/<script\b[^>]*src\s*=\s*['"](?:\.\/)?(?:domain\.mjs|work-pages\.js|personal-pages\.js|mobile-controls\.js|legacy-pages\.js|app\.js)['"][^>]*>\s*<\/script\s*>/gi,'');
+html=html.replace(/<script\b[^>]*src\s*=\s*['"](?:\.\/)?(?:domain\.mjs|work-pages\.js|native-timer-adapter\.js|personal-pages\.js|mobile-controls\.js|legacy-pages\.js|app\.js)['"][^>]*>\s*<\/script\s*>/gi,'');
 if(/<script\b|<link\b[^>]*(?:rel\s*=\s*['"]stylesheet['"]|href\s*=\s*['"](?:https?:|\/\/))/i.test(html))throw Error('D4 HTML contains an unsupported script/stylesheet dependency');
 if(/@import\b/i.test(css)||/<\/style/i.test(css))throw Error('D4 stylesheet contains an external import or closing style token');
 for(const match of css.matchAll(/url\(\s*(['"]?)([\s\S]*?)\1\s*\)/gi))if(!/^(?:data:|#)/i.test(match[2].trim()))throw Error('D4 stylesheet references an unbundled asset');
@@ -69,7 +69,7 @@ if(/<(?:img|iframe|audio|video|source)\b[^>]*\b(?:src|poster)\s*=\s*['"](?!(?:da
 if(!/<\/head\s*>/i.test(html)||!/<\/body\s*>/i.test(html))throw Error('D4 template lacks head/body closing tags');
 const buildTimeUtc=new Date().toISOString();
 const identity={kind:'d4-03-offline-classic-demo',sourceSha,runId,runAttempt,buildTimeUtc,coreVersion:2,storageKey:'mytodo-d4-03-demo-v1',font,productionLogicChanged:false,productionSyncEnabled:false};
-const script='"use strict";\n(()=>{\nconst __D4Modules=Object.create(null);\n'+ordered.map(relative=>modules.get(relative).code).join('\n')+'\nglobalThis.DemoDomain=__D4Modules["prototypes/d4-01/domain.mjs"];\nglobalThis.D4_BUILD=Object.freeze('+JSON.stringify(identity)+');\n'+legacy+'\n'+pages+'\n'+personal+'\n'+mobile+'\n'+app+'\n})();\n';
+const script='"use strict";\n(()=>{\nconst __D4Modules=Object.create(null);\n'+ordered.map(relative=>modules.get(relative).code).join('\n')+'\nglobalThis.DemoDomain=__D4Modules["prototypes/d4-01/domain.mjs"];\nglobalThis.D4_BUILD=Object.freeze('+JSON.stringify(identity)+');\n'+legacy+'\n'+pages+'\n'+nativeTimer+'\n'+personal+'\n'+mobile+'\n'+app+'\n})();\n';
 new vm.Script(script,{filename:'d4-01-offline-bundle.js'}); // GHA syntax compilation only; no browser/UI code executes here.
 html=html.replace(/<\/head\s*>/i,()=>'<style data-d4-inline="styles">\n'+fontFace+css+'\n</style>\n</head>');
 html=html.replace(/<\/body\s*>/i,()=>fontLicenseMarkup+'<script data-d4-inline="classic">\n'+script.replace(/<\/script/gi,'<\\/script')+'\n</script>\n</body>');

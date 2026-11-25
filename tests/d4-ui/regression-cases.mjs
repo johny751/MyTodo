@@ -535,6 +535,19 @@ export async function runRegressionCases(api) {
 
   await check('R20 Synthetic quota failure honestly retains memory edit and blocks destructive editor exits [synthetic storage failure]', async () => {
     const before = await historicalParent({repeat:false}), title = '写入失败仍在内存的标题';
+    // Synthetic fixture preparation: settle this task's reminder at its exact
+    // due time before freezing the durable baseline. Reload/focus may otherwise
+    // legitimately initialize personal reminder state during the quota test.
+    // The original full-byte assertions below remain exact and unchanged.
+    const reminders = await read(`(()=>{
+      const repo=D4Prototype.repo,id=${JSON.stringify(before.id)},at=repo.reminderAt(id),key=id+'|'+at;
+      DemoPersonalPages.reminders.check({repo,getState:D4Prototype.getState,esc:value=>String(value),toast:()=>{}},at);
+      return {key,ledger:repo.demo.personal.reminderLedger,notices:repo.demo.personal.reminderNotices};
+    })()`);
+    assert.equal(reminders.ledger[reminders.key], 'sent');
+    assert.deepEqual(reminders.notices.map(notice=>notice.taskId), [before.id]);
+    await settle();
+    assert.deepEqual(await task(before.id), before);
     const storedBefore = await read('localStorage.getItem(D4Prototype.storageKey)');
     assert.equal((await read('D4Prototype.repo.persistence()')).mode, 'localStorage');
     await open(before.id); await api.fill(edit('title'), title);

@@ -114,6 +114,33 @@ export async function runLegacyCases(api) {
     await api.screenshot('legacy-category-quick-task');
   });
 
+  for (const kind of ['tag','place']) {
+    await check('L03-'+kind+' Selective quadrant entry excludes unrelated roots and preserves records [synthetic fixture]',async()=>{
+      await read(`(()=>{
+        D4Prototype.repo.transaction(state=>{
+          const original=structuredClone(state.tasks[0]);
+          state.tags=['SelectedTag','UnrelatedTag'];state.places=['SelectedPlace','UnrelatedPlace'];
+          state.tasks=['match','other','none'].map((suffix,index)=>({...structuredClone(original),
+            id:'d4-selective-'+suffix,title:'选择性分类 '+suffix,subtasks:[],quadrant:0,done:false,repeat:null,reminder:null,
+            start:DemoDomain.helpers.dayKey()+'T09:00',end:'',
+            tags:index===0?['SelectedTag']:index===1?['UnrelatedTag']:[],
+            place:index===0?'SelectedPlace':index===1?'UnrelatedPlace':''}));
+        });return true;
+      })()`);
+      await settle();
+      const before=await snapshot(),links=await read('D4Prototype.repo.demo.taskLinks');
+      const selected={type:kind,name:kind==='tag'?'SelectedTag':'SelectedPlace',projectId:''};
+      await api.navigate('catalogs');await api.click(action('legacy-quadrants',selected));
+      assert.equal(await read('D4Prototype.getRoute()'),'tasks');
+      assert.deepEqual(await read('[...document.querySelectorAll(".board .task-row")].map(el=>el.dataset.taskId)'),['d4-selective-match']);
+      assert.equal(await read('document.querySelector("[data-form=task-filter] [name=status]").value'),'all');
+      assert.equal(await read('document.querySelector("[data-form=task-filter] [name=allDates]").checked'),true);
+      assert.deepEqual(await snapshot(),before);
+      assert.deepEqual(await read('D4Prototype.repo.demo.taskLinks'),links);
+      assert.doesNotMatch(await read('document.querySelector("#toast").textContent'),/is not a function/);
+    });
+  }
+
   await check('L04 Timeline retains mature date boundaries, nested tasks and period controls [synthetic fixture]',async()=>{
     await api.navigate('timeline');
     assert.deepEqual(new Set(await ids()),new Set(['d4-legacy-root','d4-legacy-child','d4-legacy-future','d4-legacy-completed','d4-legacy-expired']));
