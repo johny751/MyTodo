@@ -77,5 +77,63 @@ export async function runMobileCases(api){
   await api.tap('[data-action=close-modal]');
   assert.equal(await read('!!document.querySelector("[data-form=task-edit]")'),false);
  });
+ // Real held touch must keep its source nodes while reminder state changes.
+ async function withGestureRenderFixture(body){
+  const saved=await read('({state:D4Prototype.repo.state,demo:D4Prototype.repo.demo})');
+  try{
+   await go('tasks');
+   await read(`(()=>{const repo=D4Prototype.repo,state=repo.state;state.tasks=[];repo.batch(()=>{repo.replaceState(state);for(let i=0;i<3;i++)repo.createTask({id:'d403-render-'+i,title:'Held reminder task '+i,quadrant:0,start:DemoDomain.helpers.dayKey()+'T12:00',notes:'Exact raw note '+i,tags:['raw,tag']});});return true;})()`);
+   await api.fill('[data-form=task-filter] [name=sort]','manual');await api.fill('[data-form=task-filter] [name=query]','');await api.fill('[data-form=task-filter] [name=projectId]','');await api.fill('[data-form=task-filter] [name=status]','pending');await api.fill('[data-form=task-filter] [name=allDates]',true);await api.submit('[data-form=task-filter]');
+   await api.tap('[data-action=quadrant-focus][data-id="0"]');
+   await body();
+  }finally{
+   await read(`(()=>{const p=window.__d403RenderProbe;if(p){p.stop();p.observer.disconnect();delete window.__d403RenderProbe;}DemoMobileControls.cancel();D4Prototype.repo.batch(()=>{D4Prototype.repo.replaceState(${JSON.stringify(saved.state)});D4Prototype.repo.updateDemo(()=>(${JSON.stringify(saved.demo)}));});return true;})()`);
+   await go('tasks');
+   assert.deepEqual(await read('D4Prototype.repo.state'),saved.state,'Synthetic fixture restores all core values');
+   assert.deepEqual(await read('D4Prototype.repo.demo'),saved.demo,'Synthetic fixture restores all demo values');
+  }
+ }
+ const beginRenderProbe=()=>read(`(()=>{const row=document.querySelector('[data-task-id="d403-render-0"]'),p={row,replacements:0,batches:0};p.stop=D4Prototype.repo.subscribe((state,detail)=>{if(detail.type==='batch')p.batches++;});p.observer=new MutationObserver(records=>{p.replacements+=records.filter(r=>r.type==='childList'&&r.target===document.querySelector('#app')).length;});p.observer.observe(document.querySelector('#app'),{childList:true});window.__d403RenderProbe=p;return true;})()`);
+ const changeReminderDuringTouch=()=>read(`(()=>{const repo=D4Prototype.repo;repo.updateDemo(d=>{d.personal=d.personal||{};d.personal.reminderLedger={'d403-expired-fixture|0':'sent'};d.personal.reminderNotices=[{key:'d403-expired-fixture|0',taskId:'d403-expired-fixture',title:'Removed synthetic reminder',at:0}];});DemoPersonalPages.reminders.check({repo,getState:D4Prototype.getState,esc:value=>String(value),toast:()=>{}},Date.now());return {ledger:repo.demo.personal.reminderLedger,notices:repo.demo.personal.reminderNotices};})()`);
+ const heldRenderState=()=>read(`(()=>{const p=window.__d403RenderProbe;return {connected:p.row.isConnected,same:document.querySelector('[data-task-id="d403-render-0"]')===p.row,replacements:p.replacements,batches:p.batches,dragging:p.row.classList.contains('dragging'),ghost:!!document.querySelector('.drag-ghost')};})()`);
+ for(const cancel of [false,true])await api.check('M-repository-held-'+(cancel?'cancel':'release')+' Reminder updates preserve held node and flush one render',()=>withGestureRenderFixture(async()=>{
+  const before=await read('D4Prototype.repo.state.tasks');await beginRenderProbe();
+  await api.drag('[data-task-id="d403-render-0"] .task-title','[data-task-id="d403-render-1"]',{
+   hold:3200,after:true,cancel,
+   afterDown:async()=>{
+    assert.deepEqual(await changeReminderDuringTouch(),{ledger:{},notices:[]},'Authoritative reminder state changes immediately while the finger remains down');
+    const held=await heldRenderState();assert.equal(held.connected,true);assert.equal(held.same,true);assert.equal(held.replacements,0,'No repo render replaces the pre-longpress source');
+    assert.deepEqual(await read('D4Prototype.repo.state.tasks'),before);
+   },
+   beforeMove:async()=>{
+    const held=await heldRenderState();assert.equal(held.connected,true);assert.equal(held.same,true);assert.equal(held.dragging,true,'Original row activates before the first MOVE');assert.equal(held.ghost,true);assert.equal(held.replacements,0);
+    assert.deepEqual(await read('D4Prototype.repo.state.tasks'),before,'Holding alone cannot commit an order change');
+   },
+   beforeRelease:async()=>{
+    const held=await heldRenderState();assert.equal(held.connected,true);assert.equal(held.same,true);assert.equal(held.replacements,0);assert.equal(held.batches,0);
+    assert.deepEqual(await read('D4Prototype.repo.state.tasks'),before,'No task field changes before real UP or CANCEL');
+   }
+  });
+  const observed=await heldRenderState(),after=await read('D4Prototype.repo.state.tasks');
+  assert.equal(observed.replacements,1,'Queued reminder updates and the final order commit coalesce into one render');
+  assert.equal(observed.connected,false);assert.equal(observed.batches,cancel?0:1,'Only a released gesture submits one order batch');
+  assert.equal(await read('!!document.querySelector(".dragging,.drag-ghost,.drop-target,.swiping")'),false);
+  if(cancel)assert.deepEqual(after,before,'Real cancellation preserves every raw task field');
+  else{
+   assert.deepEqual(await read('[...document.querySelectorAll(".single-quadrant .task-row")].map(row=>row.dataset.taskId)'),['d403-render-1','d403-render-0','d403-render-2'],'The actual release reorders the visible rows');
+   const raw=tasks=>tasks.map(task=>{const copy=structuredClone(task);delete copy.order;return copy;}).sort((a,b)=>a.id.localeCompare(b.id));
+   assert.deepEqual(raw(after),raw(before),'Reorder preserves all non-order raw fields');
+  }
+ }));
+ await api.check('M-repository-held-navigation Explicit navigation cancels touch and renders immediately',()=>withGestureRenderFixture(async()=>{
+  const before=await read('D4Prototype.repo.state.tasks'),p=await api.point('[data-task-id="d403-render-0"] .task-title');await beginRenderProbe();
+  await api.swipe([p.x,p.y],[p.x+35,p.y],{cancel:true,beforeRelease:async()=>{
+   await changeReminderDuringTouch();assert.equal((await heldRenderState()).replacements,0);
+   await go('notes');assert.equal(await read('document.querySelector("main").dataset.route'),'notes','Explicit navigation is never held behind a repository refresh');
+   assert.equal(await read('!!document.querySelector(".dragging,.drag-ghost,.drop-target,.swiping")'),false);
+  }});
+  assert.equal(await read('D4Prototype.getRoute()'),'notes');assert.deepEqual(await read('D4Prototype.repo.state.tasks'),before);assert.equal((await heldRenderState()).replacements,1,'Explicit navigation consumes the pending refresh without a second render');
+ }));
+
  await api.check('M-large Real scroll and held drag auto-scroll preserve every task',async()=>{assert.equal(await read('!!document.querySelector("#modal-root .modal-shade")'),false,'Long-list drag starts on an unobstructed board');await read('(()=>{D4Prototype.repo.batch(()=>{for(let i=0;i<45;i++)D4Prototype.repo.createTask({id:"d403-scroll-"+i,title:"合成长列表 "+i,quadrant:0,start:DemoDomain.helpers.dayKey()+"T12:00"});});return true;})()');await api.tap('[data-action=quadrant-focus][data-id="0"]');const list='[data-quadrant="0"] .quadrant-list',before=await read('D4Prototype.repo.state.tasks.length');await api.holdScroll('[data-task-id="d4-task-0"] .task-title',list,3200);assert.ok(await read('document.querySelector('+JSON.stringify(list)+').scrollTop')>0);assert.equal(await read('D4Prototype.repo.state.tasks.length'),before);await api.screenshot('mobile-long-list-scroll');await api.tap('[data-action=quadrant-back]');});
 }

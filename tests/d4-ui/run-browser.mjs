@@ -58,16 +58,16 @@ try {
   async point(selector,after=false){await evaluate(`document.querySelector(${JSON.stringify(selector)}).scrollIntoView({block:'nearest'})`);return evaluate(`(()=>{const r=document.querySelector(${JSON.stringify(selector)}).getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height*${after?'.95':'.5'}}})()`);},
   async tap(selector,point){const p=point||await api.point(selector);await cmd('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:p.x,y:p.y}]});await cmd('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await settle();},
   async swipe(from,to,{cancel=false,beforeRelease}={}){await cmd('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:from[0],y:from[1]}]});try{for(let i=1;i<=8;i++){await cmd('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:from[0]+(to[0]-from[0])*i/8,y:from[1]+(to[1]-from[1])*i/8}]});await wait(30);}if(beforeRelease)await beforeRelease();await cmd('Input.dispatchTouchEvent',{type:cancel?'touchCancel':'touchEnd',touchPoints:[]});}catch(error){await cmd('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});throw error;}await wait(550);await settle();},
-  async drag(source,target,{hold=550,after=false}={}){
+  async drag(source,target,{hold=550,after=false,cancel=false,afterDown,beforeMove,beforeRelease}={}){
    await touchPoint(target,{fraction:after ? .95 : .5,scroll:true});await touchPoint(source,{scroll:true});
    const p=await touchPoint(source),to=await touchPoint(target,{fraction:after ? .95 : .5});let touching=false;
    try{
-    await cmd('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:p.x,y:p.y}]});touching=true;await wait(hold);
+    await cmd('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:p.x,y:p.y}]});touching=true;if(afterDown)await afterDown();await wait(hold);if(beforeMove)await beforeMove();
     const active=await cmd('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});writeFileSync(join(screenshots,'touch-drag-active.png'),Buffer.from(active.data,'base64'));
     for(let i=1;i<=12;i++){await cmd('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:p.x+(to.x-p.x)*i/12,y:p.y+(to.y-p.y)*i/12}]});await wait(35);}
     const hit=await evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(target)}),hit=document.elementFromPoint(${to.x},${to.y});return !!el&&!!hit&&(el===hit||el.contains(hit));})()`);
     assert.ok(hit,'Drag release coordinates must still hit the requested target');
-    await cmd('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});touching=false;await wait(550);await settle();
+    if(beforeRelease)await beforeRelease();await cmd('Input.dispatchTouchEvent',{type:cancel?'touchCancel':'touchEnd',touchPoints:[]});touching=false;await wait(550);await settle();
    }finally{if(touching)await cmd('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});}
   },
   async mouseDrag(source,target,{pointerType='mouse',after=false}={}){
