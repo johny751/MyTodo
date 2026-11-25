@@ -46,6 +46,7 @@ public final class PreviewInstrumentation extends Instrumentation {
     private final JSONArray touchTargets = new JSONArray();
     private final JSONArray touchGeometries = new JSONArray();
     private final JSONArray autocompleteNativeKeys = new JSONArray();
+    private final JSONArray inputBoundaries = new JSONArray();
     private int passed, failed;
     private interface Check { void run() throws Exception; }
     @Override public void onCreate(Bundle args) { super.onCreate(args); start(); }
@@ -328,6 +329,7 @@ public final class PreviewInstrumentation extends Instrumentation {
                 Object ids=js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>t.id))");
                 double scrollBefore=((Number)js("document.querySelector("+JSONObject.quote(list)+").scrollTop")).doubleValue();
                 JSONObject observed=new JSONObject().put("source","real Android MotionEvent").put("scrollBefore",scrollBefore);
+                beginHeldTouchTrace();
                 try (NativeDragTouch touch=new NativeDragTouch("held-drag-autoscroll")) {
                     try {
                         touch.down(start); SystemClock.sleep(longHold());
@@ -345,6 +347,8 @@ public final class PreviewInstrumentation extends Instrumentation {
                         try { shot("failure-native-held-drag-before-cancel"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
                         throw error;
                     }
+                } finally {
+                    finishHeldTouchTrace();
                 }
                 settle();
                 require(raw.equals(dragFixtureRaw()),"Released long-list drag preserves every ID and every non-order task field");
@@ -380,7 +384,7 @@ public final class PreviewInstrumentation extends Instrumentation {
                 require(Boolean.TRUE.equals(js("D4Prototype.repo.state.tasks.length===1&&!D4Prototype.repo.state.tasks.some(t=>t.id==='d403-native-child-a'||t.id==='d403-native-child-b')")),"Children remain children and are not promoted");
                 // Prepare both hit-tested coordinates before the suppression window starts.
                 float[] handlePoint=point(handle,false),closePoint=point("[data-action=close-modal]",false);
-                js("(function(){var p={batches:0,events:[]};p.stop=D4Prototype.repo.subscribe((s,d)=>{if(d.type==='batch')p.batches++;});p.end=e=>{if(e.target.closest('[data-task-id=d403-native-child-a] .drag-handle')){p.handleEnd=performance.now();p.handleTrusted=e.isTrusted;p.batchesAtHandleEnd=p.batches;}};p.click=e=>{if(e.target.closest('[data-action=close-modal]')){p.closeClick=performance.now();p.closeTrusted=e.isTrusted;}};p.observer=new MutationObserver(()=>{if(p.closeClick&&!document.querySelector('[data-form=task-edit]')&&!p.closedAt)p.closedAt=performance.now();});p.observer.observe(document.querySelector('#modal-root'),{childList:true,subtree:true});document.addEventListener('touchend',p.end);document.addEventListener('click',p.click,true);window.__d403NativeCloseProbe=p;return true;})()");
+                js("(function(){var p={batches:0,events:[],dropped:0};p.types=[\"pointerdown\",\"pointerup\",\"pointercancel\",\"touchstart\",\"touchend\",\"touchcancel\",\"mousedown\",\"mouseup\",\"click\",\"selectionchange\"];p.describe=e=>e&&e.nodeType===1?{tag:e.tagName,action:e.closest(\"[data-action]\")?.dataset.action||null,taskId:e.closest(\".task-row\")?.dataset.taskId||null,field:e.getAttribute(\"name\")}:null;p.selection=()=>{var s=getSelection(),a=document.activeElement;return {type:s?.type||null,rangeCount:s?.rangeCount||0,isCollapsed:s?.isCollapsed!==false,text:s?.toString().slice(0,200)||\"\",active:p.describe(a),selectionStart:typeof a?.selectionStart===\"number\"?a.selectionStart:null,selectionEnd:typeof a?.selectionEnd===\"number\"?a.selectionEnd:null,focus:document.hasFocus()};};p.trace=e=>{if(p.events.length>=96){p.dropped++;return;}var c=e.changedTouches?.[0]||e,x=Number.isFinite(c.clientX)?c.clientX:null,y=Number.isFinite(c.clientY)?c.clientY:null;p.events.push({type:e.type,observedAt:performance.now(),eventTimeStamp:e.timeStamp,trusted:e.isTrusted,defaultPrevented:e.defaultPrevented,pointerType:e.pointerType||null,target:p.describe(e.target),x:x,y:y,hit:x===null?null:p.describe(document.elementFromPoint(x,y)),modalStillOpen:!!document.querySelector(\"[data-form=task-edit]\"),dirty:!!document.querySelector(\".dragging,.drag-ghost,.drop-target,.swiping\"),selection:p.selection()});};p.initialSelection=p.selection();p.stop=D4Prototype.repo.subscribe((s,d)=>{if(d.type==='batch')p.batches++;});p.end=e=>{if(e.target.closest('[data-task-id=d403-native-child-a] .drag-handle')){p.handleEnd=performance.now();p.handleTrusted=e.isTrusted;p.batchesAtHandleEnd=p.batches;}};p.click=e=>{if(e.target.closest('[data-action=close-modal]')){p.closeClick=performance.now();p.closeTrusted=e.isTrusted;}};p.observer=new MutationObserver(()=>{if(p.closeClick&&!document.querySelector('[data-form=task-edit]')&&!p.closedAt)p.closedAt=performance.now();});p.observer.observe(document.querySelector('#modal-root'),{childList:true,subtree:true});p.types.forEach(type=>window.addEventListener(type,p.trace,true));document.addEventListener('touchend',p.end);document.addEventListener('click',p.click,true);window.__d403NativeCloseProbe=p;return true;})()");
                 long released,closeDown,closeUp;
                 try (NativeDragTouch touch=new NativeDragTouch("subtask-immediate-close")) {
                     try {
@@ -392,7 +396,23 @@ public final class PreviewInstrumentation extends Instrumentation {
                     }
                 }
                 waitForIdleSync();
-                JSONObject probe=(JSONObject)js("(function(){var p=window.__d403NativeCloseProbe;return {handleEnd:p.handleEnd,handleTrusted:p.handleTrusted,batchesAtHandleEnd:p.batchesAtHandleEnd,closeClick:p.closeClick,closeTrusted:p.closeTrusted,closedAt:p.closedAt,modalStillOpen:!!document.querySelector('[data-form=task-edit]'),dirty:!!document.querySelector('.dragging,.drag-ghost,.drop-target,.swiping')};})()");
+                // The Android UI queue becoming idle does not prove that the
+                // WebView renderer has processed the injected input sequence.
+                // Preserve the first observation and only await evidence. The
+                // original <500ms native injection and renderer event-time
+                // assertions below remain unchanged; late closure still fails.
+                JSONObject firstProbe=readNativeCloseProbe(),probe=firstProbe;
+                long firstObservationUptime=SystemClock.uptimeMillis(),observationDeadline=released+1000L;
+                int observationReads=1;
+                while(!probe.has("closedAt")&&SystemClock.uptimeMillis()<observationDeadline) {
+                    SystemClock.sleep(20);
+                    probe=readNativeCloseProbe();observationReads++;
+                }
+                probe.put("firstObservation",new JSONObject(firstProbe.toString()))
+                    .put("firstObservationUptimeMs",firstObservationUptime)
+                    .put("lastObservationUptimeMs",SystemClock.uptimeMillis())
+                    .put("observationReadCount",observationReads)
+                    .put("observationDeadlineUptimeMs",observationDeadline);
                 probe.put("nativeHandleReleaseUptimeMs",released).put("nativeCloseDownUptimeMs",closeDown).put("nativeCloseUpUptimeMs",closeUp).put("nativeCloseAfterReleaseMs",closeUp-released);
                 write("native-subtask-immediate-close.json",probe.toString(2));
                 require(closeUp-released<500,"Actual Close touch finishes within 500ms of the real handle release");
@@ -412,21 +432,27 @@ public final class PreviewInstrumentation extends Instrumentation {
             check("android-unified-timer-web-navigation-native-pause-web-resume", () -> withUnifiedTimerCase("shared-navigation", () -> {
                 JSONObject configured=prepareUnifiedTimer(5,1);
                 openPageByTouch("pomodoro"); awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                beginUnifiedTouchTrace();markUnifiedTouchTrace("web-start-before-touch");
                 tap("[data-action=personal-timer-start]");
                 JSONObject running=awaitUnifiedWeb(configured.getLong("revision")+1,null,"running");
                 String id=running.getString("sessionId"); require(!id.isEmpty()&&"focus".equals(running.getString("phase")),"Actual Web start creates a native focus session");
                 SystemClock.sleep(1200); openPageByTouch("notes"); openPageByTouch("pomodoro");
                 JSONObject returned=awaitUnifiedWeb(running.getLong("revision"),id,"running");
                 require(returned.getLong("elapsedMillis")>running.getLong("elapsedMillis"),"The same native session advances while the Web page is changed");
+                markUnifiedTouchTrace("open-native-before-touch");
                 NativeTimerActivity activity=openUnifiedNative();
                 awaitNativeUnifiedText(activity,id);
                 nativeUnifiedTap(activity,40304);
                 JSONObject paused=unifiedSnapshot();require("paused".equals(paused.getString("status"))&&id.equals(paused.getString("sessionId")),"Real native Pause pauses the original Web-started session");
                 SystemClock.sleep(1200);require(unifiedSnapshot().getLong("elapsedMillis")==paused.getLong("elapsedMillis"),"Shared native paused elapsed time stays fixed");
+                markUnifiedTouchTrace("native-paused-before-back");
                 back();unifiedForegroundActivity=null;
                 awaitUnifiedWeb(paused.getLong("revision"),id,"paused");
+                markUnifiedTouchTrace("web-resume-before-touch");
                 tap("[data-action=personal-timer-resume]");
+                markUnifiedTouchTrace("web-resume-after-touch");
                 JSONObject resumed=awaitUnifiedWeb(paused.getLong("revision")+1,id,"running");
+                markUnifiedTouchTrace("web-resume-confirmed");
                 SystemClock.sleep(1200);
                 JSONObject later=unifiedSnapshot();
                 require(id.equals(later.getString("sessionId"))&&later.getLong("elapsedMillis")>resumed.getLong("elapsedMillis"),"Actual Web Resume continues the native-paused session without replacing its identity");
@@ -582,7 +608,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             throw error;
         } finally {
             try {
-                js("(function(){var p=window.__d403NativeCloseProbe;if(p){p.stop();p.observer.disconnect();document.removeEventListener('touchend',p.end);document.removeEventListener('click',p.click,true);delete window.__d403NativeCloseProbe;}DemoMobileControls.cancel();return true;})()");
+                js("(function(){var p=window.__d403NativeCloseProbe;if(p){p.stop();p.observer.disconnect();document.removeEventListener('touchend',p.end);document.removeEventListener('click',p.click,true);if(p.types&&p.trace)p.types.forEach(type=>window.removeEventListener(type,p.trace,true));delete window.__d403NativeCloseProbe;}DemoMobileControls.cancel();return true;})()");
                 home();
                 js("(function(){D4Prototype.repo.batch(()=>{D4Prototype.repo.replaceState(JSON.parse("+JSONObject.quote(state)+"));D4Prototype.repo.updateDemo(()=>JSON.parse("+JSONObject.quote(demo)+"));});return true;})()");
                 settle();
@@ -592,6 +618,10 @@ public final class PreviewInstrumentation extends Instrumentation {
                 if(failure!=null)failure.addSuppressed(cleanup);else throw cleanup;
             }
         }
+    }
+    /** Read only: no synthetic input, selection cleanup, retries, or DOM changes. */
+    private JSONObject readNativeCloseProbe() throws Exception {
+        return (JSONObject)js("(function(){var p=window.__d403NativeCloseProbe;return {observedAt:performance.now(),handleEnd:p.handleEnd,handleTrusted:p.handleTrusted,batchesAtHandleEnd:p.batchesAtHandleEnd,closeClick:p.closeClick,closeTrusted:p.closeTrusted,closedAt:p.closedAt,modalStillOpen:!!document.querySelector('[data-form=task-edit]'),dirty:!!document.querySelector('.dragging,.drag-ghost,.drop-target,.swiping'),batches:p.batches,events:p.events,dropped:p.dropped,initialSelection:p.initialSelection,selection:p.selection()};})()");
     }
     private Object dragFixtureRaw() throws Exception {
         return js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>{var x=structuredClone(t);delete x.order;return x;}).sort((a,b)=>a.id.localeCompare(b.id)))");
@@ -653,6 +683,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             throw error;
         } finally {
             try {
+                if("shared-navigation".equals(name))finishUnifiedTouchTrace();
                 if(unifiedForegroundActivity!=null){NativeTimerActivity activity=unifiedForegroundActivity;runOnMainSync(activity::finish);unifiedForegroundActivity=null;}
                 timer("reset");launch();home();
             } catch(Exception|Error cleanup) { if(failure!=null)failure.addSuppressed(cleanup);else throw cleanup; }
@@ -702,6 +733,39 @@ public final class PreviewInstrumentation extends Instrumentation {
             SystemClock.sleep(120);
         }
         throw new AssertionError("Web getter and visible timer did not confirm shared native identity/status by deadline: "+last);
+    }
+    /** Read-only input evidence. Does not clear selection, focus a view or replay a command. */
+    private void beginUnifiedTouchTrace() throws Exception {
+        js("(function(){var rows=[],dropped=0,ids=new WeakMap(),serial=0;"+
+            "function describe(node){var e=node&&node.nodeType===1?node:node&&node.parentElement;if(!e)return null;if(!ids.has(e))ids.set(e,++serial);return {node:ids.get(e),tag:e.tagName,id:e.id||'',name:e.getAttribute('name'),action:e.getAttribute('data-action'),connected:e.isConnected,disabled:!!e.disabled};}"+
+            "function state(){var info=window.D4NativeTimer?.info(),s=info?.state;return {ready:!!info?.ready,busy:!!info?.busy,error:info?.error||'',revision:s?.revision,status:s?.status,sessionId:s?.sessionId};}"+
+            "function sample(stage,event,extra){if(rows.length>=384){dropped++;return;}var selection=getSelection(),button=document.querySelector('[data-action=personal-timer-resume]'),rect=button?.getBoundingClientRect(),point=event?.changedTouches?.[0]||event,hit=point&&Number.isFinite(point.clientX)?document.elementFromPoint(point.clientX,point.clientY):null;rows.push({stage:stage,wallMillis:Date.now(),performanceMillis:performance.now(),documentHasFocus:document.hasFocus(),visibility:document.visibilityState,active:describe(document.activeElement),selection:selection?{type:selection.type,ranges:selection.rangeCount,collapsed:selection.isCollapsed,textLength:selection.toString().length,anchor:describe(selection.anchorNode),focus:describe(selection.focusNode)}:null,timer:state(),globalBusy:{personal:window.DemoPersonalPages?.isBusy?.(),work:window.DemoWorkPages?.isBusy?.()},resume:button?{element:describe(button),rect:{left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom}}:null,event:event?{type:event.type,trusted:event.isTrusted,defaultPrevented:event.defaultPrevented,pointerType:event.pointerType||'',key:event.key||'',code:event.code||'',ctrlKey:!!event.ctrlKey,metaKey:!!event.metaKey,shiftKey:!!event.shiftKey,clientX:point?.clientX,clientY:point?.clientY,target:describe(event.target),hit:describe(hit)}:null,extra:extra||null});}"+
+            "var types=['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel','click','keydown','keyup','selectionchange','focusin','focusout','visibilitychange'];var capture=e=>sample('window-capture',e),bubble=e=>sample('window-bubble',e);types.forEach(t=>{window.addEventListener(t,capture,true);window.addEventListener(t,bubble,false);});"+
+            "var focus=e=>sample('window-focus',e),blur=e=>sample('window-blur',e),response=e=>{var d=e.detail,v=d?.value;sample('native-response',null,{requestId:d?.id,error:d?.error||'',revision:v?.revision,status:v?.status,sessionId:v?.sessionId});};window.addEventListener('focus',focus);window.addEventListener('blur',blur);document.addEventListener('gx-d4-native-timer',response,true);"+
+            "var observer=new MutationObserver(records=>{var relevant=records.filter(r=>r.target.nodeType===1&&r.target.closest('#personal-timer-content'));if(relevant.length)sample('timer-mutations',null,{count:relevant.length,changes:relevant.slice(0,12).map(r=>({type:r.type,attribute:r.attributeName,target:describe(r.target),added:r.addedNodes.length,removed:r.removedNodes.length}))});});observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled','data-status','data-revision','class']});"+
+            "window.__d403UnifiedTouchDebug={sample:sample,read:()=>({events:rows,dropped:dropped}),dispose:()=>{observer.disconnect();types.forEach(t=>{window.removeEventListener(t,capture,true);window.removeEventListener(t,bubble,false);});window.removeEventListener('focus',focus);window.removeEventListener('blur',blur);document.removeEventListener('gx-d4-native-timer',response,true);}};sample('trace-start',null);return true;})()");
+    }
+    private void markUnifiedTouchTrace(String stage) throws Exception {
+        final boolean[] flags=new boolean[7];
+        runOnMainSync(()->{WebView view=main.previewWebView();flags[0]=main.hasWindowFocus();flags[1]=view.hasWindowFocus();flags[2]=view.hasFocus();flags[3]=view.isShown();flags[4]=main.isFinishing();flags[5]=main.isDestroyed();flags[6]=view.getWindowVisibility()==View.VISIBLE;});
+        JSONObject nativeState=new JSONObject().put("activityWindowFocus",flags[0]).put("webViewWindowFocus",flags[1]).put("webViewFocus",flags[2]).put("webViewShown",flags[3]).put("activityFinishing",flags[4]).put("activityDestroyed",flags[5]).put("windowVisible",flags[6]).put("uptimeMillis",SystemClock.uptimeMillis());
+        JSONArray windows=new JSONArray();
+        try {
+            for(android.view.accessibility.AccessibilityWindowInfo window:getUiAutomation().getWindows()) {
+                Rect bounds=new Rect();window.getBoundsInScreen(bounds);
+                windows.put(new JSONObject().put("id",window.getId()).put("type",window.getType()).put("layer",window.getLayer()).put("active",window.isActive()).put("focused",window.isFocused()).put("accessibilityFocused",window.isAccessibilityFocused()).put("title",String.valueOf(window.getTitle())).put("bounds",bounds.toShortString()));
+                window.recycle();
+            }
+            nativeState.put("windows",windows).put("windowCount",windows.length());
+        } catch(Exception unavailable) { nativeState.put("windowsObservationError",unavailable.toString()); }
+        js("(function(){var trace=window.__d403UnifiedTouchDebug;if(trace)trace.sample("+JSONObject.quote(stage)+",null,"+nativeState.toString()+");return true;})()");
+    }
+    private void finishUnifiedTouchTrace() {
+        try {
+            markUnifiedTouchTrace("before-case-cleanup");
+            JSONObject trace=(JSONObject)js("(function(){var d=window.__d403UnifiedTouchDebug;if(!d)return {missing:true};var result=d.read();d.dispose();delete window.__d403UnifiedTouchDebug;return result;})()");
+            write("unified-timer-touch-trace.json",trace.toString(2));
+        } catch(Throwable failure) {try{write("unified-timer-touch-trace-error.log",failure.toString());}catch(Exception ignored){}}
     }
     private void requireWebHistoryRow(String id,String text) throws Exception {
         require(Boolean.TRUE.equals(js("(function(){var rows=Array.from(document.querySelectorAll('.timer-history-list [data-session-id]')).filter(e=>e.dataset.sessionId==="+JSONObject.quote(id)+");return rows.length===1&&rows[0].textContent.includes("+JSONObject.quote(text)+");})()")),"Visible Web history has exactly one matching session row and expected outcome/phase");
@@ -795,7 +859,26 @@ public final class PreviewInstrumentation extends Instrumentation {
         return value instanceof String?JSONObject.quote((String)value):String.valueOf(value);
     }
 
-    private void check(String name,Check check) { long started=SystemClock.elapsedRealtime();try{check.run();record(name,null,SystemClock.elapsedRealtime()-started);}catch(Throwable e){record(name,e,SystemClock.elapsedRealtime()-started);try{shot("failure-"+name);}catch(Exception ignored){}} }
+    private void check(String name,Check check) { long started=SystemClock.elapsedRealtime();observeInputBoundary(name,"before");try{check.run();record(name,null,SystemClock.elapsedRealtime()-started);}catch(Throwable e){record(name,e,SystemClock.elapsedRealtime()-started);try{shot("failure-"+name);}catch(Exception ignored){}}finally{observeInputBoundary(name,"after");} }
+    /** Read-only diagnosis; never clears selection, focus or a native popup. */
+    private void observeInputBoundary(String name,String stage) {
+        try {
+            JSONObject row=new JSONObject().put("case",name).put("stage",stage).put("uptimeMillis",SystemClock.uptimeMillis()).put("wallMillis",System.currentTimeMillis());
+            row.put("web",js("(function(){var s=getSelection(),a=document.activeElement;return {route:window.D4Prototype?.getRoute(),focused:document.hasFocus(),active:a?{tag:a.tagName,name:a.getAttribute('name'),action:a.getAttribute('data-action')}:null,selection:s?{collapsed:s.isCollapsed,ranges:s.rangeCount,text:s.toString().slice(0,200),anchor:s.anchorNode?.parentElement?.tagName,focus:s.focusNode?.parentElement?.tagName}:null};})()"));
+            final boolean[] nativeFocus=new boolean[2];runOnMainSync(()->{nativeFocus[0]=main.previewWebView().hasFocus();nativeFocus[1]=main.previewWebView().hasWindowFocus();});
+            row.put("webViewHasFocus",nativeFocus[0]).put("webViewHasWindowFocus",nativeFocus[1]);
+            AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();
+            try{if(root!=null)row.put("activeWindow",new JSONObject().put("class",String.valueOf(root.getClassName())).put("package",String.valueOf(root.getPackageName())).put("windowId",root.getWindowId()));}finally{if(root!=null)root.recycle();}
+            inputBoundaries.put(row);write("native-input-boundaries.json",inputBoundaries.toString(2));
+        } catch(Throwable error) { try{write("native-input-boundary-error.log",name+" / "+stage+" / "+error);}catch(Exception ignored){} }
+    }
+    private void beginHeldTouchTrace() throws Exception {
+        js("(function(){var rows=[];function read(stage,e){if(rows.length>=128)return;var s=getSelection(),t=e?.target,p=e?.changedTouches?.[0];rows.push({stage:stage,now:performance.now(),eventTime:e?.timeStamp,type:e?.type,trusted:e?.isTrusted,prevented:e?.defaultPrevented,ctrl:e?.ctrlKey,target:t?.tagName,task:t?.closest?.('[data-task-id]')?.dataset.taskId,x:p?.clientX,y:p?.clientY,focused:document.hasFocus(),selection:s?{collapsed:s.isCollapsed,text:s.toString().slice(0,200)}:null,dragging:!!document.querySelector('.dragging'),ghost:!!document.querySelector('.drag-ghost')});}var types=['touchstart','touchmove','touchend','touchcancel','pointerdown','pointercancel','contextmenu','selectionchange','blur','focus'],listener=e=>read('event',e);types.forEach(t=>window.addEventListener(t,listener,true));var timer=setInterval(()=>read('sample'),100);window.__d403HeldTrace={read:()=>rows,stop:()=>{clearInterval(timer);types.forEach(t=>window.removeEventListener(t,listener,true));}};read('before-down');return true;})()");
+    }
+    private void finishHeldTouchTrace() {
+        try{Object trace=js("(function(){var p=window.__d403HeldTrace;if(!p)return null;var rows=p.read();p.stop();delete window.__d403HeldTrace;return rows;})()");write("native-held-event-trace.json",String.valueOf(trace));}
+        catch(Throwable error){try{write("native-held-event-trace-error.log",error.toString());}catch(Exception ignored){}}
+    }
     private void record(String name,Throwable error,long duration) {
         try { JSONObject row=new JSONObject().put("name",name).put("status",error==null?"passed":"failed").put("durationMs",duration);
             if(error==null)passed++;else{failed++;StringWriter raw=new StringWriter();error.printStackTrace(new PrintWriter(raw));row.put("error",raw.toString());if(evidence!=null)write(name+".failure.log",raw.toString());}
