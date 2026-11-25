@@ -31,6 +31,8 @@ public final class MainActivity extends Activity {
     private WebView web;
     private boolean destroyed;
     private android.view.ActionMode floatingTextMode;
+    private boolean resumeAfterPause, restoringTextMode, restoreFrameRequested, logNextResumedInput;
+    private long textRestoreEpoch;
     private ValueCallback<Uri[]> pendingFiles;
     private boolean pendingFilesMultiple;
     @Override public void onCreate(Bundle saved) {
@@ -235,7 +237,16 @@ public final class MainActivity extends Activity {
         super.onActionModeStarted(mode);
         if (mode.getType() == android.view.ActionMode.TYPE_FLOATING) {
             floatingTextMode = mode;
-            android.util.Log.i("D403PreviewInput", "floating-text-started id=" + System.identityHashCode(mode));
+            android.util.Log.i("D403PreviewInput", "floating-text-started id=" + System.identityHashCode(mode)
+                + " restoreEpoch=" + textRestoreEpoch + " restoring=" + restoringTextMode);
+            // WebView can rebuild a stale selection toolbar while its window is
+            // returning, even when no ActionMode remained at onPause. Limit this
+            // cleanup to the restored visual-state boundary; fresh input ends it earlier.
+            if (restoringTextMode) {
+                android.util.Log.i("D403PreviewInput", "floating-text-restored-before-input id="
+                    + System.identityHashCode(mode) + " epoch=" + textRestoreEpoch);
+                mode.finish();
+            }
         }
     }
     @Override public void onActionModeFinished(android.view.ActionMode mode) {
@@ -250,23 +261,81 @@ public final class MainActivity extends Activity {
         android.util.Log.i("D403PreviewInput", "floating-text-lifecycle-end id=" + (mode == null ? "none" : System.identityHashCode(mode)));
         if (mode != null) mode.finish();
     }
+    private void endTextRestore(String reason) {
+        if (!restoringTextMode) return;
+        restoringTextMode = false;
+        android.util.Log.i("D403PreviewInput", "text-restore-end epoch=" + textRestoreEpoch + " reason=" + reason);
+    }
+    private void observeResumedInput(String kind, long eventTime) {
+        if (logNextResumedInput) {
+            logNextResumedInput = false;
+            android.util.Log.i("D403PreviewInput", "text-restore-first-input epoch=" + textRestoreEpoch
+                + " kind=" + kind + " eventTime=" + eventTime + " restoring=" + restoringTextMode
+                + " mode=" + (floatingTextMode == null ? "none" : System.identityHashCode(floatingTextMode)));
+        }
+        endTextRestore(kind);
+    }
+    @Override public boolean dispatchTouchEvent(android.view.MotionEvent event) {
+        if (event.getActionMasked() == android.view.MotionEvent.ACTION_DOWN)
+            observeResumedInput("touch-down", event.getEventTime());
+        return super.dispatchTouchEvent(event);
+    }
+    @Override public boolean dispatchKeyEvent(android.view.KeyEvent event) {
+        if (event.getAction() == android.view.KeyEvent.ACTION_DOWN)
+            observeResumedInput("key-down", event.getEventTime());
+        return super.dispatchKeyEvent(event);
+    }
+    private void endTextRestoreAfterFrame() {
+        if (!restoringTextMode || restoreFrameRequested || web == null || !hasWindowFocus()) return;
+        restoreFrameRequested = true;
+        final long epoch = textRestoreEpoch;
+        android.util.Log.i("D403PreviewInput", "text-restore-frame-request epoch=" + epoch);
+        web.postVisualStateCallback(epoch, new WebView.VisualStateCallback() {
+            @Override public void onComplete(long requestId) {
+                if (!destroyed && epoch == textRestoreEpoch && requestId == epoch)
+                    endTextRestore("restored-visual-state-ready");
+            }
+        });
+    }
+    @Override public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) endTextRestoreAfterFrame();
+    }
     @Override protected void onPause() {
         // A text-selection toolbar belongs to this foreground WebView. Finish it
         // before pausing, so returning from a native screen cannot revive an old
         // popup over an unrelated control and consume its first real touch.
+        resumeAfterPause = true;
+        restoringTextMode = false;
+        restoreFrameRequested = false;
+        logNextResumedInput = false;
+        textRestoreEpoch++;
         finishFloatingTextMode();
         if (web != null) web.onPause();
         super.onPause();
     }
     @Override protected void onResume() {
+        // The initial launch has no restored selection to clean up. Subsequent
+        // resumes end at a WebView visual-state callback, not an input timeout.
+        restoringTextMode = resumeAfterPause;
+        resumeAfterPause = false;
+        restoreFrameRequested = false;
+        logNextResumedInput = restoringTextMode;
+        if (restoringTextMode) {
+            textRestoreEpoch++;
+            android.util.Log.i("D403PreviewInput", "text-restore-begin epoch=" + textRestoreEpoch);
+        }
         super.onResume();
         if (web != null) {
             web.onResume();
             web.evaluateJavascript("document.dispatchEvent(new Event('gx-d4-native-timer-resume'))", null);
+            endTextRestoreAfterFrame();
         }
     }
     @Override protected void onDestroy() {
         destroyed = true;
+        restoringTextMode = false;
+        textRestoreEpoch++;
         finishFloatingTextMode();
         completeFileSelection(null);
         if (web != null) { web.removeJavascriptInterface("GxD4Preview"); web.destroy(); web = null; }
