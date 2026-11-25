@@ -18,10 +18,10 @@ if (!path.isAbsolute(runnerTemp || '') || !/^[a-f0-9]{40}$/.test(process.env.GIT
 const output = path.join(runnerTemp, 'c004-android-emulator');
 const runtimeRoot = path.join(runnerTemp, 'c004-android-runtime');
 const api = '34';
-const tag = 'google_apis';
+const tag = 'default';
 const abi = 'x86_64';
 const imagePackage = `system-images;android-${api};${tag};${abi}`;
-const avd = 'mytodo-c004-api34-x86_64';
+const avd = 'mytodo-c004-api34-default-x86_64';
 const port = '5554';
 const serial = `emulator-${port}`;
 const emulator = sdk && path.join(sdk, 'emulator/emulator');
@@ -37,7 +37,7 @@ const receipt = {
   runner: { os: process.env.RUNNER_OS, arch: process.env.RUNNER_ARCH, image: process.env.ImageOS,
     imageVersion: process.env.ImageVersion, environment: process.env.RUNNER_ENVIRONMENT },
   startedAt: new Date().toISOString(), status: 'blocked', exitCode: null, serial: null,
-  requested: { api, tag, abi, imagePackage, serial, avd, expectedRevision: process.env.MYTODO_ANDROID_IMAGE_REVISION || null },
+  requested: { api, tag, abi, imagePackage, serial, avd, expectedRevision: process.env.MYTODO_ANDROID_IMAGE_REVISION || '4' },
   sdk: sdk || null,
   installPolicy: { enabled: process.env.MYTODO_ANDROID_IMAGE_INSTALL === '1', attempted: false, packages: [],
     source: 'official Google Android SDK repository via the preinstalled sdkmanager', licenseOperation: 'existing SDK licenses only' },
@@ -113,6 +113,72 @@ async function describeFile(file) {
 function parseProperties(properties) {
   return Object.fromEntries(properties.split(/\r?\n/).filter(line => line.includes('='))
     .map(line => [line.slice(0, line.indexOf('=')), line.slice(line.indexOf('=') + 1)]));
+}
+
+async function waitForStableEnvironment() {
+  const readiness = receipt.readiness = {
+    startedAt: new Date().toISOString(), status: 'observing', deadlineMs: 180_000,
+    minimumStableMs: 30_000, sampleIntervalMs: 5_000, samples: [],
+    scope: 'Read-only environment observations before any protocol case; no case retry or future lifecycle guarantee.',
+  };
+  try {
+    const packages = await requireCommand('runtime-google-services-inventory', adb,
+      ['-s', serial, 'shell', 'pm', 'list', 'packages', '--user', '0']);
+    const installedPackages = packages.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+    if (!installedPackages.includes('package:android') ||
+        installedPackages.some(line => !/^package:[A-Za-z0-9_.]+$/.test(line))) {
+      throw new Blocked('The Android package inventory did not provide a valid installed-package list.');
+    }
+    readiness.installedPackageCount = installedPackages.length;
+    readiness.googleServicesInstalled = installedPackages.includes('package:com.google.android.gms');
+    if (readiness.googleServicesInstalled) throw new Blocked('The default image unexpectedly includes Google Play services.');
+    const deadline = Date.now() + readiness.deadlineMs;
+    let previousKey = null, stableSince = null;
+    for (let poll = 1; Date.now() < deadline; poll++) {
+      try { process.kill(receipt.emulatorLaunch.pid, 0); }
+      catch { throw new Blocked('The emulator process exited during readiness observation.'); }
+      const probe = (label, ...args) => run(`readiness-${poll}-${label}`, adb,
+        ['-s', serial, 'shell', ...args], { timeout: 8_000 });
+      const boot = await probe('boot', 'getprop', 'sys.boot_completed');
+      const webview = await probe('webview', 'dumpsys', 'webviewupdate');
+      const overlays = await probe('overlays', 'cmd', 'overlay', 'list', '--user', '0');
+      const activities = await probe('activities', 'dumpsys', 'activity', 'activities');
+      const provider = webview.stdout.match(/Current WebView package[^\n]*\(([^,()]+),\s*([^()]+)\)/i);
+      const started = webview.stdout.match(/Number of relros started:\s*(\d+)/);
+      const finished = webview.stdout.match(/Number of relros finished:\s*(\d+)/);
+      const configurations = [...new Set(activities.stdout.split(/\r?\n/)
+        .map(line => line.trim()).filter(line => line.startsWith('mGlobalConfig=')))].sort();
+      const ready = [boot, webview, overlays, activities].every(result => result.exitCode === 0) &&
+        boot.stdout.trim() === '1' && provider && started && finished && Number(started[1]) > 0 &&
+        started[1] === finished[1] && /WebView package dirty:\s*false/.test(webview.stdout) &&
+        /Any WebView package installed:\s*true/.test(webview.stdout) && configurations.length > 0 && overlays.stdout.trim();
+      const key = ready ? sha256(JSON.stringify({ provider: provider.slice(1).map(value => value.trim()),
+        overlays: overlays.stdout.trim(), configurations })) : null;
+      const now = Date.now();
+      if (!key || key !== previousKey) stableSince = key ? now : null;
+      previousKey = key;
+      const stableMs = stableSince === null ? 0 : now - stableSince;
+      readiness.samples.push({ poll, at: new Date(now).toISOString(), ready: Boolean(ready),
+        fingerprintSha256: key, stableMs, provider: provider ? provider.slice(1).map(value => value.trim()) : null,
+        relrosStarted: started ? Number(started[1]) : null, relrosFinished: finished ? Number(finished[1]) : null,
+        globalConfigurations: configurations });
+      if (key && stableMs >= readiness.minimumStableMs && now <= deadline) {
+        readiness.status = 'passed';
+        readiness.finishedAt = new Date(now).toISOString();
+        readiness.observedStableMs = stableMs;
+        return webview.stdout.trim();
+      }
+      if (Date.now() < deadline) await sleep(readiness.sampleIntervalMs);
+    }
+    readiness.status = 'blocked';
+    readiness.finishedAt = new Date().toISOString();
+    throw new Blocked('Android boot, WebView, overlays and global configuration did not remain stable within the readiness deadline.');
+  } catch (error) {
+    readiness.status = error instanceof Blocked ? 'blocked' : 'failed';
+    readiness.reason = error.message;
+    readiness.finishedAt = new Date().toISOString();
+    throw error;
+  }
 }
 
 async function start() {
@@ -262,8 +328,10 @@ async function start() {
   }
   const webViewPackage = runtime.webview.match(/Current WebView package[^\n]*\(([^,()]+),\s*([^()]+)\)/i);
   if (!webViewPackage) throw new Blocked('The booted Android image has no selected WebView provider.');
-  runtime.webviewPackage = webViewPackage[1].trim();
-  runtime.webviewVersion = webViewPackage[2].trim();
+  runtime.webview = await waitForStableEnvironment();
+  const stableWebViewPackage = runtime.webview.match(/Current WebView package[^\n]*\(([^,()]+),\s*([^()]+)\)/i);
+  runtime.webviewPackage = stableWebViewPackage[1].trim();
+  runtime.webviewVersion = stableWebViewPackage[2].trim();
   const sqlite = await run('runtime-sqlite-cli', adb, ['-s', serial, 'shell', 'sqlite3', '--version']);
   runtime.sqliteCli = { exitCode: sqlite.exitCode, version: sqlite.exitCode === 0 ? sqlite.stdout.trim() : null,
     role: 'Optional device shell probe. Actual framework SQLite version comes from the instrumentation database.' };
