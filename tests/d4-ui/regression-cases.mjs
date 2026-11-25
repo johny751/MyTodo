@@ -120,15 +120,40 @@ export async function runRegressionCases(api) {
   await check('R03 First autocomplete ArrowUp selects last candidate [synthetic fixture]', async () => {
     await read('D4Prototype.repo.transaction(s=>{s.tags=["候选一","候选二","候选三"];})');
     await settle();
+    assert.deepEqual(await read('D4Prototype.repo.state.tags'), ['候选一','候选二','候选三']);
+    const before = await task('d4-task-0');
+    const options = () => read('[...document.querySelectorAll("[data-catalog=tags] [role=option]")].map(el=>({action:el.dataset.action,id:el.dataset.id}))');
+    const pick = id => ({action:'catalog-pick',id});
+    async function firstUp(expected) {
+      assert.equal(await read('document.querySelector("[data-catalog=tags] .catalog-list .selected")===null'), true, 'Query rebuild starts without an active option');
+      await api.key(null, 'ArrowUp');
+      assert.deepEqual(await read('(()=>{const el=document.querySelector("[data-catalog=tags] .catalog-list .selected");return el?{action:el.dataset.action,id:el.dataset.id}:null;})()'), expected);
+      await api.key(null, 'Enter');
+    }
     await open('d4-task-0');
+    assert.equal(await read('(()=>{const input=document.querySelector(' + JSON.stringify(edit('tagQuery')) + ');input.focus();return document.activeElement===input;})()'), true, 'Focus setup does not send a preparatory pointer gesture');
     await api.fill(edit('tagQuery'), '候选');
-    assert.equal(await read('document.querySelectorAll("[data-catalog=tags] [role=option]").length'), 3);
-    await api.key(edit('tagQuery'), 'ArrowUp');
-    assert.equal(await read('document.querySelector("[data-catalog=tags] .catalog-list .selected")?.dataset.id'), '候选三');
-    await api.key(edit('tagQuery'), 'Enter');
-    assert.ok((await read('JSON.parse(document.querySelector(' + JSON.stringify(edit('tags')) + ').value)')).includes('候选三'));
+    // A prefix without an exact catalog name appends a real create option.
+    // Both its presence and the first-Up boundary must be checked explicitly.
+    assert.deepEqual(await options(), [pick('候选一'),pick('候选二'),pick('候选三'),{action:'catalog-create',id:'候选'}]);
+    await firstUp({action:'catalog-create',id:'候选'});
+    assert.deepEqual(await read('JSON.parse(document.querySelector(' + JSON.stringify(edit('tags')) + ').value)'), [...before.tags,'候选']);
+    assert.deepEqual(await task(before.id), before, 'Keyboard selection remains a draft before explicit save');
+    assert.deepEqual(await read('D4Prototype.repo.state.tags'), ['候选一','候选二','候选三'], 'Selecting a create option does not silently persist it');
+
+    await api.fill(edit('tagQuery'), '');
+    assert.deepEqual(await options(), [pick('候选一'),pick('候选二'),pick('候选三')], 'Empty query has exactly three existing choices and no create row');
+    await firstUp(pick('候选三'));
+
+    await api.fill(edit('tagQuery'), '候选二');
+    assert.deepEqual(await options(), [pick('候选二')], 'An exact name has no duplicate create option');
+    await firstUp(pick('候选二'));
+    const expectedTags = [...before.tags,'候选','候选三','候选二'];
+    assert.deepEqual(await read('JSON.parse(document.querySelector(' + JSON.stringify(edit('tags')) + ').value)'), expectedTags);
     await api.submit('[data-form="task-edit"]');
-    assert.ok((await task('d4-task-0')).tags.includes('候选三'));
+    const after = await task(before.id);
+    assert.deepEqual(after.tags, expectedTags);
+    unchanged(before, after, ['tags']);
   });
 
   await check('R04 Keyboard invalid catalog name reports error and keeps unsaved draft', async () => {
