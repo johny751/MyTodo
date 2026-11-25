@@ -12,7 +12,11 @@ const required=[
  'android-touch-cross-quadrant-preserves-raw-fields','android-touch-and-keyboard-autocomplete',
  'android-page-switch-restores-task-draft','android-activity-recreation-retains-synthetic-task',
  'android-native-timer-real-buttons-pause-resume','android-native-one-minute-completion-after-background-once',
- ...['tasks','notes','pomodoro','projects','work-items','templates','processes','analytics','settings','sync','feedback'].map(x=>'android-touch-edge-drawer-'+x)
+ 'android-touch-single-quadrant-edge-navigation','android-touch-single-quadrant-cross-move',
+ 'android-touch-note-create-edit-delete','android-touch-feedback-local-text-submit',
+ 'android-touch-sync-state-and-devices','android-native-timer-real-early-end-button',
+ ...['tasks','notes','pomodoro','projects','work-items','templates','processes','analytics','settings','sync','feedback',
+     'dashboard','contacts','archive','devices','data-system','about','catalogs','timeline'].map(x=>'android-touch-edge-drawer-'+x)
 ];
 const tests=r.tests||[],names=tests.map(t=>t.name),passed=tests.filter(t=>t.status==='passed').length,failed=tests.filter(t=>t.status==='failed').length;
 if(r.kind!=='mytodo-d403-native-isolated-evidence'||r.packageName!=='local.gxtodo.d403preview'||r.sourceSha!==e.GITHUB_SHA||
