@@ -16,6 +16,10 @@ const required=[
  'android-touch-note-create-edit-delete','android-touch-feedback-local-text-submit',
  'android-touch-sync-state-and-devices','android-native-timer-real-early-end-button',
  'android-touch-held-drag-autoscroll','android-touch-subtask-order-immediate-close',
+ 'android-unified-timer-web-navigation-native-pause-web-resume','android-unified-timer-early-end-single-history',
+ 'android-unified-timer-real-minute-background-two-readers-once','android-unified-timer-real-break-excludes-focus-statistics',
+ 'android-unified-timer-dirty-config-survives-polls-navigation','android-unified-timer-idempotency-reopen-and-stale-refusal',
+ 'android-unified-session-shorten-completion-once','android-unified-session-refuses-unconverted-state','android-unified-session-durable-receipt-replay',
  ...['tasks','notes','pomodoro','projects','work-items','templates','processes','analytics','settings','sync','feedback',
      'dashboard','contacts','archive','devices','data-system','about','catalogs','timeline'].map(x=>'android-touch-edge-drawer-'+x)
 ];
