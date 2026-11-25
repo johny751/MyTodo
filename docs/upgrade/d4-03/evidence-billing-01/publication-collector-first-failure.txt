@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspaces/mytodo-d4-03/docs/upgrade/d4-03/collect-publication.py", line 38, in <module>
+    assert compare['base_commit']['sha']==baseline and compare['head_commit']['sha']==source
+                                                       ~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'head_commit'

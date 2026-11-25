@@ -1,0 +1,31 @@
+[d4/mobile-integrated-candidate-1 e2f9e37] Preserve D4-03 intake after whitespace repair [skip ci]
+ 40 files changed, 3395 insertions(+), 101 deletions(-)
+ create mode 100644 .github/workflows/d4-03-candidate.yml
+ create mode 100644 docs/upgrade/d4-03/audited-source-manifest.json
+ create mode 100644 docs/upgrade/d4-03/c0-preservation.md
+ create mode 100644 docs/upgrade/d4-03/original-personal-coverage.md
+ create mode 100644 docs/upgrade/d4-03/original-task-coverage.md
+ create mode 100644 docs/upgrade/d4-03/platform-integration.md
+ create mode 100644 docs/upgrade/d4-03/work-integration.md
+ create mode 100644 prototypes/d4-01/mobile-controls.js
+ create mode 100644 prototypes/d4-01/personal-pages.js
+ create mode 100644 prototypes/d4-03-platforms/android/AndroidManifest.xml
+ create mode 100644 prototypes/d4-03-platforms/android/res/values/styles.xml
+ create mode 100644 prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/MainActivity.java
+ create mode 100644 prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/NativeTimerActivity.java
+ create mode 100644 prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/NativeTimerStore.java
+ create mode 100644 prototypes/d4-03-platforms/android/src/local/gxtodo/replica/PomodoroClock.java
+ create mode 100644 prototypes/d4-03-platforms/build-android.sh
+ create mode 100644 prototypes/d4-03-platforms/prepare.mjs
+ create mode 100644 prototypes/d4-03-platforms/windows/open-isolated-preview.cmd
+ create mode 100644 tests/d4-03-platforms/android/AndroidManifest.xml
+ create mode 100644 tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/PreviewInstrumentation.java
+ create mode 100644 tests/d4-03-platforms/jvm/PomodoroClockTest.java
+ create mode 100644 tests/d4-03-platforms/run-instrumentation.sh
+ create mode 100644 tests/d4-03-platforms/run-jvm.sh
+ create mode 100644 tests/d4-03-platforms/scope.test.mjs
+ create mode 100644 tests/d4-03-platforms/start-emulator.sh
+ create mode 100644 tests/d4-03-platforms/verify-native-report.mjs
+ create mode 100644 tests/d4-ui/mobile-cases.mjs
+ create mode 100644 tests/d4-ui/personal-cases.mjs
+ create mode 100644 tests/d4-ui/provenance.mjs

@@ -1,0 +1,50 @@
+{
+  "kind": "D4-03 blocked Actions evidence",
+  "runs": [
+    {
+      "runId": "45533988173",
+      "runAttempt": 1,
+      "sourceSHA": "288b0b97d9974e3797a5099c97d5aeb1c3e26dc9",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45533988173",
+      "status": "completed",
+      "conclusion": "failure",
+      "executionStatus": "BLOCKER \u2014 GitHub refused runner start because of billing/spending limit",
+      "testExecuted": 0,
+      "testPassed": 0,
+      "testFailed": 0,
+      "artifactCount": 0,
+      "failedJobCount": 2,
+      "skippedJobCount": 2,
+      "annotationMessages": [
+        "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings"
+      ],
+      "rawFailedLogExitCode": 1,
+      "logNote": "No execution log exists for jobs rejected before runner start; original annotations are the failure evidence."
+    },
+    {
+      "runId": "45533988196",
+      "runAttempt": 1,
+      "sourceSHA": "288b0b97d9974e3797a5099c97d5aeb1c3e26dc9",
+      "url": "https://github.com/johny751/MyTodo/actions/runs/45533988196",
+      "status": "completed",
+      "conclusion": "failure",
+      "executionStatus": "BLOCKER \u2014 GitHub refused runner start because of billing/spending limit",
+      "testExecuted": 0,
+      "testPassed": 0,
+      "testFailed": 0,
+      "artifactCount": 0,
+      "failedJobCount": 10,
+      "skippedJobCount": 0,
+      "annotationMessages": [
+        "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings"
+      ],
+      "rawFailedLogExitCode": 1,
+      "logNote": "No execution log exists for jobs rejected before runner start; original annotations are the failure evidence."
+    }
+  ],
+  "stageStatus": "NOT CLOSED; candidate implementation is unverified",
+  "nextStep": "Owner restores GitHub Actions availability; rerun the exact candidate workflows in hosted Actions.",
+  "localBuildOrTestFallback": false,
+  "productionDataAccess": false,
+  "productionSyncChanged": false
+}
