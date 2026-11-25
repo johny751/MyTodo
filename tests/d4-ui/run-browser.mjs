@@ -9,6 +9,7 @@ import {runPersonalCases} from './personal-cases.mjs';
 import {runMobileCases} from './mobile-cases.mjs';
 import {runRegressionCases} from './regression-cases.mjs';
 import {runLegacyCases} from './legacy-cases.mjs';
+import {runMobileDateFilterCase} from './mobile-datefilter-case.mjs';
 const env=process.env,out=resolve(process.argv[2]||''),html=join(out,'mytodo-d4-01-demo.html');
 if(env.GITHUB_ACTIONS!=='true'||!env.GITHUB_RUN_ID||!env.GITHUB_RUN_ATTEMPT||env.EXPECTED_SOURCE_SHA!==env.GITHUB_SHA||!/^[a-f0-9]{40}$/.test(env.GITHUB_SHA||''))throw Error('Hosted Actions identity required');
 if(!env.RUNNER_TEMP||relative(resolve(env.RUNNER_TEMP),out).startsWith('..')||out===resolve(env.RUNNER_TEMP)||!existsSync(html))throw Error('Expected fresh synthetic artifact under RUNNER_TEMP');
@@ -146,6 +147,7 @@ try {
    await api.tap('[data-action="work-edit-work-item"][data-id="'+layout.id+'"]');assert.equal(await evaluate('document.querySelector("[data-form=work-work-item] [name=id]")?.value'),layout.id,'Real edit opens the exact record');await api.tap('[data-action="work-close"]');assert.equal(await evaluate('!!document.querySelector("[data-form=work-work-item]")'),false);
   }
  });
+ await runMobileDateFilterCase(api,cmd,out,{sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT});
  // Cloud-only presentation capture. These nine images are not additional test cases.
  await api.configure(412,915,true);
  const mobileShowcase=[];
