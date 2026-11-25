@@ -46,6 +46,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             launch();
             check("android-independent-package-and-bridge", () -> {
                 PackageInfo p = getTargetContext().getPackageManager().getPackageInfo(getTargetContext().getPackageName(), 4096);
+                require(BuildInfo.VERSION_NAME.equals(p.versionName)&&BuildInfo.VERSION_CODE==p.versionCode,"Actual installed package manifest matches build identity");
                 if (p.requestedPermissions != null) for (String permission : p.requestedPermissions)
                     require(!permission.contains("INTERNET") && !permission.contains("STORAGE") && !permission.contains("ACCOUNTS"), permission);
                 require(Boolean.TRUE.equals(js("typeof GxNative==='undefined'&&GxD4Preview.isPreview()")), "Only preview bridge available");
@@ -157,7 +158,15 @@ public final class PreviewInstrumentation extends Instrumentation {
                 require(domOrder.equals(js("JSON.stringify(Array.from(document.querySelectorAll('.board .task-row')).map(x=>x.dataset.taskId))")),"Visible task ordering persists after reopen");
             });
             check("android-native-timer-real-buttons-pause-resume", () -> {
-                NativeTimerActivity timer=(NativeTimerActivity)startActivitySync(new Intent(getTargetContext(),NativeTimerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                home(); js("D4Prototype.navigate('pomodoro')"); settle();
+                Instrumentation.ActivityMonitor monitor=addMonitor(NativeTimerActivity.class.getName(),null,false);
+                Activity opened;
+                try {
+                    tap("[data-action=personal-native-timer]");
+                    opened=monitor.waitForActivityWithTimeout(20000);
+                } finally { removeMonitor(monitor); }
+                require(opened instanceof NativeTimerActivity,"Actual page button and preview bridge open native timer Activity");
+                NativeTimerActivity timer=(NativeTimerActivity)opened;
                 nativeTap(timer,40302); JSONObject running=timer("snapshot"); require(running.getBoolean("running"),"Native start button");
                 SystemClock.sleep(1200); nativeTap(timer,40304); JSONObject paused=timer("snapshot"); SystemClock.sleep(650);
                 require(!paused.getBoolean("running")&&timer("snapshot").getLong("elapsedMillis")==paused.getLong("elapsedMillis"),"Native pause holds elapsed time");
@@ -180,6 +189,7 @@ public final class PreviewInstrumentation extends Instrumentation {
         } catch (Throwable fatal) { record("instrumentation-setup-or-fatal", fatal, 0); }
         try {
             JSONObject report=new JSONObject().put("kind","mytodo-d403-native-isolated-evidence").put("sourceSha",BuildInfo.SOURCE_SHA)
+                .put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT).put("htmlSha256",BuildInfo.HTML_SHA256)
                 .put("versionName",BuildInfo.VERSION_NAME).put("versionCode",BuildInfo.VERSION_CODE).put("buildTimeUTC",BuildInfo.BUILD_TIME_UTC)
                 .put("platform","Android emulator: actual WebView MotionEvent and native elapsedRealtime")
                 .put("packageName",getTargetContext().getPackageName()).put("total",passed+failed).put("passed",passed).put("failed",failed).put("tests",rows)
@@ -199,7 +209,7 @@ public final class PreviewInstrumentation extends Instrumentation {
     }
     private static void require(boolean condition,String message) { if(!condition)throw new AssertionError(message); }
     private static boolean nativeTextContains(AccessibilityNodeInfo node,String text) { if(node.getText()!=null&&node.getText().toString().contains(text))return true;for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo child=node.getChild(i);if(child!=null){boolean found=nativeTextContains(child,text);child.recycle();if(found)return true;}}return false; }
-    private void launch() throws Exception { main=(MainActivity)startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));waitLoaded(); }
+    private void launch() throws Exception { main=(MainActivity)startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));waitLoaded(); }
     private void waitLoaded() throws Exception { long end=SystemClock.elapsedRealtime()+30000;while(SystemClock.elapsedRealtime()<end){try{if(Boolean.TRUE.equals(js("!!window.D4Prototype")))return;}catch(Exception ignored){}SystemClock.sleep(250);}throw new AssertionError("Preview WebView did not load"); }
     private Object js(String expression) throws Exception {
         CountDownLatch done=new CountDownLatch(1);AtomicReference<String> raw=new AtomicReference<>();

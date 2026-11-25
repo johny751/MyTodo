@@ -71,6 +71,7 @@ public final class MainActivity extends Activity {
         @JavascriptInterface public String versionInfo() {
             try { return new JSONObject().put("versionName", BuildInfo.VERSION_NAME).put("versionCode", BuildInfo.VERSION_CODE)
                 .put("sourceSha", BuildInfo.SOURCE_SHA).put("buildTimeUtc", BuildInfo.BUILD_TIME_UTC).put("timezone", "UTC")
+                .put("runId", BuildInfo.RUN_ID).put("runAttempt", BuildInfo.RUN_ATTEMPT).put("htmlSha256", BuildInfo.HTML_SHA256)
                 .put("apkBuild", true).put("historyText", BuildInfo.HISTORY_TEXT).toString(); }
             catch (Exception e) { return "{}"; }
         }

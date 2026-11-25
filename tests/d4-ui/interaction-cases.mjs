@@ -14,7 +14,7 @@ export async function runCases(api){
  const field=name=>'form[data-form="task-edit"] [name="'+name+'"]';
  const filter=name=>'form[data-form="task-filter"] [name="'+name+'"]';
  const rows=()=>read('Array.from(document.querySelectorAll(".page .board .task-row")).map(x=>x.dataset.taskId)');
- const routes=['tasks','notes','pomodoro','analytics','feedback','dashboard','work-items','projects','templates','processes','contacts','archive','sync','devices','data-system','settings','about','task-detail'];
+ const routes=['tasks','notes','pomodoro','analytics','feedback','catalogs','timeline','dashboard','work-items','projects','templates','processes','contacts','archive','sync','devices','data-system','settings','about','task-detail'];
  let today,createdId,childId,nextId,editedTitle;
  const title='D4 UI 合成验收 '+runId;
 

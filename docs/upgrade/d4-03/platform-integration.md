@@ -7,7 +7,7 @@
 | 结论 | 实施与证据 | 限制 |
 |---|---|---|
 | FACT | 原版 Android `MainActivity` 使用共享 Web UI；任务菜单与业务逻辑不是另一套 Java 任务实现。来源见 `original-task-coverage.md`。 | 不据此声称新壳替换生产 Activity 已通过。 |
-| PROPOSAL | `prototypes/d4-03-platforms/android` 是独立 `local.gxtodo.d403preview` APK，HTML 与 Web/Windows 体验包逐字节一致，以受限 `https://d403-preview.local/index.html` 本地资源拦截提供。 | 没有 INTERNET、外部存储、账户权限；没有生产 `GxNative`、SQLite、service、LAN 或 WebDAV 接口。 |
+| PROPOSAL | `prototypes/d4-03-platforms/android` 是独立 `local.gxtodo.d403preview` APK，以受限 `https://d403-preview.local/index.html` 本地资源拦截提供核验后的 HTML。平台构建输入逐字节复制到该包的 `assets/index.html` 和随包桌面 HTML。 | 各 Actions job 独立生成 HTML 时构建时间和哈希可不同；跨 job 统一候选 SHA、业务模块与语义，分别核验包身份，不声称三份 HTML 逐字节一致。没有 INTERNET、外部存储、账户权限；没有生产 `GxNative`、SQLite、service、LAN 或 WebDAV 接口。 |
 | FACT | `prepare.mjs` 必须核对 Actions、checkout SHA、同 run/attempt 的 `build-receipt.json`、HTML SHA-256 和冻结复用字节；仅接受新建 RUNNER_TEMP/d4-platform-* 目录。 | 身份或哈希不一致立即失败。 |
 | PROPOSAL | `GxD4Preview` 只提供隔离标记、原生计时体验、`versionInfo()` 只读 APK 构建常量、版本对话框与异步计时请求，异步请求含 request ID，磁盘/model 操作在有界单 worker 执行。 | UI不得把此桥当成生产存储或生产同步桥。 |
 | PROPOSAL | Android Back 只调用一次 `D4PreviewBack()`，旧接口仅作为 fallback；主 UI 顺序为抽屉→弹窗→单象限→四象限。 | 禁止再额外派发 `gx-back` 导致两次返回。输入法与物理设备差异仍需实际证据。 |
@@ -71,9 +71,11 @@ PROPOSAL：独立 `PreviewInstrumentation` 有 25 项强制测试。触屏由 `U
 | 长按/移动 | 明确选择手动顺序，确认原默认 3000ms，再按设置值+200ms 注入长按；同象限排序和跨象限移动；全部嵌套原字段比较，仅允许目标象限/order 改动。 |
 | 自动完成/草稿 | 标签/项目/地点候选实际选择、项目 ID 断言、标签键盘选择；实际导航切页恢复未保存任务草稿。 |
 | Activity 重建 | 重建实际 MainActivity，对比任务原值、象限、order 和可见 DOM 顺序。 |
-| 原生计时 | 原生按钮 start/pause/resume；暂停时间不增长；离开计时页仍增长，AtomicFile 重新打开保留状态；真实 61 秒后台经过后，pending completion 重新打开仍只消费一次、计数只增一次。 |
+| 原生计时 | 真实点击番茄钟页面的独立原生体验按钮，经 preview bridge 打开 Activity；原生按钮 start/pause/resume；暂停时间不增长；离开计时页仍增长，AtomicFile 重新打开保留状态；真实 61 秒后台经过后，pending completion 重新打开仍只消费一次、计数只增一次。 |
 
-报告保存 total/passed/failed 和每项名称/耗时/原始异常栈，不只输出比例。失败逐项保存 `.failure.log` 和截图；`verify-native-report.mjs` 核对全部必测项、唯一名称、源码身份与计数。`am instrument` 退出码不是成功依据。runner 同时保存安装日志、emulator 属性/尺寸、原始 instrumentation/logcat 与独立 app files 证据，未生成报告立即失败。
+报告保存 total/passed/failed 和每项名称/耗时/原始异常栈，不只输出比例。失败逐项保存 `.failure.log` 和截图；`verify-native-report.mjs` 核对全部必测项、唯一名称、源码身份与计数，并将实际 APK 内的 run ID、attempt、HTML SHA-256、版本和 UTC 构建时间逐项对照当前 Actions 环境及 `platform-build-identity.json`，不能由当前环境给旧 APK 报告补身份。安装前核验交付包 SHA-256。`am instrument` 退出码不是成功依据。runner 同时保存安装日志、emulator 属性/尺寸、原始 instrumentation/logcat 与独立 app files 证据，未生成报告立即失败。
+
+静态审核修订：测试重新启动 `MainActivity` 使用独立 preview task 的 NEW_TASK/CLEAR_TASK，避免后台返回时复用已有 Activity 导致 `startActivitySync` 等待不到新实例；此操作只重建合成 UI 的任务栈，不清除 app data。实际原生番茄入口测试使用 `ActivityMonitor` 并核验页面按钮调用链，不通过直接 Intent 绕过页面入口。两项运行结果仍等待云端证据。
 
 截图包含原 PNG 和最长边 960px JPEG 缩略图，原件不覆盖。JVM report 单独报告一个原始模型 suite 及原输出断言总数；编译失败时记录 unrun，不能写成通过。Web/Windows 浏览器交互、JVM 模型和 Android 原生输入证据分别计数。
 

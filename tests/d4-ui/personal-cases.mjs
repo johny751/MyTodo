@@ -73,7 +73,25 @@ export async function runPersonalCases(a) {
     assert.equal(r.completed.status, 'completed');
     assert.equal(Object.keys(r.completed.focusedMillisByDay).length, 2);
     assert.deepEqual(Object.values(r.completed.focusedMillisByDay).sort(), [30000, 30000]);
+    assert.deepEqual(r.completed.completedSessionsByDay, {});
     assert.equal(r.t.history.length, 1); assert.equal(r.t.status, 'idle');
+  });
+
+  await a.check('Break timer preserves countup preference and does not count as original focus completion', async () => {
+    const r = await a.eval(`(()=>{const c=DemoPersonalPages.clock,n={wall:Date.parse('2026-11-25T01:00:00Z'),elapsed:0,boot:'rest'};
+      let t=c.command(c.create(n),'configure',{durationMinutes:1,breakMinutes:1,mode:'countup'},n);
+      t=c.command(t,'start',{sessionId:'first-focus'},n);
+      t=c.command(t,'finish',{}, {wall:n.wall+30000,elapsed:30000,boot:'rest'});
+      t=c.command(t,'break',{sessionId:'first-rest'}, {wall:n.wall+30000,elapsed:30000,boot:'rest'});
+      t=c.advance(t,{wall:n.wall+90000,elapsed:90000,boot:'rest'});const rest=structuredClone(t);
+      t=c.command(t,'start',{sessionId:'second-focus'}, {wall:n.wall+90000,elapsed:90000,boot:'rest'});
+      return {rest,t};})()`);
+    assert.equal(r.rest.status, 'completed'); assert.equal(r.rest.phase, 'break');
+    assert.deepEqual(r.rest.completedSessionsByDay, {});
+    assert.equal(Object.values(r.rest.focusedMillisByDay).reduce((a, b) => a + b, 0), 30000);
+    assert.equal(r.t.mode, 'countup'); assert.equal(r.t.focusMode, 'countup');
+    assert.equal(r.t.phase, 'focus'); assert.equal(r.t.status, 'running');
+    assert.equal(r.rest.history.length, 2);
   });
 
   await a.check('Pomodoro controls persist across module navigation and reload', async () => {
@@ -186,11 +204,61 @@ export async function runPersonalCases(a) {
     assert.equal(data.ideas.length, before.ideas.length + 1);
     assert.ok(data.ideas.some(i => i.id !== ideaId && i.body === other.body));
     assert.deepEqual(data.beforeImport, before.ideas);
+    const copy = data.ideas.find(i => i.id !== ideaId && i.body === other.body);
+    assert.ok(Date.parse(copy.updatedAt) > Date.parse(other.updatedAt));
+    await a.click('[data-action="personal-feedback-import"]');
+    await a.fill('.modal [name="json"]', JSON.stringify({kind: 'mytodo.d4.synthetic.feedback', version: 1, ideas: [other]}));
+    await a.submit('[data-form="personal-feedback-import"]');
+    assert.deepEqual((await demo()).feedback.ideas, data.ideas);
     const tasks = (await read()).tasks;
     await a.click(`[data-action="personal-feedback-delete"][data-id="${ideaId}"]`);
     await a.click(`[data-action="personal-feedback-delete-confirm"][data-id="${ideaId}"]`);
     assert.ok(!(await demo()).feedback.ideas.some(i => i.id === ideaId));
     assert.deepEqual((await read()).tasks, tasks);
+  });
+
+  await a.check('Feedback preserves original title-only records and blank-field refusal', async () => {
+    await a.navigate('feedback'); await a.click('[data-action="personal-feedback-new"]');
+    await a.fill('.modal [name="title"]', '只有标题的原有意见');
+    await a.submit('[data-form="personal-feedback"]');
+    const idea = (await demo()).feedback.ideas.find(x => x.title === '只有标题的原有意见');
+    assert.ok(idea); assert.equal(idea.body, '');
+    await a.click(`[data-action="personal-feedback-edit"][data-id="${idea.id}"]`);
+    await a.fill('.modal [name="title"]', '');
+    await a.submit('[data-form="personal-feedback"]');
+    assert.equal((await demo()).feedback.ideas.find(x => x.id === idea.id).title, '只有标题的原有意见');
+    assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('标题或内容'));
+    await close();
+    await a.click('[data-action="personal-feedback-new"]');
+    await a.fill('.modal [name="title"]', '  ');
+    await a.fill('.modal [name="body"]', '  正文首行自动成为标题\n第二行  ');
+    await a.submit('[data-form="personal-feedback"]');
+    const bodyOnly = (await demo()).feedback.ideas.find(x => x.title === '正文首行自动成为标题');
+    assert.ok(bodyOnly); assert.equal(bodyOnly.body, '正文首行自动成为标题\n第二行');
+    await a.click(`[data-action="personal-feedback-edit"][data-id="${bodyOnly.id}"]`);
+    await a.fill('.modal [name="body"]', '旧编辑器尝试覆盖');
+    await a.eval(`D4Prototype.repo.updateDemo(d=>{d.personal.feedback.ideas.find(x=>x.id===${JSON.stringify(bodyOnly.id)}).body='其他操作已保存的内容';})`);
+    await a.submit('[data-form="personal-feedback"]');
+    assert.equal((await demo()).feedback.ideas.find(x => x.id === bodyOnly.id).body, '其他操作已保存的内容');
+    assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('其他编辑操作'));
+    await close();
+  });
+
+  await a.check('Feedback validation follows original Unicode, byte, UTC timestamp and monotonic edit rules', async () => {
+    const result = await a.eval(`(async()=>{const make=()=>({id:'boundary',title:'😀'.repeat(200),body:'',status:'pending',createdAt:'2026-11-25T00:00:00Z',updatedAt:'2026-11-25T00:00:00Z',images:[]}),wrap=x=>({kind:'mytodo.d4.synthetic.feedback',version:1,ideas:[x]});
+      const accepted=await DemoPersonalPages.validateFeedback(wrap(make())),errors=[];
+      for(const patch of [{title:'😀'.repeat(201)},{body:null},{updatedAt:'2026-11-25T08:00:00+08:00'},{createdAt:'2026-02-30T00:00:00Z'}])try{await DemoPersonalPages.validateFeedback(wrap({...make(),...patch}));errors.push(null);}catch(e){errors.push(e.message);}
+      return {accepted,errors};})()`);
+    assert.equal(Array.from(result.accepted[0].title).length, 200);
+    assert.equal(result.accepted[0].createdAt, '2026-11-25T00:00:00.000Z');
+    assert.equal(result.errors.length, 4); assert.ok(result.errors.every(Boolean));
+    const id = (await demo()).feedback.ideas.find(x => x.title === '只有标题的原有意见').id;
+    const future = '2090-01-01T00:00:00.000Z';
+    await a.eval(`D4Prototype.repo.updateDemo(d=>{d.personal.feedback.ideas.find(x=>x.id===${JSON.stringify(id)}).updatedAt=${JSON.stringify(future)};})`);
+    await a.click(`[data-action="personal-feedback-edit"][data-id="${id}"]`);
+    await a.fill('.modal [name="title"]', '时间回退仍保持原版递增时间');
+    await a.submit('[data-form="personal-feedback"]');
+    assert.equal((await demo()).feedback.ideas.find(x => x.id === id).updatedAt, '2090-01-01T00:00:00.001Z');
   });
 
   await a.check('Synthetic sync configuration and failure retain task and pending state without transport', async () => {
@@ -245,7 +313,7 @@ export async function runPersonalCases(a) {
     await close();
   });
 
-  await a.check('Workspace import rejects malformed timer before replacing core or demo', async () => {
+  await a.check('Workspace import rejects malformed timer or draft before replacing core or demo', async () => {
     await a.navigate('data-system');
     const before = await read(), p = await demo();
     const incoming = await a.eval('({kind:DemoDomain.STORAGE_KIND,version:1,state:D4Prototype.repo.state,demo:D4Prototype.repo.demo})');
@@ -255,6 +323,14 @@ export async function runPersonalCases(a) {
     await a.submit('[data-form="personal-workspace-import"]');
     assert.deepEqual(await read(), before); assert.deepEqual(await demo(), p);
     assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('计时状态'));
+    await close();
+    const badDraft = await a.eval('({kind:DemoDomain.STORAGE_KIND,version:1,state:D4Prototype.repo.state,demo:D4Prototype.repo.demo})');
+    badDraft.demo.personal.feedback.draft = {...badDraft.demo.personal.feedback.ideas[0], body: null};
+    await a.click('[data-action="personal-workspace-import"]');
+    await a.fill('.modal [name="json"]', JSON.stringify(badDraft));
+    await a.submit('[data-form="personal-workspace-import"]');
+    assert.deepEqual(await read(), before); assert.deepEqual(await demo(), p);
+    assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('字段限制'));
     await close();
   });
 

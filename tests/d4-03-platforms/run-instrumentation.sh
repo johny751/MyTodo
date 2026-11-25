@@ -7,6 +7,7 @@ out="${2:?fresh RUNNER_TEMP evidence directory required}"
 case "$out" in "$RUNNER_TEMP"/d4-native-evidence-*) ;; *) echo 'Cloud temporary evidence path required' >&2; exit 1;; esac
 [[ ! -e "$out" && -f "$build/mytodo-d4-03-isolated-preview.apk" && -f "$build/mytodo-d4-03-isolated-tests.apk" ]] || { echo 'Fresh evidence and both isolated APKs required' >&2; exit 1; }
 mkdir "$out"
+(cd "$build"; sha256sum --strict -c platform-SHA256SUMS.txt) > "$out/installed-artifact-hash-check.txt"
 serial="${ANDROID_SERIAL:?Explicit isolated Actions emulator serial required}"
 adb -s "$serial" wait-for-device
 adb -s "$serial" shell getprop > "$out/emulator-getprop.txt"
@@ -28,4 +29,4 @@ if [[ "$extract_status" -ne 0 ]]; then cat "$out/evidence-extract.raw.log" >&2; 
 tar -xf "$out/native-evidence.tar" -C "$out"
 printf '%s\n' "$instrument_status" > "$out/adb-instrument-exit-code.txt"
 # am instrument's exit code alone does not establish test success.
-node tests/d4-03-platforms/verify-native-report.mjs "$out/files/d403-evidence/report.json" "$out"
+node tests/d4-03-platforms/verify-native-report.mjs "$out/files/d403-evidence/report.json" "$out" "$build/platform-build-identity.json"

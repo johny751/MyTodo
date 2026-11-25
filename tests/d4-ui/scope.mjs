@@ -7,7 +7,7 @@ if(process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_REF!=='refs/heads/d4/
 const base=git(['rev-parse','origin/master']);
 git(['diff','--check','origin/master...HEAD']);
 const files=git(['diff','--name-only','origin/master...HEAD']).split('\n').filter(Boolean);
-const allowed=/^(?:prototypes\/(?:d4-01|d4-03-platforms)\/|tests\/(?:d4-ui|d4-03-platforms)\/|docs\/upgrade\/(?:d4-01|d4-03)\/|\.github\/workflows\/d4-(?:ui-candidate|03-candidate)\.yml$)/;
+const allowed=/^(?:prototypes\/(?:d4-01|d4-03-platforms)\/|tests\/(?:d4-ui|d4-03-platforms)\/|docs\/upgrade\/(?:d4-01|d4-03)\/|\.github\/workflows\/d4-(?:ui-candidate|03-candidate|03-c0-regression)\.yml$)/;
 if(files.some(f=>!allowed.test(f)))throw Error('Unauthorized scope: '+files.filter(f=>!allowed.test(f)).join(','));
 git(['diff','--exit-code','origin/master...HEAD','--','src','windows','android','package.json']);
 let evidenceFiles=0;

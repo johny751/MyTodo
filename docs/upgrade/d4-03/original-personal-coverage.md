@@ -32,12 +32,12 @@
 | 便签独立 CRUD/时间排序 | 缺少独立入口与 CRUD | PROPOSAL：notes 路由、编辑/删除确认、独立 id/body/createdAt、创建时间降序、Ctrl+Enter；删除任务不触及便签 | `personal-cases.mjs`：转义、编辑保留创建时间、重新打开、搜索、独立性、删除 | Web/mobile browser：待 Actions；Windows/Android 原版 API 回归及新 UI 接入：UNVERIFIED |
 | 便签颜色/分类/拖动排序 | 未核实原版有此功能 | FACT：已审计的 core schema 不保留这些字段；不添加伪称原有的生产字段；其他历史版本待调查 | 记录字段集，仅允许成熟 schema | UNVERIFIED：未证明所有历史版本都没有附加功能 |
 | 倒计时/正计时/暂停继续/结束 | D4-01 缺少番茄钟 | PROPOSAL：独立 timer anchors、history、计时配置及 taskId；1–180 分钟和 25 分钟默认；同页面 monotonic，reload wall 恢复 | 注入纯合成时钟：系统时间回退、暂停不增长、reload 恢复、完成只一次、正计时完成/重置历史 | Web：待 Actions；Android 后台/锁屏/重启：BLOCKER，仍需原生证据 |
-| 番茄钟北京时间日统计 | 缺失 | FACT：原 `PomodoroClock` 将 earned 区间跨北京时间午夜分摊，保留最近 32 天；PROPOSAL：合成时钟采用同口径，不把休息计入专注 | 午夜前后各 30 秒准确分摊，完成轮次一次记录 | 纯模型待 Actions；原生兼容运行待验证 |
+| 番茄钟北京时间日统计 | 缺失 | FACT：原 `PomodoroClock` 将 earned 区间跨北京时间午夜分摊，保留最近 32 天；原完成轮次只含倒计时完成，正计时没有原生完成轮次；PROPOSAL：合成时钟采用相同日分摊与倒计时计数口径，不把休息计入专注 | 午夜前后各 30 秒准确分摊、正计时结束不增倒计时完成轮次、休息后恢复正计时偏好、完成只记录一次 | 纯模型待 Actions；原生兼容运行待验证 |
 | 休息计时/显示历史列表 | 原生时钟未证实休息配置；有日聚合统计 | PROPOSAL：明确作为新体验扩展；保留原 countdown/countup。不能把新增历史列表伪称原原生已有 | 开始休息/结束；独立 phase，历史不覆盖 | OWNER DECISION：原生扩展后续如何接入现有统计与任务关联 |
 | Android 番茄钟任务关联 | D4-01 缺失 | FACT：原关联是 accountId + id，账号切换/任务删除期间原子验证；合成当前单工作区只用 taskId，不把它作为生产桥契约 | 合成任务删除仍保留计时历史，picker 缺失关联拒绝 | BLOCKER：原生账号/任务关联桥回归未完成 |
-| 意见列表/CRUD/搜索/本地处理状态 | 缺失 | PROPOSAL：feedback 路由、本地 pending/resolved、复制、标题可空、正文必填 | 草稿/编辑/图片保留、删除不影响 tasks、列表截图 | Web：待 Actions；Windows 原窗口、Android FeedbackKit 接入：UNVERIFIED |
-| 意见导入导出/同编号冲突 | 缺失 | PROPOSAL：只接受 `mytodo.d4.synthetic.feedback`；完整验证后合并；导入前备份；同 timestamp 不同内容副本保留 | 同时间冲突双版本、损坏图片拒绝且状态与备份均不变 | 不宣称支持原 Web/Windows 生产格式或 Android ZIP 恢复 |
-| Android 意见草稿/原图 | 缺失 | PROPOSAL：合成反馈草稿、原字节 base64 + size + SHA-256，导出原始图片；无压缩/缩放覆盖；备份完整性验证 | 加入真实小 PNG 的浏览器 File，存储/编辑/重开字节相等、坏 hash 拒绝 | BLOCKER：Android AAR 原始 assets/links/草稿 ZIP恢复与新 UI 集成证据仍需独立验收 |
+| 意见列表/CRUD/搜索/本地处理状态 | 缺失 | FACT：`feedback.mjs:7-27,57-64` 允许标题或正文至少一项非空；保存 trim 两者，空标题取正文首行前 50 Unicode 码点。标题上限 200 码点/800 UTF-8 字节，正文上限 50,000 码点/200,000 字节；PROPOSAL：feedback 路由保留这些规则及本地 pending/resolved、复制、同文档旧编辑器/异步保存防覆盖 | 仅标题、全空拒绝、正文默认标题、码点边界、UTC时间规范化、修改时间递增、草稿/编辑/图片保留、删除不影响 tasks | Web：待 Actions；Windows 原窗口、Android FeedbackKit 接入：UNVERIFIED |
+| 意见导入导出/同编号冲突 | 缺失 | PROPOSAL：只接受 `mytodo.d4.synthetic.feedback`；完整验证后合并；导入前备份；同 timestamp 不同内容副本保留；副本时间递增，重复导入相同内容不反复复制；含图片时将原字节元数据加入去重比较 | 同时间冲突双版本及重放、损坏图片拒绝且状态与备份均不变 | 不宣称支持原 Web/Windows 生产格式或 Android ZIP 恢复；跨窗口写锁未接入原 store |
+| Android 意见草稿/原图 | 缺失 | PROPOSAL：合成反馈草稿、原字节 base64 + size + SHA-256，导出原始图片；无压缩/缩放覆盖；备份完整性验证；新增文件草稿继续时保留；存储降级至内存时明确提示导出和重开丢失风险 | 加入真实小 PNG 的浏览器 File，草稿/存储/编辑/重开字节相等、坏 hash 与非法草稿拒绝 | BLOCKER：Android AAR 原始 assets/links/草稿 ZIP恢复与新 UI 集成证据仍需独立验收；大图/配额/持久化故障证据仍 UNVERIFIED |
 | 提醒计划/循环 | D4-01 已用冻结纯 schedule/成熟 task 完成链；提醒中心只列计划 | PROPOSAL：继续原计划入口；新增隔离页内调度，5秒、focus/visibility复检、receipt、10分钟稍后、知道了/查看 | 准备 cap5、稳定 receipt、防重复、snooze、已完成/删除清理；原 task repeat/ref reminder 用父级既有回归 | Web UI：待 Actions；Android AlarmManager/原生通知：BLOCKER |
 | 同步状态/手动同步/自动配置 | D4-01 缺失 | PROPOSAL：sync 页面仅模拟成功/错误/冲突；显示明确合成 pending、错误、历史；配置不收凭据；不请求外部网络 | 失败不改变任务/待发送状态；成功只改 demo；无 password/真实运输入口；已有全页面外网阻断 | Web：待 Actions；真实连接未授权，保持 BLOCKER/UNVERIFIED |
 | 冲突所有值保留 | 缺失 | PROPOSAL：合成候选全部保留、选择只记录 demo.chosen，业务任务不变 | 选择后两个 values 相等，原 task 数据逐值比较 | 不替代 C0-04 ACK/outbox/cursor/manifest/batch 原协议回归 |
@@ -55,6 +55,17 @@
 6. UNVERIFIED：Android FeedbackKit AAR 中所有菜单/颜色/草稿/asset 细节，本轮只审计 host 与历史隔离测试源码。新 Android 菜单仍须按库实际运行盘点；此模块不编造后台管理功能。
 7. OWNER DECISION：休息计时和新增历史列表的未来原生接口、数据域与统计口径。当前明确隔离，不新增生产字段。
 8. UNVERIFIED：真实用户数据库历史结构及数据格式；禁止尝试用本轮 import 去调查真实用户文件。
+9. BLOCKER：合成存储采用独立 localStorage 并可能在写失败后降级为内存；保存提示已如实告知。小 PNG 正常重开断言不能证明大图、断电或存储配额耗尽时的原始字节持久性。意见多窗口原版写锁与完整生产数据恢复仍未接入。
+
+## 复核修订及原值差异
+
+FACT：本次对照 `src/feedback.mjs:7-27,57-64` 修正了早期审计中的“正文必填”误判；仅标题记录属于原版有效能力。业务限额按 Unicode 码点与 UTF-8 字节双重检查，编辑器 `maxlength=400/100000` 是 UTF-16 控件限额，不能作为业务字段定义。
+
+FACT：原反馈时间仅接受 20 或 24 字符的 UTC ISO 格式，规范为含 `.000Z` 的 ISO 时间，拒绝不存在的日期；保存时间取当前时间与旧修改时间加 1ms 的较大者。PROPOSAL：隔离实现与准备断言已对齐，尚无本轮运行结论。
+
+PROPOSAL：合成意见导入严格要求标题和正文均为字符串；原 `normalizeIdea` 对缺失/NULL 标题正文使用空字符串默认值。该差异是隔离格式的拒绝策略，不是生产兼容迁移；生产备份一律不接受。合成图片限额单张 4 MiB/单意见总计 8 MiB，JSON 输入限额 20,000,000 UTF-8 字节；这些是体验保护值，不是原 Android FeedbackKit 限额或原 Web 16 MiB 存储合同。
+
+PROPOSAL：合成正计时的“完成本轮”、休息和逐轮历史属于新增体验；原 Android 只统计完成倒计时。已修正正计时不能增加原完成轮次，休息也不能计入专注统计。独立原生预览与网页计时状态仍分离，不能据此声称原生统一状态已完成。
 
 ## 集成契约与证据边界
 

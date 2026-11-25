@@ -32,6 +32,8 @@ const historyText=identity.versionName+' / code '+versionCode+'\n'+identity.buil
 const java='package local.gxtodo.d403preview;\npublic final class BuildInfo {\n'+
  'public static final String VERSION_NAME='+JSON.stringify(identity.versionName)+';\npublic static final int VERSION_CODE='+versionCode+';\n'+
  'public static final String SOURCE_SHA='+JSON.stringify(e.GITHUB_SHA)+';\npublic static final String BUILD_TIME_UTC='+JSON.stringify(identity.buildTimeUTC)+';\n'+
+ 'public static final String RUN_ID='+JSON.stringify(e.GITHUB_RUN_ID)+';\npublic static final String RUN_ATTEMPT='+JSON.stringify(e.GITHUB_RUN_ATTEMPT)+';\n'+
+ 'public static final String HTML_SHA256='+JSON.stringify(hash(bytes))+';\n'+
  'public static final String HISTORY_TEXT='+JSON.stringify(historyText)+';\n}\n';
 await fs.writeFile(path.join(output,'generated/local/gxtodo/d403preview/BuildInfo.java'),java);
 const manifest=(await fs.readFile(path.join(root,'prototypes/d4-03-platforms/android/AndroidManifest.xml'),'utf8'))

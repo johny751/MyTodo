@@ -43,5 +43,8 @@ jar cf "$out/test-classes.jar" -C "$out/test-classes" .
 "$bt/zipalign" -p 4 "$out/test-unsigned.apk" "$out/test-aligned.apk"
 "$bt/apksigner" sign --ks "$out/isolated-test-key.jks" --ks-pass pass:android --key-pass pass:android --ks-key-alias d403preview \
  --out "$out/mytodo-d4-03-isolated-tests.apk" "$out/test-aligned.apk"
-sha256sum "$out/mytodo-d4-03-isolated-preview.apk" "$out/mytodo-d4-03-isolated-tests.apk" "$out/mytodo-d4-03-demo.html" > "$out/platform-SHA256SUMS.txt"
+"$bt/apksigner" verify --verbose --print-certs "$out/mytodo-d4-03-isolated-tests.apk" > "$out/test-apk-signature.txt"
+"$bt/aapt2" dump permissions "$out/mytodo-d4-03-isolated-tests.apk" > "$out/test-apk-permissions.txt"
+if grep -E 'INTERNET|READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|GET_ACCOUNTS' "$out/test-apk-permissions.txt"; then echo 'Test APK permission isolation violated' >&2; exit 1; fi
+(cd "$out"; sha256sum mytodo-d4-03-isolated-preview.apk mytodo-d4-03-isolated-tests.apk mytodo-d4-03-demo.html) > "$out/platform-SHA256SUMS.txt"
 printf 'Android isolated build finished; native runtime remains UNVERIFIED until instrumentation.\n'

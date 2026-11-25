@@ -1,0 +1,159 @@
+name: MyTodo D4-03 frozen C0-04 isolated regression
+
+on:
+  push:
+    branches:
+      - d4/mobile-integrated-candidate-1
+    paths:
+      - '.github/workflows/d4-03-c0-regression.yml'
+      - 'scripts/ci/c004-android-emulator.mjs'
+      - 'scripts/ci/c004-node-path.*'
+      - 'tests/protocol-harness/**'
+      - 'tests/protocol-vectors/**'
+      - 'tests/credential-harness/**'
+      - '.github/workflows/c0-05-credentials.yml'
+      - 'src/**'
+      - 'windows/**'
+      - 'android/**'
+
+permissions:
+  contents: read
+
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+
+jobs:
+  desktop:
+    name: Windows C and Node SQLite producer and receiver cases
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact protocol source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select a preinstalled Node
+        shell: pwsh
+        run: ./scripts/ci/c004-node-path.ps1
+      - name: Generate and cross-test C and JS samples
+        shell: cmd
+        run: node tests/protocol-harness/run-c004-matrix.mjs --phase desktop --output "%RUNNER_TEMP%\c004-desktop"
+      - name: Preserve desktop matrix artifacts
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c004-desktop-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-desktop/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 14
+
+  android:
+    name: Android SQLite shard ${{ matrix.shard }}
+    needs: desktop
+    if: ${{ always() && !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    env:
+      MYTODO_ANDROID_IMAGE_INSTALL: '1'
+      MYTODO_ANDROID_PULSE_INSTALL: '1'
+      MYTODO_ANDROID_IMAGE_REVISION: ${{ vars.MYTODO_ANDROID_IMAGE_REVISION }}
+    steps:
+      - name: Checkout exact protocol source
+        id: checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select a preinstalled Node
+        id: node
+        run: bash scripts/ci/c004-node-path.sh
+      - name: Inspect and start the Android test emulator
+        id: emulator
+        run: node scripts/ci/c004-android-emulator.mjs start
+      - name: Load the desktop artifacts from this workflow attempt
+        if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: c004-desktop-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-desktop-input/
+      - name: Run Android generation and cross-platform reception
+        if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        run: >-
+          node tests/protocol-harness/run-c004-matrix.mjs --phase android --android-shard ${{ matrix.shard }}
+          --desktop "$RUNNER_TEMP/c004-desktop-input"
+          --android-environment "$RUNNER_TEMP/c004-android-emulator/environment.json"
+          --output "$RUNNER_TEMP/c004-android"
+      - name: Stop the Android emulator and finish the environment evidence
+        if: ${{ always() && !cancelled() && steps.emulator.outcome != 'skipped' }}
+        run: node scripts/ci/c004-android-emulator.mjs finish
+      - name: Preserve raw emulator environment evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c004-android-environment-shard-${{ matrix.shard }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android-emulator/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Preserve Android APK, SQLite exports and matrix artifacts
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c004-android-shard-${{ matrix.shard }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 14
+
+  complete:
+    name: Android to Windows and Node reception and matrix comparison
+    needs: [desktop, android]
+    if: ${{ always() && !cancelled() }}
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact protocol source
+        id: checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select a preinstalled Node
+        id: node
+        shell: pwsh
+        run: ./scripts/ci/c004-node-path.ps1
+      - name: Load the desktop artifacts from this workflow attempt
+        if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: c004-desktop-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-desktop-input/
+      - name: Load the Android artifacts from this workflow attempt
+        if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: c004-android-shard-*-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-android-input/
+      - name: Verify producer lineage and complete the three-platform matrix
+        if: ${{ always() && !cancelled() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        shell: cmd
+        run: >-
+          node tests/protocol-harness/run-c004-matrix.mjs --phase complete
+          --desktop "%RUNNER_TEMP%\c004-desktop-input"
+          --android "%RUNNER_TEMP%\c004-android-input"
+          --output "%RUNNER_TEMP%\c004-complete"
+      - name: Preserve final comparisons and failure evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c004-complete-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/c004-complete/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 14
