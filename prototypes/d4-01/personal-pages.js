@@ -263,16 +263,19 @@
 
   function reminderPlan(tasks, ledger, wall, existing) {
     var receipts = clone(ledger || {}), notices = clone(existing || []), active = new Set();
+    tasks.forEach(function (t) { if (!t.done && Number.isFinite(t.at)) active.add(t.id + '|' + t.at); });
+    // Remove completed/deleted reminders before applying the five-card cap so
+    // freed slots and their receipts settle in this pass, not the next poll.
+    notices = notices.filter(function (n) { return active.has(n.key); });
+    Object.keys(receipts).forEach(function (key) { if (!active.has(key)) delete receipts[key]; });
     tasks.forEach(function (t) {
       if (t.done || !Number.isFinite(t.at)) return;
-      var key = t.id + '|' + t.at; active.add(key);
+      var key = t.id + '|' + t.at;
       var before = receipts[key], due = typeof before === 'number' ? before : t.at;
       if (before !== 'sent' && due <= wall && notices.length < 5 && !notices.some(function (n) { return n.key === key; })) {
         notices.push({key: key, taskId: t.id, title: t.title, at: t.at}); receipts[key] = 'sent';
       }
     });
-    notices = notices.filter(function (n) { return active.has(n.key); });
-    Object.keys(receipts).forEach(function (key) { if (!active.has(key)) delete receipts[key]; });
     return {ledger: receipts, notices: notices};
   }
   function measureReminderDock() {
