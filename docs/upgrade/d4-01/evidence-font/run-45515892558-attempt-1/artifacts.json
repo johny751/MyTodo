@@ -1,0 +1,65 @@
+{
+  "total_count": 3,
+  "artifacts": [
+    {
+      "id": 14978365264,
+      "node_id": "MDg6QXJ0aWZhY3QxNDk3ODM2NTI2NA==",
+      "name": "d4-domain-ubuntu-latest-45515892558-1",
+      "size_in_bytes": 1267,
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/artifacts/14978365264",
+      "archive_download_url": "https://api.github.com/repos/johny751/MyTodo/actions/artifacts/14978365264/zip",
+      "expired": false,
+      "digest": "sha256:b2f545f3518043313d9552a3ed1812c362b3f93daae4004580b76407ee0afe93",
+      "created_at": "2026-11-25T00:10:00Z",
+      "updated_at": "2026-11-25T00:10:00Z",
+      "expires_at": "2027-02-23T00:09:50Z",
+      "workflow_run": {
+        "id": 45515892558,
+        "repository_id": 1467750099,
+        "head_repository_id": 1467750099,
+        "head_branch": "d4/ui-candidate-1",
+        "head_sha": "b9c80665011dc88c841ae0ac8d743f70b51dec66"
+      }
+    },
+    {
+      "id": 14977636887,
+      "node_id": "MDg6QXJ0aWZhY3QxNDk3NzYzNjg4Nw==",
+      "name": "d4-domain-windows-latest-45515892558-1",
+      "size_in_bytes": 1235,
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/artifacts/14977636887",
+      "archive_download_url": "https://api.github.com/repos/johny751/MyTodo/actions/artifacts/14977636887/zip",
+      "expired": false,
+      "digest": "sha256:3705d1dbf714e14bdebfa45578f9c4710dc4801bc56de1b237788dc88e47a126",
+      "created_at": "2026-11-25T00:10:12Z",
+      "updated_at": "2026-11-25T00:10:12Z",
+      "expires_at": "2027-02-23T00:09:50Z",
+      "workflow_run": {
+        "id": 45515892558,
+        "repository_id": 1467750099,
+        "head_repository_id": 1467750099,
+        "head_branch": "d4/ui-candidate-1",
+        "head_sha": "b9c80665011dc88c841ae0ac8d743f70b51dec66"
+      }
+    },
+    {
+      "id": 14976774806,
+      "node_id": "MDg6QXJ0aWZhY3QxNDk3Njc3NDgwNg==",
+      "name": "d4-ui-experience-45515892558-1",
+      "size_in_bytes": 28758153,
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/artifacts/14976774806",
+      "archive_download_url": "https://api.github.com/repos/johny751/MyTodo/actions/artifacts/14976774806/zip",
+      "expired": false,
+      "digest": "sha256:4f1d5714894ca339872c965f97816eb03a58130beef99e8500b0af23f7edd787",
+      "created_at": "2026-11-25T00:11:05Z",
+      "updated_at": "2026-11-25T00:11:05Z",
+      "expires_at": "2027-02-23T00:09:50Z",
+      "workflow_run": {
+        "id": 45515892558,
+        "repository_id": 1467750099,
+        "head_repository_id": 1467750099,
+        "head_branch": "d4/ui-candidate-1",
+        "head_sha": "b9c80665011dc88c841ae0ac8d743f70b51dec66"
+      }
+    }
+  ]
+}

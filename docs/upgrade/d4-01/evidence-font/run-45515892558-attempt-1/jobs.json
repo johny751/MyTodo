@@ -1,0 +1,313 @@
+{
+  "total_count": 3,
+  "jobs": [
+    {
+      "id": 138875090468,
+      "run_id": 45515892558,
+      "workflow_name": "D4 UI candidate synthetic validation",
+      "head_branch": "d4/ui-candidate-1",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45515892558",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgVZm2JA",
+      "head_sha": "b9c80665011dc88c841ae0ac8d743f70b51dec66",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/138875090468",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45515892558/job/138875090468",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-25T00:09:50Z",
+      "started_at": "2026-11-25T00:09:52Z",
+      "completed_at": "2026-11-25T00:10:02Z",
+      "name": "domain (ubuntu-latest)",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-25T00:09:52Z",
+          "completed_at": "2026-11-25T00:09:53Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-25T00:09:53Z",
+          "completed_at": "2026-11-25T00:09:57Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-25T00:09:57Z",
+          "completed_at": "2026-11-25T00:09:58Z"
+        },
+        {
+          "name": "Scope and frozen production guard",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-25T00:09:58Z",
+          "completed_at": "2026-11-25T00:09:59Z"
+        },
+        {
+          "name": "Mature pure domain tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-25T00:09:59Z",
+          "completed_at": "2026-11-25T00:09:59Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-25T00:09:59Z",
+          "completed_at": "2026-11-25T00:10:00Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-25T00:10:00Z",
+          "completed_at": "2026-11-25T00:10:00Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-25T00:10:00Z",
+          "completed_at": "2026-11-25T00:10:00Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-25T00:10:00Z",
+          "completed_at": "2026-11-25T00:10:00Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/138875090468",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000486,
+      "runner_name": "GitHub Actions 1000000486",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 138875090953,
+      "run_id": 45515892558,
+      "workflow_name": "D4 UI candidate synthetic validation",
+      "head_branch": "d4/ui-candidate-1",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45515892558",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgVZm4CQ",
+      "head_sha": "b9c80665011dc88c841ae0ac8d743f70b51dec66",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/138875090953",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45515892558/job/138875090953",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-25T00:09:50Z",
+      "started_at": "2026-11-25T00:09:52Z",
+      "completed_at": "2026-11-25T00:10:17Z",
+      "name": "domain (windows-latest)",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-25T00:09:53Z",
+          "completed_at": "2026-11-25T00:09:54Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-25T00:09:54Z",
+          "completed_at": "2026-11-25T00:10:03Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-25T00:10:03Z",
+          "completed_at": "2026-11-25T00:10:09Z"
+        },
+        {
+          "name": "Scope and frozen production guard",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-25T00:10:09Z",
+          "completed_at": "2026-11-25T00:10:09Z"
+        },
+        {
+          "name": "Mature pure domain tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-25T00:10:09Z",
+          "completed_at": "2026-11-25T00:10:10Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-25T00:10:10Z",
+          "completed_at": "2026-11-25T00:10:12Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-25T00:10:12Z",
+          "completed_at": "2026-11-25T00:10:12Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-25T00:10:12Z",
+          "completed_at": "2026-11-25T00:10:15Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-25T00:10:15Z",
+          "completed_at": "2026-11-25T00:10:15Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/138875090953",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000000487,
+      "runner_name": "GitHub Actions 1000000487",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 138875309312,
+      "run_id": 45515892558,
+      "workflow_name": "D4 UI candidate synthetic validation",
+      "head_branch": "d4/ui-candidate-1",
+      "run_url": "https://api.github.com/repos/johny751/MyTodo/actions/runs/45515892558",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV3wW088AAAAgVZ0NAA",
+      "head_sha": "b9c80665011dc88c841ae0ac8d743f70b51dec66",
+      "url": "https://api.github.com/repos/johny751/MyTodo/actions/jobs/138875309312",
+      "html_url": "https://github.com/johny751/MyTodo/actions/runs/45515892558/job/138875309312",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-25T00:10:17Z",
+      "started_at": "2026-11-25T00:10:19Z",
+      "completed_at": "2026-11-25T00:11:09Z",
+      "name": "browser",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-25T00:10:20Z",
+          "completed_at": "2026-11-25T00:10:21Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-25T00:10:21Z",
+          "completed_at": "2026-11-25T00:10:26Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-25T00:10:26Z",
+          "completed_at": "2026-11-25T00:10:26Z"
+        },
+        {
+          "name": "Build offline Windows and Web demo",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-25T00:10:26Z",
+          "completed_at": "2026-11-25T00:10:27Z"
+        },
+        {
+          "name": "Real DOM interactions and responsive screenshots",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-25T00:10:27Z",
+          "completed_at": "2026-11-25T00:10:56Z"
+        },
+        {
+          "name": "Package verified experience",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-25T00:10:56Z",
+          "completed_at": "2026-11-25T00:10:57Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-25T00:10:57Z",
+          "completed_at": "2026-11-25T00:11:06Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-25T00:11:06Z",
+          "completed_at": "2026-11-25T00:11:06Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-11-25T00:11:06Z",
+          "completed_at": "2026-11-25T00:11:06Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-11-25T00:11:06Z",
+          "completed_at": "2026-11-25T00:11:06Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/johny751/MyTodo/check-runs/138875309312",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000488,
+      "runner_name": "GitHub Actions 1000000488",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

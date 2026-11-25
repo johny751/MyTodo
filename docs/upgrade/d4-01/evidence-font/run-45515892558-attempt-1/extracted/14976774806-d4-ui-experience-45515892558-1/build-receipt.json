@@ -1,0 +1,236 @@
+{
+  "kind": "d4-01-offline-classic-demo",
+  "sourceSha": "b9c80665011dc88c841ae0ac8d743f70b51dec66",
+  "runId": "45515892558",
+  "runAttempt": "1",
+  "buildTimeUtc": "2026-11-25T00:10:26.916Z",
+  "coreVersion": 2,
+  "storageKey": "mytodo-d4-01-demo-v1",
+  "font": {
+    "family": "Noto Sans SC",
+    "sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
+    "bytes": 17773244,
+    "license": "OFL-1.1"
+  },
+  "productionLogicChanged": false,
+  "productionSyncEnabled": false,
+  "status": "built",
+  "browserRuntime": "UNVERIFIED until UI acceptance",
+  "scriptSyntaxCompiled": true,
+  "inputs": [
+    {
+      "path": "src/task-tree.mjs",
+      "bytes": 1581,
+      "sha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9"
+    },
+    {
+      "path": "src/schedule.mjs",
+      "bytes": 6620,
+      "sha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b"
+    },
+    {
+      "path": "src/model.mjs",
+      "bytes": 8792,
+      "sha256": "837f10b5b1486e3be7f276cc8c00758afd420c9d49537b28d3d96341f1bf8c97"
+    },
+    {
+      "path": "src/sync-core.mjs",
+      "bytes": 5116,
+      "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a"
+    },
+    {
+      "path": "src/task-editor.mjs",
+      "bytes": 3110,
+      "sha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad"
+    },
+    {
+      "path": "src/personal-ui.mjs",
+      "bytes": 5868,
+      "sha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a"
+    },
+    {
+      "path": "prototypes/d4-01/domain.mjs",
+      "bytes": 11939,
+      "sha256": "90568611f1e229918b7336aeee1c2ce71c02ad1f8eac70957d152f754f5e45a4"
+    },
+    {
+      "path": "prototypes/d4-01/index.html",
+      "bytes": 778,
+      "sha256": "888b656bf846043a98250d60901c0d0dbd980979fec7ac06971f2de4d2dec64c"
+    },
+    {
+      "path": "prototypes/d4-01/styles.css",
+      "bytes": 24614,
+      "sha256": "b47303df6356de12c05fc1fd7f686a3ab91e7435c9ff89e27e9501537bc1e874"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "bytes": 50606,
+      "sha256": "c048235244dd01388ad3992b4029cc70ba5ef1fa72204b6d49e80511894ec667"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "bytes": 35116,
+      "sha256": "79c520e756c94ac7eb8dbfb63582ee35177e6216d3729eb810226c039e48006a"
+    },
+    {
+      "path": "prototypes/d4-01/fonts/NotoSansSC-VF.ttf",
+      "bytes": 17773244,
+      "sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a"
+    },
+    {
+      "path": "prototypes/d4-01/fonts/OFL.txt",
+      "bytes": 4388,
+      "sha256": "760eb2367844e6c3f700cc04ebf39ceb9a1a9678d8dd4633cb72184d1926ef19"
+    },
+    {
+      "path": "prototypes/d4-01/fonts/COPYRIGHT.txt",
+      "bytes": 837,
+      "sha256": "2865e926de4011818655fdde0ab116e004988ec4a0a414896c2782743adb7d8e"
+    }
+  ],
+  "fontLicense": {
+    "id": "OFL-1.1",
+    "fullNoticesEmbedded": true,
+    "ofl": {
+      "source": "prototypes/d4-01/fonts/OFL.txt",
+      "file": "OFL.txt",
+      "bytes": 4388,
+      "sha256": "760eb2367844e6c3f700cc04ebf39ceb9a1a9678d8dd4633cb72184d1926ef19"
+    },
+    "copyright": {
+      "source": "prototypes/d4-01/fonts/COPYRIGHT.txt",
+      "file": "COPYRIGHT.txt",
+      "bytes": 837,
+      "sha256": "2865e926de4011818655fdde0ab116e004988ec4a0a414896c2782743adb7d8e"
+    }
+  },
+  "dependencyGraph": [
+    {
+      "path": "src/task-tree.mjs",
+      "dependencies": [],
+      "exports": [
+        "taskEntries",
+        "flattenTasks",
+        "findTaskEntry",
+        "findTask",
+        "moveSubtask",
+        "rekeyDescendants"
+      ]
+    },
+    {
+      "path": "src/schedule.mjs",
+      "dependencies": [
+        "src/task-tree.mjs"
+      ],
+      "exports": [
+        "parseTime",
+        "formatTime",
+        "normalizeRepeat",
+        "normalizeReminder",
+        "reminderTime",
+        "nextOccurrence",
+        "stableId",
+        "setTaskDone",
+        "repeatLabel",
+        "reminderLabel",
+        "taskStats"
+      ]
+    },
+    {
+      "path": "src/model.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/schedule.mjs"
+      ],
+      "exports": [
+        "isEntityId",
+        "QUADRANTS",
+        "dayKey",
+        "dateRange",
+        "shiftDate",
+        "DEFAULT_SETTINGS",
+        "normalizeSettings",
+        "matchesQuery",
+        "taskSearchText",
+        "searchAll",
+        "compareOrder",
+        "moveTask",
+        "completionDay",
+        "visibleTasks",
+        "normalizeState",
+        "seedState"
+      ]
+    },
+    {
+      "path": "src/sync-core.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/model.mjs"
+      ],
+      "exports": [
+        "emptyState",
+        "mergeStates",
+        "decodeRemote",
+        "encodeRemote",
+        "syncExchange",
+        "syncError"
+      ]
+    },
+    {
+      "path": "src/task-editor.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/sync-core.mjs"
+      ],
+      "exports": [
+        "saveTaskRecord",
+        "quickSubtask",
+        "handleTaskEditorEnter",
+        "blockTaskFormSubmit",
+        "saveTaskEditorDraft",
+        "applyPlaceDraft"
+      ]
+    },
+    {
+      "path": "src/personal-ui.mjs",
+      "dependencies": [
+        "src/task-tree.mjs",
+        "src/schedule.mjs"
+      ],
+      "exports": [
+        "scheduleFields",
+        "captureSchedule",
+        "statsPage",
+        "validateSchedule"
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/domain.mjs",
+      "dependencies": [
+        "src/model.mjs",
+        "src/schedule.mjs",
+        "src/task-tree.mjs",
+        "src/task-editor.mjs",
+        "src/personal-ui.mjs"
+      ],
+      "exports": [
+        "STORAGE_KEY",
+        "STORAGE_KIND",
+        "QUADRANTS",
+        "helpers",
+        "createRepository"
+      ]
+    }
+  ],
+  "artifact": {
+    "file": "mytodo-d4-01-demo.html",
+    "bytes": 23858785,
+    "sha256": "e2e63c381816ea4e27ac24583394cd78c8e66bb944c36b3bf26bdb46702bfd8a"
+  },
+  "limitations": [
+    "Discussion prototype and isolated synthetic data only.",
+    "No platform final implementation or production storage/sync is activated.",
+    "file:// persistence can fall back to memory when the browser restricts localStorage."
+  ]
+}

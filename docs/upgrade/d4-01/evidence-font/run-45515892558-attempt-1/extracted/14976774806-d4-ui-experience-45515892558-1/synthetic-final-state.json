@@ -1,0 +1,1038 @@
+{
+  "core": {
+    "version": 2,
+    "settings": {
+      "swipeMenu": true,
+      "swipeComplete": true,
+      "longPressMs": 3000,
+      "undoMs": 8000
+    },
+    "tasks": [
+      {
+        "id": "d4-task-0",
+        "order": 0,
+        "title": "确认本周交付清单",
+        "quadrant": 0,
+        "done": false,
+        "start": "2026-11-25T09:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": {
+          "mode": "offset",
+          "minutes": 30,
+          "days": 0,
+          "at": ""
+        },
+        "reminderAt": 1795566600000,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "交付推进",
+        "place": "办公室",
+        "tags": [
+          "交付"
+        ],
+        "notes": "核对材料版本，整理需要确认的问题。",
+        "subtasks": [
+          {
+            "id": "d4-sub-0",
+            "order": 0,
+            "title": "核对附件目录",
+            "quadrant": 0,
+            "done": true,
+            "start": "2026-11-25T08:30",
+            "end": "",
+            "allDay": false,
+            "repeat": null,
+            "reminder": null,
+            "reminderAt": null,
+            "seriesId": "",
+            "generatedFrom": "",
+            "review": "",
+            "weight": 0,
+            "project": "交付推进",
+            "place": "办公室",
+            "tags": [
+              "交付"
+            ],
+            "notes": "",
+            "subtasks": [],
+            "createdAt": "2026-11-25T00:10:35.670Z",
+            "completedAt": "2026-11-24T03:00:00Z"
+          },
+          {
+            "id": "d4-sub-1",
+            "order": 1024,
+            "title": "记录验收关注点",
+            "quadrant": 0,
+            "done": false,
+            "start": "2026-11-25T09:00",
+            "end": "",
+            "allDay": false,
+            "repeat": null,
+            "reminder": null,
+            "reminderAt": null,
+            "seriesId": "",
+            "generatedFrom": "",
+            "review": "",
+            "weight": 0,
+            "project": "交付推进",
+            "place": "办公室",
+            "tags": [
+              "交付"
+            ],
+            "notes": "",
+            "subtasks": [],
+            "createdAt": "2026-11-25T00:10:35.670Z",
+            "completedAt": ""
+          }
+        ],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-1",
+        "order": 1024,
+        "title": "准备项目评审材料",
+        "quadrant": 0,
+        "done": false,
+        "start": "2026-11-25T10:30",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "交付推进",
+        "place": "办公室",
+        "tags": [
+          "交付"
+        ],
+        "notes": "准备目标、范围和下一步行动。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-2",
+        "order": 2048,
+        "title": "处理关键依赖反馈",
+        "quadrant": 0,
+        "done": false,
+        "start": "2026-11-24T11:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "交付推进",
+        "place": "办公室",
+        "tags": [
+          "交付"
+        ],
+        "notes": "演示工作区中的合成任务，可自由编辑。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-3",
+        "order": 3072,
+        "title": "安排产品界面评审",
+        "quadrant": 1,
+        "done": false,
+        "start": "2026-11-25T14:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "产品迭代",
+        "place": "办公室",
+        "tags": [
+          "产品"
+        ],
+        "notes": "核对材料版本，整理需要确认的问题。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-4",
+        "order": 4096,
+        "title": "完善任务详情交互",
+        "quadrant": 1,
+        "done": false,
+        "start": "2026-11-25T15:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "产品迭代",
+        "place": "办公室",
+        "tags": [
+          "产品"
+        ],
+        "notes": "准备目标、范围和下一步行动。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-5",
+        "order": 5120,
+        "title": "整理下月产品计划",
+        "quadrant": 1,
+        "done": false,
+        "start": "2026-12-02T16:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "产品迭代",
+        "place": "办公室",
+        "tags": [
+          "产品"
+        ],
+        "notes": "演示工作区中的合成任务，可自由编辑。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-6",
+        "order": 6144,
+        "title": "回收协作方意见",
+        "quadrant": 2,
+        "done": false,
+        "start": "2026-11-25T09:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "交付推进",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "核对材料版本，整理需要确认的问题。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-7",
+        "order": 7168,
+        "title": "确认周会时间",
+        "quadrant": 2,
+        "done": false,
+        "start": "2026-11-25T10:30",
+        "end": "",
+        "allDay": false,
+        "repeat": {
+          "frequency": "weekly",
+          "interval": 1,
+          "weekdays": [
+            3
+          ],
+          "until": "",
+          "anchor": "2026-11-25T10:30"
+        },
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "团队运营",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "准备目标、范围和下一步行动。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-8",
+        "order": 8192,
+        "title": "跟进材料补充",
+        "quadrant": 2,
+        "done": false,
+        "start": "2026-11-25T11:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "交付推进",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "演示工作区中的合成任务，可自由编辑。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-9",
+        "order": 9216,
+        "title": "整理团队工作资料",
+        "quadrant": 3,
+        "done": false,
+        "start": "2026-11-25T14:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "团队运营",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "核对材料版本，整理需要确认的问题。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-10",
+        "order": 10240,
+        "title": "梳理知识库目录",
+        "quadrant": 3,
+        "done": false,
+        "start": "2026-11-25T15:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "团队运营",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "准备目标、范围和下一步行动。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-11",
+        "order": 11264,
+        "title": "记录本周工作复盘",
+        "quadrant": 1,
+        "done": false,
+        "start": "2026-11-25T16:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "产品迭代",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "演示工作区中的合成任务，可自由编辑。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": ""
+      },
+      {
+        "id": "d4-task-12",
+        "order": 12288,
+        "title": "完成上次交付核对",
+        "quadrant": 0,
+        "done": true,
+        "start": "2026-11-25T09:00",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "交付推进",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "核对材料版本，整理需要确认的问题。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": "2026-11-24T03:00:00Z"
+      },
+      {
+        "id": "d4-task-13",
+        "order": 13312,
+        "title": "整理历史会议纪要",
+        "quadrant": 3,
+        "done": true,
+        "start": "2026-11-25T10:30",
+        "end": "",
+        "allDay": false,
+        "repeat": null,
+        "reminder": null,
+        "reminderAt": null,
+        "seriesId": "",
+        "generatedFrom": "",
+        "review": "",
+        "weight": 0,
+        "project": "团队运营",
+        "place": "办公室",
+        "tags": [
+          "协作"
+        ],
+        "notes": "准备目标、范围和下一步行动。",
+        "subtasks": [],
+        "createdAt": "2026-11-25T00:10:35.670Z",
+        "completedAt": "2026-11-24T03:00:00Z"
+      },
+      {
+        "id": "repeat-u2gwfm1u30rdu",
+        "order": 13312,
+        "title": "D4 UI 合成验收 45515892558 · 已编辑",
+        "quadrant": 1,
+        "done": false,
+        "start": "2026-11-26T10:00",
+        "end": "2026-11-26T11:00",
+        "allDay": false,
+        "repeat": {
+          "frequency": "daily",
+          "interval": 1,
+          "weekdays": [],
+          "until": "",
+          "anchor": "2026-11-25T10:00"
+        },
+        "reminder": {
+          "mode": "custom",
+          "minutes": 15,
+          "days": 0,
+          "at": "2026-11-26T09:40"
+        },
+        "reminderAt": 1795657200000,
+        "seriesId": "d4-demo-5bc7aa48-374f-4a9b-bfbf-9858f6aead87",
+        "generatedFrom": "d4-demo-5bc7aa48-374f-4a9b-bfbf-9858f6aead87",
+        "review": "",
+        "weight": 5,
+        "project": "产品迭代",
+        "place": "离线会议室",
+        "tags": [
+          "界面",
+          "D4验收"
+        ],
+        "notes": "单文件离线 CRUD 合成测试",
+        "subtasks": [
+          {
+            "id": "repeat-u2gwfm1u30rdu-sub-1",
+            "order": 0,
+            "title": "D4 合成子步骤 45515892558",
+            "quadrant": 1,
+            "done": false,
+            "start": "2026-11-26T08:10",
+            "end": "",
+            "allDay": false,
+            "repeat": null,
+            "reminder": null,
+            "reminderAt": null,
+            "seriesId": "",
+            "generatedFrom": "",
+            "review": "",
+            "weight": 0,
+            "project": "产品迭代",
+            "place": "离线会议室",
+            "tags": [
+              "界面",
+              "D4验收"
+            ],
+            "notes": "",
+            "subtasks": [],
+            "createdAt": "2026-11-26T10:00:00+08:00",
+            "completedAt": ""
+          }
+        ],
+        "createdAt": "2026-11-26T10:00:00+08:00",
+        "completedAt": ""
+      }
+    ],
+    "notes": [],
+    "projects": [
+      {
+        "id": "project-delivery",
+        "name": "交付推进",
+        "description": "围绕交付里程碑，推进材料、协作和验收。",
+        "archived": false
+      },
+      {
+        "id": "project-product",
+        "name": "产品迭代",
+        "description": "保留成熟任务体验，完善工作管理界面。",
+        "archived": false
+      },
+      {
+        "id": "project-operations",
+        "name": "团队运营",
+        "description": "维护日常协作和团队资料。",
+        "archived": false
+      }
+    ],
+    "tags": [
+      "交付",
+      "产品",
+      "协作",
+      "界面",
+      "D4验收"
+    ],
+    "places": [
+      "办公室",
+      "远程",
+      "离线会议室"
+    ]
+  },
+  "demo": {
+    "projectMeta": {
+      "project-delivery": {
+        "status": "active",
+        "color": "q0",
+        "dueDate": "2026-12-02"
+      },
+      "project-product": {
+        "status": "active",
+        "color": "q1",
+        "dueDate": "2026-12-09"
+      },
+      "project-operations": {
+        "status": "paused",
+        "color": "q3",
+        "dueDate": "2026-12-16"
+      }
+    },
+    "workItems": [
+      {
+        "id": "work-delivery-plan",
+        "title": "交付材料与里程碑",
+        "projectId": "project-delivery",
+        "status": "doing",
+        "owner": "林晓",
+        "description": "核对本次交付清单与验收材料。",
+        "dueDate": "2026-11-28",
+        "archived": false
+      },
+      {
+        "id": "work-product-review",
+        "title": "新界面评审准备",
+        "projectId": "project-product",
+        "status": "waiting",
+        "owner": "陈晨",
+        "description": "收集页面反馈，整理需要确认的交互。",
+        "dueDate": "2026-11-30",
+        "archived": false,
+        "archivedAt": ""
+      },
+      {
+        "id": "work-operations-training",
+        "title": "团队资料整理",
+        "projectId": "project-operations",
+        "status": "planned",
+        "owner": "周宁",
+        "description": "整理新人可复用的工作资料。",
+        "dueDate": "2026-12-04",
+        "archived": false
+      },
+      {
+        "id": "work-archived-retro",
+        "title": "上周例会复盘",
+        "projectId": "project-operations",
+        "status": "done",
+        "owner": "周宁",
+        "description": "演示用的归档事项，可以恢复。",
+        "dueDate": "2026-11-18",
+        "archived": true,
+        "archivedAt": "2026-11-23T03:00:00Z"
+      }
+    ],
+    "templates": [
+      {
+        "id": "template-delivery",
+        "name": "交付检查",
+        "description": "交付前按顺序准备材料、核对内容并完成验收。",
+        "steps": [
+          {
+            "id": "delivery-step-0",
+            "title": "准备材料",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "delivery-step-1",
+            "title": "核对交付清单",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "delivery-step-2",
+            "title": "确认验收",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          }
+        ],
+        "archived": false
+      },
+      {
+        "id": "template-weekly",
+        "name": "每周工作复盘",
+        "description": "梳理进展，把问题变成下一步行动。",
+        "steps": [
+          {
+            "id": "weekly-step-0",
+            "title": "整理本周完成项",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "weekly-step-1",
+            "title": "分析阻塞",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "weekly-step-2",
+            "title": "安排下周行动",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "weekly-step-3",
+            "title": "记录复盘",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          }
+        ],
+        "archived": false
+      },
+      {
+        "id": "template-archived",
+        "name": "旧版发布检查",
+        "description": "演示已归档模板。恢复后可以重新使用。",
+        "steps": [
+          {
+            "id": "old-step-0",
+            "title": "检查版本",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "old-step-1",
+            "title": "保存发布记录",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          }
+        ],
+        "archived": true,
+        "archivedAt": "2026-11-22T03:00:00Z"
+      },
+      {
+        "id": "templates-315aa5eb-19f9-411b-ae99-51e176208d98",
+        "archived": false,
+        "createdAt": "2026-11-25T00:10:50.545Z",
+        "name": "云端验证流程",
+        "description": "",
+        "steps": [
+          {
+            "id": "step-880bd403-a5cb-4af4-99df-640d94d29e39",
+            "title": "准备",
+            "description": ""
+          },
+          {
+            "id": "step-a61628a4-bc3d-4ca8-ad58-d47bc6dadb54",
+            "title": "核对",
+            "description": ""
+          },
+          {
+            "id": "step-01b3c8bf-b320-41b3-9ff9-8b3d45606183",
+            "title": "完成",
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "processes": [
+      {
+        "id": "process-delivery",
+        "name": "本周交付检查",
+        "templateId": "template-delivery",
+        "projectId": "project-delivery",
+        "status": "running",
+        "currentStep": 1,
+        "steps": [
+          {
+            "id": "delivery-run-0",
+            "title": "准备材料",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-24T03:00:00Z"
+          },
+          {
+            "id": "delivery-run-1",
+            "title": "核对交付清单",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "delivery-run-2",
+            "title": "确认验收",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          }
+        ],
+        "archived": false,
+        "createdAt": "2026-11-23T03:00:00Z",
+        "completedAt": ""
+      },
+      {
+        "id": "process-weekly",
+        "name": "产品迭代复盘",
+        "templateId": "template-weekly",
+        "projectId": "project-product",
+        "status": "paused",
+        "currentStep": 0,
+        "steps": [
+          {
+            "id": "weekly-run-0",
+            "title": "整理本周完成项",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "weekly-run-1",
+            "title": "分析阻塞",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "weekly-run-2",
+            "title": "安排下周行动",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          },
+          {
+            "id": "weekly-run-3",
+            "title": "记录复盘",
+            "description": "",
+            "completed": false,
+            "completedAt": ""
+          }
+        ],
+        "archived": false,
+        "createdAt": "2026-11-24T03:00:00Z",
+        "completedAt": ""
+      },
+      {
+        "id": "process-completed",
+        "name": "上次交付检查",
+        "templateId": "template-delivery",
+        "projectId": "project-delivery",
+        "status": "completed",
+        "currentStep": 3,
+        "steps": [
+          {
+            "id": "past-run-0",
+            "title": "准备材料",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-24T03:00:00Z"
+          },
+          {
+            "id": "past-run-1",
+            "title": "核对交付清单",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-24T03:00:00Z"
+          },
+          {
+            "id": "past-run-2",
+            "title": "确认验收",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-24T03:00:00Z"
+          }
+        ],
+        "archived": false,
+        "createdAt": "2026-11-17T03:00:00Z",
+        "completedAt": "2026-11-24T03:00:00Z"
+      },
+      {
+        "id": "processes-b46bcc09-e80e-4195-8876-79a022bb5bf4",
+        "archived": false,
+        "createdAt": "2026-11-25T00:10:50.657Z",
+        "name": "云端运行实例",
+        "templateId": "templates-315aa5eb-19f9-411b-ae99-51e176208d98",
+        "projectId": "",
+        "status": "completed",
+        "currentStep": 3,
+        "steps": [
+          {
+            "id": "run-step-c5045b84-5340-41eb-a848-bca3c7fe72e8",
+            "title": "准备",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-25T00:10:50.774Z"
+          },
+          {
+            "id": "run-step-8baf49b9-85d8-4370-adce-e9efb88d09a5",
+            "title": "核对",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-25T00:10:50.807Z"
+          },
+          {
+            "id": "run-step-2335307f-0545-42e1-97b1-f0cdadac556c",
+            "title": "完成",
+            "description": "",
+            "completed": true,
+            "completedAt": "2026-11-25T00:10:50.840Z"
+          }
+        ],
+        "completedAt": "2026-11-25T00:10:50.840Z"
+      }
+    ],
+    "contacts": [
+      {
+        "id": "contact-partner",
+        "name": "林晓",
+        "organization": "交付协作组",
+        "role": "项目联络",
+        "email": "",
+        "phone": "",
+        "notes": "核对材料后记录确认结果。",
+        "archived": false,
+        "followups": [
+          {
+            "id": "followup-material",
+            "title": "确认交付材料",
+            "dueDate": "2026-11-24",
+            "status": "pending",
+            "notes": "待确认最终清单。",
+            "completedAt": ""
+          },
+          {
+            "id": "followup-review",
+            "title": "回收评审反馈",
+            "dueDate": "2026-11-27",
+            "status": "pending",
+            "notes": "",
+            "completedAt": ""
+          }
+        ]
+      },
+      {
+        "id": "contact-team",
+        "name": "陈晨",
+        "organization": "产品团队",
+        "role": "设计协作",
+        "email": "",
+        "phone": "",
+        "notes": "记录原型评审的下一步行动。",
+        "archived": false,
+        "followups": [
+          {
+            "id": "followup-ui",
+            "title": "安排界面评审",
+            "dueDate": "2026-11-25",
+            "status": "done",
+            "notes": "已确认本次讨论范围。",
+            "completedAt": "2026-11-25T03:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "contact-archived",
+        "name": "周宁",
+        "organization": "历史协作组",
+        "role": "资料联系人",
+        "email": "",
+        "phone": "",
+        "notes": "演示归档联系人。",
+        "archived": true,
+        "archivedAt": "2026-11-23T03:00:00Z",
+        "followups": []
+      },
+      {
+        "id": "contacts-493df7f7-64d5-4da5-9cc5-24f1aba49556",
+        "archived": false,
+        "createdAt": "2026-11-25T00:10:50.994Z",
+        "name": "合成协作人",
+        "organization": "",
+        "role": "",
+        "email": "",
+        "phone": "",
+        "notes": "",
+        "followups": [
+          {
+            "id": "followup-0a938464-f129-4c2d-954b-93c6aee26a1b",
+            "createdAt": "2026-11-25T00:10:51.128Z",
+            "title": "确认合成材料",
+            "dueDate": "",
+            "notes": "",
+            "status": "done",
+            "completedAt": "2026-11-25T00:10:51.176Z"
+          }
+        ]
+      }
+    ],
+    "taskLinks": {
+      "d4-task-0": {
+        "projectId": "project-delivery",
+        "workItemId": "work-delivery-plan"
+      },
+      "d4-sub-0": {
+        "projectId": "project-delivery",
+        "workItemId": "work-delivery-plan"
+      },
+      "d4-sub-1": {
+        "projectId": "project-delivery",
+        "workItemId": "work-delivery-plan"
+      },
+      "d4-task-1": {
+        "projectId": "project-delivery",
+        "workItemId": "work-delivery-plan"
+      },
+      "d4-task-2": {
+        "projectId": "project-delivery",
+        "workItemId": "work-delivery-plan"
+      },
+      "d4-task-3": {
+        "projectId": "project-product",
+        "workItemId": "work-product-review"
+      },
+      "d4-task-4": {
+        "projectId": "project-product",
+        "workItemId": ""
+      },
+      "d4-task-5": {
+        "projectId": "project-product",
+        "workItemId": "work-product-review"
+      },
+      "d4-task-6": {
+        "projectId": "project-delivery",
+        "workItemId": ""
+      },
+      "d4-task-7": {
+        "projectId": "project-operations",
+        "workItemId": ""
+      },
+      "d4-task-8": {
+        "projectId": "project-delivery",
+        "workItemId": ""
+      },
+      "d4-task-9": {
+        "projectId": "project-operations",
+        "workItemId": ""
+      },
+      "d4-task-10": {
+        "projectId": "project-operations",
+        "workItemId": ""
+      },
+      "d4-task-11": {
+        "projectId": "project-product",
+        "workItemId": ""
+      },
+      "d4-task-12": {
+        "projectId": "project-delivery",
+        "workItemId": ""
+      },
+      "d4-task-13": {
+        "projectId": "project-operations",
+        "workItemId": ""
+      },
+      "repeat-u2gwfm1u30rdu": {
+        "projectId": "project-product",
+        "workItemId": ""
+      },
+      "repeat-u2gwfm1u30rdu-sub-1": {
+        "projectId": "project-product",
+        "workItemId": ""
+      }
+    },
+    "archivedTaskIds": [
+      "d4-task-13"
+    ],
+    "ui": {
+      "compact": false,
+      "defaultStatus": "pending"
+    },
+    "taskArchiveTimes": {
+      "d4-task-13": "2026-11-25T00:10:35.670Z"
+    }
+  },
+  "persistence": {
+    "key": "mytodo-d4-01-demo-v1",
+    "mode": "localStorage",
+    "loaded": false,
+    "error": null
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "kind": "D4 synthetic real-browser validation",
+  "sourceSHA": "b9c80665011dc88c841ae0ac8d743f70b51dec66",
+  "runId": "45515892558",
+  "runAttempt": "1",
+  "platform": "linux",
+  "checks": [
+    {
+      "name": "Offline CJK font identity loaded before visual review",
+      "status": "passed",
+      "at": "2026-11-25T00:10:38.082Z"
+    },
+    {
+      "name": "core-single-file-provenance-and-V2",
+      "status": "passed",
+      "at": "2026-11-25T00:10:38.099Z"
+    },
+    {
+      "name": "core-reset-through-settings-controls",
+      "status": "passed",
+      "at": "2026-11-25T00:10:38.120Z"
+    },
+    {
+      "name": "core-route-dashboard",
+      "status": "passed",
+      "at": "2026-11-25T00:10:38.326Z"
+    },
+    {
+      "name": "core-route-tasks",
+      "status": "passed",
+      "at": "2026-11-25T00:10:41.757Z"
+    },
+    {
+      "name": "core-route-task-detail",
+      "status": "passed",
+      "at": "2026-11-25T00:10:41.920Z"
+    },
+    {
+      "name": "core-route-projects",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.048Z"
+    },
+    {
+      "name": "core-route-work-items",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.163Z"
+    },
+    {
+      "name": "core-route-templates",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.261Z"
+    },
+    {
+      "name": "core-route-processes",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.362Z"
+    },
+    {
+      "name": "core-route-contacts",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.464Z"
+    },
+    {
+      "name": "core-route-archive",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.559Z"
+    },
+    {
+      "name": "core-route-analytics",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.678Z"
+    },
+    {
+      "name": "core-route-settings",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.797Z"
+    },
+    {
+      "name": "core-weekday-default-and-invalid-schedule-refusal",
+      "status": "passed",
+      "at": "2026-11-25T00:10:42.914Z"
+    },
+    {
+      "name": "core-create-task-repeat-and-reminder-through-form",
+      "status": "passed",
+      "at": "2026-11-25T00:10:43.389Z"
+    },
+    {
+      "name": "core-edit-task-custom-reminder-and-add-complete-child",
+      "status": "passed",
+      "at": "2026-11-25T00:10:43.932Z"
+    },
+    {
+      "name": "core-completion-generates-one-retimed-next-occurrence",
+      "status": "passed",
+      "at": "2026-11-25T00:10:44.357Z"
+    },
+    {
+      "name": "core-reminder-center-shows-pending-next-not-completed-original",
+      "status": "passed",
+      "at": "2026-11-25T00:10:44.686Z"
+    },
+    {
+      "name": "core-global-search-retains-mature-place-and-AND-fields",
+      "status": "passed",
+      "at": "2026-11-25T00:10:48.239Z"
+    },
+    {
+      "name": "core-status-project-query-and-date-filters-use-actual-form",
+      "status": "passed",
+      "at": "2026-11-25T00:10:48.456Z"
+    },
+    {
+      "name": "core-delete-original-subtree-preserves-next-and-its-project-association",
+      "status": "passed",
+      "at": "2026-11-25T00:10:48.895Z"
+    },
+    {
+      "name": "core-settings-build-identity-and-marked-export-boundary",
+      "status": "passed",
+      "at": "2026-11-25T00:10:48.993Z"
+    },
+    {
+      "name": "Parent archive hides descendants without overwriting independent child archive",
+      "status": "passed",
+      "at": "2026-11-25T00:10:49.088Z"
+    },
+    {
+      "name": "Project CRUD and task association survives rename",
+      "status": "passed",
+      "at": "2026-11-25T00:10:49.443Z"
+    },
+    {
+      "name": "Work item CRUD and task link stays demo-only",
+      "status": "passed",
+      "at": "2026-11-25T00:10:49.892Z"
+    },
+    {
+      "name": "Template creation and real sequential process run",
+      "status": "passed",
+      "at": "2026-11-25T00:10:50.409Z"
+    },
+    {
+      "name": "Contact follow-up create and complete",
+      "status": "passed",
+      "at": "2026-11-25T00:10:50.875Z"
+    },
+    {
+      "name": "Archive restore and dynamic statistics",
+      "status": "passed",
+      "at": "2026-11-25T00:10:51.239Z"
+    },
+    {
+      "name": "Mobile layout and all navigation destinations",
+      "status": "passed",
+      "at": "2026-11-25T00:10:55.557Z"
+    },
+    {
+      "name": "No page external network and no runtime exceptions",
+      "status": "passed",
+      "at": "2026-11-25T00:10:55.759Z"
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "url": "file:///home/runner/work/_temp/d4-ui-45515892558/mytodo-d4-01-demo.html",
+      "type": "Document"
+    },
+    {
+      "url": "data:font/ttf;base64,[inline asset omitted]",
+      "type": "Font",
+      "inlineCharacters": 23697681
+    },
+    {
+      "url": "data:image/svg+xml;base64,[inline asset omitted]",
+      "type": "Image",
+      "inlineCharacters": 382
+    }
+  ],
+  "blocked": [],
+  "protocolErrors": [],
+  "startedAt": "2026-11-25T00:10:27.148Z",
+  "font": {
+    "family": "Noto Sans SC",
+    "sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
+    "bytes": 17773244,
+    "license": "OFL-1.1"
+  },
+  "status": "passed",
+  "finishedAt": "2026-11-25T00:10:55.763Z"
+}

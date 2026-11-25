@@ -1,0 +1,46 @@
+[
+  {
+    "runId": "45514411150",
+    "attempt": 1,
+    "sourceSHA": "438407793cb7bdb1f780719805e8aa651018b365",
+    "conclusion": "failure",
+    "url": "https://github.com/johny751/MyTodo/actions/runs/45514411150",
+    "artifacts": 0,
+    "jobs": [
+      {
+        "name": "domain (windows-latest)",
+        "conclusion": "failure"
+      },
+      {
+        "name": "domain (ubuntu-latest)",
+        "conclusion": "failure"
+      },
+      {
+        "name": "browser",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  {
+    "runId": "45515892558",
+    "attempt": 1,
+    "sourceSHA": "b9c80665011dc88c841ae0ac8d743f70b51dec66",
+    "conclusion": "success",
+    "url": "https://github.com/johny751/MyTodo/actions/runs/45515892558",
+    "artifacts": 3,
+    "jobs": [
+      {
+        "name": "domain (ubuntu-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "domain (windows-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "browser",
+        "conclusion": "success"
+      }
+    ]
+  }
+]
