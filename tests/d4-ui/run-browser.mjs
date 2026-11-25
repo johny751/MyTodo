@@ -1,5 +1,5 @@
 import {spawn} from 'node:child_process';
-import {existsSync,readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {existsSync,readFileSync,writeFileSync,mkdirSync,appendFileSync,statSync} from 'node:fs';
 import {resolve,join,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
@@ -18,17 +18,45 @@ const events=[],checks=[],errors=[],requests=[],blocked=[],protocolErrors=[];let
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function serialize(error){return {name:error?.name,message:String(error?.message||error),stack:error?.stack};}
 const report={kind:'D4 synthetic real-browser validation',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,platform:process.platform,checks,errors,requests,blocked,protocolErrors,startedAt:new Date().toISOString()};
+// Startup observations never select a fallback endpoint or retry a business check.
+const chromeProfile=join(out,'chrome-synthetic-profile'),startupClock=performance.now();
+const startup={kind:'D4 hosted browser startup diagnostics',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,platform:process.platform,arch:process.arch,nodeVersion:process.version,runnerOS:env.RUNNER_OS,runnerArch:env.RUNNER_ARCH,imageOS:env.ImageOS,imageVersion:env.ImageVersion,executable,profile:chromeProfile,endpointDiscovery:'stderr only',pollLimit:100,pollIntervalMs:100,stage:'before-spawn',events:[],observations:[],streams:{stdout:{file:'chrome-startup-stdout.txt',bytes:0,savedBytes:0},stderr:{file:'chrome-startup-stderr.txt',bytes:0,savedBytes:0}},diagnosticErrors:[]};
+function diagnosticError(where,error){if(startup.diagnosticErrors.length<20)startup.diagnosticErrors.push({where,...serialize(error)});}
+function writeStartup(){try{writeFileSync(join(out,'chrome-startup-diagnostics.json'),JSON.stringify(startup,null,2)+'\n');}catch(error){diagnosticError('write-startup',error);}}
+function startupEvent(type,details={}){startup.events.push({type,at:new Date().toISOString(),elapsedMs:performance.now()-startupClock,...details});writeStartup();}
+function diagnosticFile(path,includeText=false){
+ try{const info=statSync(path),result={exists:true,bytes:info.size,modifiedAt:info.mtime.toISOString(),isFile:info.isFile()};if(includeText&&info.isFile()){if(info.size<=4096)result.text=readFileSync(path,'utf8');else result.textOmitted='Larger than 4096-byte diagnostic limit';}return result;}
+ catch(error){return error.code==='ENOENT'?{exists:false}:{error:serialize(error)};}
+}
+function observeStartup(phase){startup.observations.push({phase,at:new Date().toISOString(),elapsedMs:performance.now()-startupClock,pid:chrome?.pid??null,exitCode:chrome?.exitCode??null,signalCode:chrome?.signalCode??null,killed:chrome?.killed??false,profileExists:existsSync(chromeProfile),devToolsActivePort:diagnosticFile(join(chromeProfile,'DevToolsActivePort'),true)});writeStartup();}
+function captureStartupStream(name,chunk){
+ const stream=startup.streams[name];stream.bytes+=chunk.length;const remaining=Math.max(0,1048576-stream.savedBytes);
+ try{if(remaining){const saved=chunk.subarray(0,remaining);appendFileSync(join(out,stream.file),saved);stream.savedBytes+=saved.length;}}catch(error){diagnosticError('capture-'+name,error);}
+ stream.omittedBytes=stream.bytes-stream.savedBytes;
+}
+startup.executableFile=diagnosticFile(executable);
+for(const stream of Object.values(startup.streams)){try{writeFileSync(join(out,stream.file),'');}catch(error){diagnosticError('initialize-'+stream.file,error);}}
+observeStartup('before-spawn');
 let send;
 try {
- chrome=spawn(executable,['--headless=new','--no-sandbox','--disable-gpu','--disable-background-networking','--disable-component-update','--disable-default-apps','--disable-sync','--no-first-run','--no-default-browser-check','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+join(out,'chrome-synthetic-profile'),'about:blank'],{stdio:['ignore','ignore','pipe']});
- let stderr='';chrome.stderr.on('data',chunk=>{stderr+=chunk;});chrome.on('error',e=>errors.push(serialize(e)));
- let devtools;for(let i=0;i<100;i++){devtools=stderr.match(/DevTools listening on (ws:\/\/127\.0\.0\.1:\d+\/[^\s]+)/)?.[1];if(devtools)break;if(chrome.exitCode!==null)throw Error('Chrome exited: '+stderr);await wait(100);}if(!devtools)throw Error('Chrome debugging startup timed out: '+stderr);
- const pending=new Map();ws=new WebSocket(devtools);await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});
+ startup.stage='spawn';
+ chrome=spawn(executable,['--headless=new','--no-sandbox','--disable-gpu','--disable-background-networking','--disable-component-update','--disable-default-apps','--disable-sync','--no-first-run','--no-default-browser-check','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+chromeProfile,'about:blank'],{stdio:['ignore','pipe','pipe']});
+ let stderr='';chrome.stderr.on('data',chunk=>{stderr+=chunk;captureStartupStream('stderr',chunk);});chrome.stdout.on('data',chunk=>captureStartupStream('stdout',chunk));
+ chrome.on('spawn',()=>startupEvent('spawn',{pid:chrome.pid}));
+ chrome.on('error',e=>{errors.push(serialize(e));startupEvent('process-error',{error:serialize(e)});});
+ chrome.on('exit',(code,signal)=>startupEvent('process-exit',{code,signal,cleanupRequested:!!startup.cleanupRequestedAt}));
+ chrome.on('close',(code,signal)=>startupEvent('process-close',{code,signal,cleanupRequested:!!startup.cleanupRequestedAt}));
+ chrome.stdout.on('error',e=>startupEvent('stdout-error',{error:serialize(e)}));chrome.stderr.on('error',e=>startupEvent('stderr-error',{error:serialize(e)}));
+ startup.stage='debugger-endpoint-poll';observeStartup('after-spawn-call');
+ let devtools;for(let i=0;i<100;i++){devtools=stderr.match(/DevTools listening on (ws:\/\/127\.0\.0\.1:\d+\/[^\s]+)/)?.[1];if(devtools)break;if(chrome.exitCode!==null)throw Error('Chrome exited: '+stderr);await wait(100);}startup.endpointMatched=!!devtools;observeStartup('debugger-poll-finished');if(!devtools)throw Error('Chrome debugging startup timed out: '+stderr);
+ startup.stage='websocket-connect';observeStartup('before-websocket-connect');
+ const pending=new Map();ws=new WebSocket(devtools);await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});startup.stage='cdp-setup';observeStartup('websocket-open');
  ws.onmessage=event=>{const message=JSON.parse(event.data);if(message.id){const job=pending.get(message.id);if(job){pending.delete(message.id);clearTimeout(job.timer);message.error?job.reject(Error(JSON.stringify(message.error))):job.resolve(message.result);}}else {if(message.method==='Runtime.exceptionThrown')errors.push(message.params.exceptionDetails);if(message.method==='Network.requestWillBeSent'){const url=message.params.request.url;requests.push({url:url.startsWith('data:')?url.slice(0,url.indexOf(',')+1)+'[inline asset omitted]':url,type:message.params.type,inlineCharacters:url.startsWith('data:')?url.length:undefined});}}};
  send=(method,params={},sessionId)=>new Promise((resolve,reject)=>{const id=++counter,timer=setTimeout(()=>{pending.delete(id);reject(Error('CDP timeout: '+method));},15000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})}));});
  const target=await send('Target.createTarget',{url:'about:blank'}),attached=await send('Target.attachToTarget',{targetId:target.targetId,flatten:true}),sid=attached.sessionId;
  const cmd=(method,params={})=>send(method,params,sid);
  await cmd('Runtime.enable');await cmd('Page.enable');await cmd('Network.enable');
+ startup.stage='cdp-ready';observeStartup('cdp-ready');
  await cmd('Network.setBlockedURLs',{urls:['http://*','https://*','ws://*','wss://*']});
  await cmd('Emulation.setDeviceMetricsOverride',{width:1440,height:960,deviceScaleFactor:1,mobile:false});
  const evaluate=async expression=>{const result=await cmd('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true,userGesture:true});if(result.exceptionDetails)throw Error(JSON.stringify(result.exceptionDetails));return result.result.value;};
@@ -118,16 +146,18 @@ try {
    await api.tap('[data-action="work-edit-work-item"][data-id="'+layout.id+'"]');assert.equal(await evaluate('document.querySelector("[data-form=work-work-item] [name=id]")?.value'),layout.id,'Real edit opens the exact record');await api.tap('[data-action="work-close"]');assert.equal(await evaluate('!!document.querySelector("[data-form=work-work-item]")'),false);
   }
  });
- // Cloud-only presentation capture. These four images are not additional test cases.
+ // Cloud-only presentation capture. These nine images are not additional test cases.
  await api.configure(412,915,true);
  const mobileShowcase=[];
- for(const route of ['notes','pomodoro','feedback','work-items']){
+ for(const route of ['notes','pomodoro','feedback','work-items','contacts','archive','analytics','templates','processes']){
   await api.navigate(route);
-  const observed=await evaluate('({route:window.D4Prototype.getRoute(),domRoute:document.querySelector("main").dataset.route,width:innerWidth,height:innerHeight,documentWidth:document.documentElement.scrollWidth,heading:document.querySelector("main .page-heading h1")?.textContent||""})');
+  await evaluate(`Promise.race([(async()=>{while(window.D4Prototype.getRoute()!==${JSON.stringify(route)}||document.querySelector('main')?.dataset.route!==${JSON.stringify(route)})await new Promise(requestAnimationFrame);await document.fonts.ready;await Promise.all(document.querySelector('.app-shell').getAnimations({subtree:true}).map(a=>a.finished));await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));return true;})(),new Promise((resolve,reject)=>setTimeout(()=>reject(Error('Phone presentation route or animations did not settle: '+${JSON.stringify(route)})),1500))])`);
+  const observed=await evaluate('({route:window.D4Prototype.getRoute(),domRoute:document.querySelector("main").dataset.route,width:innerWidth,height:innerHeight,documentWidth:document.documentElement.scrollWidth,heading:document.querySelector("main .page-heading h1")?.textContent||"",unfinishedAnimations:document.querySelector(".app-shell").getAnimations({subtree:true}).filter(a=>a.pending||!["finished","idle"].includes(a.playState)).map(a=>({playState:a.playState,pending:a.pending}))})');
   assert.equal(observed.route,route,'Presentation capture route identity');
   assert.equal(observed.domRoute,route,'Presentation capture rendered route identity');
   assert.equal(observed.width,412,'Presentation capture uses the real phone viewport width');
   assert.equal(observed.height,915,'Presentation capture uses the real phone viewport height');
+  assert.deepEqual(observed.unfinishedAnimations,[],'Phone presentation animations have finished');
   const file='mobile-'+route+'.png';await api.screenshot('mobile-'+route);
   mobileShowcase.push({file,route,observed});
  }
@@ -136,7 +166,7 @@ try {
  await api.check('No page external network and no runtime exceptions',async()=>{const external=requests.filter(x=>/^(https?|wss?):/.test(x.url));assert.deepEqual(external,[]);assert.deepEqual(errors,[]);});
  writeFileSync(join(out,'synthetic-final-state.json'),JSON.stringify(await evaluate('({core:window.D4Prototype.repo.state,demo:window.D4Prototype.repo.demo,persistence:window.D4Prototype.repo.persistence()})'),null,2));
  report.status='passed';
-}catch(error){failed=error;report.status='failed';report.failure=serialize(error);}
-finally{report.executedCount=checks.length;report.passed=checks.filter(c=>c.status==='passed').length;report.failed=checks.filter(c=>c.status==='failed').length;report.remainingSuites=failed?'aborted after preserved first failure':'all suites executed';report.finishedAt=new Date().toISOString();writeFileSync(join(out,'browser-results.json'),JSON.stringify(report,null,2));if(ws?.readyState===WebSocket.OPEN)ws.close();if(chrome&&chrome.exitCode===null){chrome.kill('SIGTERM');await wait(300);if(chrome.exitCode===null)chrome.kill('SIGKILL');}}
+}catch(error){failed=error;report.status='failed';report.failure=serialize(error);startup.firstFailure={stage:startup.stage,error:serialize(error)};observeStartup('caught-failure');}
+finally{report.executedCount=checks.length;report.passed=checks.filter(c=>c.status==='passed').length;report.failed=checks.filter(c=>c.status==='failed').length;report.remainingSuites=failed?'aborted after preserved first failure':'all suites executed';report.finishedAt=new Date().toISOString();writeFileSync(join(out,'browser-results.json'),JSON.stringify(report,null,2));startup.result=report.status;observeStartup('before-cleanup');if(ws?.readyState===WebSocket.OPEN)ws.close();if(chrome&&chrome.exitCode===null){startup.cleanupRequestedAt=new Date().toISOString();startupEvent('cleanup-request',{signal:'SIGTERM'});chrome.kill('SIGTERM');await wait(300);if(chrome.exitCode===null){startupEvent('cleanup-request',{signal:'SIGKILL'});chrome.kill('SIGKILL');}}observeStartup('after-cleanup');}
 if(failed)throw failed;
 console.log(JSON.stringify({status:report.status,checks:checks.length,sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID}));
