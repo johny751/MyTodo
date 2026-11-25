@@ -197,6 +197,17 @@ public final class MainActivity extends Activity {
             runOnUiThread(() -> startActivity(new Intent(MainActivity.this, NativeTimerActivity.class)));
         }
         @JavascriptInterface public void openVersionInfo() { runOnUiThread(() -> showVersion()); }
+        @JavascriptInterface public void navigationDrawerOpened() {
+            runOnUiThread(() -> {
+                if (destroyed || web == null) return;
+                // A page's floating edit toolbar must not remain above the
+                // global drawer and consume its next navigation touch.
+                // Do not inject focus changes or writes to DOM selection/dirty fields.
+                android.util.Log.i("D403PreviewInput", "navigation-drawer-open mode="
+                    + (floatingTextMode == null ? "none" : System.identityHashCode(floatingTextMode)));
+                finishFloatingTextMode();
+            });
+        }
         @JavascriptInterface public void timerCall(String id, String json) {
             if (id == null || id.length() > 100 || json == null || json.length() > 65536) return;
             NativeTimerStore.request(MainActivity.this, json, (value, error) -> {
