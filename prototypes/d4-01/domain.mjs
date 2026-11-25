@@ -121,10 +121,13 @@ export function createRepository(seedStorage=null){
    if(typeof fields!=='string')return repository.createTask(fields||{},parentId);
    let id;commit(core=>{const parent=required(core.tasks,parentId).task;id=freshId(core);const child=quickSubtask(parent,fields,id,now());parent.subtasks.push(child);checkedSaved(core,id);},'addSubtask');return taskResult(id);
   },
-  updateTask(id,patch){
+  updateTask(id,patch,base=null){
    commit(core=>{
-    const task=required(core.tasks,id).task,wasDone=task.done,updated=changedFields(task,patch);
-    saveTaskRecord(core,updated,null);classifications(core,updated);checkedSaved(core,id);
+    if(base!==null&&(!base||typeof base!=='object'||Array.isArray(base)||base.id!==id))throw new Error('任务编辑基线与任务 ID 不匹配');
+    const task=required(core.tasks,id).task,wasDone=task.done,updated=changedFields(base===null?task:base,patch);
+    // A captured editor base uses the frozen three-way save, including conflict
+    // copies and the current containing array. Two-argument callers are unchanged.
+    const saved=saveTaskRecord(core,updated,base===null?null:clone(base));classifications(core,saved);checkedSaved(core,id);
     if(own(patch,'done')&&typeof patch.done==='boolean'&&patch.done!==wasDone)matureSetTaskDone(core,id,patch.done,now());
    },'updateTask');return taskResult(id);
   },
