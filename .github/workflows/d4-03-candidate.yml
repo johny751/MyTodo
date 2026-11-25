@@ -141,4 +141,6 @@ jobs:
             ${{ runner.temp }}/d4-native-evidence-${{ github.run_id }}/
             ${{ runner.temp }}/d4-jvm-*/
             ${{ runner.temp }}/d403-emulator-boot.log
+            ${{ runner.temp }}/d403-emulator-environment.log
+            ${{ runner.temp }}/d403-emulator-poll.log
           if-no-files-found: error
