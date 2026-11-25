@@ -133,6 +133,23 @@ export async function runPersonalCases(a) {
     assert.deepEqual(r.completed.ledger, {}); assert.deepEqual(r.completed.notices, []);
   });
 
+  await a.check('Reminder reconciliation fills a freed full-dock slot in one stable pass', async () => {
+    const r = await a.eval(`(()=>{const p=DemoPersonalPages.reminders.plan,tasks=Array.from({length:6},(_,i)=>({id:'stable-r'+i,title:'Stable reminder '+i,at:1000,done:false}));
+      const before=p(tasks,{},1000,[]),complete=tasks.map((t,i)=>({...t,done:i===0}));
+      const completed=p(complete,before.ledger,1000,before.notices),completedAgain=p(complete,completed.ledger,1000,completed.notices);
+      const deleted=p(tasks.slice(1),before.ledger,1000,before.notices),deletedAgain=p(tasks.slice(1),deleted.ledger,1000,deleted.notices);
+      return {before,completed,completedAgain,deleted,deletedAgain};})()`);
+    assert.equal(r.before.notices.length, 5);
+    assert.equal(r.before.ledger['stable-r5|1000'], undefined, 'The sixth overdue reminder starts queued');
+    for (const result of [r.completed, r.deleted]) {
+      assert.deepEqual(result.notices.map(n => n.taskId), ['stable-r1', 'stable-r2', 'stable-r3', 'stable-r4', 'stable-r5']);
+      assert.equal(result.ledger['stable-r0|1000'], undefined);
+      assert.equal(result.ledger['stable-r5|1000'], 'sent');
+    }
+    assert.deepEqual(r.completedAgain, r.completed, 'A second poll cannot defer another write for the same completion');
+    assert.deepEqual(r.deletedAgain, r.deleted, 'A second poll cannot defer another write for the same deletion');
+  });
+
   await a.check('Reminder page notice supports actual snooze, acknowledge and view-task controls', async () => {
     const task = await a.eval(`(()=>{const r=D4Prototype.repo,H=DemoDomain.helpers,at=H.dayKey()+'T23:59',t=r.createTask({title:'合成页内提醒交互',quadrant:0,start:at,reminder:{mode:'custom',at}});r.updateDemo(d=>{d.personal=d.personal||{};d.personal.reminderLedger={};d.personal.reminderNotices=[];H.flattenTasks(r.state.tasks).forEach(x=>{const when=r.reminderAt(x.id);if(x.id!==t.id&&Number.isFinite(when))d.personal.reminderLedger[x.id+'|'+when]='sent';});});return {id:t.id,at:r.reminderAt(t.id)};})()`);
     const key = task.id + '|' + task.at;

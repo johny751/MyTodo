@@ -110,6 +110,21 @@ try {
  await cmd('Emulation.setDeviceMetricsOverride',{width:412,height:915,deviceScaleFactor:1,mobile:true});await api.navigate('dashboard');await api.screenshot('mobile-dashboard');
  await api.check('Mobile layout and all navigation destinations',async()=>{assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true);await api.click('[data-action="nav-toggle"]');assert.equal(await evaluate('document.querySelector(".app-shell").classList.contains("nav-open")'),true);await api.screenshot('mobile-navigation');});
  await api.navigate('tasks');await api.screenshot('mobile-tasks');
+ // Cloud-only presentation capture. These four images are not additional test cases.
+ await api.configure(412,915,true);
+ const mobileShowcase=[];
+ for(const route of ['notes','pomodoro','feedback','work-items']){
+  await api.navigate(route);
+  const observed=await evaluate('({route:window.D4Prototype.getRoute(),domRoute:document.querySelector("main").dataset.route,width:innerWidth,height:innerHeight,documentWidth:document.documentElement.scrollWidth,heading:document.querySelector("main .page-heading h1")?.textContent||""})');
+  assert.equal(observed.route,route,'Presentation capture route identity');
+  assert.equal(observed.domRoute,route,'Presentation capture rendered route identity');
+  assert.equal(observed.width,412,'Presentation capture uses the real phone viewport width');
+  assert.equal(observed.height,915,'Presentation capture uses the real phone viewport height');
+  const file='mobile-'+route+'.png';await api.screenshot('mobile-'+route);
+  mobileShowcase.push({file,route,observed});
+ }
+ await api.navigate('tasks');
+ writeFileSync(join(out,'mobile-showcase-receipt.json'),JSON.stringify({kind:'d403-cloud-browser-phone-showcase',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,scope:'Presentation screenshots from actual emulated phone viewport; no new business test count; not Android native evidence',viewport:{width:412,height:915,deviceScaleFactor:1,mobile:true},screenshots:mobileShowcase},null,2)+'\n');
  await api.check('No page external network and no runtime exceptions',async()=>{const external=requests.filter(x=>/^(https?|wss?):/.test(x.url));assert.deepEqual(external,[]);assert.deepEqual(errors,[]);});
  writeFileSync(join(out,'synthetic-final-state.json'),JSON.stringify(await evaluate('({core:window.D4Prototype.repo.state,demo:window.D4Prototype.repo.demo,persistence:window.D4Prototype.repo.persistence()})'),null,2));
  report.status='passed';

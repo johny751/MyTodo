@@ -15,6 +15,58 @@ export async function runMobileCases(api){
  await api.check('M18 Edge navigation preserves unsaved task draft',async()=>{await go('tasks');await api.tap('[data-task-id="d4-task-0"] [data-action=task-open]');await api.fill('[name=title]','尚未保存的手机草稿');await api.swipe([3,155],[150,155]);await api.tap('.nav-item[data-id=notes]');await api.swipe([3,155],[150,155]);await api.tap('.nav-item[data-id=tasks]');assert.equal(await read('document.querySelector("[data-form=task-edit] [name=title]").value'),'尚未保存的手机草稿');assert.notEqual(await read('D4Prototype.repo.getTask("d4-task-0").title'),'尚未保存的手机草稿');await api.tap('[data-action=close-modal]');});
  await api.check('M-scroll Content vertical scroll does not become navigation or drag',async()=>{await go('tasks');const before=await read('D4Prototype.repo.state.tasks.map(t=>({id:t.id,quadrant:t.quadrant,order:t.order,done:t.done}))');await api.swipe([110,420],[110,220]);assert.equal(await read('!!document.querySelector(".app-shell.nav-open")'),false);assert.deepEqual(await read('D4Prototype.repo.state.tasks.map(t=>({id:t.id,quadrant:t.quadrant,order:t.order,done:t.done}))'),before);});
  await api.check('M-legacy Content swipe menu and completion retain guarded undo',async()=>{await go('tasks');const p=await api.point('[data-task-id="d4-task-0"] .task-title');await api.swipe([p.x,p.y],[p.x-100,p.y]);assert.ok(await read('!!document.querySelector(".task-menu-actions")'));await api.tap('[data-action=close-modal]');const before=await read('D4Prototype.repo.getTask("d4-task-0")');const p2=await api.point('[data-task-id="d4-task-0"] .task-title');await api.swipe([p2.x,p2.y],[p2.x+100,p2.y]);assert.equal(await read('D4Prototype.repo.getTask("d4-task-0").done'),!before.done);await api.tap('#undo-notice [data-action=task-undo]');assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0")'),before);});
+ // Force the reminder poll between real task input and real Undo input. This
+ // reproduces the interleaving without waiting for a favourable timer phase.
+ const undoEnvelope=()=>read('({core:D4Prototype.repo.state,demo:D4Prototype.repo.demo})');
+ const pollUndoReminders=()=>read(`DemoPersonalPages.reminders.check({repo:D4Prototype.repo,getState:D4Prototype.getState,esc:value=>String(value),toast:()=>{}})`);
+ async function withUndoReminderFixture(count,body){
+  const saved=await undoEnvelope();
+  try{
+   await go('tasks');
+   await read(`(()=>{const repo=D4Prototype.repo,H=DemoDomain.helpers,state=repo.state;state.tasks=[];
+    repo.batch(()=>{repo.replaceState(state);for(let i=0;i<${count};i++)repo.createTask({id:'d403-undo-'+i,title:'Undo reminder '+i,quadrant:0,start:H.dayKey()+'T12:00',reminder:{mode:'custom',at:H.shiftDate(H.dayKey(),'day',-1)+'T09:00'},notes:'Preserve raw note '+i,tags:['raw,tag']});repo.createTask({id:'d403-undo-later',title:'Subsequent real edit',quadrant:0,start:H.dayKey()+'T12:00',notes:'Original follow-up note'});repo.updateDemo(d=>{d.personal=d.personal||{};d.personal.timer=null;d.personal.reminderLedger={};d.personal.reminderNotices=[];});});return true;})()`);
+   await pollUndoReminders();await api.reload();await go('tasks');
+   await api.fill('[data-form=task-filter] [name=sort]','manual');await api.fill('[data-form=task-filter] [name=query]','');await api.fill('[data-form=task-filter] [name=projectId]','');await api.fill('[data-form=task-filter] [name=status]','pending');await api.fill('[data-form=task-filter] [name=allDates]',true);await api.submit('[data-form=task-filter]');
+   await api.tap('[data-action=quadrant-focus][data-id="0"]');
+   await body();
+  }catch(error){await api.screenshot('failure-mobile-undo-reminder-fixture');throw error;}finally{
+   await read(`(()=>{D4Prototype.repo.batch(()=>{D4Prototype.repo.replaceState(${JSON.stringify(saved.core)});D4Prototype.repo.updateDemo(()=>(${JSON.stringify(saved.demo)}));});return true;})()`);
+   assert.deepEqual(await undoEnvelope(),saved,'The reminder Undo fixture restores the entire prior workspace');
+   await api.reload();await go('tasks');
+  }
+ }
+ async function completeUndoReminder(){const p=await api.point('[data-task-id="d403-undo-0"] .task-title');await api.swipe([p.x,p.y],[p.x+100,p.y]);assert.equal(await read('D4Prototype.repo.getTask("d403-undo-0").done'),true);}
+ for(const item of [{action:'complete',count:1},{action:'delete',count:1},{action:'complete',count:6}])await api.check('M-undo-reminders-'+item.action+'-'+item.count+' Real Undo retains the exact workspace after reminder reconciliation',()=>withUndoReminderFixture(item.count,async()=>{
+  const before=await undoEnvelope();assert.equal(before.demo.personal.reminderNotices.length,Math.min(5,item.count));
+  if(item.action==='complete')await completeUndoReminder();
+  else{await api.tap('[data-task-id="d403-undo-0"] [data-action=task-menu]');await api.tap('[data-action=task-delete][data-id="d403-undo-0"]');await api.tap('[data-action=task-delete-confirm][data-id="d403-undo-0"]');assert.equal(await read('D4Prototype.repo.getTask("d403-undo-0")'),null);}
+  const after=await undoEnvelope(),polled=await pollUndoReminders();
+  assert.deepEqual(await undoEnvelope(),after,'The completion/deletion has already settled all of its own derived reminder changes');
+  assert.equal(polled.notices.some(n=>n.taskId==='d403-undo-0'),false);
+  assert.equal(Object.keys(polled.ledger).some(key=>key.startsWith('d403-undo-0|')),false);
+  assert.equal(polled.notices.length,item.count===6?5:0);
+  if(item.count===6)assert.equal(polled.notices.some(n=>n.taskId==='d403-undo-5'),true,'The sixth overdue reminder fills the freed slot before the Undo snapshot');
+  await api.tap('#undo-notice [data-action=task-undo]');
+  assert.deepEqual(await undoEnvelope(),before,'Real Undo restores exact task fields, receipts, notices and all unrelated workspace values');
+ }));
+ await api.check('M-undo-reminders-new-personal Real Undo removes a newly created reminder domain',()=>withUndoReminderFixture(2,async()=>{
+  await pollUndoReminders();
+  await read('D4Prototype.repo.updateDemo(d=>{delete d.personal;})');
+  const before=await undoEnvelope();assert.equal(Object.hasOwn(before.demo,'personal'),false);
+  await completeUndoReminder();
+  assert.equal(await read('Object.hasOwn(D4Prototype.repo.demo,"personal")'),true,'The remaining overdue task creates its first reminder domain');
+  const after=await undoEnvelope();await pollUndoReminders();assert.deepEqual(await undoEnvelope(),after);
+  await api.tap('#undo-notice [data-action=task-undo]');
+  assert.deepEqual(await undoEnvelope(),before,'Exact Undo replacement removes top-level fields introduced by this action');
+ }));
+ await api.check('M-undo-reminders-conflict Real later editor save still blocks whole-workspace Undo',()=>withUndoReminderFixture(1,async()=>{
+  await completeUndoReminder();await pollUndoReminders();
+  await api.tap('[data-task-id="d403-undo-later"] [data-action=task-open]');await api.fill('[data-form=task-edit] [name=notes]','Saved after completion; must survive rejected Undo');await api.tap('[data-form=task-edit] button[type=submit]');await api.tap('[data-action=close-modal]');
+  const afterEdit=await undoEnvelope();assert.equal(afterEdit.core.tasks.find(t=>t.id==='d403-undo-later').notes,'Saved after completion; must survive rejected Undo');
+  await api.tap('#undo-notice [data-action=task-undo]');
+  assert.equal(await read('document.querySelector("#toast").textContent'),'期间数据已有改变，未覆盖后续修改');
+  assert.deepEqual(await undoEnvelope(),afterEdit,'Rejected Undo preserves the subsequent real edit and completed task');
+ }));
  await api.check('M-raw Tags with delimiters and multi-weekday rules survive actual editor save',async()=>{await read('D4Prototype.repo.updateTask("d4-task-0",{tags:["含,逗号","含，中文"],repeat:{frequency:"weekly",interval:1,weekdays:[1,3,5],until:"",anchor:DemoDomain.helpers.dayKey()+"T09:00"}})');await api.click('[data-task-id="d4-task-0"] [data-action=task-open]');await api.submit('[data-form=task-edit]');const t=await read('D4Prototype.repo.getTask("d4-task-0")');assert.deepEqual(t.tags,['含,逗号','含，中文']);assert.deepEqual(t.repeat.weekdays,[1,3,5]);await api.click('[data-task-id="d4-task-0"] [data-action=task-open]');await api.fill('[name=weekday]','2');await api.submit('[data-form=task-edit]');assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0").repeat.weekdays'),[2]);});
  await api.tap('[data-action=close-modal]');
  await api.check('M-swipe-cancel Touch move does not commit before release and cancellation preserves task',async()=>{const before=await read('D4Prototype.repo.getTask("d4-task-0")'),p=await api.point('[data-task-id="d4-task-0"] .task-title');await api.swipe([p.x,p.y],[p.x+100,p.y],{cancel:true,beforeRelease:async()=>{assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0")'),before);assert.equal(await read('!!document.querySelector(".task-menu-actions")'),false);}});assert.deepEqual(await read('D4Prototype.repo.getTask("d4-task-0")'),before);});

@@ -36,11 +36,15 @@ let observed;
 if(process.platform==='win32'){
  // The hosted PATH may resolve GNU tar; -a does not select ZIP there. Use an explicit ZIP API.
  const powershell=path.join(env.SystemRoot||'C:\\Windows','System32','WindowsPowerShell','v1.0','powershell.exe');
- const script=`$ErrorActionPreference='Stop'
+ const script=`param(
+ [Parameter(Mandatory=$true)][string]$PackageRoot,
+ [Parameter(Mandatory=$true)][string]$FilesBase64
+)
+$ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-$root=$env.D4_PACKAGE_ROOT
-$names=@(ConvertFrom-Json -InputObject $env.D4_PACKAGE_FILES)
+$root=$PackageRoot
+$names=@(ConvertFrom-Json -InputObject ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($FilesBase64))))
 $archive=Join-Path $root 'mytodo-d4-experience.zip'
 $zip=[IO.Compression.ZipFile]::Open($archive,[IO.Compression.ZipArchiveMode]::Create)
 try { foreach($name in $names) { [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip,(Join-Path $root $name),$name,[IO.Compression.CompressionLevel]::Optimal) | Out-Null } }
@@ -55,7 +59,12 @@ try {
  ConvertTo-Json -InputObject $rows -Compress
 } finally { $zip.Dispose() }
 `;
- observed=JSON.parse(execFileSync(powershell,['-NoLogo','-NoProfile','-NonInteractive','-Command',script],{...commandOptions,env:{...env,D4_PACKAGE_ROOT:dir,D4_PACKAGE_FILES:JSON.stringify(files)},encoding:'utf8'}).replace(/^\uFEFF/,''));
+ // Keep the generated script in this run's temporary directory for failure diagnostics.
+ const scriptDir=await fs.mkdtemp(path.join(path.resolve(env.RUNNER_TEMP),'d4-zip-'));
+ const scriptPath=path.join(scriptDir,'package.ps1');
+ await fs.writeFile(scriptPath,script,{encoding:'utf8',flag:'wx'});
+ const filesBase64=Buffer.from(JSON.stringify(files),'utf8').toString('base64');
+ observed=JSON.parse(execFileSync(powershell,['-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',scriptPath,'-PackageRoot',dir,'-FilesBase64',filesBase64],{...commandOptions,encoding:'utf8'}).replace(/^\uFEFF/,''));
 }else{
  execFileSync('zip',['-q',archive,...files],commandOptions);
  const names=execFileSync('unzip',['-Z1',archive],{...commandOptions,encoding:'utf8'}).trimEnd().split(/\r?\n/);
