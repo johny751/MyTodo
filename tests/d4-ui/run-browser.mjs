@@ -19,9 +19,10 @@ const events=[],checks=[],errors=[],requests=[],blocked=[],protocolErrors=[];let
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function serialize(error){return {name:error?.name,message:String(error?.message||error),stack:error?.stack};}
 const report={kind:'D4 synthetic real-browser validation',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,platform:process.platform,checks,errors,requests,blocked,protocolErrors,startedAt:new Date().toISOString()};
-// Startup observations never select a fallback endpoint or retry a business check.
-const chromeProfile=join(out,'chrome-synthetic-profile'),startupClock=performance.now();
-const startup={kind:'D4 hosted browser startup diagnostics',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,platform:process.platform,arch:process.arch,nodeVersion:process.version,runnerOS:env.RUNNER_OS,runnerArch:env.RUNNER_ARCH,imageOS:env.ImageOS,imageVersion:env.ImageVersion,executable,profile:chromeProfile,endpointDiscovery:'stderr only',pollLimit:100,pollIntervalMs:100,stage:'before-spawn',events:[],observations:[],streams:{stdout:{file:'chrome-startup-stdout.txt',bytes:0,savedBytes:0},stderr:{file:'chrome-startup-stderr.txt',bytes:0,savedBytes:0}},diagnosticErrors:[]};
+// One fresh-profile process and one connection share a fixed monotonic startup deadline.
+const chromeProfile=join(out,'chrome-synthetic-profile'),startupClock=performance.now(),startupBudgetMs=60000,startupDeadline=startupClock+startupBudgetMs;
+let chromeFailure=null,startupReady=false,rejectStartupPending=()=>{};
+const startup={kind:'D4 hosted browser startup diagnostics',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,platform:process.platform,arch:process.arch,nodeVersion:process.version,runnerOS:env.RUNNER_OS,runnerArch:env.RUNNER_ARCH,imageOS:env.ImageOS,imageVersion:env.ImageVersion,executable,profile:chromeProfile,endpointDiscovery:'validated stderr or fresh-profile DevToolsActivePort; require agreement when both available',endpointMatched:false,startupBudgetMs,deadlineClock:'performance.now',deadlineScope:'spawn through CDP setup',pollIntervalMs:100,spawnLimit:1,connectionLimit:1,stage:'before-spawn',events:[],observations:[],streams:{stdout:{file:'chrome-startup-stdout.txt',bytes:0,savedBytes:0},stderr:{file:'chrome-startup-stderr.txt',bytes:0,savedBytes:0}},diagnosticErrors:[]};
 function diagnosticError(where,error){if(startup.diagnosticErrors.length<20)startup.diagnosticErrors.push({where,...serialize(error)});}
 function writeStartup(){try{writeFileSync(join(out,'chrome-startup-diagnostics.json'),JSON.stringify(startup,null,2)+'\n');}catch(error){diagnosticError('write-startup',error);}}
 function startupEvent(type,details={}){startup.events.push({type,at:new Date().toISOString(),elapsedMs:performance.now()-startupClock,...details});writeStartup();}
@@ -35,28 +36,73 @@ function captureStartupStream(name,chunk){
  try{if(remaining){const saved=chunk.subarray(0,remaining);appendFileSync(join(out,stream.file),saved);stream.savedBytes+=saved.length;}}catch(error){diagnosticError('capture-'+name,error);}
  stream.omittedBytes=stream.bytes-stream.savedBytes;
 }
+function startupRemaining(stage){
+ if(chromeFailure)throw chromeFailure;
+ if(chrome&&(chrome.exitCode!==null||chrome.signalCode!==null||chrome.killed))throw Error('Chrome exited before startup completed');
+ const remaining=startupDeadline-performance.now();if(remaining<=0)throw Error('Chrome startup deadline exceeded during '+stage+' after '+startupBudgetMs+' ms');return remaining;
+}
+function validateDebuggerEndpoint(value,source){
+ const pattern=/^ws:\/\/127\.0\.0\.1:([1-9]\d{0,4})\/devtools\/browser\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
+ const match=pattern.exec(value);if(!match||Number(match[1])>65535)throw Error('Invalid Chrome debugger endpoint in '+source);return value;
+}
+function debuggerEvidence(stderr){
+ // Only complete stderr lines count. A partially written port file remains pending.
+ const stderrEndpoints=[...new Set([...stderr.matchAll(/^DevTools listening on ([^\r\n]+)\r?\n/gm)].map(match=>validateDebuggerEndpoint(match[1],'stderr')))];
+ if(stderrEndpoints.length>1)throw Error('Conflicting Chrome debugger endpoints in stderr');
+ const stderrEndpoint=stderrEndpoints[0]||null,file=diagnosticFile(join(chromeProfile,'DevToolsActivePort'),true);let fileEndpoint=null,fileState='absent';
+ if(file.error)throw Error('Cannot inspect Chrome DevToolsActivePort: '+file.error.message);
+ if(file.exists){
+  if(!file.isFile||typeof file.text!=='string')throw Error('Chrome DevToolsActivePort is not a bounded text file');
+  const match=/^([1-9]\d{0,4})\r?\n(\/devtools\/browser\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(?:\r?\n)?$/i.exec(file.text);
+  fileState=match?'valid':'pending-invalid-or-partial';
+  if(match)fileEndpoint=validateDebuggerEndpoint('ws://127.0.0.1:'+match[1]+match[2],'DevToolsActivePort');
+ }
+ if(stderrEndpoint&&fileEndpoint&&stderrEndpoint!==fileEndpoint)throw Error('Chrome stderr and DevToolsActivePort endpoints disagree');
+ const endpoint=file.exists&&!fileEndpoint?null:(fileEndpoint||stderrEndpoint);
+ startup.endpointEvidence={stderrEndpoint,fileEndpoint,fileState,selectedEndpoint:endpoint,selectedFrom:fileEndpoint?(stderrEndpoint?'both':'DevToolsActivePort'):(stderrEndpoint?'stderr':null),elapsedMs:performance.now()-startupClock};
+ return endpoint;
+}
 startup.executableFile=diagnosticFile(executable);
 for(const stream of Object.values(startup.streams)){try{writeFileSync(join(out,stream.file),'');}catch(error){diagnosticError('initialize-'+stream.file,error);}}
 observeStartup('before-spawn');
 let send;
 try {
+ if(existsSync(chromeProfile))throw Error('Chrome synthetic profile must not exist before its only startup');
+ startupRemaining('before-spawn');
  startup.stage='spawn';
  chrome=spawn(executable,['--headless=new','--no-sandbox','--disable-gpu','--disable-background-networking','--disable-component-update','--disable-default-apps','--disable-sync','--no-first-run','--no-default-browser-check','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+chromeProfile,'about:blank'],{stdio:['ignore','pipe','pipe']});
  let stderr='';chrome.stderr.on('data',chunk=>{stderr+=chunk;captureStartupStream('stderr',chunk);});chrome.stdout.on('data',chunk=>captureStartupStream('stdout',chunk));
  chrome.on('spawn',()=>startupEvent('spawn',{pid:chrome.pid}));
- chrome.on('error',e=>{errors.push(serialize(e));startupEvent('process-error',{error:serialize(e)});});
- chrome.on('exit',(code,signal)=>startupEvent('process-exit',{code,signal,cleanupRequested:!!startup.cleanupRequestedAt}));
+ chrome.on('error',e=>{chromeFailure=e;errors.push(serialize(e));startupEvent('process-error',{error:serialize(e)});if(!startupReady)rejectStartupPending(e);});
+ chrome.on('exit',(code,signal)=>{chromeFailure=Error('Chrome exited: code='+code+' signal='+signal);startupEvent('process-exit',{code,signal,cleanupRequested:!!startup.cleanupRequestedAt});if(!startupReady)rejectStartupPending(chromeFailure);});
  chrome.on('close',(code,signal)=>startupEvent('process-close',{code,signal,cleanupRequested:!!startup.cleanupRequestedAt}));
  chrome.stdout.on('error',e=>startupEvent('stdout-error',{error:serialize(e)}));chrome.stderr.on('error',e=>startupEvent('stderr-error',{error:serialize(e)}));
  startup.stage='debugger-endpoint-poll';observeStartup('after-spawn-call');
- let devtools;for(let i=0;i<100;i++){devtools=stderr.match(/DevTools listening on (ws:\/\/127\.0\.0\.1:\d+\/[^\s]+)/)?.[1];if(devtools)break;if(chrome.exitCode!==null)throw Error('Chrome exited: '+stderr);await wait(100);}startup.endpointMatched=!!devtools;observeStartup('debugger-poll-finished');if(!devtools)throw Error('Chrome debugging startup timed out: '+stderr);
+ let devtools,pollCount=0,nextObservationMs=5000;
+ while(!devtools){
+  startupRemaining('debugger-endpoint-poll');pollCount++;devtools=debuggerEvidence(stderr);startup.pollCount=pollCount;
+  if(devtools){startupRemaining('debugger-endpoint-selected');break;}
+  if(performance.now()-startupClock>=nextObservationMs){observeStartup('debugger-still-pending');nextObservationMs+=5000;}
+  await wait(Math.min(startup.pollIntervalMs,startupRemaining('debugger-endpoint-poll')));
+ }
+ startup.endpointMatched=true;startup.selectedEndpoint=devtools;observeStartup('debugger-poll-finished');
  startup.stage='websocket-connect';observeStartup('before-websocket-connect');
- const pending=new Map();ws=new WebSocket(devtools);await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});startup.stage='cdp-setup';observeStartup('websocket-open');
- ws.onmessage=event=>{const message=JSON.parse(event.data);if(message.id){const job=pending.get(message.id);if(job){pending.delete(message.id);clearTimeout(job.timer);message.error?job.reject(Error(JSON.stringify(message.error))):job.resolve(message.result);}}else {if(message.method==='Runtime.exceptionThrown')errors.push(message.params.exceptionDetails);if(message.method==='Network.requestWillBeSent'){const url=message.params.request.url;requests.push({url:url.startsWith('data:')?url.slice(0,url.indexOf(',')+1)+'[inline asset omitted]':url,type:message.params.type,inlineCharacters:url.startsWith('data:')?url.length:undefined});}}};
- send=(method,params={},sessionId)=>new Promise((resolve,reject)=>{const id=++counter,timer=setTimeout(()=>{pending.delete(id);reject(Error('CDP timeout: '+method));},15000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})}));});
+ const pending=new Map();startupRemaining('before-websocket-connect');ws=new WebSocket(devtools);await new Promise((resolve,reject)=>{
+  const remaining=startupRemaining('websocket-connect');let settled=false;
+  const finish=error=>{if(settled)return;settled=true;clearTimeout(timer);ws.removeEventListener('open',onOpen);ws.removeEventListener('error',onError);ws.removeEventListener('close',onClose);chrome.removeListener('error',onError);chrome.removeListener('exit',onExit);error?reject(error):resolve();};
+  const onOpen=()=>{try{startupRemaining('websocket-open');if(debuggerEvidence(stderr)!==devtools)throw Error('Chrome endpoint evidence changed before WebSocket opened');startupRemaining('websocket-open-final');finish();}catch(error){finish(error);}};
+  const onError=error=>finish(error instanceof Error?error:Error('Chrome WebSocket connection failed'));
+  const onClose=()=>finish(Error('Chrome WebSocket closed before opening')),onExit=(code,signal)=>finish(Error('Chrome exited during WebSocket connect: code='+code+' signal='+signal));
+  const timer=setTimeout(()=>finish(Error('Chrome startup deadline exceeded during websocket-connect after '+startupBudgetMs+' ms')),remaining);
+  ws.addEventListener('open',onOpen);ws.addEventListener('error',onError);ws.addEventListener('close',onClose);chrome.once('error',onError);chrome.once('exit',onExit);
+ });startup.stage='cdp-setup';observeStartup('websocket-open');
+ rejectStartupPending=error=>{for(const job of pending.values()){clearTimeout(job.timer);job.reject(error);}pending.clear();};
+ ws.onmessage=event=>{const message=JSON.parse(event.data);if(message.id){const job=pending.get(message.id);if(job){pending.delete(message.id);clearTimeout(job.timer);try{if(!startupReady)startupRemaining('cdp-response');message.error?job.reject(Error(JSON.stringify(message.error))):job.resolve(message.result);}catch(error){job.reject(error);}}}else {if(message.method==='Runtime.exceptionThrown')errors.push(message.params.exceptionDetails);if(message.method==='Network.requestWillBeSent'){const url=message.params.request.url;requests.push({url:url.startsWith('data:')?url.slice(0,url.indexOf(',')+1)+'[inline asset omitted]':url,type:message.params.type,inlineCharacters:url.startsWith('data:')?url.length:undefined});}}};
+ send=(method,params={},sessionId)=>new Promise((resolve,reject)=>{const timeout=startupReady?15000:Math.min(15000,startupRemaining('CDP '+method));const id=++counter,timer=setTimeout(()=>{pending.delete(id);reject(Error('CDP timeout: '+method));},timeout);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})}));});
  const target=await send('Target.createTarget',{url:'about:blank'}),attached=await send('Target.attachToTarget',{targetId:target.targetId,flatten:true}),sid=attached.sessionId;
  const cmd=(method,params={})=>send(method,params,sid);
  await cmd('Runtime.enable');await cmd('Page.enable');await cmd('Network.enable');
+ startupRemaining('cdp-ready');if(debuggerEvidence(stderr)!==devtools)throw Error('Chrome endpoint evidence changed before CDP became ready');startupRemaining('cdp-ready-final');startupReady=true;startup.readyElapsedMs=performance.now()-startupClock;
  startup.stage='cdp-ready';observeStartup('cdp-ready');
  await cmd('Network.setBlockedURLs',{urls:['http://*','https://*','ws://*','wss://*']});
  await cmd('Emulation.setDeviceMetricsOverride',{width:1440,height:960,deviceScaleFactor:1,mobile:false});
@@ -169,6 +215,6 @@ try {
  writeFileSync(join(out,'synthetic-final-state.json'),JSON.stringify(await evaluate('({core:window.D4Prototype.repo.state,demo:window.D4Prototype.repo.demo,persistence:window.D4Prototype.repo.persistence()})'),null,2));
  report.status='passed';
 }catch(error){failed=error;report.status='failed';report.failure=serialize(error);startup.firstFailure={stage:startup.stage,error:serialize(error)};observeStartup('caught-failure');}
-finally{report.executedCount=checks.length;report.passed=checks.filter(c=>c.status==='passed').length;report.failed=checks.filter(c=>c.status==='failed').length;report.remainingSuites=failed?'aborted after preserved first failure':'all suites executed';report.finishedAt=new Date().toISOString();writeFileSync(join(out,'browser-results.json'),JSON.stringify(report,null,2));startup.result=report.status;observeStartup('before-cleanup');if(ws?.readyState===WebSocket.OPEN)ws.close();if(chrome&&chrome.exitCode===null){startup.cleanupRequestedAt=new Date().toISOString();startupEvent('cleanup-request',{signal:'SIGTERM'});chrome.kill('SIGTERM');await wait(300);if(chrome.exitCode===null){startupEvent('cleanup-request',{signal:'SIGKILL'});chrome.kill('SIGKILL');}}observeStartup('after-cleanup');}
+finally{report.executedCount=checks.length;report.passed=checks.filter(c=>c.status==='passed').length;report.failed=checks.filter(c=>c.status==='failed').length;report.remainingSuites=failed?'aborted after preserved first failure':'all suites executed';report.finishedAt=new Date().toISOString();writeFileSync(join(out,'browser-results.json'),JSON.stringify(report,null,2));startup.result=report.status;observeStartup('before-cleanup');if(ws?.readyState===WebSocket.OPEN||ws?.readyState===WebSocket.CONNECTING)ws.close();if(chrome&&chrome.exitCode===null){startup.cleanupRequestedAt=new Date().toISOString();startupEvent('cleanup-request',{signal:'SIGTERM'});chrome.kill('SIGTERM');await wait(300);if(chrome.exitCode===null){startupEvent('cleanup-request',{signal:'SIGKILL'});chrome.kill('SIGKILL');}}observeStartup('after-cleanup');}
 if(failed)throw failed;
 console.log(JSON.stringify({status:report.status,checks:checks.length,sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID}));
