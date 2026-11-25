@@ -24,8 +24,8 @@
     },
     {
       "path": "src/sync-server.mjs",
-      "sha256": "f182650f5adc8397e1cf7e839737a9ace57f29a1d9480b658fa1dc598d7b13b1",
-      "bytes": 8195
+      "sha256": "d46cb1454c69e15f6e82cd5187ab0c55b46f590024f311b5f34f0d1f635365ba",
+      "bytes": 8413
     },
     {
       "path": "src/sync-core.mjs",
@@ -44,8 +44,8 @@
     },
     {
       "path": "src/sqlite-store.mjs",
-      "sha256": "2b7f12e6305987efadc327b46838098a987619581cb0861c6e3dda3021319eaa",
-      "bytes": 4250
+      "sha256": "0f398ec44f2d3ded1c3a1db9adcc7235e150558cf7f58e9a3853770d0f713344",
+      "bytes": 4505
     },
     {
       "path": "src/schedule.mjs",
@@ -54,8 +54,8 @@
     },
     {
       "path": "src/replica.mjs",
-      "sha256": "69b626227cf45f0f941a141c15d30f15ae02cc3bc8a6dd2f53dc34525498647b",
-      "bytes": 8586
+      "sha256": "f589a1e49e9e4c770ee9904fbd0c511332d52f0fb1f1f980cfb93885376a9f92",
+      "bytes": 10973
     },
     {
       "path": "src/reminders.mjs",
@@ -69,8 +69,8 @@
     },
     {
       "path": "src/model.mjs",
-      "sha256": "45ba81971b389d6c14a6e0beda3818539194a6a8374490d4a51fd65820a82169",
-      "bytes": 8649
+      "sha256": "837f10b5b1486e3be7f276cc8c00758afd420c9d49537b28d3d96341f1bf8c97",
+      "bytes": 8792
     },
     {
       "path": "src/gestures.mjs",
@@ -89,8 +89,8 @@
     },
     {
       "path": "src/delta-sync.mjs",
-      "sha256": "45eb7f76120a55f6cac61e15c73e2f52073b0d20302d0092389e0eb37b1a39cf",
-      "bytes": 13883
+      "sha256": "c6c9511314ee3b03aa28a708cfef10006b58a1f74ee24eb5b6fc6feb5a80dad5",
+      "bytes": 21936
     },
     {
       "path": "src/compat.mjs",
@@ -264,8 +264,8 @@
     },
     {
       "path": "windows/sync.c",
-      "sha256": "f3748d995808cdc0a765ffe2d5291b4bdad803d3c11ad6b4f298da21352f09f2",
-      "bytes": 22297
+      "sha256": "23ca036978d47a56580613eb02f88844b4368138773728b3c3d8369d8b220467",
+      "bytes": 35249
     },
     {
       "path": "windows/storage.c",
@@ -304,8 +304,8 @@
     },
     {
       "path": "windows/native.h",
-      "sha256": "75e104b9ea20004802e99497ec0e1a949af0173609848b63f9f4703c4173188a",
-      "bytes": 2330
+      "sha256": "cf06ccd5ac6c9c60698f5981330b431686c372fa7c96e90d49e8967b6c11d381",
+      "bytes": 2671
     },
     {
       "path": "windows/main.c",
@@ -339,8 +339,8 @@
     },
     {
       "path": "windows/database.c",
-      "sha256": "8e920395aee707e9649ace3e9672d8b741bf4e988c77cdc70b2106bc3f9d796b",
-      "bytes": 18371
+      "sha256": "17c980cca5c5f3a8ff7f02eebd73a29719ea00c1576323eb0b5b1a39348e5840",
+      "bytes": 27857
     },
     {
       "path": "windows/dashboard.c",
@@ -349,8 +349,8 @@
     },
     {
       "path": "windows/credential-helper.c",
-      "sha256": "8cb6a6a30131089a54591fa0c60855b6f8c1f90b307fa08a458f0d27ac23fc68",
-      "bytes": 2520
+      "sha256": "c2c22a775d6f14a021b12cadb022a604e219e591ebc46090335c752f9b17ee5a",
+      "bytes": 2659
     },
     {
       "path": "windows/catalog.c",
