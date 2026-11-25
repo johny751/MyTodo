@@ -326,7 +326,10 @@ public final class PreviewInstrumentation extends Instrumentation {
                 String source=list+" .task-row:first-child .task-title";
                 float[] start=point(source,true),edge=dragDropPoint(list,false);
                 Object before=js("JSON.stringify(D4Prototype.repo.state.tasks)"), raw=dragFixtureRaw();
-                Object ids=js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>t.id))");
+                // Top-level manual order is stored in task.order, not container-array positions.
+                String manualIds="JSON.stringify(D4Prototype.repo.listTasks({allDates:true,status:'all',sort:'manual'}).filter(t=>t.quadrant===0).map(t=>t.id))";
+                Object ids=js(manualIds);
+                JSONObject orderBefore=heldOrderObservation(list);
                 double scrollBefore=((Number)js("document.querySelector("+JSONObject.quote(list)+").scrollTop")).doubleValue();
                 JSONObject observed=new JSONObject().put("source","real Android MotionEvent").put("scrollBefore",scrollBefore);
                 beginHeldTouchTrace();
@@ -358,9 +361,13 @@ public final class PreviewInstrumentation extends Instrumentation {
                     finishHeldTouchTrace();
                 }
                 settle();
+                JSONObject orderAfter=heldOrderObservation(list);
+                write("native-held-order-commit.json",new JSONObject().put("before",orderBefore).put("after",orderAfter).toString(2));
                 require(raw.equals(dragFixtureRaw()),"Released long-list drag preserves every ID and every non-order task field");
                 require(((Number)js("D4Prototype.repo.state.tasks.length")).intValue()==50,"Every synthetic long-list task remains present");
-                require(!ids.equals(js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>t.id))")),"Dropping after held auto-scroll actually changes the order");
+                require(!ids.equals(js(manualIds)),"Dropping after held auto-scroll actually changes the order");
+                require(orderAfter.getJSONArray("manualIds").toString().equals(orderAfter.getJSONArray("domIds").toString()),"Released manual order agrees with every displayed long-list row");
+                require("localStorage".equals(orderAfter.getString("persistenceMode"))&&"mytodo-d4-03-synthetic-demo".equals(orderAfter.getString("storedKind"))&&orderAfter.getJSONArray("manualIds").toString().equals(orderAfter.getJSONArray("persistedIds").toString()),"Released manual order is persisted exactly in the isolated demo storage");
                 require(Boolean.TRUE.equals(js("!document.querySelector('.dragging,.drag-ghost,.drop-target,.swiping,.app-shell.nav-open,#modal-root .modal-shade')")),"Released drag clears gesture decorations and does not open another surface");
             }));
             check("android-touch-subtask-order-immediate-close", () -> withDragFixture("native-subtask-close", () -> {
@@ -539,8 +546,11 @@ public final class PreviewInstrumentation extends Instrumentation {
             check("android-unified-timer-dirty-config-survives-polls-navigation", () -> withUnifiedTimerCase("dirty-configuration", () -> {
                 JSONObject configured=prepareUnifiedTimer(5,1);
                 openPageByTouch("pomodoro");awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                beginDirtyNavigationTrace();markDirtyNavigationTrace("before-native-text-entry");
                 typeText("[data-form=personal-timer-config] [name=durationMinutes]","7");
+                markDirtyNavigationTrace("after-duration-entry");
                 typeText("[data-form=personal-timer-config] [name=breakMinutes]","3");
+                markDirtyNavigationTrace("after-break-entry");
                 SystemClock.sleep(2200);
                 requireUnifiedDraft("7","3");
                 JSONObject untouched=unifiedSnapshot();
@@ -595,6 +605,8 @@ public final class PreviewInstrumentation extends Instrumentation {
             check("android-native-documentsui-feedback-original-reload", () -> NativeDocumentChooserChecks.feedbackOriginalAndReload(documentChooserHost()));
             check("android-native-documentsui-attachment-original-reload", () -> NativeDocumentChooserChecks.attachmentOriginalAndReload(documentChooserHost()));
             check("android-native-floating-selection-lifecycle-copy-paste", () -> NativeSelectionLifecycleChecks.copyPasteAfterReturn(documentChooserHost()));
+            check("android-native-work-project-item-lifecycle", () -> NativeWorkLifecycleChecks.projectAndWorkLifecycle(workLifecycleHost()));
+            check("android-native-work-time-preservation-recreation", () -> NativeWorkLifecycleChecks.exactTimePreservation(workLifecycleHost()));
             check("android-system-bars-content-and-edge-insets", () -> {
                 home();
                 for (String route : new String[]{"tasks", "notes", "feedback"}) {
@@ -659,6 +671,10 @@ public final class PreviewInstrumentation extends Instrumentation {
     private Object dragFixtureRaw() throws Exception {
         return js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>{var x=structuredClone(t);delete x.order;return x;}).sort((a,b)=>a.id.localeCompare(b.id)))");
     }
+    /** Read the public manual-order contract, rendered rows and isolated saved bytes. */
+    private JSONObject heldOrderObservation(String list) throws Exception {
+        return (JSONObject)js("(function(){var state=D4Prototype.repo.state,saved=JSON.parse(localStorage.getItem(DemoDomain.STORAGE_KEY)||'null'),options={allDates:true,status:'all',sort:'manual'},ordered=tasks=>DemoDomain.helpers.visibleTasks(tasks,options).filter(t=>t.quadrant===0).map(t=>t.id);return {wallMillis:Date.now(),containerIds:state.tasks.map(t=>t.id),orderValues:state.tasks.map(t=>({id:t.id,order:t.order})),manualIds:D4Prototype.repo.listTasks(options).filter(t=>t.quadrant===0).map(t=>t.id),domIds:Array.from(document.querySelectorAll("+JSONObject.quote(list+" .task-row")+")).map(r=>r.dataset.taskId),storageKey:DemoDomain.STORAGE_KEY,persistenceMode:D4Prototype.repo.persistence().mode,storedKind:saved?.kind||null,persistedIds:saved?.state?.tasks?ordered(saved.state.tasks):null};})()");
+    }
     /** Observe clipping and real hit testing; no scrolling is performed by this helper. */
     private float[] dragDropPoint(String selector,boolean afterRow) throws Exception {
         JSONObject r=(JSONObject)js("(function(){var e=document.querySelector("+JSONObject.quote(selector)+");if(!e)throw Error('Missing drag target');var r=e.getBoundingClientRect(),v=visualViewport,l=Math.max(0,r.left),t=Math.max(0,r.top),b=Math.min(innerHeight,v.height,r.bottom),right=Math.min(innerWidth,r.right);for(var p=e.parentElement;p;p=p.parentElement){var c=getComputedStyle(p),q=p.getBoundingClientRect();if(/^(auto|scroll|hidden|clip)$/.test(c.overflowX)){l=Math.max(l,q.left+p.clientLeft);right=Math.min(right,q.left+p.clientLeft+p.clientWidth);}if(/^(auto|scroll|hidden|clip)$/.test(c.overflowY)){t=Math.max(t,q.top+p.clientTop);b=Math.min(b,q.top+p.clientTop+p.clientHeight);}}var x=(l+right)/2,y=b-12,hit=document.elementFromPoint(x,y);return {x:x,y:y,visible:right-l>4&&b-t>24,hitMatches:!!hit&&(hit===e||e.contains(hit)),belowRowCenter:y>r.top+r.height/2,rect:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},clip:{left:l,top:t,right:right,bottom:b},scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,reminderDockSpace:getComputedStyle(document.documentElement).getPropertyValue('--reminder-dock-space'),wallMillis:Date.now(),innerWidth:innerWidth,innerHeight:innerHeight,visualViewport:{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}};})()");
@@ -707,6 +723,8 @@ public final class PreviewInstrumentation extends Instrumentation {
 
 
     private NativeTimerActivity unifiedForegroundActivity;
+    private boolean dirtyNavigationTracing;
+    private final JSONArray dirtyNavigationNativeEvents=new JSONArray();
     private void withUnifiedTimerCase(String name,Check body) throws Exception {
         Throwable failure=null;
         try { home();body.run(); }
@@ -717,6 +735,7 @@ public final class PreviewInstrumentation extends Instrumentation {
         } finally {
             try {
                 if("shared-navigation".equals(name))finishUnifiedTouchTrace();
+                if("dirty-configuration".equals(name))finishDirtyNavigationTrace();
                 if(unifiedForegroundActivity!=null){NativeTimerActivity activity=unifiedForegroundActivity;runOnMainSync(activity::finish);unifiedForegroundActivity=null;}
                 timer("reset");launch();home();
             } catch(Exception|Error cleanup) { if(failure!=null)failure.addSuppressed(cleanup);else throw cleanup; }
@@ -892,6 +911,30 @@ public final class PreviewInstrumentation extends Instrumentation {
         return value instanceof String?JSONObject.quote((String)value):String.valueOf(value);
     }
 
+    private NativeWorkLifecycleChecks.Host workLifecycleHost() {
+        return new NativeWorkLifecycleChecks.Host() {
+            public Instrumentation instrumentation() { return PreviewInstrumentation.this; }
+            public MainActivity main() { return PreviewInstrumentation.this.main; }
+            public Object js(String expression) throws Exception { return PreviewInstrumentation.this.js(expression); }
+            public void tap(String selector) throws Exception { PreviewInstrumentation.this.tap(selector); }
+            public void typeText(String selector,String text) throws Exception { PreviewInstrumentation.this.typeText(selector,text); }
+            public void openPage(String route) throws Exception { PreviewInstrumentation.this.openPageByTouch(route); }
+            public void home() throws Exception { PreviewInstrumentation.this.home(); }
+            public void launch() throws Exception { PreviewInstrumentation.this.launch(); }
+            public void back() { PreviewInstrumentation.this.back(); }
+            public void settle() { PreviewInstrumentation.this.settle(); }
+            public void shot(String name) throws Exception { PreviewInstrumentation.this.shot(name); }
+            public void write(String name,String text) throws Exception { PreviewInstrumentation.this.write(name,text); }
+            public void recreate() throws Exception {
+                Instrumentation.ActivityMonitor monitor=addMonitor(MainActivity.class.getName(),null,false);
+                Activity recreated;
+                try { runOnMainSync(() -> main.recreate());recreated=monitor.waitForActivityWithTimeout(20000); }
+                finally { removeMonitor(monitor); }
+                require(recreated instanceof MainActivity,"Actual Activity recreation returns the isolated MainActivity");
+                main=(MainActivity)recreated;waitLoaded();
+            }
+        };
+    }
     private NativeDocumentChooserChecks.Host documentChooserHost() {
         return new NativeDocumentChooserChecks.Host() {
             public Instrumentation instrumentation() { return PreviewInstrumentation.this; }
@@ -1188,9 +1231,50 @@ public final class PreviewInstrumentation extends Instrumentation {
         } catch(Throwable error) { try { write("autocomplete-trace-error.log",error.toString()); } catch(Exception ignored) {} }
     }
     private void openPageByTouch(String route) throws Exception {
-        edgeOpen(); tap(".side-nav [data-action=go][data-id='"+route+"']");
+        markDirtyNavigationTrace("before-edge-"+route);
+        edgeOpen();markDirtyNavigationTrace("after-edge-before-single-tap-"+route);
+        tap(".side-nav [data-action=go][data-id='"+route+"']");
+        markDirtyNavigationTrace("after-single-tap-"+route);
         require(route.equals(js("D4Prototype.getRoute()")),"Real drawer item opens "+route);
         require(Boolean.TRUE.equals(js("!document.querySelector('.app-shell.nav-open')")),"Real page selection closes the drawer");
+    }
+    /** Observational only: no retry, focus/selection changes, or navigation commands. */
+    private void beginDirtyNavigationTrace() {
+        try {
+            js("(function(){var rows=[],dropped=0,ids=new WeakMap(),serial=0;"+
+                "function node(n){var e=n&&n.nodeType===1?n:n?.parentElement;if(!e)return null;if(!ids.has(e))ids.set(e,++serial);var action=e.closest('[data-action]');return {node:ids.get(e),tag:e.tagName,action:action?.dataset.action||null,id:action?.dataset.id||null,name:e.getAttribute('name'),connected:e.isConnected};}"+
+                "function sample(stage,event,extra){if(rows.length>=512){dropped++;return;}var a=document.activeElement,s=getSelection(),nav=document.querySelector('.side-nav'),r=nav?.getBoundingClientRect(),p=event?.changedTouches?.[0]||event,x=Number.isFinite(p?.clientX)?p.clientX:null,y=Number.isFinite(p?.clientY)?p.clientY:null,v=visualViewport,f=document.querySelector('[data-form=personal-timer-config]');rows.push({stage:stage,wallMillis:Date.now(),performanceMillis:performance.now(),route:D4Prototype.getRoute(),focused:document.hasFocus(),visibility:document.visibilityState,active:node(a),selection:{type:s?.type||null,collapsed:s?.isCollapsed!==false,ranges:s?.rangeCount||0,textLength:s?.toString().length||0,selectionStart:typeof a?.selectionStart==='number'?a.selectionStart:null,selectionEnd:typeof a?.selectionEnd==='number'?a.selectionEnd:null},draft:f?{duration:f.querySelector('[name=durationMinutes]')?.value,rest:f.querySelector('[name=breakMinutes]')?.value}:null,nav:{open:!!document.querySelector('.app-shell.nav-open'),node:node(nav),rect:r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom}:null,transform:nav?getComputedStyle(nav).transform:null,animations:nav?nav.getAnimations({subtree:true}).map(a=>({playState:a.playState,currentTime:a.currentTime})):[]},viewport:{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale},event:event?{type:event.type,trusted:event.isTrusted,defaultPrevented:event.defaultPrevented,pointerType:event.pointerType||null,key:event.key||null,eventTime:event.timeStamp,x:x,y:y,target:node(event.target),hit:x===null?null:node(document.elementFromPoint(x,y))}:null,extra:extra||null});}"+
+                "var types=['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel','click','keydown','keyup','selectionchange','focusin','focusout'],capture=e=>sample('window-capture',e),bubble=e=>sample('window-bubble',e);types.forEach(t=>{window.addEventListener(t,capture,true);window.addEventListener(t,bubble,false);});"+
+                "var observer=new MutationObserver(records=>{var relevant=records.filter(r=>r.type==='attributes'?r.target.matches('.app-shell,.side-nav'):Array.from(r.addedNodes).concat(Array.from(r.removedNodes)).some(n=>n.nodeType===1&&(n.matches('.app-shell,.side-nav')||n.querySelector('.side-nav'))));if(relevant.length)sample('navigation-mutation',null,{records:relevant.slice(0,8).map(r=>({type:r.type,attribute:r.attributeName,target:node(r.target),added:r.addedNodes.length,removed:r.removedNodes.length}))});});observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});"+
+                "window.__d403DirtyNavigationTrace={sample:sample,read:()=>({events:rows,dropped:dropped,maxRows:512}),dispose:()=>{observer.disconnect();types.forEach(t=>{window.removeEventListener(t,capture,true);window.removeEventListener(t,bubble,false);});}};sample('trace-start');return true;})()");
+            dirtyNavigationTracing=true;
+        } catch(Throwable failure) {try{write("dirty-navigation-trace-install-error.log",failure.toString());}catch(Exception ignored){}}
+    }
+    private void markDirtyNavigationTrace(String stage) {
+        if(!dirtyNavigationTracing)return;
+        try {
+            JSONObject nativeState=subtaskTraceNativeWindows();
+            js("(function(){var trace=window.__d403DirtyNavigationTrace;if(trace)trace.sample("+JSONObject.quote(stage)+",null,"+nativeState.toString()+");return true;})()");
+        } catch(Throwable failure) {try{write("dirty-navigation-trace-mark-error.log",stage+" / "+failure);}catch(Exception ignored){}}
+    }
+    private void recordDirtyNavigationInput(String stage,long down,long eventTime,float x,float y) {
+        if(!dirtyNavigationTracing)return;
+        try {
+            long wall=System.currentTimeMillis();
+            dirtyNavigationNativeEvents.put(new JSONObject().put("stage",stage).put("wallMillis",wall).put("downTime",down).put("eventTime",eventTime).put("screenX",x).put("screenY",y));
+            android.util.Log.i("D403DirtyNavInput",stage+" wallMillis="+wall+" downTime="+down+" eventTime="+eventTime+" screenX="+x+" screenY="+y);
+        } catch(Exception ignored){}
+    }
+    private void finishDirtyNavigationTrace() {
+        if(!dirtyNavigationTracing)return;
+        try {
+            markDirtyNavigationTrace("before-case-cleanup");
+            JSONObject trace=(JSONObject)js("(function(){var p=window.__d403DirtyNavigationTrace;if(!p)return {missing:true};var result=p.read();p.dispose();delete window.__d403DirtyNavigationTrace;return result;})()");
+            trace.put("nativeInput",dirtyNavigationNativeEvents).put("sourceSha",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
+                .put("interpretation","Read-only trace; no retry, selection clearing, injected DOM click, or root-cause claim. Missing accessibility windows are not proof of absent menus.");
+            write("unified-timer-dirty-navigation-trace.json",trace.toString(2));
+        } catch(Throwable failure) {try{write("dirty-navigation-trace-finish-error.log",failure.toString());}catch(Exception ignored){}}
+        finally{dirtyNavigationTracing=false;}
     }
     private void typeText(String selector,String text) throws Exception {
         require(text.matches("[ -~]*"),"Native keyboard helper accepts deterministic ASCII text only");
@@ -1238,7 +1322,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             &&Math.abs(viewport.getDouble("width")-geometry.getDouble("innerWidth"))<.5,
             "Unsupported visualViewport offset/zoom/width; native coordinate conversion is unverified: "+context+" "+geometry);
     }
-    private void input(long down,long now,int action,float x,float y) { MotionEvent event=MotionEvent.obtain(down,now,action,x,y,0);event.setSource(InputDevice.SOURCE_TOUCHSCREEN);try{require(getUiAutomation().injectInputEvent(event,true),"Native MotionEvent injection");}finally{event.recycle();} }
+    private void input(long down,long now,int action,float x,float y) { MotionEvent event=MotionEvent.obtain(down,now,action,x,y,0);event.setSource(InputDevice.SOURCE_TOUCHSCREEN);try{if(action==MotionEvent.ACTION_DOWN||action==MotionEvent.ACTION_UP)recordDirtyNavigationInput(action==MotionEvent.ACTION_DOWN?"native-down":"native-up",down,now,x,y);require(getUiAutomation().injectInputEvent(event,true),"Native MotionEvent injection");}finally{event.recycle();} }
     private void nativeTap(Activity activity,int id) { final int[] xy=new int[2];final int[] size=new int[2];runOnMainSync(()->{View v=activity.findViewById(id);require(v!=null,"Native button exists");v.getLocationOnScreen(xy);size[0]=v.getWidth();size[1]=v.getHeight();});long down=SystemClock.uptimeMillis();input(down,down,MotionEvent.ACTION_DOWN,xy[0]+size[0]/2f,xy[1]+size[1]/2f);input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,xy[0]+size[0]/2f,xy[1]+size[1]/2f);settle(); }
     private JSONObject timer(String op) throws Exception { return timer(op,0); }
     private JSONObject timer(String op,int minutes) throws Exception {

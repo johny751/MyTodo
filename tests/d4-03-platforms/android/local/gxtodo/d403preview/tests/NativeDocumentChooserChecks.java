@@ -151,7 +151,7 @@ final class NativeDocumentChooserChecks {
 
     private static final class Case {
         final Host h;final String name,token,fileName,title,body;
-        final JSONObject receipt=new JSONObject();final JSONArray requests=new JSONArray(),resolutionProbes=new JSONArray(),selectors=new JSONArray(),cleanupRows=new JSONArray();
+        final JSONObject receipt=new JSONObject();final JSONArray requests=new JSONArray(),resolutionProbes=new JSONArray(),selectors=new JSONArray(),nativeInputs=new JSONArray(),selectionStages=new JSONArray(),cleanupRows=new JSONArray();
         String oldState,oldDemo,oldStorage,storageKey;byte[] bytes;String base64,sha;Uri fixtureUri;String pickerPackage;
         boolean snapshotReady,serviceFlagsChanged;int originalServiceFlags;
         Case(Host h,String name) {
@@ -163,7 +163,7 @@ final class NativeDocumentChooserChecks {
             oldState=(String)h.js("JSON.stringify(D4Prototype.repo.state)");oldDemo=(String)h.js("JSON.stringify(D4Prototype.repo.demo)");
             storageKey=(String)h.js("D4Prototype.storageKey");Object raw=h.js("localStorage.getItem(D4Prototype.storageKey)");oldStorage=raw==JSONObject.NULL?null:(String)raw;snapshotReady=true;
             receipt.put("case",name).put("syntheticOnly",true).put("coreBeforeSha256",hash(oldState.getBytes(StandardCharsets.UTF_8)))
-                .put("requests",requests).put("resolutionProbes",resolutionProbes).put("selectors",selectors).put("cleanup",cleanupRows);
+                .put("requests",requests).put("resolutionProbes",resolutionProbes).put("selectors",selectors).put("nativeInputs",nativeInputs).put("selectionStages",selectionStages).put("cleanup",cleanupRows);
             AccessibilityServiceInfo service=h.instrumentation().getUiAutomation().getServiceInfo();require(service!=null,"Observe existing accessibility service configuration");
             originalServiceFlags=service.flags;service.flags|=AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
             h.instrumentation().getUiAutomation().setServiceInfo(service);serviceFlagsChanged=true;
@@ -307,6 +307,14 @@ final class NativeDocumentChooserChecks {
         }
         void cancel() throws Exception { require(c.pickerPackage.equals(activePackage(h)),"Only the observed owned picker receives Back");h.back();awaitPackage(h,h.instrumentation().getTargetContext().getPackageName(),true);require(requestCount.get()==1,"Cancel does not create another request"); }
         void selectFixture() throws Exception {
+            // Recent images may expose names only in a combined content description.
+            // Use its actual List view control so the unchanged exact-text selector applies.
+            Target listView=findAny(c,new String[]{"List view","列表视图"},true,false);
+            if(listView!=null) {
+                tap(c,listView);
+                require(waitTarget(c,new String[]{"Grid view","网格视图"},true,false)!=null,"Actual list-view switch exposes its Grid view control");
+                c.selectionStages.put(new JSONObject().put("stage","list-view-observed").put("ui",snapshot(h)));c.save();
+            }
             Target file=find(c,c.fileName,false,false);
             if(file==null) {
                 Target roots=findAny(c,new String[]{"Show roots","Show navigation drawer","Open navigation drawer","显示根目录","显示导航栏","打开导航栏"},true,false);
@@ -376,13 +384,30 @@ final class NativeDocumentChooserChecks {
     private static boolean sameBounds(List<Target> targets,Rect bounds){for(Target target:targets)if(target.bounds.equals(bounds))return true;return false;}
     private static void tap(Case c,Target target) throws Exception {
         require(c.pickerPackage.equals(activePackage(c.h)),"Native system tap stays in the observed picker");
-        c.selectors.put(target.json());c.save();long down=SystemClock.uptimeMillis();
-        inject(c.h,down,MotionEvent.ACTION_DOWN,target.bounds.exactCenterX(),target.bounds.exactCenterY());
-        inject(c.h,down,MotionEvent.ACTION_UP,target.bounds.exactCenterX(),target.bounds.exactCenterY());c.h.settle();
+        c.selectors.put(target.json());c.save();long down=SystemClock.uptimeMillis();boolean released=false;Throwable failure=null;
+        try {
+            inject(c,down,MotionEvent.ACTION_DOWN,target.bounds.exactCenterX(),target.bounds.exactCenterY());
+            inject(c,down,MotionEvent.ACTION_UP,target.bounds.exactCenterX(),target.bounds.exactCenterY());released=true;
+        } catch(Exception|Error error){failure=error;throw error;}
+        finally {
+            if(!released)try{inject(c,down,MotionEvent.ACTION_CANCEL,target.bounds.exactCenterX(),target.bounds.exactCenterY());}
+            catch(Exception|Error cancel){if(failure!=null)failure.addSuppressed(cancel);else throw cancel;}
+        }
+        c.h.settle();c.selectionStages.put(new JSONObject().put("stage","after-native-tap").put("target",target.json()).put("foregroundPackage",String.valueOf(activePackage(c.h))).put("ui",snapshot(c.h)));c.save();
     }
-    private static void inject(Host h,long down,int action,float x,float y) {
-        MotionEvent event=MotionEvent.obtain(down,SystemClock.uptimeMillis(),action,x,y,0);event.setSource(InputDevice.SOURCE_TOUCHSCREEN);
-        try{require(h.instrumentation().getUiAutomation().injectInputEvent(event,true),"Real system MotionEvent is injected");}finally{event.recycle();}
+    private static void inject(Case c,long down,int action,float x,float y) throws Exception {
+        MotionEvent.PointerProperties pointer=new MotionEvent.PointerProperties();pointer.id=0;pointer.toolType=MotionEvent.TOOL_TYPE_FINGER;
+        MotionEvent.PointerCoords coordinates=new MotionEvent.PointerCoords();coordinates.x=x;coordinates.y=y;coordinates.size=1f;
+        coordinates.pressure=action==MotionEvent.ACTION_UP||action==MotionEvent.ACTION_CANCEL?0f:1f;
+        MotionEvent event=MotionEvent.obtain(down,SystemClock.uptimeMillis(),action,1,new MotionEvent.PointerProperties[]{pointer},new MotionEvent.PointerCoords[]{coordinates},0,0,1f,1f,0,0,InputDevice.SOURCE_TOUCHSCREEN,0);
+        require(event!=null,"Native finger MotionEvent is created");
+        JSONObject row=new JSONObject().put("action",action).put("downTime",event.getDownTime()).put("eventTime",event.getEventTime()).put("source",event.getSource())
+            .put("pointerCount",event.getPointerCount()).put("pointerId",event.getPointerId(0)).put("toolType",event.getToolType(0)).put("x",event.getX()).put("y",event.getY());
+        c.nativeInputs.put(row);
+        try {
+            require(event.getToolType(0)==MotionEvent.TOOL_TYPE_FINGER&&event.getPointerCount()==1&&event.getSource()==InputDevice.SOURCE_TOUCHSCREEN,"Observed injected event has one explicit finger pointer and touchscreen source");
+            boolean injected=c.h.instrumentation().getUiAutomation().injectInputEvent(event,true);row.put("injected",injected);c.save();require(injected,"Real system MotionEvent is injected");
+        }finally{event.recycle();}
     }
     private static String activePackage(Host h) {
         AccessibilityNodeInfo root=h.instrumentation().getUiAutomation().getRootInActiveWindow();if(root==null)return null;
