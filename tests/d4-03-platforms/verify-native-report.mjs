@@ -15,6 +15,7 @@ const required=[
  'android-touch-single-quadrant-edge-navigation','android-touch-single-quadrant-cross-move',
  'android-touch-note-create-edit-delete','android-touch-feedback-local-text-submit',
  'android-touch-sync-state-and-devices','android-native-timer-real-early-end-button',
+ 'android-touch-held-drag-autoscroll','android-touch-subtask-order-immediate-close',
  ...['tasks','notes','pomodoro','projects','work-items','templates','processes','analytics','settings','sync','feedback',
      'dashboard','contacts','archive','devices','data-system','about','catalogs','timeline'].map(x=>'android-touch-edge-drawer-'+x)
 ];
