@@ -26,3 +26,10 @@
 #reminder-notice:not(:empty){max-height:25vh;max-height:min(25dvh,240px);overflow-y:auto;overscroll-behavior:contain}
 .workspace>.page .board.single-quadrant{height:max(180px,calc(100dvh - 330px - var(--reminder-dock-space,0px)));min-height:180px}
 @media(max-width:650px){.workspace>.page .board:not(.single-quadrant){height:calc(100dvh - 218px - var(--reminder-dock-space,0px))}}
+/* Append to prototypes/d4-01/styles.css after the existing rules. */
+.work-time-field{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:10px 12px;min-width:0;margin:16px 0;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:#fafcfe}
+.work-time-field legend{padding:0 5px;color:var(--ink);font-size:12px;font-weight:600}
+.work-time-field .form-help,.work-time-field .inline-setting{grid-column:1/-1;margin:0;overflow-wrap:anywhere}
+.work-time-field .inline-setting{display:flex;align-items:flex-start;gap:8px;font-size:12px}
+.work-time-field .inline-setting input{flex:none;margin-top:3px}
+@media(max-width:480px){.work-time-field{grid-template-columns:minmax(0,1fr);padding:10px 12px}.work-time-field legend{font-size:13px}}
