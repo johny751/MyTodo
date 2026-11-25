@@ -44,7 +44,7 @@ export async function runCases(api){
   const previous=await read('window.DemoDomain.helpers.shiftDate('+JSON.stringify(today)+',"day",-1)');await api.fill(field('until'),previous);await api.submit('form[data-form="task-edit"]');
   assert.deepEqual(await core(),before);assert.match(await read('document.querySelector("#toast").textContent'),/重复结束日期/);assert.ok(await read('!!document.querySelector("form[data-form=task-edit]")'));
   await api.fill(field('repeat'),'');await api.fill(field('until'),'');await api.fill(field('reminderMode'),'custom');await api.fill(field('reminderAt'),'');await api.submit('form[data-form="task-edit"]');
-  assert.deepEqual(await core(),before);assert.match(await read('document.querySelector("#toast").textContent'),/自定义提醒/);await close();return {shanghaiWeekday:weekday,failedDraftPreserved:true};
+  assert.deepEqual(await core(),before);assert.match(await read('document.querySelector("#toast").textContent'),/自定义提醒/);await close();assert.ok(await read('!!document.querySelector("form[data-form=task-edit]")'));assert.deepEqual(await core(),before);await api.click('.modal [data-action="task-discard"]');assert.equal(await read('!!document.querySelector("form[data-form=task-edit]")'),false);assert.deepEqual(await core(),before);return {shanghaiWeekday:weekday,failedDraftPreserved:true,explicitCancel:true};
  });
 
  await api.check('core-create-task-repeat-and-reminder-through-form',async()=>{
