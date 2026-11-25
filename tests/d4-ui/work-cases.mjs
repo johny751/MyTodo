@@ -83,4 +83,145 @@ export async function runWorkCases(a){
   for(const field of ['query','from','to'])assert.equal(await a.eval(`document.querySelector('[data-form="work-filter"] [name="${field}"]').value`),'');
   assert.deepEqual(await read(),before);
  });
+ // Appended acceptance coverage; all preceding work cases remain unchanged.
+ // Fixture setup uses the isolated synthetic repository. Every save below goes
+ // through the rendered form and the application's normal submit listener.
+ // DOM .click/.value events are browser DOM coverage, not trusted OS input.
+ const workTimeBaseline = await a.eval('({core:D4Prototype.repo.state,demo:D4Prototype.repo.demo})');
+ const timeField = key => `.modal [name="${key}"]`;
+ const fieldValue = key => a.eval(`document.querySelector(${JSON.stringify(timeField(key))}).value`);
+ const closeTimeForm = () => a.click('.modal-head [data-action="close-modal"]');
+ const workById = async id => (await read()).workItems.find(x=>x.id===id);
+ const projectById = async id => (await read()).projects.find(x=>x.id===id);
+ const followById = async id => (await read()).contacts.find(x=>x.id==='contact-team').followups.find(x=>x.id===id);
+ const openWorkTime = async id => {await a.navigate('work-items');await a.click(`[data-action="work-edit-work-item"][data-id="${id}"]`);};
+ const openProjectTime = async id => {await a.navigate('projects');await a.click(`[data-action="work-edit-project"][data-id="${id}"]`);};
+ const openFollowTime = async id => {await a.navigate('contacts');await a.click('[data-action="work-contact-detail"][data-id="contact-team"]');await a.click(`[data-action="work-edit-followup"][data-id="contact-team|${id}"]`);};
+ async function expectTimeFields(key,date,time,original) {
+  const actual=await a.eval(`(()=>{const box=document.querySelector('.modal [data-work-time="${key}"]');if(!box)return null;const date=box.querySelector('[name="${key}"]'),time=box.querySelector('[name="${key}Time"]');return {date:date.value,time:time.value,dateType:date.type,timeType:time.type,step:time.step,note:box.querySelector('[data-time-original="${key}"]').textContent};})()`);
+  assert.ok(actual,`Rendered time field ${key}`);
+  assert.deepEqual({date:actual.date,time:actual.time,dateType:actual.dateType,timeType:actual.timeType,step:actual.step},{date,time,dateType:'date',timeType:'time',step:'60'});
+  if(original!==undefined)assert.ok(actual.note.includes(original),`Original value must be visible: ${original}`);
+ }
+ const precisionIds={};
+
+ await a.check('WTIME-01 Project minute create edit reopen and explicit date-only save',async()=>{
+  await a.navigate('projects');await a.click('[data-action="work-new-project"]');
+  await a.fill(timeField('name'),'分钟项目验收');await a.fill(timeField('dueDate'),'2044-02-29');await a.fill(timeField('dueDateTime'),'13:45');
+  await a.submit('[data-form="work-project"]');
+  let p=(await read()).projects.find(x=>x.name==='分钟项目验收');assert.ok(p);precisionIds.project=p.id;assert.equal(p.dueDate,'2044-02-29T13:45');
+  await openProjectTime(p.id);await expectTimeFields('dueDate','2044-02-29','13:45');
+  await a.fill(timeField('dueDateTime'),'16:20');await a.submit('[data-form="work-project"]');
+  p=await projectById(p.id);assert.equal(p.dueDate,'2044-02-29T16:20');assert.equal(p.history.at(-1).before.dueDate,'2044-02-29T13:45');
+  await a.reload();await openProjectTime(p.id);await expectTimeFields('dueDate','2044-02-29','16:20');
+  await a.fill(timeField('dueDateTime'),'');await a.submit('[data-form="work-project"]');assert.equal((await projectById(p.id)).dueDate,'2044-02-29');
+  await openProjectTime(p.id);await expectTimeFields('dueDate','2044-02-29','');await a.fill(timeField('owner'),'日期精度负责人');await a.submit('[data-form="work-project"]');
+  assert.equal((await projectById(p.id)).dueDate,'2044-02-29','Unrelated edits never invent midnight');
+ });
+
+ await a.check('WTIME-02 Work minute schedule survives save reload and explicit clearing',async()=>{
+  await a.navigate('work-items');await a.click('[data-action="work-new-work-item"]');await a.fill(timeField('title'),'分钟工作事项验收');
+  await a.fill(timeField('projectId'),precisionIds.project);await a.fill(timeField('plannedStart'),'2044-02-29');await a.fill(timeField('plannedStartTime'),'09:15');await a.fill(timeField('dueDate'),'2044-02-29');await a.fill(timeField('dueDateTime'),'10:45');
+  await a.fill(timeField('notes'),'  分钟事项原始备注\n第二行  ');await a.submit('[data-form="work-work-item"]');
+  let w=(await read()).workItems.find(x=>x.title==='分钟工作事项验收');assert.ok(w);precisionIds.work=w.id;assert.equal(w.plannedStart,'2044-02-29T09:15');assert.equal(w.dueDate,'2044-02-29T10:45');
+  await openWorkTime(w.id);await expectTimeFields('plannedStart','2044-02-29','09:15');await expectTimeFields('dueDate','2044-02-29','10:45');
+  await a.fill(timeField('dueDateTime'),'11:30');await a.submit('[data-form="work-work-item"]');await a.reload();
+  w=await workById(w.id);assert.equal(w.dueDate,'2044-02-29T11:30');assert.equal(w.plannedStart,'2044-02-29T09:15');assert.equal(w.notes,'  分钟事项原始备注\n第二行  ');
+  await openWorkTime(w.id);await expectTimeFields('dueDate','2044-02-29','11:30');await a.screenshot('work-minute-schedule-reopened');
+  await a.fill(timeField('dueDateTime'),'');await a.submit('[data-form="work-work-item"]');assert.equal((await workById(w.id)).dueDate,'2044-02-29','Date-only end does not invent an earlier midnight');
+  await openWorkTime(w.id);await a.fill(timeField('dueDate'),'');await a.submit('[data-form="work-work-item"]');w=await workById(w.id);assert.equal(w.dueDate,'');assert.equal(w.plannedStart,'2044-02-29T09:15');
+  await openWorkTime(w.id);await expectTimeFields('dueDate','','');await closeTimeForm();
+ });
+
+ await a.check('WTIME-03 Followup minute fields notes and relations survive reopen',async()=>{
+  await a.navigate('contacts');await a.click('[data-action="work-new-followup"][data-id="contact-team"]');await a.fill(timeField('title'),'分钟沟通验收');
+  await a.fill(timeField('occurredOn'),'2044-02-29');await a.fill(timeField('occurredOnTime'),'09:05');await a.fill(timeField('dueDate'),'2044-02-29');await a.fill(timeField('dueDateTime'),'16:10');
+  await a.fill(timeField('projectId'),precisionIds.project);await a.fill(timeField('workItemId'),precisionIds.work);await a.fill(timeField('notes'),'  沟通原始内容\n不删空格  ');await a.submit('[data-form="work-followup"]');
+  let f=(await read()).contacts.find(c=>c.id==='contact-team').followups.find(x=>x.title==='分钟沟通验收');assert.ok(f);precisionIds.follow=f.id;assert.equal(f.occurredOn,'2044-02-29T09:05');assert.equal(f.dueDate,'2044-02-29T16:10');
+  assert.equal(f.projectId,precisionIds.project);assert.equal(f.workItemId,precisionIds.work);await closeTimeForm();
+  await openFollowTime(f.id);await expectTimeFields('occurredOn','2044-02-29','09:05');await expectTimeFields('dueDate','2044-02-29','16:10');await a.fill(timeField('dueDateTime'),'18:25');await a.submit('[data-form="work-followup"]');await closeTimeForm();await a.reload();
+  f=await followById(f.id);assert.equal(f.dueDate,'2044-02-29T18:25');assert.equal(f.notes,'  沟通原始内容\n不删空格  ');assert.equal(f.history.at(-1).before.dueDate,'2044-02-29T16:10');
+  await openFollowTime(f.id);await expectTimeFields('dueDate','2044-02-29','18:25');await a.fill(timeField('dueDateTime'),'');await a.submit('[data-form="work-followup"]');await closeTimeForm();assert.equal((await followById(f.id)).dueDate,'2044-02-29');
+ });
+
+ await a.check('WTIME-04 Unchanged historical seconds fractions and offsets remain byte exact',async()=>{
+  const original={project:'2044-02-28T23:45:12.340-05:00',start:'2044-02-29T07:30:27.123+08:00',end:'2044-02-28T23:45:59.900Z',occurred:'2044-02-28T23:30:40.050-03:30',followDue:'2044-02-29T18:00:01.007+08:00'};
+  await a.eval(`D4Prototype.repo.updateDemo(d=>{d.projectMeta[${JSON.stringify(precisionIds.project)}].dueDate=${JSON.stringify(original.project)};const w=d.workItems.find(x=>x.id===${JSON.stringify(precisionIds.work)});w.plannedStart=${JSON.stringify(original.start)};w.dueDate=${JSON.stringify(original.end)};const f=d.contacts.find(c=>c.id==='contact-team').followups.find(x=>x.id===${JSON.stringify(precisionIds.follow)});f.occurredOn=${JSON.stringify(original.occurred)};f.dueDate=${JSON.stringify(original.followDue)};});true`);
+  const coreBefore=await a.eval('D4Prototype.repo.state');
+  await openProjectTime(precisionIds.project);await expectTimeFields('dueDate','2044-02-29','12:45',original.project);await a.fill(timeField('owner'),'保留时区负责人');await a.submit('[data-form="work-project"]');
+  let p=await projectById(precisionIds.project);assert.equal(p.dueDate,original.project);assert.equal(p.history.at(-1).before.dueDate,original.project);
+  await openWorkTime(precisionIds.work);await expectTimeFields('plannedStart','2044-02-29','07:30',original.start);await expectTimeFields('dueDate','2044-02-29','07:45',original.end);await a.fill(timeField('notes'),'  只改备注保留秒和时区  ');await a.submit('[data-form="work-work-item"]');
+  let w=await workById(precisionIds.work);assert.equal(w.notes,'  只改备注保留秒和时区  ');assert.equal(w.plannedStart,original.start);assert.equal(w.dueDate,original.end,'Offset chronology must not use lexical date comparison');assert.equal(w.history.at(-1).before.plannedStart,original.start);assert.equal(w.history.at(-1).before.dueDate,original.end);
+  await openFollowTime(precisionIds.follow);await expectTimeFields('occurredOn','2044-02-29','11:00',original.occurred);await expectTimeFields('dueDate','2044-02-29','18:00',original.followDue);await a.fill(timeField('notes'),'历史沟通精度保留');await a.submit('[data-form="work-followup"]');await closeTimeForm();
+  let f=await followById(precisionIds.follow);assert.equal(f.occurredOn,original.occurred);assert.equal(f.dueDate,original.followDue);assert.equal(f.history.at(-1).before.occurredOn,original.occurred);assert.equal(f.history.at(-1).before.dueDate,original.followDue);
+  assert.deepEqual(await a.eval('D4Prototype.repo.state'),coreBefore,'Precise work dates remain in the synthetic extension');
+  await a.reload();p=await projectById(precisionIds.project);w=await workById(precisionIds.work);f=await followById(precisionIds.follow);assert.deepEqual([p.dueDate,w.plannedStart,w.dueDate,f.occurredOn,f.dueDate],[original.project,original.start,original.end,original.occurred,original.followDue]);
+  await openWorkTime(w.id);await expectTimeFields('plannedStart','2044-02-29','07:30',original.start);await a.screenshot('work-original-offset-preserved');await closeTimeForm();
+ });
+
+ await a.check('WTIME-05 Reversed minute range refuses mutation and retains the submitted draft',async()=>{
+  await openWorkTime(precisionIds.work);const before=await workById(precisionIds.work);
+  await a.fill(timeField('owner'),'倒序日期未保存草稿');await a.fill(timeField('plannedStartTime'),'08:00');await a.submit('[data-form="work-work-item"]');
+  assert.deepEqual(await workById(precisionIds.work),before);assert.equal(await fieldValue('owner'),'倒序日期未保存草稿');assert.equal(await fieldValue('plannedStartTime'),'08:00');assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('计划开始不能晚于'));
+  await a.fill(timeField('dueDate'),'2044-02-29');await a.fill(timeField('dueDateTime'),'09:00');await a.submit('[data-form="work-work-item"]');
+  const saved=await workById(precisionIds.work);assert.equal(saved.plannedStart,'2044-02-29T08:00');assert.equal(saved.dueDate,'2044-02-29T09:00');assert.equal(saved.owner,'倒序日期未保存草稿');assert.equal(saved.history.at(-1).before.plannedStart,before.plannedStart);assert.equal(saved.history.at(-1).before.dueDate,before.dueDate);
+  await a.reload();await openWorkTime(saved.id);await expectTimeFields('plannedStart','2044-02-29','08:00');await expectTimeFields('dueDate','2044-02-29','09:00');await closeTimeForm();
+ });
+
+ await a.check('WTIME-06 Missing null and unknown historical values require an explicit replacement',async()=>{
+  const unknownProject='旧截止 <未核验> 25:91',unknownFollow={legacy:'old-unparsed'},invalidDay='2044-02-30T08:00';
+  await a.eval(`D4Prototype.repo.updateDemo(d=>{d.projectMeta[${JSON.stringify(precisionIds.project)}].dueDate=${JSON.stringify(unknownProject)};const w=d.workItems.find(x=>x.id===${JSON.stringify(precisionIds.work)});delete w.plannedStart;w.dueDate=null;const f=d.contacts.find(c=>c.id==='contact-team').followups.find(x=>x.id===${JSON.stringify(precisionIds.follow)});f.occurredOn=${JSON.stringify(unknownFollow)};f.dueDate=${JSON.stringify(invalidDay)};});true`);
+  await openProjectTime(precisionIds.project);await expectTimeFields('dueDate','','',unknownProject);assert.equal(await a.eval('document.querySelector(".modal [name=dueDateClear]").checked'),false);await a.fill(timeField('owner'),'未知日期保留负责人');await a.submit('[data-form="work-project"]');assert.equal((await projectById(precisionIds.project)).dueDate,unknownProject);
+  await openWorkTime(precisionIds.work);await expectTimeFields('plannedStart','','');await expectTimeFields('dueDate','','');await a.fill(timeField('notes'),'缺失和null分别保留');await a.submit('[data-form="work-work-item"]');let w=await workById(precisionIds.work);assert.equal(Object.hasOwn(w,'plannedStart'),false);assert.equal(w.dueDate,null);assert.equal(Object.hasOwn(w.history.at(-1).before,'plannedStart'),false);assert.equal(w.history.at(-1).before.dueDate,null);
+  await openFollowTime(precisionIds.follow);await expectTimeFields('occurredOn','','',JSON.stringify(unknownFollow));await expectTimeFields('dueDate','','',invalidDay);await a.fill(timeField('notes'),'未知沟通原值保留');await a.submit('[data-form="work-followup"]');await closeTimeForm();let f=await followById(precisionIds.follow);assert.deepEqual(f.occurredOn,unknownFollow);assert.equal(f.dueDate,invalidDay);
+  await a.reload();w=await workById(precisionIds.work);f=await followById(precisionIds.follow);assert.equal(Object.hasOwn(w,'plannedStart'),false);assert.equal(w.dueDate,null);assert.deepEqual(f.occurredOn,unknownFollow);assert.equal(f.dueDate,invalidDay);assert.equal((await projectById(precisionIds.project)).dueDate,unknownProject);
+  await openProjectTime(precisionIds.project);await a.fill(timeField('dueDateClear'),true);await a.submit('[data-form="work-project"]');assert.equal((await projectById(precisionIds.project)).dueDate,'');
+  await openFollowTime(precisionIds.follow);await a.fill(timeField('occurredOnClear'),true);await a.fill(timeField('dueDateClear'),true);await a.submit('[data-form="work-followup"]');await closeTimeForm();f=await followById(precisionIds.follow);assert.equal(f.occurredOn,'');assert.equal(f.dueDate,'');assert.deepEqual(f.history.at(-1).before.occurredOn,unknownFollow);assert.equal(f.history.at(-1).before.dueDate,invalidDay);
+ });
+
+ await a.check('WTIME-07 Missing dates native step violations and malformed form payloads cannot save',async()=>{
+  const targets=[{open:()=>openProjectTime(precisionIds.project),key:'dueDate',form:'work-project'},{open:()=>openWorkTime(precisionIds.work),key:'plannedStart',form:'work-work-item'},{open:()=>openFollowTime(precisionIds.follow),key:'occurredOn',form:'work-followup'}];
+  for(const target of targets){
+   await target.open();await a.fill(timeField(target.key),'');await a.fill(timeField(target.key+'Time'),'12:34');const before=await read();await a.submit(`[data-form="${target.form}"]`);
+   assert.deepEqual(await read(),before);assert.equal(await fieldValue(target.key+'Time'),'12:34');assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('需要选择日期'));await closeTimeForm();
+  }
+  await openWorkTime(precisionIds.work);await a.fill(timeField('plannedStart'),'2044-02-29');await a.fill(timeField('plannedStartTime'),'12:34:56');
+  const nativeBefore=await read();assert.equal(await a.eval('document.querySelector(".modal [name=plannedStartTime]").validity.stepMismatch'),true);await a.click('[data-form="work-work-item"] button[type="submit"]');assert.deepEqual(await read(),nativeBefore);assert.equal(await fieldValue('plannedStartTime'),'12:34:56');await closeTimeForm();
+  // Synthetic malformed-control fixtures deliberately change type to text so
+  // invalid strings reach the real FormData submit boundary. This does not
+  // claim a native date/time picker lets a person enter these invalid values.
+  for(const fixture of [{date:'2044-02-30',time:'08:00',error:'有效日期'},{date:'2044-02-29',time:'25:61',error:'有效的小时和分钟'},{date:'2044-02-29',time:'08:00:01',error:'有效的小时和分钟'}]){
+   await openWorkTime(precisionIds.work);await a.eval(`(()=>{const date=document.querySelector('.modal [name=plannedStart]'),time=document.querySelector('.modal [name=plannedStartTime]');date.type='text';time.type='text';date.value=${JSON.stringify(fixture.date)};time.value=${JSON.stringify(fixture.time)};date.dispatchEvent(new Event('input',{bubbles:true}));time.dispatchEvent(new Event('input',{bubbles:true}));return true;})()`);
+   await a.fill(timeField('notes'),'非法时间仍保留在未保存草稿');const before=await read();await a.submit('[data-form="work-work-item"]');assert.deepEqual(await read(),before);assert.equal(await fieldValue('plannedStart'),fixture.date);assert.equal(await fieldValue('plannedStartTime'),fixture.time);assert.equal(await fieldValue('notes'),'非法时间仍保留在未保存草稿');assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes(fixture.error));await closeTimeForm();
+  }
+ });
+
+ await a.check('WTIME-08 A stale time form cannot overwrite a changed original',async()=>{
+  await a.eval(`D4Prototype.repo.updateDemo(d=>{const w=d.workItems.find(x=>x.id===${JSON.stringify(precisionIds.work)});w.plannedStart='2044-02-29T08:00';w.dueDate='2044-02-29T09:00';});true`);
+  await openWorkTime(precisionIds.work);await a.fill(timeField('notes'),'并发原值改变后仍保留的草稿');await a.fill(timeField('dueDateTime'),'10:00');
+  // A synthetic concurrent component changes the record after this form opens.
+  await a.eval(`D4Prototype.repo.updateDemo(d=>{d.workItems.find(x=>x.id===${JSON.stringify(precisionIds.work)}).dueDate='2044-02-29T11:00:12.345+08:00';});true`);
+  const before=await workById(precisionIds.work);await a.submit('[data-form="work-work-item"]');assert.deepEqual(await workById(precisionIds.work),before);assert.equal(await fieldValue('dueDateTime'),'10:00');assert.equal(await fieldValue('notes'),'并发原值改变后仍保留的草稿');assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('时间原值已改变'));
+  await closeTimeForm();await openWorkTime(precisionIds.work);await expectTimeFields('dueDate','2044-02-29','11:00','2044-02-29T11:00:12.345+08:00');await a.fill(timeField('notes'),'重新打开后明确保存');await a.submit('[data-form="work-work-item"]');assert.equal((await workById(precisionIds.work)).dueDate,'2044-02-29T11:00:12.345+08:00');
+ });
+
+ await a.check('WTIME-09 Historical process actions never fabricate a missing template snapshot',async()=>{
+  const tid='synthetic-template-unversioned',pid='synthetic-process-unversioned';
+  const original=(await read()).processes.find(x=>x.id===pid);assert.ok(original);assert.equal(Object.hasOwn(original,'templateSnapshot'),false);assert.equal(Object.hasOwn(original,'templateVersion'),false);
+  const definition=original.steps.map(({id,title,description,sourceStepId})=>({id,title,description,sourceStepId}));
+  const expectUnrecorded=async()=>{const p=(await read()).processes.find(x=>x.id===pid);assert.equal(Object.hasOwn(p,'templateSnapshot'),false);assert.equal(Object.hasOwn(p,'templateVersion'),false);assert.deepEqual(p.steps.map(({id,title,description,sourceStepId})=>({id,title,description,sourceStepId})),definition);for(const h of p.history||[])if(h.before){assert.equal(Object.hasOwn(h.before,'templateSnapshot'),false);assert.equal(Object.hasOwn(h.before,'templateVersion'),false);}return p;};
+  await a.navigate('templates');await a.click(`[data-action="work-edit-template"][data-id="${tid}"]`);await a.fill(timeField('stepLines'),'当前模板新步骤甲\n当前模板新步骤乙');await a.submit('[data-form="work-template"]');assert.equal((await read()).templates.find(x=>x.id===tid).version,2);await expectUnrecorded();
+  await a.click(`[data-action="work-delete-templates"][data-id="${tid}"]`);assert.ok((await a.eval('document.querySelector("#toast").textContent')).includes('缺少模板快照'));assert.ok((await read()).templates.some(x=>x.id===tid));
+  await a.navigate('processes');assert.ok((await a.eval('document.querySelector("main").textContent')).includes('不反推历史模板版本'));await a.click(`[data-action="work-process-toggle"][data-id="${pid}"]`);assert.equal((await expectUnrecorded()).status,'paused');assert.equal(await a.eval(`document.querySelector('[data-action="work-process-advance"][data-id="${pid}"]').disabled`),true);
+  await a.click(`[data-action="work-process-toggle"][data-id="${pid}"]`);assert.equal((await expectUnrecorded()).status,'running');await a.click(`[data-action="work-edit-process"][data-id="${pid}"]`);await a.fill(timeField('name'),'历史实例只改名称');await a.submit('[data-form="work-process"]');assert.equal((await expectUnrecorded()).name,'历史实例只改名称');
+  await a.click(`[data-action="work-process-advance"][data-id="${pid}"]`);let p=await expectUnrecorded();assert.equal(p.status,'completed');assert.equal(p.currentStep,original.steps.length);assert.ok(p.steps.every(x=>x.completed));assert.ok(p.completedAt);
+  await a.click(`[data-action="work-archive-processes"][data-id="${pid}"]`);assert.equal((await expectUnrecorded()).archived,true);await a.navigate('archive');await a.click(`[data-action="work-restore-processes"][data-id="${pid}"]`);assert.equal((await expectUnrecorded()).archived,false);await a.reload();await a.navigate('processes');p=await expectUnrecorded();assert.equal(p.status,'completed');assert.equal(p.steps[0].title,'旧步骤');await a.screenshot('work-historical-process-no-snapshot');
+ });
+
+ // Restore only after every added check succeeds. Failed runs keep their exact
+ // live form and synthetic records for the harness's first-failure screenshot.
+ const restoredWorkTime=await a.eval(`(()=>{const saved=${JSON.stringify(workTimeBaseline)},r=D4Prototype.repo;r.batch(()=>{r.replaceState(saved.core);r.updateDemo(()=>saved.demo);});return {core:r.state,demo:r.demo};})()`);
+ assert.deepEqual(restoredWorkTime,workTimeBaseline,'Additional work fixtures restore their input state');
+ await a.navigate('analytics');
+
 }
