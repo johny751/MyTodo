@@ -6,8 +6,8 @@ import {flattenTasks,findTaskEntry,findTask,moveSubtask as matureMoveSubtask} fr
 import {saveTaskRecord,quickSubtask} from '../../src/task-editor.mjs';
 import {validateSchedule} from '../../src/personal-ui.mjs';
 
-export const STORAGE_KEY='mytodo-d4-01-demo-v1';
-export const STORAGE_KIND='mytodo-d4-01-synthetic-demo';
+export const STORAGE_KEY='mytodo-d4-03-demo-v1';
+export const STORAGE_KIND='mytodo-d4-03-synthetic-demo';
 export const QUADRANTS=matureQuadrants;
 export const helpers=Object.freeze({dayKey:matureDayKey,dateRange,shiftDate,normalizeState,visibleTasks,searchAll,matchesQuery,flattenTasks,findTaskEntry,parseTime,formatTime,nextOccurrence:matureNextOccurrence,reminderTime,repeatLabel,reminderLabel,taskStats,saveTaskRecord,quickSubtask,validateSchedule});
 

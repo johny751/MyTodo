@@ -14,13 +14,13 @@ export async function runCases(api){
  const field=name=>'form[data-form="task-edit"] [name="'+name+'"]';
  const filter=name=>'form[data-form="task-filter"] [name="'+name+'"]';
  const rows=()=>read('Array.from(document.querySelectorAll(".page .board .task-row")).map(x=>x.dataset.taskId)');
- const routes=['dashboard','tasks','task-detail','projects','work-items','templates','processes','contacts','archive','analytics','settings'];
+ const routes=['tasks','notes','pomodoro','analytics','feedback','dashboard','work-items','projects','templates','processes','contacts','archive','sync','devices','data-system','settings','about','task-detail'];
  let today,createdId,childId,nextId,editedTitle;
  const title='D4 UI 合成验收 '+runId;
 
  await api.check('core-single-file-provenance-and-V2',async()=>{
   const value=await read('({protocol:location.protocol,source:window.D4_BUILD?.sourceSha||window.D4Build?.sourceSHA||"",routes:window.D4Prototype.routes,key:window.D4Prototype.storageKey,core:window.D4Prototype.repo.state,moduleScripts:document.querySelectorAll("script[type=module],script[src]").length})');
-  assert.equal(value.protocol,'file:');assert.equal(value.source,sourceSha);assert.equal(value.key,'mytodo-d4-01-demo-v1');assert.equal(value.moduleScripts,0);assert.deepEqual(value.routes,routes);assert.equal(value.core.version,2);
+  assert.equal(value.protocol,'file:');assert.equal(value.source,sourceSha);assert.equal(value.key,'mytodo-d4-03-demo-v1');assert.equal(value.moduleScripts,0);assert.deepEqual(value.routes,routes);assert.equal(value.core.version,2);
   assert.equal(value.core.tasks.some(t=>'status' in t||'projectId' in t),false);
   today=await read('window.DemoDomain.helpers.dayKey()');return {protocol:value.protocol,sourceSha:value.source,routes:routes.length,coreVersion:2};
  });
@@ -28,7 +28,7 @@ export async function runCases(api){
  // Start from the factory using the actual settings/reset controls, not a model shortcut.
  await api.check('core-reset-through-settings-controls',async()=>{
   await go('settings');await api.click('.page [data-action="reset-ask"]');await api.click('.modal [data-action="reset-confirm"]');
-  assert.equal(await read('document.querySelector("main.page").dataset.route'),'dashboard');assert.ok((await core()).tasks.some(t=>t.id==='d4-task-0'));return {actualResetControls:true};
+  assert.equal(await read('document.querySelector("main.page").dataset.route'),'tasks');assert.ok((await core()).tasks.some(t=>t.id==='d4-task-0'));return {actualResetControls:true};
  });
 
  for(const route of routes)await api.check('core-route-'+route,async()=>{
@@ -49,7 +49,7 @@ export async function runCases(api){
 
  await api.check('core-create-task-repeat-and-reminder-through-form',async()=>{
   await go('tasks');await api.click('.page .page-actions [data-action="task-new"]');
-  for(const [name,value] of Object.entries({title,quadrant:'1',projectId:'project-product',start:today+'T10:00',end:today+'T11:00',place:'离线会议室',tags:'界面, D4验收',weight:'5',repeat:'daily',interval:'1',reminderMode:'offset',minutes:'15',notes:'单文件离线 CRUD 合成测试'}))await api.fill(field(name),value);
+  for(const [name,value] of Object.entries({title,quadrant:'1',projectId:'project-product',start:today+'T10:00',end:today+'T11:00',place:'离线会议室',tags:JSON.stringify(['界面','D4验收']),weight:'5',repeat:'daily',interval:'1',reminderMode:'offset',minutes:'15',notes:'单文件离线 CRUD 合成测试'}))await api.fill(field(name),value);
   await api.submit('form[data-form="task-edit"]');
   const value=await read('window.D4Prototype.repo.state.tasks.find(t=>t.title==='+JSON.stringify(title)+')');assert.ok(value);createdId=value.id;
   assert.equal(value.done,false);assert.equal(value.quadrant,1);assert.equal(value.project,'产品迭代');assert.equal(value.projectId,undefined);assert.equal(value.status,undefined);assert.equal(value.start,today+'T10:00');assert.equal(value.end,today+'T11:00');
@@ -108,7 +108,7 @@ export async function runCases(api){
   await go('settings');const pageText=await read('document.querySelector("main.page").textContent');assert.ok(pageText.includes(sourceSha.slice(0,8)));assert.equal(pageText.includes('源码未构建'),false);
   await api.eval('(()=>{window.__D4_EXPORT_ORIGINAL=URL.createObjectURL;URL.createObjectURL=function(blob){window.__D4_EXPORT_BLOB=blob;return window.__D4_EXPORT_ORIGINAL.call(URL,blob);};return true;})()');
   try{
-   await api.click('.page [data-action="export-demo"]');const serialized=await api.eval('window.__D4_EXPORT_BLOB.text()'),value=JSON.parse(serialized);assert.equal(value.kind,'mytodo-d4-01-synthetic-demo');assert.equal(value.version,1);assert.equal(value.state.version,2);assert.equal(value.sourceSHA,sourceSha);
+   await api.click('.page [data-action="export-demo"]');const serialized=await api.eval('window.__D4_EXPORT_BLOB.text()'),value=JSON.parse(serialized);assert.equal(value.kind,'mytodo-d4-03-synthetic-demo');assert.equal(value.version,1);assert.equal(value.state.version,2);assert.equal(value.sourceSHA,sourceSha);
    assert.deepEqual(value.state,await core());assert.equal(value.state.tasks.some(t=>'projectId' in t||'status' in t),false);assert.ok(value.demo.taskLinks);assert.equal(value.demo.taskLinks[createdId],undefined);
    return {markedSyntheticExport:true,sourceSha:value.sourceSHA,coreVersion:2,coreAndMockSeparated:true};
   }finally{await api.eval('(()=>{URL.createObjectURL=window.__D4_EXPORT_ORIGINAL;delete window.__D4_EXPORT_ORIGINAL;delete window.__D4_EXPORT_BLOB;return true;})()');}

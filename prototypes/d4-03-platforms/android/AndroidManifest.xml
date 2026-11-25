@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.gxtodo.d403preview" android:versionCode="__VERSION_CODE__" android:versionName="__VERSION_NAME__">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+  <!-- Deliberately no INTERNET, storage, account or production service permission. -->
+  <application android:label="MyTodo D4-03 隔离体验" android:theme="@style/PreviewTheme" android:allowBackup="false" android:debuggable="true" android:usesCleartextTraffic="false">
+    <activity android:name=".MainActivity" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity>
+    <activity android:name=".NativeTimerActivity" android:exported="false"/>
+  </application>
+</manifest>

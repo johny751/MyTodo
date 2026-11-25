@@ -1,0 +1,501 @@
+{
+  "baseline": "d4c5af4cbbb9192c19276dd371bd142c2b835534",
+  "status": "UNVERIFIED until Actions compare",
+  "files": [
+    {
+      "path": "src/view-history.mjs",
+      "sha256": "b3b847df3ffc2f0bb5187b61265f9aecb280790d7bc885b90b8a0c1011b23e88",
+      "bytes": 2055
+    },
+    {
+      "path": "src/undo.mjs",
+      "sha256": "742ca6a0de6e1e8bc739aaa24a8737746e1b0ac063ae04d47bbff3c78015a551",
+      "bytes": 2328
+    },
+    {
+      "path": "src/task-tree.mjs",
+      "sha256": "1ee34a76a7d210fa5eb8bdc6afe27b910860f884534c5d71614d68319f15a7d9",
+      "bytes": 1581
+    },
+    {
+      "path": "src/task-editor.mjs",
+      "sha256": "97390e29b6b6f83e4fe015152cae69e038032695ce13125afb1be264a24831ad",
+      "bytes": 3110
+    },
+    {
+      "path": "src/sync-server.mjs",
+      "sha256": "f182650f5adc8397e1cf7e839737a9ace57f29a1d9480b658fa1dc598d7b13b1",
+      "bytes": 8195
+    },
+    {
+      "path": "src/sync-core.mjs",
+      "sha256": "c75a3ae75d6f0db8bb40edefb6e57fe5eb1a31d6c406c1a4199a3469d4b8099a",
+      "bytes": 5116
+    },
+    {
+      "path": "src/sync-client.mjs",
+      "sha256": "5c5dcc6c80cbb599c612ed7889b5b635941b00266dd3fe5270faa6447b866274",
+      "bytes": 1505
+    },
+    {
+      "path": "src/storage.mjs",
+      "sha256": "5083cd46eb1f90248aa5b65bd09f3b0590d4f02330d3bffe01ede63608ea84f4",
+      "bytes": 2268
+    },
+    {
+      "path": "src/sqlite-store.mjs",
+      "sha256": "2b7f12e6305987efadc327b46838098a987619581cb0861c6e3dda3021319eaa",
+      "bytes": 4250
+    },
+    {
+      "path": "src/schedule.mjs",
+      "sha256": "26a8782043e113ab990bb8cc0c6dec25cedb4e19dc7519e0cf23f14be773a09b",
+      "bytes": 6620
+    },
+    {
+      "path": "src/replica.mjs",
+      "sha256": "69b626227cf45f0f941a141c15d30f15ae02cc3bc8a6dd2f53dc34525498647b",
+      "bytes": 8586
+    },
+    {
+      "path": "src/reminders.mjs",
+      "sha256": "b558ab3b801cc1c257df9e96b941aac841392075474419381bea69729fb5d59c",
+      "bytes": 3350
+    },
+    {
+      "path": "src/personal-ui.mjs",
+      "sha256": "372a5c72d497c7da161e72603ea393d1f01b46fba3966a5b88009365b502c89a",
+      "bytes": 5868
+    },
+    {
+      "path": "src/model.mjs",
+      "sha256": "45ba81971b389d6c14a6e0beda3818539194a6a8374490d4a51fd65820a82169",
+      "bytes": 8649
+    },
+    {
+      "path": "src/gestures.mjs",
+      "sha256": "73a3a3eb7fdb8c2dbb52a5166e3421cb04411311742c22055069924ac9051499",
+      "bytes": 10402
+    },
+    {
+      "path": "src/feedback.mjs",
+      "sha256": "8e1a719b18f696df7428744410b8e6643765cd709d4bf8e6cf31e26cf4386df1",
+      "bytes": 6288
+    },
+    {
+      "path": "src/feedback-ui.mjs",
+      "sha256": "57afa887fd07479ff38f6b9e1b4d99fb094ccb7aa86de3221710a9189efe169b",
+      "bytes": 8194
+    },
+    {
+      "path": "src/delta-sync.mjs",
+      "sha256": "45eb7f76120a55f6cac61e15c73e2f52073b0d20302d0092389e0eb37b1a39cf",
+      "bytes": 13883
+    },
+    {
+      "path": "src/compat.mjs",
+      "sha256": "375bc2a464504c8aef79f058a49fd8ce4f477c5666a15963300e6c996305ddf1",
+      "bytes": 678
+    },
+    {
+      "path": "src/app.mjs",
+      "sha256": "159150182dcf28e50734f54ff9844401eda35358eb165fcaf062b535895773ae",
+      "bytes": 83772
+    },
+    {
+      "path": "src/accounts.mjs",
+      "sha256": "a222c3eabc1250bb189f46f347c3e28eec1f9b2521eaede2e242f9231b43c05d",
+      "bytes": 713
+    },
+    {
+      "path": "src/account-store.mjs",
+      "sha256": "b841a27b28bbb8a22bc750d3242bb20b1d104b4a48c16a28a9b7f2df1ec78bb1",
+      "bytes": 6291
+    },
+    {
+      "path": "windows/visual-test.c",
+      "sha256": "9edf6e20ae1f8f96209eeffc35beb095fce2e8438825f498ed2c3b748814f843",
+      "bytes": 4373
+    },
+    {
+      "path": "windows/vendor/zlib/zutil.h",
+      "sha256": "dddb2dc7a1dc339ecf2c8e089b366f08bb731c0839c7110240d17ce731bb4fea",
+      "bytes": 6677
+    },
+    {
+      "path": "windows/vendor/zlib/zutil.c",
+      "sha256": "8ced40d8c88588811edd2bdb35b7439983d5e1f8e9e32b8a3b244731f3c317b7",
+      "bytes": 7179
+    },
+    {
+      "path": "windows/vendor/zlib/zlib.h",
+      "sha256": "8a5579af72ea4f427ff00a4150f0ccb3fc5c1e4379f726e101133b1ab9fc600c",
+      "bytes": 96829
+    },
+    {
+      "path": "windows/vendor/zlib/zconf.h",
+      "sha256": "f5134250a67d57459234b63858f0d9d3ef8dcc48e9e1028d3f4fdcf6eae677ae",
+      "bytes": 16500
+    },
+    {
+      "path": "windows/vendor/zlib/trees.h",
+      "sha256": "bb0a9d3ca88ee00c81adb7c636e73b97085f6ef1b52d6d58edbe2b6dc3adeb4d",
+      "bytes": 8472
+    },
+    {
+      "path": "windows/vendor/zlib/trees.c",
+      "sha256": "f63c68c16c05fcd196050529d1a0e7657960e4136b9987d90a6ac3e58a964b0f",
+      "bytes": 40937
+    },
+    {
+      "path": "windows/vendor/zlib/inftrees.h",
+      "sha256": "0a0fcaf2ae2fae57426bdc06637270e9bba974f35202cadbdba479d946e6409d",
+      "bytes": 2920
+    },
+    {
+      "path": "windows/vendor/zlib/inftrees.c",
+      "sha256": "5d4f335221d2dc76f17abd2577d92c2d7baf68fa6d7f23373b360830493d1563",
+      "bytes": 13024
+    },
+    {
+      "path": "windows/vendor/zlib/inflate.h",
+      "sha256": "e8d4a51b07694bf48cb91979c19974cf6a5ab0b8a09d26ec0d14df349230673e",
+      "bytes": 6683
+    },
+    {
+      "path": "windows/vendor/zlib/inflate.c",
+      "sha256": "34c998ce0037c0537c04b03b276f680b945f9b2c9d1e01b287605bd6879f7fd2",
+      "bytes": 55519
+    },
+    {
+      "path": "windows/vendor/zlib/inffixed.h",
+      "sha256": "237ba710f090e432b62ebf963bee8b302867e9691406b2d3f8ee89ee7bfef9b0",
+      "bytes": 6332
+    },
+    {
+      "path": "windows/vendor/zlib/inffast.h",
+      "sha256": "05cc5dc9ff1da7b8b52a4bd8bda0d8a5c236a2f39efe84b941516ea13857e6c5",
+      "bytes": 422
+    },
+    {
+      "path": "windows/vendor/zlib/inffast.c",
+      "sha256": "e6ef64ce5dc0a4cd5c7ad08ceeb2b2a698b8447f6bd156057caeb2edab68c0cb",
+      "bytes": 12924
+    },
+    {
+      "path": "windows/vendor/zlib/gzguts.h",
+      "sha256": "716fa648aca1bb06c219d7b97ad4846d8479206143bc39557bfd8283f5783e04",
+      "bytes": 6676
+    },
+    {
+      "path": "windows/vendor/zlib/deflate.h",
+      "sha256": "48baf016326d8d5e3e32ac8153cc7e22f854b8e6834830b167b998a7fb1e7989",
+      "bytes": 14041
+    },
+    {
+      "path": "windows/vendor/zlib/deflate.c",
+      "sha256": "3b956337350f94c34987750f785587ef33d9c89ceaebb7c2afb189c956360cbe",
+      "bytes": 81731
+    },
+    {
+      "path": "windows/vendor/zlib/crc32.h",
+      "sha256": "9a2223575183ac2ee8a247f20bf3ac066e8bd0140369556bdbdffc777435749e",
+      "bytes": 591749
+    },
+    {
+      "path": "windows/vendor/zlib/crc32.c",
+      "sha256": "8fd16f0a7714d51c89c2eb37eb98ec15e8a4dc57ba343e7b7398b19144039fda",
+      "bytes": 31605
+    },
+    {
+      "path": "windows/vendor/zlib/compress.c",
+      "sha256": "86f802c16a965e7a28737e3730b4e576c5ba40981753967e3e30916f4dc1b4b1",
+      "bytes": 2613
+    },
+    {
+      "path": "windows/vendor/zlib/adler32.c",
+      "sha256": "9cd1443a24ff2a3053961695bd432035c58347386a420d3388232376ebabe211",
+      "bytes": 4964
+    },
+    {
+      "path": "windows/vendor/sqlite3.h",
+      "sha256": "61ded34ca2ddf50ad19cf5c55f595db775350be22d09efa5cda359caf2ee93b0",
+      "bytes": 611797
+    },
+    {
+      "path": "windows/vendor/sqlite3.c",
+      "sha256": "254d5579c10ae6a7425ddd055abbdecc5d7b7e6b473ddf28729cd831f25bbd8d",
+      "bytes": 8462111
+    },
+    {
+      "path": "windows/vendor/cJSON.h",
+      "sha256": "25b0145150d500498e4d209cec69c18c42cf818bffcc54690be3b895a2a16dee",
+      "bytes": 16394
+    },
+    {
+      "path": "windows/vendor/cJSON.c",
+      "sha256": "7879ae840ed0ac04c121d51423148b954dba0d24f0872d17c1a6e572613ef523",
+      "bytes": 80368
+    },
+    {
+      "path": "windows/util.c",
+      "sha256": "055fbe113d0bc02bd1e10054bee488c1f9b66679df6c8e29cdb4df913e794309",
+      "bytes": 3459
+    },
+    {
+      "path": "windows/ui.h",
+      "sha256": "84ff0f7b46793e010a0c1174c75a3eb840342c078b000b727492cdfc05276864",
+      "bytes": 6239
+    },
+    {
+      "path": "windows/theme.c",
+      "sha256": "e7b86988057effa75f3e872df0970f76483e2ce9e0d37bdbe676772d85552bd8",
+      "bytes": 21262
+    },
+    {
+      "path": "windows/tasks.c",
+      "sha256": "ab0f23ada141ae9bfedbf5eab7723b234c8fb8adc3f8eab4d7389cfa1b9736f1",
+      "bytes": 7666
+    },
+    {
+      "path": "windows/task-menu.c",
+      "sha256": "e93397dc3ff35068727ce4dd79fff90379c4ee2e4ac21c2b4a897a525ea77b23",
+      "bytes": 7946
+    },
+    {
+      "path": "windows/sync.c",
+      "sha256": "f3748d995808cdc0a765ffe2d5291b4bdad803d3c11ad6b4f298da21352f09f2",
+      "bytes": 22297
+    },
+    {
+      "path": "windows/storage.c",
+      "sha256": "2483aa5b2fb6502ff1dbf323e64bfc12c026432d2eece93b43d4df96f95a4456",
+      "bytes": 11750
+    },
+    {
+      "path": "windows/storage-test.c",
+      "sha256": "e50dda0acd3ef56f418d3b348e16dd03ad6b7294d039682d2249f595f0174436",
+      "bytes": 10420
+    },
+    {
+      "path": "windows/selftest.c",
+      "sha256": "d254b2c469477056c62d1545683faa008afedde5299a75c9704609f5525ee98b",
+      "bytes": 5798
+    },
+    {
+      "path": "windows/repaint-test.c",
+      "sha256": "78878d218f3d87900a219b786b1e0ea234b1c7dbbd63b8f10c32545118c4a18a",
+      "bytes": 10141
+    },
+    {
+      "path": "windows/query.c",
+      "sha256": "48efd15523dd2be3f190023781445c7ed097797f80adff0ea07ee7fac3632409",
+      "bytes": 16748
+    },
+    {
+      "path": "windows/profile.c",
+      "sha256": "c7267bbaaecbd79a365500d644bcb4abde59d4d9743f0055afead0abacab0df1",
+      "bytes": 1464
+    },
+    {
+      "path": "windows/operations.c",
+      "sha256": "61f02a521236d09786d1dbe2f4305c96d0f1be62cdee1cb833e9944b60afc483",
+      "bytes": 13651
+    },
+    {
+      "path": "windows/native.h",
+      "sha256": "75e104b9ea20004802e99497ec0e1a949af0173609848b63f9f4703c4173188a",
+      "bytes": 2330
+    },
+    {
+      "path": "windows/main.c",
+      "sha256": "b4dd54756f2b05d5d8c04f978d452e2b831dacd23ded72450a811ec72d2aca77",
+      "bytes": 3159
+    },
+    {
+      "path": "windows/gui.c",
+      "sha256": "8cbe341d9dfc6fc7a2b88029704888ab00a656a77b35c064589eb21110e3dd30",
+      "bytes": 53898
+    },
+    {
+      "path": "windows/feedback.c",
+      "sha256": "f912104f48d1ecf8dbbe065a9cf2e5fa376fb6db2da1df280014506e5b464c97",
+      "bytes": 25018
+    },
+    {
+      "path": "windows/drag-test.c",
+      "sha256": "efcc5f3beb60721349730e0675a998a2e42cdd19a62536400e501d80ab8e020b",
+      "bytes": 29866
+    },
+    {
+      "path": "windows/dialogs.c",
+      "sha256": "3bd64e0236b93f2653c61541f7609173fd8ef254e3217ad0c595d0fb5b117603",
+      "bytes": 19583
+    },
+    {
+      "path": "windows/detail.c",
+      "sha256": "a7ef456ae28c747e886c99c16f2e1176e82231bd61bb971f3e6d9c528af6579f",
+      "bytes": 49694
+    },
+    {
+      "path": "windows/database.c",
+      "sha256": "8e920395aee707e9649ace3e9672d8b741bf4e988c77cdc70b2106bc3f9d796b",
+      "bytes": 18371
+    },
+    {
+      "path": "windows/dashboard.c",
+      "sha256": "fe9c58b5de45064fe05e383ee853d21766a991f5a7e42e66ccaee2289162fd3a",
+      "bytes": 8857
+    },
+    {
+      "path": "windows/credential-helper.c",
+      "sha256": "8cb6a6a30131089a54591fa0c60855b6f8c1f90b307fa08a458f0d27ac23fc68",
+      "bytes": 2520
+    },
+    {
+      "path": "windows/catalog.c",
+      "sha256": "5f77d1c8e4ea424d8d1608af73e3a9358103dd9b3b722da01ac3c2ea7fafe79e",
+      "bytes": 10854
+    },
+    {
+      "path": "windows/advanced-test.c",
+      "sha256": "9ee06905d161612bfd144ebc04b9c34c59f03117c30420865580812cbed564d3",
+      "bytes": 10528
+    },
+    {
+      "path": "android/AndroidManifest.xml",
+      "sha256": "eb8c26e489e3d541d1aa4b56be08901136de409b6714478f626f06c0c7916508",
+      "bytes": 3342
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AndroidToolsActivity.java",
+      "sha256": "16fd684db75e80e87f3aac4941a53ca0cda2c05b647cbe47b8f6a4ae070a0142",
+      "bytes": 62407
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AndroidCompanionService.java",
+      "sha256": "76e91bf2ce169edbd7cea5f185fd4f75b9bfba47abaaf046dcbce85c8c0cb64e",
+      "bytes": 20514
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AccountStore.java",
+      "sha256": "cd1128d50a4a1a5283d41bf7ac5daddac9e974d77304d67da950bf282ff11a20",
+      "bytes": 7525
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/DailyTaskPolicy.java",
+      "sha256": "2965d80c1c96ab19d12612331ca521086a36ff03e336cba1a91496539bc8a83e",
+      "bytes": 3772
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/CompanionAlarmReceiver.java",
+      "sha256": "3174aee8e5dbfdbac1ecbbb04aebfcf87d70b7a729c7908d168a6b9f117299db",
+      "bytes": 251
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/DailyTaskSummary.java",
+      "sha256": "a3b0680f66cb0cfca31e154e657c3e21996936826a40ef52559915bf7ddc0570",
+      "bytes": 3587
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/TodoWidget.java",
+      "sha256": "7d1ec5048762366d1f0f81497a171eb5f4b0e41e950c2da57b4665002e9d30af",
+      "bytes": 2338
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/SyncStore.java",
+      "sha256": "c73a7cac4c3f48d13cf1b0ef60504c06a4d891963226ddfa9bbf5c65dc80934e",
+      "bytes": 9967
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+      "sha256": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663",
+      "bytes": 10845
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReminderScheduler.java",
+      "sha256": "8e9ec71e850566c23b54f42233057c803ac12e920b6749fe9be792436f8f4474",
+      "bytes": 6245
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReminderReceiver.java",
+      "sha256": "d3256ee58c594de7a0e258e98a73b2e5c2324ff15bf224573f40058e8126c285",
+      "bytes": 941
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroTimer.java",
+      "sha256": "9b1dbcfa10e6a9b3784e2ab485ef17fa1fc6ba9672b471678f79ad8fde5f66a3",
+      "bytes": 11433
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroTasks.java",
+      "sha256": "fcabd74e9cde5c2d584aeb89f1ae89e14d637085a73b447dafe25ca03d416864",
+      "bytes": 6061
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroClock.java",
+      "sha256": "1ad9c070920ae62f2abf707e843ecd315434db1d11018f693747d59f7b42af39",
+      "bytes": 11359
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/NotificationTimerControls.java",
+      "sha256": "3632fe597b7a57f88b14584f84bd1f511feac8460c19e7e81f71d21a276078a1",
+      "bytes": 1253
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/MainActivity.java",
+      "sha256": "6f7acc6c8c2bdd89e079d05d2845747dc7b972883b9ed4749443d534992922e0",
+      "bytes": 16353
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FloatingBallController.java",
+      "sha256": "032e3d7b86d4a3d68d928d70ca9a2f0f06a4c57b5e537127ab6372a22c31403b",
+      "bytes": 29916
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FeedbackToolsActivity.java",
+      "sha256": "7b883b0bb4cecba6760849ab8066ac1a071b726d397b116087306adf0e7a7ad6",
+      "bytes": 9022
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FeedbackApplication.java",
+      "sha256": "3e8f3226e3fde6f885c2c3b686f228bf105f8d86a18c398e55219395370b40f6",
+      "bytes": 4185
+    },
+    {
+      "path": "android/res/xml/todo_widget_info.xml",
+      "sha256": "e6456c3a481a6512318c9156b409de31c719995436a4911f6fce723442d2300f",
+      "bytes": 334
+    },
+    {
+      "path": "android/res/layout/todo_widget.xml",
+      "sha256": "7038622f8540adc3d2b140795598ab0ed39ae37fefca0fdb2763f01099594667",
+      "bytes": 1897
+    },
+    {
+      "path": "android/res/layout/notification_status_expanded.xml",
+      "sha256": "4fbba4294ddaaca242968dd45fe6a126fea6b04cef789835f48ba20cc216381d",
+      "bytes": 3329
+    },
+    {
+      "path": "android/res/layout/notification_status.xml",
+      "sha256": "6ca497d5bb9a55ed8038f64189fffbf67b08bb625c831e94eda92894228321e3",
+      "bytes": 2636
+    },
+    {
+      "path": "android/res/values/styles.xml",
+      "sha256": "44954bfbdc6951c2ef5e3e2f7ef31f69f8c6b712006769edf4d112f8aa3b60ab",
+      "bytes": 414
+    },
+    {
+      "path": "android/res/drawable/ic_notification.xml",
+      "sha256": "dec2b91ef564bb338ff452ae65105492f897de644b39f548ccad1039664777d9",
+      "bytes": 310
+    },
+    {
+      "path": "android/res/drawable/ic_launcher.xml",
+      "sha256": "7e8a9c0f59072efe0bb5895af8504889f72969b0e74026868fac5647c2a4e386",
+      "bytes": 528
+    }
+  ]
+}
