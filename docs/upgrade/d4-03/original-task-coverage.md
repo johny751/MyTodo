@@ -142,4 +142,3 @@ PROPOSAL：GitHub Actions分别执行：
 | S01及独立工具 | 原个人任务统计与新增工作统计分开；独立便签、番茄、优化意见、sync/devices/data-system存在实际synthetic处理，详见personal审计。 | 原Androidservice/通知/反馈独立DB与图片字节、真实sync/设备/生产API/正式Win32仍BLOCKER；平台包均未构建。 | W U / A U / B U |
 
 BLOCKER：现有测试计划没有覆盖全部原菜单执行、鼠标/pen、子任务手柄和父路径、save/leave故障、single-quadrant peek、原周期手势及全部实体搜索。源码增加页面或计划测试不能关闭这些缺口。账户问题不阻止独立静态修订，但未恢复云端执行资格前不能宣布 D4-03 完成。
-
