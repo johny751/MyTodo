@@ -87,6 +87,7 @@ public final class MainActivity extends Activity {
     public WebView previewWebView() { return web; }
     public final class PreviewBridge {
         @JavascriptInterface public boolean isPreview() { return true; }
+        @JavascriptInterface public int nativeTimerProtocol() { return NativeTimerSession.PROTOCOL; }
         @JavascriptInterface public String versionInfo() {
             try { return new JSONObject().put("versionName", BuildInfo.VERSION_NAME).put("versionCode", BuildInfo.VERSION_CODE)
                 .put("sourceSha", BuildInfo.SOURCE_SHA).put("buildTimeUtc", BuildInfo.BUILD_TIME_UTC).put("timezone", "UTC")
@@ -100,15 +101,19 @@ public final class MainActivity extends Activity {
         @JavascriptInterface public void openVersionInfo() { runOnUiThread(() -> showVersion()); }
         @JavascriptInterface public void timerCall(String id, String json) {
             if (id == null || id.length() > 100 || json == null || json.length() > 65536) return;
-            NativeTimerStore.request(MainActivity.this, json, (value, error) -> runOnUiThread(() -> {
-                if (destroyed || web == null) return;
+            NativeTimerStore.request(MainActivity.this, json, (value, error) -> {
+                final String script;
                 try {
                     JSONObject response = new JSONObject().put("id", id);
                     if (error == null) response.put("value", value); else response.put("error", error);
-                    web.evaluateJavascript("document.dispatchEvent(new CustomEvent('gx-d4-native-timer',{detail:" +
-                        response.toString() + "}))", null);
-                } catch (Exception ignored) {}
-            }));
+                    script = "document.dispatchEvent(new CustomEvent('gx-d4-native-timer',{detail:" + response.toString() + "}))";
+                } catch (Exception ignored) { return; }
+                runOnUiThread(() -> {
+                    if (destroyed || web == null) return;
+                    try { web.evaluateJavascript(script, null); }
+                    catch (Exception ignored) {}
+                });
+            });
         }
     }
     private void showVersion() {
@@ -131,7 +136,13 @@ public final class MainActivity extends Activity {
             value -> { if (!destroyed && "false".equals(value)) moveTaskToBack(true); });
     }
     @Override protected void onPause() { if (web != null) web.onPause(); super.onPause(); }
-    @Override protected void onResume() { super.onResume(); if (web != null) web.onResume(); }
+    @Override protected void onResume() {
+        super.onResume();
+        if (web != null) {
+            web.onResume();
+            web.evaluateJavascript("document.dispatchEvent(new Event('gx-d4-native-timer-resume'))", null);
+        }
+    }
     @Override protected void onDestroy() {
         destroyed = true;
         if (web != null) { web.removeJavascriptInterface("GxD4Preview"); web.destroy(); web = null; }
