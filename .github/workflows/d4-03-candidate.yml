@@ -74,6 +74,11 @@ jobs:
         run: node tests/d4-ui/run-browser.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
       - name: Package verified experience
         run: node tests/d4-ui/package-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Observe actual packaged Windows launcher in a headed session
+        if: runner.os == 'Windows'
+        env:
+          D4_PREVIEW_CI_INSPECT: '1'
+        run: node tests/d4-ui/run-windows-launcher.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
