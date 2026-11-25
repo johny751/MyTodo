@@ -408,6 +408,151 @@ public final class PreviewInstrumentation extends Instrumentation {
                 shot("android-native-subtask-draft-reopened");
             }));
 
+
+            check("android-unified-timer-web-navigation-native-pause-web-resume", () -> withUnifiedTimerCase("shared-navigation", () -> {
+                JSONObject configured=prepareUnifiedTimer(5,1);
+                openPageByTouch("pomodoro"); awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                tap("[data-action=personal-timer-start]");
+                JSONObject running=awaitUnifiedWeb(configured.getLong("revision")+1,null,"running");
+                String id=running.getString("sessionId"); require(!id.isEmpty()&&"focus".equals(running.getString("phase")),"Actual Web start creates a native focus session");
+                SystemClock.sleep(1200); openPageByTouch("notes"); openPageByTouch("pomodoro");
+                JSONObject returned=awaitUnifiedWeb(running.getLong("revision"),id,"running");
+                require(returned.getLong("elapsedMillis")>running.getLong("elapsedMillis"),"The same native session advances while the Web page is changed");
+                NativeTimerActivity activity=openUnifiedNative();
+                awaitNativeUnifiedText(activity,id);
+                nativeUnifiedTap(activity,40304);
+                JSONObject paused=unifiedSnapshot();require("paused".equals(paused.getString("status"))&&id.equals(paused.getString("sessionId")),"Real native Pause pauses the original Web-started session");
+                SystemClock.sleep(1200);require(unifiedSnapshot().getLong("elapsedMillis")==paused.getLong("elapsedMillis"),"Shared native paused elapsed time stays fixed");
+                back();unifiedForegroundActivity=null;
+                awaitUnifiedWeb(paused.getLong("revision"),id,"paused");
+                tap("[data-action=personal-timer-resume]");
+                JSONObject resumed=awaitUnifiedWeb(paused.getLong("revision")+1,id,"running");
+                SystemClock.sleep(1200);
+                JSONObject later=unifiedSnapshot();
+                require(id.equals(later.getString("sessionId"))&&later.getLong("elapsedMillis")>resumed.getLong("elapsedMillis"),"Actual Web Resume continues the native-paused session without replacing its identity");
+                require(historyCount(later,id)==0,"Navigation and pause/resume do not invent terminal history");
+                write("unified-timer-shared-navigation.json",new JSONObject().put("started",running).put("paused",paused).put("resumed",resumed).put("later",later).toString(2));
+                shot("android-unified-timer-shared-navigation");
+            }));
+            check("android-unified-timer-early-end-single-history", () -> withUnifiedTimerCase("early-end-history", () -> {
+                JSONObject configured=prepareUnifiedTimer(5,1);
+                long completedBefore=timerMapTotal(configured,"completedSessionsByDay");
+                openPageByTouch("pomodoro");awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                tap("[data-action=personal-timer-start]");
+                JSONObject running=awaitUnifiedWeb(configured.getLong("revision")+1,null,"running");String id=running.getString("sessionId");
+                SystemClock.sleep(1300);tap("[data-action=personal-timer-end]");
+                JSONObject ended=awaitUnifiedWeb(running.getLong("revision")+1,id,"ended");
+                require(historyCount(ended,id)==1,"Actual Web End records exactly one terminal history row");
+                JSONObject row=historyRow(ended,id);
+                require("focus".equals(row.getString("phase"))&&"ended".equals(row.getString("outcome"))&&row.getLong("elapsedMillis")>0,"Early end preserves measured focus elapsed time with the ended outcome");
+                require(timerMapTotal(ended,"completedSessionsByDay")==completedBefore,"Early ending does not count as a completed countdown");
+                requireWebHistoryRow(id,"提前结束");
+                NativeTimerActivity activity=openUnifiedNative();awaitNativeUnifiedText(activity,id);
+                require(nativeUnifiedText(activity,40301).contains("提前结束"),"Native reader shows the Web-ended session");
+                nativeUnifiedTap(activity,40306);JSONObject reset=unifiedSnapshot();
+                require("idle".equals(reset.getString("status"))&&historyCount(reset,id)==1,"Real native reset retains exactly the existing ended history");
+                JSONObject noSecondEnd=unifiedCommand("end",new JSONObject());
+                require(historyCount(noSecondEnd,id)==1&&canonicalTimerJson(row).equals(canonicalTimerJson(historyRow(noSecondEnd,id))),"Ending an already reset session does not duplicate or rewrite its prior history");
+                back();unifiedForegroundActivity=null;awaitUnifiedWeb(noSecondEnd.getLong("revision"),"","idle");requireWebHistoryRow(id,"提前结束");
+                write("unified-timer-early-end-history.json",new JSONObject().put("ended",ended).put("afterNativeReset",reset).put("afterRepeatedEnd",noSecondEnd).toString(2));
+            }));
+            check("android-unified-timer-real-minute-background-two-readers-once", () -> withUnifiedTimerCase("focus-minute", () -> {
+                JSONObject configured=prepareUnifiedTimer(1,1);
+                long focusBefore=timerMapTotal(configured,"focusedMillisByDay"),completedBefore=timerMapTotal(configured,"completedSessionsByDay");
+                openPageByTouch("pomodoro");awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                tap("[data-action=personal-timer-start]");
+                JSONObject running=awaitUnifiedWeb(configured.getLong("revision")+1,null,"running");String id=running.getString("sessionId");
+                runOnMainSync(()->main.moveTaskToBack(true));waitRealTimerMinute();
+                JSONObject completed=unifiedSnapshot();
+                require("completed".equals(completed.getString("status"))&&id.equals(completed.getString("sessionId")),"A real minute completes the same Web-started native session in background");
+                require(historyCount(completed,id)==1&&"completed".equals(historyRow(completed,id).getString("outcome"))&&historyRow(completed,id).getLong("elapsedMillis")==60000L,"Actual countdown completion creates one exact one-minute history");
+                require(timerMapTotal(completed,"focusedMillisByDay")==focusBefore+60000L&&timerMapTotal(completed,"completedSessionsByDay")==completedBefore+1,"Native focus statistics add exactly one minute and one completed round across all recorded days");
+                JSONObject reopened=timer("reopen-for-isolated-test");requireSameTerminalTimer(completed,reopened,id);
+                launch();openPageByTouch("pomodoro");
+                JSONObject web=awaitUnifiedWeb(reopened.getLong("revision"),id,"completed");requireSameTerminalTimer(completed,web,id);requireWebHistoryRow(id,"已完成");
+                NativeTimerActivity activity=openUnifiedNative();awaitNativeUnifiedText(activity,id);
+                require(nativeUnifiedText(activity,40301).contains("已完成"),"Native UI independently displays the same completed session");
+                JSONObject nativeRead=unifiedSnapshot();requireSameTerminalTimer(completed,nativeRead,id);
+                back();unifiedForegroundActivity=null;
+                JSONObject webAgain=awaitUnifiedWeb(nativeRead.getLong("revision"),id,"completed");requireSameTerminalTimer(completed,webAgain,id);requireWebHistoryRow(id,"已完成");
+                write("unified-timer-focus-minute-two-readers.json",new JSONObject().put("before",configured).put("completed",completed).put("reopened",reopened).put("web",web).put("nativeRead",nativeRead).put("webAgain",webAgain).toString(2));
+                shot("android-unified-timer-focus-minute");
+            }));
+            check("android-unified-timer-real-break-excludes-focus-statistics", () -> withUnifiedTimerCase("break-minute", () -> {
+                JSONObject configured=prepareUnifiedTimer(5,1);
+                long focusBefore=timerMapTotal(configured,"focusedMillisByDay"),completedBefore=timerMapTotal(configured,"completedSessionsByDay");
+                openPageByTouch("pomodoro");awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                tap("[data-action=personal-timer-break]");
+                JSONObject running=awaitUnifiedWeb(configured.getLong("revision")+1,null,"running");String id=running.getString("sessionId");
+                require("break".equals(running.getString("phase"))&&"countdown".equals(running.getString("mode")),"Actual Web rest button starts the native break phase");
+                runOnMainSync(()->main.moveTaskToBack(true));waitRealTimerMinute();
+                JSONObject completed=unifiedSnapshot();JSONObject row=historyRow(completed,id);
+                require("completed".equals(completed.getString("status"))&&"break".equals(completed.getString("phase"))&&historyCount(completed,id)==1,"Real break completion creates one break history");
+                require("break".equals(row.getString("phase"))&&"completed".equals(row.getString("outcome"))&&row.getLong("elapsedMillis")==60000L,"Break history contains its own actual minute");
+                require(timerMapTotal(completed,"focusedMillisByDay")==focusBefore&&timerMapTotal(completed,"completedSessionsByDay")==completedBefore,"A complete break contributes no focus milliseconds or completed focus round");
+                launch();openPageByTouch("pomodoro");
+                JSONObject web=awaitUnifiedWeb(completed.getLong("revision"),id,"completed");requireSameTerminalTimer(completed,web,id);requireWebHistoryRow(id,"休息");
+                NativeTimerActivity activity=openUnifiedNative();awaitNativeUnifiedText(activity,id);
+                require(nativeUnifiedText(activity,40301).contains("休息")&&nativeUnifiedText(activity,40301).contains("已完成"),"Native UI shows this same completed break");
+                JSONObject nativeRead=unifiedSnapshot();requireSameTerminalTimer(completed,nativeRead,id);
+                back();unifiedForegroundActivity=null;awaitUnifiedWeb(nativeRead.getLong("revision"),id,"completed");
+                write("unified-timer-break-minute-no-focus.json",new JSONObject().put("before",configured).put("completed",completed).put("web",web).put("nativeRead",nativeRead).toString(2));
+            }));
+            check("android-unified-timer-dirty-config-survives-polls-navigation", () -> withUnifiedTimerCase("dirty-configuration", () -> {
+                JSONObject configured=prepareUnifiedTimer(5,1);
+                openPageByTouch("pomodoro");awaitUnifiedWeb(configured.getLong("revision"),"","idle");
+                typeText("[data-form=personal-timer-config] [name=durationMinutes]","7");
+                typeText("[data-form=personal-timer-config] [name=breakMinutes]","3");
+                SystemClock.sleep(2200);
+                requireUnifiedDraft("7","3");
+                JSONObject untouched=unifiedSnapshot();
+                require(untouched.getInt("durationMinutes")==5&&untouched.getInt("breakMinutes")==1,"Typing a dirty Web configuration does not silently write the native authority");
+                openPageByTouch("notes");openPageByTouch("pomodoro");
+                awaitUnifiedWeb(untouched.getLong("revision"),"","idle");requireUnifiedDraft("7","3");
+                NativeTimerActivity activity=openUnifiedNative();awaitNativeUnifiedText(activity,"已暂停 / 待开始");
+                JSONObject nativeRead=unifiedSnapshot();
+                require(nativeRead.getInt("durationMinutes")==5&&nativeRead.getInt("breakMinutes")==1,"Native reader still sees only the saved settings while Web fields are dirty");
+                back();unifiedForegroundActivity=null;awaitUnifiedWeb(nativeRead.getLong("revision"),"","idle");requireUnifiedDraft("7","3");
+                tap("[data-form=personal-timer-config] button[type=submit]");
+                JSONObject saved=awaitUnifiedWeb(nativeRead.getLong("revision")+1,"","idle");
+                require(saved.getInt("durationMinutes")==7&&saved.getInt("breakMinutes")==3,"Actual Web settings submit writes the retained draft to the shared native authority");
+                requireUnifiedDraft("7","3");
+                require(unifiedSnapshot().getInt("durationMinutes")==7&&unifiedSnapshot().getInt("breakMinutes")==3,"Both readers agree on the exact saved configuration");
+                write("unified-timer-dirty-configuration.json",new JSONObject().put("before",configured).put("whileDirty",untouched).put("nativeRead",nativeRead).put("saved",saved).toString(2));
+                shot("android-unified-timer-dirty-config-saved");
+            }));
+            check("android-unified-timer-idempotency-reopen-and-stale-refusal", () -> withUnifiedTimerCase("command-contract", () -> {
+                JSONObject configured=prepareUnifiedTimer(5,1);
+                JSONObject request=new JSONObject().put("op","command").put("action","start").put("values",new JSONObject()).put("commandId","test:"+java.util.UUID.randomUUID()).put("expectedRevision",configured.getLong("revision"));
+                JSONObject accepted=unifiedRequest(request),duplicate;String id=accepted.getString("sessionId");
+                SystemClock.sleep(350);duplicate=unifiedRequest(request);
+                require(canonicalTimerJson(accepted).equals(canonicalTimerJson(duplicate)),"Repeating exactly the same command ID, payload and expectedRevision returns the exact original receipt");
+                JSONObject progressed=unifiedSnapshot();require(id.equals(progressed.getString("sessionId"))&&progressed.getLong("elapsedMillis")>=accepted.getLong("elapsedMillis"),"Retry does not restart the accepted session");
+                timer("reopen-for-isolated-test");
+                JSONObject reopenedDuplicate=unifiedRequest(request);
+                require(canonicalTimerJson(accepted).equals(canonicalTimerJson(reopenedDuplicate)),"Idempotent receipt survives real AtomicFile store reopen");
+                JSONObject reused=new JSONObject(request.toString()).put("action","end");
+                JSONObject reuseError=unifiedRawResult(reused);
+                require(reuseError.optString("error").contains("command-id-reused"),"Same ID with a different action is explicitly rejected");
+                JSONObject stale=new JSONObject().put("op","command").put("action","end").put("values",new JSONObject()).put("commandId","test:"+java.util.UUID.randomUUID()).put("expectedRevision",configured.getLong("revision"));
+                JSONObject staleError=unifiedRawResult(stale);
+                require(staleError.optString("error").contains("stale-revision"),"A new command with the old revision is explicitly rejected");
+                JSONObject unchanged=unifiedSnapshot();
+                require(id.equals(unchanged.getString("sessionId"))&&"running".equals(unchanged.getString("status"))&&unchanged.getLong("revision")==accepted.getLong("revision")&&historyCount(unchanged,id)==0,"Rejected commands do not end, replace or duplicate the active session");
+                require(timerMapTotal(unchanged,"completedSessionsByDay")==timerMapTotal(configured,"completedSessionsByDay"),"Rejected commands do not add completion statistics");
+                write("unified-timer-command-contract.json",new JSONObject().put("request",request).put("accepted",accepted).put("duplicate",duplicate).put("reopenedDuplicate",reopenedDuplicate).put("reuseError",reuseError).put("staleError",staleError).put("current",unchanged).toString(2));
+            }));
+
+            check("android-unified-session-shorten-completion-once", () -> {
+                write("unified-session-shorten-completion.json", NativeTimerSessionChecks.shortenCompletionOnce().toString(2));
+            });
+            check("android-unified-session-refuses-unconverted-state", () -> {
+                write("unified-session-refused-state.json", NativeTimerSessionChecks.refusesUnconvertedState().toString(2));
+            });
+            check("android-unified-session-durable-receipt-replay", () -> {
+                write("unified-session-durable-receipt-replay.json", NativeTimerSessionChecks.durableReceiptReplay().toString(2));
+            });
+
         } catch (Throwable fatal) { record("instrumentation-setup-or-fatal", fatal, 0); }
         try {
             JSONObject report=new JSONObject().put("kind","mytodo-d403-native-isolated-evidence").put("sourceSha",BuildInfo.SOURCE_SHA)
@@ -495,6 +640,159 @@ public final class PreviewInstrumentation extends Instrumentation {
         @Override public void close() {
             if(active){try{input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_CANCEL,lastX,lastY);}finally{active=false;}}
         }
+    }
+
+
+    private NativeTimerActivity unifiedForegroundActivity;
+    private void withUnifiedTimerCase(String name,Check body) throws Exception {
+        Throwable failure=null;
+        try { home();body.run(); }
+        catch(Exception|Error error) {
+            failure=error;
+            try { shot("failure-unified-timer-"+name+"-before-cleanup"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
+            throw error;
+        } finally {
+            try {
+                if(unifiedForegroundActivity!=null){NativeTimerActivity activity=unifiedForegroundActivity;runOnMainSync(activity::finish);unifiedForegroundActivity=null;}
+                timer("reset");launch();home();
+            } catch(Exception|Error cleanup) { if(failure!=null)failure.addSuppressed(cleanup);else throw cleanup; }
+        }
+    }
+    private JSONObject unifiedRawResult(JSONObject request) throws Exception {
+        CountDownLatch done=new CountDownLatch(1);
+        AtomicReference<JSONObject> result=new AtomicReference<>();
+        AtomicReference<String> serializationError=new AtomicReference<>();
+        NativeTimerStore.request(getTargetContext(),request.toString(),(value,error)->{
+            try {result.set(new JSONObject().put("value",value==null?JSONObject.NULL:value).put("error",error==null?JSONObject.NULL:error));}
+            catch(Exception invalid){serializationError.set(invalid.toString());}
+            finally{done.countDown();}
+        });
+        require(done.await(10,TimeUnit.SECONDS),"Unified native timer callback completes");
+        require(serializationError.get()==null&&result.get()!=null,"Unified timer callback retains its result: "+serializationError.get());
+        return result.get();
+    }
+    private JSONObject unifiedRequest(JSONObject request) throws Exception {
+        JSONObject result=unifiedRawResult(request);
+        require(result.isNull("error"),"Unified timer request accepted: "+result.optString("error"));
+        return result.getJSONObject("value");
+    }
+    private JSONObject unifiedSnapshot() throws Exception {return unifiedRequest(new JSONObject().put("op","snapshot"));}
+    private JSONObject unifiedCommand(String action,JSONObject values) throws Exception {
+        JSONObject current=unifiedSnapshot();
+        return unifiedRequest(new JSONObject().put("op","command").put("action",action).put("values",values)
+            .put("commandId","test:"+java.util.UUID.randomUUID()).put("expectedRevision",current.getLong("revision")));
+    }
+    /** Explicit synthetic fixture setup; real page commands remain real MotionEvent taps. */
+    private JSONObject prepareUnifiedTimer(int focusMinutes,int restMinutes) throws Exception {
+        require(((Number)js("GxD4Preview.nativeTimerProtocol()")).intValue()==1,"Native unified protocol is advertised by this APK");
+        timer("reset");
+        return unifiedCommand("configure",new JSONObject().put("mode","countdown").put("durationMinutes",focusMinutes).put("breakMinutes",restMinutes).put("taskId",""));
+    }
+    private JSONObject awaitUnifiedWeb(long revision,String sessionId,String status) throws Exception {
+        long deadline=SystemClock.elapsedRealtime()+12000L;
+        JSONObject last=null;
+        while(SystemClock.elapsedRealtime()<deadline){
+            last=(JSONObject)js("(function(){var info=window.D4NativeTimer?.info(),p=document.querySelector('#personal-timer');return {info:info||null,dom:p?{provider:p.dataset.provider,sessionId:p.dataset.sessionId,revision:p.dataset.revision,phase:p.dataset.phase,status:p.dataset.status}:null};})()");
+            JSONObject info=last.optJSONObject("info"),dom=last.optJSONObject("dom"),state=info==null?null:info.optJSONObject("state");
+            if(info!=null&&info.optBoolean("ready")&&"android-native".equals(info.optString("provider"))&&info.optInt("protocol")==1&&state!=null&&dom!=null
+                &&state.optLong("revision",-1)>=revision&&(sessionId==null||sessionId.equals(state.optString("sessionId")))&&status.equals(state.optString("status"))
+                &&"android-native".equals(dom.optString("provider"))&&state.optString("sessionId").equals(dom.optString("sessionId"))
+                &&Long.toString(state.optLong("revision")).equals(dom.optString("revision"))&&state.optString("phase").equals(dom.optString("phase"))
+                &&status.equals(dom.optString("status"))&&!info.optBoolean("busy")&&info.optString("error","").isEmpty()) return state;
+            SystemClock.sleep(120);
+        }
+        throw new AssertionError("Web getter and visible timer did not confirm shared native identity/status by deadline: "+last);
+    }
+    private void requireWebHistoryRow(String id,String text) throws Exception {
+        require(Boolean.TRUE.equals(js("(function(){var rows=Array.from(document.querySelectorAll('.timer-history-list [data-session-id]')).filter(e=>e.dataset.sessionId==="+JSONObject.quote(id)+");return rows.length===1&&rows[0].textContent.includes("+JSONObject.quote(text)+");})()")),"Visible Web history has exactly one matching session row and expected outcome/phase");
+    }
+    private void requireUnifiedDraft(String focus,String rest) throws Exception {
+        require(Boolean.TRUE.equals(js("(function(){var f=document.querySelector('[data-form=personal-timer-config]');return !!f&&f.querySelector('[name=durationMinutes]').value==="+JSONObject.quote(focus)+"&&f.querySelector('[name=breakMinutes]').value==="+JSONObject.quote(rest)+";})()")),"Dirty timer configuration fields retain their exact native keyboard input");
+    }
+    private NativeTimerActivity openUnifiedNative() throws Exception {
+        Instrumentation.ActivityMonitor monitor=addMonitor(NativeTimerActivity.class.getName(),null,false);
+        Activity opened;
+        try {tap("[data-action=personal-native-timer]");opened=monitor.waitForActivityWithTimeout(20000);}
+        finally {removeMonitor(monitor);}
+        require(opened instanceof NativeTimerActivity,"Actual Web button opens the shared native timer screen");
+        unifiedForegroundActivity=(NativeTimerActivity)opened;return unifiedForegroundActivity;
+    }
+    private String nativeUnifiedText(Activity activity,int id) throws Exception {
+        AtomicReference<String> text=new AtomicReference<>();
+        runOnMainSync(()->{View view=activity.findViewById(id);require(view instanceof android.widget.TextView,"Observed native text view exists: "+id);text.set(((android.widget.TextView)view).getText().toString());});
+        return text.get();
+    }
+    private void awaitNativeUnifiedText(Activity activity,String expected) throws Exception {
+        long deadline=SystemClock.elapsedRealtime()+10000L;String last="";
+        while(SystemClock.elapsedRealtime()<deadline){last=nativeUnifiedText(activity,40301)+"\n"+nativeUnifiedText(activity,40314);if(last.contains(expected)&&!last.contains("读取计时状态")&&!last.contains("未确认计时状态"))return;SystemClock.sleep(120);}
+        throw new AssertionError("Native timer text did not show expected shared state "+expected+": "+last);
+    }
+    /** Real native scroll locates the control; the activation itself is a touchscreen tap. */
+    private void nativeUnifiedTap(Activity activity,int id) throws Exception {
+        long deadline=SystemClock.elapsedRealtime()+12000L;
+        while(SystemClock.elapsedRealtime()<deadline){
+            final android.graphics.Rect visible=new android.graphics.Rect();
+            final int[] location=new int[2],decorLocation=new int[2],decorSize=new int[2];
+            final boolean[] shown=new boolean[1],enabled=new boolean[1];
+            runOnMainSync(()->{View v=activity.findViewById(id);require(v!=null,"Native timer button exists: "+id);enabled[0]=v.isEnabled();shown[0]=v.getGlobalVisibleRect(visible);v.getLocationOnScreen(location);View decor=activity.getWindow().getDecorView();decor.getLocationOnScreen(decorLocation);decorSize[0]=decor.getWidth();decorSize[1]=decor.getHeight();});
+            if(shown[0]&&visible.width()>8&&visible.height()>24&&enabled[0]){
+                float x=visible.exactCenterX(),y=visible.exactCenterY();
+                long now=SystemClock.uptimeMillis();boolean held=true;Throwable failure=null;
+                try {input(now,now,MotionEvent.ACTION_DOWN,x,y);input(now,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,x,y);held=false;}
+                catch(Exception|Error error){failure=error;throw error;}
+                finally {if(held)try{input(now,SystemClock.uptimeMillis(),MotionEvent.ACTION_CANCEL,x,y);}catch(Exception|Error cancel){if(failure!=null)failure.addSuppressed(cancel);else throw cancel;}}
+                settle();return;
+            }
+            if(!shown[0]||visible.height()<=24){
+                boolean targetBelow=location[1]>decorLocation[1]+decorSize[1]/2;
+                float x=decorLocation[0]+decorSize[0]*.6f;
+                float from=decorLocation[1]+decorSize[1]*(targetBelow?.78f:.28f),to=decorLocation[1]+decorSize[1]*(targetBelow?.28f:.78f);
+                long down=SystemClock.uptimeMillis();boolean held=true;float y=from;Throwable failure=null;
+                try {
+                    input(down,down,MotionEvent.ACTION_DOWN,x,y);
+                    for(int i=1;i<=12;i++){SystemClock.sleep(25);y=from+(to-from)*i/12;input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_MOVE,x,y);}
+                    input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,x,y);held=false;
+                } catch(Exception|Error error){failure=error;throw error;}
+                finally {if(held)try{input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_CANCEL,x,y);}catch(Exception|Error cancel){if(failure!=null)failure.addSuppressed(cancel);else throw cancel;}}
+                settle();
+            } else SystemClock.sleep(120);
+        }
+        throw new AssertionError("Native timer button did not become visibly enabled for real touch: "+id);
+    }
+    private void waitRealTimerMinute() {
+        long deadline=SystemClock.elapsedRealtime()+61000L;
+        while(SystemClock.elapsedRealtime()<deadline)SystemClock.sleep(Math.max(1L,Math.min(1000L,deadline-SystemClock.elapsedRealtime())));
+    }
+    private static long timerMapTotal(JSONObject value,String field) throws Exception {
+        long total=0;JSONObject map=value.getJSONObject(field);
+        for(java.util.Iterator<String> it=map.keys();it.hasNext();)total+=map.getLong(it.next());
+        return total;
+    }
+    private static int historyCount(JSONObject value,String id) throws Exception {
+        int count=0;JSONArray rows=value.getJSONArray("history");
+        for(int i=0;i<rows.length();i++)if(id.equals(rows.getJSONObject(i).getString("id")))count++;
+        return count;
+    }
+    private static JSONObject historyRow(JSONObject value,String id) throws Exception {
+        JSONArray rows=value.getJSONArray("history");
+        for(int i=0;i<rows.length();i++)if(id.equals(rows.getJSONObject(i).getString("id")))return rows.getJSONObject(i);
+        throw new AssertionError("Missing terminal history for shared session "+id);
+    }
+    private static void requireSameTerminalTimer(JSONObject expected,JSONObject actual,String id) throws Exception {
+        require(id.equals(actual.getString("sessionId"))&&expected.getString("status").equals(actual.getString("status"))&&expected.getString("phase").equals(actual.getString("phase"))
+            &&expected.getLong("elapsedMillis")==actual.getLong("elapsedMillis")&&expected.getLong("remainingMillis")==actual.getLong("remainingMillis"),"Both readers retain the same terminal timer identity, phase, status and time");
+        require(historyCount(actual,id)==1&&canonicalTimerJson(expected.getJSONArray("history")).equals(canonicalTimerJson(actual.getJSONArray("history"))),"Reading or claiming completion never duplicates or rewrites terminal history");
+        require(canonicalTimerJson(expected.getJSONObject("focusedMillisByDay")).equals(canonicalTimerJson(actual.getJSONObject("focusedMillisByDay")))
+            &&canonicalTimerJson(expected.getJSONObject("completedSessionsByDay")).equals(canonicalTimerJson(actual.getJSONObject("completedSessionsByDay"))),"Both readers retain exactly the same focus statistics");
+    }
+    private static String canonicalTimerJson(Object value) throws Exception {
+        if(value instanceof JSONObject){
+            JSONObject object=(JSONObject)value;java.util.List<String> keys=new java.util.ArrayList<>();
+            for(java.util.Iterator<String> it=object.keys();it.hasNext();)keys.add(it.next());java.util.Collections.sort(keys);
+            StringBuilder text=new StringBuilder("{");for(String key:keys){if(text.length()>1)text.append(',');text.append(JSONObject.quote(key)).append(':').append(canonicalTimerJson(object.get(key)));}return text.append('}').toString();
+        }
+        if(value instanceof JSONArray){JSONArray rows=(JSONArray)value;StringBuilder text=new StringBuilder("[");for(int i=0;i<rows.length();i++){if(i>0)text.append(',');text.append(canonicalTimerJson(rows.get(i)));}return text.append(']').toString();}
+        return value instanceof String?JSONObject.quote((String)value):String.valueOf(value);
     }
 
     private void check(String name,Check check) { long started=SystemClock.elapsedRealtime();try{check.run();record(name,null,SystemClock.elapsedRealtime()-started);}catch(Throwable e){record(name,e,SystemClock.elapsedRealtime()-started);try{shot("failure-"+name);}catch(Exception ignored){}} }
