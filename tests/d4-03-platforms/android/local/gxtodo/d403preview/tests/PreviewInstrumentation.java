@@ -1224,7 +1224,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             try { require(root!=null&&nativeTextContains(root,"版本历史（离线）")&&nativeTextContains(root,expectedHistory),"Actual native history dialog contains all packaged entries, changes and UTC identity in order"); }
             finally { if(root!=null)root.recycle(); }
             proof.put("nativeHistoryTextMatched",true);shot("android-apk-version-history-top");
-            scrollNativeHistory(actions);shot("android-apk-version-history-end");nativeDialogButton("关闭",actions);
+            scrollNativeHistory(actions,history.length());shot("android-apk-version-history-end");nativeDialogButton("关闭",actions);
             root=getUiAutomation().getRootInActiveWindow();
             try { require(root!=null&&!nativeTextContains(root,"版本历史（离线）"),"Real native close button dismisses the history dialog"); }
             finally { if(root!=null)root.recycle(); }
@@ -1286,12 +1286,16 @@ public final class PreviewInstrumentation extends Instrumentation {
         if(ownPackage&&wanted&&node.isVisibleToUser()&&node.isEnabled()){Rect r=new Rect();node.getBoundsInScreen(r);found.put(new JSONObject().put("left",r.left).put("top",r.top).put("right",r.right).put("bottom",r.bottom).put("class",String.valueOf(node.getClassName())));}
         for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo child=node.getChild(i);if(child!=null)try{nativeTargets(child,label,scrolling,found);}finally{child.recycle();}}
     }
-    private void scrollNativeHistory(JSONArray actions) throws Exception {
+    private void scrollNativeHistory(JSONArray actions,int packagedHistoryCount) throws Exception {
+        require(packagedHistoryCount>0&&packagedHistoryCount<=100,"Native history scroll budget uses 1 to 100 verified packaged entries");
+        int maxSwipes=Math.max(20,packagedHistoryCount*2);
+        actions.put(new JSONObject().put("action","native-history-scroll-budget").put("packagedHistoryCount",packagedHistoryCount)
+            .put("minimumBudgetSwipes",20).put("swipesPerEntry",2).put("hardMaximumSwipes",200).put("maxSwipes",maxSwipes));
         AtomicReference<int[]> latest=new AtomicReference<>();final String pkg=getTargetContext().getPackageName();
         getUiAutomation().setOnAccessibilityEventListener(event->{if(event.getEventType()==AccessibilityEvent.TYPE_VIEW_SCROLLED&&event.getPackageName()!=null&&pkg.contentEquals(event.getPackageName())&&"android.widget.ScrollView".equals(String.valueOf(event.getClassName())))latest.set(new int[]{event.getScrollY(),event.getMaxScrollY()});});
         int prior=-1;boolean reachedEnd=false;
         try {
-            for(int i=0;i<20&&!reachedEnd;i++){
+            for(int i=0;i<maxSwipes&&!reachedEnd;i++){
                 AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();require(root!=null,"History remains the active native window");JSONArray scrolls=new JSONArray();Rect window=new Rect();
                 try{root.getBoundsInScreen(window);nativeTargets(root,"",true,scrolls);}finally{root.recycle();}
                 require(scrolls.length()==1,"Exactly one visible native history ScrollView");JSONObject target=scrolls.getJSONObject(0);
