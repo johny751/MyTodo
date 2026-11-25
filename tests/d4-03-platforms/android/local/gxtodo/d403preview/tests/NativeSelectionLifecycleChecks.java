@@ -157,7 +157,7 @@ final class NativeSelectionLifecycleChecks {
         void scan(AccessibilityNodeInfo node,int window,String action,List<Target> found,int depth) throws Exception {
             if(depth>30||"android.webkit.WebView".contentEquals(node.getClassName()==null?"":node.getClassName()))return;
             String text=String.valueOf(node.getText()),desc=String.valueOf(node.getContentDescription());String chinese="Copy".equals(action)?"复制":"粘贴";
-            if(node.isVisibleToUser()&&node.isEnabled()&&(action.equalsIgnoreCase(text)||chinese.equals(text)||action.equalsIgnoreCase(desc)||chinese.equals(desc)){
+            if(node.isVisibleToUser()&&node.isEnabled()&&(action.equalsIgnoreCase(text)||chinese.equals(text)||action.equalsIgnoreCase(desc)||chinese.equals(desc))){
                 AccessibilityNodeInfo hit=AccessibilityNodeInfo.obtain(node);
                 try {for(int i=0;i<4&&!hit.isClickable();i++){AccessibilityNodeInfo parent=hit.getParent();if(parent==null)break;hit.recycle();hit=parent;}
                     Rect rect=new Rect();hit.getBoundsInScreen(rect);
