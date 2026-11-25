@@ -2,6 +2,7 @@ package local.gxtodo.d403preview;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -10,6 +11,9 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
+import android.webkit.MimeTypeMap;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
@@ -17,12 +21,18 @@ import android.webkit.WebViewClient;
 import org.json.JSONObject;
 import java.io.ByteArrayInputStream;
 import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Locale;
 
 /** Synthetic-only WebView. No production GxNative, accounts, SQLite or sync bridge. */
 public final class MainActivity extends Activity {
     private static final String HOST = "d403-preview.local";
+    private static final int OPEN_LOCAL_DOCUMENT = 0xD403;
     private WebView web;
     private boolean destroyed;
+    private android.view.ActionMode floatingTextMode;
+    private ValueCallback<Uri[]> pendingFiles;
+    private boolean pendingFilesMultiple;
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
         web = new WebView(this);
@@ -34,7 +44,10 @@ public final class MainActivity extends Activity {
         web.getSettings().setAllowContentAccess(false);
         web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         web.getSettings().setSupportZoom(false);
-        web.setWebChromeClient(new android.webkit.WebChromeClient() {
+        web.setWebChromeClient(new WebChromeClient() {
+            @Override public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback, FileChooserParams params) {
+                return chooseLocalDocuments(view, callback, params);
+            }
             @Override public boolean onConsoleMessage(android.webkit.ConsoleMessage message) {
                 if (message.messageLevel() == android.webkit.ConsoleMessage.MessageLevel.ERROR)
                     android.util.Log.e("D403PreviewWeb", message.message() + " at " + message.sourceId() + ":" + message.lineNumber());
@@ -64,8 +77,34 @@ public final class MainActivity extends Activity {
                 oldLeft, oldTop, oldRight, oldBottom) -> updateNavigationGestureSegment());
             web.post(this::updateNavigationGestureSegment);
         }
-        setContentView(web);
+        installPreviewContent();
         web.loadUrl("https://" + HOST + "/index.html");
+    }
+    private void installPreviewContent() {
+        if (Build.VERSION.SDK_INT < 35) {
+            // Earlier versions keep their existing platform-fitted content bounds.
+            setContentView(web);
+            return;
+        }
+        getWindow().setDecorFitsSystemWindows(false);
+        android.widget.FrameLayout content = new android.widget.FrameLayout(this);
+        content.setBackgroundColor(0xfff4f7f5);
+        content.addView(web, new android.widget.FrameLayout.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+        content.setOnApplyWindowInsetsListener((view, insets) -> {
+            android.graphics.Insets safe = insets.getInsets(android.view.WindowInsets.Type.systemBars() | android.view.WindowInsets.Type.displayCutout());
+            android.graphics.Insets keyboard = insets.getInsets(android.view.WindowInsets.Type.ime());
+            int bottom = Math.max(safe.bottom, keyboard.bottom);
+            // Resize the WebView's actual viewport, so DOM and touch coordinates
+            // share the same inset origin instead of compensating with CSS.
+            if (view.getPaddingLeft() != safe.left || view.getPaddingTop() != safe.top ||
+                view.getPaddingRight() != safe.right || view.getPaddingBottom() != bottom)
+                view.setPadding(safe.left, safe.top, safe.right, bottom);
+            // This container has applied the insets; descendants must not apply them twice.
+            return android.view.WindowInsets.CONSUMED;
+        });
+        setContentView(content);
+        content.requestApplyInsets();
     }
     private void updateNavigationGestureSegment() {
         if (Build.VERSION.SDK_INT < 29 || web == null) return;
@@ -83,6 +122,63 @@ public final class MainActivity extends Activity {
     private static WebResourceResponse denied() {
         return new WebResourceResponse("text/plain", "UTF-8", 403, "Forbidden",
             Collections.emptyMap(), new ByteArrayInputStream(new byte[0]));
+    }
+    /** Selected local documents are read by the input element; no broad storage permission. */
+    private boolean chooseLocalDocuments(WebView view, ValueCallback<Uri[]> callback, WebChromeClient.FileChooserParams params) {
+        if (callback == null) return false;
+        if (destroyed || view != web || view.getUrl() == null || !local(Uri.parse(view.getUrl())) || params == null ||
+            (params.getMode() != WebChromeClient.FileChooserParams.MODE_OPEN && params.getMode() != WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE)) {
+            callback.onReceiveValue(null);return true;
+        }
+        // Do not replace the first callback: its result may already be on its way.
+        if (pendingFiles != null) { callback.onReceiveValue(null);return true; }
+        LinkedHashSet<String> mimeTypes = new LinkedHashSet<>();
+        String[] accepted = params.getAcceptTypes();
+        if (accepted != null) for (String group : accepted) {
+            if (group == null) continue;
+            for (String item : group.split(",")) {
+                String type = item.trim().toLowerCase(Locale.ROOT);
+                if (type.startsWith(".")) type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(type.substring(1));
+                if (type != null && type.matches("(?:[a-z0-9!#$&^_.+-]+|\\*)/(?:[a-z0-9!#$&^_.+-]+|\\*)")) mimeTypes.add(type);
+            }
+        }
+        Intent request = new Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)
+            .setType(mimeTypes.size() == 1 ? mimeTypes.iterator().next() : "*/*")
+            .putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+            .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, params.getMode() == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE)
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if (mimeTypes.size() > 1) request.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes.toArray(new String[0]));
+        pendingFiles = callback;
+        pendingFilesMultiple = params.getMode() == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE;
+        try { startActivityForResult(request, OPEN_LOCAL_DOCUMENT); }
+        catch (ActivityNotFoundException | SecurityException unavailable) {
+            completeFileSelection(null);
+            android.widget.Toast.makeText(this, "无法打开本机文件选择器；当前表单仍保留", android.widget.Toast.LENGTH_LONG).show();
+        }
+        return true;
+    }
+    private void completeFileSelection(Uri[] selected) {
+        ValueCallback<Uri[]> callback = pendingFiles;
+        pendingFiles = null;pendingFilesMultiple = false;
+        if (callback != null) callback.onReceiveValue(selected);
+    }
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != OPEN_LOCAL_DOCUMENT || pendingFiles == null) return;
+        LinkedHashSet<Uri> selected = new LinkedHashSet<>();
+        if (!destroyed && resultCode == RESULT_OK && data != null) {
+            ClipData clips = data.getClipData();
+            if (clips != null) for (int i = 0; i < clips.getItemCount(); i++) {
+                Uri uri = clips.getItemAt(i).getUri();
+                if (uri != null && "content".equals(uri.getScheme())) selected.add(uri);
+                if (!pendingFilesMultiple && !selected.isEmpty()) break;
+            }
+            if (selected.isEmpty()) {
+                Uri uri = data.getData();
+                if (uri != null && "content".equals(uri.getScheme())) selected.add(uri);
+            }
+        }
+        completeFileSelection(selected.isEmpty() ? null : selected.toArray(new Uri[0]));
     }
     public WebView previewWebView() { return web; }
     public final class PreviewBridge {
@@ -135,7 +231,33 @@ public final class MainActivity extends Activity {
             "if(window.D4Prototype&&D4Prototype.back){D4Prototype.back();return true;}return false;})()",
             value -> { if (!destroyed && "false".equals(value)) moveTaskToBack(true); });
     }
-    @Override protected void onPause() { if (web != null) web.onPause(); super.onPause(); }
+    @Override public void onActionModeStarted(android.view.ActionMode mode) {
+        super.onActionModeStarted(mode);
+        if (mode.getType() == android.view.ActionMode.TYPE_FLOATING) {
+            floatingTextMode = mode;
+            android.util.Log.i("D403PreviewInput", "floating-text-started id=" + System.identityHashCode(mode));
+        }
+    }
+    @Override public void onActionModeFinished(android.view.ActionMode mode) {
+        if (floatingTextMode == mode) floatingTextMode = null;
+        if (mode.getType() == android.view.ActionMode.TYPE_FLOATING)
+            android.util.Log.i("D403PreviewInput", "floating-text-finished id=" + System.identityHashCode(mode));
+        super.onActionModeFinished(mode);
+    }
+    private void finishFloatingTextMode() {
+        android.view.ActionMode mode = floatingTextMode;
+        floatingTextMode = null;
+        android.util.Log.i("D403PreviewInput", "floating-text-lifecycle-end id=" + (mode == null ? "none" : System.identityHashCode(mode)));
+        if (mode != null) mode.finish();
+    }
+    @Override protected void onPause() {
+        // A text-selection toolbar belongs to this foreground WebView. Finish it
+        // before pausing, so returning from a native screen cannot revive an old
+        // popup over an unrelated control and consume its first real touch.
+        finishFloatingTextMode();
+        if (web != null) web.onPause();
+        super.onPause();
+    }
     @Override protected void onResume() {
         super.onResume();
         if (web != null) {
@@ -145,6 +267,8 @@ public final class MainActivity extends Activity {
     }
     @Override protected void onDestroy() {
         destroyed = true;
+        finishFloatingTextMode();
+        completeFileSelection(null);
         if (web != null) { web.removeJavascriptInterface("GxD4Preview"); web.destroy(); web = null; }
         super.onDestroy();
     }
