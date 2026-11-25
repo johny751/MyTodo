@@ -17,6 +17,7 @@ export async function runRegressionCases(api) {
   const read = expression => api.eval(expression);
   const task = id => read('D4Prototype.repo.getTask(' + JSON.stringify(id) + ')');
   const edit = name => '[data-form="task-edit"] [name="' + name + '"]';
+  const quick = name => '[data-form="subtask-add"] [name="' + name + '"]';
   const filter = name => '[data-form="task-filter"] [name="' + name + '"]';
   const menu = id => '[data-task-id="' + id + '"] [data-action="task-menu"]';
   const open = id => api.click('[data-task-id="' + id + '"] [data-action="task-open"]');
@@ -42,6 +43,21 @@ export async function runRegressionCases(api) {
   }
   function withoutOrder(value) {
     return value.map(({order, ...raw}) => raw).sort((a, b) => a.id.localeCompare(b.id));
+  }
+  function unchanged(before, after, edited = []) {
+    for (const key of Object.keys(before).filter(key=>!edited.includes(key))) assert.deepEqual(after[key], before[key], key);
+  }
+  async function historicalParent({repeat = true} = {}) {
+    // Valid minute schedule plus genuinely raw legacy payloads. Seconds-bearing
+    // custom reminders remain a separately reported BLOCKER, never a fake fixture.
+    await read(`(()=>{const today=DemoDomain.helpers.dayKey();D4Prototype.repo.transaction(s=>{
+      const t=s.tasks.find(t=>t.id==='d4-task-0');Object.assign(t,{done:false,completedAt:'',
+        start:today+'T09:00',end:today+'T11:30',place:'  原始园区\\n楼层 2  ',weight:12.5,
+        reminder:{mode:'custom',minutes:0,days:0,at:today+'T08:45'},
+        repeat:${repeat?"{frequency:'daily',interval:2,weekdays:[0,2,5],until:'',anchor:today+'T09:00'}":"null"}});
+      });return true;})()`);
+    await settle();
+    return task('d4-task-0');
   }
 
   await check('R01 Explicit task selection outranks old detail-page draft and ID', async () => {
@@ -332,6 +348,210 @@ export async function runRegressionCases(api) {
     await api.screenshot('regression-drawer-saved-values');
     await api.click('[data-action="close-modal"]');
     assert.equal(await read('!!document.querySelector(".modal")'), false);
+  });
+
+  for (const [name, leave] of [
+    ['close', () => api.click('.task-drawer [data-action="close-modal"]')],
+    ['back', async () => {await read('D4PreviewBack()'); await settle();}]
+  ]) {
+    await check('R12-' + name + ' Leaving a valid dirty editor saves raw parent fields before exit [synthetic fixture]', async () => {
+      const before = await historicalParent(), title = '离开详情前保存标题 ' + name, notes = '离开详情前保存备注\n' + name;
+      await open(before.id); await api.fill(edit('title'), title); await api.fill(edit('notes'), notes);
+      assert.deepEqual(await task(before.id), before, 'Typing must remain a draft until the leave gate runs');
+      await leave();
+      assert.equal(await read('!!document.querySelector(".modal")'), false);
+      const saved = await task(before.id);
+      assert.equal(saved.title, title); assert.equal(saved.notes, notes); unchanged(before, saved, ['title','notes']);
+      await api.reload(); assert.deepEqual(await task(before.id), saved);
+      await api.screenshot('regression-leave-saves-' + name);
+    });
+  }
+
+  for (const [name, attempt, invalid] of [
+    ['close', () => api.click('.task-drawer [data-action="close-modal"]'), 'schedule'],
+    ['back', async () => {await read('D4PreviewBack()'); await settle();}, 'html-required'],
+    ['complete', () => api.click('.task-drawer [data-action="task-toggle"][data-id="d4-task-0"]'), 'trimmed-title'],
+    ['subtask', () => api.submit('[data-form="subtask-add"]'), 'trimmed-title']
+  ]) {
+    await check('R13-' + name + ' Invalid parent draft blocks exit/completion/child creation and retains inputs [synthetic fixture]', async () => {
+      const before = await historicalParent({repeat:false}), draftTitle = invalid==='schedule'?'有效标题，但截止早于开始':invalid==='html-required'?'':' \n ';
+      const draftEnd = invalid==='schedule'?before.start.slice(0,10)+'T08:30':before.end;
+      await open(before.id); await api.fill(edit('title'), draftTitle); await api.fill(edit('end'), draftEnd);
+      await api.fill(edit('notes'), '校验失败仍保留备注草稿');
+      await api.fill(quick('title'), '校验失败时不能创建的子任务');
+      await attempt();
+      assert.deepEqual(await task(before.id), before);
+      assert.equal(await read('!!document.querySelector(".task-drawer [data-form=task-edit]")'), true);
+      assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), draftTitle);
+      assert.equal(await read('document.querySelector(' + JSON.stringify(edit('end')) + ').value'), draftEnd);
+      assert.equal(await read('document.querySelector(' + JSON.stringify(edit('notes')) + ').value'), '校验失败仍保留备注草稿');
+      assert.equal(await read('document.querySelector(' + JSON.stringify(quick('title')) + ').value'), '校验失败时不能创建的子任务');
+      const failure = await read(`(()=>{const f=document.querySelector('[data-form="task-edit"]');return {
+        toast:document.querySelector('#toast').textContent,validation:[...f.elements].filter(e=>!e.checkValidity()).map(e=>e.validationMessage)
+      };})()`);
+      assert.ok(/任务内容|有效|保存失败|早于|结束时间/.test(failure.toast) || failure.validation.some(Boolean), 'The blocked action must expose a validation failure');
+      // The explicit Cancel action is a deliberate discard; it must not be used
+      // as a substitute for the failing close/back save path above.
+      await api.click('[data-form="task-edit"] [data-action="task-discard"]');
+      assert.deepEqual(await task(before.id), before);
+      assert.equal(await read('!!document.querySelector(".modal")'), false);
+    });
+  }
+
+  await check('R14 Completing a dirty editor first commits parent raw fields [synthetic fixture]', async () => {
+    const before = await historicalParent({repeat:false}), title = '保存草稿后完成', notes = '完成前提交的备注\n保持原始地点';
+    await open(before.id); await api.fill(edit('title'), title); await api.fill(edit('notes'), notes);
+    await api.click('.task-drawer [data-action="task-toggle"][data-id="' + before.id + '"]');
+    const saved = await task(before.id);
+    assert.equal(saved.title, title); assert.equal(saved.notes, notes); assert.equal(saved.done, true);
+    assert.ok(Number.isFinite(Date.parse(saved.completedAt)));
+    // Frozen reminderTime returns null for a completed task. Keep the original
+    // reminder rule exact while checking this mature derived-value transition.
+    assert.equal(saved.reminderAt, null); unchanged(before, saved, ['title','notes','done','completedAt','reminderAt']);
+    assert.equal(await read('!!document.querySelector(".task-drawer [data-form=task-edit]")'), true);
+    assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), title);
+    await api.click('.task-drawer [data-action="close-modal"]'); await api.reload();
+    assert.deepEqual(await task(before.id), saved);
+    await api.screenshot('regression-complete-saves-parent');
+  });
+
+  await check('R15 Adding a quick child first saves parent draft and preserves all other raw fields [synthetic fixture]', async () => {
+    const before = await historicalParent(), title = '添加子任务前提交父任务', childTitle = '新子任务\n第二行';
+    await open(before.id); await api.fill(edit('title'), title); await api.fill(edit('notes'), '添加子任务前提交父备注');
+    await api.fill(quick('title'), '  ' + childTitle + '  '); await api.submit('[data-form="subtask-add"]');
+    const saved = await task(before.id), child = saved.subtasks.find(x=>!before.subtasks.some(old=>old.id===x.id));
+    assert.equal(saved.title, title); assert.equal(saved.notes, '添加子任务前提交父备注');
+    unchanged(before, saved, ['title','notes','subtasks']);
+    assert.equal(saved.subtasks.length, before.subtasks.length + 1); assert.ok(child); assert.equal(child.title, childTitle);
+    assert.deepEqual(saved.subtasks.filter(x=>x.id!==child.id), before.subtasks);
+    for (const key of ['quadrant','project','place','tags']) assert.deepEqual(child[key], saved[key], key);
+    assert.equal(await read('document.querySelector(' + JSON.stringify(quick('title')) + ').value'), '');
+    assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), title);
+    await api.click('.task-drawer [data-action="close-modal"]'); await api.reload();
+    assert.deepEqual(await task(before.id), saved);
+    await api.screenshot('regression-subtask-saves-parent');
+  });
+
+  await check('R16 Back saves parent and nonblank quick child exactly once [synthetic fixture]', async () => {
+    const before = await historicalParent(), childTitle = '返回时保存快捷子任务';
+    await open(before.id); await api.fill(edit('notes'), '返回时父任务备注也保存'); await api.fill(quick('title'), childTitle);
+    await read('D4PreviewBack()'); await settle();
+    assert.equal(await read('!!document.querySelector(".modal")'), false);
+    const saved = await task(before.id);
+    assert.equal(saved.notes, '返回时父任务备注也保存'); unchanged(before, saved, ['notes','subtasks']);
+    const added = saved.subtasks.filter(x=>!before.subtasks.some(old=>old.id===x.id));
+    assert.equal(added.length, 1); assert.equal(added[0].title, childTitle);
+    assert.deepEqual(saved.subtasks.filter(x=>x.id!==added[0].id), before.subtasks);
+    await open(before.id); assert.equal(await read('document.querySelector(' + JSON.stringify(quick('title')) + ').value'), '');
+    await api.click('.task-drawer [data-action="close-modal"]');
+    assert.deepEqual(await task(before.id), saved, 'Closing again must not duplicate the already-added quick child');
+    await api.reload(); assert.deepEqual(await task(before.id), saved);
+  });
+
+  await check('R17 Captured editor base merges a distinct synthetic concurrent field edit [synthetic fixture]', async () => {
+    const before = await historicalParent(), localTitle = '本地草稿标题', remoteNotes = '隔离并发更新的备注', remotePlace = '  并发原始地点\n房间 B  ';
+    const initialIds = await read('D4Prototype.repo.state.tasks.map(t=>t.id)');
+    await open(before.id); await api.fill(edit('title'), localTitle);
+    // A direct synthetic provider edit simulates a concurrent writer. It is not
+    // remote connectivity or production synchronization evidence.
+    await read('D4Prototype.repo.updateTask(' + JSON.stringify(before.id) + ',{notes:' + JSON.stringify(remoteNotes) + ',place:' + JSON.stringify(remotePlace) + '})');
+    await settle();
+    assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), localTitle);
+    await api.submit('[data-form="task-edit"]');
+    const saved = await task(before.id);
+    assert.equal(saved.title, localTitle); assert.equal(saved.notes, remoteNotes); assert.equal(saved.place, remotePlace);
+    unchanged(before, saved, ['title','notes','place']);
+    assert.deepEqual(await read('D4Prototype.repo.state.tasks.map(t=>t.id)'), initialIds);
+    assert.equal(await read('document.querySelector(' + JSON.stringify(edit('notes')) + ').value'), remoteNotes);
+    assert.equal(await read('document.querySelector(' + JSON.stringify(edit('place')) + ').value'), remotePlace);
+    await api.click('.task-drawer [data-action="close-modal"]'); await api.reload();
+    assert.deepEqual(await task(before.id), saved);
+    await api.screenshot('regression-editor-distinct-field-merge');
+  });
+
+  await check('R18 Same-field conflict preserves local original and complete concurrent conflict copy [synthetic fixture]', async () => {
+    await historicalParent();
+    await read(`(()=>{D4Prototype.repo.transaction(s=>{const t=s.tasks.find(t=>t.id==='d4-task-0');
+      t.subtasks=[{...structuredClone(t),id:'d4-regression-conflict-child',title:'冲突副本须保留子任务',subtasks:[],repeat:null,reminder:null}];
+      });return true;})()`); await settle();
+    const before = await task('d4-task-0'), localTitle = '本地并发标题', remoteTitle = '并发写入标题';
+    const originalIds = await read('D4Prototype.repo.state.tasks.map(t=>t.id)');
+    await open(before.id); await api.fill(edit('title'), localTitle);
+    await read('D4Prototype.repo.updateTask(' + JSON.stringify(before.id) + ',{title:' + JSON.stringify(remoteTitle) + '})'); await settle();
+    const remote = await task(before.id);
+    await api.submit('[data-form="task-edit"]');
+    const saved = await task(before.id), added = await read('D4Prototype.repo.state.tasks.filter(t=>!' + JSON.stringify(originalIds) + '.includes(t.id))');
+    assert.equal(saved.title, localTitle); unchanged(before, saved, ['title']);
+    assert.equal(added.length, 1); const copy = added[0];
+    assert.match(copy.id, /^conflict-/); assert.equal(copy.title, '[同步冲突副本] ' + remoteTitle);
+    unchanged(remote, copy, ['id','title','subtasks']); assert.equal(copy.subtasks.length, remote.subtasks.length);
+    for (let i=0;i<copy.subtasks.length;i++) {
+      assert.notEqual(copy.subtasks[i].id, remote.subtasks[i].id);
+      unchanged(remote.subtasks[i], copy.subtasks[i], ['id']);
+    }
+    await api.click('.task-drawer [data-action="close-modal"]'); await api.reload();
+    assert.deepEqual(await task(before.id), saved); assert.deepEqual(await task(copy.id), copy);
+    await api.screenshot('regression-editor-conflict-copy');
+  });
+
+  await check('R19 Concurrently deleted parent is never resurrected by saving or closing its draft [synthetic fixture]', async () => {
+    const before = await historicalParent(); await open(before.id); await api.fill(edit('title'), '已删除任务仍保留的编辑草稿');
+    await read('D4Prototype.repo.deleteTask(' + JSON.stringify(before.id) + ')'); await settle();
+    await api.submit('[data-form="task-edit"]');
+    assert.equal(await task(before.id), null);
+    assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), '已删除任务仍保留的编辑草稿');
+    assert.match(await read('document.querySelector("#toast").textContent'), /不存在|删除/);
+    await api.click('.task-drawer [data-action="close-modal"]');
+    assert.equal(await task(before.id), null); assert.equal(await read('!!document.querySelector(".modal")'), true);
+    await api.click('[data-form="task-edit"] [data-action="task-discard"]');
+    assert.equal(await read('!!document.querySelector(".modal")'), false);
+    assert.equal(await task(before.id), null);
+  });
+
+  await check('R20 Synthetic quota failure honestly retains memory edit and blocks destructive editor exits [synthetic storage failure]', async () => {
+    const before = await historicalParent({repeat:false}), title = '写入失败仍在内存的标题';
+    const storedBefore = await read('localStorage.getItem(D4Prototype.storageKey)');
+    assert.equal((await read('D4Prototype.repo.persistence()')).mode, 'localStorage');
+    await open(before.id); await api.fill(edit('title'), title);
+    // Only the documented D4 synthetic namespace fails. No other namespace is
+    // read, removed, overwritten or tested. Restore the native method in finally.
+    await read(`(()=>{window.__d4RegressionSetItem=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){
+      if(key===D4Prototype.storageKey)throw new Error('d4 synthetic quota failure');
+      return window.__d4RegressionSetItem.call(this,key,value);
+    };return true;})()`);
+    try {
+      await api.submit('[data-form="task-edit"]');
+      const memory = await task(before.id), persistence = await read('D4Prototype.repo.persistence()');
+      assert.equal(memory.title, title); unchanged(before, memory, ['title']);
+      assert.equal(persistence.mode, 'memory'); assert.match(persistence.error, /synthetic quota failure/);
+      assert.equal(await read('localStorage.getItem(D4Prototype.storageKey)'), storedBefore);
+      assert.equal(await read('!!document.querySelector(".task-drawer [data-form=task-edit]")'), true);
+      assert.match(await read('document.querySelector("#toast").textContent'), /仅保存在当前会话内存/);
+      await api.fill(quick('title'), '存储失败时不能创建的子任务');
+      for (const attempt of [
+        () => api.click('.task-drawer [data-action="close-modal"]'),
+        () => api.click('.task-drawer [data-action="task-toggle"][data-id="' + before.id + '"]'),
+        () => api.submit('[data-form="subtask-add"]')
+      ]) {
+        await attempt(); assert.deepEqual(await task(before.id), memory);
+        assert.equal(await read('!!document.querySelector(".task-drawer [data-form=task-edit]")'), true);
+        assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), title);
+        assert.equal(await read('document.querySelector(' + JSON.stringify(quick('title')) + ').value'), '存储失败时不能创建的子任务');
+        assert.match(await read('document.querySelector("#toast").textContent'), /仅保存在当前会话内存/);
+      }
+      // The harness keeps toasts in screenshots whose name starts "failure-".
+      // This is an expected injected failure; the case status still records the
+      // actual assertions, and does not count this evidence filename as a failure.
+      await api.screenshot('failure-expected-synthetic-quota-warning');
+    } finally {
+      await read('(()=>{Storage.prototype.setItem=window.__d4RegressionSetItem;delete window.__d4RegressionSetItem;return true;})()');
+      await api.reload();
+    }
+    // Reopening reads the old durable bytes. The accepted memory edit must never
+    // be presented as persistence across reload or as native SQLite validation.
+    assert.deepEqual(await task(before.id), before);
+    assert.equal(await read('localStorage.getItem(D4Prototype.storageKey)'), storedBefore);
+    assert.equal((await read('D4Prototype.repo.persistence()')).mode, 'localStorage');
   });
 
   for (const [name, expression] of [

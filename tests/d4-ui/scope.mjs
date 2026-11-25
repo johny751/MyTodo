@@ -5,7 +5,13 @@ import path from 'node:path';
 const git=args=>execFileSync('git',args,{encoding:'utf8',windowsHide:true}).trim();
 if(process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_REF!=='refs/heads/d4/mobile-integrated-candidate-1'||process.env.EXPECTED_SOURCE_SHA!==process.env.GITHUB_SHA||git(['rev-parse','HEAD'])!==process.env.GITHUB_SHA)throw Error('Wrong UI candidate identity');
 const base=git(['rev-parse','origin/master']);
-git(['diff','--check','origin/master...HEAD']);
+if(base!=='d4c5af4cbbb9192c19276dd371bd142c2b835534')throw Error('Frozen master identity changed');
+// Unified diff requires a leading space for an empty context line.
+// Verify these raw failure bytes exactly rather than rewriting history.
+const rawPatch='docs/upgrade/d4-03/evidence-billing-01/source04-preserved-dirty.patch';
+const rawBytes=readFileSync(rawPatch);
+if(rawBytes.length!==205759||createHash('sha256').update(rawBytes).digest('hex')!=='366b1be84eac5fb9855eee46c5a558518e2d8df6bbcb884cc452403aeb3757c7')throw Error('Frozen raw patch evidence changed');
+git(['diff','--check','origin/master...HEAD','--','.',':(exclude,literal)'+rawPatch]);
 const files=git(['diff','--name-only','origin/master...HEAD']).split('\n').filter(Boolean);
 const allowed=/^(?:prototypes\/(?:d4-01|d4-03-platforms)\/|tests\/(?:d4-ui|d4-03-platforms)\/|docs\/upgrade\/(?:d4-01|d4-03)\/|\.github\/workflows\/d4-(?:ui-candidate|03-candidate|03-c0-regression)\.yml$)/;
 if(files.some(f=>!allowed.test(f)))throw Error('Unauthorized scope: '+files.filter(f=>!allowed.test(f)).join(','));
