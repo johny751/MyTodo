@@ -77,9 +77,10 @@ public final class PreviewInstrumentation extends Instrumentation {
                 try {
                 js("D4Prototype.navigate('about')"); settle();
                 require(Boolean.TRUE.equals(js("document.querySelector('.version-info').textContent.includes(JSON.parse(GxD4Preview.versionInfo()).versionName)&&document.querySelector('.version-info').textContent.includes(String(JSON.parse(GxD4Preview.versionInfo()).versionCode))")),"About page displays actual APK identity");
-                tap("[data-action=personal-apk-version]");
+                openNativeVersionDialog("initial");
                 AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();
-                require(root!=null&&nativeTextContains(root,BuildInfo.VERSION_NAME)&&nativeTextContains(root,BuildInfo.BUILD_TIME_UTC),"Real Android version dialog contains injected APK name and UTC build time");
+                try { require(root!=null&&nativeTextContains(root,BuildInfo.VERSION_NAME)&&nativeTextContains(root,BuildInfo.BUILD_TIME_UTC),"Real Android version dialog contains injected APK name and UTC build time"); }
+                finally { if(root!=null)root.recycle(); }
                 shot("android-apk-version"); verifyNativeVersionButtons();home();
                 } catch(Throwable failure) {
                     try { shot("failure-native-version-before-cleanup"); }
@@ -1045,6 +1046,82 @@ public final class PreviewInstrumentation extends Instrumentation {
     }
     private static void require(boolean condition,String message) { if(!condition)throw new AssertionError(message); }
     private static boolean nativeTextContains(AccessibilityNodeInfo node,String text) { if(node.getText()!=null&&node.getText().toString().contains(text))return true;for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo child=node.getChild(i);if(child!=null){boolean found=nativeTextContains(child,text);child.recycle();if(found)return true;}}return false; }
+    /** Observe the exact native dialog after one real opening tap; never repeat input. */
+    private void openNativeVersionDialog(String stage) throws Exception {
+        String app=getTargetContext().getPackageName();
+        String expected=BuildInfo.VERSION_NAME+" / versionCode "+BuildInfo.VERSION_CODE+
+            "\nby codex · "+BuildInfo.SOURCE_SHA.substring(0,5)+"\nAPK 编译时间："+BuildInfo.BUILD_TIME_UTC+
+            " (UTC)\n独立合成体验；无生产数据库/远端同步";
+        JSONObject proof=new JSONObject().put("kind","mytodo-d403-native-version-readiness")
+            .put("sourceSha",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
+            .put("stage",stage).put("expectedText",expected).put("eventWaitTimeoutMs",10000)
+            .put("timeoutScope","Event wait after the opening command returns; elapsed includes the command");
+        JSONArray observations=new JSONArray();proof.put("observations",observations);
+        final Throwable[] callbackFailure={null};final int[] openingTaps={0};final boolean[] observedReady={false};
+        long started=SystemClock.uptimeMillis();AccessibilityEvent ready=null;Throwable originalFailure=null;
+        try {
+            ready=getUiAutomation().executeAndWaitForEvent(()->{
+                openingTaps[0]++;
+                try{tap("[data-action=personal-apk-version]");}
+                catch(Exception|Error failure){callbackFailure[0]=failure;throw new IllegalStateException("Native version opening tap failed",failure);}
+            },event->{
+                int type=event.getEventType();
+                if(type!=AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED&&type!=AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+                    &&type!=AccessibilityEvent.TYPE_WINDOWS_CHANGED)return false;
+                CharSequence pkg=event.getPackageName();if(pkg!=null&&!app.contentEquals(pkg))return false;
+                try {
+                    require(observations.length()<64,"Native version readiness observations remain bounded");
+                    JSONObject observation=new JSONObject().put("eventType",type).put("eventTime",event.getEventTime())
+                        .put("eventPackage",pkg==null?JSONObject.NULL:pkg.toString());
+                    observations.put(observation);observeNativeVersionRoot(expected,observation);
+                    observedReady[0]=observation.getBoolean("ready");return observedReady[0];
+                } catch(Exception|Error failure){callbackFailure[0]=failure;throw new IllegalStateException("Native version readiness observation failed",failure);}
+            },10000L);
+            require(openingTaps[0]==1&&observedReady[0],"One opening tap exposes the exact current native version dialog");
+            proof.put("ready",true);
+        } catch(Exception|Error failure) {
+            Throwable original=callbackFailure[0]==null?failure:callbackFailure[0];originalFailure=original;
+            try {
+                proof.put("failure",original.toString());JSONObject last=new JSONObject();proof.put("failureRoot",last);
+                observeNativeVersionRoot(expected,last);
+            } catch(Exception|Error evidenceFailure){original.addSuppressed(evidenceFailure);}
+            if(original instanceof Exception)throw (Exception)original;throw (Error)original;
+        } finally {
+            if(ready!=null)ready.recycle();
+            try {
+                proof.put("openingTapInvocationCount",openingTaps[0]).put("elapsedIncludingCommandMs",SystemClock.uptimeMillis()-started);
+                write("native-version-readiness-"+stage+".json",proof.toString(2));
+            } catch(Exception|Error saveFailure){if(originalFailure!=null)originalFailure.addSuppressed(saveFailure);else throw saveFailure;}
+        }
+    }
+    private void observeNativeVersionRoot(String expected,JSONObject observation) throws Exception {
+        observation.put("observedUptimeMillis",SystemClock.uptimeMillis()).put("ready",false);
+        AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();observation.put("rootPresent",root!=null);
+        if(root==null)return;
+        JSONArray tree=new JSONArray();int[] matches={0,0};observation.put("tree",tree);
+        try {
+            observation.put("rootPackage",String.valueOf(root.getPackageName())).put("windowId",root.getWindowId());
+            collectNativeVersionReadiness(root,expected,tree,matches);
+            observation.put("exactVisibleTitleMatches",matches[0]).put("exactVisibleMessageMatches",matches[1]);
+            require(matches[0]<=1&&matches[1]<=1,"Native version title and message are unambiguous");
+            observation.put("ready",getTargetContext().getPackageName().equals(String.valueOf(root.getPackageName()))&&matches[0]==1&&matches[1]==1);
+        } finally {root.recycle();}
+    }
+    private void collectNativeVersionReadiness(AccessibilityNodeInfo node,String expected,JSONArray tree,int[] matches) throws Exception {
+        require(tree.length()<400,"Native version readiness tree remains bounded");
+        String text=node.getText()==null?"":node.getText().toString();String cls=String.valueOf(node.getClassName());
+        String pkg=String.valueOf(node.getPackageName());Rect bounds=new Rect();node.getBoundsInScreen(bounds);
+        tree.put(new JSONObject().put("class",cls).put("package",pkg).put("text",text.length()>1000?text.substring(0,1000):text)
+            .put("visible",node.isVisibleToUser()).put("enabled",node.isEnabled()).put("bounds",bounds.toShortString()));
+        if(getTargetContext().getPackageName().equals(pkg)&&node.isVisibleToUser()&&"android.widget.TextView".equals(cls)){
+            if("MyTodo D4-03 版本信息".equals(text))matches[0]++;
+            if(expected.equals(text))matches[1]++;
+        }
+        for(int i=0;i<node.getChildCount();i++){
+            AccessibilityNodeInfo child=node.getChild(i);
+            if(child!=null)try{collectNativeVersionReadiness(child,expected,tree,matches);}finally{child.recycle();}
+        }
+    }
     private void verifyNativeVersionButtons() throws Exception {
         JSONObject proof=new JSONObject().put("kind","mytodo-d403-native-version-button-evidence")
             .put("sourceSha",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
@@ -1071,7 +1148,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             runOnMainSync(()->{ClipData clip=clipboard.getPrimaryClip();copiedItems[0]=clip==null?0:clip.getItemCount();copied[0]=clip!=null&&clip.getItemCount()==1&&clip.getItemAt(0).getText()!=null?clip.getItemAt(0).getText().toString():null;});
             proof.put("copiedItems",copiedItems[0]).put("copiedText",copied[0]==null?JSONObject.NULL:copied[0]);
             require(copiedItems[0]==1&&versionText.equals(copied[0]),"Actual native copy button replaces the sentinel with the exact displayed version information");
-            tap("[data-action=personal-apk-version]");nativeDialogButton("版本历史",actions);
+            openNativeVersionDialog("history-reopen");nativeDialogButton("版本历史",actions);
             JSONArray history;
             try(InputStream in=getTargetContext().getAssets().open("version-history.json");ByteArrayOutputStream bytes=new ByteArrayOutputStream()){
                 byte[] buffer=new byte[4096];int n;while((n=in.read(buffer))!=-1)bytes.write(buffer,0,n);

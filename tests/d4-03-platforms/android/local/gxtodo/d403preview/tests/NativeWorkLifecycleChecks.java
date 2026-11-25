@@ -178,12 +178,8 @@ final class NativeWorkLifecycleChecks {
         int workEditClicks(String id,boolean detailFooter) throws Exception {return ((Number)h.js("window.__d403NativeWorkTrace.events.filter(e=>e.type==='click'&&e.trusted&&e.action==='work-edit-work-item'&&e.id==="+q(id)+(detailFooter?"&&e.detailFooter":"")+").length")).intValue();}
         void select(String selector,String value) throws Exception {
             JSONObject option=(JSONObject)h.js("(function(){var e=document.querySelector("+q(selector)+"),a=Array.from(e.options).filter(o=>o.value==="+q(value)+");if(a.length!==1||a[0].disabled)throw Error('Expected one enabled exact project option');return {label:a[0].textContent,value:a[0].value,form:e.form.dataset.form,name:e.name};})()");
-            int before=countEvent("change",option.getString("form"),option.getString("name"));h.tap(selector);nativeSelectOpen=true;
-            AccessibilityNodeInfo root=h.instrumentation().getUiAutomation().getRootInActiveWindow();require(root!=null,"Native select accessibility window exists");
-            List<Rect> targets=new ArrayList<>();Rect window=new Rect();JSONArray tree=new JSONArray();
-            try{require(h.instrumentation().getTargetContext().getPackageName().equals(String.valueOf(root.getPackageName())),"Native select belongs to the isolated app");root.getBoundsInScreen(window);collectOption(root,option.getString("label"),targets,tree,new int[]{0});}finally{root.recycle();}
-            nativeSelections.put(new JSONObject().put("selector",selector).put("option",option).put("tree",tree));save();
-            require(targets.size()==1,"One visible native CheckedTextView has the exact observed project label");Rect target=targets.get(0);require(target.intersect(window)&&target.width()>2&&target.height()>2,"Native option has visible clipped bounds");
+            int before=countEvent("change",option.getString("form"),option.getString("name"));
+            Rect target=awaitNativeOption(selector,option);
             long down=SystemClock.uptimeMillis();boolean released=false;Throwable inputFailure=null;
             try{inject(h,down,MotionEvent.ACTION_DOWN,target.exactCenterX(),target.exactCenterY());inject(h,down,MotionEvent.ACTION_UP,target.exactCenterX(),target.exactCenterY());released=true;}
             catch(Exception|Error error){inputFailure=error;throw error;}
@@ -191,6 +187,63 @@ final class NativeWorkLifecycleChecks {
             h.settle();require(value.equals(h.js("document.querySelector("+q(selector)+").value")),"One actual native option tap selects the exact project ID");
             require(nativeOptionCount(h)==0&&Boolean.TRUE.equals(h.js("document.hasFocus()")),"Native option popup closes and Web document regains focus");nativeSelectOpen=false;
             require(countEvent("change",option.getString("form"),option.getString("name"))==before+1,"Native project selection emits exactly one trusted change");
+        }
+        Rect awaitNativeOption(String selector,JSONObject option) throws Exception {
+            String app=h.instrumentation().getTargetContext().getPackageName();
+            JSONObject selection=new JSONObject().put("selector",selector).put("option",option);
+            JSONArray observations=new JSONArray();selection.put("readinessObservations",observations);
+            nativeSelections.put(selection);save();
+            final Rect[] selected={null};final Throwable[] error={null};final int[] openingTaps={0};
+            long started=SystemClock.uptimeMillis();
+            android.view.accessibility.AccessibilityEvent ready=null;
+            Throwable thrown=null;
+            try {
+                // Subscribe before the only opening tap. Readiness observes native content;
+                // it never repeats the action, sleeps, selects by JavaScript or relaxes the target.
+                ready=h.instrumentation().getUiAutomation().executeAndWaitForEvent(()->{
+                    nativeSelectOpen=true;openingTaps[0]++;
+                    try{h.tap(selector);}catch(Exception|Error failure){error[0]=failure;throw new IllegalStateException("Native select opening tap failed",failure);}
+                },event->{
+                    int type=event.getEventType();
+                    if(type!=android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+                        &&type!=android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+                        &&type!=android.view.accessibility.AccessibilityEvent.TYPE_WINDOWS_CHANGED)return false;
+                    CharSequence eventPackage=event.getPackageName();
+                    if(eventPackage!=null&&!app.equals(eventPackage.toString()))return false;
+                    try {
+                        require(observations.length()<64,"Native select readiness evidence remains bounded");
+                        JSONObject observation=new JSONObject().put("eventType",type).put("eventTime",event.getEventTime())
+                            .put("observedUptimeMillis",SystemClock.uptimeMillis()).put("eventPackage",eventPackage==null?JSONObject.NULL:eventPackage.toString());
+                        observations.put(observation);
+                        AccessibilityNodeInfo root=h.instrumentation().getUiAutomation().getRootInActiveWindow();
+                        observation.put("rootPresent",root!=null);if(root==null)return false;
+                        List<Rect> targets=new ArrayList<>();Rect window=new Rect();JSONArray tree=new JSONArray();
+                        try {
+                            observation.put("rootPackage",String.valueOf(root.getPackageName())).put("windowId",root.getWindowId());
+                            require(app.equals(String.valueOf(root.getPackageName())),"Native select belongs to the isolated app");
+                            root.getBoundsInScreen(window);collectOption(root,option.getString("label"),targets,tree,new int[]{0});
+                        } finally {root.recycle();}
+                        observation.put("window",window.toShortString()).put("tree",tree).put("exactVisibleEnabledMatches",targets.size());
+                        selection.put("tree",tree);
+                        require(targets.size()<=1,"Native project label must never be ambiguous");
+                        if(targets.isEmpty())return false;
+                        require(targets.size()==1,"One visible native CheckedTextView has the exact observed project label");
+                        Rect target=targets.get(0);require(target.intersect(window)&&target.width()>2&&target.height()>2,"Native option has visible clipped bounds");
+                        selected[0]=new Rect(target);selection.put("readyTarget",target.toShortString());return true;
+                    } catch(Exception|Error failure){error[0]=failure;throw new IllegalStateException("Native select readiness observation failed",failure);}
+                },10000L);
+                require(selected[0]!=null,"Native select accessibility window exposes the exact option before touch");
+                require(openingTaps[0]==1,"Native select is opened by exactly one tap invocation");
+                selection.put("readinessWaitMs",SystemClock.uptimeMillis()-started);
+                return selected[0];
+            } catch(Exception|Error failure) {
+                Throwable original=error[0]==null?failure:error[0];thrown=original;selection.put("readinessFailure",original.toString());
+                if(original instanceof Exception)throw (Exception)original;throw (Error)original;
+            } finally {
+                if(ready!=null)ready.recycle();
+                try{selection.put("openingTapInvocationCount",openingTaps[0]);save();}
+                catch(Exception|Error saveFailure){if(thrown!=null)thrown.addSuppressed(saveFailure);else throw saveFailure;}
+            }
         }
         void timeField(String form,String key,String raw,String date,String time,boolean precise) throws Exception {
             JSONObject shown=(JSONObject)h.js("(function(){var f=document.querySelector("+q(form)+");return {date:f.elements.namedItem("+q(key)+").value,time:f.elements.namedItem("+q(key+"Time")+").value,original:JSON.parse(f.elements.namedItem("+q(key+"Original")+").value),note:f.querySelector('[data-time-original="+key+"]').textContent};})()");
