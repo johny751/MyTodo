@@ -144,11 +144,30 @@ foreach ($record in $records) {
   }
 }
 $steps=@()
+$identityObservations=New-Object 'System.Collections.Generic.List[object]'
+function ObserveOwnedIdentity($record,[string]$stage) {
+  $observation=[pscustomobject]@{stage=$stage;at=[DateTime]::UtcNow.ToString('o');pid=[int]$record.pid;expectedExecutable=$record.executable;expectedCreatedAt=$record.createdAt;present=$null;executable=$null;createdAt=$null;state='query-error';queryError=$null}
+  try {
+    $live=Get-CimInstance Win32_Process -Filter ('ProcessId='+[int]$record.pid) -ErrorAction Stop
+    $observation.present=[bool]$live
+    if (!$live) { $observation.state='absent' }
+    else {
+      $observation.executable=$live.ExecutablePath
+      if ($null -ne $live.CreationDate) { $observation.createdAt=$live.CreationDate.ToUniversalTime().ToString('o') }
+      if ([string]::IsNullOrWhiteSpace($observation.executable) -or !$observation.createdAt) { $observation.state='incomplete-identity' }
+      elseif ($observation.createdAt -cne $record.createdAt) { $observation.state='different-creation-identity' }
+      elseif ($observation.executable -ine $record.executable) { $observation.state='executable-mismatch' }
+      else { $observation.state='owned-live' }
+    }
+  } catch { $observation.queryError=[string]$_ }
+  $identityObservations.Add($observation)
+  return $observation
+}
 if ($current.root) {
-  # The exact current root was selected by executable, creation time, unique
-  # profile and file URL. Recheck its creation identity before native tree stop.
-  $live=Get-CimInstance Win32_Process -Filter ('ProcessId='+[int]$current.root.pid)
-  if ($live -and $live.ExecutablePath -ieq $current.root.executable -and $live.CreationDate.ToUniversalTime().ToString('o') -ceq $current.root.createdAt) {
+  # Stop only the exact current root identity. A missing/incomplete/foreign
+  # observation is recorded and never authorizes a termination request.
+  $identity=ObserveOwnedIdentity $current.root 'before-tree-stop'
+  if ($identity.state -ceq 'owned-live') {
     $start=New-Object Diagnostics.ProcessStartInfo
     $start.FileName=Join-Path $env:SystemRoot 'System32/taskkill.exe'
     $start.Arguments='/PID '+$current.root.pid+' /T /F'
@@ -159,32 +178,38 @@ if ($current.root) {
       if (!$tree.WaitForExit(10000)) { $tree.Kill();throw 'Owned taskkill request timed out' }
       $steps+=([pscustomobject]@{pid=$current.root.pid;status='requested-owned-tree-stop';exitCode=$tree.ExitCode;stdout=$treeOut.Result;stderr=$treeError.Result;createdAt=$current.root.createdAt})
     } finally { $tree.Dispose() }
-  } elseif (!$live) { $steps+=([pscustomobject]@{pid=$current.root.pid;status='already-exited'}) }
-  else { $steps+=([pscustomobject]@{pid=$current.root.pid;status='identity-changed-not-stopped'}) }
+  } elseif ($identity.state -ceq 'absent') { $steps+=([pscustomobject]@{pid=$current.root.pid;status='already-exited';identity=$identity}) }
+  else { $steps+=([pscustomobject]@{pid=$current.root.pid;status='identity-changed-not-stopped';identity=$identity}) }
 }
 # A prior snapshot also covers descendants if the browser exited before cleanup.
 foreach ($record in @($byIdentity.Values | Sort-Object { [DateTime]::Parse($_.createdAt) } -Descending)) {
-  $live=Get-CimInstance Win32_Process -Filter ('ProcessId='+[int]$record.pid)
-  if (!$live) { $steps+=([pscustomobject]@{pid=$record.pid;status='already-exited'});continue }
-  if ($live.ExecutablePath -ine $record.executable -or $live.CreationDate.ToUniversalTime().ToString('o') -cne $record.createdAt) {
-    $steps+=([pscustomobject]@{pid=$record.pid;status='identity-changed-not-stopped'});continue
+  $identity=ObserveOwnedIdentity $record 'before-child-stop'
+  if ($identity.state -ceq 'absent') { $steps+=([pscustomobject]@{pid=$record.pid;status='already-exited';identity=$identity});continue }
+  if ($identity.state -cne 'owned-live') {
+    $steps+=([pscustomobject]@{pid=$record.pid;status='identity-changed-not-stopped';identity=$identity});continue
   }
   try {
     Stop-Process -Id $record.pid -Force -ErrorAction Stop
     $steps+=([pscustomobject]@{pid=$record.pid;status='stopped-owned-identity';createdAt=$record.createdAt})
   } catch {
-    $race=Get-CimInstance Win32_Process -Filter ('ProcessId='+[int]$record.pid)
-    if (!$race) { $steps+=([pscustomobject]@{pid=$record.pid;status='already-exited'}) }
-    elseif ($race.ExecutablePath -ine $record.executable -or $race.CreationDate.ToUniversalTime().ToString('o') -cne $record.createdAt) { $steps+=([pscustomobject]@{pid=$record.pid;status='identity-changed-not-stopped'}) }
-    else { throw }
+    $stopError=$_
+    $race=ObserveOwnedIdentity $record 'after-stop-error'
+    if ($race.state -ceq 'absent') { $steps+=([pscustomobject]@{pid=$record.pid;status='already-exited';identity=$race}) }
+    elseif ($race.state -cne 'owned-live') { $steps+=([pscustomobject]@{pid=$record.pid;status='identity-changed-not-stopped';identity=$race}) }
+    else { throw $stopError }
   }
 }
 Start-Sleep -Milliseconds 500
 $remaining=@()
-foreach ($record in $byIdentity.Values) {
-  $live=Get-CimInstance Win32_Process -Filter ('ProcessId='+[int]$record.pid)
-  if ($live -and $live.ExecutablePath -ieq $record.executable -and $live.CreationDate.ToUniversalTime().ToString('o') -ceq $record.createdAt) { $remaining+=(Row $live) }
-}
+$finalIdentityObservations=@(foreach ($record in $byIdentity.Values) { ObserveOwnedIdentity $record 'final' })
+# Explicit absent observations are required for every recorded identity. Empty
+# exact-match or browser-tree sets alone never resolve missing/foreign identity.
+$identityBlockers=@($finalIdentityObservations | Where-Object { $_.state -cne 'absent' })
+$remaining=@($finalIdentityObservations | Where-Object { $_.state -ceq 'owned-live' })
+$identityResolutions=@(foreach ($step in $steps | Where-Object { $_.status -ceq 'identity-changed-not-stopped' }) {
+  $final=@($finalIdentityObservations | Where-Object { $_.pid -eq $step.pid -and $_.expectedCreatedAt -ceq $step.identity.expectedCreatedAt })
+  [pscustomobject]@{pid=$step.pid;initial=$step.identity;final=@($final);resolvedByObservedAbsence=($final.Count -eq 1 -and $final[0].state -ceq 'absent')}
+})
 $after=OwnedSnapshot
 # Detect survivors that appeared after a snapshot. Detection never authorizes
 # killing an unrecorded identity, and any such survivor blocks profile removal.
@@ -202,4 +227,4 @@ for ($level=0;$level -lt 12;$level++) {
   }
   if (!$added) { break }
 }
-Emit ([pscustomobject]@{before=$current;steps=@($steps);remaining=@($remaining);unresolvedSurvivors=@($survivors);after=$after;passed=($remaining.Count -eq 0 -and $survivors.Count -eq 0 -and !$after.root -and @($steps | Where-Object {$_.status -eq 'identity-changed-not-stopped'}).Count -eq 0)})
+Emit ([pscustomobject]@{before=$current;steps=@($steps);identityObservations=@($identityObservations.ToArray());finalIdentityObservations=@($finalIdentityObservations);identityResolutions=@($identityResolutions);unresolvedIdentityObservations=@($identityBlockers);remaining=@($remaining);unresolvedSurvivors=@($survivors);after=$after;passed=($remaining.Count -eq 0 -and $survivors.Count -eq 0 -and !$after.root -and $identityBlockers.Count -eq 0 -and @($identityResolutions | Where-Object { !$_.resolvedByObservedAbsence }).Count -eq 0)})
