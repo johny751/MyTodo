@@ -44,7 +44,9 @@ $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $root=$PackageRoot
-$names=@(ConvertFrom-Json -InputObject ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($FilesBase64))))
+$names=ConvertFrom-Json -InputObject ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($FilesBase64)))
+if($names -isnot [Array] -or $names.Count -ne 10){throw 'Expected ten package file names'}
+foreach($name in $names){if($name -isnot [string] -or [String]::IsNullOrWhiteSpace($name)){throw 'Package file name must be a string'}}
 $archive=Join-Path $root 'mytodo-d4-experience.zip'
 $zip=[IO.Compression.ZipFile]::Open($archive,[IO.Compression.ZipArchiveMode]::Create)
 try { foreach($name in $names) { [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip,(Join-Path $root $name),$name,[IO.Compression.CompressionLevel]::Optimal) | Out-Null } }
