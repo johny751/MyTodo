@@ -6,6 +6,11 @@ const input=path.resolve(process.argv[2]),out=path.resolve(process.argv[3]);
 const r=JSON.parse(await fs.readFile(input,'utf8'));
 const identity=JSON.parse(await fs.readFile(path.resolve(process.argv[4]),'utf8'));
 const required=[
+ 'android-native-floating-selection-lifecycle-copy-paste',
+ "android-native-documentsui-cancel-preserves-draft",
+ "android-native-documentsui-feedback-original-reload",
+ "android-native-documentsui-attachment-original-reload",
+ "android-system-bars-content-and-edge-insets",
  'android-independent-package-and-bridge','android-starts-mobile-four-quadrants','android-apk-version-info-native-dialog','android-touch-zoom-and-back',
  'android-touch-full-task-menu-and-back','android-touch-drawer-item-overlay-and-left-swipe',
  'android-vertical-scroll-does-not-open-drawer','android-touch-longpress-reorder',
