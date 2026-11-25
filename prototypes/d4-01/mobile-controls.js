@@ -6,7 +6,11 @@
  // Match the frozen task gesture contract: only this task's trailing click is
  // suppressed. A close or navigation button remains usable immediately.
  function suppressClick(g,duration){suppressUntil=Date.now()+duration;suppressTaskId=g?.id||'';suppressTarget=clickTarget(g?.target);}
- function nav(open){document.querySelector('.app-shell')?.classList.toggle('nav-open',open);document.querySelector('.nav-shade')?.setAttribute('aria-hidden',String(!open));}
+ function nav(open){const shell=document.querySelector('.app-shell'),wasOpen=!!shell?.classList.contains('nav-open');shell?.classList.toggle('nav-open',open);document.querySelector('.nav-shade')?.setAttribute('aria-hidden',String(!open));
+  // The drawer covers the page's editing controls. End only the native text
+  // toolbar owned by that page, without scripted focus, selection or draft changes.
+  if(shell&&open&&!wasOpen)window.GxD4Preview?.navigationDrawerOpened?.();
+ }
  function clear(){const hadGesture=!!gesture;clearTimeout(gesture?.timer);cancelAnimationFrame(frame);ghost?.remove();ghost=null;document.querySelectorAll('.dragging,.drop-target,.swiping').forEach(el=>{el.classList.remove('dragging','drop-target','swiping');el.style.removeProperty('--swipe-x');el.querySelector('.swipe-feedback')?.remove();});gesture=null;if(hadGesture)queueMicrotask(()=>ctx?.onGestureEnd?.());}
  function hit(x,y){const g=gesture;if(!g?.active)return;g.x=x;g.y=y;ghost.style.left=Math.min(innerWidth-180,Math.max(8,x+10))+'px';ghost.style.top=(y+10)+'px';const zone=document.elementsFromPoint(x,y).map(el=>el.closest(g.subtask?'[data-subtask-list]':'[data-quadrant]')).find(el=>el&&(!g.subtask||el.dataset.subtaskList===g.parentId));document.querySelectorAll('.drop-target').forEach(el=>el.classList.remove('drop-target'));g.zone=zone;if(zone)zone.classList.add('drop-target');}
  function scroll(){if(!gesture?.active)return;const g=gesture,list=g.subtask?g.zone:g.zone?.querySelector('.quadrant-list');if(list){const r=list.getBoundingClientRect(),top=Math.max(0,r.top),bottom=Math.min(innerHeight,r.bottom);if(g.y<top+42)list.scrollTop-=10;else if(g.y>bottom-42)list.scrollTop+=10;}else{const main=g.row.closest('.modal-body')||document.querySelector('main');if(g.y<100)main.scrollTop-=10;else if(g.y>innerHeight-75)main.scrollTop+=10;}hit(g.x,g.y);frame=requestAnimationFrame(scroll);}
