@@ -69,10 +69,12 @@ PROPOSAL：合成正计时的“完成本轮”、休息和逐轮历史属于新
 
 ## 集成契约与证据边界
 
-新增模块 `window.DemoPersonalPages` 提供 `render/handle/act/submit/tick/key`，操作和表单均 `personal-*`。主 app 给出 `getState/transaction/repo/today/esc/toast/navigate/modal/closeModal/openTask`。`submit` 是 async，应统一捕获错误。每秒调用 `tick(ctx)`；内部提醒每 5 秒复检，时钟显示不保存每秒动画。
+新增模块 `window.DemoPersonalPages` 提供 `render/handle/act/submit/isBusy/tick/key`，操作和表单均 `personal-*`。主 app 给出 `getState/transaction/repo/today/esc/toast/navigate/modal/closeModal/openTask`。`submit` 是 async，应统一捕获错误。异步意见/附件/导入防重复提交并只关闭发起操作的弹窗，`isBusy()`供根导航与用户关闭门控；成功保存自身的关闭应继续允许。每秒调用 `tick(ctx)`；内部提醒每 5 秒复检，时钟显示不保存每秒动画。
 
 主 app 放置全局 `#reminder-notice`；focus 和可见性恢复调用 `DemoPersonalPages.reminders.check(ctx)`；根渲染后可调用 `reminders.render(ctx)` 恢复卡片。本模块不申请浏览器通知，不导入有原命名空间副作用的 `src/reminders.mjs`。
 
 测试文件为 `tests/d4-ui/personal-cases.mjs`，导出 `runPersonalCases(api)`。时钟和提醒的 injected time 只属于纯隔离测试模型，不能绑定原生 timer 或生产同步。所有测试、编译和 runnable 包装只能在 Actions；本地仅静态读取与写文件，本文没有声明本轮测试已通过。测试总数/通过/失败/源码SHA/截图/运行链接由主 Agent 合并进集中证据。
+
+当前最后静态复核准备21条个人用例；尝试源码 `288b0b97d9974e3797a5099c97d5aeb1c3e26dc9` 的 Actions `45533988173` 因账户billing/额度限制未启动，执行0、无产物。后续静态修补待重新发布/验证。详细原值与modal/render接口问题及BLOCKER见 `personal-readiness.md`，不把未执行写成通过。
 
 Android 隔离预览壳兼容：PROPOSAL，about 页面仅在 `GxD4Preview.isPreview()` 成立时读取同步只读 `versionInfo()` JSON。APK 的 versionName/versionCode/源码 SHA/云端 buildTimeUtc 优先显示，并保留独立的网页 `D4_BUILD` 身份折叠区域；“APK版本信息”调用隔离壳的 `openVersionInfo()`，不触及 `GxNative` 或生产存储。历史显示只用 APK 携带 `historyText`。新增合成桥适配断言检验两套身份及按钮调用，不能把桥 Mock 通过称为实际 APK 版本验证。

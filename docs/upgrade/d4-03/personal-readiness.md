@@ -4,11 +4,15 @@
 
 原版冻结提交 `d4c5af4cbbb9192c19276dd371bd142c2b835534`；D4-01 发布提交 `03a72afca3f538cd0903624c89cb0d8bb068e470`。原版代码索引及快照身份限制见 `original-personal-coverage.md`。没有连接、读取或修改真实用户数据库。
 
+FACT（主 Agent 提供的云端状态）：本轮尝试验证源码 `288b0b97d9974e3797a5099c97d5aeb1c3e26dc9`，Actions `45533988173` 因账户 billing/额度限制未启动。用例执行0、通过0、用例失败0；没有运行产物、截图或测试原始日志。“用例失败0”不能解释为通过；阻塞发生在用例执行前。UI/C0 首轮均未形成运行证据，历史失败与既有 C0/D1/D2 证据仍保留。
+
+PROPOSAL：未启动之后继续开展的最后静态修补属于待重新发布/待 Actions 验证的工作区内容，不伪称已由上述 SHA 或运行验证。最终精确提交身份由主 Agent 集中报告绑定。
+
 ## 判定与数据边界
 
 PROPOSAL：个人效率页面已在隔离提供器 `prototypes/d4-01/personal-pages.js` 写入可操作代码。可进入集中 Actions 验证和隔离体验交付；仍不能宣称 D4-03 三端原生完整验收。
 
-FACT：本次静态检查 `tests/d4-ui/personal-cases.mjs` 有 20 个 `a.check`，没有在本机执行这些测试、编译、SQLite 或打包。通过数、失败数、截图、原始失败日志和运行链接由云端运行决定；20 是准备的用例数。
+FACT：本次静态检查 `tests/d4-ui/personal-cases.mjs` 有 21 个 `a.check`，没有在本机执行这些测试、编译、SQLite 或打包。21 是准备的用例数；当前云端实际执行0，21项均尚未执行。新增1项针对异步图片保存的防重复提交和替换弹窗保护。
 
 | 数据/接口 | 当前隔离归属 | 生产边界与证据状态 |
 |---|---|---|
@@ -22,7 +26,7 @@ FACT：本次静态检查 `tests/d4-ui/personal-cases.mjs` 有 20 个 `a.check`�
 
 ## 按功能的就绪证据
 
-| 能力 | 静态实现/原版规则 | 20 条回归中的验证准备 | 本轮准入缺口 |
+| 能力 | 静态实现/原版规则 | 21 条回归中的验证准备 | 本轮准入缺口 |
 |---|---|---|---|
 | 便签 | PROPOSAL：独立入口、列表/搜索、新建/编辑/删除、创建时间降序、转义、Ctrl+Enter；删除任务不删除便签 | 3 条：字段集、文本转义、编辑保留创建时间、重开、搜索、删除、任务独立性 | UNVERIFIED：Windows 原便签窗口和 Android 原任务存储 API；原版颜色/分类等未获证据，不编造 |
 | 番茄钟恢复 | PROPOSAL：开始/暂停/继续/提前结束、配置、单次完成、保存 anchor、页面切换/重开；1–180 分钟、默认 25 | 4 条：monotonic/系统回退、wall恢复、午夜分摊、countup/休息偏好、实际控件与重开 | BLOCKER：实际 Android 前台服务、通知控制、后台/锁屏/重启、任务关联；网页与隔离原生预览状态仍分开 |
@@ -30,18 +34,32 @@ FACT：本次静态检查 `tests/d4-ui/personal-cases.mjs` 有 20 个 `a.check`�
 | 页内提醒 | FACT：原 `src/reminders.mjs:3-15` 五秒及focus/visibility检查、cap5、receipt、十分钟稍后；PROPOSAL：隔离台账保留同类行为 | 2 条：纯计算与实际 snooze/acknowledge/open-task；完成/删除清理、重放不重复、五卡片上限 | BLOCKER：系统通知、Android权限/AlarmManager/后台精确提醒；不把网页通知卡片计作原生回归 |
 | 循环任务 | FACT：根 Demo 延用冻结纯 task/schedule 完成链；个人页提供原有提醒/循环入口 | 根测试负责任务 repeat、原值和子任务递归；本文件提醒测试复用仓库 reminderAt | UNVERIFIED：实际三端业务 API 回归；不能仅凭本文件声称循环实现完整 |
 | 意见原有细节 | FACT：原 `src/feedback.mjs:7-27,57-64`；PROPOSAL：标题或正文必填一项、trim、正文首行默认标题、200/50,000码点与800/200,000字节限制、UTC ISO规范化、修改时间递增 | 2 条字段补充：仅标题/全空、默认标题、旧编辑器防覆盖、emoji边界、非法时间/NULL、时间回退后递增 | BLOCKER：原 Web 多窗口写锁、Windows互斥/原窗口、Android完整 FeedbackKit 菜单；当前只是同文档冲突保护 |
-| 图片和意见恢复 | PROPOSAL：PNG/JPEG/WebP/GIF原字节、草稿继续、编辑保留、导出原文件、完整性校验、导入前备份；同时间保留双版本且重放不复制 | 3 条：小 PNG 文件草稿/编辑/重开字节一致、损坏hash拒绝不覆盖、同时间冲突及重放/删除独立性 | BLOCKER：Android ZIP包含草稿/截图/assets/links的真实恢复；大图/配额/断电/多文件持久化未证实 |
+| 图片和意见恢复 | PROPOSAL：PNG/JPEG/WebP/GIF原字节、草稿继续、编辑保留、导出原文件、完整性校验、导入前备份；同时间保留双版本且重放不复制；异步保存锁和原弹窗身份保护 | 4 条：小 PNG 文件草稿/编辑/重开字节一致、损坏hash拒绝不覆盖、同时间冲突及重放/删除独立性、延迟文件读取下防重复提交与新弹窗保护 | BLOCKER：Android ZIP包含草稿/截图/assets/links的真实恢复；大图/配额/断电/多文件持久化未证实 |
 | 同步与设备 | PROPOSAL：明确合成状态、错误/历史/配置、全部候选保留、设备本地演示改名 | 2 条含快照：失败保留task/pending，选择保留两版，成功只改demo，无password输入 | BLOCKER：经过认证的只读真实状态提供器、原业务同步/设备接口及 C0-04 回归；本模块不启用这些能力 |
 | 合成快照 | PROPOSAL：同工作区恢复全部个人域；完整验证后才替换；拒绝生产格式及非法timer/draft | 设备/备份复合条和2条拒绝用例：原值比较、全部域恢复、malformed timer/NULL draft拒绝 | UNVERIFIED：存储故障恢复、崩溃原子性；D2生产恢复仍独立审核 |
 | 关于与版本 | PROPOSAL：云注入SHA/构建时间、离线历史、复制；隔离APK身份优先并保留HTML身份 | 2 条：网页注入值/历史、模拟APK桥身份/按钮调用 | UNVERIFIED：实际 APK 的 versionName/versionCode/签名/构建时间与已知历史一致性，需要 Actions产物证据 |
 
-上述分类中存在一个复合备份用例，两张表的分类提及可以交叉，最终总数仍按源码的20个 `a.check` 计。测试不得降低断言以掩盖原行为差异；源码或运行不符合即记录失败。
+上述分类中存在一个复合备份用例，两张表的分类提及可以交叉，最终总数仍按源码的21个 `a.check` 计。测试不得降低断言以掩盖原行为差异；源码或运行不符合即记录失败。
 
 ## 本次聚焦修订
 
 FACT：复读冻结 `src/feedback.mjs` 后，修正了早期“正文必填”的审计错误。标题单独存在是有效原有能力；保存 trim 并按原规则补默认标题。UTC时间、码点/字节限额、单调编辑时间、同时间冲突去重与递增副本时间均有源码对照。本轮代码与断言只在隔离文件修改。
 
 PROPOSAL：图片处理等待期间会再次对比记录；编辑器还保留打开时的记录基线，防止同文档的较早编辑覆盖较新操作。尚未实现原反馈 store 的跨窗口锁，不能声称具备原多写入者屏障。
+
+## 最后一轮静态交叉审核
+
+FACT：根 `app.js` 给 P 的 `getState/transaction/repo/updateDemo/esc/toast/navigate/modal/closeModal/openTask` 接口与当前调用匹配；P async submit 由根 submit await 并捕获错误；每秒tick及focus/visibility检查已接线。`modal-root` 独立于重绘的 `#app`，普通render不直接销毁弹窗。main dirty表单恢复、File[]恢复和restoreForm空节点保护已有源码。
+
+| 发现 | 影响与证据 | 修补/剩余状态 |
+|---|---|---|
+| 异步保存重复提交、关闭非原弹窗 | FACT：修补前P无busy锁；图片读取/校验await期间可再次提交空ID创建重复意见，完成后无条件closeModal可能关闭后来打开的弹窗 | PROPOSAL：P新增pendingSubmission、防重复提交、禁用原表单、仅关闭相同modal、导出isBusy；新增延迟文件读取断言，尚未运行。根需在用户导航/返回/替换modal路径适配busy，同时允许P自身完成关闭 |
+| 未编辑任务原值被全量重建 | FACT：根saveTask全量读取DOM重建start/end/repeat/reminder；model保留start/end原字符串，datetime-local可能规范化含秒或清空不支持的历史字符串；非weekly统一清空weekdays | BLOCKER：已通知主Agent按字段编辑标记/基线保留原值或明确拒绝不支持值；不能用合成正常分钟时间排除历史边界风险；真实历史行为仍UNVERIFIED |
+| 主表单与弹窗重绘 | FACT：根captureMain/restoreMain保留dirty表单，普通render不替换modal-root；P的同步update发布后以microtask重绘 | UNVERIFIED：实际键盘/焦点、导航和计时完成同时发生的交互，需要云端执行；当前只确认源码接线 |
+| 详情主页面标签画面与未保存值分离 | FACT：复核时restoreMain仅恢复表单控件值；tag-chips为额外DOM。未保存标签增删后重绘可恢复hidden JSON，却显示原存储chips | BLOCKER：已通知主Agent在restoreMain按hidden JSON同步chips；弹窗内容不被普通render替换，影响主要是task-detail主页面。修补后仍需交互回归 |
+| UI/C0无执行证据 | FACT：Actions45533988173未启动、执行0 | BLOCKER：解除账户billing/额度限制后重新运行，不在本机替代执行，不将静态审核标为回归通过 |
+
+P的新busy锁只限当前独立模块，不构成生产写入者屏障。闭锁期间计时tick与提醒纯计算仍可运行；根导航门控与P自身closeModal要区别处理，避免成功保存被busy检查阻止关闭。
 
 PROPOSAL：新增 `focusMode` 保存正计时偏好，休息完成后恢复；countup“完成本轮”只记录新增历史，不能增加原倒计时完成数。网页以 anchors 持续计算，不依赖番茄钟页面常驻；真实后台、锁屏与重启仍须原生证据。
 
@@ -62,11 +80,12 @@ PROPOSAL：合成意见导入拒绝 NULL/缺失标题或正文；原 `normalizeI
 | P-B07 BLOCKER | 原图持久化、多窗口反馈写入屏障、崩溃一致性未证实 | 隔离存储故障/配额、并发编辑、Android附件恢复等完整运行证据；保持错误日志与未解决项 |
 | P-U01 UNVERIFIED | 原历史notes颜色/分类/自定义组织与真实历史库字段 | 有针对性的源码/历史证据；当前未发现字段不能推导所有旧版本没有功能；无权读取真实用户库 |
 | P-U02 UNVERIFIED | 真实设备列表、远程管理、后台原生附属工具能力 | 先确认原业务接口和完整菜单覆盖，不能把synthetic设备改名视为远程管理 |
+| P-B08 BLOCKER | 本轮云端执行被账户billing/额度限制阻止，UI/C0均无运行产物 | 解除限制后对最终源码SHA重新执行全部必要工作流；执行0不能用于任何阶段通过结论 |
 
 OWNER DECISION：不需要为隔离文档、代码和 Actions 验证逐项等待；主 Agent 可继续集中验证与交付。任何真实库结构/迁移、生产同步启用或协议变更仍需要单独明确授权和影响/回滚证据，不能从本报告推导授权。
 
 ## 证据发布与停止条件
 
-集中交付需带精确源码SHA、20条个人用例的实际结果及根用例/原生用例独立统计、截图/录屏、平台差异、历史失败日志、Actions链接和SHA-256清单。浏览器触摸模拟与APK桥Mock、原生纯模型、实际Android/Windows控件、后台真实运行须分别列出，不能聚合成“三端全部完成”。
+集中交付需带精确源码SHA、21条个人用例的实际结果及根用例/原生用例独立统计、截图/录屏、平台差异、历史失败日志、Actions链接和SHA-256清单。当前运行0且无产物，必须如实交付阻塞状态和待执行清单。浏览器触摸模拟与APK桥Mock、原生纯模型、实际Android/Windows控件、后台真实运行须分别列出，不能聚合成“三端全部完成”。
 
 FACT：本模块没有改生产同步或生产数据库，未合入D2代码，未启用LAN/WebDAV，也未关闭Android issue #1。UNVERIFIED/BLOCKER保留至满足对应证据；完成本次允许的隔离包后等待统一审核。

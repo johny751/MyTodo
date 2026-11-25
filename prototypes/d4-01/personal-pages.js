@@ -4,6 +4,7 @@
   var routes = ['notes', 'pomodoro', 'feedback', 'sync', 'devices', 'data-system', 'about'];
   var views = {notes: {query: ''}, feedback: {query: '', status: ''}};
   var feedbackBases = new Map();
+  var pendingSubmission = null;
   var documentId = 'document-' + Date.now() + '-' + Math.random().toString(36).slice(2);
   var sequence = 0;
   var lastReminderCheck = 0;
@@ -282,6 +283,7 @@
   async function copyText(ctx, text) { if (navigator.clipboard && navigator.clipboard.writeText) { try { await navigator.clipboard.writeText(text); ctx.toast('已复制'); return; } catch (_) { /* Clipboard unavailable: offer explicit selectable text. */ } } ctx.modal('<h2>复制内容</h2>' + textarea(ctx, '选择并复制', 'copyText', text) + button(ctx, '关闭', 'personal-close')); }
   function handle(action, id, ctx) {
     if (!action.startsWith('personal-')) return false;
+    if (pendingSubmission) throw new Error('正在保存或验证意见与附件，请等待完成');
     if (action === 'personal-close') { ctx.closeModal(); return true; }
     if (action === 'personal-native-timer') { if (!window.GxD4Preview || !window.GxD4Preview.isPreview || !window.GxD4Preview.isPreview() || !window.GxD4Preview.openNativeTimer) throw new Error('此版本不包含原生隔离体验'); window.GxD4Preview.openNativeTimer(); return true; }
     if (action === 'personal-apk-version') { if (!previewVersion() || !window.GxD4Preview.openVersionInfo) throw new Error('此版本不包含 APK 版本信息'); window.GxD4Preview.openVersionInfo(); return true; }
@@ -318,6 +320,20 @@
   }
   async function submit(name, values, ctx) {
     if (!name.startsWith('personal-')) return false;
+    if (pendingSubmission) throw new Error('正在保存或验证意见与附件，请等待完成');
+    if (!['personal-feedback', 'personal-feedback-draft', 'personal-feedback-import', 'personal-workspace-import'].includes(name)) return submitCore(name, values, ctx);
+    var actualName = name === 'personal-feedback-draft' ? 'personal-feedback' : name;
+    var sourceForm = document.querySelector('[data-form="' + actualName + '"]'), sourceModal = sourceForm && sourceForm.closest('.modal');
+    var controls = sourceForm ? Array.from(sourceForm.querySelectorAll('input,textarea,select,button')).map(function (control) { return {element: control, disabled: control.disabled}; }) : [];
+    var guardedCtx = Object.create(ctx);
+    guardedCtx.closeModal = function () { if (!sourceModal || document.querySelector('.modal') === sourceModal) ctx.closeModal(); };
+    pendingSubmission = {name: name, form: sourceForm};
+    controls.forEach(function (saved) { saved.element.disabled = true; });
+    try { return await submitCore(name, values, guardedCtx); }
+    finally { pendingSubmission = null; controls.forEach(function (saved) { if (saved.element.isConnected) saved.element.disabled = saved.disabled; }); }
+  }
+  async function submitCore(name, values, ctx) {
+    if (!name.startsWith('personal-')) return false;
     if (name === 'personal-filter') { var route = get(values, 'route'); if (!views[route]) throw new Error('筛选页面无效'); views[route] = {query: get(values, 'query'), status: get(values, 'status')}; ctx.navigate(route); return true; }
     if (name === 'personal-note') { var id = get(values, 'id'), body = get(values, 'body').trim(); if (!body || body.length > 50000) throw new Error('请输入不超过 50000 字符的便签内容'); ctx.transaction(function (s) { var n = s.notes.find(function (x) { return x.id === id; }); if (id && !n) throw new Error('便签已不存在'); if (n) n.body = body; else s.notes.unshift({id: uid('note'), body: body, createdAt: stamp()}); }); ctx.closeModal(); persistedToast(ctx, '已保存便签'); return true; }
     if (name === 'personal-timer-config') { var taskId = get(values, 'taskId'); if (taskId && !window.DemoDomain.helpers.flattenTasks(core(ctx).tasks).some(function (x) { return x.id === taskId; })) throw new Error('关联任务已不存在'); return mutateTimer(ctx, 'configure', {durationMinutes: get(values, 'durationMinutes'), breakMinutes: get(values, 'breakMinutes'), mode: get(values, 'mode'), taskId: taskId}); }
@@ -342,5 +358,5 @@
     return false;
   }
   function key(event, ctx) { if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && event.target.closest('[data-form="personal-note"]')) { event.preventDefault(); event.target.closest('form').requestSubmit(); return true; } return false; }
-  window.DemoPersonalPages = Object.freeze({routes: routes, render: render, handle: handle, act: handle, submit: submit, tick: tick, key: key, clock: Object.freeze({create: createClock, advance: advance, command: command, dayOf: dayOf}), reminders: Object.freeze({plan: reminderPlan, check: checkReminders, render: renderReminders}), validateFeedback: validateFeedback});
+  window.DemoPersonalPages = Object.freeze({routes: routes, render: render, handle: handle, act: handle, submit: submit, isBusy: function () { return pendingSubmission !== null; }, tick: tick, key: key, clock: Object.freeze({create: createClock, advance: advance,command: command, dayOf: dayOf}), reminders: Object.freeze({plan: reminderPlan, check: checkReminders, render: renderReminders}), validateFeedback: validateFeedback});
 }());

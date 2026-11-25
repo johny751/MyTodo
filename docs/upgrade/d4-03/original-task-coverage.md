@@ -120,3 +120,26 @@ PROPOSAL：GitHub Actions分别执行：
 
 生产数据库结构/迁移/真实用户数据/真实远端/LAN-WebDAV双通道/ACK-outbox-cursor-manifest-batch既有语义调整/D2合入/Android issue #1关闭均不在本轮权限。Android issue #1保持开放。
 
+## 9. D4-03 当前候选补充覆盖（首轮云端执行 0）
+
+本节追加本轮实现与未达条件，保留第 1–8 节进入 D4-03 前的缺失审计。FACT：首轮源码 `288b0b97d9974e3797a5099c97d5aeb1c3e26dc9`，UI Actions [45533988173](https://github.com/johny751/MyTodo/actions/runs/45533988173)、C0 [45533988196](https://github.com/johny751/MyTodo/actions/runs/45533988196) 被账户 billing/spending limit 拒绝启动。已执行/通过/失败测试均为 0，没有本轮 HTML、Windows 或 Android 安装体验包、截图。25 项 Android 强制测试是计划数，不是通过数。
+
+下表 FACT 只指候选源码存在相应处理；所有运行、持久化及三端交互仍为 UNVERIFIED。手势/原习惯的详细证据、快照哈希和必要回归见 [platform-readiness.md](platform-readiness.md) H01–H12。后续修正和执行结果由主 Agent 按新源码 SHA 补充，不能删除首轮拒绝证据。
+
+| 原矩阵 ID | FACT：本轮独立候选源码覆盖 | 待执行证据 / 仍须保留差异 | 三端状态 |
+|---|---|---|---|
+| T01、T02 | `app.js:78–83/98–102` 完整textarea标题、象限、开始/结束、allDay、分类、review、weight、多星期/提醒表单；`domain.mjs:108–129` 复用成熟创建/保存函数。 | H05/H09/H11：原keep-open/leave保存、group快捷默认及历史原值仍未完整证明。原并发/base/父删除与实际存储API仍需原生回归。 | W U / A U / B U |
+| T03、T04 | 删除保留确认/子树；`offerUndo/undo:104–106` 为独立合成快照及后续修改保护；完成沿用原模型，复制后续任务旁路links；review与小数weight可编辑。 | 撤销非生产 UndoQueue/墓碑回归；H01/H05：方向、release及编辑完成屏障。R06/R06b、M-legacy 计划未执行。 | W U / A U / B U |
+| T05 | 完整子任务详情、继续新增、原同级 moveSubtask API；菜单可上/下移。 | H03/H06：手柄/键盘/触摸排序、父路径/返回、quickTitle换行及save顺序缺口。100/101及父删除 UNVERIFIED。 | W U / A U / B U |
+| Q01、Q02 | `app.js:15/132` 空路由默认tasks；标题zoom、独立加号、真正single-quadrant；M01–M03与Android对应计划用例。 | H04/H10：原overview内容tap/peek跨拖与按象限滚动key未完整恢复。没有Android启动结果。 | W U / A U / B U |
+| Q03、Q04 | `mobile-controls.js` 准备触摸长按、拖动、auto-scroll；`moveTask` 复用原根/子移动API；三点及表单可改象限；M04/M05/M-large准备原字段与任务数断言。 | H01/H02/H04：原方向/release、取消/pen/配置/手柄和zoom跨拖仍有静态差异。真实触屏/顺序持久化没有结果。 | W U / A U / B U |
+| M01 | `taskMenu:69` 保留原9动作及子任务/备注/提醒/复盘快捷；R02准备可见首尾排序。 | 全动作实际执行、当前象限反馈、焦点与各端menu仍未验；Android只检查动作存在不能等同9项全部执行。 | W U / A U / B U |
+| A01–A03 | `autocomplete/catalogList/pickCatalog` 具有chips、匹配候选、键盘选择、创建/清除，projectId为旁路ID；place为多行并保留未编辑空白原值；R03–R06b/M07–M09/L05计划。 | 原重名/删除/归档关联与IME待验证；原生产name键没有改为ID；不得用synthetic ID证明生产关系迁移。 | W U / A U / B U |
+| E01、E02、E03 | 多星期、repeat anchor、原时区、review/weight、Enter/IME防隐式submit、textarea地点/备注，合成提醒中心；成熟schedule生成器保留。 | H05/H06/H07/H11：日期快捷、keep-open/leave、quick输入、原值边界和系统调度；Web计划不能证明Android通知权限/后台。 | W U / A U / B U |
+| F01、F02 | 分类页/独立时间轴、日周月/前后周期、活动/归档目录、精确关联；L01–L07计划；全局搜索含任务及新增工作实体。 | H07/H08/H09：原quad周期手势、全局notes/tags/places结果、组内新建缺口。不存在本轮运行通过。 | W U / A U / B U |
+| N01、N02 | 新导航保留个人工具、分类、时间轴、工作模块与系统入口；严格左22px起始判定、方向门限、遮罩/左滑/Back；M10–M17及Android11页计划。 | H01/H02/H07/H12：内容手势、边界周期、原全部菜单/账号/帮助兼容；系统手势/IME/无障碍无证据。 | W U / A U / B U |
+| N03 | pageMemory保存modal与输入值、各页view与scroll，切页恢复未保存草稿；M18与R01计划。 | H03/H05/H10：原保存失败阻止离开、返回父详情、per-quadrant scroll不同；内存草稿不是进程重启持久化。 | W U / A U / B U |
+| S01及独立工具 | 原个人任务统计与新增工作统计分开；独立便签、番茄、优化意见、sync/devices/data-system存在实际synthetic处理，详见personal审计。 | 原Androidservice/通知/反馈独立DB与图片字节、真实sync/设备/生产API/正式Win32仍BLOCKER；平台包均未构建。 | W U / A U / B U |
+
+BLOCKER：现有测试计划没有覆盖全部原菜单执行、鼠标/pen、子任务手柄和父路径、save/leave故障、single-quadrant peek、原周期手势及全部实体搜索。源码增加页面或计划测试不能关闭这些缺口。账户问题不阻止独立静态修订，但未恢复云端执行资格前不能宣布 D4-03 完成。
+

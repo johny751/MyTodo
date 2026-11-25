@@ -4,7 +4,7 @@
   const H = window.DemoDomain.helpers;
   const labels = {project:'项目', tag:'标签', place:'地点'};
   let catalog = {query:'', archived:'active'};
-  let timeline = {group:null, query:'', status:'all', allDates:true, date:'', period:'day', sort:'time'};
+  let timeline = {group:null, query:'', status:'all', allDates:true, date:'', period:'day', sort:'time', limit:100};
   const esc = (ctx, value) => ctx.esc(String(value ?? ''));
   const token = group => encodeURIComponent(JSON.stringify(group));
   function decode(value) {
@@ -23,6 +23,22 @@
   }
   function heading(ctx, title, text, actions = '') {
     return '<header class="page-heading"><div><h2>' + esc(ctx,title) + '</h2><p>' + esc(ctx,text) + '</p></div><div class="page-actions">' + actions + '</div></header>';
+  }
+  function clearDraftForm(name) {
+    const form=document.querySelector('[data-form="'+name+'"]');
+    if(form) form.dataset.dirty='';
+  }
+  function currentGroup(ctx, group) {
+    if(!group) return null;
+    const state=ctx.getState();
+    if(group.type==='project') {
+      const project=state.projects.find(row=>row.id===group.projectId);
+      if(!project) throw Error('项目已删除，未重新匹配同名项目');
+      return {...group,name:project.name};
+    }
+    const key=group.type==='tag'?'tags':'places';
+    if(!state[key].includes(group.name)) throw Error('分类已不存在，未重新创建');
+    return group;
   }
   function groupTasks(state, group) {
     const all = H.flattenTasks(state.tasks).filter(task=>!task.archived);
@@ -71,10 +87,16 @@
   }
   function timelinePage(ctx) {
     if (!timeline.date) timeline.date = ctx.today;
-    const state = ctx.getState(), result = groupTasks(state,timeline.group);
+    const state = ctx.getState();
+    if(timeline.group?.type==='project') {
+      const project=state.projects.find(row=>row.id===timeline.group.projectId);
+      if(project) timeline.group={...timeline.group,name:project.name};
+    }
+    const result = groupTasks(state,timeline.group);
     const tasks = H.visibleTasks(result.tasks,{...timeline,group:null});
+    const shown = tasks.slice(0,timeline.limit);
     const dates = new Map();
-    for (const task of tasks) {
+    for (const task of shown) {
       const date = task.start?.slice(0,10)||'未安排日期';
       if (!dates.has(date)) dates.set(date,[]);
       dates.get(date).push(task);
@@ -92,7 +114,9 @@
       '<label><input name="allDates" type="checkbox"' + (timeline.allDates?' checked':'') + '> 所有日期</label><button class="button" type="submit">应用筛选</button>' +
       button(ctx,'上一周期','legacy-period','-1') + button(ctx,'今天','legacy-period','today') + button(ctx,'下一周期','legacy-period','1') + button(ctx,'全部分类','legacy-all-timeline') + '</form>' +
       '<p data-legacy-count>' + tasks.length + ' 项任务（含子任务，归档内容在工作归档查询）</p><div data-legacy-timeline>' +
-      ([...dates].map(([date,items])=>'<section data-legacy-date="' + esc(ctx,date) + '"><h3>' + esc(ctx,date) + '</h3>' + items.map(task=>row(ctx,task)).join('') + '</section>').join('')||'<p class="empty-state">没有符合条件的任务。</p>') + '</div>';
+      ([...dates].map(([date,items])=>'<section data-legacy-date="' + esc(ctx,date) + '"><h3>' + esc(ctx,date) + '</h3>' + items.map(task=>row(ctx,task)).join('') + '</section>').join('')||'<p class="empty-state">没有符合条件的任务。</p>') + '</div>' +
+      (shown.length<tasks.length?button(ctx,'继续加载（剩余 '+(tasks.length-shown.length)+' 项）','legacy-more-tasks'):'') +
+      '<p class="help-text" data-legacy-loaded>已加载 '+shown.length+' / '+tasks.length+' 项</p>';
   }
   function entityForm(ctx, group) {
     if (!['tag','place'].includes(group.type)) throw Error('项目编辑请使用项目管理');
@@ -104,12 +128,13 @@
   function act(action, id, ctx) {
     if (action==='legacy-close') {ctx.closeModal();return true;}
     if (action==='legacy-catalogs') {ctx.navigate('catalogs');return true;}
-    if (action==='legacy-catalog-clear') {catalog={query:'',archived:'active'};ctx.navigate('catalogs');return true;}
-    if (action==='legacy-all-timeline') {timeline.group=null;ctx.navigate('timeline');return true;}
-    if (action==='legacy-timeline') {timeline.group=decode(id);ctx.navigate('timeline');return true;}
-    if (action==='legacy-quadrants') {ctx.openTaskGroup(decode(id));return true;}
-    if (action==='legacy-group-new-task') {ctx.newTaskForGroup(id?decode(id):null);return true;}
-    if (action==='legacy-period') {timeline.date=id==='today'?ctx.today:H.shiftDate(timeline.date||ctx.today,timeline.period,Number(id));ctx.navigate('timeline');return true;}
+    if (action==='legacy-catalog-clear') {clearDraftForm('legacy-catalog-filter');catalog={query:'',archived:'active'};ctx.navigate('catalogs');return true;}
+    if (action==='legacy-all-timeline') {timeline.group=null;timeline.limit=100;ctx.navigate('timeline');return true;}
+    if (action==='legacy-timeline') {timeline.group=currentGroup(ctx,decode(id));timeline.limit=100;ctx.navigate('timeline');return true;}
+    if (action==='legacy-quadrants') {ctx.openTaskGroup(currentGroup(ctx,decode(id)));return true;}
+    if (action==='legacy-group-new-task') {ctx.newTaskForGroup(id?currentGroup(ctx,decode(id)):null);return true;}
+    if (action==='legacy-period') {clearDraftForm('legacy-timeline-filter');timeline.date=id==='today'?ctx.today:H.shiftDate(timeline.date||ctx.today,timeline.period,Number(id));timeline.limit=100;ctx.navigate('timeline');return true;}
+    if (action==='legacy-more-tasks') {timeline.limit+=100;ctx.navigate('timeline');return true;}
     if (action==='legacy-new') {if (!['tag','place'].includes(id)) throw Error('分类类型无效');entityForm(ctx,{type:id,name:'',projectId:''});return true;}
     if (action==='legacy-edit') {entityForm(ctx,decode(id));return true;}
     if (action==='legacy-delete') {
@@ -136,7 +161,7 @@
   function submit(name, values, ctx) {
     if (name==='legacy-catalog-filter') {catalog={query:String(values.get('query')||''),archived:String(values.get('archived')||'active')};ctx.navigate('catalogs');return true;}
     if (name==='legacy-timeline-filter') {
-      Object.assign(timeline,{query:String(values.get('query')||''),status:String(values.get('status')||'all'),date:String(values.get('date')||ctx.today),period:String(values.get('period')||'day'),sort:String(values.get('sort')||'time'),allDates:values.has('allDates')});
+      Object.assign(timeline,{query:String(values.get('query')||''),status:String(values.get('status')||'all'),date:String(values.get('date')||ctx.today),period:String(values.get('period')||'day'),sort:String(values.get('sort')||'time'),allDates:values.has('allDates'),limit:100});
       ctx.navigate('timeline');return true;
     }
     if (name!=='legacy-catalog') return false;
@@ -161,6 +186,6 @@
   window.DemoLegacyPages = Object.freeze({
     render(route,ctx) {return route==='catalogs'?catalogsPage(ctx):route==='timeline'?timelinePage(ctx):null;},
     act, submit, groupTasks,
-    reset() {catalog={query:'',archived:'active'};timeline={group:null,query:'',status:'all',allDates:true,date:'',period:'day',sort:'time'};}
+    reset() {catalog={query:'',archived:'active'};timeline={group:null,query:'',status:'all',allDates:true,date:'',period:'day',sort:'time',limit:100};}
   });
 }());

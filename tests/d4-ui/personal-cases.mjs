@@ -343,6 +343,29 @@ export async function runPersonalCases(a) {
     await a.screenshot('personal-about');
   });
 
+  await a.check('Personal async image save blocks duplicate submit and preserves a replacement modal', async () => {
+    await a.navigate('feedback'); await a.click('[data-action="personal-feedback-new"]');
+    const result = await a.eval(`(async()=>{
+      const original=File.prototype.arrayBuffer,source=document.querySelector('[data-form="personal-feedback"]'),data=new FormData(source);
+      const repo=DemoDomain.createRepository({state:D4Prototype.repo.state,demo:{},storage:null}),messages=[];let closed=0,release,first;
+      const gate=new Promise(resolve=>{release=resolve;});
+      const ctx={repo,getState:()=>repo.state,updateDemo:fn=>repo.updateDemo(fn),toast:message=>messages.push(message),closeModal:()=>{closed++;document.querySelector('#modal-root').innerHTML='';}};
+      data.set('title','异步防重提交合成意见');data.set('body','保护后来打开的弹窗');data.set('images',new File([new Uint8Array([137,80,78,71])],'personal-delayed.png',{type:'image/png'}));
+      File.prototype.arrayBuffer=function(){const file=this;return file.name==='personal-delayed.png'?gate.then(()=>original.call(file)):original.call(file);};
+      try {
+        first=DemoPersonalPages.submit('personal-feedback',data,ctx);const busy=DemoPersonalPages.isBusy(),disabled=source.querySelector('[name="title"]').disabled;
+        let secondError='';try{await DemoPersonalPages.submit('personal-feedback',data,ctx);}catch(error){secondError=error.message;}
+        source.closest('.modal').outerHTML='<section class="modal"><form data-form="personal-note"><input name="body" value="后来打开的便签草稿"><button type="button" data-action="personal-close">关闭</button></form></section>';
+        release();await first;
+        return {busy,disabled,secondError,closed,ideas:repo.demo.personal.feedback.ideas.length,body:document.querySelector('.modal [name="body"]').value,afterBusy:DemoPersonalPages.isBusy()};
+      } finally {release();if(first)await first.catch(()=>{});File.prototype.arrayBuffer=original;}
+    })()`);
+    assert.equal(result.busy, true); assert.equal(result.disabled, true);
+    assert.ok(result.secondError.includes('等待完成')); assert.equal(result.ideas, 1);
+    assert.equal(result.closed, 0); assert.equal(result.body, '后来打开的便签草稿');
+    assert.equal(result.afterBusy, false); await close();
+  });
+
   await a.check('Isolated APK version adapter prefers supplied native identity while preserving HTML identity', async () => {
     try {
       await a.eval(`window.GxD4Preview={isPreview:()=>true,versionInfo:()=>JSON.stringify({apkBuild:true,versionName:'isolated-adapter-test',versionCode:7,sourceSha:'a'.repeat(40),buildTimeUtc:'2026-11-25T01:02:03Z',timezone:'UTC',historyText:'7 · 合成适配器校验'}),openVersionInfo:()=>{window.__versionDialogCalls=(window.__versionDialogCalls||0)+1}}`);

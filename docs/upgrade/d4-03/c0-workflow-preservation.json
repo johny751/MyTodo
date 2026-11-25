@@ -3,8 +3,8 @@
   "original": ".github/workflows/c0-04-protocol.yml",
   "originalSha256": "dfbc7daffa4781ca70fa2f82ab3365789c22bf5f95365a97af726f492c36f1d0",
   "candidate": ".github/workflows/d4-03-c0-regression.yml",
-  "candidateSha256": "ca58862f692dc51e4ce3037399ec313549d0d1645d62b0a317354bfd8efc406b",
-  "changed": "workflow name, isolated branch and self-trigger path only",
+  "candidateSha256": "4aba10ab2726379758f09eb01ad88e2fac76b56976daaca87e7708e242ec4e01",
+  "changed": "workflow name, isolated branch and self/UI trigger paths only",
   "jobsAndPermissionsExact": true,
   "runtimeStatus": "UNVERIFIED pending GitHub Actions"
 }

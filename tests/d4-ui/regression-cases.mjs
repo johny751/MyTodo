@@ -25,6 +25,9 @@ export async function runRegressionCases(api) {
 
   async function reset(mobile = false) {
     await api.configure(mobile ? 412 : 1440, mobile ? 915 : 960, mobile);
+    // Saving an edited task now keeps its drawer open. Close it explicitly before
+    // using navigation instead of relying on the former save-and-close behavior.
+    if (await read('!!document.querySelector(".modal")')) await api.click('[data-action="close-modal"]');
     await api.navigate('settings');
     await api.click('[data-action="reset-ask"]');
     await api.click('[data-action="reset-confirm"]');
@@ -153,6 +156,7 @@ export async function runRegressionCases(api) {
     assert.equal(await read('document.querySelector(' + JSON.stringify(edit('weight')) + ').value'), '12.5');
     await api.submit('[data-form="task-edit"]');
     assert.deepEqual(await task(before.id), before);
+    await api.click('[data-action="close-modal"]');
     await open(before.id);
     const nextPlace = '  辅楼\n会议区 B  ';
     await api.fill(edit('place'), nextPlace);
@@ -225,6 +229,111 @@ export async function runRegressionCases(api) {
     await api.screenshot('regression-timer-dirty-config');
   });
 
+  await check('R08 Untouched historical second-bearing times survive a title-only DOM save or fail explicitly [synthetic fixture]', async () => {
+    // Only start/end can carry raw seconds through the frozen isolated store.
+    // normalizeReminder silently removes seconds from custom at; that separate
+    // boundary is an explicit BLOCKER, not a passed fixture or a mocked store.
+    // This case also requires the untouched valid custom reminder and derived
+    // reminderAt to remain identical when the title changes.
+    const raw = await read(`(()=>{
+      const today=DemoDomain.helpers.dayKey(),fields={start:today+'T09:00:00',end:today+'T11:20:00',reminder:{mode:'custom',minutes:0,days:0,at:today+'T08:45'},repeat:null};
+      D4Prototype.repo.transaction(s=>Object.assign(s.tasks.find(t=>t.id==='d4-task-0'),fields));return fields;
+    })()`);
+    await settle();
+    const before = await task('d4-task-0'), draftTitle = '只改标题，保留历史原时间字串';
+    assert.equal(before.start, raw.start); assert.equal(before.end, raw.end);
+    assert.equal(before.reminder.at, raw.reminder.at);
+    await open(before.id);
+    const displayed = await read(`(()=>{const f=document.querySelector('[data-form="task-edit"]');return {start:f.elements.start.value,end:f.elements.end.value,reminderAt:f.elements.reminderAt.value,baseline:JSON.parse(f.dataset.baseline)};})()`);
+    assert.equal(displayed.baseline.start[0], displayed.start);
+    assert.equal(displayed.baseline.end[0], displayed.end);
+    assert.equal(displayed.baseline.reminderAt[0], displayed.reminderAt);
+    await api.fill(edit('title'), draftTitle);
+    // Use the actual submit button: native constraint validation may explicitly
+    // reject a historical value, while api.submit intentionally rejects invalid
+    // forms before the UI is exercised. Both outcomes require zero silent edits.
+    await api.click('[data-form="task-edit"] button[type="submit"]');
+    const after = await task(before.id);
+    if (after.title === draftTitle) {
+      for (const key of Object.keys(before).filter(k=>k!=='title')) assert.deepEqual(after[key], before[key], key);
+      assert.equal(after.start, raw.start); assert.equal(after.end, raw.end);
+      assert.equal(after.reminder.at, raw.reminder.at);
+      assert.equal(await read('!!document.querySelector(".task-drawer [data-form=task-edit]")'), true);
+      assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), draftTitle);
+    } else {
+      assert.deepEqual(after, before);
+      assert.equal(await read('document.querySelector(' + JSON.stringify(edit('title')) + ').value'), draftTitle);
+      const failure = await read(`(()=>{const f=document.querySelector('[data-form="task-edit"]');return {dirty:f.dataset.dirty,toast:document.querySelector('#toast').textContent,validation:[...f.elements].filter(e=>!e.checkValidity()).map(e=>e.validationMessage)};})()`);
+      assert.equal(failure.dirty, 'true');
+      assert.ok(/时间|保存失败|有效/.test(failure.toast) || failure.validation.some(Boolean), 'Historical values require an explicit validation failure');
+    }
+    await api.screenshot('regression-historical-time-baseline');
+  });
+
+  await check('R09 Untouched daily-repeat weekday payload survives title-only save [synthetic fixture]', async () => {
+    await read(`(()=>{const today=DemoDomain.helpers.dayKey();D4Prototype.repo.updateTask('d4-task-0',{repeat:{frequency:'daily',interval:2,weekdays:[0,2,5],until:'',anchor:today+'T09:00'},reminder:null});return true;})()`);
+    await settle();
+    const before = await task('d4-task-0');
+    assert.deepEqual(before.repeat.weekdays, [0,2,5]);
+    await open(before.id); await api.fill(edit('title'), '日循环原星期载荷不被重建');
+    await api.submit('[data-form="task-edit"]');
+    const after = await task(before.id);
+    assert.equal(after.title, '日循环原星期载荷不被重建');
+    assert.deepEqual(after.repeat, before.repeat);
+    for (const key of Object.keys(before).filter(k=>k!=='title')) assert.deepEqual(after[key], before[key], key);
+    await api.click('[data-action="close-modal"]'); await api.reload();
+    assert.deepEqual((await task(before.id)).repeat, before.repeat);
+  });
+
+  await check('R10 Task-detail tag chips and hidden values stay equal through a real render [synthetic fixture]', async () => {
+    const before = await task('d4-task-0'), added = '详情重绘新增标签';
+    await open(before.id); await api.click('[data-action="detail-go"][data-id="' + before.id + '"]');
+    assert.equal(await read('D4Prototype.getRoute()'), 'task-detail');
+    assert.equal(await read('!!document.querySelector(".modal")'), false);
+    await api.fill(edit('title'), '标签重绘期间的标题草稿');
+    await api.fill(edit('tagQuery'), added); await api.key(edit('tagQuery'), 'ArrowDown'); await api.key(edit('tagQuery'), 'Enter');
+    await api.click('[data-form="task-edit"] [data-action="tag-remove"][data-id="' + before.tags[0] + '"]');
+    const state = () => read(`(()=>{const f=document.querySelector('[data-form="task-edit"]');return {id:f.elements.id.value,title:f.elements.title.value,hidden:JSON.parse(f.elements.tags.value),chips:[...f.querySelectorAll('.tag-chip')].map(el=>el.dataset.id),dirty:f.dataset.dirty,baseline:JSON.parse(f.dataset.baseline)};})()`);
+    const draft = await state();
+    assert.deepEqual(draft.hidden, draft.chips); assert.ok(draft.hidden.includes(added));
+    assert.ok(!draft.hidden.includes(before.tags[0])); assert.equal(draft.dirty, 'true');
+    // Repository setup triggers the application's real subscription/render path.
+    await read('D4Prototype.repo.updateDemo(d=>{d.ui={...(d.ui||{}),regressionRenderTick:1};})'); await settle();
+    const restored = await state();
+    assert.deepEqual(restored, draft); assert.deepEqual(restored.hidden, restored.chips);
+    assert.deepEqual(await task(before.id), before);
+    await api.submit('[data-form="task-edit"]');
+    const after = await task(before.id);
+    assert.equal(after.title, draft.title); assert.deepEqual(after.tags, draft.hidden);
+    for (const key of Object.keys(before).filter(k=>!['title','tags'].includes(k))) assert.deepEqual(after[key], before[key], key);
+    const displayed = await state();
+    assert.deepEqual(displayed.hidden, after.tags); assert.deepEqual(displayed.chips, after.tags);
+    await api.screenshot('regression-detail-tag-chips-baseline');
+  });
+
+  await check('R11 Consecutive drawer saves retain the drawer and display committed values', async () => {
+    const before = await task('d4-task-1');
+    await open(before.id); await api.fill(edit('title'), '抽屉保存后的最新标题');
+    await api.fill(edit('notes'), '抽屉保持打开，并显示已保存的备注');
+    await api.submit('[data-form="task-edit"]');
+    const first = await task(before.id);
+    assert.equal(first.title, '抽屉保存后的最新标题'); assert.equal(first.notes, '抽屉保持打开，并显示已保存的备注');
+    for (const key of Object.keys(before).filter(k=>!['title','notes'].includes(k))) assert.deepEqual(first[key], before[key], key);
+    const drawer = () => read(`(()=>{const f=document.querySelector('.task-drawer [data-form="task-edit"]');return f?{id:f.elements.id.value,title:f.elements.title.value,notes:f.elements.notes.value,baseline:JSON.parse(f.dataset.baseline)}:null;})()`);
+    const firstDisplay = await drawer(); assert.ok(firstDisplay);
+    assert.equal(firstDisplay.id, before.id); assert.equal(firstDisplay.title, first.title); assert.equal(firstDisplay.notes, first.notes);
+    assert.equal(firstDisplay.baseline.title[0], first.title); assert.equal(firstDisplay.baseline.notes[0], first.notes);
+    await api.fill(edit('title'), '同一抽屉第二次保存'); await api.submit('[data-form="task-edit"]');
+    const second = await task(before.id), secondDisplay = await drawer();
+    assert.ok(secondDisplay); assert.equal(second.title, '同一抽屉第二次保存');
+    assert.equal(second.notes, first.notes); assert.equal(secondDisplay.title, second.title); assert.equal(secondDisplay.notes, second.notes);
+    for (const key of Object.keys(first).filter(k=>k!=='title')) assert.deepEqual(second[key], first[key], key);
+    assert.match(await read('document.querySelector("#toast").textContent'), /已保存/);
+    await api.screenshot('regression-drawer-saved-values');
+    await api.click('[data-action="close-modal"]');
+    assert.equal(await read('!!document.querySelector(".modal")'), false);
+  });
+
   for (const [name, expression] of [
     ['D4PreviewBack', 'D4PreviewBack()'],
     ['gx-back', 'window.dispatchEvent(new Event("gx-back"))']
@@ -240,9 +349,10 @@ export async function runRegressionCases(api) {
       await invoke();
       assert.equal(await read('D4Prototype.getRoute()'), 'tasks');
       await api.tap('[data-action="quadrant-focus"][data-id="0"]');
-      assert.equal(await read('document.querySelectorAll("[data-quadrant]").length'), 1);
+      assert.equal(await read('document.querySelectorAll(".board [data-quadrant]").length'), 1);
+      assert.deepEqual(await read('[...document.querySelectorAll(".quadrant-peeks .quadrant-peek[data-quadrant]")].map(el=>Number(el.dataset.quadrant)).sort()'), [1,2,3]);
       await invoke();
-      assert.equal(await read('document.querySelectorAll("[data-quadrant]").length'), 4);
+      assert.equal(await read('document.querySelectorAll(".board [data-quadrant]").length'), 4);
       await api.tap('[data-task-id="d4-task-0"] [data-action="task-open"]');
       assert.equal(await read('!!document.querySelector(".modal")'), true);
       await invoke();

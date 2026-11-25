@@ -5,6 +5,7 @@
   var routes = ['projects', 'work-items', 'templates', 'processes', 'contacts', 'archive', 'analytics'];
   var views = {};
   var sequence = 0;
+  var pendingAttachment = null;
   var labels = {
     active: '进行中', paused: '已暂停', completed: '已完成', planned: '待开始',
     doing: '进行中', waiting: '待反馈', done: '已完成', running: '运行中', pending: '待跟进'
@@ -264,11 +265,18 @@
   }
   function act(action, id, ctx) {
     if (!action.startsWith('work-')) return false;
+    if (pendingAttachment) throw new Error('正在校验并保存附件，请等待完成');
     var s = state(ctx), key, x, pair;
     if (action === 'work-close') return close(ctx);
     if (action === 'work-go') { close(ctx); ctx.navigate(id || 'templates'); return true; }
     if (action === 'work-open-task') { close(ctx); ctx.openTask(id); return true; }
-    if (action === 'work-reset-filter') { views[id] = {query:'',status:'',projectId:'',kind:''}; return change(ctx, function () {}, '已清除筛选'); }
+    if (action === 'work-reset-filter') {
+      if (!routes.includes(id)) throw new Error('筛选页面无效');
+      var filterForm = document.querySelector('[data-form="work-filter"]');
+      if (filterForm && filterForm.querySelector('[name="route"]')?.value === id) filterForm.dataset.dirty = '';
+      views[id] = {query:'',status:'',projectId:'',kind:'',from:'',to:''};
+      return change(ctx, function () {}, '已清除筛选');
+    }
     var entities = ['project','work-item','template','contact'];
     for (var i = 0; i < entities.length; i++) {
       if (action === 'work-new-' + entities[i]) return entityForm(ctx, entities[i], '');
@@ -327,14 +335,26 @@
   function submit(name, values, ctx) {
     name = ({project:'work-project',workitem:'work-work-item',template:'work-template',process:'work-process',contact:'work-contact',followup:'work-followup'})[name] || name;
     if (!name.startsWith('work-')) return false;
+    if (pendingAttachment) throw new Error('正在校验并保存附件，请等待完成');
     var s = state(ctx), id = get(values, 'id'), title, fields, key;
     if (name === 'work-filter') { var route = get(values, 'route'); if (!routes.includes(route)) return false;var from=dateValue(values,'from'),to=dateValue(values,'to');if(from && to && from>to)return error(ctx,'起始日期不能晚于结束日期');views[route] = {query:get(values,'query'),status:get(values,'status'),projectId:get(values,'projectId'),kind:get(values,'kind'),from:from,to:to}; return change(ctx, function () {}); }
     if (name === 'work-archive-finished') { var target=get(values,'target').split('|');var row=target[0]==='tasks' ? taskById(s,target[1]) : find(s,target[0],target[1]);if(!['tasks','workItems','projects','processes'].includes(target[0]) || !row || !done(row) || row.archived)return error(ctx,'请选择尚未归档的已完成内容');return act('work-archive-'+target[0],target[1],ctx); }
     if (name === 'work-attachment') {
       var attachmentWorkId=get(values,'workItemId'),files=typeof values.getAll==='function' ? values.getAll('attachments') : [];
       if(!find(s,'workItems',attachmentWorkId))return error(ctx,'工作事项已不存在');
-      var submittedForm=document.querySelector('[data-form="work-attachment"]'),reopen=false,attachmentCtx=Object.assign({},ctx,{closeModal:function(){reopen=!!submittedForm && document.contains(submittedForm) && document.querySelector('[data-form="work-attachment"]')===submittedForm;if(reopen)ctx.closeModal();}});
-      prepareAttachments(files).then(function(prepared){return change(attachmentCtx,function(next){var w=find(next,'workItems',attachmentWorkId);if(!w || w.archived)throw new Error('事项已不存在或已归档');var current=w.attachments || [];if(current.reduce(function(total,a){return total+a.byteLength;},0)+prepared.reduce(function(total,a){return total+a.byteLength;},0)>3*attachmentLimit)throw new Error('每事项附件总量最多 3 MiB');w.attachments=current.concat(prepared);audit(w,'添加原始附件',null,prepared.map(function(a){return JSON.stringify(attachmentSummary(a));}).join('\n'));},'附件原始字节已保存',function(){if(reopen)workDetail(ctx,attachmentWorkId);});}).catch(function(e){ctx.toast(e.message || '保存附件失败');});return true;
+      var submittedForm=document.querySelector('[data-form="work-attachment"]'),submittedModal=submittedForm?.closest('.modal');
+      var controls=submittedForm ? Array.from(submittedForm.querySelectorAll('input,textarea,select,button')).map(function(control){return {element:control,disabled:control.disabled};}) : [];
+      var submission={form:submittedForm,workItemId:attachmentWorkId};
+      function releaseSubmission(){if(pendingAttachment===submission)pendingAttachment=null;controls.forEach(function(saved){if(saved.element.isConnected)saved.element.disabled=saved.disabled;});}
+      pendingAttachment=submission;controls.forEach(function(saved){saved.element.disabled=true;});
+      return prepareAttachments(files).then(async function(prepared){
+        var accepted=await ctx.transaction(function(next){var w=find(next,'workItems',attachmentWorkId);if(!w || w.archived)throw new Error('事项已不存在或已归档');var current=w.attachments || [];if(current.reduce(function(total,a){return total+a.byteLength;},0)+prepared.reduce(function(total,a){return total+a.byteLength;},0)>3*attachmentLimit)throw new Error('每事项附件总量最多 3 MiB');w.attachments=current.concat(prepared);audit(w,'添加原始附件',null,prepared.map(function(a){return JSON.stringify(attachmentSummary(a));}).join('\n'));});
+        if(accepted===false)throw new Error('附件未保存，请重试');
+        var reopen=!!submittedForm && !!submittedModal && document.contains(submittedForm) && document.querySelector('.modal')===submittedModal && document.querySelector('[data-form="work-attachment"]')===submittedForm;
+        releaseSubmission();
+        if(reopen){ctx.closeModal();workDetail(ctx,attachmentWorkId);}
+        ctx.toast('附件原始字节已保存');return true;
+      }).catch(function(e){if(submittedForm?.isConnected)submittedForm.dataset.dirty='true';throw e;}).finally(releaseSubmission);
     }
     if (name === 'work-project') {
       title = get(values, 'name'); if (!title) return error(ctx, '请输入项目名称');if(title.length>100)return error(ctx,'项目名称最多 100 字，避免 V2 存储截断导致关联歧义');var existingProject=find(s,'projects',id);if ((!existingProject || existingProject.name!==title) && !unique(s, 'projects', title, id)) return error(ctx, '已有同名项目，请选择已有项目或使用另一个名称');
@@ -419,5 +439,5 @@
     result.workItems.forEach(function(w){w.priority='normal';w.plannedStart='';w.processId='';w.notes='';w.attachments=[];});
     return result;
   }
-  window.DemoWorkPages = {render:render,act:act,submit:submit,seed:seed};
+  window.DemoWorkPages = {render:render,act:act,submit:submit,seed:seed,isBusy:function(){return pendingAttachment!==null;}};
 }());

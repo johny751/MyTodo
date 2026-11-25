@@ -158,5 +158,72 @@ export async function runLegacyCases(api) {
     await api.navigate('timeline');await api.screenshot('legacy-project-id-boundary');
   });
 
+  await check('L06 Explicit catalog clear removes unsaved search draft [synthetic fixture]',async()=>{
+    await api.navigate('catalogs');
+    await api.fill('[data-form="legacy-catalog-filter"] [name="query"]','尚未提交的目录搜索');
+    await api.click('[data-action="legacy-catalog-clear"]');
+    assert.equal(await read('document.querySelector("[data-form=legacy-catalog-filter] [name=query]").value'),'');
+    assert.equal(await read('document.querySelectorAll("[data-legacy-group]").length'),3);
+  });
+
+  await check('L07 Timeline loads in original 100-row batches without changing data [synthetic fixture]',async()=>{
+    await read(`(()=>{
+      D4Prototype.repo.transaction(state=>{
+        const original=structuredClone(state.tasks[0]);
+        state.tasks=Array.from({length:125},(_,index)=>({...structuredClone(original),id:'d4-legacy-page-'+index,
+          title:'分页任务 '+index,subtasks:[],order:index*1024}));
+      });return true;
+    })()`);
+    await settle();
+    const before=await snapshot();
+    await api.navigate('timeline');
+    assert.equal((await ids()).length,100);
+    assert.match(await read('document.querySelector("[data-legacy-loaded]").textContent'),/100 \/ 125/);
+    await api.click('[data-action="legacy-more-tasks"]');
+    assert.equal((await ids()).length,125);
+    assert.equal(new Set(await ids()).size,125);
+    assert.deepEqual(await snapshot(),before);
+    await api.fill(timeFilter('query'),'分页任务 124');await api.submit('[data-form="legacy-timeline-filter"]');
+    assert.deepEqual(await ids(),['d4-legacy-page-124']);
+    await api.fill(timeFilter('query'),'');await api.submit('[data-form="legacy-timeline-filter"]');
+    assert.equal((await ids()).length,100);
+    assert.deepEqual(await snapshot(),before);
+  });
+
+  await check('L08 Project ID and unique historical-name selection agree across task views and deletion never rebinds [synthetic fixture]',async()=>{
+    await read(`(()=>{
+      const repo=D4Prototype.repo;
+      repo.transaction(state=>{
+        const original=structuredClone(state.tasks[0]);
+        state.projects=[{id:'d4-legacy-current-project',name:'当前唯一项目名',description:'合成历史关联边界',archived:false}];
+        state.tasks=[
+          {...structuredClone(original),id:'d4-legacy-explicit-stale-name',title:'明确ID保留旧名称',project:'旧项目名',subtasks:[]},
+          {...structuredClone(original),id:'d4-legacy-unique-name',title:'唯一名称历史关联',project:'当前唯一项目名',subtasks:[]},
+          {...structuredClone(original),id:'d4-legacy-unrelated-name',title:'没有ID且名称无关',project:'旧项目名',subtasks:[]}
+        ];
+      });
+      repo.updateDemo(d=>{d.taskLinks={'d4-legacy-explicit-stale-name':{projectId:'d4-legacy-current-project',workItemId:''}};});
+      return true;
+    })()`);
+    await settle();
+    const selected={type:'project',name:'当前唯一项目名',projectId:'d4-legacy-current-project'};
+    const before=await snapshot(),expected=new Set(['d4-legacy-explicit-stale-name','d4-legacy-unique-name']);
+    await api.navigate('catalogs');await api.click(action('legacy-timeline',selected));
+    assert.deepEqual(new Set(await ids()),expected);
+    await api.navigate('catalogs');await api.click(action('legacy-quadrants',selected));
+    assert.deepEqual(new Set(await read('[...document.querySelectorAll(".board .task-row")].map(el=>el.dataset.taskId)')),expected);
+    assert.deepEqual(await snapshot(),before);
+    // Synthetic concurrent deletion, not a production migration or user action.
+    await read('D4Prototype.repo.transaction(state=>{state.projects=[];});true');
+    await settle();await api.navigate('timeline');
+    const removed=await snapshot();
+    assert.deepEqual(await ids(),[]);
+    assert.match(await read('document.querySelector("[data-legacy-blocker=missing-project]").textContent'),/BLOCKER.*已删除/);
+    await api.click(action('legacy-group-new-task',selected));
+    assert.match(await read('document.querySelector("#toast").textContent'),/项目已删除/);
+    assert.equal(await read('!!document.querySelector("[data-form=task-edit]")'),false);
+    assert.deepEqual(await snapshot(),removed);
+  });
+
   await reset();
 }

@@ -16,6 +16,11 @@ on:
       - 'windows/**'
       - 'android/**'
 
+      - 'prototypes/d4-01/**'
+      - 'prototypes/d4-03-platforms/**'
+      - 'tests/d4-ui/**'
+      - 'tests/d4-03-platforms/**'
+  workflow_dispatch:
 permissions:
   contents: read
 
