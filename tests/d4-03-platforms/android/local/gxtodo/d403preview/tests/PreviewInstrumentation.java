@@ -366,15 +366,20 @@ public final class PreviewInstrumentation extends Instrumentation {
                 String handle="[data-subtask-list] [data-task-id='d403-native-child-a'] .drag-handle";
                 String other="[data-subtask-list] [data-task-id='d403-native-child-b']";
                 float[] start=point(handle,true),after=dragDropPoint(other,true);
+                JSONObject subtaskTrace=beginSubtaskDragTrace(handle,start);
+                long subtaskDownUptime=-1,subtaskAssertionReadUptime=-1;
                 try (NativeDragTouch touch=new NativeDragTouch("subtask-order")) {
                     try {
-                        touch.down(start);SystemClock.sleep(100);
+                        subtaskDownUptime=touch.down(start);SystemClock.sleep(100);
+                        subtaskAssertionReadUptime=SystemClock.uptimeMillis();
                         require(Boolean.TRUE.equals(js("!!document.querySelector('[data-task-id=d403-native-child-a].dragging')")),"Real handle touch activates the child drag");
                         touch.move(after,300);touch.up(after);
                     } catch(Exception|Error error) {
                         try { shot("failure-native-subtask-drag-before-cancel"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
                         throw error;
                     }
+                } finally {
+                    finishSubtaskDragTrace(subtaskTrace,subtaskDownUptime,subtaskAssertionReadUptime);
                 }
                 waitForIdleSync();
                 require(Boolean.TRUE.equals(js("JSON.stringify(D4Prototype.repo.getTask('d403-native-parent').subtasks.map(t=>t.id))===JSON.stringify(['d403-native-child-b','d403-native-child-a'])")),"Real drag moves the first child after its sibling");
@@ -577,6 +582,27 @@ public final class PreviewInstrumentation extends Instrumentation {
             });
             check("android-unified-session-durable-receipt-replay", () -> {
                 write("unified-session-durable-receipt-replay.json", NativeTimerSessionChecks.durableReceiptReplay().toString(2));
+            });
+
+            check("android-native-documentsui-cancel-preserves-draft", () -> NativeDocumentChooserChecks.cancelPreservesDraft(documentChooserHost()));
+            check("android-native-documentsui-feedback-original-reload", () -> NativeDocumentChooserChecks.feedbackOriginalAndReload(documentChooserHost()));
+            check("android-native-documentsui-attachment-original-reload", () -> NativeDocumentChooserChecks.attachmentOriginalAndReload(documentChooserHost()));
+            check("android-native-floating-selection-lifecycle-copy-paste", () -> NativeSelectionLifecycleChecks.copyPasteAfterReturn(documentChooserHost()));
+            check("android-system-bars-content-and-edge-insets", () -> {
+                home();
+                for (String route : new String[]{"tasks", "notes", "feedback"}) {
+                    openPageByTouch(route);
+                    assertNativeInsets(route, false);
+                    shot("android-insets-" + route);
+                    edgeOpen(); back();
+                    require(route.equals(js("D4Prototype.getRoute()")), "Real edge navigation and Back preserve the inset page " + route);
+                }
+                openPageByTouch("notes");
+                tap("[data-form=personal-filter] [name=query]");
+                assertNativeInsets("notes-ime", true);
+                back();
+                assertNativeInsets("notes-ime-dismissed", false);
+                home();
             });
 
         } catch (Throwable fatal) { record("instrumentation-setup-or-fatal", fatal, 0); }
@@ -859,6 +885,39 @@ public final class PreviewInstrumentation extends Instrumentation {
         return value instanceof String?JSONObject.quote((String)value):String.valueOf(value);
     }
 
+    private NativeDocumentChooserChecks.Host documentChooserHost() {
+        return new NativeDocumentChooserChecks.Host() {
+            public Instrumentation instrumentation() { return PreviewInstrumentation.this; }
+            public MainActivity main() { return PreviewInstrumentation.this.main; }
+            public Object js(String expression) throws Exception { return PreviewInstrumentation.this.js(expression); }
+            public void tap(String selector) throws Exception { PreviewInstrumentation.this.tap(selector); }
+            public void typeText(String selector,String text) throws Exception { PreviewInstrumentation.this.typeText(selector,text); }
+            public void openPage(String route) throws Exception { PreviewInstrumentation.this.openPageByTouch(route); }
+            public void home() throws Exception { PreviewInstrumentation.this.home(); }
+            public void launch() throws Exception { PreviewInstrumentation.this.launch(); }
+            public void back() { PreviewInstrumentation.this.back(); }
+            public void settle() { PreviewInstrumentation.this.settle(); }
+            public void shot(String name) throws Exception { PreviewInstrumentation.this.shot(name); }
+            public void write(String name,String text) throws Exception { PreviewInstrumentation.this.write(name,text); }
+        };
+    }
+
+
+    private void assertNativeInsets(String stage, boolean expectIme) throws Exception {
+        long deadline = SystemClock.elapsedRealtime() + 5000L;
+        JSONObject nativeBounds = null, dom = null;
+        AssertionError last = null;
+        while (SystemClock.elapsedRealtime() < deadline) {
+            nativeBounds = NativeInsetsChecks.observe(this, main);
+            dom = (JSONObject)js("(function(){var toolbar=document.querySelector('.topbar'),toggle=document.querySelector('[data-action=nav-toggle]'),v=visualViewport,r=e=>{if(!e)return null;var b=e.getBoundingClientRect();return {left:b.left,top:b.top,right:b.right,bottom:b.bottom,width:b.width,height:b.height};},t=r(toggle);if(t){var hit=document.elementFromPoint(t.left+t.width/2,t.top+t.height/2);t.hit=hit===toggle||!!toggle?.contains(hit);}return {width:innerWidth,height:innerHeight,visualViewport:v?{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}:null,toolbar:r(toolbar),navigationToggle:t};})()");
+            try { NativeInsetsChecks.verify(nativeBounds, dom, expectIme); last = null; break; }
+            catch (AssertionError pending) { last = pending; SystemClock.sleep(50); }
+        }
+        write("native-insets-" + stage + ".json", new JSONObject().put("native", nativeBounds).put("dom", dom).put("expectIme", expectIme).toString(2));
+        if (last != null) throw last;
+        require(nativeBounds != null && dom != null, "Inset geometry was actually observed");
+    }
+
     private void check(String name,Check check) { long started=SystemClock.elapsedRealtime();observeInputBoundary(name,"before");try{check.run();record(name,null,SystemClock.elapsedRealtime()-started);}catch(Throwable e){record(name,e,SystemClock.elapsedRealtime()-started);try{shot("failure-"+name);}catch(Exception ignored){}}finally{observeInputBoundary(name,"after");} }
     /** Read-only diagnosis; never clears selection, focus or a native popup. */
     private void observeInputBoundary(String name,String stage) {
@@ -872,8 +931,55 @@ public final class PreviewInstrumentation extends Instrumentation {
             inputBoundaries.put(row);write("native-input-boundaries.json",inputBoundaries.toString(2));
         } catch(Throwable error) { try{write("native-input-boundary-error.log",name+" / "+stage+" / "+error);}catch(Exception ignored){} }
     }
+    /** Read-only first-down diagnosis. Keeps captured node identity across renderer updates. */
+    private JSONObject beginSubtaskDragTrace(String selector,float[] point) {
+        JSONObject proof=new JSONObject();
+        try {
+            proof.put("kind","mytodo-d403-native-subtask-first-down-trace")
+                .put("sourceSha",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
+                .put("nativeBefore",subtaskTraceNativeWindows()).put("selector",selector)
+                .put("cssX",point[0]).put("cssY",point[1]);
+            js("(function(selector, point) {\n  var old = window.__d403SubtaskDragTrace;\n  if (old) old.stop();\n  var rows = [], dropped = 0, ids = new WeakMap(), nextId = 1;\n  var capturedHandle = document.querySelector(selector);\n  var capturedRow = capturedHandle?.closest('.task-row');\n  var rowSelector = '[data-subtask-list] [data-task-id=\"d403-native-child-a\"]';\n  var currentHandle = () => document.querySelector(selector);\n  var currentRow = () => document.querySelector(rowSelector);\n  function describe(node) {\n    if (!node) return null;\n    if (!ids.has(node)) ids.set(node, nextId++);\n    var el = node.nodeType === 1 ? node : node.parentElement;\n    return {nodeId: ids.get(node), nodeType: node.nodeType, tag: el?.tagName || null,\n      connected: node.isConnected, taskId: el?.closest?.('.task-row')?.dataset.taskId || null,\n      action: el?.closest?.('[data-action]')?.dataset.action || null,\n      name: el?.getAttribute?.('name') || null,\n      classes: typeof el?.className === 'string' ? el.className.slice(0, 240) : null};\n  }\n  function selection() {\n    var s = getSelection(), a = document.activeElement;\n    return {type: s?.type || null, ranges: s?.rangeCount || 0, collapsed: s?.isCollapsed !== false,\n      length: s?.toString().length || 0, text: s?.toString().slice(0, 80) || '',\n      anchor: describe(s?.anchorNode), focus: describe(s?.focusNode), active: describe(a),\n      selectionStart: typeof a?.selectionStart === 'number' ? a.selectionStart : null,\n      selectionEnd: typeof a?.selectionEnd === 'number' ? a.selectionEnd : null};\n  }\n  function read(stage, event, detail) {\n    if (rows.length >= 192) { dropped++; return; }\n    var p = event?.changedTouches?.[0] || event;\n    var x = Number.isFinite(p?.clientX) ? p.clientX : point[0];\n    var y = Number.isFinite(p?.clientY) ? p.clientY : point[1];\n    var handle = currentHandle(), row = currentRow();\n    rows.push({stage: stage, now: performance.now(), wallMillis: Date.now(),\n      eventTimeStamp: event?.timeStamp ?? null, type: event?.type || null,\n      trusted: event?.isTrusted ?? null, defaultPrevented: event?.defaultPrevented ?? null,\n      pointerType: event?.pointerType || null, touches: event?.touches?.length ?? null,\n      target: describe(event?.target), path: event?.composedPath?.().slice(0, 8).map(describe) || [],\n      x: x, y: y, hit: describe(document.elementFromPoint(x, y)),\n      capturedHandle: describe(capturedHandle), capturedRow: describe(capturedRow),\n      currentHandle: describe(handle), currentRow: describe(row),\n      sameHandle: handle === capturedHandle, sameRow: row === capturedRow,\n      dragging: Array.from(document.querySelectorAll('.dragging')).slice(0, 4).map(describe),\n      ghost: describe(document.querySelector('.drag-ghost')),\n      modalOpen: !!document.querySelector('[data-form=task-edit]'),\n      focused: document.hasFocus(), visibility: document.visibilityState,\n      selection: selection(), detail: detail || null});\n  }\n  var types = ['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel',\n    'click','contextmenu','selectionchange','focus','blur'];\n  var capture = e => read('window-capture', e);\n  var bubble = e => read('window-bubble', e);\n  types.forEach(type => { window.addEventListener(type, capture, true); window.addEventListener(type, bubble, false); });\n  function relevant(node) {\n    if (!node || node.nodeType !== 1) return false;\n    return node === capturedHandle || node === capturedRow || node.contains(capturedRow) ||\n      node.matches('.task-row,.drag-handle,.drag-ghost,[data-subtask-list],#modal-root') ||\n      !!node.querySelector(rowSelector + ',.drag-ghost,[data-subtask-list]');\n  }\n  var observer = new MutationObserver(mutations => {\n    var changes = [];\n    for (var mutation of mutations) {\n      if (mutation.type === 'attributes') {\n        if (!mutation.target.matches('.task-row,.drag-handle,.drag-ghost,[data-subtask-list],#modal-root')) continue;\n        changes.push({kind: 'attribute', target: describe(mutation.target), attribute: mutation.attributeName,\n          oldValue: mutation.oldValue, currentValue: mutation.target.getAttribute(mutation.attributeName)});\n      } else {\n        var added = Array.from(mutation.addedNodes).filter(relevant);\n        var removed = Array.from(mutation.removedNodes).filter(relevant);\n        if (!added.length && !removed.length) continue;\n        changes.push({kind: 'childList', target: describe(mutation.target),\n          added: added.slice(0, 8).map(describe), removed: removed.slice(0, 8).map(describe),\n          addedCount: added.length, removedCount: removed.length});\n      }\n      if (changes.length >= 12) break;\n    }\n    if (changes.length) read('dom-mutation', null, {changes: changes, mutationCount: mutations.length});\n  });\n  observer.observe(document.body, {childList: true, subtree: true, attributes: true,\n    attributeFilter: ['class'], attributeOldValue: true});\n  var stopRepo = D4Prototype.repo.subscribe((state, change) => read('repo-publish', null,\n    {changeType: change?.type || null}));\n  var timer = setInterval(() => read('sample'), 100);\n  var stopped = false;\n  function stop() {\n    if (stopped) return;\n    stopped = true; clearInterval(timer); observer.disconnect(); stopRepo();\n    types.forEach(type => { window.removeEventListener(type, capture, true); window.removeEventListener(type, bubble, false); });\n  }\n  window.__d403SubtaskDragTrace = {read: () => ({rows: rows, dropped: dropped, maxRows: 192}),\n    mark: stage => read(stage), stop: stop};\n  read('before-native-down');\n  return true;\n})(" + JSONObject.quote(selector) + ", " + new JSONArray().put(point[0]).put(point[1]).toString() + ")\n");
+            proof.put("installed",true);
+        } catch(Throwable error) { try{proof.put("installError",error.toString());}catch(Exception ignored){} }
+        return proof;
+    }
+    private void finishSubtaskDragTrace(JSONObject proof,long downUptime,long assertionReadUptime) {
+        try {
+            proof.put("nativeDownUptimeMillis",downUptime).put("activationAssertionReadRequestedUptimeMillis",assertionReadUptime)
+                .put("requestedReadAfterDownMs",assertionReadUptime>=0&&downUptime>=0?assertionReadUptime-downUptime:JSONObject.NULL);
+            proof.put("web",js("(function(){var p=window.__d403SubtaskDragTrace;if(!p)return {absent:true};p.mark('after-native-touch-close');var result=p.read();p.stop();delete window.__d403SubtaskDragTrace;return result;})()"));
+            proof.put("nativeAfter",subtaskTraceNativeWindows());
+            write("native-subtask-drag-event-trace.json",proof.toString(2));
+        } catch(Throwable error) { try{write("native-subtask-drag-event-trace-error.log",error.toString());}catch(Exception ignored){} }
+    }
+    /** Enumeration is observational; empty/limited results cannot establish that a popup is absent. */
+    private JSONObject subtaskTraceNativeWindows() throws Exception {
+        JSONObject result=new JSONObject().put("uptimeMillis",SystemClock.uptimeMillis()).put("wallMillis",System.currentTimeMillis());
+        android.accessibilityservice.AccessibilityServiceInfo info=getUiAutomation().getServiceInfo();
+        int flags=info==null?0:info.flags;
+        result.put("serviceFlags",flags).put("retrieveInteractiveWindowsEnabled",(flags&android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS)!=0)
+            .put("interpretation","Read-only accessibility inventory; missing or empty windows are not proof that no native popup exists");
+        JSONArray windows=new JSONArray();
+        java.util.List<android.view.accessibility.AccessibilityWindowInfo> inventory=getUiAutomation().getWindows();
+        if(inventory!=null)for(android.view.accessibility.AccessibilityWindowInfo window:inventory){
+            try {
+                Rect bounds=new Rect();window.getBoundsInScreen(bounds);
+                JSONObject row=new JSONObject().put("id",window.getId()).put("type",window.getType()).put("layer",window.getLayer())
+                    .put("active",window.isActive()).put("focused",window.isFocused()).put("accessibilityFocused",window.isAccessibilityFocused())
+                    .put("bounds",bounds.toShortString()).put("title",window.getTitle()==null?JSONObject.NULL:String.valueOf(window.getTitle()));
+                AccessibilityNodeInfo root=window.getRoot();
+                try{if(root!=null)row.put("rootClass",String.valueOf(root.getClassName())).put("rootPackage",String.valueOf(root.getPackageName()));}
+                finally{if(root!=null)root.recycle();}
+                windows.put(row);
+            } finally { window.recycle(); }
+        }
+        return result.put("windows",windows);
+    }
+
+
     private void beginHeldTouchTrace() throws Exception {
-        js("(function(){var rows=[];function read(stage,e){if(rows.length>=128)return;var s=getSelection(),t=e?.target,p=e?.changedTouches?.[0];rows.push({stage:stage,now:performance.now(),eventTime:e?.timeStamp,type:e?.type,trusted:e?.isTrusted,prevented:e?.defaultPrevented,ctrl:e?.ctrlKey,target:t?.tagName,task:t?.closest?.('[data-task-id]')?.dataset.taskId,x:p?.clientX,y:p?.clientY,focused:document.hasFocus(),selection:s?{collapsed:s.isCollapsed,text:s.toString().slice(0,200)}:null,dragging:!!document.querySelector('.dragging'),ghost:!!document.querySelector('.drag-ghost')});}var types=['touchstart','touchmove','touchend','touchcancel','pointerdown','pointercancel','contextmenu','selectionchange','blur','focus'],listener=e=>read('event',e);types.forEach(t=>window.addEventListener(t,listener,true));var timer=setInterval(()=>read('sample'),100);window.__d403HeldTrace={read:()=>rows,stop:()=>{clearInterval(timer);types.forEach(t=>window.removeEventListener(t,listener,true));}};read('before-down');return true;})()");
+        js("(function() {\n  var rows = [], dropped = 0, ids = new WeakMap(), nextId = 1;\n  var capturedTitle = document.querySelector('.single-quadrant [data-quadrant=\"0\"] .quadrant-list .task-row:first-child .task-title');\n  var capturedRow = capturedTitle?.closest('.task-row'), sourceId = capturedRow?.dataset.taskId || '';\n  var currentRow = () => Array.from(document.querySelectorAll('.single-quadrant .task-row')).find(r => r.dataset.taskId === sourceId) || null;\n  function node(n) {\n    if (!n) return null;\n    if (!ids.has(n)) ids.set(n, nextId++);\n    var el = n.nodeType === 1 ? n : n.parentElement;\n    return {nodeId: ids.get(n), nodeType: n.nodeType, tag: el?.tagName || null,\n      taskId: el?.closest?.('.task-row')?.dataset.taskId || null, connected: n.isConnected,\n      classes: typeof el?.className === 'string' ? el.className.slice(0, 240) : null};\n  }\n  function read(stage, e, detail) {\n    if (rows.length >= 128) { dropped++; return; }\n    var s = getSelection(), t = e?.target, p = e?.changedTouches?.[0], current = currentRow();\n    rows.push({stage: stage, now: performance.now(), wallMillis: Date.now(), eventTime: e?.timeStamp,\n      type: e?.type, trusted: e?.isTrusted, prevented: e?.defaultPrevented, ctrl: e?.ctrlKey,\n      target: t?.tagName, task: t?.closest?.('[data-task-id]')?.dataset.taskId, x: p?.clientX, y: p?.clientY,\n      focused: document.hasFocus(), selection: s ? {collapsed: s.isCollapsed, text: s.toString().slice(0, 200)} : null,\n      dragging: !!document.querySelector('.dragging'), ghost: !!document.querySelector('.drag-ghost'),\n      eventTarget: node(t), capturedTitle: node(capturedTitle), capturedRow: node(capturedRow),\n      currentRow: node(current), sameRow: current === capturedRow,\n      sameTitle: current?.querySelector('.task-title') === capturedTitle, sourceId: sourceId, detail: detail || null});\n  }\n  var types = ['touchstart','touchmove','touchend','touchcancel','pointerdown','pointercancel','contextmenu','selectionchange','blur','focus'];\n  var listener = e => read('event', e);\n  types.forEach(type => window.addEventListener(type, listener, true));\n  function relevant(n) {\n    if (!n || n.nodeType !== 1) return false;\n    return n === capturedTitle || n === capturedRow || n.contains(capturedRow) ||\n      n.matches('.drag-ghost') || !!n.querySelector('.single-quadrant .task-row,.drag-ghost') ||\n      (n.matches('.task-row') && n.dataset.taskId === sourceId);\n  }\n  var observer = new MutationObserver(mutations => {\n    var changes = [];\n    for (var m of mutations) {\n      if (m.type === 'attributes') {\n        if (m.target !== capturedRow && (!m.target.matches('.task-row') || m.target.dataset.taskId !== sourceId)) continue;\n        changes.push({kind: 'attribute', target: node(m.target), attribute: m.attributeName,\n          oldValue: m.oldValue, currentValue: m.target.getAttribute(m.attributeName)});\n      } else {\n        var added = Array.from(m.addedNodes).filter(relevant), removed = Array.from(m.removedNodes).filter(relevant);\n        if (!added.length && !removed.length) continue;\n        changes.push({kind: 'childList', target: node(m.target), added: added.slice(0, 6).map(node),\n          removed: removed.slice(0, 6).map(node), addedCount: added.length, removedCount: removed.length});\n      }\n      if (changes.length >= 8) break;\n    }\n    if (changes.length) read('dom-mutation', null, {changes: changes, mutationCount: mutations.length});\n  });\n  observer.observe(document.body, {childList: true, subtree: true, attributes: true,\n    attributeFilter: ['class'], attributeOldValue: true});\n  var stopRepo = D4Prototype.repo.subscribe((state, detail) => read('repo-publish', null,\n    {changeType: detail?.type || null, detailKeys: detail ? Object.keys(detail).slice(0, 12) : []}));\n  var timer = setInterval(() => read('sample'), 100), stopped = false;\n  window.__d403HeldTrace = {\n    read: () => rows.concat([{stage: 'trace-summary', dropped: dropped, maxMeasurementRows: 128}]),\n    stop: () => {\n      if (stopped) return;\n      stopped = true; clearInterval(timer); observer.disconnect(); stopRepo();\n      types.forEach(type => window.removeEventListener(type, listener, true));\n    }\n  };\n  read('before-down');\n  return true;\n})()\n");
     }
     private void finishHeldTouchTrace() {
         try{Object trace=js("(function(){var p=window.__d403HeldTrace;if(!p)return null;var rows=p.read();p.stop();delete window.__d403HeldTrace;return rows;})()");write("native-held-event-trace.json",String.valueOf(trace));}
