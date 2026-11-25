@@ -2,9 +2,13 @@ package local.gxtodo.d403preview.tests;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -14,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityEvent;
 import android.webkit.WebView;
 import local.gxtodo.d403preview.BuildInfo;
 import local.gxtodo.d403preview.MainActivity;
@@ -24,6 +29,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
@@ -66,12 +73,20 @@ public final class PreviewInstrumentation extends Instrumentation {
                 shot("android-quadrants");
             });
             check("android-apk-version-info-native-dialog", () -> {
+                try {
                 js("D4Prototype.navigate('about')"); settle();
                 require(Boolean.TRUE.equals(js("document.querySelector('.version-info').textContent.includes(JSON.parse(GxD4Preview.versionInfo()).versionName)&&document.querySelector('.version-info').textContent.includes(String(JSON.parse(GxD4Preview.versionInfo()).versionCode))")),"About page displays actual APK identity");
                 tap("[data-action=personal-apk-version]");
                 AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();
                 require(root!=null&&nativeTextContains(root,BuildInfo.VERSION_NAME)&&nativeTextContains(root,BuildInfo.BUILD_TIME_UTC),"Real Android version dialog contains injected APK name and UTC build time");
-                shot("android-apk-version"); back();home();
+                shot("android-apk-version"); verifyNativeVersionButtons();home();
+                } catch(Throwable failure) {
+                    try { shot("failure-native-version-before-cleanup"); }
+                    catch(Throwable evidenceError) { failure.addSuppressed(evidenceError); }
+                    try { cleanupNativeVersionDialogs(); }
+                    catch(Throwable cleanupError) { failure.addSuppressed(cleanupError); }
+                    throw failure;
+                }
             });
             check("android-touch-zoom-and-back", () -> {
                 home(); tap("[data-action='quadrant-focus'][data-id='0']");
@@ -302,6 +317,97 @@ public final class PreviewInstrumentation extends Instrumentation {
                 stopped=timer("reopen-for-isolated-test");
                 require(!stopped.getBoolean("running")&&!stopped.getBoolean("completed")&&stopped.getLong("elapsedMillis")==0,"Actual early-end state persists across store reopen");
             });
+
+            check("android-touch-held-drag-autoscroll", () -> withDragFixture("native-held-drag", () -> {
+                js("(function(){var s=D4Prototype.repo.state;s.tasks=[];D4Prototype.repo.batch(()=>{D4Prototype.repo.replaceState(s);for(var i=0;i<50;i++)D4Prototype.repo.createTask({id:'d403-native-long-'+i,title:'Native long list '+i,quadrant:0,start:DemoDomain.helpers.dayKey()+'T12:00',notes:'Retained notes '+i,tags:['native-drag-fixture']});});return true;})()");
+                settle(); manualSort(); tap("[data-action=quadrant-focus][data-id='0']");
+                String list=".single-quadrant [data-quadrant='0'] .quadrant-list";
+                String source=list+" .task-row:first-child .task-title";
+                float[] start=point(source,true),edge=dragDropPoint(list,false);
+                Object before=js("JSON.stringify(D4Prototype.repo.state.tasks)"), raw=dragFixtureRaw();
+                Object ids=js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>t.id))");
+                double scrollBefore=((Number)js("document.querySelector("+JSONObject.quote(list)+").scrollTop")).doubleValue();
+                JSONObject observed=new JSONObject().put("source","real Android MotionEvent").put("scrollBefore",scrollBefore);
+                try (NativeDragTouch touch=new NativeDragTouch("held-drag-autoscroll")) {
+                    try {
+                        touch.down(start); SystemClock.sleep(longHold());
+                        require(Boolean.TRUE.equals(js("!!document.querySelector('.dragging')&&!!document.querySelector('.drag-ghost')")),"Real long hold activates drag before movement");
+                        touch.move(edge,450); SystemClock.sleep(800);
+                        double scrollHeld=((Number)js("document.querySelector("+JSONObject.quote(list)+").scrollTop")).doubleValue();
+                        boolean active=Boolean.TRUE.equals(js("!!document.querySelector('.dragging')&&!!document.querySelector('.drag-ghost')"));
+                        observed.put("heldBeforeActionUp",true).put("scrollHeld",scrollHeld).put("dragActive",active);
+                        write("native-held-drag-observation.json",observed.toString(2));
+                        require(active&&scrollHeld>scrollBefore+30,"List scrollTop increases while the real finger remains down");
+                        require(before.equals(js("JSON.stringify(D4Prototype.repo.state.tasks)")),"Held drag does not commit task mutations before ACTION_UP");
+                        shot("android-native-held-drag-autoscroll");
+                        touch.up(edge);
+                    } catch(Exception|Error error) {
+                        try { shot("failure-native-held-drag-before-cancel"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
+                        throw error;
+                    }
+                }
+                settle();
+                require(raw.equals(dragFixtureRaw()),"Released long-list drag preserves every ID and every non-order task field");
+                require(((Number)js("D4Prototype.repo.state.tasks.length")).intValue()==50,"Every synthetic long-list task remains present");
+                require(!ids.equals(js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>t.id))")),"Dropping after held auto-scroll actually changes the order");
+                require(Boolean.TRUE.equals(js("!document.querySelector('.dragging,.drag-ghost,.drop-target,.swiping,.app-shell.nav-open,#modal-root .modal-shade')")),"Released drag clears gesture decorations and does not open another surface");
+            }));
+            check("android-touch-subtask-order-immediate-close", () -> withDragFixture("native-subtask-close", () -> {
+                js("(function(){var s=D4Prototype.repo.state;s.tasks=[];D4Prototype.repo.batch(()=>{D4Prototype.repo.replaceState(s);D4Prototype.repo.createTask({id:'d403-native-parent',title:'Native parent fixture',notes:'Original parent notes',quadrant:0,start:DemoDomain.helpers.dayKey()+'T12:00'});D4Prototype.repo.createTask({id:'d403-native-child-a',title:'Native first child',notes:'Raw A',tags:['A,comma'],place:'Room A'},'d403-native-parent');D4Prototype.repo.createTask({id:'d403-native-child-b',title:'Native second child',notes:'Raw B',tags:['B'],place:'Room B'},'d403-native-parent');});return true;})()");
+                settle(); manualSort(); tap("[data-task-id='d403-native-parent'] [data-action=task-open]");
+                String draft="Native parent draft retained through child order";
+                Object beforeChildren=js("JSON.stringify(D4Prototype.repo.getTask('d403-native-parent').subtasks.map(t=>{var x=structuredClone(t);delete x.order;return x;}).sort((a,b)=>a.id.localeCompare(b.id)))");
+                typeText("[data-form=task-edit] [name=notes]",draft);
+                require("Original parent notes".equals(js("D4Prototype.repo.getTask('d403-native-parent').notes")),"Native text input remains an unsaved parent draft");
+                String handle="[data-subtask-list] [data-task-id='d403-native-child-a'] .drag-handle";
+                String other="[data-subtask-list] [data-task-id='d403-native-child-b']";
+                float[] start=point(handle,true),after=dragDropPoint(other,true);
+                try (NativeDragTouch touch=new NativeDragTouch("subtask-order")) {
+                    try {
+                        touch.down(start);SystemClock.sleep(100);
+                        require(Boolean.TRUE.equals(js("!!document.querySelector('[data-task-id=d403-native-child-a].dragging')")),"Real handle touch activates the child drag");
+                        touch.move(after,300);touch.up(after);
+                    } catch(Exception|Error error) {
+                        try { shot("failure-native-subtask-drag-before-cancel"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
+                        throw error;
+                    }
+                }
+                waitForIdleSync();
+                require(Boolean.TRUE.equals(js("JSON.stringify(D4Prototype.repo.getTask('d403-native-parent').subtasks.map(t=>t.id))===JSON.stringify(['d403-native-child-b','d403-native-child-a'])")),"Real drag moves the first child after its sibling");
+                require(Boolean.TRUE.equals(js("JSON.stringify(Array.from(document.querySelectorAll('[data-subtask-list] .task-row')).map(r=>r.dataset.taskId))===JSON.stringify(['d403-native-child-b','d403-native-child-a'])")),"Visible sibling DOM order updates immediately");
+                require(beforeChildren.equals(js("JSON.stringify(D4Prototype.repo.getTask('d403-native-parent').subtasks.map(t=>{var x=structuredClone(t);delete x.order;return x;}).sort((a,b)=>a.id.localeCompare(b.id)))")),"Sorting preserves every child non-order field");
+                require("Original parent notes".equals(js("D4Prototype.repo.getTask('d403-native-parent').notes"))&&draft.equals(js("document.querySelector('[data-form=task-edit] [name=notes]').value")),"Sorting retains the unsaved parent notes without saving them");
+                require(Boolean.TRUE.equals(js("D4Prototype.repo.state.tasks.length===1&&!D4Prototype.repo.state.tasks.some(t=>t.id==='d403-native-child-a'||t.id==='d403-native-child-b')")),"Children remain children and are not promoted");
+                // Prepare both hit-tested coordinates before the suppression window starts.
+                float[] handlePoint=point(handle,false),closePoint=point("[data-action=close-modal]",false);
+                js("(function(){var p={batches:0,events:[]};p.stop=D4Prototype.repo.subscribe((s,d)=>{if(d.type==='batch')p.batches++;});p.end=e=>{if(e.target.closest('[data-task-id=d403-native-child-a] .drag-handle')){p.handleEnd=performance.now();p.handleTrusted=e.isTrusted;p.batchesAtHandleEnd=p.batches;}};p.click=e=>{if(e.target.closest('[data-action=close-modal]')){p.closeClick=performance.now();p.closeTrusted=e.isTrusted;}};p.observer=new MutationObserver(()=>{if(p.closeClick&&!document.querySelector('[data-form=task-edit]')&&!p.closedAt)p.closedAt=performance.now();});p.observer.observe(document.querySelector('#modal-root'),{childList:true,subtree:true});document.addEventListener('touchend',p.end);document.addEventListener('click',p.click,true);window.__d403NativeCloseProbe=p;return true;})()");
+                long released,closeDown,closeUp;
+                try (NativeDragTouch touch=new NativeDragTouch("subtask-immediate-close")) {
+                    try {
+                        touch.down(handlePoint);SystemClock.sleep(60);released=touch.up(handlePoint);
+                        closeDown=touch.down(closePoint);closeUp=touch.up(closePoint);
+                    } catch(Exception|Error error) {
+                        try { shot("failure-native-subtask-close-before-cancel"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
+                        throw error;
+                    }
+                }
+                waitForIdleSync();
+                JSONObject probe=(JSONObject)js("(function(){var p=window.__d403NativeCloseProbe;return {handleEnd:p.handleEnd,handleTrusted:p.handleTrusted,batchesAtHandleEnd:p.batchesAtHandleEnd,closeClick:p.closeClick,closeTrusted:p.closeTrusted,closedAt:p.closedAt,modalStillOpen:!!document.querySelector('[data-form=task-edit]'),dirty:!!document.querySelector('.dragging,.drag-ghost,.drop-target,.swiping')};})()");
+                probe.put("nativeHandleReleaseUptimeMs",released).put("nativeCloseDownUptimeMs",closeDown).put("nativeCloseUpUptimeMs",closeUp).put("nativeCloseAfterReleaseMs",closeUp-released);
+                write("native-subtask-immediate-close.json",probe.toString(2));
+                require(closeUp-released<500,"Actual Close touch finishes within 500ms of the real handle release");
+                require(probe.optBoolean("handleTrusted")&&probe.optBoolean("closeTrusted"),"Observed handle touchend and Close click are trusted browser events");
+                require(probe.optInt("batchesAtHandleEnd",-1)==1,"One real handle touch commits exactly one repository batch");
+                require(probe.has("closedAt")&&probe.has("handleEnd")&&probe.getDouble("closedAt")>=probe.getDouble("handleEnd")&&probe.getDouble("closedAt")-probe.getDouble("handleEnd")<500,"The modal is actually removed inside the original 500ms click-suppression window");
+                require(!probe.getBoolean("modalStillOpen")&&!probe.getBoolean("dirty"),"Immediate Close dismisses the editor and leaves no active gesture");
+                require(draft.equals(js("D4Prototype.repo.getTask('d403-native-parent').notes")),"Explicit Close saves the preserved parent draft");
+                require(Boolean.TRUE.equals(js("JSON.stringify(D4Prototype.repo.getTask('d403-native-parent').subtasks.map(t=>t.id))===JSON.stringify(['d403-native-child-b','d403-native-child-a'])")),"Immediate Close retains the new sibling order");
+                tap("[data-task-id='d403-native-parent'] [data-action=task-open]");
+                require(draft.equals(js("document.querySelector('[data-form=task-edit] [name=notes]').value")),"Reopening shows the exact saved parent draft");
+                require(beforeChildren.equals(js("JSON.stringify(D4Prototype.repo.getTask('d403-native-parent').subtasks.map(t=>{var x=structuredClone(t);delete x.order;return x;}).sort((a,b)=>a.id.localeCompare(b.id)))")),"Close and reopen preserve child identities and raw fields");
+                shot("android-native-subtask-draft-reopened");
+            }));
+
         } catch (Throwable fatal) { record("instrumentation-setup-or-fatal", fatal, 0); }
         try {
             JSONObject report=new JSONObject().put("kind","mytodo-d403-native-isolated-evidence").put("sourceSha",BuildInfo.SOURCE_SHA)
@@ -318,6 +424,79 @@ public final class PreviewInstrumentation extends Instrumentation {
             finish(failed==0?Activity.RESULT_OK:Activity.RESULT_CANCELED,status);
         } catch(Exception reportFailure) { Bundle b=new Bundle();b.putString("stream",reportFailure.toString());finish(Activity.RESULT_CANCELED,b); }
     }
+
+    /** Fixtures are synthetic only and are restored after each added case, including failures. */
+    private void withDragFixture(String name,Check body) throws Exception {
+        home();
+        String state=(String)js("JSON.stringify(D4Prototype.repo.state)"),demo=(String)js("JSON.stringify(D4Prototype.repo.demo)");
+        Throwable failure=null;
+        try { body.run(); }
+        catch(Exception|Error error) {
+            failure=error;
+            try { shot("failure-"+name+"-before-cleanup"); } catch(Exception|Error capture) { error.addSuppressed(capture); }
+            throw error;
+        } finally {
+            try {
+                js("(function(){var p=window.__d403NativeCloseProbe;if(p){p.stop();p.observer.disconnect();document.removeEventListener('touchend',p.end);document.removeEventListener('click',p.click,true);delete window.__d403NativeCloseProbe;}DemoMobileControls.cancel();return true;})()");
+                home();
+                js("(function(){D4Prototype.repo.batch(()=>{D4Prototype.repo.replaceState(JSON.parse("+JSONObject.quote(state)+"));D4Prototype.repo.updateDemo(()=>JSON.parse("+JSONObject.quote(demo)+"));});return true;})()");
+                settle();
+                require(state.equals(js("JSON.stringify(D4Prototype.repo.state)")),"Synthetic drag fixture restores the entire previous core state");
+                require(demo.equals(js("JSON.stringify(D4Prototype.repo.demo)")),"Synthetic drag fixture restores the entire previous demo state without leftover keys");
+            } catch(Exception|Error cleanup) {
+                if(failure!=null)failure.addSuppressed(cleanup);else throw cleanup;
+            }
+        }
+    }
+    private Object dragFixtureRaw() throws Exception {
+        return js("JSON.stringify(D4Prototype.repo.state.tasks.map(t=>{var x=structuredClone(t);delete x.order;return x;}).sort((a,b)=>a.id.localeCompare(b.id)))");
+    }
+    /** Observe clipping and real hit testing; no scrolling is performed by this helper. */
+    private float[] dragDropPoint(String selector,boolean afterRow) throws Exception {
+        JSONObject r=(JSONObject)js("(function(){var e=document.querySelector("+JSONObject.quote(selector)+");if(!e)throw Error('Missing drag target');var r=e.getBoundingClientRect(),v=visualViewport,l=Math.max(0,r.left),t=Math.max(0,r.top),b=Math.min(innerHeight,v.height,r.bottom),right=Math.min(innerWidth,r.right);for(var p=e.parentElement;p;p=p.parentElement){var c=getComputedStyle(p),q=p.getBoundingClientRect();if(/^(auto|scroll|hidden|clip)$/.test(c.overflowX)){l=Math.max(l,q.left+p.clientLeft);right=Math.min(right,q.left+p.clientLeft+p.clientWidth);}if(/^(auto|scroll|hidden|clip)$/.test(c.overflowY)){t=Math.max(t,q.top+p.clientTop);b=Math.min(b,q.top+p.clientTop+p.clientHeight);}}var x=(l+right)/2,y=b-12,hit=document.elementFromPoint(x,y);return {x:x,y:y,visible:right-l>4&&b-t>24,hitMatches:!!hit&&(hit===e||e.contains(hit)),belowRowCenter:y>r.top+r.height/2,innerWidth:innerWidth,innerHeight:innerHeight,visualViewport:{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}};})()");
+        touchTargets.put(new JSONObject().put("selector",selector).put("purpose",afterRow?"drop-after-row":"held-bottom-edge").put("observation",r));
+        write("touch-targets.json",touchTargets.toString(2));
+        requireSimpleViewport(r,"Native held/drop target");
+        require(r.getBoolean("visible")&&r.getBoolean("hitMatches")&&(!afterRow||r.getBoolean("belowRowCenter")),"Visible drag drop target wins hit testing and is below the target row midpoint when required: "+r);
+        return new float[]{(float)r.getDouble("x"),(float)r.getDouble("y")};
+    }
+    /** One native geometry mapping, with explicit cancellation of any unfinished real touch. */
+    private final class NativeDragTouch implements AutoCloseable {
+        private final float scale;
+        private final int[] origin=new int[2];
+        private long down;
+        private float lastX,lastY;
+        private boolean active;
+        NativeDragTouch(String purpose) throws Exception {
+            JSONObject geometry=(JSONObject)js("(function(){var v=visualViewport;return {innerWidth:innerWidth,innerHeight:innerHeight,devicePixelRatio:devicePixelRatio,visualViewport:{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}};})()");
+            final int[] size=new int[2];
+            runOnMainSync(()->{WebView w=main.previewWebView();w.getLocationOnScreen(origin);size[0]=w.getWidth();size[1]=w.getHeight();});
+            requireSimpleViewport(geometry,"Native drag sequence "+purpose);
+            require(size[0]>0&&size[1]>0&&geometry.getDouble("innerWidth")>0,"Positive native drag geometry");
+            scale=(float)(size[0]/geometry.getDouble("innerWidth"));
+            geometry.put("purpose",purpose).put("webView",new JSONObject().put("screenX",origin[0]).put("screenY",origin[1]).put("widthPixels",size[0]).put("heightPixels",size[1]));
+            touchGeometries.put(geometry);write("touch-geometries.json",touchGeometries.toString(2));
+        }
+        long down(float[] css) {
+            require(!active,"Previous native touch must be released");
+            lastX=origin[0]+css[0]*scale;lastY=origin[1]+css[1]*scale;
+            down=SystemClock.uptimeMillis();active=true;input(down,down,MotionEvent.ACTION_DOWN,lastX,lastY);return down;
+        }
+        void move(float[] css,long duration) {
+            require(active,"Native move requires a held touch");
+            float sx=lastX,sy=lastY,ex=origin[0]+css[0]*scale,ey=origin[1]+css[1]*scale;
+            for(int i=1;i<=12;i++){SystemClock.sleep(duration/12);lastX=sx+(ex-sx)*i/12;lastY=sy+(ey-sy)*i/12;input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_MOVE,lastX,lastY);}
+        }
+        long up(float[] css) {
+            require(active,"Native release requires a held touch");
+            lastX=origin[0]+css[0]*scale;lastY=origin[1]+css[1]*scale;long now=SystemClock.uptimeMillis();
+            input(down,now,MotionEvent.ACTION_UP,lastX,lastY);active=false;return now;
+        }
+        @Override public void close() {
+            if(active){try{input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_CANCEL,lastX,lastY);}finally{active=false;}}
+        }
+    }
+
     private void check(String name,Check check) { long started=SystemClock.elapsedRealtime();try{check.run();record(name,null,SystemClock.elapsedRealtime()-started);}catch(Throwable e){record(name,e,SystemClock.elapsedRealtime()-started);try{shot("failure-"+name);}catch(Exception ignored){}} }
     private void record(String name,Throwable error,long duration) {
         try { JSONObject row=new JSONObject().put("name",name).put("status",error==null?"passed":"failed").put("durationMs",duration);
@@ -327,6 +506,148 @@ public final class PreviewInstrumentation extends Instrumentation {
     }
     private static void require(boolean condition,String message) { if(!condition)throw new AssertionError(message); }
     private static boolean nativeTextContains(AccessibilityNodeInfo node,String text) { if(node.getText()!=null&&node.getText().toString().contains(text))return true;for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo child=node.getChild(i);if(child!=null){boolean found=nativeTextContains(child,text);child.recycle();if(found)return true;}}return false; }
+    private void verifyNativeVersionButtons() throws Exception {
+        JSONObject proof=new JSONObject().put("kind","mytodo-d403-native-version-button-evidence")
+            .put("sourceSha",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
+            .put("htmlSha256",BuildInfo.HTML_SHA256).put("versionName",BuildInfo.VERSION_NAME)
+            .put("versionCode",BuildInfo.VERSION_CODE).put("buildTimeUTC",BuildInfo.BUILD_TIME_UTC)
+            .put("productionDatabase",false).put("productionSync",false);
+        JSONArray actions=new JSONArray();proof.put("nativeActions",actions);
+        final ClipboardManager clipboard=(ClipboardManager)main.getSystemService(Context.CLIPBOARD_SERVICE);
+        final ClipData[] originalClip=new ClipData[1];final boolean[] clipboardOwned=new boolean[1];
+        Throwable originalFailure=null;
+        try {
+            require(BuildInfo.BUILD_TIME_UTC.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z"),"APK build time is the injected UTC instant");
+            String versionText=BuildInfo.VERSION_NAME+" / versionCode "+BuildInfo.VERSION_CODE+
+                "\nby codex · "+BuildInfo.SOURCE_SHA.substring(0,5)+"\nAPK 编译时间："+BuildInfo.BUILD_TIME_UTC+
+                " (UTC)\n独立合成体验；无生产数据库/远端同步";
+            AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();
+            try { require(root!=null&&nativeTextContains(root,"MyTodo D4-03 版本信息")&&nativeTextContains(root,versionText),"Native version dialog exposes the complete current name, code, source prefix and UTC build time"); }
+            finally { if(root!=null)root.recycle(); }
+            proof.put("expectedCurrentText",versionText);
+            final String sentinel="d403-version-copy-before-"+BuildInfo.RUN_ID+"-"+BuildInfo.RUN_ATTEMPT;
+            runOnMainSync(()->{originalClip[0]=clipboard.getPrimaryClip();clipboard.setPrimaryClip(ClipData.newPlainText("D403 isolated verification",sentinel));clipboardOwned[0]=true;});
+            nativeDialogButton("复制版本信息",actions);
+            final String[] copied=new String[1];final int[] copiedItems=new int[1];
+            runOnMainSync(()->{ClipData clip=clipboard.getPrimaryClip();copiedItems[0]=clip==null?0:clip.getItemCount();copied[0]=clip!=null&&clip.getItemCount()==1&&clip.getItemAt(0).getText()!=null?clip.getItemAt(0).getText().toString():null;});
+            proof.put("copiedItems",copiedItems[0]).put("copiedText",copied[0]==null?JSONObject.NULL:copied[0]);
+            require(copiedItems[0]==1&&versionText.equals(copied[0]),"Actual native copy button replaces the sentinel with the exact displayed version information");
+            tap("[data-action=personal-apk-version]");nativeDialogButton("版本历史",actions);
+            JSONArray history;
+            try(InputStream in=getTargetContext().getAssets().open("version-history.json");ByteArrayOutputStream bytes=new ByteArrayOutputStream()){
+                byte[] buffer=new byte[4096];int n;while((n=in.read(buffer))!=-1)bytes.write(buffer,0,n);
+                history=new JSONArray(bytes.toString(StandardCharsets.UTF_8.name()));
+            }
+            proof.put("packagedHistory",history);
+            require(history.length()>=6,"Packaged offline history includes the current build and five verified earlier builds");
+            JSONObject current=history.getJSONObject(0);
+            require(BuildInfo.VERSION_NAME.equals(current.getString("versionName"))&&BuildInfo.VERSION_CODE==current.getInt("versionCode")&&
+                BuildInfo.SOURCE_SHA.equals(current.getString("sourceSHA"))&&BuildInfo.BUILD_TIME_UTC.equals(current.getString("buildTimeUTC"))&&
+                BuildInfo.RUN_ID.equals(current.getString("runId"))&&BuildInfo.RUN_ATTEMPT.equals(current.getString("runAttempt")),"First offline record has the exact current APK source/run/build identity");
+            String[][] known={
+                {"0.3.11","403011","e5dc4dd1fd23d6db7fb384d24269153d068feb8c","45563979340","1","2026-11-25T06:54:33.086Z"},
+                {"0.3.10","403010","5b537d523c06ef6e50891d4ac214a9ac48c0e58a","45559378554","1","2026-11-25T06:17:15.241Z"},
+                {"0.3.9","403009","c5c4c83880382354cbf28afdcf6660cab4bafa84","45558130766","1","2026-11-25T06:07:03.820Z"},
+                {"0.3.8","403008","85d5896320e72253f6aa86a372ef17faa1e8f5d3","45549250863","1","2026-11-25T04:49:05.106Z"},
+                {"0.3.7","403007","e91f4cc89cfd94312f24d749ddd7a12dc8390e85","45547914158","1","2026-11-25T04:37:02.716Z"}
+            };
+            for(String[] expected:known){int count=0;for(int i=1;i<history.length();i++){JSONObject row=history.getJSONObject(i);if(expected[0].equals(row.getString("versionName"))){count++;require(Integer.parseInt(expected[1])==row.getInt("versionCode")&&expected[2].equals(row.getString("sourceSHA"))&&expected[3].equals(row.getString("runId"))&&expected[4].equals(row.getString("runAttempt"))&&expected[5].equals(row.getString("buildTimeUTC")),"Historical record retains its independently archived identity: "+expected[0]);}}require(count==1,"Each known historical build occurs exactly once: "+expected[0]);}
+            StringBuilder text=new StringBuilder("已核实构建记录；未记录的更早版本不补造。\n独立 CI 体验签名，不保证跨运行覆盖安装。\n\n");
+            int previousCode=Integer.MAX_VALUE;
+            for(int i=0;i<history.length();i++){
+                JSONObject row=history.getJSONObject(i);int code=row.getInt("versionCode");String sha=row.getString("sourceSHA"),built=row.getString("buildTimeUTC");
+                require(code<previousCode&&sha.matches("[a-f0-9]{40}")&&built.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z"),"Offline history uses unique descending codes and explicit source/UTC build identity");previousCode=code;
+                if(i>0)text.append("\n\n");text.append(row.getString("versionName")).append(" / versionCode ").append(code)
+                    .append("\nby codex · ").append(sha.substring(0,5)).append("\nAPK 编译时间：").append(built).append(" (UTC)\nActions ")
+                    .append(row.getString("runId")).append(" / attempt ").append(row.getString("runAttempt"));
+                JSONArray changes=row.getJSONArray("changes");require(changes.length()>0,"Every historical build has offline change details");
+                for(int j=0;j<changes.length();j++){String change=changes.getString(j);require(!change.trim().isEmpty(),"Offline history change is non-empty");text.append("\n• ").append(change);}
+            }
+            String expectedHistory=text.toString();require(expectedHistory.equals(BuildInfo.HISTORY_TEXT),"APK history text and structured asset agree on every identity and change");
+            root=getUiAutomation().getRootInActiveWindow();
+            try { require(root!=null&&nativeTextContains(root,"版本历史（离线）")&&nativeTextContains(root,expectedHistory),"Actual native history dialog contains all packaged entries, changes and UTC identity in order"); }
+            finally { if(root!=null)root.recycle(); }
+            proof.put("nativeHistoryTextMatched",true);shot("android-apk-version-history-top");
+            scrollNativeHistory(actions);shot("android-apk-version-history-end");nativeDialogButton("关闭",actions);
+            root=getUiAutomation().getRootInActiveWindow();
+            try { require(root!=null&&!nativeTextContains(root,"版本历史（离线）"),"Real native close button dismisses the history dialog"); }
+            finally { if(root!=null)root.recycle(); }
+            require("about".equals(js("D4Prototype.getRoute()")),"Native version actions return to the same About page");
+            proof.put("passed",true);
+        } catch(Throwable failure) {
+            originalFailure=failure;
+            try { shot("failure-native-version-buttons-original"); }
+            catch(Throwable evidenceError) { failure.addSuppressed(evidenceError); }
+            throw failure;
+        } finally {
+            Throwable finalizationFailure=null;
+            try { if(clipboardOwned[0])runOnMainSync(()->{if(originalClip[0]!=null)clipboard.setPrimaryClip(originalClip[0]);else if(Build.VERSION.SDK_INT>=28)clipboard.clearPrimaryClip();}); }
+            catch(Throwable error) { finalizationFailure=error; }
+            try { write("native-version-buttons.json",proof.toString(2)); }
+            catch(Throwable error) { if(finalizationFailure==null)finalizationFailure=error;else finalizationFailure.addSuppressed(error); }
+            if(finalizationFailure!=null){if(originalFailure!=null)originalFailure.addSuppressed(finalizationFailure);else if(finalizationFailure instanceof Exception)throw (Exception)finalizationFailure;else if(finalizationFailure instanceof Error)throw (Error)finalizationFailure;else throw new RuntimeException(finalizationFailure);}
+        }
+    }
+    private void cleanupNativeVersionDialogs() throws Exception {
+        JSONArray steps=new JSONArray();Throwable originalFailure=null;
+        try {
+            for(int i=0;i<2;i++){
+                AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();boolean visible;
+                try { require(root!=null,"Failure cleanup requires an observed active window");visible=isNativeVersionDialog(root); }
+                finally { if(root!=null)root.recycle(); }
+                steps.put(new JSONObject().put("step",i).put("knownDialogVisible",visible));
+                if(!visible)return;
+                back();steps.put(new JSONObject().put("action","real-android-back").put("step",i));
+            }
+            AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();
+            try { require(root!=null&&!isNativeVersionDialog(root),"Failed version case cleanup dismisses only its known native dialog"); }
+            finally { if(root!=null)root.recycle(); }
+        } catch(Throwable failure) { originalFailure=failure;throw failure; }
+        finally { try { write("native-version-failure-cleanup.json",new JSONObject().put("sourceSha",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT).put("steps",steps).toString(2)); }catch(Throwable error){if(originalFailure!=null)originalFailure.addSuppressed(error);else if(error instanceof Exception)throw (Exception)error;else if(error instanceof Error)throw (Error)error;else throw new RuntimeException(error);} }
+    }
+    private boolean isNativeVersionDialog(AccessibilityNodeInfo node) {
+        boolean ownPackage=node.getPackageName()!=null&&getTargetContext().getPackageName().contentEquals(node.getPackageName());
+        if(ownPackage&&node.isVisibleToUser()&&"android.widget.TextView".equals(String.valueOf(node.getClassName()))&&node.getText()!=null&&
+            ("MyTodo D4-03 版本信息".contentEquals(node.getText())||"版本历史（离线）".contentEquals(node.getText())))return true;
+        for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo child=node.getChild(i);if(child!=null)try{if(isNativeVersionDialog(child))return true;}finally{child.recycle();}}
+        return false;
+    }
+    private void nativeDialogButton(String label,JSONArray actions) throws Exception {
+        AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();require(root!=null,"Native dialog accessibility root exists");
+        JSONArray matches=new JSONArray();Rect window=new Rect();
+        try { root.getBoundsInScreen(window);nativeTargets(root,label,false,matches); }
+        finally { root.recycle(); }
+        require(matches.length()==1,"Exactly one visible enabled native dialog button: "+label+" "+matches);
+        JSONObject target=matches.getJSONObject(0);Rect bounds=new Rect(target.getInt("left"),target.getInt("top"),target.getInt("right"),target.getInt("bottom"));
+        require(bounds.intersect(window)&&bounds.width()>2&&bounds.height()>2,"Native button has visible screen bounds: "+label);
+        float x=bounds.exactCenterX(),y=bounds.exactCenterY();actions.put(new JSONObject().put("action","native-button-tap").put("label",label).put("target",target).put("x",x).put("y",y));
+        long now=SystemClock.uptimeMillis();input(now,now,MotionEvent.ACTION_DOWN,x,y);input(now,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,x,y);settle();
+    }
+    private void nativeTargets(AccessibilityNodeInfo node,String label,boolean scrolling,JSONArray found) throws Exception {
+        boolean ownPackage=node.getPackageName()!=null&&getTargetContext().getPackageName().contentEquals(node.getPackageName());
+        String className=String.valueOf(node.getClassName());
+        boolean wanted=scrolling?node.isScrollable()&&"android.widget.ScrollView".equals(className):node.isClickable()&&"android.widget.Button".equals(className)&&node.getText()!=null&&label.contentEquals(node.getText());
+        if(ownPackage&&wanted&&node.isVisibleToUser()&&node.isEnabled()){Rect r=new Rect();node.getBoundsInScreen(r);found.put(new JSONObject().put("left",r.left).put("top",r.top).put("right",r.right).put("bottom",r.bottom).put("class",String.valueOf(node.getClassName())));}
+        for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo child=node.getChild(i);if(child!=null)try{nativeTargets(child,label,scrolling,found);}finally{child.recycle();}}
+    }
+    private void scrollNativeHistory(JSONArray actions) throws Exception {
+        AtomicReference<int[]> latest=new AtomicReference<>();final String pkg=getTargetContext().getPackageName();
+        getUiAutomation().setOnAccessibilityEventListener(event->{if(event.getEventType()==AccessibilityEvent.TYPE_VIEW_SCROLLED&&event.getPackageName()!=null&&pkg.contentEquals(event.getPackageName())&&"android.widget.ScrollView".equals(String.valueOf(event.getClassName())))latest.set(new int[]{event.getScrollY(),event.getMaxScrollY()});});
+        int prior=-1;boolean reachedEnd=false;
+        try {
+            for(int i=0;i<20&&!reachedEnd;i++){
+                AccessibilityNodeInfo root=getUiAutomation().getRootInActiveWindow();require(root!=null,"History remains the active native window");JSONArray scrolls=new JSONArray();Rect window=new Rect();
+                try{root.getBoundsInScreen(window);nativeTargets(root,"",true,scrolls);}finally{root.recycle();}
+                require(scrolls.length()==1,"Exactly one visible native history ScrollView");JSONObject target=scrolls.getJSONObject(0);
+                Rect bounds=new Rect(target.getInt("left"),target.getInt("top"),target.getInt("right"),target.getInt("bottom"));require(bounds.intersect(window)&&bounds.height()>80,"History has a reachable native scrolling area");
+                latest.set(null);float x=bounds.exactCenterX(),start=bounds.top+bounds.height()*.8f,end=bounds.top+bounds.height()*.2f;long down=SystemClock.uptimeMillis();
+                input(down,down,MotionEvent.ACTION_DOWN,x,start);for(int step=1;step<=12;step++){SystemClock.sleep(25);input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_MOVE,x,start+(end-start)*step/12f);}input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,x,end);settle();
+                int[] observed=latest.get();require(observed!=null&&observed[1]>0&&observed[0]>prior,"Real swipe emits native scroll progress toward older history");prior=observed[0];reachedEnd=observed[0]>=observed[1];
+                actions.put(new JSONObject().put("action","native-history-swipe").put("target",target).put("x",x).put("startY",start).put("endY",end).put("scrollY",observed[0]).put("maxScrollY",observed[1]));
+            }
+            require(reachedEnd,"Actual native history swipes reach the oldest record without leaving the dialog");
+        } finally { getUiAutomation().setOnAccessibilityEventListener(null); }
+    }
     private void launch() throws Exception { main=(MainActivity)startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));waitLoaded(); }
     private void waitLoaded() throws Exception { long end=SystemClock.elapsedRealtime()+30000;while(SystemClock.elapsedRealtime()<end){try{if(Boolean.TRUE.equals(js("!!window.D4Prototype")))return;}catch(Exception ignored){}SystemClock.sleep(250);}throw new AssertionError("Preview WebView did not load"); }
     private Object js(String expression) throws Exception {
