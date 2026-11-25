@@ -34,6 +34,8 @@ public final class PreviewInstrumentation extends Instrumentation {
     private MainActivity main;
     private File evidence;
     private final JSONArray rows = new JSONArray();
+    private final JSONArray touchTargets = new JSONArray();
+    private final JSONArray touchGeometries = new JSONArray();
     private int passed, failed;
     private interface Check { void run() throws Exception; }
     @Override public void onCreate(Bundle args) { super.onCreate(args); start(); }
@@ -84,6 +86,7 @@ public final class PreviewInstrumentation extends Instrumentation {
                 final String page = route;
                 check("android-touch-edge-drawer-" + page, () -> {
                     home(); js("D4Prototype.navigate(" + JSONObject.quote(page) + ")"); settle(); edgeOpen();
+                    require(page.equals(js("D4Prototype.getRoute()")), "Edge gesture preserves page " + page);
                     require(Boolean.TRUE.equals(js("document.querySelector('.app-shell').classList.contains('nav-open')")), "Real left-edge swipe opens on " + page);
                     if ("notes".equals(page)) shot("android-notes-drawer");
                     if ("projects".equals(page)) shot("android-projects-drawer");
@@ -131,10 +134,15 @@ public final class PreviewInstrumentation extends Instrumentation {
                     tap(host+" [role=combobox]");
                     js("(function(){var x=document.querySelector("+JSONObject.quote(host+" [role=combobox]")+");x.value='';x.dispatchEvent(new Event('input',{bubbles:true}));return true;})()");
                     require(Boolean.TRUE.equals(js("document.querySelector("+JSONObject.quote(host+" .catalog-list")+").children.length>0")), "Existing " + kind + " candidates");
+                    String candidateId="projects".equals(kind)
+                        ? (String)js("document.querySelector("+JSONObject.quote(host+" [data-action=catalog-pick]")+").dataset.id") : null;
                     if ("tags".equals(kind)) { sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DPAD_DOWN)); sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)); sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER)); }
                     else tap(host+" [data-action=catalog-pick]");
                     require(Boolean.TRUE.equals(js("document.querySelector("+JSONObject.quote(host+" [role=combobox]")+").getAttribute('aria-expanded')==='false'")), "Candidate selection closed " + kind);
-                    if ("projects".equals(kind)) require(((String)js("document.querySelector('[name=projectId]').value")).startsWith("project-"), "Project identity selected, not name");
+                    if ("projects".equals(kind)) {
+                        require(candidateId.equals(js("document.querySelector('[data-form=task-edit] [data-catalog=projects] [name=projectId]').value")), "Exact tapped project identity selected, not name or underlying filter");
+                        require(Boolean.TRUE.equals(js("(function(){var h=document.querySelector('[data-form=task-edit] [data-catalog=projects]');var p=D4Prototype.repo.state.projects.find(p=>p.id===h.querySelector('[name=projectId]').value);return !!p&&!p.archived&&p.name===h.querySelector('[role=combobox]').value;})()")), "Selected project ID resolves to the active entity and visible name");
+                    }
                 }
                 shot("android-task-autocomplete"); back();
             });
@@ -142,7 +150,9 @@ public final class PreviewInstrumentation extends Instrumentation {
                 home(); tap("[data-task-id='d4-task-0'] .task-title");
                 js("document.querySelector('[data-form=task-edit] [name=title]').value='隔离未保存草稿'");
                 edgeOpen(); tap(".side-nav [data-action=go][data-id=notes]");
+                require("notes".equals(js("D4Prototype.getRoute()")), "Actual drawer tap navigated to notes with draft held");
                 js("DemoMobileControls.nav(false)"); edgeOpen(); tap(".side-nav [data-action=go][data-id=tasks]");
+                require("tasks".equals(js("D4Prototype.getRoute()")), "Actual drawer tap returned to tasks");
                 require("隔离未保存草稿".equals(js("document.querySelector('[data-form=task-edit] [name=title]').value")), "Draft restored across actual navigation taps");
                 js("DemoMobileControls.nav(false)"); back();
             });
@@ -196,6 +206,8 @@ public final class PreviewInstrumentation extends Instrumentation {
                 .put("productionDatabase",false).put("productionSync",false)
                 .put("unverified",new JSONArray().put("Physical handset touch and accessibility").put("Original production notification service, process-death and lockscreen regression").put("Original Win32 native task regression"));
             write("report.json",report.toString(2));
+            write("touch-targets.json",touchTargets.toString(2));
+            write("touch-geometries.json",touchGeometries.toString(2));
             Bundle status=new Bundle(); status.putString("stream",report.toString()); status.putInt("passed",passed);status.putInt("failed",failed);
             finish(failed==0?Activity.RESULT_OK:Activity.RESULT_CANCELED,status);
         } catch(Exception reportFailure) { Bundle b=new Bundle();b.putString("stream",reportFailure.toString());finish(Activity.RESULT_CANCELED,b); }
@@ -224,16 +236,37 @@ public final class PreviewInstrumentation extends Instrumentation {
     private void back() { sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_BACK));sendKeySync(new KeyEvent(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_BACK));settle(); }
     private void settle() { waitForIdleSync();SystemClock.sleep(650); }
     private float[] point(String selector,boolean scroll) throws Exception {
-        JSONObject rect=(JSONObject)js("(function(){var e=document.querySelector("+JSONObject.quote(selector)+");if(!e)throw Error('Missing '+"+JSONObject.quote(selector)+");"+(scroll?"e.scrollIntoView({block:'center'});":"")+"var r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,w:innerWidth,h:innerHeight};})()");
+        JSONObject rect=(JSONObject)js("(function(){var e=document.querySelector("+JSONObject.quote(selector)+");if(!e)throw Error('Missing '+"+JSONObject.quote(selector)+");"+(scroll?"e.scrollIntoView({block:'center',inline:'nearest'});":"")+
+            "var r=e.getBoundingClientRect(),v=window.visualViewport,l=Math.max(0,r.left),t=Math.max(0,r.top),right=Math.min(innerWidth,r.right),bottom=Math.min(innerHeight,v?v.height:innerHeight,r.bottom);"+
+            "for(var p=e.parentElement;p;p=p.parentElement){var c=getComputedStyle(p),b=p.getBoundingClientRect();if(/^(auto|scroll|hidden|clip)$/.test(c.overflowX)){l=Math.max(l,b.left+p.clientLeft);right=Math.min(right,b.left+p.clientLeft+p.clientWidth);}if(/^(auto|scroll|hidden|clip)$/.test(c.overflowY)){t=Math.max(t,b.top+p.clientTop);bottom=Math.min(bottom,b.top+p.clientTop+p.clientHeight);}}"+
+            "var x=(l+right)/2,y=(t+bottom)/2,hit=document.elementFromPoint(x,y);return {x:x,y:y,visible:right-l>2&&bottom-t>2,hitMatches:!!hit&&(hit===e||e.contains(hit)),hit:hit?hit.tagName+':'+hit.className:null,rect:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},clip:{left:l,top:t,right:right,bottom:bottom},innerWidth:innerWidth,innerHeight:innerHeight,devicePixelRatio:devicePixelRatio,visualViewport:v?{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}:null};})()");
+        touchTargets.put(new JSONObject().put("selector",selector).put("scroll",scroll).put("observation",rect));
+        write("touch-targets.json",touchTargets.toString(2));
+        requireSimpleViewport(rect,"DOM point "+selector);
+        require(rect.getBoolean("visible")&&rect.getBoolean("hitMatches"), "Actual visible touch target must win elementFromPoint: "+selector+" "+rect);
         return new float[]{(float)rect.getDouble("x"),(float)rect.getDouble("y")};
     }
     private void tap(String selector) throws Exception { point(selector,true);SystemClock.sleep(200);float[] p=point(selector,false);gesture(p[0],p[1],p[0],p[1],0,0);settle(); }
-    private void edgeOpen() throws Exception { gesture(3,150,140,152,0,300);settle(); }
+    private void edgeOpen() throws Exception { gesture(3,150,140,152,0,300);settle();require(Boolean.TRUE.equals(js("!!document.querySelector('.app-shell.nav-open')")),"Actual left-edge touch opened drawer before a menu interaction"); }
     private void gesture(float sx,float sy,float ex,float ey,long hold,long duration) throws Exception {
-        double cssWidth=((Number)js("innerWidth")).doubleValue();final int[] origin=new int[2];final int[] size=new int[1];runOnMainSync(()->{WebView w=main.previewWebView();w.getLocationOnScreen(origin);size[0]=w.getWidth();});
+        JSONObject geometry=(JSONObject)js("(function(){var v=window.visualViewport;return {innerWidth:innerWidth,innerHeight:innerHeight,devicePixelRatio:devicePixelRatio,visualViewport:v?{width:v.width,height:v.height,offsetLeft:v.offsetLeft,offsetTop:v.offsetTop,scale:v.scale}:null};})()");
+        double cssWidth=geometry.getDouble("innerWidth");final int[] origin=new int[2];final int[] size=new int[2];runOnMainSync(()->{WebView w=main.previewWebView();w.getLocationOnScreen(origin);size[0]=w.getWidth();size[1]=w.getHeight();});
+        geometry.put("webView",new JSONObject().put("screenX",origin[0]).put("screenY",origin[1]).put("widthPixels",size[0]).put("heightPixels",size[1]));
+        geometry.put("cssGesture",new JSONObject().put("startX",sx).put("startY",sy).put("endX",ex).put("endY",ey).put("holdMs",hold).put("durationMs",duration));
+        touchGeometries.put(geometry);write("touch-geometries.json",touchGeometries.toString(2));
+        requireSimpleViewport(geometry,"Native CSS-to-pixel gesture");
+        require(cssWidth>0&&size[0]>0&&size[1]>0,"Actual CSS and native WebView bounds must be positive: "+geometry);
         float scale=(float)(size[0]/cssWidth);long down=SystemClock.uptimeMillis();input(down,down,MotionEvent.ACTION_DOWN,origin[0]+sx*scale,origin[1]+sy*scale);SystemClock.sleep(hold);
         int steps=duration==0?0:12;for(int i=1;i<=steps;i++){SystemClock.sleep(duration/steps);input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_MOVE,origin[0]+(sx+(ex-sx)*i/steps)*scale,origin[1]+(sy+(ey-sy)*i/steps)*scale);}
         input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,origin[0]+ex*scale,origin[1]+ey*scale);
+    }
+    private static void requireSimpleViewport(JSONObject geometry,String context) throws Exception {
+        JSONObject viewport=geometry.optJSONObject("visualViewport");
+        require(viewport!=null,"Observed visualViewport is required before native touch mapping: "+context+" "+geometry);
+        require(Math.abs(viewport.getDouble("offsetLeft"))<.5&&Math.abs(viewport.getDouble("offsetTop"))<.5
+            &&Math.abs(viewport.getDouble("scale")-1d)<.001
+            &&Math.abs(viewport.getDouble("width")-geometry.getDouble("innerWidth"))<.5,
+            "Unsupported visualViewport offset/zoom/width; native coordinate conversion is unverified: "+context+" "+geometry);
     }
     private void input(long down,long now,int action,float x,float y) { MotionEvent event=MotionEvent.obtain(down,now,action,x,y,0);event.setSource(InputDevice.SOURCE_TOUCHSCREEN);try{require(getUiAutomation().injectInputEvent(event,true),"Native MotionEvent injection");}finally{event.recycle();} }
     private void nativeTap(Activity activity,int id) { final int[] xy=new int[2];final int[] size=new int[2];runOnMainSync(()->{View v=activity.findViewById(id);require(v!=null,"Native button exists");v.getLocationOnScreen(xy);size[0]=v.getWidth();size[1]=v.getHeight();});long down=SystemClock.uptimeMillis();input(down,down,MotionEvent.ACTION_DOWN,xy[0]+size[0]/2f,xy[1]+size[1]/2f);input(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,xy[0]+size[0]/2f,xy[1]+size[1]/2f);settle(); }
