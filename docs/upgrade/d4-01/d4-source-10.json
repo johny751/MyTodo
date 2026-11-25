@@ -1,0 +1,135 @@
+{
+  "base": "d4c5af4cbbb9192c19276dd371bd142c2b835534",
+  "branch": "d4/ui-candidate-1",
+  "allowed": "(?:prototypes/d4-01/.+|tests/d4-ui/.+|docs/upgrade/d4-01/.+|\\.github/workflows/d4-ui-candidate\\.yml)",
+  "sha256": "01fa413aefb45def3198cd4c2cb3c6daba4015f19fafbfdc0b2d6dced366249b",
+  "message": "D4 preserve original evidence bytes across hosts and validate SHA manifests",
+  "archive": "d4-source-10.zip",
+  "files": [
+    {
+      "bytes": 2668,
+      "path": ".github/workflows/d4-ui-candidate.yml",
+      "sha256": "8f18eb70a972f2f2af0507adc3ae358f990855ecb543e3d3b03cd73e240623eb"
+    },
+    {
+      "bytes": 2657,
+      "path": "docs/upgrade/d4-01/architecture.md",
+      "sha256": "992be5aca62840ced4ac8189246f865e9a62f0d3bffe0750925e1493e8211efa"
+    },
+    {
+      "bytes": 4077,
+      "path": "docs/upgrade/d4-01/collect-evidence.py",
+      "sha256": "84d504b171b80cff63fd807304ab11be0c18f3831316b0bd90fbcb800dd86247"
+    },
+    {
+      "bytes": 3042,
+      "path": "docs/upgrade/d4-01/d4-source-01.json",
+      "sha256": "7cc8ef4f546676c5be42cbbaaecbed5251080cfd835a8f1bfbb464d337899f63"
+    },
+    {
+      "bytes": 114,
+      "path": "docs/upgrade/d4-01/evidence-font/.gitattributes",
+      "sha256": "a8aab75548f7987b59d5f20b3dfdaedfa91f45b3b1a4b1b51ef1b11c9b5677ad"
+    },
+    {
+      "bytes": 114,
+      "path": "docs/upgrade/d4-01/evidence/.gitattributes",
+      "sha256": "a8aab75548f7987b59d5f20b3dfdaedfa91f45b3b1a4b1b51ef1b11c9b5677ad"
+    },
+    {
+      "bytes": 2980,
+      "path": "docs/upgrade/d4-01/history.md",
+      "sha256": "125acce3bb18ccecfec7f596f973bfa5e483f5f40899bc5c8fa19a57834c1234"
+    },
+    {
+      "bytes": 1493,
+      "path": "docs/upgrade/d4-01/reuse-and-review-gate.md",
+      "sha256": "2561ad4f0ac4e575f5744dc6f3e6e2360085f5263b13c9f1b1decdd55ee1066b"
+    },
+    {
+      "bytes": 9725,
+      "path": "docs/upgrade/d4-01/task-reuse.md",
+      "sha256": "de5e0f050816e7cf5187c57159e41800728ebfe4397f91563bd79e1dc005d01a"
+    },
+    {
+      "bytes": 8763,
+      "path": "docs/upgrade/d4-01/work-modules.md",
+      "sha256": "c49732cb95d43dee13eae707433446ef1da1a0c3867da4a9e42c2fc0faa88d22"
+    },
+    {
+      "bytes": 35116,
+      "path": "prototypes/d4-01/app.js",
+      "sha256": "79c520e756c94ac7eb8dbfb63582ee35177e6216d3729eb810226c039e48006a"
+    },
+    {
+      "bytes": 11939,
+      "path": "prototypes/d4-01/domain.mjs",
+      "sha256": "90568611f1e229918b7336aeee1c2ce71c02ad1f8eac70957d152f754f5e45a4"
+    },
+    {
+      "bytes": 837,
+      "path": "prototypes/d4-01/fonts/COPYRIGHT.txt",
+      "sha256": "2865e926de4011818655fdde0ab116e004988ec4a0a414896c2782743adb7d8e"
+    },
+    {
+      "bytes": 17773244,
+      "path": "prototypes/d4-01/fonts/NotoSansSC-VF.ttf",
+      "sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a"
+    },
+    {
+      "bytes": 4388,
+      "path": "prototypes/d4-01/fonts/OFL.txt",
+      "sha256": "760eb2367844e6c3f700cc04ebf39ceb9a1a9678d8dd4633cb72184d1926ef19"
+    },
+    {
+      "bytes": 778,
+      "path": "prototypes/d4-01/index.html",
+      "sha256": "888b656bf846043a98250d60901c0d0dbd980979fec7ac06971f2de4d2dec64c"
+    },
+    {
+      "bytes": 24614,
+      "path": "prototypes/d4-01/styles.css",
+      "sha256": "b47303df6356de12c05fc1fd7f686a3ab91e7435c9ff89e27e9501537bc1e874"
+    },
+    {
+      "bytes": 50606,
+      "path": "prototypes/d4-01/work-pages.js",
+      "sha256": "c048235244dd01388ad3992b4029cc70ba5ef1fa72204b6d49e80511894ec667"
+    },
+    {
+      "bytes": 9508,
+      "path": "tests/d4-ui/build-demo.mjs",
+      "sha256": "3ffac860f8b8799841675241b803c5e752afe88f3a5156f277fd9d23c3c55354"
+    },
+    {
+      "bytes": 15858,
+      "path": "tests/d4-ui/domain.test.mjs",
+      "sha256": "535180856df0580275cba49b23e09152d122401caf91d8ba52d7e11eb85ac32a"
+    },
+    {
+      "bytes": 13847,
+      "path": "tests/d4-ui/interaction-cases.mjs",
+      "sha256": "84048477bf3b724eb3abc495c5ae08777545dfcfb7b8250ecc60d1853e3d10f4"
+    },
+    {
+      "bytes": 2745,
+      "path": "tests/d4-ui/package-demo.mjs",
+      "sha256": "6fbd0064f732507b697f3a298f86a22e833855cb93cb950e9f8dad0f17191c05"
+    },
+    {
+      "bytes": 9024,
+      "path": "tests/d4-ui/run-browser.mjs",
+      "sha256": "695cd6b9c07854019124f6f78bf0d39f9932dec138c2758545cec638d09e51d9"
+    },
+    {
+      "bytes": 2128,
+      "path": "tests/d4-ui/scope.mjs",
+      "sha256": "752075eb742f6194176570fbe8e63a7fe815188f59fdc40c0ec0441e0c933b45"
+    },
+    {
+      "bytes": 6932,
+      "path": "tests/d4-ui/work-cases.mjs",
+      "sha256": "9f6114396888812f74c11199b3dfe8163e179d3cb17ea1c9023b9c404e74eb43"
+    }
+  ]
+}
