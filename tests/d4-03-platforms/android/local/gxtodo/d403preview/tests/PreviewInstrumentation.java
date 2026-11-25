@@ -547,6 +547,7 @@ public final class PreviewInstrumentation extends Instrumentation {
                 JSONObject configured=prepareUnifiedTimer(5,1);
                 openPageByTouch("pomodoro");awaitUnifiedWeb(configured.getLong("revision"),"","idle");
                 beginDirtyNavigationTrace();markDirtyNavigationTrace("before-native-text-entry");
+                require(dirtyNavigationTracing,"Dirty navigation single-touch regression has its observation trace installed");
                 typeText("[data-form=personal-timer-config] [name=durationMinutes]","7");
                 markDirtyNavigationTrace("after-duration-entry");
                 typeText("[data-form=personal-timer-config] [name=breakMinutes]","3");
@@ -607,6 +608,7 @@ public final class PreviewInstrumentation extends Instrumentation {
             check("android-native-floating-selection-lifecycle-copy-paste", () -> NativeSelectionLifecycleChecks.copyPasteAfterReturn(documentChooserHost()));
             check("android-native-work-project-item-lifecycle", () -> NativeWorkLifecycleChecks.projectAndWorkLifecycle(workLifecycleHost()));
             check("android-native-work-time-preservation-recreation", () -> NativeWorkLifecycleChecks.exactTimePreservation(workLifecycleHost()));
+            check("android-native-flow-template-snapshot-progress-archive", () -> NativeFlowLifecycleChecks.snapshotProgressAndArchive(workLifecycleHost()));
             check("android-system-bars-content-and-edge-insets", () -> {
                 home();
                 for (String route : new String[]{"tasks", "notes", "feedback"}) {
@@ -1237,6 +1239,24 @@ public final class PreviewInstrumentation extends Instrumentation {
         markDirtyNavigationTrace("after-single-tap-"+route);
         require(route.equals(js("D4Prototype.getRoute()")),"Real drawer item opens "+route);
         require(Boolean.TRUE.equals(js("!document.querySelector('.app-shell.nav-open')")),"Real page selection closes the drawer");
+        requireDirtyNavigationSingleTouch(route);
+    }
+    /** The dirty-draft regression must reach each drawer route with one real touch. */
+    private void requireDirtyNavigationSingleTouch(String route) throws Exception {
+        if(!dirtyNavigationTracing)return;
+        JSONObject observed=(JSONObject)js("(function(){var rows=window.__d403DirtyNavigationTrace.read().events,route="+JSONObject.quote(route)+",start=-1,end=-1;for(var i=0;i<rows.length;i++){if(rows[i].stage==='after-edge-before-single-tap-'+route)start=i;if(rows[i].stage==='after-single-tap-'+route)end=i;}var counts={},untrusted=0,cancelled=0;for(var i=start+1;i<end;i++){var row=rows[i],e=row.event;if(row.stage!=='window-capture'||!e)continue;if(e.type==='pointercancel'||e.type==='touchcancel')cancelled++;if(e.target?.action==='go'&&e.target?.id===route){counts[e.type]=(counts[e.type]||0)+1;if(!e.trusted)untrusted++;}}return {start:start,end:end,counts:counts,untrusted:untrusted,cancelled:cancelled,startWall:rows[start]?.wallMillis||0,endWall:rows[end]?.wallMillis||0};})()");
+        require(observed.getInt("start")>=0&&observed.getInt("end")>observed.getInt("start"),"Dirty navigation has both observation boundaries");
+        JSONObject counts=observed.getJSONObject("counts");
+        for(String type:new String[]{"pointerdown","pointerup","touchstart","touchend","click"})
+            require(counts.optInt(type)==1,"Dirty drawer navigation has exactly one trusted "+type+" for "+route+": "+observed);
+        require(observed.getInt("untrusted")==0&&observed.getInt("cancelled")==0,"Dirty drawer navigation has no synthetic or cancelled target event");
+        int downs=0,ups=0;long firstDown=-1,upDown=-1,startWall=observed.getLong("startWall"),endWall=observed.getLong("endWall");
+        for(int i=0;i<dirtyNavigationNativeEvents.length();i++){
+            JSONObject e=dirtyNavigationNativeEvents.getJSONObject(i);long wall=e.getLong("wallMillis");if(wall<startWall||wall>endWall)continue;
+            if("native-down".equals(e.getString("stage"))){downs++;firstDown=e.getLong("downTime");}
+            if("native-up".equals(e.getString("stage"))){ups++;upDown=e.getLong("downTime");}
+        }
+        require(downs==1&&ups==1&&firstDown==upDown,"Dirty drawer navigation retains exactly one native DOWN/UP pair for "+route);
     }
     /** Observational only: no retry, focus/selection changes, or navigation commands. */
     private void beginDirtyNavigationTrace() {

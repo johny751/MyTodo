@@ -59,7 +59,7 @@ final class NativeWorkLifecycleChecks {
             require(canonical(work).equals(canonical(c.work(id))),"Renaming a project does not rewrite the associated work object");
             h.openPage("work-items");h.tap(action("work-work-detail",id));
             require(Boolean.TRUE.equals(h.js("document.querySelector('.modal').textContent.includes("+q(projectTitle+" renamed")+")")),"Work details resolve the renamed project through the unchanged exact ID");
-            h.tap(action("work-edit-work-item",id));h.typeText(WORK_FORM+" [name=notes]","Native notes after edit");c.submit(WORK_FORM);
+            c.editWorkDetail(id);h.typeText(WORK_FORM+" [name=notes]","Native notes after edit");c.submit(WORK_FORM);
             JSONObject edited=c.work(id);transition(work,edited,"编辑工作事项","notes");
             require("Native notes after edit".equals(edited.getString("notes")),"Actual work edit saves the exact new note");c.assertProtected();c.stage("renamed-and-edited");
             h.tap(action("work-work-detail",id));h.shot("android-native-work-edited");h.tap(".modal-body > footer [data-action=work-close]");
@@ -108,7 +108,7 @@ final class NativeWorkLifecycleChecks {
             transition(beforeProject,c.project(),"编辑项目","description");require(projectDue.equals(c.project().getString("dueDate")),"Unchanged project date/time preserves exact seconds, fraction and offset");
             for(String id:new String[]{minute,precise}) {
                 JSONObject before=c.work(id);boolean historical=id.equals(precise);
-                h.openPage("work-items");h.tap(action("work-work-detail",id));h.tap(action("work-edit-work-item",id));
+                h.openPage("work-items");h.tap(action("work-work-detail",id));c.editWorkDetail(id);
                 c.timeField(WORK_FORM,"plannedStart",before.getString("plannedStart"),"2032-05-07",historical?"07:04":"09:15",historical);
                 c.timeField(WORK_FORM,"dueDate",before.getString("dueDate"),"2032-05-07",historical?"20:30":"17:45",historical);
                 h.typeText(WORK_FORM+" [name=notes]","Unrelated native edit retains time "+id);c.submit(WORK_FORM);
@@ -162,6 +162,20 @@ final class NativeWorkLifecycleChecks {
             h.tap(selector+" button[type=submit]");await(h,"!document.querySelector("+q(selector)+")","Real work form submit closes the editor");
             require(countEvent("submit",form,null)==before+1,"Exactly one trusted native form submit performs the save");
         }
+        void editWorkDetail(String id) throws Exception {
+            // The background list also has this action/ID. Select the current detail footer explicitly.
+            String selector=".modal-body > footer "+action("work-edit-work-item",id);
+            JSONObject target=(JSONObject)h.js("(function(){var selector="+q(selector)+",all=Array.from(document.querySelectorAll("+q(action("work-edit-work-item",id))+"));return {selector:selector,modalCount:document.querySelectorAll('.modal').length,scopedCount:document.querySelectorAll(selector).length,editorCount:document.querySelectorAll('[data-form=work-work-item]').length,candidates:all.map(e=>({text:e.textContent,inModal:!!e.closest('.modal'),inDetailFooter:!!e.closest('.modal-body > footer')}))};})()");
+            stages.put(new JSONObject().put("stage","detail-edit-target").put("workItemId",id).put("observation",target));save();
+            require(target.getInt("modalCount")==1&&target.getInt("scopedCount")==1&&target.getInt("editorCount")==0,"Exactly one current detail footer exposes the intended work edit action");
+            int before=workEditClicks(id,false),beforeScoped=workEditClicks(id,true);
+            h.tap(selector);
+            await(h,"(function(){var f=document.querySelector('[data-form=work-work-item]');return !!f&&f.elements.namedItem('id').value==="+q(id)+";})()","One detail-footer tap opens the editor for the exact work item");
+            int clicks=workEditClicks(id,false)-before,scopedClicks=workEditClicks(id,true)-beforeScoped;
+            stages.put(new JSONObject().put("stage","detail-edit-opened").put("workItemId",id).put("selector",selector).put("trustedActionClickDelta",clicks).put("trustedDetailFooterClickDelta",scopedClicks));save();
+            require(clicks==1&&scopedClicks==1,"Exactly one trusted current-detail footer click opens the work editor");
+        }
+        int workEditClicks(String id,boolean detailFooter) throws Exception {return ((Number)h.js("window.__d403NativeWorkTrace.events.filter(e=>e.type==='click'&&e.trusted&&e.action==='work-edit-work-item'&&e.id==="+q(id)+(detailFooter?"&&e.detailFooter":"")+").length")).intValue();}
         void select(String selector,String value) throws Exception {
             JSONObject option=(JSONObject)h.js("(function(){var e=document.querySelector("+q(selector)+"),a=Array.from(e.options).filter(o=>o.value==="+q(value)+");if(a.length!==1||a[0].disabled)throw Error('Expected one enabled exact project option');return {label:a[0].textContent,value:a[0].value,form:e.form.dataset.form,name:e.name};})()");
             int before=countEvent("change",option.getString("form"),option.getString("name"));h.tap(selector);nativeSelectOpen=true;
@@ -196,7 +210,7 @@ final class NativeWorkLifecycleChecks {
             require(expected.equals(exactObjects()),"Activity recreation retains the exact project, work items, histories and time strings");assertProtected();stage("after-activity-recreation");
         }
         void beginTrace() throws Exception {
-            h.js("(function(){if(window.__d403NativeWorkTrace)throw Error('Work trace already installed');var events=[],dropped=0,types=['input','change','submit','click'];var listener=e=>{var f=e.target.closest?.('form[data-form]');if(!f||!f.dataset.form.startsWith('work-'))return;if(events.length>=512){dropped++;return;}events.push({type:e.type,trusted:e.isTrusted,form:f.dataset.form,name:e.target.name||'',action:e.target.dataset.action||'',wallMillis:Date.now()});};types.forEach(t=>document.addEventListener(t,listener,true));window.__d403NativeWorkTrace={events:events,read:()=>({events:events,dropped:dropped}),dispose:()=>types.forEach(t=>document.removeEventListener(t,listener,true))};return true;})()");
+            h.js("(function(){if(window.__d403NativeWorkTrace)throw Error('Work trace already installed');var events=[],dropped=0,types=['input','change','submit','click'];var listener=e=>{var f=e.target.closest?.('form[data-form]'),a=e.target.closest?.('[data-action]');if(!(f?.dataset.form.startsWith('work-')||a?.dataset.action.startsWith('work-')))return;if(events.length>=512){dropped++;return;}events.push({type:e.type,trusted:e.isTrusted,form:f?.dataset.form||'',name:e.target.name||'',action:a?.dataset.action||'',id:a?.dataset.id||'',detailFooter:!!a?.closest('.modal-body > footer'),wallMillis:Date.now()});};types.forEach(t=>document.addEventListener(t,listener,true));window.__d403NativeWorkTrace={events:events,read:()=>({events:events,dropped:dropped}),dispose:()=>types.forEach(t=>document.removeEventListener(t,listener,true))};return true;})()");
         }
         int countEvent(String type,String form,String name) throws Exception {return ((Number)h.js("window.__d403NativeWorkTrace.events.filter(e=>e.trusted&&e.type==="+q(type)+"&&e.form==="+q(form)+(name==null?"":"&&e.name==="+q(name))+").length")).intValue();}
         void flushTrace() throws Exception {
