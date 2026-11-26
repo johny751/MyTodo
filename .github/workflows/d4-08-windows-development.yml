@@ -1,0 +1,60 @@
+name: D4-08 Win32 development validation
+on:
+  push:
+    branches: [d4/d4-08-candidate-1]
+    paths:
+      - windows/**
+      - scripts/build-windows.mjs
+      - tests/d4-08/windows/**
+      - .github/workflows/d4-08-windows-development.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-d408:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build actual D408 Win32 application
+        id: nativebuild
+        run: |
+          New-Item -ItemType Directory -Path "$env:RUNNER_TEMP/d4-08-build" | Out-Null
+          node scripts/build-windows.mjs "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" --d408-candidate 2>&1 | Tee-Object "$env:RUNNER_TEMP/d4-08-build/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Actual timer feedback work and persistence regression
+        id: native
+        run: node tests/d4-08/windows/run-native.mjs "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" "$env:RUNNER_TEMP/d4-08-native-evidence"
+      - name: External HWND and keyboard requirements at 96 DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-08/windows/reproduce-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -OutputDirectory "$env:RUNNER_TEMP/d4-08-ui-96" -Dpi 96
+      - name: External HWND and keyboard requirements at 144 DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-08/windows/reproduce-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -OutputDirectory "$env:RUNNER_TEMP/d4-08-ui-144" -Dpi 144
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d408-win32-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-08-build/
+            ${{ runner.temp }}/d4-08-native-evidence/
+            ${{ runner.temp }}/d4-08-ui-96/
+            ${{ runner.temp }}/d4-08-ui-144/
+          if-no-files-found: error
+
