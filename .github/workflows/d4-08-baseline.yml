@@ -1,0 +1,170 @@
+name: D4-08 frozen product gap reproduction
+on:
+  push:
+    branches: [d4/d4-08-candidate-1]
+    paths:
+      - .github/workflows/d4-08-baseline.yml
+      - tests/d4-08/baseline-input.mjs
+      - tests/d4-08/web-*.mjs
+      - tests/d4-08/windows/reproduce-ui.ps1
+      - tests/d4-08/windows/UiDriver.cs
+      - tests/d4-08/android/*probe*
+      - tests/d4-08/android/verify-baseline.mjs
+      - tests/d4-08/android/AndroidManifest.xml
+      - tests/d4-08/android/local/gxtodo/d408probe/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+  D408_APP_SOURCE_SHA: 04c525c55fc136ad1b960b5d727dab3c5e3165fd
+jobs:
+  web:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download the original frozen browser artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: d403-ui-${{ matrix.os }}-45743320346-1
+          run-id: 45743320346
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/d408-frozen-web
+      - name: Verify product identity independently of harness identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node tests/d4-08/baseline-input.mjs web "$RUNNER_TEMP/d408-frozen-web"
+      - name: Run new requirements on the unchanged product and preserve failures
+        id: gap
+        continue-on-error: true
+        run: node tests/d4-08/web-run.mjs "$D408_BASELINE_ARTIFACT" "$RUNNER_TEMP/d408-baseline-web-results"
+      - name: Record the actual test step outcome
+        if: always()
+        run: echo '${{ steps.gap.outcome }}' > "$RUNNER_TEMP/d408-baseline-web-step-outcome.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d408-baseline-web-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d408-baseline-web-results/*.json
+            ${{ runner.temp }}/d408-baseline-web-results/*.jsonl
+            ${{ runner.temp }}/d408-baseline-web-results/*.txt
+            ${{ runner.temp }}/d408-baseline-web-results/screenshots/
+            ${{ runner.temp }}/d408-baseline-web-results/snapshots/
+            ${{ runner.temp }}/d408-baseline-web-step-outcome.txt
+            ${{ runner.temp }}/d408-frozen-web/D408-FROZEN-INPUT.json
+          if-no-files-found: error
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/download-artifact@v4
+        with:
+          name: d404-win32-45743320346-1
+          run-id: 45743320346
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/d408-frozen-windows
+      - name: Verify frozen native product
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node tests/d4-08/baseline-input.mjs windows "$env:RUNNER_TEMP/d408-frozen-windows"
+      - name: Reproduce requirements using actual Win32 controls
+        id: gap
+        continue-on-error: true
+        run: >-
+          ./tests/d4-08/windows/reproduce-ui.ps1
+          -Executable "$env:D408_BASELINE_ARTIFACT"
+          -ProductSourceSha 04c525c55fc136ad1b960b5d727dab3c5e3165fd
+          -ExpectedExecutableSha256 4e4d49e652ecfa60b96e959226ac69033f4722587abea384f2c47bac3e6e8890
+          -OutputDirectory "$env:RUNNER_TEMP/d4-08-baseline-windows-results"
+      - name: Record the actual test step outcome
+        if: always()
+        run: Set-Content -LiteralPath "$env:RUNNER_TEMP/d408-baseline-windows-step-outcome.txt" -Value '${{ steps.gap.outcome }}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d408-baseline-windows-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-08-baseline-windows-results/
+            ${{ runner.temp }}/d408-baseline-windows-step-outcome.txt
+            ${{ runner.temp }}/d408-frozen-windows/D408-FROZEN-INPUT.json
+          if-no-files-found: error
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/download-artifact@v4
+        with:
+          name: d405-services-45743320346-1
+          run-id: 45743320346
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/d408-frozen-android
+      - name: Prepare official compile SDK and build tools
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Verify original APK and receipt
+        run: node tests/d4-08/android/verify-baseline.mjs "$RUNNER_TEMP/d408-frozen-android" "$RUNNER_TEMP/d408-baseline-android-input.json"
+      - name: Compile independent external UI probe
+        run: bash tests/d4-08/android/build-probe.sh "$RUNNER_TEMP/d408-probe-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Exercise the frozen app through actual system input
+        id: gap
+        continue-on-error: true
+        run: >-
+          bash tests/d4-08/android/run-probe.sh
+          --input "$RUNNER_TEMP/d408-baseline-android-input.json"
+          --probe "$RUNNER_TEMP/d408-probe-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT/d408-probe.apk"
+          --suite baseline-gaps
+          --out "$RUNNER_TEMP/d408-baseline-android-results"
+      - name: Record the actual test step outcome
+        if: always()
+        run: echo '${{ steps.gap.outcome }}' > "$RUNNER_TEMP/d408-baseline-android-step-outcome.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d408-baseline-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d408-baseline-android-results/
+            ${{ runner.temp }}/d408-baseline-android-input.json
+            ${{ runner.temp }}/d408-baseline-android-step-outcome.txt
+            ${{ runner.temp }}/d408-probe-*/*.apk
+            ${{ runner.temp }}/d408-probe-*/*.json
+            ${{ runner.temp }}/d408-probe-*/*.txt
+            ${{ runner.temp }}/d408-probe-*/*.log
+            ${{ runner.temp }}/d403-emulator-*.log
+          if-no-files-found: error
