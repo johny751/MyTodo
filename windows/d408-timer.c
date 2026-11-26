@@ -26,8 +26,8 @@ static J *initial(void){
 static int valid(J *state){
  if(num(state,"schemaVersion")!=1||!d408_choice(str(state,"status"),"idle|running|paused|completed|ended")||
     !d408_choice(str(state,"phase"),"focus|break")||!d408_choice(str(state,"mode"),"countdown|countup")||
-    num(state,"elapsedMillis")<0||!cJSON_IsArray(get(state,"history"))||!cJSON_IsArray(get(state,"commandReceipts"))||!cJSON_IsArray(get(state,"segments")))return 0;
- J *config=get(state,"configuration");return cJSON_IsObject(config)&&d408_choice(str(config,"mode"),"countdown|countup")&&num(config,"durationMinutes")>=1&&num(config,"durationMinutes")<=180&&num(config,"breakMinutes")>=1&&num(config,"breakMinutes")<=180;
+    num(state,"elapsedMillis")<0||num(state,"revision")<0||num(state,"revision")!=floor(num(state,"revision"))||!cJSON_IsArray(get(state,"history"))||!cJSON_IsArray(get(state,"commandReceipts"))||!cJSON_IsArray(get(state,"segments")))return 0;
+ J *config=get(state,"configuration");return cJSON_IsObject(config)&&d408_choice(str(config,"mode"),"countdown|countup")&&num(config,"durationMinutes")>=1&&num(config,"durationMinutes")<=180&&num(config,"durationMinutes")==floor(num(config,"durationMinutes"))&&num(config,"breakMinutes")>=1&&num(config,"breakMinutes")<=180&&num(config,"breakMinutes")==floor(num(config,"breakMinutes"));
 }
 static int ready(void){
  if(timerReady)return 1;if(timerTried)return 0;timerTried=1;
@@ -81,7 +81,7 @@ J *d408_timer_snapshot(void){if(!ready())return 0;J *value=dup(timerStore.data);
 
 int d408_timer_command(const char *action,J *values,const char *commandId,int expectedRevision){
  if(!ready())return 0;timerError[0]=0;
- J *receipt=d408_find(get(timerStore.data,"commandReceipts"),commandId?commandId:"");if(receipt)return !strcmp(str(receipt,"action"),action);
+ J *receipt=d408_find(get(timerStore.data,"commandReceipts"),commandId?commandId:"");if(receipt){int same=!strcmp(str(receipt,"action"),action);if(!same)strcpy(timerError,"同一操作标识不能用于不同命令。");return same;}
  if(expectedRevision>=0&&expectedRevision!=(int)num(timerStore.data,"revision")){strcpy(timerError,"计时状态已更新，请刷新后重试操作。");return 0;}
  J *next=dup(timerStore.data);advance(next);J *config=get(next,"configuration");int ok=1;
  if(!strcmp(action,"configure")){
@@ -109,6 +109,7 @@ int d408_timer_command(const char *action,J *values,const char *commandId,int ex
 }
 
 static HWND control(int id){return timerControls[id-T_MODE];}
+static double day_elapsed(J *history,int64_t start,int64_t end){double total=0;J *entry,*segment;cJSON_ArrayForEach(entry,history)if(!strcmp(str(entry,"phase"),"focus"))cJSON_ArrayForEach(segment,get(entry,"segments")){double a=num(segment,"startMillis"),b=num(segment,"endMillis");if(b>a){double overlap=fmax(0,fmin((double)end,b)-fmax((double)start,a));total+=num(segment,"elapsedMillis")*overlap/(b-a);}}return total;}
 static void refresh_timer(int configuration){
  if(!timerWindow)return;J *state=d408_timer_snapshot();if(!state){ui_set(control(T_STATUS),timerError);return;}
  timerLoading=1;J *config=get(timerStore.data,"configuration");
@@ -127,7 +128,8 @@ static void refresh_timer(int configuration){
  SendMessageW(control(T_HISTORY),LB_RESETCONTENT,0,0);J *history=get(state,"history");double total=0;int completed=0,ended=0;
  for(int i=cJSON_GetArraySize(history)-1;i>=0;i--){J *entry=cJSON_GetArrayItem(history,i);if(!strcmp(str(entry,"phase"),"focus"))total+=num(entry,"elapsedMillis");completed+=!strcmp(str(entry,"status"),"completed");ended+=!strcmp(str(entry,"status"),"ended");
    snprintf(text,sizeof(text),"%.19s · %s · %s · %.1f分钟 · %s [%s]",str(entry,"endedAt"),!strcmp(str(entry,"phase"),"break")?"休息":"专注",!strcmp(str(entry,"status"),"completed")?"完成":"提前结束",num(entry,"elapsedMillis")/60000.,str(entry,"taskTitle"),str(entry,"accountId"));wchar_t *w=wide(text);SendMessageW(control(T_HISTORY),LB_ADDSTRING,0,(LPARAM)w);free(w);}
- snprintf(text,sizeof(text),"历史记录：%d次 · 正常完成%d次 · 提前结束%d次 · 专注累计%.1f分钟（休息不计）",cJSON_GetArraySize(history),completed,ended,total/60000.);ui_set(control(T_SUMMARY),text);timerLoading=0;cJSON_Delete(state);
+ int64_t today=(clock_wall()+28800000LL)/86400000LL*86400000LL-28800000LL;
+ snprintf(text,sizeof(text),"历史记录（UTC）：%d次 · 正常完成%d次 · 提前结束%d次 · 专注累计%.1f分钟\r\n按Asia/Shanghai分日：今天%.1f分钟 · 最近7天%.1f分钟（按专注时段拆分，休息不计）",cJSON_GetArraySize(history),completed,ended,total/60000.,day_elapsed(history,today,today+86400000LL)/60000.,day_elapsed(history,today-6*86400000LL,today+86400000LL)/60000.);ui_set(control(T_SUMMARY),text);timerLoading=0;cJSON_Delete(state);
 }
 static void timer_layout(void){
  RECT r;GetClientRect(timerWindow,&r);int width=r.right-U(36),half=(width-U(18))/2;
@@ -164,6 +166,7 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
  return DefWindowProcW(h,message,w,l);
 }
 void d408_timer_open(void){
+ if(!timerReady&&timerTried){d408_store_close(&timerStore);timerTried=0;}
  if(!ready()){d408_error(app.window,timerError);return;}if(!ui_catalog_commit()||!detail_save(0))return;
  if(!timerWindow){WNDCLASSW cls={0};cls.lpfnWndProc=timer_proc;cls.hInstance=app.instance;cls.hCursor=LoadCursorW(0,IDC_ARROW);cls.hbrBackground=app.white;cls.lpszClassName=L"GxD408PomodoroTimer";RegisterClassW(&cls);
    timerWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 番茄钟（隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,U(760),U(820),app.window,0,app.instance,0);}
@@ -176,6 +179,7 @@ int d408_timer_shutdown(void){
 
 int d408_timer_regression(void){
  d408_timer_test_clock(1,1795651200000LL,100000);if(!ready())return 0;J *config=dup(get(timerStore.data,"configuration"));ss(config,"mode","countdown");sn(config,"durationMinutes",1);sn(config,"breakMinutes",1);ss(config,"accountId","test-account");ss(config,"taskId","task-one");ss(config,"taskTitle","D408 timer association");
+ J *daily=cJSON_CreateArray(),*entry=cJSON_CreateObject(),*segments=cJSON_CreateArray(),*segment=cJSON_CreateObject();ss(entry,"phase","focus");sn(segment,"startMillis",500);sn(segment,"endMillis",1500);sn(segment,"elapsedMillis",1000);cJSON_AddItemToArray(segments,segment);set(entry,"segments",segments);cJSON_AddItemToArray(daily,entry);d408_check("timer",day_elapsed(daily,0,1000)==500&&day_elapsed(daily,1000,2000)==500,"daily statistics split a focus segment across midnight boundaries");cJSON_Delete(daily);
  d408_check("timer",d408_timer_command("configure",config,"configure-1",-1),"duration and task/account configuration persists");
  d408_check("timer",d408_timer_command("start",0,"start-1",-1),"countdown starts");J *s=d408_timer_snapshot();char session[80];strcpy(session,str(s,"sessionId"));int revision=(int)num(s,"revision");cJSON_Delete(s);
  d408_check("timer",d408_timer_command("start",0,"start-1",-1)&&!d408_timer_command("start",0,"start-another",-1),"same command id is idempotent and second active timer rejected");

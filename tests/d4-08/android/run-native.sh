@@ -23,7 +23,11 @@ collect() {
   adb exec-out run-as "$pkg" tar -cf - files/d408-evidence > "$evidence/device-evidence.tar" 2> "$evidence/pull-error.txt" || true
   if [[ -s "$evidence/device-evidence.tar" ]];then tar -xf "$evidence/device-evidence.tar" -C "$evidence" || true;fi
 }
-cleanup(){collect;adb shell wm size reset >/dev/null 2>&1||true;adb shell wm density reset >/dev/null 2>&1||true;}
+cleanup() {
+  collect
+  adb shell wm size reset >/dev/null 2>&1 || true
+  adb shell wm density reset >/dev/null 2>&1 || true
+}
 trap cleanup EXIT
 [[ "${ANDROID_SERIAL:-}" == emulator-5554 && "$(adb shell getprop ro.kernel.qemu | tr -d '\r')" == 1 ]] || { echo 'Isolated emulator required' >&2;exit 1; }
 adb install "$out/mytodo-d4-08-native-candidate.apk" > "$evidence/install-app.txt"
@@ -34,9 +38,28 @@ adb shell locksettings set-disabled false
 adb shell input keyevent 224
 adb shell wm dismiss-keyguard
 adb logcat -c
-phase(){ adb shell am instrument -w -r -e phase "$1" "$component" | tee "$evidence/instrumentation-$1.raw.txt"; }
+phase() {
+  adb shell am instrument -w -r -e phase "$1" "$component" | tee "$evidence/instrumentation-$1.raw.txt"
+}
 phase main
 phase features
+phase feedback-ui
+adb shell cmd overlay list > "$evidence/navigation-overlays-before.txt"
+for mode in gestural threebutton;do
+  overlay="$(awk -v suffix=".navbar.$mode" 'index($NF,suffix)==length($NF)-length(suffix)+1 {print $NF}' "$evidence/navigation-overlays-before.txt")"
+  [[ "$overlay" =~ ^com\.android\.internal\.systemui\.navbar\.(gestural|threebutton)$ ]] || { echo "Required installed navigation overlay missing/ambiguous: $mode" > "$evidence/navigation-$mode-unavailable.txt";exit 2; }
+  adb shell cmd overlay enable-exclusive --category "$overlay" > "$evidence/navigation-$mode-change.txt"
+  adb shell cmd overlay list > "$evidence/navigation-$mode-after.txt"
+  grep -F "[x] $overlay" "$evidence/navigation-$mode-after.txt" >/dev/null || { echo 'Navigation overlay did not activate' >&2;exit 2; }
+  adb shell settings get secure navigation_mode > "$evidence/navigation-$mode-setting.txt"
+  for width in 360 412;do
+    adb shell wm density 160
+    adb shell wm size "${width}x900"
+    adb shell wm size > "$evidence/wm-size-$width-$mode.txt"
+    adb shell wm density > "$evidence/wm-density-$width-$mode.txt"
+    phase "navigation-$width-$mode"
+  done
+done
 for width in 360 412;do
   adb shell wm density 160
   adb shell wm size "${width}x900"
@@ -75,11 +98,11 @@ phase boot-recover
 collect
 node --input-type=module - "$evidence" <<'NODE'
 import fs from 'node:fs/promises';
-const root=process.argv[2],groups={retained:['main','visual-360','visual-412','process-prepare','process-recover'],features:['features'],permissions:['notification-denied','notification-restored','exact-denied'],reboot:['boot-prepare','boot-recover']},results={};
+const root=process.argv[2],groups={retained:['main','visual-360','visual-412','process-prepare','process-recover'],features:['features'],feedbackUi:['feedback-ui'],navigation:['navigation-360-gestural','navigation-412-gestural','navigation-360-threebutton','navigation-412-threebutton'],permissions:['notification-denied','notification-restored','exact-denied'],reboot:['boot-prepare','boot-recover']},results={};
 let failed=false;
 for(const [name,phases] of Object.entries(groups)){const reports=[];for(const phase of phases){const p=JSON.parse(await fs.readFile(root+'/files/d408-evidence/result-'+phase+'.json','utf8'));if(p.sourceSHA!==process.env.GITHUB_SHA||p.runId!==process.env.GITHUB_RUN_ID||p.runAttempt!==process.env.GITHUB_RUN_ATTEMPT)throw Error('Identity mismatch '+phase);reports.push(p);}const cases=reports.flatMap(r=>r.cases);results[name]={caseCount:cases.length,passed:cases.filter(c=>c.passed).length,failed:cases.filter(c=>!c.passed).length,reports};if(results[name].failed)failed=true;}
 await fs.writeFile(root+'/aggregate.json',JSON.stringify({sourceSHA:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,syntheticEmulatorOnly:true,
  groups:results,allGroupsPassed:!failed,notes:'D408 adapted retention suite is separate from unchanged D403/D405 jobs; actual reboot and permissions have independent counts.'},null,2)+'\n');
-if(results.retained.caseCount!==15||results.features.caseCount!==7||results.permissions.caseCount!==3||results.reboot.caseCount!==2)throw Error('D408 coverage incomplete');
+if(results.retained.caseCount!==15||results.features.caseCount!==7||results.feedbackUi.caseCount!==7||results.navigation.caseCount!==20||results.permissions.caseCount!==3||results.reboot.caseCount!==2)throw Error('D408 coverage incomplete');
 if(failed)throw Error('D408 cases failed; preserve all original evidence');
 NODE

@@ -8,6 +8,7 @@ async function close(a){await a.key(null,'Escape');assert.equal(await opened(a),
 export const navigationCases=[
  {id:'N1',name:'All primary routes open navigation from a reasonable 32px start at 360 and 412 widths',async run(a){
   const failures=[];
+  await a.configure(412,915,true);await a.navigate('tasks');await a.swipe([3,175],[155,177]);assert.equal(await opened(a),true,'Preserve the accepted extreme-edge entry at x3');await close(a);
   for(const width of [360,412]){
    await a.configure(width,915,true);
    for(const route of ['tasks','notes','pomodoro','feedback','analytics','dashboard','work-items','projects','templates','processes','contacts','archive','settings']){

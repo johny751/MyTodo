@@ -160,3 +160,57 @@ jobs:
             ${{ runner.temp }}/d403-emulator-*.log
           if-no-files-found: error
 
+
+  web-service:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      D408_APP_SOURCE_SHA: ${{ github.sha }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build candidate UI and existing V2 service composition
+        id: build
+        run: node tests/d4-08/web-build.mjs "$RUNNER_TEMP/d4-08-service-app"
+      - name: Unchanged original 164-case browser suite on the composed HTML
+        run: node tests/d4-08/web-legacy-run.mjs "$RUNNER_TEMP/d4-08-service-app"
+      - name: Independent 21-case restored feature suite
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        run: node tests/d4-08/web-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-features"
+      - name: Independent mounted V2 service suite
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        run: node tests/d4-08/web-service-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-results"
+      - name: Package only the verified same-HTML Web candidate
+        run: node tests/d4-08/web-package.mjs "$RUNNER_TEMP/d4-08-service-app" "$RUNNER_TEMP/d4-08-service-features" "$RUNNER_TEMP/d4-08-service-results" "$RUNNER_TEMP/d4-08-web-package"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d408-web-service-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-08-service-app/*.json
+            ${{ runner.temp }}/d4-08-service-app/*.txt
+            ${{ runner.temp }}/d4-08-service-app/*.html
+            ${{ runner.temp }}/d4-08-service-app/screenshots/
+            ${{ runner.temp }}/d4-08-service-features/*.json
+            ${{ runner.temp }}/d4-08-service-features/*.jsonl
+            ${{ runner.temp }}/d4-08-service-features/*.txt
+            ${{ runner.temp }}/d4-08-service-features/screenshots/
+            ${{ runner.temp }}/d4-08-service-features/snapshots/
+            ${{ runner.temp }}/d4-08-service-results/*.json
+            ${{ runner.temp }}/d4-08-service-results/*.jsonl
+            ${{ runner.temp }}/d4-08-service-results/*.txt
+            ${{ runner.temp }}/d4-08-service-results/screenshots/
+            ${{ runner.temp }}/d4-08-service-results/snapshots/
+            ${{ runner.temp }}/d4-08-web-package/
+          if-no-files-found: error

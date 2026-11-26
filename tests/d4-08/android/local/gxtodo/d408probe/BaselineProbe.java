@@ -96,6 +96,9 @@ public final class BaselineProbe extends Instrumentation {
                 shell("input text " + body); settle(); snapshot("feedback-editor-filled");
                 if(ui.getWindows().stream().anyMatch(w->w.getType()==AccessibilityWindowInfo.TYPE_INPUT_METHOD))back();
                 tapTextScrolling("保存意见", 8); settle(); snapshot("feedback-after-save");
+                // newIdea is quick compose: a successful save returns to the tools
+                // Activity, so the saved body must be checked in its actual list.
+                requireText("查看优化意见",10000);tapText("查看优化意见");settle();snapshot("feedback-saved-list");
                 AccessibilityNodeInfo saved = awaitNode(n -> visible(n) && !n.isEditable() && string(n.getText()).contains(body),8000);
                 return result(saved != null, "真实入口→列表→编辑→保存→可见历史内容", body).put("savedBodyVisible",saved != null);
             });
@@ -140,13 +143,28 @@ public final class BaselineProbe extends Instrumentation {
         shell("input keyevent 224");shell("wm dismiss-keyguard");
         write(currentCase+"-launch.txt",shell("am start -W -n "+pkg+"/local.gxtodo.replica.MainActivity"));
         if(awaitNode(n->pkg.equals(string(n.getPackageName()))&&visible(n),15000)==null) throw new HarnessFailure("Target never reached foreground");
-        settle();
+        // The native WebView window appears before its local page and accessibility
+        // tree. Observe the rendered header instead of treating an empty window as ready.
+        requireText("打开导航",30000);settle();
     }
     private void fresh() throws Exception { shell("am force-stop "+pkg);launch(); }
     private void navigate(String label) throws Exception {
-        tapText("打开导航"); requireText("关闭导航遮罩",8000);tapTextScrolling(label,8);settle();
-        if(nodeText("关闭导航遮罩")!=null) throw new HarnessFailure("Navigation selection did not close drawer: "+label);
+        tapText("打开导航");
+        if(awaitNode(n->visible(n)&&string(n.getText()).equals("全局导航"),10000)==null)throw new HarnessFailure("Navigation panel never opened");
+        AccessibilityNodeInfo chosen=awaitNavigationButton(label,5000);
+        for(int i=0;chosen==null&&i<7;i++){swipe(screenWidth*.48f,screenHeight*.70f,screenWidth*.48f,screenHeight*.30f,350);settle();chosen=awaitNavigationButton(label,1500);}
+        if(chosen==null)throw new HarnessFailure("Navigation button not found: "+label);
+        tapNode(chosen);settle();
+        long end=SystemClock.elapsedRealtime()+8000;while(SystemClock.elapsedRealtime()<end){if(!drawerOpen()){settle();if(!drawerOpen())return;}SystemClock.sleep(200);}
+        throw new HarnessFailure("Navigation selection did not close drawer: "+label);
     }
+    private AccessibilityNodeInfo awaitNavigationButton(String label,long timeout){
+        long end=SystemClock.elapsedRealtime()+timeout;do{AccessibilityNodeInfo nav=node(n->visible(n)&&string(n.getText()).equals("全局导航"));
+            AccessibilityNodeInfo match=walk(nav,n->{String text=string(n.getText());return visible(n)&&n.isClickable()&&string(n.getClassName()).equals("android.widget.Button")&&(text.equals(label)||text.startsWith(label+" "));},0);
+            if(match!=null)return match;SystemClock.sleep(200);
+        }while(SystemClock.elapsedRealtime()<end);return null;
+    }
+    private boolean drawerOpen(){return node(n->visible(n)&&string(n.getText()).equals("全局导航"))!=null;}
     private void openTimer() throws Exception {
         fresh();navigate("番茄钟");
         tapAnyScrolling(new String[]{"打开原生计时控制","打开原生番茄钟"},8);
@@ -160,7 +178,7 @@ public final class BaselineProbe extends Instrumentation {
         if(r.width()!=screenWidth)throw new HarnessFailure("Expected 1:1 CSS viewport width from configured density; observed "+r);
         if(y+20>=r.height())throw new HarnessFailure("Gesture y outside measured WebView");
         snapshot("edge-before");swipe(r.left+x,r.top+y,r.left+x+137,r.top+y+2,300);settle();
-        boolean opened=nodeText("关闭导航遮罩")!=null;snapshot("edge-after");
+        boolean opened=drawerOpen();snapshot("edge-after");
         return result(opened,"左侧合理起始区右滑打开导航","drawer="+opened).put("startCssX",x).put("startCssY",y).put("webBounds",r.toShortString());
     }
     private List<String> collectScrolledText(String prefix,int count) throws Exception {
@@ -170,7 +188,7 @@ public final class BaselineProbe extends Instrumentation {
     }
     private List<String> visibleText(){List<String> texts=new ArrayList<>();walk(ui.getRootInActiveWindow(),n->{if(visible(n)){String t=label(n);if(!t.isEmpty())texts.add(t);}return false;},0);return texts;}
     private AccessibilityNodeInfo nodeText(String text){return node(n->visible(n)&&(string(n.getText()).equals(text)||string(n.getContentDescription()).equals(text)));}
-    private AccessibilityNodeInfo node(Predicate<AccessibilityNodeInfo> predicate){return walk(ui.getRootInActiveWindow(),predicate,0);}
+    private AccessibilityNodeInfo node(Predicate<AccessibilityNodeInfo> predicate){AccessibilityNodeInfo root=ui.getRootInActiveWindow();if(root!=null)root.refresh();return walk(root,predicate,0);}
     private AccessibilityNodeInfo walk(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate,int depth){
         if(n==null||depth>60)return null;if(predicate.test(n))return n;
         for(int i=0;i<n.getChildCount();i++){AccessibilityNodeInfo found=walk(n.getChild(i),predicate,depth+1);if(found!=null)return found;}return null;
@@ -179,12 +197,12 @@ public final class BaselineProbe extends Instrumentation {
         long until=SystemClock.elapsedRealtime()+timeout;do{AccessibilityNodeInfo n=node(predicate);if(n!=null)return n;SystemClock.sleep(200);}while(SystemClock.elapsedRealtime()<until);return null;
     }
     private void requireText(String text,long timeout)throws Exception{if(awaitNode(n->visible(n)&&(string(n.getText()).equals(text)||string(n.getContentDescription()).equals(text)),timeout)==null)throw new HarnessFailure("Missing visible control: "+text);}
-    private void tapText(String text)throws Exception{AccessibilityNodeInfo n=nodeText(text);if(n==null){requireText(text,6000);n=nodeText(text);}tapNode(n);settle();}
+    private void tapText(String text)throws Exception{AccessibilityNodeInfo n=awaitNode(x->visible(x)&&(string(x.getText()).equals(text)||string(x.getContentDescription()).equals(text)),10000);if(n==null)throw new HarnessFailure("Missing visible control: "+text);tapNode(n);settle();}
     private void tapTextScrolling(String text,int attempts)throws Exception{
         tapAnyScrolling(new String[]{text},attempts);
     }
     private void tapAnyScrolling(String[] labels,int attempts)throws Exception{
-        for(int i=0;i<attempts;i++){for(String text:labels){AccessibilityNodeInfo n=nodeText(text);if(n!=null){tapNode(n);settle();return;}}swipe(screenWidth*.63f,screenHeight*.77f,screenWidth*.63f,screenHeight*.30f,350);settle();}
+        for(int i=0;i<attempts;i++){AccessibilityNodeInfo n=awaitNode(x->{if(!visible(x))return false;for(String text:labels)if(string(x.getText()).equals(text)||string(x.getContentDescription()).equals(text))return true;return false;},1500);if(n!=null){tapNode(n);settle();return;}swipe(screenWidth*.63f,screenHeight*.77f,screenWidth*.63f,screenHeight*.30f,350);settle();}
         throw new HarnessFailure("Control not found after bounded scroll: "+java.util.Arrays.toString(labels));
     }
     private void tapNode(AccessibilityNodeInfo n)throws Exception{if(n==null)throw new HarnessFailure("Null touch target");Rect r=new Rect();n.getBoundsInScreen(r);if(!visible(n))throw new HarnessFailure("Offscreen touch target: "+r);swipe(r.exactCenterX(),r.exactCenterY(),r.exactCenterX(),r.exactCenterY(),0);}

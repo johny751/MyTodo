@@ -1,0 +1,159 @@
+package local.gxtodo.replica;
+
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.ContentValues;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.os.SystemClock;
+import android.provider.MediaStore;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
+import com.androidshared.feedback.DefaultFeedbackStorage;
+import com.androidshared.feedback.FeedbackRepository;
+import com.androidshared.feedback.FeedbackStorage;
+import local.gxtodo.d403preview.BuildInfo;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.function.Predicate;
+
+/** Actual FeedbackKit and Android picker UI. Fixtures and assertions use only isolated CI data. */
+final class D408FeedbackUiChecks {
+    final D408IntegrationInstrumentation t;
+    final DefaultFeedbackStorage storage;
+    final String body="D408_UI_PHOTO_"+BuildInfo.RUN_ID;
+    final String backupName="d408-feedback-ui-"+BuildInfo.RUN_ID+".zip";
+    final String corruptName="d408-corrupt-ui-"+BuildInfo.RUN_ID+".zip";
+    Activity tools,page;
+    String assetId,imageHash,noteId,backupHash;
+    JSONObject exported;
+    long exportedGeneration;
+    int dumpSequence;
+    Uri imageUri;
+    D408FeedbackUiChecks(D408IntegrationInstrumentation t){this.t=t;storage=new DefaultFeedbackStorage(t.target);android.accessibilityservice.AccessibilityServiceInfo info=t.getUiAutomation().getServiceInfo();info.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;t.getUiAutomation().setServiceInfo(info);}
+    static void run(D408IntegrationInstrumentation t){
+        D408FeedbackUiChecks s=new D408FeedbackUiChecks(t);
+        s.test("D408-U01-system-photo-picker-preview-remove-and-draft",s::photoDraft);
+        s.test("D408-U02-resume-recreate-save-category-status-image",s::resumeDraft);
+        s.test("D408-U03-delete-confirm-cancel-and-real-undo",s::deleteUndo);
+        s.test("D408-U04-SAF-export-cancel-and-real-archive",s::exportUi);
+        s.test("D408-U05-SAF-restore-cancel-confirm-and-image",s::restoreUi);
+        s.test("D408-U06-corrupt-restore-visible-error-and-retry",s::failedRestore);
+        s.test("D408-U07-empty-body-validation-and-corrected-save",s::validationRetry);
+    }
+    void test(String name,D408IntegrationInstrumentation.Check action){
+        t.test(name,()->{try{return action.run();}catch(Exception|AssertionError failure){
+            try{dump(name+"-failed");t.shot(name+"-failed");}catch(Exception diagnostic){failure.addSuppressed(diagnostic);}throw failure;
+        }});
+    }
+    static void check(boolean value,String message){D408IntegrationInstrumentation.check(value,message);}
+    View tag(Activity activity,String name){final View[] found={null};t.runOnMainSync(()->found[0]=activity.getWindow().getDecorView().findViewWithTag(name));return found[0];}
+    View waitTag(Activity activity,String name)throws Exception{t.until("actual FeedbackKit view "+name,10000,()->tag(activity,name)!=null);return tag(activity,name);}
+    void tapTag(Activity activity,String name)throws Exception{
+        View view=waitTag(activity,name);t.until("enabled FeedbackKit view "+name,10000,view::isEnabled);
+        t.runOnMainSync(()->view.requestRectangleOnScreen(new Rect(0,0,view.getWidth(),view.getHeight()),true));SystemClock.sleep(250);t.tap(view);SystemClock.sleep(250);
+    }
+    void text(String value)throws Exception{
+        View view=waitTag(page,"feedback_body");t.runOnMainSync(()->view.requestRectangleOnScreen(new Rect(0,0,view.getWidth(),view.getHeight()),true));SystemClock.sleep(200);t.tap(view);t.sendStringSync(value);t.waitForIdleSync();D408FeatureChecks.dismissIme(t,page);
+    }
+    Activity open(String label)throws Exception{
+        tools=t.launch(FeedbackToolsActivity.class);
+        Instrumentation.ActivityMonitor monitor=t.addMonitor("com.androidshared.feedback.FeedbackActivity",null,false);
+        D408FeatureChecks.nativeText(t,tools,label);page=t.waitForMonitorWithTimeout(monitor,10000);t.removeMonitor(monitor);check(page!=null,"Actual original FeedbackKit Activity opened by "+label);t.current=page;t.awaitForeground(page);return page;
+    }
+    void openDetail()throws Exception{check(noteId!=null,"prior UI-created note exists");open("查看优化意见");t.until("UI-created record visible",10000,()->D408FeatureChecks.windowContains(t,body));D408FeatureChecks.nativeText(t,page,body);waitTag(page,"feedback_detail_body");}
+    JSONObject note()throws Exception{for(JSONObject value:storage.all(FeedbackStorage.NOTES))if(body.equals(value.optString("body")))return value;return null;}
+    JSONObject draft()throws Exception{return new FeedbackRepository(storage,storage).draft();}
+    void waitDraftAssets(int count)throws Exception{t.until("persisted original draft image count "+count,10000,()->{JSONObject d=draft();return d!=null&&d.getJSONObject("note").getJSONArray("assetIds").length()==count;});}
+    JSONObject photoDraft()throws Exception{
+        Bitmap bitmap=Bitmap.createBitmap(64,48,Bitmap.Config.ARGB_8888);bitmap.eraseColor(Color.rgb(27,142,95));
+        ByteArrayOutputStream bytes=new ByteArrayOutputStream();check(bitmap.compress(Bitmap.CompressFormat.PNG,100,bytes),"real fixture PNG");bitmap.recycle();byte[] png=bytes.toByteArray();
+        imageHash=D408FeatureChecks.hash(new ByteArrayInputStream(png));ContentValues values=new ContentValues();values.put(MediaStore.MediaColumns.DISPLAY_NAME,"d408-ui-image-"+BuildInfo.RUN_ID+".png");values.put(MediaStore.MediaColumns.MIME_TYPE,"image/png");values.put(MediaStore.MediaColumns.RELATIVE_PATH,"Pictures/D408/");values.put(MediaStore.MediaColumns.IS_PENDING,1);
+        imageUri=t.target.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);check(imageUri!=null,"synthetic image inserted into real MediaStore");
+        try(OutputStream output=t.target.getContentResolver().openOutputStream(imageUri)){check(output!=null,"real MediaStore output");output.write(png);}ContentValues ready=new ContentValues();ready.put(MediaStore.MediaColumns.IS_PENDING,0);t.target.getContentResolver().update(imageUri,ready,null,null);
+        open("记个想法");text(body);tapTag(page,"feedback_category_experience");tapTag(page,"feedback_editor_status_pending");
+        pickImage();waitDraftAssets(1);assetId=draft().getJSONObject("note").getJSONArray("assetIds").getString(0);check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"system-selected actual bytes stored");
+        t.until("decoded original image thumbnail",10000,()->{View view=tag(page,"feedback_image_0");return view instanceof ImageView&&((ImageView)view).getDrawable()!=null;});tapTag(page,"feedback_image_0");
+        t.until("original screenshot preview",5000,()->find(n->"截图 1".contentEquals(n.getContentDescription()==null?"":n.getContentDescription()))!=null);t.shot("feedback-ui-image-preview");check(D408FeatureChecks.tapWindowText(t,"关闭截图",5000),"real close-preview button");
+        tapTag(page,"feedback_remove_image_0");waitDraftAssets(0);check(tag(page,"feedback_image_0")==null,"remove updates UI");
+        pickImage();waitDraftAssets(1);assetId=draft().getJSONObject("note").getJSONArray("assetIds").getString(0);check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"reselected image retains actual bytes");
+        tapTag(page,"feedback_keep_draft");t.until("quick compose finishes after keep",10000,page::isFinishing);t.current=tools;t.awaitForeground(tools);JSONObject kept=draft();check(kept!=null&&body.equals(kept.getJSONObject("note").getString("body")),"keep preserves actual draft");
+        return new JSONObject().put("sourceUri",imageUri.toString()).put("imageSha256",imageHash).put("assetId",assetId).put("draftId",kept.getString("id")).put("pickerResultInjected",false);
+    }
+    void pickImage()throws Exception{
+        tapTag(page,"feedback_add_image");t.until("real system image picker",10000,()->find(n->{String p=String.valueOf(n.getPackageName());return !p.equals(t.target.getPackageName())&&(p.contains("photopicker")||p.contains("providers.media")||p.contains("documentsui"));})!=null);dump("feedback-system-picker-before");
+        AccessibilityNodeInfo thumbnail=waitNode("seeded image in system picker",n->{String id=String.valueOf(n.getViewIdResourceName());return id.endsWith(":id/icon_thumbnail")||id.endsWith(":id/icon_photo")||id.endsWith(":id/image_view");},10000);
+        touch(thumbnail);SystemClock.sleep(300);
+        AccessibilityNodeInfo add=find(n->{String value=String.valueOf(n.getText());return value.matches("(?i)add(?: \\(.*\\))?")||value.matches("添加(?:[（(].*[）)])?");});
+        if(add!=null)touch(add);
+        t.until("system picker returned actual image",15000,()->page.hasWindowFocus()&&tag(page,"feedback_image_0")!=null);dump("feedback-system-picker-after");
+    }
+    JSONObject resumeDraft()throws Exception{
+        check(assetId!=null,"prior actual image draft exists");open("查看优化意见");tapTag(page,"feedback_resume_draft");waitTag(page,"feedback_body");
+        check(body.equals(((EditText)tag(page,"feedback_body")).getText().toString()),"actual draft banner restores body");check(tag(page,"feedback_image_0")!=null,"actual draft banner restores image");
+        Instrumentation.ActivityMonitor monitor=t.addMonitor(page.getClass().getName(),null,false);Activity prior=page;t.runOnMainSync(prior::recreate);Activity restored=t.waitForMonitorWithTimeout(monitor,10000);t.removeMonitor(monitor);check(restored!=null&&restored!=prior,"actual editor Activity recreated");page=restored;t.current=page;t.awaitForeground(page);waitTag(page,"feedback_body");
+        check(body.equals(((EditText)tag(page,"feedback_body")).getText().toString()),"recreation restores draft body");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"recreation retains original image bytes");t.shot("feedback-ui-recreated-draft");
+        tapTag(page,"feedback_save");t.until("UI save persists real note",10000,()->note()!=null);JSONObject saved=note();noteId=saved.getString("id");check("experience".equals(saved.getString("category"))&&"pending".equals(saved.getString("status")),"category and status persisted from UI");check(draft()==null,"successful save consumes draft");waitTag(page,"feedback_detail_body");t.shot("feedback-ui-saved-detail");
+        return new JSONObject().put("noteId",noteId).put("category",saved.getString("category")).put("status",saved.getString("status")).put("assetId",assetId).put("imageSha256",imageHash);
+    }
+    JSONObject deleteUndo()throws Exception{
+        openDetail();String before=storage.get(FeedbackStorage.NOTES,noteId).toString();tapTag(page,"feedback_delete");check(D408FeatureChecks.tapWindowText(t,"保留",10000),"real cancel deletion confirmation");check(before.equals(storage.get(FeedbackStorage.NOTES,noteId).toString()),"cancel preserves exact record");
+        tapTag(page,"feedback_delete");check(D408FeatureChecks.tapWindowText(t,"删除 1 条",10000),"real confirm deletion");t.until("deleted record and undo bar",10000,()->storage.deletedNotes().stream().anyMatch(n->noteId.equals(n.optString("id")))&&tag(page,"feedback_undo")!=null);t.shot("feedback-ui-delete-undo");
+        tapTag(page,"feedback_undo");t.until("real undo restores note",10000,()->storage.deletedNotes().stream().noneMatch(n->noteId.equals(n.optString("id"))));check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"undo preserves original image");
+        return new JSONObject().put("noteId",noteId).put("cancelPreserved",true).put("deletedAndUndone",true).put("imageSha256",imageHash);
+    }
+    JSONObject exportUi()throws Exception{
+        check(noteId!=null,"prior UI note exists");tools=t.launch(FeedbackToolsActivity.class);D408FeatureChecks.nativeText(t,tools,"导出意见备份");waitDocuments();t.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);t.awaitForeground(tools);t.until("visible export cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消选择文件"));
+        D408FeatureChecks.nativeText(t,tools,"导出意见备份");downloads();AccessibilityNodeInfo filename=waitNode("SAF filename input",n->"android.widget.EditText".contentEquals(n.getClassName()),8000);touch(filename);selectAll();t.sendStringSync(backupName);t.waitForIdleSync();
+        touch(waitNode("SAF save button",n->String.valueOf(n.getText()).matches("(?i)save|保存|存储"),8000));t.awaitForeground(tools);t.until("visible export success",15000,()->D408FeatureChecks.windowContains(t,"意见备份已保存"));
+        File archive=new File(t.evidence,backupName);try(ParcelFileDescriptor fd=t.getUiAutomation().executeShellCommand("cat /sdcard/Download/"+backupName);InputStream input=new ParcelFileDescriptor.AutoCloseInputStream(fd);OutputStream output=new FileOutputStream(archive)){byte[] buffer=new byte[32768];int n;while((n=input.read(buffer))!=-1)output.write(buffer,0,n);}
+        check(archive.length()>100,"actual SAF ZIP exists");try(InputStream input=new java.io.FileInputStream(archive)){check(input.read()=='P'&&input.read()=='K',"actual exported ZIP header");}backupHash=D408FeatureChecks.hash(new java.io.FileInputStream(archive));exported=D408FeatureChecks.storageSnapshot(storage);exportedGeneration=storage.generation();t.shot("feedback-ui-export-success");
+        return new JSONObject().put("file",backupName).put("bytes",archive.length()).put("sha256",backupHash).put("exportCanceledThenSaved",true);
+    }
+    JSONObject restoreUi()throws Exception{
+        check(exported!=null,"prior actual SAF backup exists");openDetail();tapTag(page,"feedback_status_done");t.until("real detail status mutation",10000,()->"done".equals(storage.get(FeedbackStorage.NOTES,noteId).optString("status")));tools=t.launch(FeedbackToolsActivity.class);String changed=D408FeatureChecks.storageSnapshot(storage).toString();long generation=storage.generation();
+        chooseRestore(backupName);check(D408FeatureChecks.tapWindowText(t,"取消",5000),"actual replacement cancel");t.until("visible restore cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消恢复"));check(changed.equals(D408FeatureChecks.storageSnapshot(storage).toString())&&generation==storage.generation(),"cancel leaves exact data and generation");
+        chooseRestore(backupName);check(D408FeatureChecks.tapWindowText(t,"检查并恢复",5000),"actual replacement confirmation");t.until("visible restore success",15000,()->D408FeatureChecks.windowContains(t,"恢复完成"));check(exported.toString().equals(D408FeatureChecks.storageSnapshot(storage).toString()),"SAF restore returns exact notes draft and meta");check(storage.generation()>generation,"UI restore increments generation");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"UI restore restores actual image bytes");t.shot("feedback-ui-restore-success");
+        return new JSONObject().put("backupSha256",backupHash).put("generationBefore",generation).put("generationAfter",storage.generation()).put("imageSha256",imageHash);
+    }
+    JSONObject failedRestore()throws Exception{
+        check(exported!=null,"prior successful UI export required");ContentValues values=new ContentValues();values.put(MediaStore.MediaColumns.DISPLAY_NAME,corruptName);values.put(MediaStore.MediaColumns.MIME_TYPE,"application/zip");values.put(MediaStore.MediaColumns.RELATIVE_PATH,"Download/");Uri corrupt=t.target.getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI,values);check(corrupt!=null,"real invalid archive fixture");try(OutputStream output=t.target.getContentResolver().openOutputStream(corrupt)){output.write("D408 invalid ZIP".getBytes(StandardCharsets.UTF_8));}
+        tools=t.launch(FeedbackToolsActivity.class);String before=D408FeatureChecks.storageSnapshot(storage).toString();long generation=storage.generation();chooseRestore(corruptName);check(D408FeatureChecks.tapWindowText(t,"检查并恢复",5000),"confirm actual invalid-file restore");t.until("visible failed restore",15000,()->D408FeatureChecks.windowContains(t,"恢复失败，当前意见未替换"));check(before.equals(D408FeatureChecks.storageSnapshot(storage).toString())&&generation==storage.generation(),"UI restore failure preserves data and generation");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"failed UI restore preserves image");dump("feedback-ui-visible-restore-error");t.shot("feedback-ui-visible-restore-error");
+        chooseRestore(backupName);check(D408FeatureChecks.tapWindowText(t,"检查并恢复",5000),"real corrected restore retry");t.until("retry success",15000,()->D408FeatureChecks.windowContains(t,"恢复完成"));check(exported.toString().equals(D408FeatureChecks.storageSnapshot(storage).toString()),"retry restores complete snapshot");
+        return new JSONObject().put("invalidFile",corruptName).put("visibleFailure",true).put("preservedGeneration",generation).put("retryGeneration",storage.generation()).put("scope","local restore failure; FeedbackKit has no remote submission service");
+    }
+    JSONObject validationRetry()throws Exception{
+        open("记个想法");int before=storage.all(FeedbackStorage.NOTES).size();tapTag(page,"feedback_save");EditText bodyInput=(EditText)waitTag(page,"feedback_body");t.until("visible field validation",5000,()->bodyInput.getError()!=null);check(storage.all(FeedbackStorage.NOTES).size()==before,"invalid empty save creates no note");t.shot("feedback-ui-empty-save-error");String corrected="D408_UI_CORRECTED_"+BuildInfo.RUN_ID;text(corrected);tapTag(page,"feedback_save");t.until("corrected save succeeds",10000,()->storage.all(FeedbackStorage.NOTES).stream().anyMatch(n->corrected.equals(n.optString("body"))));
+        return new JSONObject().put("emptySaveRejected",true).put("correctedSaveBody",corrected).put("operation","local note save; no network submission claimed");
+    }
+    void chooseRestore(String filename)throws Exception{
+        t.current=tools;t.awaitForeground(tools);D408FeatureChecks.nativeText(t,tools,"从备份恢复");downloads();touch(waitNode("actual SAF backup row "+filename,n->filename.contentEquals(n.getText()==null?"":n.getText()),10000));t.until("original host replacement confirmation",10000,()->D408FeatureChecks.windowContains(t,"替换当前优化意见"));
+    }
+    void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
+    void downloads()throws Exception{
+        waitDocuments();dump("feedback-documents-before");AccessibilityNodeInfo roots=find(n->{String desc=String.valueOf(n.getContentDescription());return desc.matches("(?i)show roots|open navigation drawer|显示根目录|打开导航抽屉|显示根目录菜单");});
+        if(roots!=null){touch(roots);touch(waitNode("Downloads root",n->String.valueOf(n.getText()).matches("(?i)downloads|下载"),5000));}
+        else check(find(n->String.valueOf(n.getText()).matches("(?i)downloads|下载"))!=null,"observed DocumentsUI Downloads location");
+        SystemClock.sleep(300);dump("feedback-documents-downloads");
+    }
+    void selectAll(){long now=SystemClock.uptimeMillis();t.sendKeySync(new KeyEvent(now,now,KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_A,0,KeyEvent.META_CTRL_ON));t.sendKeySync(new KeyEvent(now,SystemClock.uptimeMillis(),KeyEvent.ACTION_UP,KeyEvent.KEYCODE_A,0,KeyEvent.META_CTRL_ON));}
+    AccessibilityNodeInfo find(Predicate<AccessibilityNodeInfo> predicate){return find(t.getUiAutomation().getRootInActiveWindow(),predicate);}
+    AccessibilityNodeInfo find(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate){if(n==null)return null;if(n.isVisibleToUser()&&predicate.test(n))return n;for(int i=0;i<n.getChildCount();i++){AccessibilityNodeInfo result=find(n.getChild(i),predicate);if(result!=null)return result;}return null;}
+    AccessibilityNodeInfo waitNode(String label,Predicate<AccessibilityNodeInfo> predicate,long timeout)throws Exception{t.until(label,timeout,()->find(predicate)!=null);return find(predicate);}
+    void touch(AccessibilityNodeInfo n)throws Exception{check(n!=null,"actual accessible target");Rect r=new Rect();n.getBoundsInScreen(r);check(!r.isEmpty(),"visible system target bounds");D408FeatureChecks.deviceSwipe(t,r.exactCenterX(),r.exactCenterY(),r.exactCenterX(),r.exactCenterY(),1);}
+    void dump(String name)throws Exception{JSONArray rows=new JSONArray();collect(t.getUiAutomation().getRootInActiveWindow(),rows);D408IntegrationInstrumentation.write(new File(t.evidence,String.format(java.util.Locale.ROOT,"%03d-",++dumpSequence)+name+".json"),rows.toString(2));}
+    void collect(AccessibilityNodeInfo n,JSONArray rows)throws Exception{if(n==null||rows.length()>600)return;if(n.isVisibleToUser()){Rect r=new Rect();n.getBoundsInScreen(r);rows.put(new JSONObject().put("package",String.valueOf(n.getPackageName())).put("class",String.valueOf(n.getClassName())).put("id",String.valueOf(n.getViewIdResourceName())).put("text",String.valueOf(n.getText())).put("description",String.valueOf(n.getContentDescription())).put("bounds",r.toShortString()).put("clickable",n.isClickable()));}for(int i=0;i<n.getChildCount();i++)collect(n.getChild(i),rows);}
+}

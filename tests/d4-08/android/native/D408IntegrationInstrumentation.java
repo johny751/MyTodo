@@ -39,6 +39,8 @@ public final class D408IntegrationInstrumentation extends Instrumentation {
             if ("process-prepare".equals(phase)) prepareDeath();
             else if ("process-recover".equals(phase)) recoverDeath();
             else if ("features".equals(phase)) { foreground(); D408FeatureChecks.run(this); }
+            else if ("feedback-ui".equals(phase)) { D408FeedbackUiChecks.run(this); }
+            else if (phase.startsWith("navigation-")) { D408NavigationChecks.run(this,phase); }
             else if ("boot-prepare".equals(phase)) { foreground(); D408FeatureChecks.prepareBoot(this); }
             else if ("boot-recover".equals(phase)) { foreground(); D408FeatureChecks.recoverBoot(this); }
             else if ("notification-denied".equals(phase)) { foreground(); D408FeatureChecks.notificationDenied(this); }
@@ -206,7 +208,7 @@ public final class D408IntegrationInstrumentation extends Instrumentation {
                 catch(Exception|AssertionError cleanupError){if(primaryFailure!=null)primaryFailure.addSuppressed(cleanupError);else throw cleanupError;}}
         });
         test("D408-07-activity-recreation-preserves-timer-and-draft",()->{
-            Activity nativePage=launch(D408TimerActivity.class);until("native timer configured",8000,()->{TextView v=nativePage.findViewById(40301);return v!=null&&!v.getText().toString().contains("读取");});
+            Activity nativePage=launch(D408TimerActivity.class);until("native timer configured",8000,()->nativePage.findViewById(40310).isEnabled());
             runOnMainSync(()->((EditText)nativePage.findViewById(40312)).setText("37"));
             JSONObject before=state();ActivityMonitor monitor=addMonitor(D408TimerActivity.class.getName(),null,false);
             runOnMainSync(nativePage::recreate);Activity restored=waitForMonitorWithTimeout(monitor,10000);removeMonitor(monitor);check(restored!=null,"recreated Activity");current=restored;
