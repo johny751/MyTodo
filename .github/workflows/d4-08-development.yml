@@ -1,0 +1,162 @@
+name: D4-08 UI and Android development validation
+on:
+  push:
+    branches: [d4/d4-08-candidate-1]
+    paths:
+      - prototypes/d4-01/**
+      - prototypes/d4-08/**
+      - android/d408/**
+      - tests/d4-08/web-*.mjs
+      - tests/d4-08/android/native/**
+      - tests/d4-08/android/run-native.sh
+      - .github/workflows/d4-08-development.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  domain:
+    if: github.ref == 'refs/heads/d4/d4-08-candidate-1'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Authorized native diff and immutable accepted evidence guard
+        shell: bash
+        run: |
+          git diff --exit-code 04c525c55fc136ad1b960b5d727dab3c5e3165fd -- src android/src android/d405 tests/d4-ui tests/d4-03-platforms tests/d4-05 windows/database.c windows/native.h windows/sync.c windows/storage.c windows/tasks.c windows/operations.c
+          node tests/d4-ui/provenance.mjs
+          node --test tests/d4-03-platforms/scope.test.mjs tests/d4-05/scope.test.mjs
+      - name: Mature pure domain tests
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-reporter=tap tests/d4-ui/domain.test.mjs tests/d4-03-platforms/native-timer-adapter.test.mjs tests/d4-ui/web-service.test.mjs 2>&1 | tee "$RUNNER_TEMP/d4-domain-${{ matrix.os }}.tap"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d4-domain-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-domain-${{ matrix.os }}.tap
+            ${{ runner.temp }}/d403-source-provenance.json
+            ${{ runner.temp }}/d408-scope.json
+            ${{ runner.temp }}/d4-web-v2-*/
+          if-no-files-found: error
+  browser:
+    if: github.ref == 'refs/heads/d4/d4-08-candidate-1'
+    needs: domain
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 20
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build offline Windows and Web demo
+        id: webbuild
+        run: node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Real DOM interactions and responsive screenshots
+        run: node tests/d4-ui/run-browser.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: D4-08 independent browser behavior regression
+        if: ${{ always() && steps.webbuild.outcome == 'success' }}
+        env:
+          D408_APP_SOURCE_SHA: ${{ github.sha }}
+        run: node tests/d4-08/web-run.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-web-results"
+      - name: Package verified experience
+        run: node tests/d4-ui/package-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Observe actual packaged Windows launcher in a headed session
+        if: runner.os == 'Windows'
+        env:
+          D4_PREVIEW_CI_INSPECT: '1'
+        run: node tests/d4-ui/run-windows-launcher.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d403-ui-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/mytodo-d4-01-demo.html
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.json
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.md
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.bat
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.cmd
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.txt
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.zip
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/screenshots
+            ${{ runner.temp }}/d408-web-results/*.json
+            ${{ runner.temp }}/d408-web-results/*.jsonl
+            ${{ runner.temp }}/d408-web-results/*.txt
+            ${{ runner.temp }}/d408-web-results/screenshots/
+            ${{ runner.temp }}/d408-web-results/snapshots/
+          if-no-files-found: error
+
+  android-d408:
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare official SDK and build tools
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Compile D408 isolated application and instrumentation
+        run: |
+          node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-d408-ui-$GITHUB_RUN_ID"
+          bash android/d408/build-android-d408.sh "$RUNNER_TEMP/d4-d408-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Real native D408 UI service and recovery regression
+        run: bash tests/d4-08/android/run-native.sh "$RUNNER_TEMP/d408-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d408-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d408-native-*/*.apk
+            ${{ runner.temp }}/d408-native-*/*.json
+            ${{ runner.temp }}/d408-native-*/*.txt
+            ${{ runner.temp }}/d408-native-*/*.log
+            ${{ runner.temp }}/d408-native-*/native-evidence/
+            ${{ runner.temp }}/d403-emulator-*.log
+          if-no-files-found: error
+

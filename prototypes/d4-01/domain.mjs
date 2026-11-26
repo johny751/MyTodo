@@ -64,13 +64,14 @@ export function createRepository(seedStorage=null){
  };
  const initialState=normalizeSyntheticState(clone(options.state||seedState(matureDayKey(new Date(now())))));
  const initialDemo=mockObject(options.demo||{});
- let state=clone(initialState),demo=clone(initialDemo),storage=null;
+ let state=clone(initialState),demo=clone(initialDemo),storage=null,durableStorage=null;
  const persistenceInfo={key:STORAGE_KEY,mode:'memory',loaded:false,error:null,loadError:null};
  let loadingSaved=false;
  const listeners=new Set();
  let batchDepth=0,batchDirty=false,batchSnapshot=null,batchFailure=null;
  try{
   storage=own(options,'storage')?options.storage:globalThis.localStorage;
+  durableStorage=storage;
   if(storage&&typeof storage.getItem==='function'&&typeof storage.setItem==='function'){
    persistenceInfo.mode='localStorage';const raw=storage.getItem(STORAGE_KEY);
    if(raw!==null&&raw!==undefined){
@@ -171,6 +172,23 @@ export function createRepository(seedStorage=null){
    return protectedChange(()=>{const next=clone(demo);if(typeof patchOrMutator==='function')syncCallback(patchOrMutator);
     const result=syncResult(typeof patchOrMutator==='function'?patchOrMutator(next):Object.assign(next,mockObject(patchOrMutator)));
     demo=mockObject(result&&typeof result==='object'?result:next);publish('updateDemo');return clone(demo);});
+  },
+  updateDemoDurable(mutator){
+   // Candidate-only explicit commit. A failed feedback save leaves the old
+   // durable and in-memory record unchanged, so the editor can retry safely.
+   // Existing task/work memory-fallback operations retain their original contract.
+   return protectedChange(()=>{
+    if(batchDepth)throw new Error('独立意见持久提交不能嵌入工作区批次');syncCallback(mutator);
+    if(persistenceInfo.loadError)throw new Error('原始候选存储无法读取，已保留原始内容；请先导出诊断，不覆盖原文件');
+    const next=clone(demo),value=syncResult(mutator(next)),candidate=mockObject(value&&typeof value==='object'?value:next);
+    if(!durableStorage||typeof durableStorage.setItem!=='function'){
+     if(persistenceInfo.error)throw new Error('当前存储不可用，意见尚未持久保存；请保留编辑内容后重试。'+persistenceInfo.error);
+     demo=candidate;publish('updateDemo');return clone(demo); // Explicit memory-only test/provider.
+    }
+    try{durableStorage.setItem(STORAGE_KEY,JSON.stringify({kind:STORAGE_KIND,version:1,state,demo:candidate}));}
+    catch(error){persistenceInfo.error=String(error.message||error);throw new Error('意见尚未写入持久存储；编辑内容和原图已保留，请重试保存或导出草稿。'+persistenceInfo.error);}
+    demo=candidate;storage=durableStorage;persistenceInfo.mode='localStorage';persistenceInfo.error=null;emit('updateDemo');return clone(demo);
+   });
   },
   reset(next=initialState){return protectedChange(()=>{state=normalizeSyntheticState(clone(next));demo=clone(initialDemo);publish('reset');return clone(state);});},
   batch(fn){
