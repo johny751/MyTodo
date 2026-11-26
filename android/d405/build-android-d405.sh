@@ -27,6 +27,31 @@ NODE
 "$bt/aapt2" compile --dir "$out/feedback-aar/res" -o "$out/feedback-resources.zip"
 "$bt/aapt2" link -I "$android_jar" --manifest "$out/AndroidManifest.xml" -A "$out/assets" --java "$out/resources-generated" \
  --extra-packages com.androidshared.feedback -o "$out/unsigned.apk" "$out/resources.zip" "$out/feedback-resources.zip"
+# Compile the formal Java source in isolation before any candidate classes exist.
+# Only formal source, generated R.java, the SDK and the pinned AAR are inputs.
+mkdir -p "$out/formal-classes"
+find android/src -name '*.java' -print > "$out/formal-java-sources.txt"
+find "$out/resources-generated" -name 'R.java' -print >> "$out/formal-java-sources.txt"
+LC_ALL=C sort -o "$out/formal-java-sources.txt" "$out/formal-java-sources.txt"
+javac -version > "$out/formal-javac-version.txt" 2>&1
+javac -encoding UTF-8 --release 17 -implicit:none -sourcepath '' -classpath "$android_jar:$out/feedback-aar/classes.jar" \
+ -d "$out/formal-classes" @"$out/formal-java-sources.txt" 2>&1 | tee "$out/formal-compile-log.txt"
+node --input-type=module - "$out" "$android_jar" <<'NODE'
+import fs from 'node:fs/promises';import path from 'node:path';import crypto from 'node:crypto';
+const out=process.argv[2],hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const list=await fs.readFile(out+'/formal-java-sources.txt','utf8'),sources=list.trim().split('\n');
+if(!sources.length||sources.some(p=>!p.startsWith('android/src/')&&!(p.startsWith(out+'/resources-generated/')&&p.endsWith('/R.java'))))throw Error('Unexpected formal compile input');
+const files=await Promise.all(sources.map(async p=>({path:p.startsWith(out+'/')?'build/'+p.slice(out.length+1):p,sha256:hash(await fs.readFile(p))})));
+async function classes(dir){const rows=[];for(const entry of await fs.readdir(dir,{withFileTypes:true})){const p=path.join(dir,entry.name);if(entry.isDirectory())rows.push(...await classes(p));else if(entry.name.endsWith('.class'))rows.push(path.relative(out+'/formal-classes',p));}return rows;}
+const compiled=(await classes(out+'/formal-classes')).sort();
+if(!compiled.includes('local/gxtodo/replica/NativeIntegration.class')||compiled.some(p=>p.startsWith('local/gxtodo/d403preview/')||/\/D405[^/]*\.class$/.test('/'+p)))throw Error('Formal compile leaked candidate classes');
+const aarSHA256=hash(await fs.readFile('android/libs/feedback-kit-1.2.0.aar'));
+if(aarSHA256!=='4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade')throw Error('Pinned AAR mismatch');
+await fs.writeFile(out+'/formal-source-compile.json',JSON.stringify({sourceSHA:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,
+ passed:true,kind:'formal-source-isolated-javac',formalPackageBuiltOrInstalled:false,compiler:(await fs.readFile(out+'/formal-javac-version.txt','utf8')).trim(),
+ classpath:['official Android SDK android.jar','pinned FeedbackKit classes.jar'],sdkJarSHA256:hash(await fs.readFile(process.argv[3])),aarSHA256,sourceListSHA256:hash(list),
+ sources:files,compiledClasses:compiled,excludedInputs:['android/d405/src','generated D4-03 timer source','candidate classes']},null,2)+'\n');
+NODE
 find android/src android/d405/src "$out/generated" "$out/resources-generated" -name '*.java' -print > "$out/java-sources.txt"
 javac -encoding UTF-8 --release 17 -classpath "$android_jar:$out/feedback-aar/classes.jar" -d "$out/classes" @"$out/java-sources.txt"
 jar cf "$out/classes.jar" -C "$out/classes" .
@@ -60,5 +85,5 @@ jar cf "$out/test-classes.jar" -C "$out/test-classes" .
 "$bt/apksigner" sign --ks "$out/isolated-d405-key.jks" --ks-pass pass:android --key-pass pass:android --ks-key-alias d405ci \
  --out "$out/mytodo-d4-05-native-tests.apk" "$out/test-aligned.apk"
 "$bt/apksigner" verify --verbose --print-certs "$out/mytodo-d4-05-native-tests.apk" > "$out/test-apk-signature.txt"
-(cd "$out"; sha256sum mytodo-d4-05-native-candidate.apk mytodo-d4-05-native-tests.apk assets/index.html d405-build-identity.json) > "$out/SHA256SUMS.txt"
+(cd "$out"; sha256sum mytodo-d4-05-native-candidate.apk mytodo-d4-05-native-tests.apk assets/index.html d405-build-identity.json formal-source-compile.json formal-java-sources.txt) > "$out/SHA256SUMS.txt"
 echo 'D4-05 built; runtime unverified until separate instrumentation evidence.'

@@ -28,14 +28,14 @@ await fs.access(exe);
 await fs.mkdir(output);
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 const suites = [
-  {id: 'workspace-96', flag: '--work-regression', renderFlag: '--work-render', dpi: 96},
-  {id: 'workspace-144', flag: '--work-regression', renderFlag: '--work-render', dpi: 144},
+  {id: 'workspace-96', flag: '--work-regression', renderFlag: '--work-render', dpi: 96, gui: true},
+  {id: 'workspace-144', flag: '--work-regression', renderFlag: '--work-render', dpi: 144, gui: true},
   {id: 'legacy-self-test', flag: '--self-test'},
   {id: 'legacy-advanced', flag: '--advanced-test'},
-  {id: 'legacy-catalog', flag: '--ui-regression'},
-  {id: 'legacy-detail', flag: '--detail-regression'},
-  {id: 'legacy-repaint', flag: '--repaint-regression'},
-  {id: 'legacy-drag', flag: '--drag-regression', renderFlag: '--drag-render'},
+  {id: 'legacy-catalog', flag: '--ui-regression', gui: true},
+  {id: 'legacy-detail', flag: '--detail-regression', gui: true},
+  {id: 'legacy-repaint', flag: '--repaint-regression', gui: true},
+  {id: 'legacy-drag', flag: '--drag-regression', renderFlag: '--drag-render', gui: true},
   {id: 'legacy-feedback', flag: '--feedback-test'},
 ];
 const manifest = {
@@ -51,8 +51,10 @@ const manifest = {
     'Programmatic native control actions are not physical owner testing.'
   ]
 };
-const execute = args => new Promise(resolve => execFile(exe, args, {
-  windowsHide: true, encoding: 'utf8', timeout: 180000, maxBuffer: 12 * 1024 * 1024
+const execute = (args, gui = false) => new Promise(resolve => execFile(exe, args, {
+  // A visible Win32 test needs its real initial ShowWindow; SW_HIDE from the
+  // process startup info would override that first call and suppress paints.
+  windowsHide: !gui, encoding: 'utf8', timeout: 180000, maxBuffer: 12 * 1024 * 1024
 }, (error, stdout, stderr) => resolve({
   stdout: stdout ?? '', stderr: stderr ?? '', exitCode: error?.code ?? 0,
   signal: error?.signal ?? null, killed: error?.killed ?? false, error: error?.message ?? null
@@ -125,11 +127,41 @@ for (const suite of suites) {
   await fs.mkdir(directory);
   const data = path.join(directory, 'synthetic-data'), render = path.join(directory, 'render');
   await fs.mkdir(data); await fs.mkdir(render);
+  let fixture = null;
+  if (suite.id === 'legacy-repaint') {
+    // The unchanged historical repaint suite explicitly requires seeded tasks
+    // (docs/windows-native.md). Use only this suite's fresh isolated database
+    // and the existing native local-change entry, never a user backup/import.
+    const changes = Array.from({length: 4}, (_, quadrant) => {
+      const id = `d404-repaint-fixture-${quadrant}`;
+      return {key: JSON.stringify(['tasks', id]), values: {
+        id, title: `D4-04 synthetic repaint task ${quadrant + 1}`, quadrant,
+        order: quadrant * 1024, done: false, _deleted: false, parentId: null,
+        start: '', end: '', seriesId: '', generatedFrom: '', review: '', project: '', place: '',
+        notes: 'Synthetic native repaint fixture.\nNo real user data or remote connection.',
+        completedAt: '', createdAt: '2026-11-26T00:00:00Z', allDay: false,
+        repeat: null, reminder: null, reminderAt: null, weight: 0, tags: []
+      }};
+    });
+    const fixturePath = path.join(directory, 'synthetic-fixture.json');
+    const fixtureBytes = JSON.stringify(changes, null, 2) + '\n';
+    await fs.writeFile(fixturePath, fixtureBytes);
+    const fixtureArgs = ['--data-dir', data, '--change', fixturePath];
+    const preparation = await execute(fixtureArgs);
+    await fs.writeFile(path.join(directory, 'fixture-stdout.log'), preparation.stdout);
+    await fs.writeFile(path.join(directory, 'fixture-stderr.log'), preparation.stderr);
+    fixture = {file: path.basename(fixturePath), sha256: sha256(fixtureBytes), taskCount: changes.length,
+      args: fixtureArgs, exitCode: preparation.exitCode, signal: preparation.signal,
+      killed: preparation.killed, error: preparation.error,
+      passed: preparation.exitCode === 0 && !preparation.killed && preparation.signal === null,
+      stdoutSha256: sha256(preparation.stdout), stderrSha256: sha256(preparation.stderr)};
+    await fs.writeFile(path.join(directory, 'fixture-execution.json'), JSON.stringify(fixture, null, 2) + '\n');
+  }
   const args = ['--data-dir', data, suite.flag];
   if (suite.renderFlag) args.push(suite.renderFlag, render);
   if (suite.dpi) args.push('--visual-dpi', String(suite.dpi));
   const start = Date.now();
-  const execution = await execute(args);
+  const execution = await execute(args, suite.gui === true);
   await fs.writeFile(path.join(directory, 'stdout.log'), execution.stdout);
   await fs.writeFile(path.join(directory, 'stderr.log'), execution.stderr);
   const failLines = execution.stdout.split(/\r?\n/).filter(line => /^FAIL\b/.test(line));
@@ -138,9 +170,9 @@ for (const suite of suites) {
     try { nativeReport = JSON.parse(await fs.readFile(path.join(render, 'workspace-report.json'), 'utf8')); }
     catch { /* Missing evidence is a failed suite, even if an exit code was zero. */ }
   }
-  const passed = execution.exitCode === 0 && failLines.length === 0 &&
+  const passed = (fixture === null || fixture.passed) && execution.exitCode === 0 && failLines.length === 0 &&
     (suite.flag !== '--work-regression' || (nativeReport?.checks > 0 && nativeReport.failures === 0));
-  const record = {id: suite.id, args, passed, exitCode: execution.exitCode,
+  const record = {id: suite.id, args, gui: suite.gui === true, fixture, passed, exitCode: execution.exitCode,
     signal: execution.signal, killed: execution.killed, error: execution.error,
     durationMs: Date.now() - start, failLines,
     checks: nativeReport?.checks ?? null,

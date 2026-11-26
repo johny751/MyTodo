@@ -1,0 +1,38 @@
+[
+  {
+    "packageName": "local.gxtodo.d405candidate",
+    "versionName": "0.5.1",
+    "versionCode": 405001,
+    "sourceSHA": "8779f84848c7df5eff86896abe627fe10ce1cfdb",
+    "buildTimeUTC": "2026-11-26T01:39:06.174Z",
+    "runId": "45737059912",
+    "runAttempt": "1",
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "FAILED",
+    "statusText": "首次云端候选：原生专项 15 项，10 项通过、5 项失败；未发布、未验收。",
+    "changes": [
+      "正式前台服务接入统一计时会话、通知暂停继续与到时唤醒",
+      "原生提醒和 FeedbackKit 1.2.0 接入独立合成应用空间",
+      "独立 D4-05 生命周期验证；稳定签名及覆盖升级待专门审批",
+      "本轮保留锁屏、Activity 重建、反馈编辑器及 360/412 宽度交互失败证据；后续修复单独验证"
+    ],
+    "validation": {
+      "scope": "D4-05 native integration only",
+      "caseCount": 15,
+      "passed": 10,
+      "failed": 5,
+      "buildIdentitySha256": "c22cc9ea3946c3b38bddbc495067421f7b24e732ac8993911d20b0674b527a51",
+      "phaseReports": [
+        {"file": "result-main.json", "caseCount": 11, "passed": 8, "failed": 3, "sha256": "369aea869793e10874f06dc6e97daf65036206b28d20b512253771b17ed4e97e"},
+        {"file": "result-process-prepare.json", "caseCount": 1, "passed": 1, "failed": 0, "sha256": "964ca1dcdbd355ed8cec477c524b97603a559d73cd7c8daf244d8747395e10f4"},
+        {"file": "result-process-recover.json", "caseCount": 1, "passed": 1, "failed": 0, "sha256": "7270c610c51afbecbb98020a6a5184755842d595b42f56f30a82f927bf5cc83f"},
+        {"file": "result-visual-360.json", "caseCount": 1, "passed": 0, "failed": 1, "sha256": "3a2ab0aa7c4f39e9c35ecc5f9fdfc302c209404ecf9b90cfffe5996fc3700dfe"},
+        {"file": "result-visual-412.json", "caseCount": 1, "passed": 0, "failed": 1, "sha256": "8ce5612853eb786686cc9f0b140b7015618a4978183bd31aacf7c6e9b6ea49cc"}
+      ]
+    }
+  }
+]

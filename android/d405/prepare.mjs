@@ -19,10 +19,27 @@ const buildTimeUTC = new Date().toISOString();
 const identity = {packageName: 'local.gxtodo.d405candidate', versionCode, versionName, sourceSHA: e.GITHUB_SHA, buildTimeUTC,
   runId: e.GITHUB_RUN_ID, runAttempt: e.GITHUB_RUN_ATTEMPT, syntheticOnly: true, stableSigning: false, productionSync: false,
   originalD403TestsUnchanged: true, feedbackAarSha256: aarHash, inputHtmlSha256: hash(html)};
-const changes = ['正式前台服务接入统一计时会话、通知暂停继续与到时唤醒', '原生提醒和 FeedbackKit 1.2.0 接入独立合成应用空间', '独立 D4-05 生命周期验证；稳定签名及覆盖升级待专门审批'];
-const history = [{...identity, changes}];
-const historyText = versionName + ' / versionCode ' + versionCode + '\nby codex · ' + e.GITHUB_SHA.slice(0, 5) +
-  '\nAPK 编译时间：' + buildTimeUTC + ' (UTC)\n独立临时 CI 签名；跨运行覆盖未经批准。\n' + changes.join('\n');
+const changes = ['正式前台服务接入统一计时会话、通知暂停继续与到时唤醒', '原生提醒和 FeedbackKit 1.2.0 接入独立合成应用空间',
+  '修复云端生命周期验证的锁屏时序与解锁恢复，并记录失败时窗口和电源状态', '版本历史保留已知候选的真实编译时间、云端结果和未验收状态',
+  '独立 D4-05 生命周期验证；稳定签名及覆盖升级待专门审批'];
+const knownHistory = JSON.parse(await fs.readFile('android/d405/version-history.json', 'utf8'));
+if (!Array.isArray(knownHistory)) throw Error('Known candidate history must be an array');
+const historyKeys = new Set();
+for (const entry of knownHistory) {
+  const key = [entry.sourceSHA, entry.runId, entry.runAttempt].join('/');
+  if (entry.packageName !== identity.packageName || !Number.isSafeInteger(entry.versionCode) || entry.versionCode >= versionCode ||
+      typeof entry.versionName !== 'string' || !/^[a-f0-9]{40}$/.test(entry.sourceSHA) ||
+      !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(entry.buildTimeUTC) || !Number.isFinite(Date.parse(entry.buildTimeUTC)) ||
+      !/^[1-9]\d*$/.test(entry.runId) || !/^[1-9]\d*$/.test(entry.runAttempt) || historyKeys.has(key) ||
+      !Array.isArray(entry.changes) || !entry.changes.every(change => typeof change === 'string') || typeof entry.statusText !== 'string' ||
+      entry.stableSigning !== false || entry.syntheticOnly !== true || entry.released !== false || entry.accepted !== false) throw Error('Invalid known candidate history');
+  historyKeys.add(key);
+}
+const history = [{...identity, changes, status: 'UNVERIFIED', statusText: '本次候选等待云端验证；未发布、未验收。',
+  released: false, accepted: false}, ...knownHistory.sort((a, b) => b.versionCode - a.versionCode || b.buildTimeUTC.localeCompare(a.buildTimeUTC))];
+const historyText = history.map(entry => entry.versionName + ' / versionCode ' + entry.versionCode + '\nby codex · ' + entry.sourceSHA.slice(0, 5) +
+  '\nAPK 编译时间：' + entry.buildTimeUTC + ' (UTC)\n云端运行：' + entry.runId + ' / attempt ' + entry.runAttempt +
+  '\n独立临时 CI 签名；跨运行覆盖未经批准。\n' + entry.statusText + '\n' + entry.changes.join('\n')).join('\n\n');
 let bundle = html.replaceAll('MyTodo D4-03 Android 隔离体验 APK', 'MyTodo D4-05 Android 原生集成候选 APK');
 if (!bundle.includes('</body>')) throw Error('HTML insertion anchor missing');
 bundle = bundle.replace('</body>', '<script>\n' + await fs.readFile('android/d405/native-integration.js', 'utf8') + '\n</script>\n</body>');

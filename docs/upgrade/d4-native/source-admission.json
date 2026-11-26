@@ -26,8 +26,8 @@
     {
       "path": "scripts/d4-04-native-regression.mjs",
       "owner": "windows",
-      "bytes": 10265,
-      "sha256": "2ac6a536b5a49420d7c29eea6953d143d7a9e1080dab6cdd153103ddaf9872cd",
+      "bytes": 12627,
+      "sha256": "e93a911b6fe175886f3c613214c1dd3f7e4d5ff4c8f3ca96f4d8f91441bfd35d",
       "baselineSha256": null
     },
     {
@@ -159,8 +159,8 @@
     {
       "path": "android/d405/build-android-d405.sh",
       "owner": "android",
-      "bytes": 5545,
-      "sha256": "44ec204539538cf63258cc6df0fbdfd49eee1e55ef2e10296dcdbd2d85fbf629",
+      "bytes": 8421,
+      "sha256": "d5cf34e5e8bc74f63d96580910f9689db8073ba75632a0b760200fd781c2ca83",
       "baselineSha256": null
     },
     {
@@ -173,8 +173,8 @@
     {
       "path": "android/d405/prepare.mjs",
       "owner": "android",
-      "bytes": 5618,
-      "sha256": "0f303580719bccc661b4b3ead2057a20f8a1358432382c52e955f0d50a678728",
+      "bytes": 7350,
+      "sha256": "e8792bbf4b02e026b37393ec07272e47d40fac1952a5647816ab7cc60de28967",
       "baselineSha256": null
     },
     {
@@ -203,6 +203,13 @@
       "owner": "android",
       "bytes": 10187,
       "sha256": "3f86f47f519dd5647d50b5083e4063b24cbe263ec22cb46240907422ad353cd4",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/version-history.json",
+      "owner": "android",
+      "bytes": 2035,
+      "sha256": "42fef09b9473bd33eaa7c2f1b8f5b03d2abe303039fea577f83145d3cec041f4",
       "baselineSha256": null
     },
     {
@@ -250,8 +257,8 @@
     {
       "path": "tests/d4-05/android/NativeIntegrationInstrumentation.java",
       "owner": "android",
-      "bytes": 28221,
-      "sha256": "006de83b2e55a8112cc5e5527c283a5061044393c34f1a1cc0482375038aa166",
+      "bytes": 31641,
+      "sha256": "e13eee8ced916ab45c779c1d037e6ea009344bec1e10e01c91b2312e2d49b5d3",
       "baselineSha256": null
     },
     {
@@ -297,10 +304,24 @@
       "baselineSha256": null
     },
     {
+      "path": "docs/upgrade/d4-native/D404-FIRST-RUN-FAILURE.md",
+      "owner": "root",
+      "bytes": 5164,
+      "sha256": "06b8e40d522c46118dbdf9360df8e4a3c3247e7e29fb649fe26e93198dea87de",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-native/D405-FIRST-RUN-FAILURE.md",
+      "owner": "root",
+      "bytes": 6785,
+      "sha256": "31f0fd89e6bea35b201513ffeba6e04cdbad898ecba994cf0c919e66d40a1bb4",
+      "baselineSha256": null
+    },
+    {
       "path": "docs/upgrade/d4-native/D405-INTEGRATION-REVIEW.md",
       "owner": "root",
-      "bytes": 8072,
-      "sha256": "cd8b586cab35b41ce5d886f4f96284892dd2168b80ce9dcd36521e22612f22b1",
+      "bytes": 8998,
+      "sha256": "060331dd3befaf8229b38abfd1c6942531b5ec5a9c6f4207dd99f014e8d13318",
       "baselineSha256": null
     },
     {
@@ -327,8 +348,8 @@
     {
       "path": "prototypes/d4-03-platforms/version-history.json",
       "owner": "root",
-      "bytes": 18710,
-      "sha256": "19eb808f9e05cd9eac57fb3e9996dd5510cacf1de30361931a52819ccb268bd2",
+      "bytes": 19592,
+      "sha256": "d08382d5ab783fd8cbf413c3b7989360468d23a6a70372b6616e0e90faaad9d6",
       "baselineSha256": "4021bd73736870530fc27cddb5c5b18eb0935289a8ea0992f3a41558c831892d"
     },
     {

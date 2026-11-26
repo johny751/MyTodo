@@ -1,6 +1,6 @@
 # D4-05 Android native integration candidate
 
-Prepared from accepted `9fe8824754af4e8b541f3550e677564183fa7c1f` on 2026-11-26 Asia/Shanghai. Runtime status: **NOT RUN**. All execution is reserved for GitHub Actions. Candidate source is `candidate/`; no local build, emulator, SQLite or project test was executed.
+Prepared from accepted `9fe8824754af4e8b541f3550e677564183fa7c1f` on 2026-11-26 Asia/Shanghai. First cloud source `8779f84848c7df5eff86896abe627fe10ce1cfdb`, run `45737059912` attempt 1, built successfully and executed all 15 cases: **10 passed / 5 failed**. The harness repair is prepared but not yet cloud verified; see `FIRST-RUN-FAILURE.md`. All execution is reserved for GitHub Actions. Candidate source is `candidate/`; no local build, emulator, SQLite or project test was executed.
 
 ## Actual native integration
 
@@ -31,6 +31,8 @@ Prerequisites: Linux Actions runner, JDK17, official Android API35/build-tools35
 
 Build: `bash android/d405/build-android-d405.sh "$VERIFIED_HTML" "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"`.
 
+Before candidate compilation, the builder compiles only formal `android/src` plus generated `R.java` against the official SDK and pinned AAR in an independent class directory, with an empty source path. `formal-source-compile.json`, `formal-java-sources.txt`, `formal-javac-version.txt` and `formal-compile-log.txt` preserve this compile-only check; no formal package is signed or installed. This new check remains pending Actions execution.
+
 Runtime in emulator: `bash tests/d4-05/run-native.sh "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"`.
 
 Static regression in Actions: `node --test tests/d4-05/scope.test.mjs` (two tests including 25 frozen file hashes). Native suite has 15 cases across five phases: main, visual-360, visual-412, process-prepare, process-recover. Phone visual phases use real native touch/key replacement and read-only selection observations; runner records exact CSS width and restores device size/density.
@@ -43,16 +45,16 @@ Runtime outputs: `native-evidence/aggregate.json`, five unaltered phase reports 
 
 | Owner area | Executable CI coverage | Current status |
 |---|---|---|
-| Background timer service | D405-03, D405-05 | Pending Actions |
-| Notification control | D405-04 | Pending Actions |
-| Lock screen | D405-06: actual keyguard/screen-off, private notice | Pending Actions; emulator only |
-| Activity reconstruction | D405-07: actual recreate, shared session, dirty native config | Pending Actions |
-| Process death/recovery | D405-12/13: external run-as kill -9, different process, same durable session | Pending Actions |
-| Actual timer deadline | D405-08: real one-minute countdown; no fake time | Pending Actions |
-| Reminders and snooze | D405-09: actual formal OS alarm + notification action | Pending Actions |
-| Native FeedbackKit | D405-02/10: native entry and actual AAR editor touch/save/storage | Pending Actions |
+| Background timer service | D405-03, D405-05 | First run passed; current rerun pending |
+| Notification control | D405-04 | First run passed; current rerun pending |
+| Lock screen | D405-06: actual keyguard/screen-off, private notice | First run failed; corrected state wait/cleanup pending rerun |
+| Activity reconstruction | D405-07: actual recreate, shared session, dirty native config | First run failed; lock/focus correction pending rerun |
+| Process death/recovery | D405-12/13: external run-as kill -9, different process, same durable session | First run passed; current rerun pending |
+| Actual timer deadline | D405-08: real one-minute countdown; no fake time | First run passed; current rerun pending |
+| Reminders and snooze | D405-09: actual formal OS alarm + notification action | First run passed; current rerun pending |
+| Native FeedbackKit | D405-02/10: native entry and actual AAR editor touch/save/storage | Entry passed; editor failed; lock/focus correction pending rerun |
 | Original interactions | Original 58 + original browser suites remain independent | Must rerun current candidate |
-| Work-note visual trace | D405-11 plus actual edit/save/detail at 360/412; read-only selection/focus + screenshot | Does not replace desktop browser visual regression |
+| Work-note visual trace | D405-11 plus actual edit/save/detail at 360/412; read-only selection/focus + screenshot | Trace passed; both real edit widths failed under lockscreen; rerun pending |
 | Stable signing | Review plan only | Explicit approval pending |
 | Old-version overwrite/data | Review plan only | Explicit approval pending |
 

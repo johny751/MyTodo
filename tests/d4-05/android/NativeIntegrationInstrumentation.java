@@ -35,6 +35,7 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
         String phase = arguments.getString("phase", "main");
         try {
             if (!"local.gxtodo.d405candidate".equals(target.getPackageName())) throw new AssertionError("synthetic package identity required");
+            wakeAndUnlock();
             if ("process-prepare".equals(phase)) prepareDeath();
             else if ("process-recover".equals(phase)) recoverDeath();
             else if (phase.startsWith("visual-")) visualCase(Integer.parseInt(phase.substring(7)));
@@ -59,7 +60,13 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
     }
     void recordFailure(String name, Throwable error) {
         try { StringWriter stack = new StringWriter(); error.printStackTrace(new PrintWriter(stack));
-            cases.put(new JSONObject().put("name", name).put("passed", false).put("error", error.toString()).put("stack", stack.toString()));
+            JSONObject failure=new JSONObject().put("name", name).put("passed", false).put("error", error.toString()).put("stack", stack.toString());
+            cases.put(failure);
+            String prefix="failure-"+arguments.getString("phase","main")+"-"+name.replaceAll("[^A-Za-z0-9_-]","_");
+            try { failure.put("uiState",uiState(current));
+                write(new File(evidence,prefix+"-window.txt"),shell("dumpsys window"));
+                write(new File(evidence,prefix+"-power.txt"),shell("dumpsys power"));
+            } catch(Exception diagnosticError) { failure.put("diagnosticError",diagnosticError.toString()); }
         } catch (Exception ignored) {}
     }
     static void check(boolean value, String message) { if (!value) throw new AssertionError(message); }
@@ -84,10 +91,37 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
         command("reset",new JSONObject());
         return command("configure",new JSONObject().put("mode",mode).put("durationMinutes",minutes).put("breakMinutes",1).put("taskId",""));
     }
-    Activity launch(Class<?> cls) {
-        current = startActivitySync(new Intent(target, cls).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)); waitForIdleSync(); return current;
+    boolean interactive() { return ((PowerManager)target.getSystemService(Context.POWER_SERVICE)).isInteractive(); }
+    boolean keyguardLocked() { return ((KeyguardManager)target.getSystemService(Context.KEYGUARD_SERVICE)).isKeyguardLocked(); }
+    JSONObject uiState(Activity activity) throws Exception {
+        boolean[] state=new boolean[3];runOnMainSync(()->{if(activity!=null){state[0]=activity.hasWindowFocus();state[1]=activity.getWindow().getDecorView().isShown();state[2]=activity.isDestroyed();}});
+        return new JSONObject().put("interactive",interactive()).put("keyguardLocked",keyguardLocked())
+            .put("activity",activity==null?JSONObject.NULL:activity.getClass().getName()).put("hasWindowFocus",state[0]).put("decorShown",state[1]).put("destroyed",state[2]);
     }
-    void foreground() { launch(D405Activity.class); }
+    void wakeAndUnlock() throws Exception {
+        shell("input keyevent 224");until("screen interactive after wake",15000,this::interactive);
+        long end=SystemClock.elapsedRealtime()+15000,unlockedSince=0;
+        shell("wm dismiss-keyguard");
+        while(SystemClock.elapsedRealtime()<end){
+            if(interactive()&&!keyguardLocked()){
+                if(unlockedSince==0)unlockedSince=SystemClock.elapsedRealtime();
+                if(SystemClock.elapsedRealtime()-unlockedSince>=1000)return;
+            }else{unlockedSince=0;shell("wm dismiss-keyguard");}
+            SystemClock.sleep(100);
+        }
+        throw new AssertionError("timeout: observed stable unlocked screen");
+    }
+    void awaitForeground(Activity activity) throws Exception {
+        until("visible focused Activity "+activity.getClass().getSimpleName(),15000,()->{
+            JSONObject observed=uiState(activity);return observed.getBoolean("interactive")&&!observed.getBoolean("keyguardLocked")
+                &&observed.getBoolean("hasWindowFocus")&&observed.getBoolean("decorShown")&&!observed.getBoolean("destroyed");
+        });
+    }
+    Activity launch(Class<?> cls) throws Exception {
+        current = startActivitySync(new Intent(target, cls).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        waitForIdleSync();awaitForeground(current);return current;
+    }
+    void foreground() throws Exception { launch(D405Activity.class); }
     StatusBarNotification notice(int id) {
         for (StatusBarNotification n : ((NotificationManager)target.getSystemService(Context.NOTIFICATION_SERVICE)).getActiveNotifications()) if(n.getId()==id) return n;
         return null;
@@ -148,21 +182,29 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
             check(notice(8501)!=null,"foreground notice remains");foreground();return new JSONObject().put("before",before).put("after",after);
         });
         test("D405-06-lockscreen-keeps-private-timer-notification",()->{
-            JSONObject before=state();shell("input keyevent 223");SystemClock.sleep(1800);
-            boolean interactive=((PowerManager)target.getSystemService(Context.POWER_SERVICE)).isInteractive();
-            boolean locked=((KeyguardManager)target.getSystemService(Context.KEYGUARD_SERVICE)).isKeyguardLocked();
-            try{check(!interactive,"device screen is off");check(locked,"keyguard is locked");check(notice(8501)!=null,"lockscreen timer notice exists");
+            JSONObject before=state(),observed=new JSONObject();Throwable primaryFailure=null;long sleepStarted=SystemClock.elapsedRealtime();
+            try{shell("input keyevent 223");
+                until("screen off and keyguard locked",15000,()->!interactive()&&keyguardLocked());
+                boolean interactive=interactive(),locked=keyguardLocked();
+                check(!interactive,"device screen is off");check(locked,"keyguard is locked");check(notice(8501)!=null,"lockscreen timer notice exists");
                 check(notice(8501).getNotification().visibility==Notification.VISIBILITY_PRIVATE,"private lockscreen content");
                 JSONObject after=state();check(after.getLong("elapsedMillis")>before.getLong("elapsedMillis"),"time advanced locked");
-                shell("input keyevent 224");SystemClock.sleep(300);shot("native-lockscreen");return new JSONObject().put("interactive",interactive).put("keyguardLocked",locked).put("sessionId",after.getString("sessionId"));
-            }finally{shell("input keyevent 224");shell("wm dismiss-keyguard");foreground();}
+                observed.put("interactive",interactive).put("keyguardLocked",locked).put("lockEntryWaitMs",SystemClock.elapsedRealtime()-sleepStarted).put("sessionId",after.getString("sessionId"));
+                shell("input keyevent 224");until("awake lockscreen",15000,()->interactive()&&keyguardLocked());
+                shot("native-lockscreen");return observed;
+            }catch(Exception|AssertionError error){primaryFailure=error;
+                try{write(new File(evidence,"lockscreen-before-cleanup-state.json"),uiState(current).toString(2));
+                    write(new File(evidence,"lockscreen-before-cleanup-window.txt"),shell("dumpsys window"));}
+                catch(Exception diagnosticError){error.addSuppressed(diagnosticError);}throw error;}
+            finally{try{wakeAndUnlock();foreground();observed.put("afterCleanup",uiState(current));}
+                catch(Exception|AssertionError cleanupError){if(primaryFailure!=null)primaryFailure.addSuppressed(cleanupError);else throw cleanupError;}}
         });
         test("D405-07-activity-recreation-preserves-timer-and-draft",()->{
             Activity nativePage=launch(NativeTimerActivity.class);until("native timer configured",8000,()->{TextView v=nativePage.findViewById(40301);return v!=null&&!v.getText().toString().contains("读取");});
             runOnMainSync(()->((EditText)nativePage.findViewById(40312)).setText("37"));
             JSONObject before=state();ActivityMonitor monitor=addMonitor(NativeTimerActivity.class.getName(),null,false);
             runOnMainSync(nativePage::recreate);Activity restored=waitForMonitorWithTimeout(monitor,10000);removeMonitor(monitor);check(restored!=null,"recreated Activity");current=restored;
-            waitForIdleSync();check("37".equals(((EditText)restored.findViewById(40312)).getText().toString()),"dirty config draft restored");
+            waitForIdleSync();awaitForeground(restored);check("37".equals(((EditText)restored.findViewById(40312)).getText().toString()),"dirty config draft restored");
             check(state().getString("sessionId").equals(before.getString("sessionId")),"recreation keeps session");shot("native-activity-recreated");
             runOnMainSync(restored::finish);foreground();return new JSONObject().put("sessionId",before.getString("sessionId")).put("draftMinutes",37);
         });
@@ -194,7 +236,8 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
         });
         test("D405-10-native-feedbackkit-real-editor-save",()->{
             foreground();ActivityMonitor monitor=addMonitor("com.androidshared.feedback.FeedbackActivity",null,false);
-            runOnMainSync(()->FeedbackKit.newIdea(current,"D405 CI"));Activity feedback=waitForMonitorWithTimeout(monitor,10000);removeMonitor(monitor);check(feedback!=null,"real AAR Activity");
+            runOnMainSync(()->FeedbackKit.newIdea(current,"D405 CI"));Activity feedback=waitForMonitorWithTimeout(monitor,10000);removeMonitor(monitor);check(feedback!=null,"real AAR Activity");current=feedback;
+            awaitForeground(feedback);
             until("native feedback editor",10000,()->find(feedback.getWindow().getDecorView(),EditText.class,null)!=null);
             View editor=find(feedback.getWindow().getDecorView(),EditText.class,null);tap(editor);sendStringSync("D405_NATIVE_FEEDBACK_"+BuildInfo.RUN_ID);waitForIdleSync();
             View save=find(feedback.getWindow().getDecorView(),TextView.class,"保存意见");check(save!=null,"real save control");
@@ -204,6 +247,7 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
             shot("native-feedback-saved");runOnMainSync(feedback::finish);foreground();return new JSONObject().put("aarVersion",FeedbackKit.VERSION).put("storedBody","D405_NATIVE_FEEDBACK_"+BuildInfo.RUN_ID);
         });
         test("D405-11-accepted-work-page-selection-readonly-trace",()->{
+            foreground();
             D405Activity app=(D405Activity)current;until("web restored",15000,()->"true".equals(js(app.previewWebView(),"!!window.D405SelectionTrace")));
             js(app.previewWebView(),"D4Prototype.navigate('work-items')");waitForIdleSync();shot("native-work-page");
             return new JSONObject().put("readOnlyTrace",new JSONTokener(js(app.previewWebView(),"D405SelectionTrace()" )).nextValue());
@@ -278,6 +322,7 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
         if(visible[0]){sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_BACK));sendKeySync(new KeyEvent(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_BACK));waitForIdleSync();SystemClock.sleep(200);}
     }
     void webTap(WebView web,String selector)throws Exception {
+        awaitForeground(current);
         js(web,"document.querySelector("+JSONObject.quote(selector)+").scrollIntoView({block:'center',inline:'nearest'})");SystemClock.sleep(200);
         JSONObject p=new JSONObject(js(web,"(function(){var e=document.querySelector("+JSONObject.quote(selector)+"),r=e.getBoundingClientRect(),v=visualViewport,x=Math.max(0,r.left)+Math.min(r.width,innerWidth-Math.max(0,r.left))/2,y=Math.max(0,r.top)+Math.min(r.height,v.height-Math.max(0,r.top))/2,h=document.elementFromPoint(x,y);return {x:x,y:y,width:innerWidth,scale:v.scale,offsetX:v.offsetLeft,offsetY:v.offsetTop,hit:!!h&&(h===e||e.contains(h))};})()"));
         check(p.getBoolean("hit")&&Math.abs(p.getDouble("scale")-1)<.001&&Math.abs(p.getDouble("offsetX"))<.5&&Math.abs(p.getDouble("offsetY"))<.5,"verified native touch target");
