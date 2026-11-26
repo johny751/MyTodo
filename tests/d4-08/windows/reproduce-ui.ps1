@@ -103,6 +103,11 @@ function Press-Key([long]$Handle, [int]$Key, [bool]$Control = $false, [bool]$Shi
     [D408.UiDriver]::Chord([uint16]$Key, $Control, $Shift)
     Start-Sleep -Milliseconds 250
 }
+function Move-CaretToEnd([long]$Handle) {
+    Focus-Control $Handle
+    $length = [D408.UiDriver]::Text($Handle).Length
+    [void][D408.UiDriver]::Message($Handle,0x00B1,$length,$length)
+}
 function Click-Control([long]$Handle) {
     [D408.UiDriver]::Click($Handle)
     Start-Sleep -Milliseconds 300
@@ -122,7 +127,9 @@ function All-Tasks($Tasks) {
 }
 function Task-ById([string]$Id) {
     $state = Read-Business
-    return ,@(All-Tasks $state.tasks | Where-Object { $_.id -ceq $Id } | Select-Object -First 1)
+    $matches = @(All-Tasks $state.tasks | Where-Object { $_.id -ceq $Id })
+    if ($matches.Count -ne 1) { throw "Readback expected one task '$Id', found $($matches.Count)." }
+    return $matches[0]
 }
 function Capture([string]$Name, [long]$Handle) {
     $rect = [D408.UiDriver+RECT]::new()
@@ -154,7 +161,7 @@ function Scenario([string]$Id, [string]$Expected, [scriptblock]$Body) {
     try {
         $observed = & $Body
         $record = [ordered]@{id=$Id;expected=$Expected;executed=$true;passed=[bool]$observed.passed;
-            failureKind=$(if($observed.passed){$null}else{'product-behavior'});observed=$observed;error=$null;
+            failureKind=$(if($observed.passed){$null}elseif($Id -eq 'W408-ENTER-CONTROL'){'harness-or-environment'}else{'product-behavior'});observed=$observed;error=$null;
             startedAtUtc=$begin.ToString('o');endedAtUtc=[DateTime]::UtcNow.ToString('o')}
     } catch {
         $record = [ordered]@{id=$Id;expected=$Expected;executed=$true;passed=$false;failureKind='harness-or-environment';
@@ -233,20 +240,23 @@ try {
     $parent=@(All-Tasks $initial.tasks|Where-Object {$_.title -ceq 'D408 seed parent'})
     if($parent.Count -ne 1){throw 'Positive control failed: explicit Save did not persist exactly one seed parent.'}
     $parentId=$parent[0].id
+    $script:keyboardPositiveControl=$false
     Scenario 'W408-ENTER-CONTROL' 'Plain Enter inserts a newline without saving; explicit native Save remains available' {
         [D408.UiDriver]::SetText($title.Handle,'D408 plain enter')
-        [void][D408.UiDriver]::Message($title.Handle,0x00B1,-1,-1)
+        Move-CaretToEnd $title.Handle
         Press-Key $title.Handle 13
         $text=[D408.UiDriver]::Text($title.Handle)
-        $saved=Task-ById $parentId
+        $saved=@(Task-ById $parentId)
         $null=Snapshot 'plain-enter'
-        return @{passed=($text -ceq "D408 plain enter`r`n" -and $saved.Count -eq 1 -and $saved[0].title -ceq 'D408 seed parent');input=$text;persisted=$saved}
+        $script:keyboardPositiveControl=($text -ceq "D408 plain enter`r`n" -and $saved.Count -eq 1 -and $saved[0].title -ceq 'D408 seed parent')
+        return @{passed=$script:keyboardPositiveControl;input=$text;persisted=$saved}
     }
     Scenario 'W408-CTRLENTER-TITLE' 'Ctrl+Enter saves the edited task title immediately without inserting newline' {
+        if(-not $script:keyboardPositiveControl){throw 'Keyboard positive control failed; this scenario cannot classify product behavior.'}
         [D408.UiDriver]::SetText($title.Handle,'D408 title shortcut saved')
-        [void][D408.UiDriver]::Message($title.Handle,0x00B1,-1,-1)
+        Move-CaretToEnd $title.Handle
         Press-Key $title.Handle 13 $true
-        $saved=Task-ById $parentId
+        $saved=@(Task-ById $parentId)
         $text=[D408.UiDriver]::Text($title.Handle)
         $null=Snapshot 'title-ctrl-enter';Capture 'title-ctrl-enter' $main.Handle
         return @{passed=($saved.Count -eq 1 -and $saved[0].title -ceq 'D408 title shortcut saved' -and $text -ceq 'D408 title shortcut saved');input=$text;persisted=$saved}
@@ -254,11 +264,12 @@ try {
     [D408.UiDriver]::SetText($title.Handle,'D408 stable parent')
     Click-Control (Find-Control 555 'Button').Handle
     Scenario 'W408-CTRLENTER-NOTES' 'Ctrl+Enter from task notes saves the task; ordinary Enter/Shift+Enter remain multiline' {
+        if(-not $script:keyboardPositiveControl){throw 'Keyboard positive control failed; this scenario cannot classify product behavior.'}
         $notes=Find-Control 608 'Edit'
         [D408.UiDriver]::SetText($notes.Handle,'D408 notes shortcut saved')
-        [void][D408.UiDriver]::Message($notes.Handle,0x00B1,-1,-1)
+        Move-CaretToEnd $notes.Handle
         Press-Key $notes.Handle 13 $true
-        $saved=Task-ById $parentId
+        $saved=@(Task-ById $parentId)
         $text=[D408.UiDriver]::Text($notes.Handle)
         $null=Snapshot 'notes-ctrl-enter';Capture 'notes-ctrl-enter' $main.Handle
         return @{passed=($saved.Count -eq 1 -and $saved[0].notes -ceq 'D408 notes shortcut saved' -and $text -ceq 'D408 notes shortcut saved');input=$text;persisted=$saved}
@@ -266,11 +277,12 @@ try {
     [D408.UiDriver]::SetText((Find-Control 608 'Edit').Handle,'D408 stable notes')
     Click-Control (Find-Control 555 'Button').Handle
     Scenario 'W408-CTRLENTER-CHILD' 'Ctrl+Enter in child input creates exactly one child and clears the draft while keeping the parent editor open' {
+        if(-not $script:keyboardPositiveControl){throw 'Keyboard positive control failed; this scenario cannot classify product behavior.'}
         $quick=Find-Control 571 'Edit'
         [D408.UiDriver]::SetText($quick.Handle,'D408 shortcut child')
-        [void][D408.UiDriver]::Message($quick.Handle,0x00B1,-1,-1)
+        Move-CaretToEnd $quick.Handle
         Press-Key $quick.Handle 13 $true
-        $saved=Task-ById $parentId
+        $saved=@(Task-ById $parentId)
         $children=@($saved[0].subtasks|Where-Object {$_.title -ceq 'D408 shortcut child'})
         $text=[D408.UiDriver]::Text($quick.Handle)
         $null=Snapshot 'child-ctrl-enter';Capture 'child-ctrl-enter' $main.Handle
@@ -288,7 +300,7 @@ try {
         if($dropped -eq 0){return @{passed=$false;reason='Typing did not expose a suggestion popup';dropped=$dropped;catalogCount=$count;input=[D408.UiDriver]::Text($edit)}}
         Press-Key $edit 40
         Press-Key $edit 13
-        $text=[D408.UiDriver]::Text($combo.Handle);$saved=Task-ById $parentId
+        $text=[D408.UiDriver]::Text($combo.Handle);$saved=@(Task-ById $parentId)
         return @{passed=($count -gt 0 -and $text -ceq 'D408 Alpha Project' -and $saved[0].project -ceq '');selected=$text;persisted=$saved;candidateCount=$count}
     }
     # Clear only this synthetic editor's unfinished input before navigation autosave.
