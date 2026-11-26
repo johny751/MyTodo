@@ -150,7 +150,7 @@ jobs:
           --input "$RUNNER_TEMP/d408-baseline-android-input.json"
           --probe "$RUNNER_TEMP/d408-probe-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT/d408-probe.apk"
           --suite baseline-gaps
-          --out "$RUNNER_TEMP/d408-baseline-android-results"
+          --out "$RUNNER_TEMP/d408-baseline-evidence-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
       - name: Record the actual test step outcome
         if: always()
         run: echo '${{ steps.gap.outcome }}' > "$RUNNER_TEMP/d408-baseline-android-step-outcome.txt"
@@ -159,7 +159,7 @@ jobs:
         with:
           name: d408-baseline-android-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            ${{ runner.temp }}/d408-baseline-android-results/
+            ${{ runner.temp }}/d408-baseline-evidence-*/
             ${{ runner.temp }}/d408-baseline-android-input.json
             ${{ runner.temp }}/d408-baseline-android-step-outcome.txt
             ${{ runner.temp }}/d408-probe-*/*.apk
