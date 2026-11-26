@@ -37,6 +37,7 @@ public final class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (NativeIntegration.enabled(this)) { NativeIntegration.adapter(this).open(this); return; }
         pendingTaskId = getIntent().getStringExtra("taskId");
         pendingToolAction = getIntent().getStringExtra("toolAction");
         try { accounts=AccountStore.get(this); } catch(Exception e){ android.widget.TextView error=new android.widget.TextView(this);error.setText("无法读取账号："+e.getMessage());setContentView(error);return;}
@@ -188,7 +189,7 @@ public final class MainActivity extends Activity {
             web.evaluateJavascript("document.dispatchEvent(new CustomEvent('gx-open-task',{detail:" + JSONObject.quote(task) + "}))", null);
         }
     }
-    @Override protected void onResume(){super.onResume();nativeForeground=true;ReminderScheduler.refresh(this);if(accounts!=null){AndroidCompanionService.refresh(this);android.content.SharedPreferences prefs=getSharedPreferences("android-tools",MODE_PRIVATE);if(android.os.Build.VERSION.SDK_INT>=33&&prefs.getBoolean("statusEnabled",true)&&!prefs.getBoolean("notificationAsked",false)&&checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED){prefs.edit().putBoolean("notificationAsked",true).apply();requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS},43);}}if(web!=null){web.onResume();web.evaluateJavascript("document.dispatchEvent(new Event('gx-app-foreground'));document.dispatchEvent(new Event('gx-reminder-status'))",null);dispatchPendingTools();}}
+    @Override protected void onResume(){super.onResume();if(NativeIntegration.enabled(this))return;nativeForeground=true;ReminderScheduler.refresh(this);if(accounts!=null){AndroidCompanionService.refresh(this);android.content.SharedPreferences prefs=getSharedPreferences("android-tools",MODE_PRIVATE);if(android.os.Build.VERSION.SDK_INT>=33&&prefs.getBoolean("statusEnabled",true)&&!prefs.getBoolean("notificationAsked",false)&&checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED){prefs.edit().putBoolean("notificationAsked",true).apply();requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS},43);}}if(web!=null){web.onResume();web.evaluateJavascript("document.dispatchEvent(new Event('gx-app-foreground'));document.dispatchEvent(new Event('gx-reminder-status'))",null);dispatchPendingTools();}}
     @Override protected void onPause(){nativeForeground=false;if(web!=null){web.evaluateJavascript("document.dispatchEvent(new Event('gx-app-background'))",null);web.onPause();}super.onPause();}
     @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] results){super.onRequestPermissionsResult(request,permissions,results);ReminderScheduler.refresh(this);AndroidCompanionService.refresh(this);if(web!=null)web.evaluateJavascript("document.dispatchEvent(new Event('gx-reminder-status'))",null);}
     @Override public void onBackPressed() {

@@ -1,0 +1,9 @@
+{
+  "acceptedSource": "9fe8824754af4e8b541f3550e677564183fa7c1f",
+  "original": ".github/workflows/d4-03-c0-regression.yml",
+  "candidate": ".github/workflows/d4-native-c0.yml",
+  "change": "name, candidate branch and trigger paths only",
+  "permissionsAndJobsExact": true,
+  "bodySha256": "da3437706877978756cbbe22bb42eacd0ebf51147db834f0e998b14aedbbb85b",
+  "runtimeStatus": "PENDING new Actions execution"
+}

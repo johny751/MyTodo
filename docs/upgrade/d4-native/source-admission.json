@@ -1,0 +1,349 @@
+{
+  "acceptedSource": "9fe8824754af4e8b541f3550e677564183fa7c1f",
+  "reviewScope": "Native candidate only; all existing schema/models/protocol and accepted tests frozen except additive browser runner and version identity.",
+  "files": [
+    {
+      "path": "docs/d4-04-model-admission-proposal.md",
+      "owner": "windows",
+      "bytes": 4103,
+      "sha256": "526a8ae170bd84335af4cd430d0735786fba3a781b41b8d2cca421d14cb46f68",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/d4-04-native-integration.md",
+      "owner": "windows",
+      "bytes": 8394,
+      "sha256": "2e9677ac3210c18ce01b6a3beb2acb0ef12a00cc50fdf3e411a53670135b8049",
+      "baselineSha256": null
+    },
+    {
+      "path": "scripts/build-windows.mjs",
+      "owner": "windows",
+      "bytes": 4327,
+      "sha256": "67de9e41b165665958794ee9a32fafdff548f24a15bfa9ac0010572c612a91e6",
+      "baselineSha256": "a9199dc51822c2a12d6823f23417286c82525c36243d94d00130a94044d93693"
+    },
+    {
+      "path": "scripts/d4-04-native-regression.mjs",
+      "owner": "windows",
+      "bytes": 10265,
+      "sha256": "2ac6a536b5a49420d7c29eea6953d143d7a9e1080dab6cdd153103ddaf9872cd",
+      "baselineSha256": null
+    },
+    {
+      "path": "windows/candidate-guard.h",
+      "owner": "windows",
+      "bytes": 5452,
+      "sha256": "fb2bae746acd8f2a472c32cc6b0ad812666a6f1b736a55a514eb2888f088acc5",
+      "baselineSha256": null
+    },
+    {
+      "path": "windows/dialogs.c",
+      "owner": "windows",
+      "bytes": 19710,
+      "sha256": "39e3950676db243c7327f92df4976cac99f22325f75bf2b2b1766e7047fd0414",
+      "baselineSha256": "3bd64e0236b93f2653c61541f7609173fd8ef254e3217ad0c595d0fb5b117603"
+    },
+    {
+      "path": "windows/feedback.c",
+      "owner": "windows",
+      "bytes": 25099,
+      "sha256": "15e1548e7c3b44ba4c834bd4ca262b8bee59059be46f97dd67791dfcabf69d66",
+      "baselineSha256": "f912104f48d1ecf8dbbe065a9cf2e5fa376fb6db2da1df280014506e5b464c97"
+    },
+    {
+      "path": "windows/gui.c",
+      "owner": "windows",
+      "bytes": 54575,
+      "sha256": "7e9819d3c86f5e33b656ab33729bd4d0e9178113ca97b5ba2abd3061e416bcc5",
+      "baselineSha256": "8cbe341d9dfc6fc7a2b88029704888ab00a656a77b35c064589eb21110e3dd30"
+    },
+    {
+      "path": "windows/main.c",
+      "owner": "windows",
+      "bytes": 3247,
+      "sha256": "85b7efae30d82a5eecf7250f1f9cb16e46bdc591228393fd1052cd740a9bb1b8",
+      "baselineSha256": "b4dd54756f2b05d5d8c04f978d452e2b831dacd23ded72450a811ec72d2aca77"
+    },
+    {
+      "path": "windows/ui.h",
+      "owner": "windows",
+      "bytes": 6262,
+      "sha256": "9949afeb5d09a46b5f39fcef952237fec78ec62b44980764ce8e061e43cb0816",
+      "baselineSha256": "84ff0f7b46793e010a0c1174c75a3eb840342c078b000b727492cdfc05276864"
+    },
+    {
+      "path": "windows/workspace-test.c",
+      "owner": "windows",
+      "bytes": 18202,
+      "sha256": "cb7d74035e436c75445670239522478307a3e35e3e1b906c359f68ef0d5cdddb",
+      "baselineSha256": null
+    },
+    {
+      "path": "windows/workspace.c",
+      "owner": "windows",
+      "bytes": 24579,
+      "sha256": "a97f271a372f81822ae578a95cb3b8c009d65e538e287c9b92f2db1205e33efd",
+      "baselineSha256": null
+    },
+    {
+      "path": "windows/workspace.h",
+      "owner": "windows",
+      "bytes": 1016,
+      "sha256": "885dbdf7730741c942bf7a83ee083a479ffe03ccbdb41c74b4a4c10d94c562dd",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-03/d4-06-web-integration.md",
+      "owner": "web",
+      "bytes": 7442,
+      "sha256": "b971109129905737c7cc4db93583d0317d73e7f6e8d27e1c300985e08ef542d1",
+      "baselineSha256": null
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "owner": "web",
+      "bytes": 64371,
+      "sha256": "05a13f2db3245df8f4e28c9aa41ecda3ada3b026d41224d019c221d7f2ff8d0b",
+      "baselineSha256": "96ad5eefd7c4f828a02504f7083a68eb88da99314fbe967e8ca12816daf6645c"
+    },
+    {
+      "path": "prototypes/d4-01/styles.css",
+      "owner": "web",
+      "bytes": 34793,
+      "sha256": "1d3f5575c2481e033abef9184db3ab9d14f4bd145a97ec1d8ab85e8ca81be001",
+      "baselineSha256": "fab4e4eac90519f68e2de705136e4e76c0390c2617a2ac1f09ff27cc158d404d"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "owner": "web",
+      "bytes": 80477,
+      "sha256": "bfab67e4edbbfbe3ea5ec8700ff0e55d4286ad82ab7c793bd1baedc5e2137a92",
+      "baselineSha256": "f8dd901b4f60ad9a05bce44b561886599ad49034ab620e2bdf5cf1ce67641c06"
+    },
+    {
+      "path": "prototypes/d4-06/v2-service.mjs",
+      "owner": "web",
+      "bytes": 8481,
+      "sha256": "0121531ebf365f7865796fd041d00e8768b56c1bd7d2f29ad1a1f68644e1ebd8",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-ui/run-browser.mjs",
+      "owner": "web",
+      "bytes": 34157,
+      "sha256": "f3f0925f3f8431bcbbb3db766c2fe1f99e1209db5d0bbfcee72de33f297394be",
+      "baselineSha256": "514150094ae7d42104f2c7f0d0764364b2e1859938c1e984679a1e80d2e16b7b"
+    },
+    {
+      "path": "tests/d4-ui/web-integration-cases.mjs",
+      "owner": "web",
+      "bytes": 5120,
+      "sha256": "2a22a16934885f63f715c8a8d88e30d866b95e6aabed3618c56a68f34b8d7656",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-ui/web-service.test.mjs",
+      "owner": "web",
+      "bytes": 7214,
+      "sha256": "5358757f40213286632def7ca65b003e2b3be86f75520c0b16e6ea3bfcb85cb9",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/AndroidManifest.xml",
+      "owner": "android",
+      "bytes": 2165,
+      "sha256": "ac331c19a5ed4c1e2e6fb46b21113d393b80762ef675972507524194e5dee4c4",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/build-android-d405.sh",
+      "owner": "android",
+      "bytes": 5545,
+      "sha256": "44ec204539538cf63258cc6df0fbdfd49eee1e55ef2e10296dcdbd2d85fbf629",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/native-integration.js",
+      "owner": "android",
+      "bytes": 4620,
+      "sha256": "a9c576465a903677031d10006e4051ba6ed48275c5e2291879c87e8d595b97a6",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/prepare.mjs",
+      "owner": "android",
+      "bytes": 5618,
+      "sha256": "0f303580719bccc661b4b3ead2057a20f8a1358432382c52e955f0d50a678728",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/src/local/gxtodo/replica/D405Activity.java",
+      "owner": "android",
+      "bytes": 21605,
+      "sha256": "44bcd1bfcfd4699f2e67f3d172c037ce21bdff9f2b9690de87ac07b5ebeb07e6",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/src/local/gxtodo/replica/D405Bridge.java",
+      "owner": "android",
+      "bytes": 4778,
+      "sha256": "301592ac99bce0e03d3ba9666c50ab1abcd75427370f39bf657308fdb8d2ee2a",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/src/local/gxtodo/replica/D405Integration.java",
+      "owner": "android",
+      "bytes": 2957,
+      "sha256": "2f5f85aef6c10c966f47c3ac1496e9d07cdf00aa8351cb192f74219f83972136",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/d405/src/local/gxtodo/replica/D405TimerCompanion.java",
+      "owner": "android",
+      "bytes": 10187,
+      "sha256": "3f86f47f519dd5647d50b5083e4063b24cbe263ec22cb46240907422ad353cd4",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AndroidCompanionService.java",
+      "owner": "android",
+      "bytes": 21059,
+      "sha256": "06e83ce7fefcf0fde5e5e97c26fa64546ed93adbf36abf8c4a24af8daf3f54c2",
+      "baselineSha256": "76e91bf2ce169edbd7cea5f185fd4f75b9bfba47abaaf046dcbce85c8c0cb64e"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/CompanionAlarmReceiver.java",
+      "owner": "android",
+      "bytes": 553,
+      "sha256": "33833a4d8633fbdb2057273cd56740e270ea077d37e05778450331d949b78638",
+      "baselineSha256": "3174aee8e5dbfdbac1ecbbb04aebfcf87d70b7a729c7908d168a6b9f117299db"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/MainActivity.java",
+      "owner": "android",
+      "bytes": 16496,
+      "sha256": "729aa46afcc759792d3f1cc9fa16b1701b889b7afb8e4ce95b4aca2735083a9e",
+      "baselineSha256": "6f7acc6c8c2bdd89e079d05d2845747dc7b972883b9ed4749443d534992922e0"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/NativeIntegration.java",
+      "owner": "android",
+      "bytes": 1473,
+      "sha256": "78473a31d716f89793572b38cfcbb5503db16ecf5a64589b07d55c8ed0e3631c",
+      "baselineSha256": null
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReminderReceiver.java",
+      "owner": "android",
+      "bytes": 1288,
+      "sha256": "eb6dfb04ca1c8c189350ddc8b151fc876bd84afe894b26e6ee347577e29a4f5b",
+      "baselineSha256": "d3256ee58c594de7a0e258e98a73b2e5c2324ff15bf224573f40058e8126c285"
+    },
+    {
+      "path": "tests/d4-05/android/AndroidManifest.xml",
+      "owner": "android",
+      "bytes": 475,
+      "sha256": "7212909ec771bb7441a890cf106aade6befeea5fc18991f0aeff2e5afc2dcfab",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-05/android/NativeIntegrationInstrumentation.java",
+      "owner": "android",
+      "bytes": 28221,
+      "sha256": "006de83b2e55a8112cc5e5527c283a5061044393c34f1a1cc0482375038aa166",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-05/frozen-baseline.json",
+      "owner": "android",
+      "bytes": 4625,
+      "sha256": "d9fcee6e05f9888352d89fa69edc07fa9b7136a17a22573b46e33a82aa776d2b",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-05/run-native.sh",
+      "owner": "android",
+      "bytes": 5402,
+      "sha256": "93ae8ff276a1961ef131be19bbad47f27c24f02adaa281b6df8d7e13faddd0ec",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-05/scope.test.mjs",
+      "owner": "android",
+      "bytes": 1566,
+      "sha256": "d887712f169aaf042f682a6d7e60f1013383b38f0e3d3cd007075cfe2ce14dea",
+      "baselineSha256": null
+    },
+    {
+      "path": ".github/workflows/d4-native-c0.yml",
+      "owner": "root",
+      "bytes": 11717,
+      "sha256": "2a6b153c7b64240fcf55bc7b93d3aa93afe69676a2d3a5f0795a81592b311027",
+      "baselineSha256": null
+    },
+    {
+      "path": ".github/workflows/d4-native-candidate.yml",
+      "owner": "root",
+      "bytes": 10428,
+      "sha256": "d30de02604835cacdda42b1b218a7021a72eae97378cf16c5ce3ffbe506f26ef",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-native/c0-preservation.json",
+      "owner": "root",
+      "bytes": 411,
+      "sha256": "794099c65e77e3e0a587069e15d800a06185b2933f9fa7252623df2e6ccb3db7",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-native/D405-INTEGRATION-REVIEW.md",
+      "owner": "root",
+      "bytes": 8072,
+      "sha256": "cd8b586cab35b41ce5d886f4f96284892dd2168b80ce9dcd36521e22612f22b1",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-native/README.md",
+      "owner": "root",
+      "bytes": 3895,
+      "sha256": "e33bd04d7858fc6d1f6c03744a396dc02b16873495989c1f8c0ccb0c99e6d875",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-native/SIGNING-UPGRADE-APPROVAL-PLAN.md",
+      "owner": "root",
+      "bytes": 3065,
+      "sha256": "16668ad4492b13277a6b280a2fdde10baeb582fcdd701b662faf94afbd463991",
+      "baselineSha256": null
+    },
+    {
+      "path": "prototypes/d4-03-platforms/prepare.mjs",
+      "owner": "root",
+      "bytes": 6653,
+      "sha256": "4048657c109938b10422307ef1fe30e84c7100e9702a2abb475573222ab32fde",
+      "baselineSha256": "b123b2bb8f75a8bb187d8f763bc4164ea799c565951221f5ed2d993ff2f92f24"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/version-history.json",
+      "owner": "root",
+      "bytes": 18710,
+      "sha256": "19eb808f9e05cd9eac57fb3e9996dd5510cacf1de30361931a52819ccb268bd2",
+      "baselineSha256": "4021bd73736870530fc27cddb5c5b18eb0935289a8ea0992f3a41558c831892d"
+    },
+    {
+      "path": "tests/d4-native/package-windows.mjs",
+      "owner": "root",
+      "bytes": 5953,
+      "sha256": "e3103aaf77b8db0c46a27eb1a93bab8445bd5e683a55e8177946c676f761203c",
+      "baselineSha256": null
+    },
+    {
+      "path": "tests/d4-native/scope.mjs",
+      "owner": "root",
+      "bytes": 4250,
+      "sha256": "79961272bbd851ade40434ed54104da9b7690d727221ab61b9459b2f5e4c9d36",
+      "baselineSha256": null
+    }
+  ]
+}

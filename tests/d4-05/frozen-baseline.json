@@ -1,0 +1,105 @@
+{
+  "sourceSHA": "9fe8824754af4e8b541f3550e677564183fa7c1f",
+  "files": [
+    {
+      "path": "android/AndroidManifest.xml",
+      "sha256": "eb8c26e489e3d541d1aa4b56be08901136de409b6714478f626f06c0c7916508"
+    },
+    {
+      "path": "android/libs/feedback-kit-1.2.0.aar",
+      "sha256": "4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/AccountStore.java",
+      "sha256": "cd1128d50a4a1a5283d41bf7ac5daddac9e974d77304d67da950bf282ff11a20"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FeedbackApplication.java",
+      "sha256": "3e8f3226e3fde6f885c2c3b686f228bf105f8d86a18c398e55219395370b40f6"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/FeedbackToolsActivity.java",
+      "sha256": "7b883b0bb4cecba6760849ab8066ac1a071b726d397b116087306adf0e7a7ad6"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroClock.java",
+      "sha256": "1ad9c070920ae62f2abf707e843ecd315434db1d11018f693747d59f7b42af39"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/PomodoroTimer.java",
+      "sha256": "9b1dbcfa10e6a9b3784e2ab485ef17fa1fc6ba9672b471678f79ad8fde5f66a3"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReminderScheduler.java",
+      "sha256": "8e9ec71e850566c23b54f42233057c803ac12e920b6749fe9be792436f8f4474"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/ReplicaDatabase.java",
+      "sha256": "efac2d464c612506debc2aea04a992352bba6ce8a816d96f6a1f07ee9b614663"
+    },
+    {
+      "path": "android/src/local/gxtodo/replica/SyncStore.java",
+      "sha256": "c73a7cac4c3f48d13cf1b0ef60504c06a4d891963226ddfa9bbf5c65dc80934e"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/AndroidManifest.xml",
+      "sha256": "3217a631862ba05e615528d5bba9bfa5f1a04a8243ee84a667b181763afc2da1"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/res/values/styles.xml",
+      "sha256": "5b9457728a3c62ef7afe6b3b46c1ebe99f313b4e0c9308f9e71f44c11918eaac"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/MainActivity.java",
+      "sha256": "296164ed8c384840e19fc08cb9ce09e6e518ad3ac00a883d089c7e6c55f8bbec"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/NativeTimerActivity.java",
+      "sha256": "e002676d950cb8337c0e71b220edeac5b3dd578e31fab98e3baa1f12f438707c"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/NativeTimerSession.java",
+      "sha256": "856ee49e4ced1e9e910cb75f1a4c1ab0a61dc74e5c6ff9ef8c51a92832862ac6"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/src/local/gxtodo/d403preview/NativeTimerStore.java",
+      "sha256": "9d2d306e4c92628a323e9c705f388709525a60c8712bbe58698d05bcb87859d2"
+    },
+    {
+      "path": "prototypes/d4-03-platforms/android/src/local/gxtodo/replica/PomodoroClock.java",
+      "sha256": "1ad9c070920ae62f2abf707e843ecd315434db1d11018f693747d59f7b42af39"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/AndroidManifest.xml",
+      "sha256": "66c5ee38f92cb5ba071705bbaef8470b6f8630a47ddcf3ff5886051e43e255d2"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/NativeDocumentChooserChecks.java",
+      "sha256": "7f3804f60c9edcd8eb91b534d29c32630a190e011eb6d88b53cdacf9189a1092"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/NativeFlowLifecycleChecks.java",
+      "sha256": "b00c7d4ffa9cdd78669f738e2f32aaa2214b84d506adf0a6a538fa3d18aac175"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/NativeInsetsChecks.java",
+      "sha256": "4e8665d48cf937fec8ac10d62e6e78f0cd3f91492dfbe177f7ba3749b2f7cceb"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/NativeSelectionLifecycleChecks.java",
+      "sha256": "0cf0e322d775871cba74b400c78c2eac2dd0f987eeb70aad118d6a6028feeb94"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/NativeTimerSessionChecks.java",
+      "sha256": "71782bcd5fcc352ad613f05f9e0c250141a2cc424c9167fe1862db085c9e3580"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/NativeWorkLifecycleChecks.java",
+      "sha256": "726e95b830091636f00a023c1de4af7b1392bb9fcb1119086c7e2d8f594932fc"
+    },
+    {
+      "path": "tests/d4-03-platforms/android/local/gxtodo/d403preview/tests/PreviewInstrumentation.java",
+      "sha256": "91f6aae2a5f6a849f8e568dccfad18102a8074228b2a73d5eb67495efaa1eb0b"
+    }
+  ]
+}

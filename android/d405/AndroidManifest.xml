@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.gxtodo.d405candidate" android:versionCode="__VERSION_CODE__" android:versionName="__VERSION_NAME__">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+  <application android:name="local.gxtodo.replica.FeedbackApplication" android:label="MyTodo D4-05 原生集成候选" android:theme="@style/AppTheme" android:allowBackup="false" android:debuggable="true" android:usesCleartextTraffic="false">
+    <activity android:name="local.gxtodo.replica.MainActivity" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity>
+    <activity android:name="local.gxtodo.replica.D405Activity" android:exported="false" android:launchMode="singleTop" android:windowSoftInputMode="adjustResize"/>
+    <activity android:name="local.gxtodo.d403preview.NativeTimerActivity" android:exported="false"/>
+    <activity android:name="local.gxtodo.replica.FeedbackToolsActivity" android:exported="false"/>
+    <service android:name="local.gxtodo.replica.AndroidCompanionService" android:exported="false" android:foregroundServiceType="specialUse">
+      <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="User-started focus timer, pause/resume notification and background completion"/>
+    </service>
+    <receiver android:name="local.gxtodo.replica.CompanionAlarmReceiver" android:exported="false"/>
+    <receiver android:name="local.gxtodo.replica.ReminderReceiver" android:exported="false"/>
+  </application>
+  <queries><intent><action android:name="android.intent.action.OPEN_DOCUMENT"/><category android:name="android.intent.category.OPENABLE"/><data android:mimeType="*/*"/></intent></queries>
+</manifest>

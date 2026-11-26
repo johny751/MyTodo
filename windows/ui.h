@@ -1,6 +1,7 @@
 #ifndef GX_UI_H
 #define GX_UI_H
 #include "native.h"
+#include "workspace.h"
 #include <windowsx.h>
 #include <uxtheme.h>
 #define GX_CACHE 96

@@ -54,3 +54,6 @@
  .work-record-table tbody td.row-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;padding-top:10px;border-top:1px solid #edf1f5}
  .work-record-table .row-actions .button{min-width:44px;min-height:44px;padding:8px 12px}
 }
+
+/* Preserve literal notes/history while wrapping unbroken timestamps and IDs. */
+.work-raw-text{max-width:100%;min-width:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}.work-note-content{font:inherit;line-height:1.7}

@@ -1,0 +1,240 @@
+name: D4 native integration and preserved UI regression
+on:
+  push:
+    branches: [d4/native-integration-candidate-1]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  domain:
+    if: github.ref == 'refs/heads/d4/native-integration-candidate-1'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Authorized native diff and immutable accepted evidence guard
+        shell: bash
+        run: |
+          node tests/d4-native/scope.mjs
+          node tests/d4-ui/provenance.mjs
+          node --test tests/d4-03-platforms/scope.test.mjs
+      - name: Mature pure domain tests
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-reporter=tap tests/d4-ui/domain.test.mjs tests/d4-03-platforms/native-timer-adapter.test.mjs tests/d4-ui/web-service.test.mjs 2>&1 | tee "$RUNNER_TEMP/d4-domain-${{ matrix.os }}.tap"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d4-domain-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-domain-${{ matrix.os }}.tap
+            ${{ runner.temp }}/d403-source-provenance.json
+            ${{ runner.temp }}/d4-native-scope.json
+            ${{ runner.temp }}/d4-web-v2-*/
+          if-no-files-found: error
+  browser:
+    if: github.ref == 'refs/heads/d4/native-integration-candidate-1'
+    needs: domain
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 20
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build offline Windows and Web demo
+        run: node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Real DOM interactions and responsive screenshots
+        run: node tests/d4-ui/run-browser.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Package verified experience
+        run: node tests/d4-ui/package-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Observe actual packaged Windows launcher in a headed session
+        if: runner.os == 'Windows'
+        env:
+          D4_PREVIEW_CI_INSPECT: '1'
+        run: node tests/d4-ui/run-windows-launcher.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d403-ui-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/mytodo-d4-01-demo.html
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.json
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.md
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.bat
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.cmd
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.txt
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.zip
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/screenshots
+          if-no-files-found: error
+
+  android:
+    if: github.ref == 'refs/heads/d4/native-integration-candidate-1'
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Frozen native clock regression
+        run: bash tests/d4-03-platforms/run-jvm.sh
+      - name: Prepare official compile SDK
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35"'
+      - name: Build independent Android preview and tests
+        run: |
+          node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+          bash prototypes/d4-03-platforms/build-android.sh "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-platform-$GITHUB_RUN_ID"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Native touchscreen and background regression
+        run: bash tests/d4-03-platforms/run-instrumentation.sh "$RUNNER_TEMP/d4-platform-$GITHUB_RUN_ID" "$RUNNER_TEMP/d4-native-evidence-$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d403-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/mytodo-d4-03-isolated-preview.apk
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/mytodo-d4-03-isolated-tests.apk
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/*.json
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/*.txt
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/*.cmd
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/mytodo-d4-03-demo.html
+            ${{ runner.temp }}/d4-native-evidence-${{ github.run_id }}/
+            ${{ runner.temp }}/d4-jvm-*/
+            ${{ runner.temp }}/d403-emulator-boot.log
+            ${{ runner.temp }}/d403-emulator-environment.log
+            ${{ runner.temp }}/d403-emulator-poll.log
+          if-no-files-found: error
+
+  windows-native:
+    if: github.ref == 'refs/heads/d4/native-integration-candidate-1'
+    runs-on: windows-latest
+    timeout-minutes: 25
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify admitted source before native build
+        run: node tests/d4-native/scope.mjs
+      - name: Build actual candidate Win32 executable with isolated entry guard
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path "$env:RUNNER_TEMP/d4-04-build" | Out-Null
+          node scripts/build-windows.mjs "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" --d404-candidate 2>&1 | Tee-Object "$env:RUNNER_TEMP/d4-04-build/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Actual Win32 controls and unchanged mature native regressions
+        shell: pwsh
+        run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" "$env:RUNNER_TEMP/d4-04-evidence"
+      - name: Package source-bound native candidate
+        shell: pwsh
+        run: node tests/d4-native/package-windows.mjs "$env:RUNNER_TEMP/d4-04-build" "$env:RUNNER_TEMP/d4-04-evidence"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d404-win32-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-04-build/
+            ${{ runner.temp }}/d4-04-evidence/
+          if-no-files-found: error
+
+  android-services:
+    if: github.ref == 'refs/heads/d4/native-integration-candidate-1'
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - name: Preserve exact Git blob bytes
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Protect old Android identities and test sources
+        run: node --test tests/d4-05/scope.test.mjs
+      - name: Prepare official compile SDK and build tools
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Compile separate formal-component service candidate
+        run: |
+          node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-service-ui-$GITHUB_RUN_ID"
+          bash android/d405/build-android-d405.sh "$RUNNER_TEMP/d4-service-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Native lifecycle, notification, FeedbackKit and process recovery
+        run: bash tests/d4-05/run-native.sh "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d405-services-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d405-native-*/*.apk
+            ${{ runner.temp }}/d405-native-*/*.json
+            ${{ runner.temp }}/d405-native-*/*.txt
+            ${{ runner.temp }}/d405-native-*/native-evidence/
+            ${{ runner.temp }}/d403-emulator-*.log
+          if-no-files-found: error

@@ -5,6 +5,7 @@ import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {runCases} from './interaction-cases.mjs';
 import {runWorkCases} from './work-cases.mjs';
+import {runWebIntegrationCases} from './web-integration-cases.mjs';
 import {runPersonalCases} from './personal-cases.mjs';
 import {runMobileCases} from './mobile-cases.mjs';
 import {runRegressionCases} from './regression-cases.mjs';
@@ -211,6 +212,7 @@ try {
  }
  await api.navigate('tasks');
  writeFileSync(join(out,'mobile-showcase-receipt.json'),JSON.stringify({kind:'d403-cloud-browser-phone-showcase',sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,scope:'Presentation screenshots from actual emulated phone viewport; no new business test count; not Android native evidence',viewport:{width:412,height:915,deviceScaleFactor:1,mobile:true},screenshots:mobileShowcase},null,2)+'\n');
+ const webVisual=await runWebIntegrationCases(api);writeFileSync(join(out,'d406-web-visual-receipt.json'),JSON.stringify({sourceSHA:env.GITHUB_SHA,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,scope:'Synthetic browser fixture; native WebView highlight still requires its own trace and screenshot',observations:webVisual},null,2)+'\n');
  await api.check('No page external network and no runtime exceptions',async()=>{const external=requests.filter(x=>/^(https?|wss?):/.test(x.url));assert.deepEqual(external,[]);assert.deepEqual(errors,[]);});
  writeFileSync(join(out,'synthetic-final-state.json'),JSON.stringify(await evaluate('({core:window.D4Prototype.repo.state,demo:window.D4Prototype.repo.demo,persistence:window.D4Prototype.repo.persistence()})'),null,2));
  report.status='passed';

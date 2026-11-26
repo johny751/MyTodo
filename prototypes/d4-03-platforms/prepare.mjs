@@ -15,7 +15,9 @@ if(receipt.sourceSha!==e.GITHUB_SHA||receipt.runId!==e.GITHUB_RUN_ID||receipt.ru
 const reused=[['prototypes/d4-03-platforms/android/src/local/gxtodo/replica/PomodoroClock.java','1ad9c070920ae62f2abf707e843ecd315434db1d11018f693747d59f7b42af39'],
  ['tests/d4-03-platforms/jvm/PomodoroClockTest.java','4f253e97d96ecba12045fa1c836abbdcbec34b5b854363e7e8948585a5e58b9a']];
 for(const [name,expected] of reused)if(hash(await fs.readFile(path.join(root,name)))!==expected)throw Error('Frozen reuse byte mismatch: '+name);
-const runNumber=Number(e.GITHUB_RUN_NUMBER),versionCode=403000+runNumber;
+// The new workflow counter starts at 1; preserve the accepted 0.3.27 sequence.
+const versionOffset=e.GITHUB_REF==='refs/heads/d4/native-integration-candidate-1'?27:0;
+const runNumber=Number(e.GITHUB_RUN_NUMBER)+versionOffset,versionCode=403000+runNumber;
 if(!Number.isSafeInteger(runNumber)||runNumber<1||versionCode>2147483647)throw Error('Valid Actions run number required for isolated versionCode');
 const identity={packageName:'local.gxtodo.d403preview',versionName:'0.3.'+runNumber,versionCode,
  sourceSHA:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:e.GITHUB_RUN_ATTEMPT,buildTimeUTC:new Date().toISOString(),

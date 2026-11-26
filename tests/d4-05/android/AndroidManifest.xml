@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.gxtodo.d405candidate.tests">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+  <instrumentation android:name="local.gxtodo.replica.NativeIntegrationInstrumentation" android:targetPackage="local.gxtodo.d405candidate" android:label="D4-05 synthetic native lifecycle evidence"/>
+  <application android:debuggable="true" android:label="D4-05 isolated tests"/>
+</manifest>

@@ -21,6 +21,7 @@ public final class AndroidCompanionService extends Service {
     private final ExecutorService reader = Executors.newSingleThreadExecutor();
     private FloatingBallController floating;
     private PomodoroTimer timer;
+    private NativeIntegration.Companion integrated;
     private JSONObject summary = new JSONObject();
     private boolean summaryBusy, destroyed;
     private long summaryAt, nextNoticeAt, summaryGeneration;
@@ -34,6 +35,7 @@ public final class AndroidCompanionService extends Service {
     }
     public static void refresh(Context context) { command(context, "refresh"); }
     public static void command(Context context, String command) {
+        if (NativeIntegration.enabled(context)) { NativeIntegration.adapter(context).command(context, command); return; }
         AndroidCompanionService active = instance;
         if (active != null && !active.destroyed) {
             active.handler.post(() -> active.handle(command));
@@ -51,6 +53,7 @@ public final class AndroidCompanionService extends Service {
     }
     @Override public void onCreate() {
         super.onCreate();
+        if (NativeIntegration.enabled(this)) { integrated = NativeIntegration.adapter(this).create(this); return; }
         instance = this;
         timer = PomodoroTimer.get(this);
         channels();
@@ -62,6 +65,10 @@ public final class AndroidCompanionService extends Service {
         handler.post(ticker);
     }
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
+        if (integrated != null) {
+            if (integrated.isClosed()) integrated = NativeIntegration.adapter(this).create(this);
+            return integrated.start(intent, flags, startId);
+        }
         handle(intent == null ? "refresh" : intent.getStringExtra("command"));
         return START_STICKY;
     }
@@ -331,6 +338,7 @@ public final class AndroidCompanionService extends Service {
     }
     @Override public IBinder onBind(Intent intent) { return null; }
     @Override public void onDestroy() {
+        if (integrated != null) integrated.close();
         destroyed = true;
         if (instance == this) instance = null;
         handler.removeCallbacksAndMessages(null);
