@@ -1,6 +1,78 @@
 [
   {
     "packageName": "local.gxtodo.d405candidate",
+    "versionName": "0.5.2",
+    "versionCode": 405002,
+    "sourceSHA": "84de5bc9f261c1eb8051124e67e363b1a12624e5",
+    "buildTimeUTC": "2026-11-26T02:05:46.428Z",
+    "runId": "45739951988",
+    "runAttempt": "1",
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "FAILED",
+    "statusText": "第二次云端候选：原生专项 15 项，14 项通过、提醒投递 1 项失败；未发布、未验收。",
+    "changes": [
+      "修复验证中的锁屏时序、稳定解锁和 Activity 焦点等待；前轮 5 个失败项本轮均通过",
+      "正式 Android 源码在隔离 classpath 下编译通过，未构建或安装正式应用",
+      "提醒用例真实执行后超时；保留失败原件，测试数据来源修复另行验证",
+      "保留首次候选历史、真实编译时间及临时 CI 签名边界"
+    ],
+    "validation": {
+      "scope": "D4-05 native integration only",
+      "caseCount": 15,
+      "passed": 14,
+      "failed": 1,
+      "failedCases": [
+        "D405-09-formal-reminder-alarm-delivery-and-snooze"
+      ],
+      "aggregateSha256": "28802fba6deb6620fc353d9da925736194bec802b84edabfa3d0047dc7fd4b1d",
+      "buildIdentitySha256": "d5eef410b8efa959084b424399034159efd7ab305560bb966ec943a2218dbcd3",
+      "formalCompilePassed": true,
+      "formalCompileSha256": "1126b1d8295f3362c715ab56252b29810578c1ec1bff75bff235c58099cc4680",
+      "phaseReports": [
+        {
+          "file": "result-main.json",
+          "caseCount": 11,
+          "passed": 10,
+          "failed": 1,
+          "sha256": "087d00cbd145d4ada6804be4f9e25527155e3b42880bcbf47f819449e3dc89e4"
+        },
+        {
+          "file": "result-visual-360.json",
+          "caseCount": 1,
+          "passed": 1,
+          "failed": 0,
+          "sha256": "bf70b11df102b6e30968ec8cb8b52b00bc67bf56cf3bd37ba9f91805e96286ab"
+        },
+        {
+          "file": "result-visual-412.json",
+          "caseCount": 1,
+          "passed": 1,
+          "failed": 0,
+          "sha256": "d0352628fda798c9c3fea69818da1b8bc1b56c8aed1d344a7c46783597f61b88"
+        },
+        {
+          "file": "result-process-prepare.json",
+          "caseCount": 1,
+          "passed": 1,
+          "failed": 0,
+          "sha256": "f92117d3fc120c434c7e7319000cd150ad573b242a5eec3982b3bcef8e610234"
+        },
+        {
+          "file": "result-process-recover.json",
+          "caseCount": 1,
+          "passed": 1,
+          "failed": 0,
+          "sha256": "d41f7f23a7fb18abc6c494bfa5790f5a26667f2db2e65652647260e73ee8496e"
+        }
+      ]
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d405candidate",
     "versionName": "0.5.1",
     "versionCode": 405001,
     "sourceSHA": "8779f84848c7df5eff86896abe627fe10ce1cfdb",
@@ -27,11 +99,41 @@
       "failed": 5,
       "buildIdentitySha256": "c22cc9ea3946c3b38bddbc495067421f7b24e732ac8993911d20b0674b527a51",
       "phaseReports": [
-        {"file": "result-main.json", "caseCount": 11, "passed": 8, "failed": 3, "sha256": "369aea869793e10874f06dc6e97daf65036206b28d20b512253771b17ed4e97e"},
-        {"file": "result-process-prepare.json", "caseCount": 1, "passed": 1, "failed": 0, "sha256": "964ca1dcdbd355ed8cec477c524b97603a559d73cd7c8daf244d8747395e10f4"},
-        {"file": "result-process-recover.json", "caseCount": 1, "passed": 1, "failed": 0, "sha256": "7270c610c51afbecbb98020a6a5184755842d595b42f56f30a82f927bf5cc83f"},
-        {"file": "result-visual-360.json", "caseCount": 1, "passed": 0, "failed": 1, "sha256": "3a2ab0aa7c4f39e9c35ecc5f9fdfc302c209404ecf9b90cfffe5996fc3700dfe"},
-        {"file": "result-visual-412.json", "caseCount": 1, "passed": 0, "failed": 1, "sha256": "8ce5612853eb786686cc9f0b140b7015618a4978183bd31aacf7c6e9b6ea49cc"}
+        {
+          "file": "result-main.json",
+          "caseCount": 11,
+          "passed": 8,
+          "failed": 3,
+          "sha256": "369aea869793e10874f06dc6e97daf65036206b28d20b512253771b17ed4e97e"
+        },
+        {
+          "file": "result-process-prepare.json",
+          "caseCount": 1,
+          "passed": 1,
+          "failed": 0,
+          "sha256": "964ca1dcdbd355ed8cec477c524b97603a559d73cd7c8daf244d8747395e10f4"
+        },
+        {
+          "file": "result-process-recover.json",
+          "caseCount": 1,
+          "passed": 1,
+          "failed": 0,
+          "sha256": "7270c610c51afbecbb98020a6a5184755842d595b42f56f30a82f927bf5cc83f"
+        },
+        {
+          "file": "result-visual-360.json",
+          "caseCount": 1,
+          "passed": 0,
+          "failed": 1,
+          "sha256": "3a2ab0aa7c4f39e9c35ecc5f9fdfc302c209404ecf9b90cfffe5996fc3700dfe"
+        },
+        {
+          "file": "result-visual-412.json",
+          "caseCount": 1,
+          "passed": 0,
+          "failed": 1,
+          "sha256": "8ce5612853eb786686cc9f0b140b7015618a4978183bd31aacf7c6e9b6ea49cc"
+        }
       ]
     }
   }

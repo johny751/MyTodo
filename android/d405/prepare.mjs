@@ -20,7 +20,8 @@ const identity = {packageName: 'local.gxtodo.d405candidate', versionCode, versio
   runId: e.GITHUB_RUN_ID, runAttempt: e.GITHUB_RUN_ATTEMPT, syntheticOnly: true, stableSigning: false, productionSync: false,
   originalD403TestsUnchanged: true, feedbackAarSha256: aarHash, inputHtmlSha256: hash(html)};
 const changes = ['正式前台服务接入统一计时会话、通知暂停继续与到时唤醒', '原生提醒和 FeedbackKit 1.2.0 接入独立合成应用空间',
-  '修复云端生命周期验证的锁屏时序与解锁恢复，并记录失败时窗口和电源状态', '版本历史保留已知候选的真实编译时间、云端结果和未验收状态',
+  '修复云端生命周期验证的锁屏时序与解锁恢复，并记录失败时窗口和电源状态', '提醒验证数据通过现有任务仓库和真实原生桥接写入，并确认镜像一致及结束清理',
+  '版本历史保留已知候选的真实编译时间、云端结果和未验收状态',
   '独立 D4-05 生命周期验证；稳定签名及覆盖升级待专门审批'];
 const knownHistory = JSON.parse(await fs.readFile('android/d405/version-history.json', 'utf8'));
 if (!Array.isArray(knownHistory)) throw Error('Known candidate history must be an array');

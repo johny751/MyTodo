@@ -1,6 +1,6 @@
 # D4-05 Android native integration candidate
 
-Prepared from accepted `9fe8824754af4e8b541f3550e677564183fa7c1f` on 2026-11-26 Asia/Shanghai. First cloud source `8779f84848c7df5eff86896abe627fe10ce1cfdb`, run `45737059912` attempt 1, built successfully and executed all 15 cases: **10 passed / 5 failed**. The harness repair is prepared but not yet cloud verified; see `FIRST-RUN-FAILURE.md`. All execution is reserved for GitHub Actions. Candidate source is `candidate/`; no local build, emulator, SQLite or project test was executed.
+Prepared from accepted `9fe8824754af4e8b541f3550e677564183fa7c1f` on 2026-11-26 Asia/Shanghai. First cloud source `8779f84`, run `45737059912` attempt 1: **10/15 passed, 5 failed**. Second cloud source `84de5bc9f261c1eb8051124e67e363b1a12624e5`, run `45739951988` attempt 1: **14/15 passed, 1 reminder timeout**. All first-run failed cases passed in the second run. The current reminder fixture repair is prepared for a new exact-source Actions run; see `SECOND-RUN-FAILURE.md`, preserving `FIRST-RUN-FAILURE.md`. All execution is reserved for GitHub Actions. Candidate source is `candidate/`; no local build, emulator, SQLite or project test was executed.
 
 ## Actual native integration
 
@@ -31,7 +31,7 @@ Prerequisites: Linux Actions runner, JDK17, official Android API35/build-tools35
 
 Build: `bash android/d405/build-android-d405.sh "$VERIFIED_HTML" "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"`.
 
-Before candidate compilation, the builder compiles only formal `android/src` plus generated `R.java` against the official SDK and pinned AAR in an independent class directory, with an empty source path. `formal-source-compile.json`, `formal-java-sources.txt`, `formal-javac-version.txt` and `formal-compile-log.txt` preserve this compile-only check; no formal package is signed or installed. This new check remains pending Actions execution.
+Before candidate compilation, the builder compiles only formal `android/src` plus generated `R.java` against the official SDK and pinned AAR in an independent class directory, with an empty source path. `formal-source-compile.json`, `formal-java-sources.txt`, `formal-javac-version.txt` and `formal-compile-log.txt` preserve this compile-only check; no formal package is signed or installed. Second-run Actions receipt proves this isolated compile passed (22 sources, 56 classes, javac 17.0.21); every new candidate source must rerun it.
 
 Runtime in emulator: `bash tests/d4-05/run-native.sh "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"`.
 
@@ -45,19 +45,21 @@ Runtime outputs: `native-evidence/aggregate.json`, five unaltered phase reports 
 
 | Owner area | Executable CI coverage | Current status |
 |---|---|---|
-| Background timer service | D405-03, D405-05 | First run passed; current rerun pending |
-| Notification control | D405-04 | First run passed; current rerun pending |
-| Lock screen | D405-06: actual keyguard/screen-off, private notice | First run failed; corrected state wait/cleanup pending rerun |
-| Activity reconstruction | D405-07: actual recreate, shared session, dirty native config | First run failed; lock/focus correction pending rerun |
-| Process death/recovery | D405-12/13: external run-as kill -9, different process, same durable session | First run passed; current rerun pending |
-| Actual timer deadline | D405-08: real one-minute countdown; no fake time | First run passed; current rerun pending |
-| Reminders and snooze | D405-09: actual formal OS alarm + notification action | First run passed; current rerun pending |
-| Native FeedbackKit | D405-02/10: native entry and actual AAR editor touch/save/storage | Entry passed; editor failed; lock/focus correction pending rerun |
+| Background timer service | D405-03, D405-05 | Second run passed; third source rerun pending |
+| Notification control | D405-04 | Second run passed; third source rerun pending |
+| Lock screen | D405-06: actual keyguard/screen-off, private notice | Second run passed; true keyguard entry and stable unlocked/focused cleanup recorded |
+| Activity reconstruction | D405-07: actual recreate, shared session, dirty native config | Second run passed; same session and draft after actual recreation |
+| Process death/recovery | D405-12/13: external run-as kill -9, different process, same durable session | Second run passed; third source rerun pending |
+| Actual timer deadline | D405-08: real one-minute countdown; no fake time | Second run passed; third source rerun pending |
+| Reminders and snooze | D405-09: actual formal OS alarm + notification action | Second run FAILED: real OS delivery timeout; repository fixture repair awaits third run |
+| Native FeedbackKit | D405-02/10: native entry and actual AAR editor touch/save/storage | Second run passed; actual AAR editor, native touch/save and storage |
 | Original interactions | Original 58 + original browser suites remain independent | Must rerun current candidate |
-| Work-note visual trace | D405-11 plus actual edit/save/detail at 360/412; read-only selection/focus + screenshot | Trace passed; both real edit widths failed under lockscreen; rerun pending |
+| Work-note visual trace | D405-11 plus actual edit/save/detail at 360/412; read-only selection/focus + screenshot | Second run passed at both CSS widths; screenshots/read-only selection evidence retained |
 | Stable signing | Review plan only | Explicit approval pending |
 | Old-version overwrite/data | Review plan only | Explicit approval pending |
 
 Unresolved: real-device/OEM background restrictions and secure credential lockscreen are not emulator evidence; reboot recovery is not included (no boot receiver/permission); force-stop does not promise background delivery; notification denial/revocation and exact-alarm fallback have code paths but no dedicated current runtime case; all accepted arbitrary unsaved Web work forms across process death are not covered by native timer draft recreation; native FeedbackKit backup/export/restore inherits the old implementation but this suite only adds current editor save coverage; full data/storage migration remains prohibited. The candidate reminder store is a mirror for native delivery, not approval of the entire new work model as production storage.
+
+The third-run preparation changes only reminder test fixture setup/cleanup plus offline history text. All 43 original assertions remain; current-minute due-time and cleanup assertions are added. Current-minute reminder scheduling follows the domain’s existing Beijing minute precision and replaces the former native-only now+2s fixture; the original OS alarm timeout remains 20 seconds. The source-supported mirror-overwrite diagnosis is not a claim that logcat directly identifies the cancelling caller.
 
 D4-03 remains open. Candidate success grants no production admission. Retain prior failures and owner acceptance evidence unchanged.

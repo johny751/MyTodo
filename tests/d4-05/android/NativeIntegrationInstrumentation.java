@@ -222,17 +222,38 @@ public final class NativeIntegrationInstrumentation extends Instrumentation {
             foreground();return new JSONObject().put("state",after).put("matchingNotices",count).put("matchingHistory",histories).put("noticePostTime",postTime).put("repeatWakeRevision",repeated.getLong("revision"));
         });
         test("D405-09-formal-reminder-alarm-delivery-and-snooze",()->{
-            AccountStore accounts=AccountStore.get(target);JSONObject original=new JSONObject(accounts.read(accounts.active()));
-            JSONObject task=new JSONObject().put("id","d405-qa-reminder").put("title","D405_SYNTHETIC_NATIVE_REMINDER").put("done",false).put("quadrant",0).put("reminderAt",System.currentTimeMillis()+2000).put("subtasks",new JSONArray());
-            JSONObject saved=new JSONObject(original.toString());saved.getJSONArray("tasks").put(task);accounts.write(accounts.active(),saved.toString());ReminderScheduler.refresh(target);
+            D405Activity app=(D405Activity)current;WebView web=app.previewWebView();AccountStore accounts=AccountStore.get(target);
+            until("reminder source page ready",20000,()->"true".equals(js(web,"!!window.D4Prototype&&document.documentElement.dataset.nativeReminders==='saved'")));
+            // Create the synthetic fixture in the existing authority. The native AccountStore is its mirror;
+            // writing the mirror directly races a newly launched page's initial saveReminderState call.
+            Throwable primaryFailure=null;JSONObject observed=new JSONObject();
+            try{
+            JSONObject fixture=new JSONObject(js(web,"(function(){var wall=Date.now();return {fixtureWallMillis:wall,task:D4Prototype.repo.createTask({id:'d405-qa-reminder',title:'D405_SYNTHETIC_NATIVE_REMINDER',start:'',reminder:{mode:'custom',at:new Date(wall+8*60*60*1000).toISOString().slice(0,16)}})};})()"));
+            JSONObject task=fixture.getJSONObject("task");long fixtureWall=fixture.getLong("fixtureWallMillis"),dueAge=fixtureWall-task.getLong("reminderAt");
+            check(dueAge>=0&&dueAge<60000,"current-minute reminder is due within its captured wall-clock minute");
+            JSONObject[] mirrored=new JSONObject[1];
+            until("authoritative reminder mirrored",10000,()->{JSONArray tasks=new JSONObject(accounts.read(accounts.active())).getJSONArray("tasks");for(int i=0;i<tasks.length();i++){JSONObject row=tasks.getJSONObject(i);if(task.getString("id").equals(row.optString("id"))&&task.getLong("reminderAt")==row.optLong("reminderAt")&&task.getString("title").equals(row.optString("title"))&&!row.optBoolean("done")){mirrored[0]=row;return true;}}return false;});
+            observed.put("repoTask",task).put("mirrorTask",mirrored[0]).put("matchingFields",new JSONArray(Arrays.asList("id","title","reminderAt","done")))
+                .put("fixtureWallMillis",fixtureWall).put("dueAgeAtCreationMillis",dueAge)
+                .put("fixtureSemantics","Existing Beijing minute precision: current-minute due reminder; real scheduler minimum +500ms, not the former native-only now+2s fixture");
+            write(new File(evidence,"reminder-authoritative-fixture.json"),observed.toString(2));
             until("OS reminder alarm",20000,()->{for(StatusBarNotification n:((NotificationManager)target.getSystemService(Context.NOTIFICATION_SERVICE)).getActiveNotifications())if("d405-qa-reminder".equals(n.getTag()))return true;return false;});
             StatusBarNotification found=null;for(StatusBarNotification n:((NotificationManager)target.getSystemService(Context.NOTIFICATION_SERVICE)).getActiveNotifications())if("d405-qa-reminder".equals(n.getTag()))found=n;
             check(found!=null&&found.getNotification().visibility==Notification.VISIBILITY_PRIVATE,"private formal reminder");
             found.getNotification().actions[0].actionIntent.send();String key=ReminderScheduler.key(task);
             until("native snooze receipt",5000,()->target.getSharedPreferences(AccountStore.reminderPrefs(target),Context.MODE_PRIVATE).getLong(key,0)>System.currentTimeMillis());
             long snoozed=target.getSharedPreferences(AccountStore.reminderPrefs(target),Context.MODE_PRIVATE).getLong(key,0);
-            accounts.write(accounts.active(),original.toString());ReminderScheduler.refresh(target);
-            return new JSONObject().put("snoozedAt",snoozed).put("formalScheduler",ReminderScheduler.class.getName());
+            return observed.put("snoozedAt",snoozed).put("formalScheduler",ReminderScheduler.class.getName()).put("source","existing repository through real native reminder bridge");
+            }catch(Exception|AssertionError error){primaryFailure=error;
+                try{write(new File(evidence,"reminder-failure-mirror.json"),accounts.read(accounts.active()));
+                    write(new File(evidence,"reminder-failure-alarm.txt"),shell("dumpsys alarm"));}
+                catch(Exception diagnosticError){error.addSuppressed(diagnosticError);}throw error;
+            }finally{try{js(web,"if(D4Prototype.repo.getTask('d405-qa-reminder'))D4Prototype.repo.deleteTask('d405-qa-reminder')");
+                until("reminder fixture removed from native mirror",10000,()->{JSONArray tasks=new JSONObject(accounts.read(accounts.active())).getJSONArray("tasks");for(int i=0;i<tasks.length();i++)if("d405-qa-reminder".equals(tasks.getJSONObject(i).optString("id")))return false;return true;});
+                check("true".equals(js(web,"D4Prototype.repo.getTask('d405-qa-reminder')===null")),"reminder fixture removed from repository");
+                observed.put("cleanup",new JSONObject().put("repoAbsent",true).put("mirrorAbsent",true));
+                write(new File(evidence,"reminder-fixture-cleanup.json"),observed.getJSONObject("cleanup").toString(2));
+                }catch(Exception|AssertionError cleanupError){if(primaryFailure!=null)primaryFailure.addSuppressed(cleanupError);else throw cleanupError;}}
         });
         test("D405-10-native-feedbackkit-real-editor-save",()->{
             foreground();ActivityMonitor monitor=addMonitor("com.androidshared.feedback.FeedbackActivity",null,false);

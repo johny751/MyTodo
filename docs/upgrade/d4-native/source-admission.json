@@ -173,8 +173,8 @@
     {
       "path": "android/d405/prepare.mjs",
       "owner": "android",
-      "bytes": 7350,
-      "sha256": "e8792bbf4b02e026b37393ec07272e47d40fac1952a5647816ab7cc60de28967",
+      "bytes": 7464,
+      "sha256": "5459b21639dd8aa92ea46a8eddb82affdc17c19cd3269f18370fc6d7cb7713b8",
       "baselineSha256": null
     },
     {
@@ -208,8 +208,8 @@
     {
       "path": "android/d405/version-history.json",
       "owner": "android",
-      "bytes": 2035,
-      "sha256": "42fef09b9473bd33eaa7c2f1b8f5b03d2abe303039fea577f83145d3cec041f4",
+      "bytes": 5027,
+      "sha256": "aaa9d328bd8a4c1a18f2c378a3b9d0969f217034c1cfa0b061c130ac4c419379",
       "baselineSha256": null
     },
     {
@@ -257,8 +257,8 @@
     {
       "path": "tests/d4-05/android/NativeIntegrationInstrumentation.java",
       "owner": "android",
-      "bytes": 31641,
-      "sha256": "e13eee8ced916ab45c779c1d037e6ea009344bec1e10e01c91b2312e2d49b5d3",
+      "bytes": 34623,
+      "sha256": "af9607230ba255821b9abbbc4663901306ca876e283f78ddd06dddf7f57b0412",
       "baselineSha256": null
     },
     {
@@ -320,8 +320,15 @@
     {
       "path": "docs/upgrade/d4-native/D405-INTEGRATION-REVIEW.md",
       "owner": "root",
-      "bytes": 8998,
-      "sha256": "060331dd3befaf8229b38abfd1c6942531b5ec5a9c6f4207dd99f014e8d13318",
+      "bytes": 9893,
+      "sha256": "3cabdee51d2c9b41379d0f57b3dddb0062ba8ecfb76dae1044f52d743a380b39",
+      "baselineSha256": null
+    },
+    {
+      "path": "docs/upgrade/d4-native/D405-SECOND-RUN-FAILURE.md",
+      "owner": "root",
+      "bytes": 6170,
+      "sha256": "28da2a90cabf15e8d83abad9d221edaa4a0708e29bdff6f204b1dcf081342c79",
       "baselineSha256": null
     },
     {
@@ -348,8 +355,8 @@
     {
       "path": "prototypes/d4-03-platforms/version-history.json",
       "owner": "root",
-      "bytes": 19592,
-      "sha256": "d08382d5ab783fd8cbf413c3b7989360468d23a6a70372b6616e0e90faaad9d6",
+      "bytes": 20277,
+      "sha256": "47deb70a0bba351ecd3f7c3d9aed26cff48e43f09dfe186f8fa99561cba49c46",
       "baselineSha256": "4021bd73736870530fc27cddb5c5b18eb0935289a8ea0992f3a41558c831892d"
     },
     {

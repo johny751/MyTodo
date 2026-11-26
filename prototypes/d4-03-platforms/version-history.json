@@ -8,6 +8,19 @@
   ],
   "versions": [
     {
+      "versionName": "0.3.29",
+      "versionCode": 403029,
+      "sourceSHA": "84de5bc9f261c1eb8051124e67e363b1a12624e5",
+      "runId": "45739951988",
+      "runAttempt": "1",
+      "buildTimeUTC": "2026-11-26T02:05:49.660Z",
+      "changes": [
+        "原D4-03隔离UI回归包；原58项模拟器测试结果：58/58通过，0失败。",
+        "对应原生集成Actions 45739951988 的工作流状态：completed / failure；独立服务测试结果见同源码原始报告，不与本包58项合并。",
+        "保留旧版本和原始失败记录；临时CI签名，未发布、未验收。生产、稳定签名和旧版本覆盖升级仍未批准。"
+      ]
+    },
+    {
       "versionName": "0.3.28",
       "versionCode": 403028,
       "sourceSHA": "8779f84848c7df5eff86896abe627fe10ce1cfdb",
