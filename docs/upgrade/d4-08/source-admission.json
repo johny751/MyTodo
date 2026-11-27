@@ -32,8 +32,8 @@
     },
     {
       "path": ".github/workflows/d4-08-windows-development.yml",
-      "bytes": 2317,
-      "sha256": "6135d79878c3f4acdc2ff08489a2e0a465807b4a1f33fa0007307608502ac62a",
+      "bytes": 2263,
+      "sha256": "3b4f6c284bd01e840d40dba51a780e056c99999ef00103a488e3ca09105447c4",
       "reason": "Independent candidate branch cloud build/regression/source packaging; production branches unchanged."
     },
     {
@@ -110,20 +110,20 @@
     },
     {
       "path": "docs/upgrade/d4-08/D4-08-01-FEATURE-MATRIX.md",
-      "bytes": 3906,
-      "sha256": "e709b6e7c1f6742b8cd72bb97bc6d95216015fff36ddcd05d06042700bd73752",
+      "bytes": 3868,
+      "sha256": "efcb3102d372d83f82b5f2ec990fc9991eea3978f913b7e0db53df8b1e7871e4",
       "reason": "D408 audit, requirements, candidate-only data boundary and preserved history documentation."
     },
     {
       "path": "docs/upgrade/d4-08/D4-08-01-GAP-ANALYSIS.md",
-      "bytes": 5194,
-      "sha256": "7ceb437da960a536f808c95daf5df1bce110469b51d9271512850e0c0594d9f9",
+      "bytes": 5156,
+      "sha256": "e6477850b21b1619767473831696e052c3e7a82fdd077a9d1ebc6a63e71257d6",
       "reason": "D408 audit, requirements, candidate-only data boundary and preserved history documentation."
     },
     {
       "path": "docs/upgrade/d4-08/D4-08-01-IMPLEMENTATION-PLAN.md",
-      "bytes": 4810,
-      "sha256": "34f084db9cd6479518103a99daecfbd81384f902e4cd0c4871842f0a754e5146",
+      "bytes": 4775,
+      "sha256": "d7142759e28e4bf131e4f16ed2caa6fb136aae20dbc5a5f29ec273d9cf53b4a1",
       "reason": "D408 audit, requirements, candidate-only data boundary and preserved history documentation."
     },
     {
@@ -152,8 +152,8 @@
     },
     {
       "path": "prototypes/d4-01/domain.mjs",
-      "bytes": 15591,
-      "sha256": "a978c1fb35bde6cc452f1e5e2f399240fd120aef7732c63745205b28c380e17c",
+      "bytes": 15590,
+      "sha256": "0f1dcfefd2265a44c973cc6a8c8fc434e726b6d8eb0695620540f39a21944ef9",
       "reason": "Restore complete shared candidate UI behavior and feedback durability, preserve task/work model and production source."
     },
     {
@@ -284,8 +284,8 @@
     },
     {
       "path": "tests/d4-08/scope.mjs",
-      "bytes": 4069,
-      "sha256": "ef667bdbe8b0a5448f4d3deb1e3cdcb08acd1bee74680d2fdab57640726c9b70",
+      "bytes": 4452,
+      "sha256": "30d1ef34a304562e760b948364092fbafaf3e9e53f91b6df28f9a496eb0fc592",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -392,8 +392,8 @@
     },
     {
       "path": "windows/d408-form.c",
-      "bytes": 4848,
-      "sha256": "75d8777fa493a75a45065e76dd60ac5c94b1818fe549d20d5b26fe248ee92d70",
+      "bytes": 4847,
+      "sha256": "aad57c74f6cf07852b6a820a099c38f35cc73b93b517c96c25c4e482cb5a9393",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
