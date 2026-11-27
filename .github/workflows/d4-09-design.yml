@@ -1,0 +1,66 @@
+name: D4-09 interactive design prototypes
+on:
+  push:
+    branches: [d4/d4-09-design-candidate-1]
+    paths:
+      - 'prototypes/d4-09/**'
+      - 'tests/d4-09/**'
+      - 'docs/upgrade/d4-09/**'
+      - '.github/workflows/d4-09-design.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  EXPECTED_SOURCE_SHA: ${{ github.sha }}
+jobs:
+  design:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install official distro CJK fonts for Linux screenshot text
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - name: Verify design-only source and retained baseline bytes
+        run: node tests/d4-09/design-scope.mjs
+      - name: Parse prototype and runner JavaScript on hosted runtime
+        run: |
+          for file in prototypes/d4-09/*.js tests/d4-09/*.mjs tests/d4-09/*/prototype-cases.mjs; do node --check "$file" || exit 1; done
+      - name: Windows design real browser interaction and screenshots
+        if: ${{ !cancelled() }}
+        run: node tests/d4-09/prototype-run.mjs windows "$RUNNER_TEMP/d409-prototype-windows"
+      - name: Android design real browser interaction and screenshots
+        if: ${{ !cancelled() }}
+        run: node tests/d4-09/prototype-run.mjs android "$RUNNER_TEMP/d409-prototype-android"
+      - name: Web design real browser interaction and screenshots
+        if: ${{ !cancelled() }}
+        run: node tests/d4-09/prototype-run.mjs web "$RUNNER_TEMP/d409-prototype-web"
+      - name: Package source and interactive design bundle on Actions
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: node tests/d4-09/prototype-package.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-design-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d409-design-scope.json
+            ${{ runner.temp }}/d409-design-package/
+            ${{ runner.temp }}/d409-prototype-*/report.json
+            ${{ runner.temp }}/d409-prototype-*/*.jsonl
+            ${{ runner.temp }}/d409-prototype-*/*.txt
+            ${{ runner.temp }}/d409-prototype-*/screenshots/
+          if-no-files-found: error

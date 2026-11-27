@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>MyTodo · Windows 设计原型</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="windows.css">
+  <script src="windows.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#page-title">跳到当前页面</a>
+  <div class="desktop-shell">
+    <aside class="app-sidebar" aria-label="应用导航">
+      <a class="brand" href="#quadrants" aria-label="MyTodo 四象限首页"><span class="brand-mark" aria-hidden="true">m<span>·</span></span><span>MyTodo<small>把工作理清楚</small></span></a>
+      <nav id="main-nav" aria-label="主导航"></nav>
+      <div class="sidebar-bottom"><span class="avatar" aria-hidden="true">林</span><div><strong>林舟的工作空间</strong><small>本机演示账号</small></div><button class="icon-button" data-action="account-menu" aria-label="账号菜单" aria-haspopup="menu">⋯</button></div>
+    </aside>
+    <div class="app-body">
+      <header class="workspace-bar"><div class="workspace-breadcrumb"><span class="connection-dot" aria-hidden="true"></span><span id="breadcrumb">个人效率 / 四象限</span></div><div class="workspace-tools"><span class="prototype-badge">Windows 设计原型 · 合成数据</span><button class="quiet-button" id="demo-state-trigger" data-action="demo-menu" aria-haspopup="menu">演示状态 <span aria-hidden="true">⌄</span></button><button class="icon-button" data-action="help" aria-label="快捷键与原型说明">?</button></div></header>
+      <main id="workspace" tabindex="-1">
+        <div class="page-heading"><div><p class="eyebrow" id="page-eyebrow">PERSONAL WORKSPACE</p><h1 id="page-title" tabindex="-1">四象限</h1><p class="page-subtitle" id="page-subtitle"></p></div><div class="page-actions" id="page-actions"></div></div>
+        <div id="page-toolbar"></div>
+        <div id="notice-region" aria-live="polite"></div>
+        <div id="page-content"></div>
+      </main>
+      <footer class="status-bar"><span><span class="connection-dot" aria-hidden="true"></span>演示数据仅在内存中 · 刷新后重置</span><span id="status-context">准备就绪</span><button class="status-button" data-action="help">Ctrl+N 新建 · Ctrl+Enter 保存</button></footer>
+    </div>
+  </div>
+  <div id="context-menu" class="context-menu" role="menu" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="editor-dialog" class="editor-dialog" aria-labelledby="editor-title">
+    <form id="editor-form" novalidate>
+      <header class="dialog-header"><div><p class="eyebrow">工作记录</p><h2 id="editor-title">新建记录</h2></div><button type="button" class="icon-button" data-action="close-editor" aria-label="关闭编辑">×</button></header>
+      <div class="dialog-body" id="editor-fields"></div>
+      <p id="editor-error" class="form-error" role="alert" hidden></p>
+      <footer class="dialog-footer"><span class="muted">Ctrl+Enter 保存 · 演示不会写入产品数据</span><div><button type="button" class="secondary-button" data-action="close-editor">取消</button><button type="submit" class="primary-button" id="save-record">保存</button></div></footer>
+    </form>
+  </dialog>
+  <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title">
+    <div class="dialog-header"><h2 id="confirm-title">确认操作</h2></div><div class="dialog-body"><p id="confirm-message"></p></div><div class="dialog-footer" id="confirm-actions"></div>
+  </dialog>
+  <dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title"><header class="dialog-header"><h2 id="info-title">详情</h2><button class="icon-button" data-action="close-info" aria-label="关闭详情">×</button></header><div class="dialog-body" id="info-content"></div><footer class="dialog-footer"><button class="primary-button" data-action="close-info">知道了</button></footer></dialog>
+  <noscript><p class="noscript-notice">此交互原型需要浏览器启用 JavaScript。所有脚本和样式均在本地，不连接服务。</p></noscript>
+</body>
+</html>

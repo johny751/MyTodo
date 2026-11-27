@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src data: blob:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>MyTodo · D4-09 Web 交互原型</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="web.css">
+  <script defer src="web.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#page">跳到主要内容</a>
+  <div id="web-app"></div>
+  <dialog id="editor-dialog" aria-labelledby="editor-title"></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"></dialog>
+  <div id="web-toast" role="status" aria-live="polite"></div>
+  <noscript>交互原型需要启用 JavaScript。数据仅存在本页内存，刷新后重置。</noscript>
+</body>
+</html>
