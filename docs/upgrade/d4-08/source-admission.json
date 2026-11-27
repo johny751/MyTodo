@@ -470,8 +470,8 @@
     },
     {
       "path": "windows/d408-work-tests.inc",
-      "bytes": 32720,
-      "sha256": "373e7ae6a440a641d22272d7439a22eb66d3f618ac8bbf5cb7d81513b412585d",
+      "bytes": 34634,
+      "sha256": "97e49a202d8f1d7eb2f6227947fc92cf69ef8d11552325bfafa2131fcac7290d",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
