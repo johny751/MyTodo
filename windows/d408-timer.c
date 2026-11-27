@@ -150,7 +150,7 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    const wchar_t *labels[]={L"倒计时",L"25",L"5",L"",L"保存设置",L"开始",L"暂停",L"继续",L"提前结束",L"完成正计时",L"开始休息",L"重置",L"确认完成",L"历史记录",L"历史与统计",L"25:00",L"",L"关闭窗口"};
    for(int i=T_MODE;i<=T_CLOSE;i++){const wchar_t *cls=i==T_MODE||i==T_TASK?L"COMBOBOX":i==T_FOCUS||i==T_BREAK?L"EDIT":i==T_HISTORY?L"LISTBOX":i==T_SUMMARY||i==T_CLOCK||i==T_STATUS?L"STATIC":L"BUTTON";
      DWORD style=i==T_MODE||i==T_TASK?CBS_DROPDOWNLIST:i==T_FOCUS||i==T_BREAK?ES_NUMBER|ES_AUTOHSCROLL|WS_BORDER:i==T_HISTORY?WS_VSCROLL|LBS_NOINTEGRALHEIGHT:0;
-     timerControls[i-T_MODE]=ui_control(h,cls,labels[i-T_MODE],style|WS_TABSTOP,i,0,0,0,0);}
+     timerControls[i-T_MODE]=ui_control(h,cls,labels[i-T_MODE],style|WS_TABSTOP,i,0,0,0,0);if(i==T_FOCUS||i==T_BREAK){HWND edit=control(i);/* The cloud-created EDIT lacked the requested WS_BORDER. Apply the actual native frame after creation. */SetWindowLongPtrW(edit,GWL_STYLE,GetWindowLongPtrW(edit,GWL_STYLE)|WS_BORDER);SetWindowPos(edit,0,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);}}
    SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"倒计时");SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"正计时");
    SendMessageW(control(T_CLOCK),WM_SETFONT,(WPARAM)app.title,TRUE);
    ui_control(h,L"STATIC",L"专注模式",0,4596,0,0,0,0);ui_control(h,L"STATIC",L"专注分钟",0,4597,0,0,0,0);ui_control(h,L"STATIC",L"休息分钟",0,4598,0,0,0,0);

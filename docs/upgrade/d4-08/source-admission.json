@@ -176,8 +176,8 @@
     },
     {
       "path": "prototypes/d4-01/work-pages.js",
-      "bytes": 81626,
-      "sha256": "4aca2e2972d98a4738dc3f40948f55722dd95cb7b681638fba7643ed28233742",
+      "bytes": 83751,
+      "sha256": "efcfddbfa95a4df8287131680d0fde46729f583d2e3e01b91faafa61e9ed45f1",
       "reason": "Restore complete shared candidate UI behavior and feedback durability, preserve task/work model and production source."
     },
     {
@@ -338,8 +338,8 @@
     },
     {
       "path": "tests/d4-08/web-run.mjs",
-      "bytes": 15633,
-      "sha256": "3e2ef5ed3533fabce0b901707d1ee41961cb9ac67cb7f869a76e451abaf64431",
+      "bytes": 16187,
+      "sha256": "091a0bd8c12a365bbf5b4025d8858289dc1cb73ff8a7cbcd94daaf511469b71e",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -362,8 +362,8 @@
     },
     {
       "path": "tests/d4-08/web-work-cases.mjs",
-      "bytes": 8320,
-      "sha256": "4c65cd942cdbd817f28db435da215cf778c249ea5354dc22e52e88bb6ee994e7",
+      "bytes": 14386,
+      "sha256": "c6d0edd5e5997ae37672522c484339430cc9d81a1b53f9f76163bcc1af8a7d32",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -386,8 +386,8 @@
     },
     {
       "path": "tests/d4-08/windows/expected-checks.json",
-      "bytes": 8050,
-      "sha256": "7c754380a619c2df6b2cfeef592e6aea9f064e830b0903f8c628b598d372a655",
+      "bytes": 10459,
+      "sha256": "fb74b860a8ea486e58fcd2cde97ef2de57bc239470fd18d36e4df1d6b01f283f",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -416,8 +416,8 @@
     },
     {
       "path": "windows/d408-feedback.c",
-      "bytes": 38958,
-      "sha256": "236521a645ab55b71399ff7c3c1ed3eeebb0d9e3c0e3628fd093cd25ffcf3b82",
+      "bytes": 54165,
+      "sha256": "75cef5c86e8f309a1f9f31c7b1263ac2c861d9404d9413acb084dba260b01bbc",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
@@ -452,8 +452,8 @@
     },
     {
       "path": "windows/d408-timer.c",
-      "bytes": 31796,
-      "sha256": "e5d0b7c6918ee394a1ab98a5af2b9ade8e79d374ab4a02ade8b473d4fec02b1f",
+      "bytes": 32125,
+      "sha256": "1dae180a01fd8964b0f6a42f9cf33f8c19eba4282a0137558056c4dbc7253c16",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
@@ -464,20 +464,20 @@
     },
     {
       "path": "windows/d408-work-domain.inc",
-      "bytes": 15978,
-      "sha256": "77b850e7341d0384fcfcf1fd5b60deaad6e607d7b2bf9733edc687af2a61444a",
+      "bytes": 20553,
+      "sha256": "08f081e7e1bb7083d8d4f4948fa69656854feccd707b623ff4fcc87c70953494",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
       "path": "windows/d408-work-tests.inc",
-      "bytes": 16461,
-      "sha256": "68d497cd438eca58ef2b6ec195703b13a06d7f5d05e24dfaefc74dae2c9b29ff",
+      "bytes": 30761,
+      "sha256": "33e2141a606f4d83a7a9b267cd0e86403cae3b7f13c5f15d4779fd04c4c1dee1",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
       "path": "windows/d408-work.c",
-      "bytes": 35520,
-      "sha256": "544570309a01941babf5534aafb5f6bb060124057263f205e733d7c31b03b052",
+      "bytes": 39595,
+      "sha256": "af876ad509aca18212f02b3bdf807bccbebd885c4737568a0d82ebbbab8e7207",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {

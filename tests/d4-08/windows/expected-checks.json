@@ -56,6 +56,16 @@
     "native timer labels fields task selector and statistics occupy separate visible rows"
   ],
   "feedback": [
+    "draft-only delete and undo preserve draft membership and original fields",
+    "submitted record and editable draft restore to their separate collections",
+    "same-id undo conflicts preserve live records deletion batch and generation",
+    "legacy deletion batch undo remains compatible with submitted records",
+    "deleted source snapshots retain original image bytes through complete backup",
+    "invalid deletion source collections cannot mutate records or consume batch",
+    "same-instant offset feedback imports preserve both records and raw timestamps",
+    "feedback import orders valid offsets and milliseconds before replacing",
+    "unknown invalid or older feedback time imports preserve independent conflict copies",
+    "repeating identical feedback conflict imports preserves one source copy",
     "native feedback entry opens editable persistent form",
     "draft persists original fields and multiline body",
     "draft survives close and store reopen",
@@ -136,6 +146,25 @@
     "backup contains bytes referenced only by historical before snapshot",
     "missing historical file blocks full export and is explicit in safety snapshot",
     "full restore path repairs missing historical attachment with real saved bytes",
-    "corrupt historical attachment rejects restore before record merge"
+    "corrupt historical attachment rejects restore before record merge",
+    "native project form saves description color owner and members",
+    "native project unchanged edit preserves missing null and legacy scalar fields",
+    "project color accepts empty or six hexadecimal digits only",
+    "native unchanged item dropdowns preserve absent null unknown and numeric originals",
+    "explicit valid dropdown selection replaces preserved legacy status",
+    "search matches owner description contact fields members and steps case insensitively",
+    "search excludes history snapshots while empty query includes record",
+    "statistics scope excludes archives and other accounts with cancelled-free completion rate",
+    "statistics due date range includes Beijing timezone boundary and excludes unknown dates",
+    "statistics project query and status filters compose without changing records",
+    "statistics empty denominator and strict inclusive date filters are defined",
+    "template deletion rejects same-account legacy references without usable snapshot",
+    "template deletion permits instances carrying their independent definition snapshot",
+    "other account legacy references do not block own template deletion",
+    "native delete refuses legacy template without changing archived instance or definition",
+    "native delete permits independent snapshot and preserves archived instance definition",
+    "native statistics applies date and stable project filters with visible completion progress",
+    "invalid native statistics date range preserves previously applied result",
+    "native list search uses owner field beyond name and notes"
   ]
 }

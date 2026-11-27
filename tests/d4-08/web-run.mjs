@@ -39,11 +39,15 @@ try{
  chrome=spawn(browser,['--headless=new','--no-sandbox','--disable-gpu','--disable-background-networking','--disable-component-update','--disable-default-apps','--disable-sync','--no-first-run','--no-default-browser-check','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+profile,'about:blank'],{stdio:['ignore','pipe','pipe'],windowsHide:true});
  chrome.stderr.on('data',b=>{stderr+=b.toString();appendFileSync(join(out,'chrome-stderr.txt'),b);});chrome.stdout.on('data',b=>appendFileSync(join(out,'chrome-stdout.txt'),b));chrome.on('error',e=>{processError=e;});chrome.on('exit',(code,signal)=>{processError=Error('Chromium exited '+code+'/'+signal);});
  const started=performance.now();let endpoint;
+ report.startup={budgetMs:60000,spawnCount:1,transientPortReadCount:0,transientPortReads:[]};
  while(!endpoint){
   if(processError)throw processError;if(performance.now()-started>60000)throw Error('Chromium startup deadline exceeded');
-  const fromStderr=stderr.match(/^DevTools listening on (ws:\/\/127\.0\.0\.1:\d+\/devtools\/browser\/[a-f0-9-]+)\r?$/mi)?.[1],portFile=join(profile,'DevToolsActivePort');let fromFile;
-  if(existsSync(portFile)){const m=/^(\d+)\r?\n(\/devtools\/browser\/[a-f0-9-]+)\r?\n?$/.exec(readFileSync(portFile,'utf8'));if(m)fromFile='ws://127.0.0.1:'+m[1]+m[2];}
-  if(fromStderr&&fromFile&&fromStderr!==fromFile)throw Error('Conflicting debugger endpoints');endpoint=fromFile||fromStderr;if(!endpoint)await pause(100);
+  const fromStderr=stderr.match(/^DevTools listening on (ws:\/\/127\.0\.0\.1:\d+\/devtools\/browser\/[a-f0-9-]+)\r?$/mi)?.[1],portFile=join(profile,'DevToolsActivePort');let fromFile,filePending=false;
+  if(existsSync(portFile)){
+   try{const m=/^(\d+)\r?\n(\/devtools\/browser\/[a-f0-9-]+)\r?\n?$/.exec(readFileSync(portFile,'utf8'));if(m)fromFile='ws://127.0.0.1:'+m[1]+m[2];else filePending=true;}
+   catch(error){if(!['EBUSY','ENOENT'].includes(error.code))throw error;filePending=true;report.startup.transientPortReadCount++;const observation={code:error.code,message:error.message,elapsedMs:performance.now()-started};if(report.startup.transientPortReads.length<32)report.startup.transientPortReads.push(observation);trace({kind:'startup-transient-port-read',...observation});write();}
+  }
+  if(fromStderr&&fromFile&&fromStderr!==fromFile)throw Error('Conflicting debugger endpoints');endpoint=filePending?null:fromFile||fromStderr;if(!endpoint)await pause(100);
  }
  if(!/^ws:\/\/127\.0\.0\.1:([1-9]\d{0,4})\/devtools\/browser\/[a-f0-9-]+$/i.test(endpoint)||Number(new URL(endpoint).port)>65535)throw Error('Invalid local debugger endpoint');
  ws=new WebSocket(endpoint);await new Promise((yes,no)=>{const timer=setTimeout(()=>no(Error('CDP connection timeout')),15000);ws.addEventListener('open',()=>{clearTimeout(timer);yes();},{once:true});ws.addEventListener('error',e=>{clearTimeout(timer);no(e);},{once:true});});
