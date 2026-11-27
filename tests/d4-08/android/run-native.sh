@@ -7,7 +7,7 @@ import fs from 'node:fs/promises';import path from 'node:path';import crypto fro
 const out=await fs.realpath(process.argv[2]),temp=await fs.realpath(process.env.RUNNER_TEMP);
 if(path.dirname(out)!==temp||!path.basename(out).startsWith('d408-native-'))throw Error('Confined D408 output required');
 const identity=JSON.parse(await fs.readFile(out+'/d408-build-identity.json','utf8'));
-if(identity.sourceSHA!==process.env.GITHUB_SHA||identity.runId!==process.env.GITHUB_RUN_ID||identity.runAttempt!==process.env.GITHUB_RUN_ATTEMPT||identity.packageName!=='local.gxtodo.d408candidate'||identity.syntheticOnly!==true)throw Error('Same-run D408 identity required');
+if(identity.sourceSHA!==process.env.GITHUB_SHA||identity.runId!==process.env.GITHUB_RUN_ID||identity.runAttempt!==process.env.GITHUB_RUN_ATTEMPT||identity.runNumber!==process.env.GITHUB_RUN_NUMBER||identity.workflowName!==process.env.GITHUB_WORKFLOW||identity.packageName!=='local.gxtodo.d408candidate'||identity.syntheticOnly!==true||identity.stableSigning!==false||identity.productionSync!==false)throw Error('Same-run D408 identity required');
 const sums=await fs.readFile(out+'/SHA256SUMS.txt','utf8');
 for(const name of ['mytodo-d4-08-native-candidate.apk','mytodo-d4-08-native-tests.apk','d408-build-identity.json']){const expected=sums.trim().split('\n').filter(line=>line.slice(66)===name);if(expected.length!==1||expected[0].slice(0,64)!==crypto.createHash('sha256').update(await fs.readFile(out+'/'+name)).digest('hex'))throw Error('Artifact checksum mismatch: '+name);}
 NODE
@@ -15,6 +15,10 @@ pkg=local.gxtodo.d408candidate
 component=local.gxtodo.d408candidate.tests/local.gxtodo.replica.D408IntegrationInstrumentation
 evidence="$out/native-evidence"
 mkdir "$evidence"
+node --input-type=module - "$evidence" <<'NODE'
+import fs from 'node:fs/promises';
+await fs.writeFile(process.argv[2]+'/aggregate.json',JSON.stringify({sourceSHA:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,syntheticEmulatorOnly:true,coverageComplete:false,allGroupsPassed:false,coverageErrors:['Runner has not completed all phases and validated their exact case IDs. Inspect preserved raw reports for an interrupted or failed run.']},null,2)+'\n');
+NODE
 collect() {
   adb logcat -d -v threadtime > "$evidence/logcat.raw.txt" 2>&1 || true
   adb shell dumpsys notification --noredact > "$evidence/notification.raw.txt" 2>&1 || true
@@ -99,10 +103,43 @@ collect
 node --input-type=module - "$evidence" <<'NODE'
 import fs from 'node:fs/promises';
 const root=process.argv[2],groups={retained:['main','visual-360','visual-412','process-prepare','process-recover'],features:['features'],feedbackUi:['feedback-ui'],navigation:['navigation-360-gestural','navigation-412-gestural','navigation-360-threebutton','navigation-412-threebutton'],permissions:['notification-denied','notification-restored','exact-denied'],reboot:['boot-prepare','boot-recover']},results={};
+const expectedCounts={retained:15,features:7,feedbackUi:7,navigation:20,permissions:3,reboot:2};
+const identity=JSON.parse(await fs.readFile(root+'/../d408-build-identity.json','utf8'));
+const expectedIds={
+ main:['01 exact-permission-and-component-policy','02 accepted-page-native-bridge-and-feedback-entry','03 single-authority-foreground-service','04-native-notification-pause-resume','05-background-keeps-session','06-lockscreen-keeps-private-timer-notification','07-activity-recreation-preserves-timer-and-draft','08-real-deadline-completion-once','09-formal-reminder-alarm-delivery-and-snooze','10-native-feedbackkit-real-editor-save','11-accepted-work-page-selection-readonly-trace'],
+ features:['F01-real-native-timer-controls-and-task-picker','F02-all-history-and-native-day-statistics','F03-feedback-main-tools-list-editor-save','F04-feedback-real-image-draft-backup-restore-generation','F05-feedback-delete-batch-undo-and-stale-generation','F06-task-navigation-through-work-pages','F07-version-history-and-copy-controls'],
+ 'feedback-ui':['U01-system-photo-picker-preview-remove-and-draft','U02-resume-recreate-save-category-status-image','U03-delete-confirm-cancel-and-real-undo','U04-SAF-export-cancel-and-real-archive','U05-SAF-restore-cancel-confirm-and-image','U06-corrupt-restore-visible-error-and-retry','U07-empty-body-validation-and-corrected-save'],
+ 'visual-360':['visual-360-work-notes-real-edit-and-readonly-selection'],'visual-412':['visual-412-work-notes-real-edit-and-readonly-selection'],
+ 'process-prepare':['12-process-death-preparation'],'process-recover':['13-real-process-death-recovery'],
+ 'notification-denied':['P01-denied-notification-keeps-completion'],'notification-restored':['P02-restored-notification-delivers-pending'],'exact-denied':['P03-inexact-fallback-completes-real-minute'],
+ 'boot-prepare':['B01-prepare-real-device-reboot'],'boot-recover':['B02-real-device-reboot-recovers-session']
+};
+for(const phase of groups.navigation)expectedIds[phase]=['N01-thirteen-routes-real-wider-edge','N02-edges-distance-velocity-and-direction','N03-task-note-input-and-real-keyboard','N04-horizontal-scroll-retains-touch','N05-work-note-native-selection-and-system-back'].map(id=>phase+'-'+id);
+for(const phase of Object.keys(expectedIds))expectedIds[phase]=expectedIds[phase].map(id=>'D408-'+id).sort();
+const coverageErrors=[];
 let failed=false;
-for(const [name,phases] of Object.entries(groups)){const reports=[];for(const phase of phases){const p=JSON.parse(await fs.readFile(root+'/files/d408-evidence/result-'+phase+'.json','utf8'));if(p.sourceSHA!==process.env.GITHUB_SHA||p.runId!==process.env.GITHUB_RUN_ID||p.runAttempt!==process.env.GITHUB_RUN_ATTEMPT)throw Error('Identity mismatch '+phase);reports.push(p);}const cases=reports.flatMap(r=>r.cases);results[name]={caseCount:cases.length,passed:cases.filter(c=>c.passed).length,failed:cases.filter(c=>!c.passed).length,reports};if(results[name].failed)failed=true;}
+for(const [name,phases] of Object.entries(groups)){
+  const reports=[],missingReports=[];
+  for(const phase of phases){
+    let p;
+    try{p=JSON.parse(await fs.readFile(root+'/files/d408-evidence/result-'+phase+'.json','utf8'));}
+    catch(error){coverageErrors.push(`${phase}: report missing or invalid JSON: ${error.message}`);missingReports.push(phase);continue;}
+    if(!p||typeof p!=='object'||Array.isArray(p)){coverageErrors.push(`${phase}: report root is not an object`);missingReports.push(phase);continue;}
+    reports.push(p);
+    if(p.sourceSHA!==process.env.GITHUB_SHA||p.runId!==process.env.GITHUB_RUN_ID||p.runAttempt!==process.env.GITHUB_RUN_ATTEMPT||p.packageName!==identity.packageName||p.versionName!==identity.versionName||p.versionCode!==identity.versionCode||p.phase!==phase||p.syntheticOnly!==true||p.emulatorEvidence!==true)coverageErrors.push(`${phase}: identity or scope mismatch`);
+    if(!Array.isArray(p.cases)){coverageErrors.push(`${phase}: cases not an array`);continue;}
+    const names=p.cases.map(c=>c?.name),failures=p.cases.filter(c=>c?.passed!==true).length;
+    if(JSON.stringify([...names].sort())!==JSON.stringify(expectedIds[phase])||new Set(names).size!==names.length)coverageErrors.push(`${phase}: missing, duplicated or unexpected case IDs`);
+    if(p.caseCount!==p.cases.length||p.failureCount!==failures||p.passed!==(failures===0)||p.cases.some(c=>typeof c?.passed!=='boolean'))coverageErrors.push(`${phase}: inconsistent result counters or passed flags`);
+  }
+  const cases=reports.flatMap(r=>Array.isArray(r.cases)?r.cases:[]),failures=cases.filter(c=>c?.passed!==true).length;
+  results[name]={caseCount:cases.length,passed:cases.filter(c=>c?.passed===true).length,failed:failures,missingReports,reports};
+  if(failures)failed=true;
+  if(cases.length!==expectedCounts[name])coverageErrors.push(`${name}: expected ${expectedCounts[name]}, observed ${cases.length}`);
+}
+const coverageComplete=coverageErrors.length===0;
 await fs.writeFile(root+'/aggregate.json',JSON.stringify({sourceSHA:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,syntheticEmulatorOnly:true,
- groups:results,allGroupsPassed:!failed,notes:'D408 adapted retention suite is separate from unchanged D403/D405 jobs; actual reboot and permissions have independent counts.'},null,2)+'\n');
-if(results.retained.caseCount!==15||results.features.caseCount!==7||results.feedbackUi.caseCount!==7||results.navigation.caseCount!==20||results.permissions.caseCount!==3||results.reboot.caseCount!==2)throw Error('D408 coverage incomplete');
+ groups:results,coverageComplete,coverageErrors,allGroupsPassed:!failed&&coverageComplete,notes:'D408 adapted retention suite is separate from unchanged D403/D405 jobs; actual reboot and permissions have independent counts.'},null,2)+'\n');
+if(!coverageComplete)throw Error('D408 coverage incomplete: '+coverageErrors.join('; '));
 if(failed)throw Error('D408 cases failed; preserve all original evidence');
 NODE

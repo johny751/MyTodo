@@ -11,6 +11,9 @@ import android.os.ParcelFileDescriptor;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
+import android.view.KeyCharacterMap;
+import android.view.InputDevice;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.EditText;
@@ -56,7 +59,10 @@ final class D408FeedbackUiChecks {
     }
     void test(String name,D408IntegrationInstrumentation.Check action){
         t.test(name,()->{try{return action.run();}catch(Exception|AssertionError failure){
-            try{dump(name+"-failed");t.shot(name+"-failed");}catch(Exception diagnostic){failure.addSuppressed(diagnostic);}throw failure;
+            try{dump(name+"-failed");t.shot(name+"-failed");}catch(Exception diagnostic){failure.addSuppressed(diagnostic);}
+            // Preserve the failure before dismissing an external picker that
+            // would otherwise hide all later independent cases.
+            try{for(int i=0;i<3;i++){AccessibilityNodeInfo root=t.getUiAutomation().getRootInActiveWindow();if(root==null||t.target.getPackageName().contentEquals(root.getPackageName()==null?"":root.getPackageName()))break;systemKey(KeyEvent.KEYCODE_BACK,0);SystemClock.sleep(300);}}catch(Exception|AssertionError cleanup){failure.addSuppressed(cleanup);}throw failure;
         }});
     }
     static void check(boolean value,String message){D408IntegrationInstrumentation.check(value,message);}
@@ -116,8 +122,9 @@ final class D408FeedbackUiChecks {
         return new JSONObject().put("noteId",noteId).put("cancelPreserved",true).put("deletedAndUndone",true).put("imageSha256",imageHash);
     }
     JSONObject exportUi()throws Exception{
-        check(noteId!=null,"prior UI note exists");tools=t.launch(FeedbackToolsActivity.class);D408FeatureChecks.nativeText(t,tools,"导出意见备份");waitDocuments();t.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);t.awaitForeground(tools);t.until("visible export cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消选择文件"));
-        D408FeatureChecks.nativeText(t,tools,"导出意见备份");downloads();AccessibilityNodeInfo filename=waitNode("SAF filename input",n->"android.widget.EditText".contentEquals(n.getClassName()),8000);touch(filename);selectAll();t.sendStringSync(backupName);t.waitForIdleSync();
+        check(noteId!=null,"prior UI note exists");tools=t.launch(FeedbackToolsActivity.class);D408FeatureChecks.nativeText(t,tools,"导出意见备份");waitDocuments();for(int i=0;i<3&&!tools.hasWindowFocus();i++){systemKey(KeyEvent.KEYCODE_BACK,0);SystemClock.sleep(300);}t.awaitForeground(tools);t.until("visible export cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消选择文件"));
+        D408FeatureChecks.nativeText(t,tools,"导出意见备份");downloads();AccessibilityNodeInfo filename=waitNode("SAF filename input",n->"android.widget.EditText".contentEquals(n.getClassName()),8000);touch(filename);systemKey(KeyEvent.KEYCODE_A,KeyEvent.META_CTRL_ON);systemText(backupName);t.waitForIdleSync();
+        check(find(n->"android.widget.EditText".contentEquals(n.getClassName())&&backupName.contentEquals(n.getText()==null?"":n.getText()))!=null,"real system filename entry matches requested archive");
         touch(waitNode("SAF save button",n->String.valueOf(n.getText()).matches("(?i)save|保存|存储"),8000));t.awaitForeground(tools);t.until("visible export success",15000,()->D408FeatureChecks.windowContains(t,"意见备份已保存"));
         File archive=new File(t.evidence,backupName);try(ParcelFileDescriptor fd=t.getUiAutomation().executeShellCommand("cat /sdcard/Download/"+backupName);InputStream input=new ParcelFileDescriptor.AutoCloseInputStream(fd);OutputStream output=new FileOutputStream(archive)){byte[] buffer=new byte[32768];int n;while((n=input.read(buffer))!=-1)output.write(buffer,0,n);}
         check(archive.length()>100,"actual SAF ZIP exists");try(InputStream input=new java.io.FileInputStream(archive)){check(input.read()=='P'&&input.read()=='K',"actual exported ZIP header");}backupHash=D408FeatureChecks.hash(new java.io.FileInputStream(archive));exported=D408FeatureChecks.storageSnapshot(storage);exportedGeneration=storage.generation();t.shot("feedback-ui-export-success");
@@ -136,6 +143,9 @@ final class D408FeedbackUiChecks {
         return new JSONObject().put("invalidFile",corruptName).put("visibleFailure",true).put("preservedGeneration",generation).put("retryGeneration",storage.generation()).put("scope","local restore failure; FeedbackKit has no remote submission service");
     }
     JSONObject validationRetry()throws Exception{
+        // This independent validation case must still run when a preceding UI
+        // case leaves its synthetic draft behind. Keep the draft as evidence.
+        JSONObject prior=draft();if(prior!=null){D408IntegrationInstrumentation.write(new File(t.evidence,"feedback-u07-prior-incomplete-fixture.json"),prior.toString(2));new FeedbackRepository(storage,storage).discardDraft(prior.getString("id"));}
         open("记个想法");int before=storage.all(FeedbackStorage.NOTES).size();tapTag(page,"feedback_save");EditText bodyInput=(EditText)waitTag(page,"feedback_body");t.until("visible field validation",5000,()->bodyInput.getError()!=null);check(storage.all(FeedbackStorage.NOTES).size()==before,"invalid empty save creates no note");t.shot("feedback-ui-empty-save-error");String corrected="D408_UI_CORRECTED_"+BuildInfo.RUN_ID;text(corrected);tapTag(page,"feedback_save");t.until("corrected save succeeds",10000,()->storage.all(FeedbackStorage.NOTES).stream().anyMatch(n->corrected.equals(n.optString("body"))));
         return new JSONObject().put("emptySaveRejected",true).put("correctedSaveBody",corrected).put("operation","local note save; no network submission claimed");
     }
@@ -144,16 +154,23 @@ final class D408FeedbackUiChecks {
     }
     void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
     void downloads()throws Exception{
-        waitDocuments();dump("feedback-documents-before");AccessibilityNodeInfo roots=find(n->{String desc=String.valueOf(n.getContentDescription());return desc.matches("(?i)show roots|open navigation drawer|显示根目录|打开导航抽屉|显示根目录菜单");});
-        if(roots!=null){touch(roots);touch(waitNode("Downloads root",n->String.valueOf(n.getText()).matches("(?i)downloads|下载"),5000));}
+        waitDocuments();dump("feedback-documents-before");AccessibilityNodeInfo roots=find(n->{String desc=String.valueOf(n.getContentDescription());return desc.matches("(?i)show roots|show navigation drawer|open navigation drawer|显示根目录|显示导航栏|打开导航栏|打开导航抽屉|显示根目录菜单");});
+        if(roots!=null){touch(roots);touch(waitNode("Downloads root",n->String.valueOf(n.getText()).matches("(?i)downloads|下载")&&clickTarget(n)!=null,5000));}
         else check(find(n->String.valueOf(n.getText()).matches("(?i)downloads|下载"))!=null,"observed DocumentsUI Downloads location");
         SystemClock.sleep(300);dump("feedback-documents-downloads");
     }
-    void selectAll(){long now=SystemClock.uptimeMillis();t.sendKeySync(new KeyEvent(now,now,KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_A,0,KeyEvent.META_CTRL_ON));t.sendKeySync(new KeyEvent(now,SystemClock.uptimeMillis(),KeyEvent.ACTION_UP,KeyEvent.KEYCODE_A,0,KeyEvent.META_CTRL_ON));}
+    void systemKey(int code,int modifiers){long now=SystemClock.uptimeMillis();check(t.getUiAutomation().injectInputEvent(new KeyEvent(now,now,KeyEvent.ACTION_DOWN,code,0,modifiers,KeyCharacterMap.VIRTUAL_KEYBOARD,0,0,InputDevice.SOURCE_KEYBOARD),true),"system key down accepted");check(t.getUiAutomation().injectInputEvent(new KeyEvent(now,SystemClock.uptimeMillis(),KeyEvent.ACTION_UP,code,0,modifiers,KeyCharacterMap.VIRTUAL_KEYBOARD,0,0,InputDevice.SOURCE_KEYBOARD),true),"system key up accepted");}
+    void systemText(String value){KeyEvent[] events=KeyCharacterMap.load(KeyCharacterMap.VIRTUAL_KEYBOARD).getEvents(value.toCharArray());check(events!=null,"system filename has real key events");for(KeyEvent event:events)check(t.getUiAutomation().injectInputEvent(KeyEvent.changeTimeRepeat(event,SystemClock.uptimeMillis(),0),true),"system filename key accepted");}
     AccessibilityNodeInfo find(Predicate<AccessibilityNodeInfo> predicate){return find(t.getUiAutomation().getRootInActiveWindow(),predicate);}
     AccessibilityNodeInfo find(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate){if(n==null)return null;if(n.isVisibleToUser()&&predicate.test(n))return n;for(int i=0;i<n.getChildCount();i++){AccessibilityNodeInfo result=find(n.getChild(i),predicate);if(result!=null)return result;}return null;}
     AccessibilityNodeInfo waitNode(String label,Predicate<AccessibilityNodeInfo> predicate,long timeout)throws Exception{t.until(label,timeout,()->find(predicate)!=null);return find(predicate);}
-    void touch(AccessibilityNodeInfo n)throws Exception{check(n!=null,"actual accessible target");Rect r=new Rect();n.getBoundsInScreen(r);check(!r.isEmpty(),"visible system target bounds");D408FeatureChecks.deviceSwipe(t,r.exactCenterX(),r.exactCenterY(),r.exactCenterX(),r.exactCenterY(),1);}
+    AccessibilityNodeInfo clickTarget(AccessibilityNodeInfo node){for(int i=0;i<5&&node!=null;i++,node=node.getParent())if(node.isVisibleToUser()&&node.isEnabled()&&node.isClickable())return node;return null;}
+    void touch(AccessibilityNodeInfo n)throws Exception{
+        check(n!=null,"actual accessible target");AccessibilityNodeInfo clickable=clickTarget(n);check(clickable!=null,"observed enabled clickable system target");Rect r=new Rect();clickable.getBoundsInScreen(r);check(!r.isEmpty(),"visible system target bounds");long now=SystemClock.uptimeMillis();
+        MotionEvent down=MotionEvent.obtain(now,now,MotionEvent.ACTION_DOWN,r.exactCenterX(),r.exactCenterY(),0),up=MotionEvent.obtain(now,now+35,MotionEvent.ACTION_UP,r.exactCenterX(),r.exactCenterY(),0);
+        down.setSource(InputDevice.SOURCE_TOUCHSCREEN);up.setSource(InputDevice.SOURCE_TOUCHSCREEN);
+        try{check(t.getUiAutomation().injectInputEvent(down,true),"system pointer down accepted");SystemClock.sleep(35);check(t.getUiAutomation().injectInputEvent(up,true),"system pointer up accepted");}finally{down.recycle();up.recycle();}SystemClock.sleep(250);
+    }
     void dump(String name)throws Exception{JSONArray rows=new JSONArray();collect(t.getUiAutomation().getRootInActiveWindow(),rows);D408IntegrationInstrumentation.write(new File(t.evidence,String.format(java.util.Locale.ROOT,"%03d-",++dumpSequence)+name+".json"),rows.toString(2));}
     void collect(AccessibilityNodeInfo n,JSONArray rows)throws Exception{if(n==null||rows.length()>600)return;if(n.isVisibleToUser()){Rect r=new Rect();n.getBoundsInScreen(r);rows.put(new JSONObject().put("package",String.valueOf(n.getPackageName())).put("class",String.valueOf(n.getClassName())).put("id",String.valueOf(n.getViewIdResourceName())).put("text",String.valueOf(n.getText())).put("description",String.valueOf(n.getContentDescription())).put("bounds",r.toShortString()).put("clickable",n.isClickable()));}for(int i=0;i<n.getChildCount();i++)collect(n.getChild(i),rows);}
 }

@@ -38,7 +38,15 @@ collect() {
   adb exec-out run-as local.gxtodo.d408probe tar -cf - files/d408-probe-evidence > "$out/probe-evidence.tar" 2> "$out/pull-error.txt" || true
   if [[ -s "$out/probe-evidence.tar" ]]; then tar -xf "$out/probe-evidence.tar" -C "$out" || true; fi
 }
-cleanup() { collect;adb shell wm size reset >/dev/null 2>&1 || true;adb shell wm density reset >/dev/null 2>&1 || true; }
+cleanup() {
+  local runner_status=$?
+  collect
+  if ! node tests/d4-08/android/aggregate-probe.mjs "$out" "$role"; then runner_status=1; fi
+  adb shell wm size reset >/dev/null 2>&1 || true
+  adb shell wm density reset >/dev/null 2>&1 || true
+  trap - EXIT
+  exit "$runner_status"
+}
 trap cleanup EXIT
 adb install "$app_apk" > "$out/install-target.txt"
 adb install "$probe" > "$out/install-probe.txt"
@@ -68,19 +76,4 @@ for mode in gestural threebutton; do
       local.gxtodo.d408probe/local.gxtodo.d408probe.BaselineProbe | tee "$out/instrumentation-$phase.raw.txt"
   done
 done
-collect
-node --input-type=module - "$out" "$role" <<'NODE'
-import fs from 'node:fs/promises';
-const [out,role]=process.argv.slice(2),reports=[];
-for(const mode of ['gestural','threebutton'])for(const width of [360,412]){
- const report=JSON.parse(await fs.readFile(`${out}/files/d408-probe-evidence/${width}-${mode}/result.json`,'utf8'));
- if(report.probeSourceSHA!==process.env.GITHUB_SHA||report.evidenceRunId!==process.env.GITHUB_RUN_ID||report.evidenceAttempt!==process.env.GITHUB_RUN_ATTEMPT)throw Error('Probe report identity mismatch');
- reports.push(report);
-}
-const cases=reports.flatMap(r=>r.cases),harnessErrors=reports.reduce((n,r)=>n+r.harnessErrors,0);
-await fs.writeFile(out+'/aggregate.json',JSON.stringify({role,probeSourceSHA:process.env.GITHUB_SHA,evidenceRunId:process.env.GITHUB_RUN_ID,evidenceAttempt:process.env.GITHUB_RUN_ATTEMPT,
- suite:'D408-frozen-apk-blackbox',phaseCount:reports.length,caseCount:cases.length,productPassed:cases.filter(c=>!c.harnessError&&c.productPassed).length,
- productFailed:cases.filter(c=>!c.harnessError&&!c.productPassed).length,harnessErrors,reports,notes:'Baseline product gaps remain failures. A green collector only confirms complete evidence, not product acceptance.'},null,2)+'\n');
-if(harnessErrors)throw Error('Blackbox driver infrastructure failures: '+harnessErrors);
-if(role!=='frozen-baseline'&&cases.some(c=>!c.productPassed))throw Error('Fixed candidate still fails required capability');
-NODE
+# EXIT always collects and aggregates every available phase, including aborts.

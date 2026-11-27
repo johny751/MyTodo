@@ -1,15 +1,5 @@
 name: D4-08 UI and Android development validation
 on:
-  push:
-    branches: [d4/d4-08-candidate-1]
-    paths:
-      - prototypes/d4-01/**
-      - prototypes/d4-08/**
-      - android/d408/**
-      - tests/d4-08/web-*.mjs
-      - tests/d4-08/android/native/**
-      - tests/d4-08/android/run-native.sh
-      - .github/workflows/d4-08-development.yml
   workflow_dispatch:
 permissions:
   contents: read

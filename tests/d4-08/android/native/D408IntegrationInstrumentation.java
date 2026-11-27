@@ -51,7 +51,7 @@ public final class D408IntegrationInstrumentation extends Instrumentation {
         } catch (Throwable error) { recordFailure("phase-abort", error); }
         for (int i = 0; i < cases.length(); i++) if (!cases.optJSONObject(i).optBoolean("passed")) failures++;
         try {
-            JSONObject report = new JSONObject().put("phase", phase).put("sourceSHA", BuildInfo.SOURCE_SHA)
+            JSONObject report = new JSONObject().put("phase", phase).put("packageName",target.getPackageName()).put("sourceSHA", BuildInfo.SOURCE_SHA)
                 .put("runId", BuildInfo.RUN_ID).put("runAttempt", BuildInfo.RUN_ATTEMPT).put("versionName", BuildInfo.VERSION_NAME)
                 .put("versionCode", BuildInfo.VERSION_CODE).put("deviceSdk", Build.VERSION.SDK_INT)
                 .put("deviceFingerprint", Build.FINGERPRINT).put("pid", Process.myPid()).put("syntheticOnly", true)

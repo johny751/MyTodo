@@ -13,11 +13,18 @@ if (prior.sourceSha !== e.GITHUB_SHA || prior.runId !== e.GITHUB_RUN_ID || prior
 const aar = 'android/libs/feedback-kit-1.2.0.aar', aarHash = hash(await fs.readFile(aar));
 if (aarHash !== '4c55a583a2641dfb68a90700a0759adec3e4ab1562dc5ccef7cbbc06e2896ade') throw Error('Pinned FeedbackKit mismatch');
 await fs.mkdir(output); await fs.mkdir(path.join(output, 'assets')); await fs.mkdir(path.join(output, 'generated/local/gxtodo/d403preview'), {recursive: true});
-const versionCode = 408000 + Number(e.GITHUB_RUN_NUMBER), versionName = '0.8.' + e.GITHUB_RUN_NUMBER;
-if (!Number.isSafeInteger(versionCode) || versionCode <= 408000 || versionCode > 2147483647) throw Error('Invalid run identity');
+const versionTracks = {
+  'D4-08 UI and Android development validation': {versionTrack:'development',versionBase:408000,nameOffset:0},
+  'D4-08 candidate and preserved regression': {versionTrack:'candidate',versionBase:418000,nameOffset:10000}
+};
+const track=versionTracks[e.GITHUB_WORKFLOW],runNumber=Number(e.GITHUB_RUN_NUMBER);
+if(!track||!/^[1-9]\d*$/.test(e.GITHUB_RUN_NUMBER)||!Number.isSafeInteger(runNumber)||runNumber>9999||
+  !/^[1-9]\d*$/.test(e.GITHUB_RUN_ID)||!/^[1-9]\d*$/.test(e.GITHUB_RUN_ATTEMPT))throw Error('Unknown workflow or exhausted version range');
+const versionCode=track.versionBase+runNumber,versionName='0.8.'+(track.nameOffset+runNumber);
 const buildTimeUTC = new Date().toISOString();
 const identity = {packageName: 'local.gxtodo.d408candidate', versionCode, versionName, sourceSHA: e.GITHUB_SHA, buildTimeUTC,
-  runId: e.GITHUB_RUN_ID, runAttempt: e.GITHUB_RUN_ATTEMPT, syntheticOnly: true, stableSigning: false, productionSync: false,
+  runId: e.GITHUB_RUN_ID, runAttempt: e.GITHUB_RUN_ATTEMPT, runNumber:e.GITHUB_RUN_NUMBER,workflowName:e.GITHUB_WORKFLOW,
+  versionTrack:track.versionTrack,versionBase:track.versionBase,syntheticOnly: true, stableSigning: false, productionSync: false,
   originalD403TestsUnchanged: true, feedbackAarSha256: aarHash, inputHtmlSha256: hash(html)};
 const changes = ['恢复完整原生番茄钟、任务选择、计时历史与每日统计', '原 FeedbackKit 完整工具和列表成为明确主流程，保留独立数据库、图片和恢复能力',
   '扩展应用内侧导航起始区并保留系统返回，继续使用唯一持久计时会话',
@@ -27,18 +34,24 @@ if (!Array.isArray(knownHistory)) throw Error('Known candidate history must be a
 const historyKeys = new Set();
 for (const entry of knownHistory) {
   const key = [entry.sourceSHA, entry.runId, entry.runAttempt].join('/');
-  if (entry.packageName !== identity.packageName || !Number.isSafeInteger(entry.versionCode) || entry.versionCode >= versionCode ||
+  const priorTrack=versionTracks[entry.workflowName],priorRun=Number(entry.runNumber);
+  if (entry.packageName !== identity.packageName || !priorTrack || entry.versionTrack!==priorTrack.versionTrack || entry.versionBase!==priorTrack.versionBase ||
+      !/^[1-9]\d*$/.test(entry.runNumber) || !Number.isSafeInteger(priorRun) || priorRun>9999 ||
+      entry.versionCode!==priorTrack.versionBase+priorRun || entry.versionName!=='0.8.'+(priorTrack.nameOffset+priorRun) ||
+      (entry.versionTrack===identity.versionTrack&&(priorRun>runNumber||(priorRun===runNumber&&(entry.runId!==identity.runId||Number(entry.runAttempt)>=Number(identity.runAttempt))))) ||
       typeof entry.versionName !== 'string' || !/^[a-f0-9]{40}$/.test(entry.sourceSHA) ||
       !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(entry.buildTimeUTC) || !Number.isFinite(Date.parse(entry.buildTimeUTC)) ||
       !/^[1-9]\d*$/.test(entry.runId) || !/^[1-9]\d*$/.test(entry.runAttempt) || historyKeys.has(key) ||
       !Array.isArray(entry.changes) || !entry.changes.every(change => typeof change === 'string') || typeof entry.statusText !== 'string' ||
-      entry.stableSigning !== false || entry.syntheticOnly !== true || entry.released !== false || entry.accepted !== false) throw Error('Invalid known candidate history');
+      entry.stableSigning !== false || entry.syntheticOnly !== true || entry.released !== false || entry.accepted !== false ||
+      !entry.provenance || !['archiveSha256','apkSha256','identitySha256','signerSha256'].every(field=>/^[a-f0-9]{64}$/.test(entry.provenance[field]||''))) throw Error('Invalid known candidate history');
   historyKeys.add(key);
 }
 const history = [{...identity, changes, status: 'UNVERIFIED', statusText: '本次候选等待云端验证；未发布、未验收。',
-  released: false, accepted: false}, ...knownHistory.sort((a, b) => b.versionCode - a.versionCode || b.buildTimeUTC.localeCompare(a.buildTimeUTC))];
+  released: false, accepted: false}, ...knownHistory.sort((a, b) => b.buildTimeUTC.localeCompare(a.buildTimeUTC)||b.versionCode-a.versionCode)];
 const historyText = history.map(entry => entry.versionName + ' / versionCode ' + entry.versionCode + '\nby codex · ' + entry.sourceSHA.slice(0, 5) +
   '\nAPK 编译时间：' + entry.buildTimeUTC + ' (UTC)\n云端运行：' + entry.runId + ' / attempt ' + entry.runAttempt +
+  '\n工作流：'+entry.workflowName+' / run number '+entry.runNumber+
   '\n独立临时 CI 签名；跨运行覆盖未经批准。\n' + entry.statusText + '\n' + entry.changes.join('\n')).join('\n\n');
 let bundle = html.replaceAll('MyTodo D4-03 Android 隔离体验 APK', 'MyTodo D4-08 Android 原生集成候选 APK');
 if (!bundle.includes('</body>')) throw Error('HTML insertion anchor missing');

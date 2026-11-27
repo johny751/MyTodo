@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.2",
+    "versionCode": 408002,
+    "sourceSHA": "f7a680559d7d23643f56c1a100402245187b982c",
+    "buildTimeUTC": "2026-11-26T09:15:55.236Z",
+    "runId": "45790215610",
+    "runAttempt": "1",
+    "runNumber": "2",
+    "workflowName": "D4-08 UI and Android development validation",
+    "versionTrack": "development",
+    "versionBase": 408000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "DEVELOPMENT_VALIDATION_FAILED",
+    "statusText": "开发构建成功，云端验证失败；未发布、未验收。保留组15/15、导航20/20、权限3/3、重启后重开恢复2/2通过；功能4/7、反馈UI 0/7，原失败保留。",
+    "changes": [
+      "增加真实系统图片选择器、SAF、草稿重建、删除撤销及恢复失败重试UI测试",
+      "增加360/412宽度及手势/三键导航的实际设备矩阵测试",
+      "保留完整原生计时器、任务选择、全部历史、每日统计及原FeedbackKit主流程",
+      "修复前轮运行脚本语法；本轮仍有任务选择、备份URI和跨应用测试输入失败"
+    ],
+    "provenance": {
+      "artifactId": "15104135165",
+      "artifactName": "d408-android-45790215610-1",
+      "archiveSha256": "887fdd7e20cb22fdeaaa807c58ad32fbdc1c42b0fc826877fe5bdce3d5ce0345",
+      "apkMember": "d408-native-45790215610-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "442fbfcabb0fa33cafc363c777e8ec16cf598e87abd530dec1e4a407bb74c786",
+      "identityMember": "d408-native-45790215610-1/d408-build-identity.json",
+      "identitySha256": "eaa2df395aef7f7ab7df082ef2cac32724a0299b4fa8cd3890befc9f36323a39",
+      "signerSha256": "abc3c994a43a13494fc2ba9f8a19b434a4b6bf023e398f2e2250370141c2c83c"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.1",
+    "versionCode": 408001,
+    "sourceSHA": "1b6abe95d88f55326ba910cf7a1c326744f80346",
+    "buildTimeUTC": "2026-11-26T08:50:01.340Z",
+    "runId": "45786419385",
+    "runAttempt": "1",
+    "runNumber": "1",
+    "workflowName": "D4-08 UI and Android development validation",
+    "versionTrack": "development",
+    "versionBase": 408000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "DEVELOPMENT_RUNNER_FAILED",
+    "statusText": "开发APK构建成功，原生运行脚本语法错误导致产品测试未执行；未发布、未验收。不得把未执行视为产品通过。",
+    "changes": [
+      "建立D408独立原生候选包及原正式源码单独编译检查",
+      "恢复原生计时器、任务关联、完整历史与每日统计",
+      "恢复原FeedbackKit主入口，扩展应用导航起始区并保留系统返回",
+      "注入真实Git源、云端运行编号和UTC APK编译时间"
+    ],
+    "provenance": {
+      "artifactId": "15101070630",
+      "artifactName": "d408-android-45786419385-1",
+      "archiveSha256": "e869559fd8cd4ab83d5e8177314cf0053affb1d1effa876e113b1e601eaa6b11",
+      "apkMember": "d408-native-45786419385-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "37cb07970635077a4ec221a278b7a73a6a3f546dbf7683c63f831e34a8c4e45d",
+      "identityMember": "d408-native-45786419385-1/d408-build-identity.json",
+      "identitySha256": "72b11a9b1c0c4fd3e0fcb0084570f47d97eb12153166bb150cfcec99647eb474",
+      "signerSha256": "ab7c5fd72f8656cd5eeeba7b8a1b37d174985a55115919197e39d9e2f9b99438"
+    }
+  }
+]

@@ -7,6 +7,7 @@
   var feedbackBases = new Map();
   var timerHistoryView = {query: '', phase: '', mode: '', outcome: '', page: 0};
   var pendingSubmission = null;
+  var pendingWebTimer = null;
   var documentId = 'document-' + Date.now() + '-' + Math.random().toString(36).slice(2);
   var sequence = 0;
   var lastReminderCheck = 0;
@@ -89,7 +90,6 @@
   function record(t, outcome, wall) {
     if (!t.sessionId || t.history.some(function (h) { return h.id === t.sessionId; })) return;
     t.history.unshift({id: t.sessionId, mode: t.mode, phase: t.phase, taskId: t.taskId, startedAt: t.startedAt, finishedAt: new Date(wall).toISOString(), elapsedMillis: t.elapsedMillis, outcome: outcome});
-    if (t.history.length > 10000) t.history.length = 10000;
   }
   function complete(t, wall) {
     if (t.status === 'completed') return;
@@ -214,7 +214,37 @@
   }
   function timer(ctx) {
     if (nativeTimer()) { observeNativeTimer(ctx); return nativeTimer().info().state || createClock(time()); }
+    if (pendingWebTimer) return personal(ctx).timer || createClock(time());
     return advance(personal(ctx).timer || createClock(time()), time());
+  }
+  function webTimerNotice(ctx) {
+    return '<div id="personal-web-timer-save"'+(pendingWebTimer?' role="alert"':'')+'>'+(pendingWebTimer?'<p>'+esc(ctx,pendingWebTimer.error)+'</p><p>待保存操作保留原会话、操作时刻和完整历史；切换页面后仍可重试。关闭浏览器会放弃这次未保存操作，重新打开以原持久状态恢复。</p>'+button(ctx,'重试保存计时操作','personal-timer-retry')+button(ctx,'放弃未保存操作并读取原状态','personal-timer-discard-pending'):'')+'</div>';
+  }
+  function showWebTimerFailure(ctx) {
+    var host=document.querySelector('#personal-web-timer-save');if(host)host.outerHTML=webTimerNotice(ctx);
+    var content=document.querySelector('#personal-timer-content');if(content)content.innerHTML=timerBody(ctx,personal(ctx).timer||createClock(time()));
+    ctx.toast(pendingWebTimer.error);
+  }
+  function commitWebTimer(ctx) {
+    var operation=pendingWebTimer;if(!operation)return true;
+    try {
+      if(typeof ctx.repo.updateDemoDurable!=='function')throw new Error('此候选缺少可靠持久化接口');
+      ctx.repo.updateDemoDurable(function(d){var p=ensure(d);if(JSON.stringify(p.timer||null)!==operation.base)throw new Error('计时状态已被其他操作修改，未覆盖；请放弃本次未保存操作后核对');p.timer=clone(operation.next);});
+    } catch(error) {
+      var changed=JSON.stringify(personal(ctx).timer||null)!==operation.base;
+      operation.error='计时操作尚未写入持久存储，原状态和全部历史保持不变。'+(changed?error.message:ctx.repo.persistence?.().error||error.message||String(error));
+      showWebTimerFailure(ctx);throw new Error(operation.error);
+    }
+    pendingWebTimer=null;var host=document.querySelector('#personal-web-timer-save');if(host)host.outerHTML=webTimerNotice(ctx);
+    ctx.toast(operation.message);return true;
+  }
+  function saveWebTimer(ctx,action,values,next,message) {
+    if(pendingWebTimer) {
+      if(pendingWebTimer.action===action&&JSON.stringify(pendingWebTimer.values)===JSON.stringify(values||{}))return commitWebTimer(ctx);
+      throw new Error('上一项计时操作尚未保存，请先重试或明确放弃；原持久状态保持不变');
+    }
+    pendingWebTimer={action:action,values:clone(values||{}),base:JSON.stringify(personal(ctx).timer||null),next:clone(next),message:message,error:''};
+    return commitWebTimer(ctx);
   }
   function timerText(t) { var millis = t.mode === 'countup' ? t.elapsedMillis : Math.max(0, (t.phase === 'break' ? t.breakMinutes : t.durationMinutes) * MINUTE - t.elapsedMillis), seconds = Math.floor(millis / 1000); return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0'); }
   function timerStatus(t) { return ({idle: '待开始', running: '计时中', paused: '已暂停', completed: '本轮已完成', ended: '提前结束'})[t.status]; }
@@ -238,7 +268,7 @@
   }
   function pomodoroPage(ctx) {
     var html = webPomodoroPage(ctx);
-    if (!nativeTimer()) return html + '<section class="panel"><h2>关闭与恢复规则</h2><p>切换页面不停止计时。关闭浏览器或异常退出后，重新打开会使用已保存会话和系统时间差恢复；同一页面内使用单调时钟。系统时间倒退不会产生负时长，向前调整可能使倒计时到期。每个会话只写入一次结束记录。</p><p>浏览器被系统暂停时不会保证准时通知。计时状态保存在当前候选的独立存储中；存储不可用时请保留页面并导出备份。</p></section>';
+    if (!nativeTimer()) return html.replace('<div id="personal-timer-content">',webTimerNotice(ctx)+'<div id="personal-timer-content">') + '<section class="panel"><h2>关闭与恢复规则</h2><p>切换页面不停止计时。关闭浏览器或异常退出后，重新打开会使用已保存会话和系统时间差恢复；同一页面内使用单调时钟。系统时间倒退不会产生负时长，向前调整可能使倒计时到期。每个会话只写入一次结束记录。</p><p>历史不会按条数删除。存储容量不足或写入失败时保留原持久状态和完整历史，显示待保存操作；请保留页面并重试或导出已有备份。浏览器被系统暂停时不会保证准时通知。</p></section>';
     observeNativeTimer(ctx);
     html = html.replace('原生番茄钟隔离体验', '打开原生计时控制')
       .replace('计时状态独立于页面，切换页面或重新打开体验后继续恢复。', '网页与原生界面共用 Android 持久计时会话。')
@@ -250,7 +280,10 @@
   }
   function mutateTimer(ctx, action, values) {
     var messages = {start: '已开始计时', pause: '已暂停', resume: '已继续计时', end: '已提前结束', finish: '本轮已完成', break: '已开始休息', reset: '已重置计时', configure: '已保存计时设置', 'claim-completion': '已确认本轮完成'};
-    if (!nativeTimer()) return update(ctx, function (p) { p.timer = command(p.timer || createClock(time()), action, values, time()); }, messages[action]);
+    if (!nativeTimer()) {
+      if(pendingWebTimer)return saveWebTimer(ctx,action,values,null,messages[action]);
+      var now=time();return saveWebTimer(ctx,action,values,command(personal(ctx).timer||createClock(now),action,values,now),messages[action]);
+    }
     observeNativeTimer(ctx);
     if (nativeTimerBlocked(ctx)) throw new Error('请先读取计时状态或处理保留的旧记录；当前操作尚未保存');
     var form = document.querySelector('[data-form="personal-timer-config"]');
@@ -272,11 +305,12 @@
       if (!document.hidden) nativeTimer().refresh().catch(function () {});
       return false;
     }
+    if(pendingWebTimer)return false;
     var saved = personal(ctx).timer;
     if (!saved || saved.status !== 'running') return false;
     var t = advance(saved, time());
     if (t.status === 'completed') {
-      update(ctx, function (p) { p.timer = t; }, t.phase === 'break' ? '休息计时完成' : '专注计时完成');
+      try{saveWebTimer(ctx,'completion',{},t,t.phase === 'break' ? '休息计时完成' : '专注计时完成');}catch(_){return false;}
       if (document.querySelector('#personal-timer-content')) document.querySelector('#personal-timer-content').innerHTML = timerBody(ctx, t);
       return true;
     }
@@ -340,6 +374,51 @@
 
   function feedbackData(ctx) { return personal(ctx).feedback || {ideas: [], draft: null, beforeImport: null}; }
   function feedbackSnapshot(record){var value=clone(record);delete value.history;return value;}
+  function feedbackIdentity(record){return record.originalId||record.id;}
+  function feedbackGeneration(record){return Number.isSafeInteger(record.restoreGeneration)?record.restoreGeneration:0;}
+  function restoredAfterDeletion(record,tombstone){
+    var generation=feedbackGeneration(tombstone);
+    return feedbackGeneration(record)>generation&&!!feedbackRestoration(record,generation,[tombstone])&&(record.history||[]).some(function(h){return h.action==='恢复意见'&&Number.isSafeInteger(h.restoreGeneration)&&h.restoreGeneration>generation&&h.restoreGeneration<=feedbackGeneration(record)&&(tombstone.deleteBatchId?h.deleteBatchId===tombstone.deleteBatchId:h.deletedAt===tombstone.deletedAt);});
+  }
+  function feedbackRestoration(record,olderGeneration,tombstones){
+    return (record.history||[]).filter(function(h){
+      if(h.action!=='恢复意见'||h.restoreGeneration!==feedbackGeneration(record)||!Number.isSafeInteger(h.restoreGeneration)||h.restoreGeneration<=olderGeneration||!h.deletedAt)return false;
+      function sameDeletion(deleted){return deleted.deletedAt===h.deletedAt&&(h.deleteBatchId?deleted.deleteBatchId===h.deleteBatchId:!deleted.deleteBatchId);}
+      return (record.history||[]).some(function(deleted){return deleted.action==='删除意见'&&sameDeletion({deletedAt:deleted.at,deleteBatchId:deleted.deleteBatchId});})||(tombstones||[]).some(function(deleted){return feedbackIdentity(deleted)===record.id&&feedbackGeneration(deleted)<h.restoreGeneration&&sameDeletion(deleted);});
+    }).at(-1);
+  }
+  function deletedVersionKey(record){var value=clone(record);value.id=feedbackIdentity(record);delete value.originalId;return JSON.stringify(value);}
+  function retainDeletedVersion(data,record,tombstone){
+    var copy=clone(record),identity=feedbackIdentity(copy);copy.id=identity;delete copy.originalId;
+    if(tombstone){copy.deletedAt=tombstone.deletedAt;if(tombstone.deleteBatchId)copy.deleteBatchId=tombstone.deleteBatchId;else delete copy.deleteBatchId;copy.restoreGeneration=Math.max(feedbackGeneration(copy),feedbackGeneration(tombstone));}
+    data.trash=data.trash||[];var key=deletedVersionKey(copy);
+    if(data.trash.some(function(existing){return deletedVersionKey(existing)===key;}))return;
+    if(data.trash.some(function(existing){return existing.id===copy.id;})){copy.originalId=identity;copy.id=uid('deleted-copy');}
+    data.trash.push(copy);
+  }
+  function mergeFeedback(data,incoming,extras){
+    data.beforeImport=clone(data.ideas);data.beforeImportFull=clone({ideas:data.ideas,draft:data.draft||null,trash:data.trash||[],draftCopies:data.draftCopies||[]});
+    extras.trash.forEach(function(tombstone){retainDeletedVersion(data,tombstone);});
+    function blocker(record){return (data.trash||[]).find(function(tombstone){return feedbackIdentity(tombstone)===record.id&&!restoredAfterDeletion(record,tombstone);});}
+    // A deletion wins over an ordinary older copy. Keep every displaced version,
+    // including original images, in trash so only explicit restore activates it.
+    data.ideas=data.ideas.filter(function(record){var tombstone=blocker(record);if(!tombstone)return true;retainDeletedVersion(data,record,tombstone);return false;});
+    incoming.forEach(function(record){
+      var x=clone(record),tombstone=blocker(x);if(tombstone){retainDeletedVersion(data,x,tombstone);return;}
+      var old=data.ideas.find(function(i){return i.id===x.id;});
+      if(old&&feedbackGeneration(old)!==feedbackGeneration(x)){
+        var newer=feedbackGeneration(old)>feedbackGeneration(x)?old:x,older=newer===old?x:old,restored=feedbackRestoration(newer,feedbackGeneration(older),data.trash);
+        if(restored){retainDeletedVersion(data,older,{deletedAt:restored.deletedAt,deleteBatchId:restored.deleteBatchId,restoreGeneration:restored.restoreGeneration-1});if(newer===x)Object.assign(old,x);return;}
+      }
+      if(!old)data.ideas.push(x);
+      else if(x.updatedAt>old.updatedAt)Object.assign(old,x);
+      else if(x.updatedAt===old.updatedAt&&JSON.stringify(x)!==JSON.stringify(old)){
+        if(data.ideas.some(function(i){return i.title===x.title&&i.body===x.body&&i.status===x.status&&feedbackCategory(i)===feedbackCategory(x)&&i.createdAt===x.createdAt&&JSON.stringify(i.images)===JSON.stringify(x.images)&&JSON.stringify(i.history||[])===JSON.stringify(x.history||[]);}))return;
+        x.id=uid('idea-copy');x.updatedAt=nextFeedbackStamp(x.updatedAt);data.ideas.push(x);
+      }
+    });
+    (extras.draft?[extras.draft]:[]).concat(extras.draftCopies).forEach(function(x){if(JSON.stringify(data.draft)===JSON.stringify(x)||(data.draftCopies||[]).some(function(i){return JSON.stringify(i)===JSON.stringify(x);}))return;if(!data.draft)data.draft=x;else{data.draftCopies=data.draftCopies||[];data.draftCopies.push(x);}});
+  }
   function feedbackImageKey(image,index){return typeof image.id==='string'&&image.id?image.id:'legacy-image-'+index+'-'+image.sha256;}
   function feedbackImages(ctx,images,editable) {
     return (images||[]).map(function(i,index){var key=feedbackImageKey(i,index);return '<figure data-feedback-preview data-image-id="'+esc(ctx,key)+'"><button type="button" class="feedback-image-toggle" data-action="personal-feedback-image-preview" aria-label="查看原图 '+esc(ctx,i.name)+'"><img src="'+esc(ctx,'data:'+i.mime+';base64,'+i.base64)+'" alt="'+esc(ctx,i.name)+'"></button><figcaption>'+esc(ctx,i.name)+' · '+i.size+' 字节<small>SHA-256 '+esc(ctx,i.sha256)+'</small></figcaption>'+(editable?button(ctx,'移除此图','personal-feedback-image-remove',key,'danger'):'')+'</figure>';}).join('');
@@ -398,7 +477,7 @@
     if (p.timer) {
       var t = p.timer;
       if (t.focusMode != null && !['countdown', 'countup'].includes(t.focusMode)) throw new Error('合成专注计时模式无效');
-      if (t.version !== 1 || !['countdown', 'countup'].includes(t.mode) || !['focus', 'break'].includes(t.phase) || !['idle', 'running', 'paused', 'ended', 'completed'].includes(t.status) || !Number.isInteger(t.durationMinutes) || t.durationMinutes < 1 || t.durationMinutes > 180 || !Number.isInteger(t.breakMinutes) || t.breakMinutes < 1 || t.breakMinutes > 180 || !Number.isFinite(t.elapsedMillis) || t.elapsedMillis < 0 || !t.anchor || !Number.isFinite(t.anchor.wall) || !Number.isFinite(t.anchor.elapsed) || typeof t.anchor.boot !== 'string' || !Array.isArray(t.history) || t.history.length > 10000 || typeof t.sessionId !== 'string' || typeof t.taskId !== 'string' || !t.focusedMillisByDay || !t.completedSessionsByDay) throw new Error('合成计时状态无效');
+      if (t.version !== 1 || !['countdown', 'countup'].includes(t.mode) || !['focus', 'break'].includes(t.phase) || !['idle', 'running', 'paused', 'ended', 'completed'].includes(t.status) || !Number.isInteger(t.durationMinutes) || t.durationMinutes < 1 || t.durationMinutes > 180 || !Number.isInteger(t.breakMinutes) || t.breakMinutes < 1 || t.breakMinutes > 180 || !Number.isFinite(t.elapsedMillis) || t.elapsedMillis < 0 || !t.anchor || !Number.isFinite(t.anchor.wall) || !Number.isFinite(t.anchor.elapsed) || typeof t.anchor.boot !== 'string' || !Array.isArray(t.history) || typeof t.sessionId !== 'string' || typeof t.taskId !== 'string' || !t.focusedMillisByDay || !t.completedSessionsByDay) throw new Error('合成计时状态无效');
       for (var h of t.history) if (!h || typeof h.id !== 'string' || !Number.isFinite(h.elapsedMillis) || h.elapsedMillis < 0 || !['completed', 'ended'].includes(h.outcome) || !Number.isFinite(Date.parse(h.finishedAt))) throw new Error('合成计时历史无效');
       for (var map of [t.focusedMillisByDay, t.completedSessionsByDay]) { if (typeof map !== 'object' || Array.isArray(map)) throw new Error('合成计时统计无效'); for (var key of Object.keys(map)) if (!/^-?\d+$/.test(key) || !Number.isFinite(map[key]) || map[key] < 0) throw new Error('合成计时统计无效'); }
     }
@@ -460,7 +539,7 @@
     if(action==='personal-feedback-image-preview')return true;
     if(action==='personal-feedback-image-remove'){var editor=document.querySelector('[data-form="personal-feedback"]');if(!editor)throw new Error('请先打开意见编辑器');var removed=JSON.parse(editor.elements.removedImageIds.value||'[]');if(!removed.includes(id))removed.push(id);editor.elements.removedImageIds.value=JSON.stringify(removed);editor.dataset.dirty='true';Array.from(editor.querySelectorAll('[data-feedback-existing] [data-image-id]')).find(function(el){return el.dataset.imageId===id;})?.remove();return true;}
     if(action==='personal-feedback-selected-remove'){var input=document.querySelector('[data-form="personal-feedback"] [name="images"]');if(input){var transfer=new DataTransfer();Array.from(input.files).forEach(function(file,index){if(index!==Number(id))transfer.items.add(file);});input.files=transfer.files;input.dispatchEvent(new Event('change',{bubbles:true}));}return true;}
-    if(action==='personal-feedback-restore')return updateFeedback(ctx,function(data){var x=(data.trash||[]).find(function(i){return i.id===id;});if(!x)throw new Error('已删除记录不存在');var originalId=x.originalId||x.id;if(data.ideas.some(function(i){return i.id===originalId;}))throw new Error('当前已有同编号意见，未覆盖任何内容；请导出备份后处理');var restored=clone(x),at=nextFeedbackStamp(x.updatedAt);restored.id=originalId;restored.restoreGeneration=(Number(x.restoreGeneration)||0)+1;restored.history=(restored.history||[]).concat([{at:at,action:'恢复意见',status:restored.status,deleteBatchId:x.deleteBatchId,deletedAt:x.deletedAt,restoreGeneration:restored.restoreGeneration}]);restored.updatedAt=at;delete restored.deletedAt;delete restored.deleteBatchId;data.ideas.push(restored);data.trash=data.trash.filter(function(i){return i.id!==id;});},'已恢复原意见和原始图片；删除批次与恢复历史保留',true);
+    if(action==='personal-feedback-restore')return updateFeedback(ctx,function(data){var x=(data.trash||[]).find(function(i){return i.id===id;});if(!x)throw new Error('已删除记录不存在');var originalId=feedbackIdentity(x);if(data.ideas.some(function(i){return i.id===originalId;}))throw new Error('当前已有同编号意见，未覆盖任何内容；请导出备份后处理');var restored=clone(x),at=nextFeedbackStamp(x.updatedAt),tombstones=(data.trash||[]).filter(function(i){return feedbackIdentity(i)===originalId;});restored.id=originalId;delete restored.originalId;restored.restoreGeneration=tombstones.reduce(function(highest,tombstone){return Math.max(highest,feedbackGeneration(tombstone));},0)+1;if(!Number.isSafeInteger(restored.restoreGeneration))throw new Error('恢复代次已达上限，原记录完整保留');restored.history=(restored.history||[]).concat(tombstones.map(function(tombstone){return {at:at,action:'恢复意见',status:restored.status,deleteBatchId:tombstone.deleteBatchId,deletedAt:tombstone.deletedAt,restoreGeneration:restored.restoreGeneration};}));restored.updatedAt=at;delete restored.deletedAt;delete restored.deleteBatchId;data.ideas.push(restored);data.trash=data.trash.filter(function(i){return i.id!==id;});},'已恢复原意见和原始图片；删除批次与恢复历史保留',true);
     if(action==='personal-feedback-draft-copy'){var copyIndex=Number(id),copyDraft=(feedbackData(ctx).draftCopies||[])[copyIndex];if(!copyDraft)throw new Error('恢复草稿已不存在');updateFeedback(ctx,function(data){var previous=data.draft;data.draft=clone(copyDraft);data.draftCopies.splice(copyIndex,1);if(previous)data.draftCopies.push(previous);});return feedbackForm(ctx,'',feedbackData(ctx).draft);}
     if(action==='personal-feedback-export-draft'){var current=document.querySelector('[data-form="personal-feedback"]');if(current)return submit('personal-feedback-export-draft',new FormData(current),ctx);return true;}
     if (action === 'personal-native-timer') { if (!window.GxD4Preview || !window.GxD4Preview.isPreview || !window.GxD4Preview.isPreview() || !window.GxD4Preview.openNativeTimer) throw new Error('此版本不包含原生隔离体验'); window.GxD4Preview.openNativeTimer(); return true; }
@@ -476,6 +555,8 @@
     if (action === 'personal-note-delete' || action === 'personal-feedback-delete') { var kind = action.includes('feedback') ? 'feedback' : 'note'; ctx.modal('<h2>删除这条' + (kind === 'feedback' ? '意见' : '便签') + '？</h2><p>仅删除当前合成条目。</p><div class="form-actions">' + button(ctx, '取消', 'personal-close') + button(ctx, '确认删除', 'personal-' + kind + '-delete-confirm', id, 'danger') + '</div>'); return true; }
     if (action === 'personal-note-delete-confirm') { ctx.transaction(function (s) { s.notes = s.notes.filter(function (n) { return n.id !== id; }); }); ctx.closeModal(); ctx.toast('已删除便签'); return true; }
     if (action === 'personal-timer-refresh' && nativeTimer()) return nativeTimer().refresh().then(function () { updateNativeTimerView(ctx); return true; });
+    if(action==='personal-timer-retry'&&!nativeTimer())return commitWebTimer(ctx);
+    if(action==='personal-timer-discard-pending'&&!nativeTimer()){if(pendingWebTimer?.action==='configure'){var timerForm=document.querySelector('[data-form="personal-timer-config"]');if(timerForm)timerForm.dataset.dirty='';}pendingWebTimer=null;ctx.navigate('pomodoro');ctx.toast('已放弃未保存操作，继续读取原持久计时状态');return true;}
     if (action === 'personal-timer-adopt' && nativeTimer()) {
       if (nativeTimer().info().busy) throw new Error('上一项计时操作尚未确认');
       update(ctx, function (p) { if (p.timer) p.nativeTimerLegacyArchive = clone(p.timer); }, '旧网页记录已保留，统一计时已启用');
@@ -539,7 +620,7 @@
     if (name === 'personal-feedback-import') {
       var raw=get(values,'json');if(new TextEncoder().encode(raw).length>20000000)throw new Error('合成意见备份超过限制');var imported=JSON.parse(raw),incoming=await validateFeedback(imported);
       var extras={ideas:[],draft:imported.draft||null,trash:imported.trash||[],draftCopies:imported.draftCopies||[]};await validatePersonal({feedback:extras});
-      return updateFeedback(ctx,function(data){data.beforeImport=clone(data.ideas);data.beforeImportFull=clone({ideas:data.ideas,draft:data.draft||null,trash:data.trash||[],draftCopies:data.draftCopies||[]});incoming.forEach(function(x){var old=data.ideas.find(function(i){return i.id===x.id;});if(!old)data.ideas.push(x);else if(x.updatedAt>old.updatedAt)Object.assign(old,x);else if(x.updatedAt===old.updatedAt&&JSON.stringify(x)!==JSON.stringify(old)){if(data.ideas.some(function(i){return i.title===x.title&&i.body===x.body&&i.status===x.status&&feedbackCategory(i)===feedbackCategory(x)&&i.createdAt===x.createdAt&&JSON.stringify(i.images)===JSON.stringify(x.images)&&JSON.stringify(i.history||[])===JSON.stringify(x.history||[]);}))return;x.id=uid('idea-copy');x.updatedAt=nextFeedbackStamp(x.updatedAt);data.ideas.push(x);}});if(extras.trash.length){data.trash=data.trash||[];extras.trash.forEach(function(x){if(!data.trash.some(function(i){return JSON.stringify(i)===JSON.stringify(x);})){if(data.trash.some(function(i){return i.id===x.id;})){x.originalId=x.id;x.id=uid('deleted-copy');}data.trash.push(x);}});}var incomingDrafts=(extras.draft?[extras.draft]:[]).concat(extras.draftCopies);incomingDrafts.forEach(function(x){if(JSON.stringify(data.draft)===JSON.stringify(x)||(data.draftCopies||[]).some(function(i){return JSON.stringify(i)===JSON.stringify(x);}))return;if(!data.draft)data.draft=x;else{data.draftCopies=data.draftCopies||[];data.draftCopies.push(x);}});},'已验证并合并合成意见，导入前备份保留',true);
+      return updateFeedback(ctx,function(data){mergeFeedback(data,incoming,extras);},'已验证并合并；删除批次优先，受阻版本保留在已删除意见，显式恢复后才重新启用。导入前备份保留',true);
     }
     if (name === 'personal-sync-config') { var folder = get(values, 'folder').trim(); if (!/^[A-Za-z0-9_-]{1,60}$/.test(folder)) throw new Error('演示目录使用 1–60 位字母、数字、下划线或短横线'); return update(ctx, function (p) { p.sync.enabled = values.has('enabled'); p.sync.autoSync = values.has('autoSync'); p.sync.folder = folder; }, '已保存模拟配置'); }
     if (name === 'personal-device') { var deviceName = get(values, 'name').trim(); if (!deviceName || deviceName.length > 80) throw new Error('请输入有效演示设备名称'); return update(ctx, function (p) { var d = p.devices.find(function (x) { return x.id === get(values, 'id'); }); if (!d) throw new Error('演示设备已不存在'); d.name = deviceName; }, '已修改演示名称', true); }

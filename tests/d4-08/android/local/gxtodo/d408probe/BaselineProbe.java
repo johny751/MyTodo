@@ -53,7 +53,10 @@ public final class BaselineProbe extends Instrumentation {
             if (size == null) throw new HarnessFailure("No screenshot surface");
             screenWidth = size.getWidth(); screenHeight = size.getHeight(); size.recycle();
             write("device.txt", shell("getprop ro.build.fingerprint") + "\n" + shell("wm size") + "\n" + shell("wm density") + "\n" + shell("settings get secure navigation_mode"));
-            launch(); snapshot("initial");
+            // Every size/navigation phase is a new driver process but the target
+            // may still be showing native FeedbackKit from the preceding phase.
+            // Reset only its process/task entry, preserving its isolated data.
+            fresh(); snapshot("initial");
             if (!args.getString("suite", "baseline-gaps").equals("baseline-gaps")) throw new HarnessFailure("Unknown suite");
 
             test("B01-native-task-selection", () -> {

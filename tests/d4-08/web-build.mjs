@@ -28,11 +28,16 @@ const marker='globalThis.DemoDomain=__D4Modules["prototypes/d4-01/domain.mjs"];'
 if(html.split(marker).length!==2)throw Error('Legacy module marker is ambiguous');
 html=html.replace(marker,()=>compiled+marker);
 const extra=new TextDecoder('utf8',{fatal:true}).decode(uiBytes);new vm.Script(extra,{filename:uiPath});
-const ending='\n})();\n</script>\n</body>';
-if(html.split(ending).length!==2)throw Error('Legacy bundle ending is ambiguous');
-html=html.replace(ending,()=>'\n'+extra.replace(/<\/script/gi,'<\\/script')+ending);
-const script=html.match(/<script data-d4-inline="classic">\n([\s\S]*?)<\/script>/)?.[1];
-if(!script)throw Error('Composed classic script missing');new vm.Script(script,{filename:'d408-composed-classic.js'});
+const blocks=[...html.matchAll(/<script data-d4-inline="classic">\n([\s\S]*?)<\/script>/g)];
+if(blocks.length!==1)throw Error('Legacy classic script is ambiguous');
+const block=blocks[0],ending=/\n\}\)\(\);\n\s*$/;
+if(!ending.test(block[1]))throw Error('Legacy bundle wrapper ending is missing');
+// The legacy builder already ends its script with a newline, then adds another
+// before </script>. Match the wrapper inside the marked script, not HTML spacing.
+const script=block[1].replace(ending,tail=>'\n'+extra.replace(/<\/script/gi,'<\\/script')+tail);
+new vm.Script(script,{filename:'d408-composed-classic.js'});
+const replacement='<script data-d4-inline="classic">\n'+script+'</script>';
+html=html.slice(0,block.index)+replacement+html.slice(block.index+block[0].length);
 const bytes=Buffer.from(html);receipt.legacyArtifact={...receipt.artifact};receipt.artifact={...receipt.artifact,bytes:bytes.length,sha256:hash(bytes)};
 receipt.inputs.push(...[[servicePath,serviceBytes],[uiPath,uiBytes]].map(([p,b])=>({path:p,bytes:b.length,sha256:hash(b)})));
 receipt.dependencyGraph.push({path:servicePath,dependencies,exports:['V2_CAPABILITIES','bindExistingV2Storage','createV2Service']});

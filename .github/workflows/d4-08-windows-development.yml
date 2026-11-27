@@ -1,12 +1,5 @@
 name: D4-08 Win32 development validation
 on:
-  push:
-    branches: [d4/d4-08-candidate-1]
-    paths:
-      - windows/**
-      - scripts/build-windows.mjs
-      - tests/d4-08/windows/**
-      - .github/workflows/d4-08-windows-development.yml
   workflow_dispatch:
 permissions:
   contents: read

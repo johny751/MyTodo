@@ -154,6 +154,22 @@ jobs:
       - name: Record the actual test step outcome
         if: always()
         run: echo '${{ steps.gap.outcome }}' > "$RUNNER_TEMP/d408-baseline-android-step-outcome.txt"
+      - name: Require complete forty-case collection without harness failures
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const e=process.env;
+          const r=JSON.parse(fs.readFileSync(`${e.RUNNER_TEMP}/d408-baseline-evidence-${e.GITHUB_RUN_ID}-${e.GITHUB_RUN_ATTEMPT}/aggregate.json`,'utf8'));
+          assert.equal(r.probeSourceSHA,e.GITHUB_SHA);
+          assert.equal(r.evidenceRunId,e.GITHUB_RUN_ID);
+          assert.equal(r.evidenceAttempt,e.GITHUB_RUN_ATTEMPT);
+          assert.equal(r.role,'frozen-baseline');
+          assert.equal(r.planned,40);assert.equal(r.executed,40);assert.equal(r.notExecuted,0);
+          assert.equal(r.coverageComplete,true);assert.equal(r.collectorPassed,true);assert.equal(r.harnessErrors,0);
+          console.log(JSON.stringify({collectorPassed:r.collectorPassed,productPassed:r.productPassed,productFailed:r.productFailed}));
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:

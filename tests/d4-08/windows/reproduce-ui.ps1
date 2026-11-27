@@ -321,11 +321,21 @@ try {
         if(-not $create.Count){return @{passed=$false;reason='Process page has no enabled visible template create control';visibleButtons=@($windows|Where-Object {$_.Visible -and $_.ClassName -eq 'Button'});notice=@($windows|Where-Object {$_.Visible -and $_.ControlId -eq 4133})}}
         Click-Control $create[0].Handle
         $windows=Snapshot 'template-form'
-        $edits=@($windows|Where-Object {$_.Visible -and $_.Enabled -and $_.ClassName -eq 'Edit' -and $_.ControlId -notin @(4120,103)}|Sort-Object Top,Left)
-        $save=Find-Button '^(保存|创建模板)$'
+        $forms=@($windows|Where-Object {$_.Visible -and $_.Enabled -and $_.ClassName -match '^Gx.*Form$' -and $_.Parent -eq $workspace[0].Handle})
+        if($forms.Count -ne 1){throw "Expected one active native template form, found $($forms.Count)."}
+        # Background controls retain their own enabled style even when their owner is
+        # disabled by a modal form. Select only this form's controls, never screen order.
+        $formControls=@($windows|Where-Object {$_.Parent -eq $forms[0].Handle -and $_.Visible -and $_.Enabled})
+        $edits=@($formControls|Where-Object {$_.ClassName -eq 'Edit'}|Sort-Object Top,Left)
+        $save=@($formControls|Where-Object {$_.ClassName -eq 'Button' -and $_.Text -match '^(保存|创建模板)$'})
         if($edits.Count -lt 2 -or -not $save.Count){return @{passed=$false;reason='Template form lacks editable name/steps and Save';editControls=$edits}}
+        if($save.Count -ne 1){throw "Expected one template form Save control, found $($save.Count)."}
         [D408.UiDriver]::SetText($edits[0].Handle,'D408 UI template')
         [D408.UiDriver]::SetText($edits[-1].Handle,"First D408 step`r`nSecond D408 step")
+        if([D408.UiDriver]::Text($edits[0].Handle) -cne 'D408 UI template' -or [D408.UiDriver]::Text($edits[-1].Handle) -cne "First D408 step`r`nSecond D408 step"){
+            throw 'Template form input readback did not match the intended name and two steps.'
+        }
+        $null=Snapshot 'template-form-filled';Capture 'template-form-filled' $forms[0].Handle
         Click-Control $save[0].Handle
         $matches=@()
         foreach($file in Get-ChildItem -LiteralPath $dataRoot -File -Recurse -Filter '*.json'){
