@@ -1,6 +1,42 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.10004",
+    "versionCode": 418004,
+    "sourceSHA": "45e381c9f108ebe45ca7c6147a8525eb9f22fabf",
+    "buildTimeUTC": "2026-11-27T11:22:55.541Z",
+    "runId": "45989756331",
+    "runAttempt": "1",
+    "runNumber": "4",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_VALIDATION_FAILED",
+    "statusText": "候选构建成功，覆盖完整但仍有真实验证失败；未发布、未验收。保留15/15、功能7/7、新工作数据保留4/4、重启后重开2/2通过；反馈UI 3/7、导航19/20、权限2/3。原失败及依赖失败完整保留。",
+    "changes": [
+      "新增360/412各两例真实编辑保存重开，验证模板版本、步骤身份、实例快照、缺失关系、未知字段和原始时间值；4/4通过",
+      "系统图片确认已通过，真实预览关闭的输入窗口问题和SAF侧栏定位问题仍使反馈UI失败",
+      "实际导航矩阵19/20；360手势模式短快手势失败保留",
+      "权限组P03原始断言超时，后续原始历史记录显示该会话完整60000毫秒；不把后续诊断替代失败结论"
+    ],
+    "provenance": {
+      "artifactId": "15194625495",
+      "artifactName": "d408-android-45989756331-1",
+      "archiveSha256": "6a4536b8b0f9535db9fe6f43ecda57527c4a4c3baf36f7c45fbdef3ea404dbe5",
+      "apkMember": "d408-native-45989756331-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "3b259a0948a1258beba028b5b599514927677b4ec6c3fd94f076edcadaaf6611",
+      "identityMember": "d408-native-45989756331-1/d408-build-identity.json",
+      "identitySha256": "f912cfb75829f6e8b50c97ad3ac649421af8e3d6322d70ebc84fe78139f572b5",
+      "signerSha256": "c16f2f9cfbf89503b34339422a765d9eb04162147f50d69cc4d3df456163d96c"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionName": "0.8.10002",
     "versionCode": 418002,
     "sourceSHA": "6f94c892efd3103e772530541658e364b6ce4577",

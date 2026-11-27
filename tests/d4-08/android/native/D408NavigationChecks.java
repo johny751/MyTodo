@@ -15,6 +15,7 @@ final class D408NavigationChecks {
     final D408IntegrationInstrumentation t;
     final String phase;
     WebView web;
+    int gestureSequence;
     D408NavigationChecks(D408IntegrationInstrumentation t,String phase){this.t=t;this.phase=phase;}
     static void run(D408IntegrationInstrumentation t,String phase){
         D408NavigationChecks s=new D408NavigationChecks(t,phase);
@@ -35,10 +36,17 @@ final class D408NavigationChecks {
     void swipe(double x,double y,double dx,double dy,long duration)throws Exception{
         int[] location=new int[2];t.runOnMainSync(()->web.getLocationOnScreen(location));float scale=web.getWidth()/(float)Double.parseDouble(t.js(web,"innerWidth"));
         float sx=location[0]+(float)x*scale,sy=location[1]+(float)y*scale,ex=sx+(float)dx*scale,ey=sy+(float)dy*scale;
-        long down=SystemClock.uptimeMillis();MotionEvent e=MotionEvent.obtain(down,down,MotionEvent.ACTION_DOWN,sx,sy,0);e.setSource(InputDevice.SOURCE_TOUCHSCREEN);t.sendPointerSync(e);e.recycle();int steps=duration<100?4:12;
-        for(int i=1;i<=steps;i++){SystemClock.sleep(Math.max(1,duration/steps));e=MotionEvent.obtain(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_MOVE,sx+(ex-sx)*i/steps,sy+(ey-sy)*i/steps,0);e.setSource(InputDevice.SOURCE_TOUCHSCREEN);t.sendPointerSync(e);e.recycle();}
-        e=MotionEvent.obtain(down,SystemClock.uptimeMillis(),MotionEvent.ACTION_UP,ex,ey,0);e.setSource(InputDevice.SOURCE_TOUCHSCREEN);t.sendPointerSync(e);e.recycle();t.waitForIdleSync();SystemClock.sleep(220);
+        // Observe trusted browser events without dispatching or changing the UI.
+        t.js(web,"(()=>{window.__d408GestureEvents=[];if(!window.__d408GestureObserver){window.__d408GestureObserver=true;for(const type of ['touchstart','touchmove','touchend','touchcancel'])document.addEventListener(type,e=>{const p=e.touches[0]||e.changedTouches[0];window.__d408GestureEvents.push({type:e.type,timeStamp:e.timeStamp,trusted:e.isTrusted,x:p?.clientX,y:p?.clientY});},{capture:true,passive:true});}return true;})()");
+        JSONArray events=new JSONArray();long down=SystemClock.uptimeMillis();inject(down,MotionEvent.ACTION_DOWN,sx,sy,events);int steps=duration<100?4:12;
+        // Schedule against a single clock. Synchronous per-event waits previously
+        // accumulated dispatch latency on top of every nominal 10 ms interval.
+        for(int i=1;i<=steps;i++){long wait=down+duration*i/steps-SystemClock.uptimeMillis();if(wait>0)SystemClock.sleep(wait);inject(down,MotionEvent.ACTION_MOVE,sx+(ex-sx)*i/steps,sy+(ey-sy)*i/steps,events);}
+        inject(down,MotionEvent.ACTION_UP,ex,ey,events);t.waitForIdleSync();SystemClock.sleep(220);
+        JSONObject evidence=new JSONObject().put("phase",phase).put("startCssX",x).put("startCssY",y).put("dx",dx).put("dy",dy).put("requestedDurationMs",duration).put("actualInputDurationMs",events.getJSONObject(events.length()-1).getLong("eventTime")-down).put("events",events).put("trustedDomEvents",new JSONArray(t.js(web,"window.__d408GestureEvents")));
+        D408IntegrationInstrumentation.write(new java.io.File(t.evidence,String.format(java.util.Locale.ROOT,"%s-gesture-%03d.json",phase,++gestureSequence)),evidence.toString(2));
     }
+    void inject(long down,int action,float x,float y,JSONArray events)throws Exception{long at=SystemClock.uptimeMillis();MotionEvent event=MotionEvent.obtain(down,at,action,x,y,0);event.setSource(InputDevice.SOURCE_TOUCHSCREEN);boolean accepted;try{accepted=t.getUiAutomation().injectInputEvent(event,false);}finally{event.recycle();}events.put(new JSONObject().put("action",action).put("eventTime",at).put("dispatchReturnedAt",SystemClock.uptimeMillis()).put("x",x).put("y",y).put("accepted",accepted));check(accepted,"real device gesture event accepted");}
     JSONObject routes()throws Exception{
         ready();JSONArray rows=new JSONArray();for(String value:new String[]{"tasks","notes","pomodoro","feedback","analytics","dashboard","work-items","projects","templates","processes","contacts","archive","settings"}){
             route(value);double[] p=blank(32);String before=t.js(web,"JSON.stringify(D4Prototype.repo.state)");swipe(p[0],p[1],115,2,280);check(opened(),"real edge opens route "+value);check(JSONObject.quote(value).equals(t.js(web,"D4Prototype.getRoute()")),"navigation preserves route "+value);check(before.equals(t.js(web,"JSON.stringify(D4Prototype.repo.state)")),"navigation preserves tasks "+value);backClose();rows.put(new JSONObject().put("route",value).put("x",p[0]).put("y",p[1]).put("opened",true).put("backClosed",true));}

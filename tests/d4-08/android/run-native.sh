@@ -20,10 +20,11 @@ import fs from 'node:fs/promises';
 await fs.writeFile(process.argv[2]+'/aggregate.json',JSON.stringify({sourceSHA:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,syntheticEmulatorOnly:true,coverageComplete:false,allGroupsPassed:false,coverageErrors:['Runner has not completed all phases and validated their exact case IDs. Inspect preserved raw reports for an interrupted or failed run.']},null,2)+'\n');
 NODE
 collect() {
-  adb logcat -d -v threadtime > "$evidence/logcat.raw.txt" 2>&1 || true
-  adb shell dumpsys notification --noredact > "$evidence/notification.raw.txt" 2>&1 || true
-  adb shell dumpsys alarm > "$evidence/alarm.raw.txt" 2>&1 || true
-  adb shell dumpsys activity services "$pkg" > "$evidence/services.raw.txt" 2>&1 || true
+  local prefix="${1:-}"
+  adb logcat -d -v threadtime > "$evidence/${prefix}logcat.raw.txt" 2>&1 || true
+  adb shell dumpsys notification --noredact > "$evidence/${prefix}notification.raw.txt" 2>&1 || true
+  adb shell dumpsys alarm > "$evidence/${prefix}alarm.raw.txt" 2>&1 || true
+  adb shell dumpsys activity services "$pkg" > "$evidence/${prefix}services.raw.txt" 2>&1 || true
   adb exec-out run-as "$pkg" tar -cf - files/d408-evidence > "$evidence/device-evidence.tar" 2> "$evidence/pull-error.txt" || true
   if [[ -s "$evidence/device-evidence.tar" ]];then tar -xf "$evidence/device-evidence.tar" -C "$evidence" || true;fi
 }
@@ -95,7 +96,7 @@ adb shell appops set "$pkg" SCHEDULE_EXACT_ALARM deny
 phase exact-denied
 adb shell appops set "$pkg" SCHEDULE_EXACT_ALARM allow
 phase boot-prepare
-collect
+collect preboot-
 adb shell settings get global boot_count > "$evidence/boot-count-before.txt"
 adb reboot
 timeout 120s adb wait-for-device

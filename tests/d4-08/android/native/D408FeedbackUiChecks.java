@@ -93,7 +93,7 @@ final class D408FeedbackUiChecks {
         open("记个想法");text(body);tapTag(page,"feedback_category_experience");tapTag(page,"feedback_editor_status_pending");
         pickImage();waitDraftAssets(1);assetId=draft().getJSONObject("note").getJSONArray("assetIds").getString(0);check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"system-selected actual bytes stored");
         t.until("decoded original image thumbnail",10000,()->{View view=tag(page,"feedback_image_0");return view instanceof ImageView&&((ImageView)view).getDrawable()!=null;});tapTag(page,"feedback_image_0");
-        t.until("original screenshot preview",5000,()->find(n->"截图 1".contentEquals(n.getContentDescription()==null?"":n.getContentDescription()))!=null);t.shot("feedback-ui-image-preview");check(D408FeatureChecks.tapWindowText(t,"关闭截图",5000),"real close-preview button");
+        t.until("original screenshot preview",5000,()->find(n->"截图 1".contentEquals(n.getContentDescription()==null?"":n.getContentDescription()))!=null);t.shot("feedback-ui-image-preview");touch(waitNode("real close-preview button",n->"关闭截图".contentEquals(n.getText()==null?"":n.getText()),5000));
         tapTag(page,"feedback_remove_image_0");waitDraftAssets(0);check(tag(page,"feedback_image_0")==null,"remove updates UI");
         pickImage();waitDraftAssets(1);assetId=draft().getJSONObject("note").getJSONArray("assetIds").getString(0);check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"reselected image retains actual bytes");
         tapTag(page,"feedback_keep_draft");t.until("quick compose finishes after keep",10000,page::isFinishing);t.current=tools;t.awaitForeground(tools);JSONObject kept=draft();check(kept!=null&&body.equals(kept.getJSONObject("note").getString("body")),"keep preserves actual draft");
@@ -127,8 +127,8 @@ final class D408FeedbackUiChecks {
     }
     JSONObject exportUi()throws Exception{
         check(noteId!=null,"prior UI note exists");tools=t.launch(FeedbackToolsActivity.class);D408FeatureChecks.nativeText(t,tools,"导出意见备份");waitDocuments();for(int i=0;i<3&&!tools.hasWindowFocus();i++){systemKey(KeyEvent.KEYCODE_BACK,0);SystemClock.sleep(300);}t.awaitForeground(tools);t.until("visible export cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消选择文件"));
-        D408FeatureChecks.nativeText(t,tools,"导出意见备份");downloads();AccessibilityNodeInfo filename=waitNode("SAF filename input",n->"android.widget.EditText".contentEquals(n.getClassName()),8000);touch(filename);systemKey(KeyEvent.KEYCODE_A,KeyEvent.META_CTRL_ON);systemText(backupName);t.waitForIdleSync();
-        check(find(n->"android.widget.EditText".contentEquals(n.getClassName())&&backupName.contentEquals(n.getText()==null?"":n.getText()))!=null,"real system filename entry matches requested archive");
+        D408FeatureChecks.nativeText(t,tools,"导出意见备份");downloads();AccessibilityNodeInfo filename=waitNode("SAF filename input",n->"android.widget.EditText".contentEquals(n.getClassName()),8000);touch(filename);waitNode("actual SAF filename focus",n->"android.widget.EditText".contentEquals(n.getClassName())&&n.isFocused(),5000);systemKey(KeyEvent.KEYCODE_A,KeyEvent.META_CTRL_ON);systemText(backupName);
+        t.until("real system filename entry matches requested archive",5000,()->find(n->"android.widget.EditText".contentEquals(n.getClassName())&&backupName.contentEquals(n.getText()==null?"":n.getText()))!=null);dump("feedback-documents-filename-entered");
         touch(waitNode("SAF save button",n->String.valueOf(n.getText()).matches("(?i)save|保存|存储"),8000));t.awaitForeground(tools);t.until("visible export success",15000,()->D408FeatureChecks.windowContains(t,"意见备份已保存"));
         File archive=new File(t.evidence,backupName);try(ParcelFileDescriptor fd=t.getUiAutomation().executeShellCommand("cat /sdcard/Download/"+backupName);InputStream input=new ParcelFileDescriptor.AutoCloseInputStream(fd);OutputStream output=new FileOutputStream(archive)){byte[] buffer=new byte[32768];int n;while((n=input.read(buffer))!=-1)output.write(buffer,0,n);}
         check(archive.length()>100,"actual SAF ZIP exists");try(InputStream input=new java.io.FileInputStream(archive)){check(input.read()=='P'&&input.read()=='K',"actual exported ZIP header");}backupHash=D408FeatureChecks.hash(new java.io.FileInputStream(archive));exported=D408FeatureChecks.storageSnapshot(storage);exportedGeneration=storage.generation();t.shot("feedback-ui-export-success");
@@ -159,7 +159,7 @@ final class D408FeedbackUiChecks {
     void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
     void downloads()throws Exception{
         waitDocuments();dump("feedback-documents-before");AccessibilityNodeInfo roots=find(n->{String desc=String.valueOf(n.getContentDescription());return desc.matches("(?i)show roots|show navigation drawer|open navigation drawer|显示根目录|显示导航栏|打开导航栏|打开导航抽屉|显示根目录菜单");});
-        if(roots!=null){touch(roots);touch(waitNode("Downloads root",n->String.valueOf(n.getText()).matches("(?i)downloads|下载")&&clickTarget(n)!=null,5000));}
+        if(roots!=null){touch(roots);touch(waitNode("Downloads root inside actual navigation drawer",n->String.valueOf(n.getText()).matches("(?i)downloads|下载")&&withinId(n,":id/roots_list")&&clickTarget(n)!=null,5000));t.until("actual DocumentsUI roots drawer closes",5000,()->find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/roots_list"))==null);}
         else check(find(n->String.valueOf(n.getText()).matches("(?i)downloads|下载"))!=null,"observed DocumentsUI Downloads location");
         SystemClock.sleep(300);dump("feedback-documents-downloads");
     }
@@ -168,6 +168,7 @@ final class D408FeedbackUiChecks {
     AccessibilityNodeInfo find(Predicate<AccessibilityNodeInfo> predicate){return find(t.getUiAutomation().getRootInActiveWindow(),predicate);}
     AccessibilityNodeInfo find(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate){if(n==null)return null;if(n.isVisibleToUser()&&predicate.test(n))return n;for(int i=0;i<n.getChildCount();i++){AccessibilityNodeInfo result=find(n.getChild(i),predicate);if(result!=null)return result;}return null;}
     AccessibilityNodeInfo waitNode(String label,Predicate<AccessibilityNodeInfo> predicate,long timeout)throws Exception{t.until(label,timeout,()->find(predicate)!=null);return find(predicate);}
+    boolean withinId(AccessibilityNodeInfo node,String suffix){for(int i=0;i<12&&node!=null;i++,node=node.getParent())if(String.valueOf(node.getViewIdResourceName()).endsWith(suffix))return true;return false;}
     AccessibilityNodeInfo clickTarget(AccessibilityNodeInfo node){for(int i=0;i<5&&node!=null;i++,node=node.getParent())if(node.isVisibleToUser()&&node.isEnabled()&&node.isClickable())return node;return null;}
     void touch(AccessibilityNodeInfo n)throws Exception{
         check(n!=null,"actual accessible target");AccessibilityNodeInfo clickable=clickTarget(n);check(clickable!=null,"observed enabled clickable system target");Rect r=new Rect();clickable.getBoundsInScreen(r);check(!r.isEmpty(),"visible system target bounds");long now=SystemClock.uptimeMillis();

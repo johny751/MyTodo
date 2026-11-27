@@ -75,6 +75,10 @@ public final class D408IntegrationInstrumentation extends Instrumentation {
             try { failure.put("uiState",uiState(current));
                 write(new File(evidence,prefix+"-window.txt"),shell("dumpsys window"));
                 write(new File(evidence,prefix+"-power.txt"),shell("dumpsys power"));
+                write(new File(evidence,prefix+"-notification.txt"),shell("dumpsys notification --noredact"));
+                write(new File(evidence,prefix+"-alarm.txt"),shell("dumpsys alarm"));
+                write(new File(evidence,prefix+"-services.txt"),shell("dumpsys activity services "+target.getPackageName()));
+                write(new File(evidence,prefix+"-logcat.txt"),shell("logcat -d -v threadtime"));
             } catch(Exception diagnosticError) { failure.put("diagnosticError",diagnosticError.toString()); }
         } catch (Exception ignored) {}
     }
@@ -134,6 +138,13 @@ public final class D408IntegrationInstrumentation extends Instrumentation {
     StatusBarNotification notice(int id) {
         for (StatusBarNotification n : ((NotificationManager)target.getSystemService(Context.NOTIFICATION_SERVICE)).getActiveNotifications()) if(n.getId()==id) return n;
         return null;
+    }
+    StatusBarNotification notice(int id,String session) {
+        for(StatusBarNotification n:((NotificationManager)target.getSystemService(Context.NOTIFICATION_SERVICE)).getActiveNotifications())if(n.getId()==id&&session.equals(n.getTag()))return n;
+        return null;
+    }
+    JSONArray activeNotices() throws Exception {
+        JSONArray rows=new JSONArray();for(StatusBarNotification n:((NotificationManager)target.getSystemService(Context.NOTIFICATION_SERVICE)).getActiveNotifications())rows.put(new JSONObject().put("id",n.getId()).put("tag",n.getTag()).put("postTime",n.getPostTime()).put("key",n.getKey()));return rows;
     }
     String shell(String command) throws Exception {
         try (ParcelFileDescriptor fd=getUiAutomation().executeShellCommand(command); InputStream in=new ParcelFileDescriptor.AutoCloseInputStream(fd); ByteArrayOutputStream out=new ByteArrayOutputStream()) {
