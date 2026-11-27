@@ -44,14 +44,14 @@
     },
     {
       "path": "android/d408/README.md",
-      "bytes": 8934,
-      "sha256": "5dd71cc9a7a690c9c56b4aee6cda0773f83d91aa00623f5312e76158f4fb1989",
+      "bytes": 9881,
+      "sha256": "c51ac083e35367bd6168b1eb295585a9233216e1260c5e7f32df1fcf26fb37d0",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
       "path": "android/d408/build-android-d408.sh",
-      "bytes": 8547,
-      "sha256": "93f7d3d331730ef92aa0f8512bce0993aad9508c047109b0f1a90c2373343b97",
+      "bytes": 8582,
+      "sha256": "97778780361da3b7a8c8e697992057b147a6d075a1c2e983daff6d6d7c252339",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -62,8 +62,8 @@
     },
     {
       "path": "android/d408/prepare.mjs",
-      "bytes": 9162,
-      "sha256": "41dd8a2f416fe615b8f18266d2a23e6166dbc3273b740d21e6c9925654ba3c3b",
+      "bytes": 10379,
+      "sha256": "8458da9c2911a6a626d3de5492d5cb0c6d2ded21aaf5d1fde73b1fded160777f",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -82,6 +82,12 @@
       "path": "android/d408/src/local/gxtodo/replica/D408Bridge.java",
       "bytes": 5066,
       "sha256": "43faf0e340414274fd31b146186b937ffb5bc40185369ffcf693e7660804fd9d",
+      "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408FeedbackInsets.java",
+      "bytes": 5741,
+      "sha256": "e250e63a46dcb38f7b3c4a210966b0ffa4f99c33c623ba158858c988aa2f0f8a",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -104,8 +110,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 7658,
-      "sha256": "3fd1de2b81fcf44187b84546d386eb1cd05bd7a64ad74fb39736757811011f8f",
+      "bytes": 13079,
+      "sha256": "1a2a6b440205d6a873ba86959bda881db60a0c3fd9d0afbcef77b8b4c7abbf65",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -242,8 +248,8 @@
     },
     {
       "path": "tests/d4-08/android/native/D408FeedbackUiChecks.java",
-      "bytes": 25727,
-      "sha256": "2efa11c32c5e752ed6911345efcfae71d6b26764f259e7d6f307449dcdf49c4d",
+      "bytes": 30656,
+      "sha256": "83d859ee5070df6ba017b5aab63d51b6c30209b9fee45baea3efbea245b7322d",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {

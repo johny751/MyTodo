@@ -52,7 +52,7 @@ await fs.writeFile(out+'/formal-source-compile.json',JSON.stringify({sourceSHA:p
  classpath:['official Android SDK android.jar','pinned FeedbackKit classes.jar'],sdkJarSHA256:hash(await fs.readFile(process.argv[3])),aarSHA256,sourceListSHA256:hash(list),
  sources:files,compiledClasses:compiled,excludedInputs:['android/d408/src','generated D4-03 timer source','candidate classes']},null,2)+'\n');
 NODE
-find android/src -name '*.java' ! -name 'NativeIntegration.java' -print > "$out/java-sources.txt"
+find android/src -name '*.java' ! -name 'NativeIntegration.java' ! -name 'FeedbackApplication.java' -print > "$out/java-sources.txt"
 find android/d408/src "$out/generated" "$out/resources-generated" -name '*.java' -print >> "$out/java-sources.txt"
 javac -encoding UTF-8 --release 17 -classpath "$android_jar:$out/feedback-aar/classes.jar" -d "$out/classes" @"$out/java-sources.txt"
 jar cf "$out/classes.jar" -C "$out/classes" .

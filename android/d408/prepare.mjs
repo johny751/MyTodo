@@ -88,6 +88,17 @@ const seam = seamOriginal.replaceAll('d405', 'd408').replaceAll('D405', 'D408').
 await fs.mkdir(path.join(output,'generated/local/gxtodo/replica'),{recursive:true});
 await fs.writeFile(path.join(output,'generated/local/gxtodo/replica/NativeIntegration.java'),seam);
 copied.push({source:seamSource,sourceSha256:hash(seamOriginal),generatedSha256:hash(seam),transformed:true});
+// Adapt only the candidate host lifecycle. The library and formal application
+// source are unchanged; the generated copy retains all original backup logic.
+const appSource = 'android/src/local/gxtodo/replica/FeedbackApplication.java';
+const appOriginal = await fs.readFile(appSource, 'utf8');
+const createdAnchor = '@Override public void onActivityCreated(Activity activity, Bundle state) {';
+const destroyedAnchor = '@Override public void onActivityDestroyed(Activity activity) { feedbackPages.remove(activity); }';
+if (appOriginal.split(createdAnchor).length !== 2 || appOriginal.split(destroyedAnchor).length !== 2) throw Error('Frozen feedback lifecycle anchor changed');
+const appCandidate = appOriginal.replace(createdAnchor, createdAnchor + '\n        D408FeedbackInsets.onActivityCreated(activity);')
+  .replace(destroyedAnchor, '@Override public void onActivityDestroyed(Activity activity) { D408FeedbackInsets.onActivityDestroyed(activity); feedbackPages.remove(activity); }');
+await fs.writeFile(path.join(output,'generated/local/gxtodo/replica/FeedbackApplication.java'), appCandidate);
+copied.push({source:appSource,sourceSha256:hash(appOriginal),generatedSha256:hash(appCandidate),transformed:true});
 let manifest = (await fs.readFile('android/d408/AndroidManifest.xml', 'utf8')).replace('__VERSION_CODE__', versionCode).replace('__VERSION_NAME__', versionName);
 await fs.writeFile(path.join(output, 'AndroidManifest.xml'), manifest);
 await fs.writeFile(path.join(output, 'd408-build-identity.json'), JSON.stringify({...identity, packagedHtmlSha256: hash(bundle), timerSources: copied}, null, 2)+'\n');

@@ -5,6 +5,7 @@ import android.app.Instrumentation;
 import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Insets;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
@@ -15,7 +16,10 @@ import android.view.KeyCharacterMap;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityWindowInfo;
+import android.view.inspector.WindowInspector;
 import android.widget.EditText;
 import android.widget.ImageView;
 import com.androidshared.feedback.DefaultFeedbackStorage;
@@ -46,7 +50,7 @@ final class D408FeedbackUiChecks {
     long exportedGeneration;
     int dumpSequence;
     Uri imageUri;
-    D408FeedbackUiChecks(D408IntegrationInstrumentation t){this.t=t;storage=new DefaultFeedbackStorage(t.target);android.accessibilityservice.AccessibilityServiceInfo info=t.getUiAutomation().getServiceInfo();info.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;t.getUiAutomation().setServiceInfo(info);}
+    D408FeedbackUiChecks(D408IntegrationInstrumentation t){this.t=t;storage=new DefaultFeedbackStorage(t.target);android.accessibilityservice.AccessibilityServiceInfo info=t.getUiAutomation().getServiceInfo();info.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS|android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;t.getUiAutomation().setServiceInfo(info);}
     static void run(D408IntegrationInstrumentation t){
         D408FeedbackUiChecks s=new D408FeedbackUiChecks(t);
         s.test("D408-U01-system-photo-picker-preview-remove-and-draft",s::photoDraft);
@@ -93,11 +97,16 @@ final class D408FeedbackUiChecks {
         open("记个想法");text(body);tapTag(page,"feedback_category_experience");tapTag(page,"feedback_editor_status_pending");
         pickImage();waitDraftAssets(1);assetId=draft().getJSONObject("note").getJSONArray("assetIds").getString(0);check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"system-selected actual bytes stored");
         t.until("decoded original image thumbnail",10000,()->{View view=tag(page,"feedback_image_0");return view instanceof ImageView&&((ImageView)view).getDrawable()!=null;});tapTag(page,"feedback_image_0");
-        t.until("original screenshot preview",5000,()->find(n->"截图 1".contentEquals(n.getContentDescription()==null?"":n.getContentDescription()))!=null);t.shot("feedback-ui-image-preview");touch(waitNode("real close-preview button",n->"关闭截图".contentEquals(n.getText()==null?"":n.getText()),5000));
+        t.until("original screenshot preview",5000,()->find(n->"截图 1".contentEquals(n.getContentDescription()==null?"":n.getContentDescription()))!=null);
+        t.until("entire preview close control outside system bars and cutout",5000,()->{Rect[] r=previewRects();return r[0]!=null&&r[1].equals(r[0])&&r[2].contains(r[0]);});
+        Rect[] preview=previewRects();JSONObject previewGeometry=new JSONObject().put("buttonBounds",preview[0].toShortString()).put("visibleBounds",preview[1].toShortString()).put("safeBounds",preview[2].toShortString()).put("windowBounds",preview[3].toShortString());
+        D408IntegrationInstrumentation.write(new File(t.evidence,"feedback-preview-safe-bounds.json"),previewGeometry.toString(2));dump("feedback-image-preview-safe");t.shot("feedback-ui-image-preview");
+        AccessibilityNodeInfo closePreview=waitNode("real close-preview button",n->"关闭截图".contentEquals(n.getText()==null?"":n.getText()),5000);Rect accessibleClose=new Rect();closePreview.getBoundsInScreen(accessibleClose);check(accessibleClose.equals(preview[0]),"actual accessibility close bounds match fully visible native control");touch(closePreview);
+        t.until("preview closed and original editor focused",10000,()->page.hasWindowFocus()&&find(n->"截图 1".contentEquals(n.getContentDescription()==null?"":n.getContentDescription()))==null);dump("feedback-image-preview-closed");
         tapTag(page,"feedback_remove_image_0");waitDraftAssets(0);check(tag(page,"feedback_image_0")==null,"remove updates UI");
         pickImage();waitDraftAssets(1);assetId=draft().getJSONObject("note").getJSONArray("assetIds").getString(0);check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"reselected image retains actual bytes");
         tapTag(page,"feedback_keep_draft");t.until("quick compose finishes after keep",10000,page::isFinishing);t.current=tools;t.awaitForeground(tools);JSONObject kept=draft();check(kept!=null&&body.equals(kept.getJSONObject("note").getString("body")),"keep preserves actual draft");
-        return new JSONObject().put("sourceUri",imageUri.toString()).put("imageSha256",imageHash).put("assetId",assetId).put("draftId",kept.getString("id")).put("pickerResultInjected",false);
+        return new JSONObject().put("sourceUri",imageUri.toString()).put("imageSha256",imageHash).put("assetId",assetId).put("draftId",kept.getString("id")).put("previewGeometry",previewGeometry).put("pickerResultInjected",false);
     }
     void pickImage()throws Exception{
         tapTag(page,"feedback_add_image");t.until("real system image picker",10000,()->find(n->{String p=String.valueOf(n.getPackageName());return !p.equals(t.target.getPackageName())&&(p.contains("photopicker")||p.contains("providers.media")||p.contains("documentsui"));})!=null);dump("feedback-system-picker-before");
@@ -126,13 +135,13 @@ final class D408FeedbackUiChecks {
         return new JSONObject().put("noteId",noteId).put("cancelPreserved",true).put("deletedAndUndone",true).put("imageSha256",imageHash);
     }
     JSONObject exportUi()throws Exception{
-        check(noteId!=null,"prior UI note exists");tools=t.launch(FeedbackToolsActivity.class);D408FeatureChecks.nativeText(t,tools,"导出意见备份");waitDocuments();for(int i=0;i<3&&!tools.hasWindowFocus();i++){systemKey(KeyEvent.KEYCODE_BACK,0);SystemClock.sleep(300);}t.awaitForeground(tools);t.until("visible export cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消选择文件"));
+        check(noteId!=null,"prior UI note exists");tools=t.launch(FeedbackToolsActivity.class);D408FeatureChecks.nativeText(t,tools,"导出意见备份");JSONObject canceled=cancelDocuments();t.until("visible export cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消选择文件"));
         D408FeatureChecks.nativeText(t,tools,"导出意见备份");downloads();AccessibilityNodeInfo filename=waitNode("SAF filename input",n->"android.widget.EditText".contentEquals(n.getClassName()),8000);touch(filename);waitNode("actual SAF filename focus",n->"android.widget.EditText".contentEquals(n.getClassName())&&n.isFocused(),5000);systemKey(KeyEvent.KEYCODE_A,KeyEvent.META_CTRL_ON);systemText(backupName);
         t.until("real system filename entry matches requested archive",5000,()->find(n->"android.widget.EditText".contentEquals(n.getClassName())&&backupName.contentEquals(n.getText()==null?"":n.getText()))!=null);dump("feedback-documents-filename-entered");
         touch(waitNode("SAF save button",n->String.valueOf(n.getText()).matches("(?i)save|保存|存储"),8000));t.awaitForeground(tools);t.until("visible export success",15000,()->D408FeatureChecks.windowContains(t,"意见备份已保存"));
         File archive=new File(t.evidence,backupName);try(ParcelFileDescriptor fd=t.getUiAutomation().executeShellCommand("cat /sdcard/Download/"+backupName);InputStream input=new ParcelFileDescriptor.AutoCloseInputStream(fd);OutputStream output=new FileOutputStream(archive)){byte[] buffer=new byte[32768];int n;while((n=input.read(buffer))!=-1)output.write(buffer,0,n);}
         check(archive.length()>100,"actual SAF ZIP exists");try(InputStream input=new java.io.FileInputStream(archive)){check(input.read()=='P'&&input.read()=='K',"actual exported ZIP header");}backupHash=D408FeatureChecks.hash(new java.io.FileInputStream(archive));exported=D408FeatureChecks.storageSnapshot(storage);exportedGeneration=storage.generation();t.shot("feedback-ui-export-success");
-        return new JSONObject().put("file",backupName).put("bytes",archive.length()).put("sha256",backupHash).put("exportCanceledThenSaved",true);
+        return new JSONObject().put("file",backupName).put("bytes",archive.length()).put("sha256",backupHash).put("exportCanceledThenSaved",true).put("cancelInteraction",canceled);
     }
     JSONObject restoreUi()throws Exception{
         check(exported!=null,"prior actual SAF backup exists");openDetail();tapTag(page,"feedback_status_done");t.until("real detail status mutation",10000,()->"done".equals(storage.get(FeedbackStorage.NOTES,noteId).optString("status")));tools=t.launch(FeedbackToolsActivity.class);String changed=D408FeatureChecks.storageSnapshot(storage).toString();long generation=storage.generation();
@@ -157,6 +166,33 @@ final class D408FeedbackUiChecks {
         t.current=tools;t.awaitForeground(tools);D408FeatureChecks.nativeText(t,tools,"从备份恢复");downloads();touch(waitNode("actual SAF backup row "+filename,n->filename.contentEquals(n.getText()==null?"":n.getText()),10000));t.until("original host replacement confirmation",10000,()->D408FeatureChecks.windowContains(t,"替换当前优化意见"));
     }
     void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
+    Rect[] previewRects(){
+        final Rect[] result={null,null,null,null};t.runOnMainSync(()->{for(View root:WindowInspector.getGlobalWindowViews()){
+            View button=root.findViewWithTag("feedback_close_image");if(button==null||!button.isShown()||!ownedByPage(button))continue;WindowInsets insets=root.getRootWindowInsets();if(insets==null)continue;
+            int[] point=new int[2];button.getLocationOnScreen(point);Rect bounds=new Rect(point[0],point[1],point[0]+button.getWidth(),point[1]+button.getHeight()),visible=new Rect();if(!button.getGlobalVisibleRect(visible))continue;
+            root.getLocationOnScreen(point);Rect window=new Rect(point[0],point[1],point[0]+root.getWidth(),point[1]+root.getHeight());Insets safe=insets.getInsets(WindowInsets.Type.systemBars()|WindowInsets.Type.displayCutout());
+            result[0]=bounds;result[1]=visible;result[2]=new Rect(window.left+safe.left,window.top+safe.top,window.right-safe.right,window.bottom-safe.bottom);result[3]=window;break;
+        }});return result;
+    }
+    boolean ownedByPage(View view){android.content.Context context=view.getContext();for(int depth=0;context!=null&&depth<12;depth++){if(context instanceof Activity)return context==page;if(!(context instanceof android.content.ContextWrapper))return false;android.content.Context next=((android.content.ContextWrapper)context).getBaseContext();if(next==context)return false;context=next;}return false;}
+    String activePackage(){AccessibilityNodeInfo root=t.getUiAutomation().getRootInActiveWindow();return root==null||root.getPackageName()==null?"":root.getPackageName().toString();}
+    boolean systemImeVisible(){for(AccessibilityWindowInfo window:t.getUiAutomation().getWindows())if(window.getType()==AccessibilityWindowInfo.TYPE_INPUT_METHOD)return true;return false;}
+    JSONObject cancelDocuments()throws Exception{
+        waitDocuments();t.waitForIdleSync();dump("feedback-documents-cancel-before");int keys=0;boolean ime=systemImeVisible();
+        Activity priorTools=tools;Instrumentation.ActivityMonitor monitor=t.addMonitor(FeedbackToolsActivity.class.getName(),null,false);
+        try{
+            if(ime){check(activePackage().contains("documentsui"),"IME cancellation belongs to active DocumentsUI");systemKey(KeyEvent.KEYCODE_BACK,0);keys++;t.until("SAF IME closes or picker returns",10000,()->!systemImeVisible()||t.target.getPackageName().equals(activePackage()));}
+            t.until("observed picker or host after IME",10000,()->activePackage().contains("documentsui")||t.target.getPackageName().equals(activePackage()));
+            t.getUiAutomation().waitForIdle(500,10000);
+            // Send one cancel only while the picker is actually active. A stale
+            // Activity focus flag never authorizes another BACK after it leaves.
+            if(activePackage().contains("documentsui")){systemKey(KeyEvent.KEYCODE_BACK,0);keys++;}
+            t.until("SAF cancellation returns to target package",15000,()->t.target.getPackageName().equals(activePackage()));
+            Activity recreated=monitor.getLastActivity();if(recreated!=null)tools=recreated;t.current=tools;t.awaitForeground(tools);dump("feedback-documents-cancel-after");
+            JSONObject result=new JSONObject().put("imeInitiallyVisible",ime).put("backKeyPairs",keys).put("returnedPackage",activePackage()).put("hostRecreated",recreated!=null&&recreated!=priorTools);
+            D408IntegrationInstrumentation.write(new File(t.evidence,"feedback-saf-cancel-interaction.json"),result.toString(2));return result;
+        }finally{t.removeMonitor(monitor);}
+    }
     void downloads()throws Exception{
         waitDocuments();dump("feedback-documents-before");AccessibilityNodeInfo roots=find(n->{String desc=String.valueOf(n.getContentDescription());return desc.matches("(?i)show roots|show navigation drawer|open navigation drawer|显示根目录|显示导航栏|打开导航栏|打开导航抽屉|显示根目录菜单");});
         if(roots!=null){touch(roots);touch(waitNode("Downloads root inside actual navigation drawer",n->String.valueOf(n.getText()).matches("(?i)downloads|下载")&&withinId(n,":id/roots_list")&&clickTarget(n)!=null,5000));t.until("actual DocumentsUI roots drawer closes",5000,()->find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/roots_list"))==null);}

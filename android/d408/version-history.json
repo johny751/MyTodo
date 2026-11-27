@@ -1,6 +1,76 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.10005",
+    "versionCode": 418005,
+    "sourceSHA": "1b8dac0a9e856300fb7dfb285dae5f4b3851b390",
+    "buildTimeUTC": "2026-11-27T12:04:03.528Z",
+    "runId": "45995320568",
+    "runAttempt": "1",
+    "runNumber": "5",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_VALIDATION_FAILED",
+    "statusText": "候选APK构建成功，云端覆盖完整但反馈UI仍失败；未发布、未验收。保留15/15、功能7/7、反馈UI3/7、工作数据保留4/4、导航20/20、权限3/3、重启后重开2/2；原始4项失败完整保留。",
+    "changes": [
+      "真实360/412及手势/三键导航20项通过；42像素短快手势实际原生和可信DOM事件为40至41毫秒",
+      "精确闹钟拒绝后真实一分钟完成，通知ID与会话标签匹配且历史记录为60000毫秒",
+      "原反馈库全屏预览关闭按钮与系统栏重叠，SAF取消驱动连续返回退出宿主；两项根因和两个依赖失败保留"
+    ],
+    "provenance": {
+      "artifactId": "15196747377",
+      "artifactName": "d408-android-45995320568-1",
+      "archiveSha256": "481daebcaec9e11d7a7f9136cddea4cb58735612a8a73e1f827bf9c1a421ded7",
+      "apkMember": "d408-native-45995320568-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "24a97a2f657bf29051f31da61550e1f9ca8221ad19b55b52715c60b2eda2b8a0",
+      "identityMember": "d408-native-45995320568-1/d408-build-identity.json",
+      "identitySha256": "d1dc1f4ce8df679164793214f83ed38769cf87a469d5c3cb87d831a52369da52",
+      "signerSha256": "2aaec663579018f7c1d6a9165367bcc4e7d3b6e985fc470baa659745ba907263"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.3",
+    "versionCode": 408003,
+    "sourceSHA": "16da9d51563190fe66c97de842b5ab354701e67f",
+    "buildTimeUTC": "2026-11-27T11:51:16.457Z",
+    "runId": "45993739135",
+    "runAttempt": "1",
+    "runNumber": "3",
+    "workflowName": "D4-08 UI and Android development validation",
+    "versionTrack": "development",
+    "versionBase": 408000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "DEVELOPMENT_VALIDATION_FAILED",
+    "statusText": "开发APK构建成功，云端覆盖完整但验证失败；未发布、未验收。保留14/15、功能7/7、反馈UI3/7、工作数据保留4/4、导航17/20、权限2/3、重启后重开2/2；原始9项失败完整保留。",
+    "changes": [
+      "既有开发工作流的实际构建，保留所有原始测试与失败证据",
+      "真实工作数据保留4/4通过；反馈弹窗/SAF、短快手势、权限通知及通知动作就绪仍有失败",
+      "该开发执行使用修复前driver，不把后续候选修复或结果回填为该版本通过"
+    ],
+    "provenance": {
+      "artifactId": "15196700115",
+      "artifactName": "d408-android-45993739135-1",
+      "archiveSha256": "70031c0aee406688a08b85e7d5b966d23bbbe8ec099f86388c6720240807c278",
+      "apkMember": "d408-native-45993739135-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "f7c46dcb3367254902531cabf51604ea3608e5c78804063dd092c684ff3956ee",
+      "identityMember": "d408-native-45993739135-1/d408-build-identity.json",
+      "identitySha256": "994fbdb772116382bd2a4320aec1835c7f2cadabd74cd46ee139e23dbc7d868e",
+      "signerSha256": "c5736a8a569dee11f3d6d5d8b46bb77f40ec49ef38f59e5784b2a7f743e8d704"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionName": "0.8.10004",
     "versionCode": 418004,
     "sourceSHA": "45e381c9f108ebe45ca7c6147a8525eb9f22fabf",
@@ -33,6 +103,40 @@
       "identityMember": "d408-native-45989756331-1/d408-build-identity.json",
       "identitySha256": "f912cfb75829f6e8b50c97ad3ac649421af8e3d6322d70ebc84fe78139f572b5",
       "signerSha256": "c16f2f9cfbf89503b34339422a765d9eb04162147f50d69cc4d3df456163d96c"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.10003",
+    "versionCode": 418003,
+    "sourceSHA": "a1238cc694533e5a938078d5e98041a92a4829c4",
+    "buildTimeUTC": "2026-11-27T11:07:53.990Z",
+    "runId": "45987708428",
+    "runAttempt": "1",
+    "runNumber": "3",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_VALIDATION_FAILED",
+    "statusText": "候选APK构建成功，云端覆盖完整但验证失败；未发布、未验收。保留15/15、功能7/7、反馈UI1/7、导航17/20、权限2/3、重启后重开2/2；当时尚未加入工作数据保留4项，原始10项失败完整保留。",
+    "changes": [
+      "保存该实际云端候选版本及其原始失败，具体计数来自完整原始aggregate",
+      "后续版本修复不替代该版本的失败证据或授予生产准入"
+    ],
+    "provenance": {
+      "artifactId": "15192439115",
+      "artifactName": "d408-android-45987708428-1",
+      "archiveSha256": "039a9191fe08caae2f3168f47811b9520fa8568ccb8784e85f903436a2a4ff29",
+      "apkMember": "d408-native-45987708428-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "d872fdfef032278dcbdd3e7c0c3e04bdd64a9cd3eebbe47be5ffe1ea428a2252",
+      "identityMember": "d408-native-45987708428-1/d408-build-identity.json",
+      "identitySha256": "12584fe4bd614452d440d2aee2a260702677a4d66c00b91ae15c44bbdf9e4a29",
+      "signerSha256": "df4229c28fcc8ccc2cce7b80d7c4d5e60e98f5ff936a61c2408132ec1bc2ae21"
     }
   },
   {
