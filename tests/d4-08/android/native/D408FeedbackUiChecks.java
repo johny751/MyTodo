@@ -22,6 +22,7 @@ import android.view.accessibility.AccessibilityWindowInfo;
 import android.view.inspector.WindowInspector;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.androidshared.feedback.DefaultFeedbackStorage;
 import com.androidshared.feedback.FeedbackRepository;
 import com.androidshared.feedback.FeedbackStorage;
@@ -48,7 +49,7 @@ final class D408FeedbackUiChecks {
     String assetId,imageHash,noteId,backupHash;
     JSONObject exported;
     long exportedGeneration;
-    int dumpSequence,documentsSequence,documentTapSequence;
+    int dumpSequence,documentsSequence,documentTapSequence,restoreDecisionSequence;
     Uri imageUri;
     D408FeedbackUiChecks(D408IntegrationInstrumentation t){this.t=t;storage=new DefaultFeedbackStorage(t.target);android.accessibilityservice.AccessibilityServiceInfo info=t.getUiAutomation().getServiceInfo();info.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS|android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;t.getUiAutomation().setServiceInfo(info);}
     static void run(D408IntegrationInstrumentation t){
@@ -145,14 +146,14 @@ final class D408FeedbackUiChecks {
     }
     JSONObject restoreUi()throws Exception{
         check(exported!=null,"prior actual SAF backup exists");openDetail();tapTag(page,"feedback_status_done");t.until("real detail status mutation",10000,()->"done".equals(storage.get(FeedbackStorage.NOTES,noteId).optString("status")));tools=t.launch(FeedbackToolsActivity.class);String changed=D408FeatureChecks.storageSnapshot(storage).toString();long generation=storage.generation();
-        chooseRestore(backupName);check(D408FeatureChecks.tapWindowText(t,"取消",5000),"actual replacement cancel");t.until("visible restore cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消恢复"));check(changed.equals(D408FeatureChecks.storageSnapshot(storage).toString())&&generation==storage.generation(),"cancel leaves exact data and generation");
-        chooseRestore(backupName);check(D408FeatureChecks.tapWindowText(t,"检查并恢复",5000),"actual replacement confirmation");t.until("visible restore success",15000,()->D408FeatureChecks.windowContains(t,"恢复完成"));check(exported.toString().equals(D408FeatureChecks.storageSnapshot(storage).toString()),"SAF restore returns exact notes draft and meta");check(storage.generation()>generation,"UI restore increments generation");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"UI restore restores actual image bytes");t.shot("feedback-ui-restore-success");
+        chooseRestore(backupName);restoreDecision(false);t.until("visible restore cancel",5000,()->D408FeatureChecks.windowContains(t,"已取消恢复"));check(changed.equals(D408FeatureChecks.storageSnapshot(storage).toString())&&generation==storage.generation(),"cancel leaves exact data and generation");
+        chooseRestore(backupName);restoreDecision(true);t.until("visible restore success",15000,()->D408FeatureChecks.windowContains(t,"恢复完成"));check(exported.toString().equals(D408FeatureChecks.storageSnapshot(storage).toString()),"SAF restore returns exact notes draft and meta");check(storage.generation()>generation,"UI restore increments generation");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"UI restore restores actual image bytes");t.shot("feedback-ui-restore-success");
         return new JSONObject().put("backupSha256",backupHash).put("generationBefore",generation).put("generationAfter",storage.generation()).put("imageSha256",imageHash);
     }
     JSONObject failedRestore()throws Exception{
         check(exported!=null,"prior successful UI export required");ContentValues values=new ContentValues();values.put(MediaStore.MediaColumns.DISPLAY_NAME,corruptName);values.put(MediaStore.MediaColumns.MIME_TYPE,"application/zip");values.put(MediaStore.MediaColumns.RELATIVE_PATH,"Download/");Uri corrupt=t.target.getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI,values);check(corrupt!=null,"real invalid archive fixture");try(OutputStream output=t.target.getContentResolver().openOutputStream(corrupt)){output.write("D408 invalid ZIP".getBytes(StandardCharsets.UTF_8));}
-        tools=t.launch(FeedbackToolsActivity.class);String before=D408FeatureChecks.storageSnapshot(storage).toString();long generation=storage.generation();chooseRestore(corruptName);check(D408FeatureChecks.tapWindowText(t,"检查并恢复",5000),"confirm actual invalid-file restore");t.until("visible failed restore",15000,()->D408FeatureChecks.windowContains(t,"恢复失败，当前意见未替换"));check(before.equals(D408FeatureChecks.storageSnapshot(storage).toString())&&generation==storage.generation(),"UI restore failure preserves data and generation");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"failed UI restore preserves image");dump("feedback-ui-visible-restore-error");t.shot("feedback-ui-visible-restore-error");
-        chooseRestore(backupName);check(D408FeatureChecks.tapWindowText(t,"检查并恢复",5000),"real corrected restore retry");t.until("retry success",15000,()->D408FeatureChecks.windowContains(t,"恢复完成"));check(exported.toString().equals(D408FeatureChecks.storageSnapshot(storage).toString()),"retry restores complete snapshot");
+        tools=t.launch(FeedbackToolsActivity.class);String before=D408FeatureChecks.storageSnapshot(storage).toString();long generation=storage.generation();chooseRestore(corruptName);restoreDecision(true);t.until("visible failed restore",15000,()->D408FeatureChecks.windowContains(t,"恢复失败，当前意见未替换"));check(before.equals(D408FeatureChecks.storageSnapshot(storage).toString())&&generation==storage.generation(),"UI restore failure preserves data and generation");check(imageHash.equals(D408FeatureChecks.hash(storage.openImage(assetId))),"failed UI restore preserves image");dump("feedback-ui-visible-restore-error");t.shot("feedback-ui-visible-restore-error");
+        chooseRestore(backupName);restoreDecision(true);t.until("retry success",15000,()->D408FeatureChecks.windowContains(t,"恢复完成"));check(exported.toString().equals(D408FeatureChecks.storageSnapshot(storage).toString()),"retry restores complete snapshot");
         return new JSONObject().put("invalidFile",corruptName).put("visibleFailure",true).put("preservedGeneration",generation).put("retryGeneration",storage.generation()).put("scope","local restore failure; FeedbackKit has no remote submission service");
     }
     JSONObject validationRetry()throws Exception{
@@ -172,6 +173,64 @@ final class D408FeedbackUiChecks {
         finally{try{selection.put("afterWaitPackage",activePackage()).put("afterWaitUptime",SystemClock.uptimeMillis());dump("feedback-documents-file-selected-after");D408IntegrationInstrumentation.write(new File(t.evidence,String.format(java.util.Locale.ROOT,"feedback-documents-selection-%02d-result.json",documentTapSequence)),selection.toString(2));}catch(Exception|Error diagnostic){if(failure!=null)failure.addSuppressed(diagnostic);else throw diagnostic;}}
     }
     void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
+    void restoreDecision(boolean positive)throws Exception{
+        final String label=positive?"检查并恢复":"取消",id=positive?"android:id/button1":"android:id/button2";
+        final int resource=positive?android.R.id.button1:android.R.id.button2,sequence=++restoreDecisionSequence;
+        final String stem=String.format(java.util.Locale.ROOT,"feedback-restore-decision-%02d",sequence);
+        final long began=SystemClock.uptimeMillis(),deadline=began+5000;long stableSince=0;String lastGeometry=null;JSONObject target=null;
+        JSONObject result=new JSONObject().put("sourceSHA",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
+            .put("sequence",sequence).put("positive",positive).put("buttonId",id).put("buttonText",label).put("budgetMillis",5000).put("beganUptime",began);
+        JSONArray samples=new JSONArray(),events=new JSONArray();result.put("samples",samples).put("events",events);Throwable failure=null;boolean released=true;long down=0;float x=0,y=0;
+        try{
+            // Observe one real host dialog with matching native/accessibility
+            // geometry and focus for 300ms within the original five-second budget.
+            while(SystemClock.uptimeMillis()<deadline){
+                target=restoreButton(resource,id,label);long now=SystemClock.uptimeMillis();
+                JSONObject sample=new JSONObject().put("uptime",now).put("target",target==null?JSONObject.NULL:target);samples.put(sample);
+                String geometry=target==null?null:target.getString("geometry");
+                if(geometry==null||!geometry.equals(lastGeometry)){lastGeometry=geometry;stableSince=now;}
+                if(target!=null&&now-stableSince>=300)break;
+                target=null;SystemClock.sleep(Math.min(100,Math.max(1,deadline-SystemClock.uptimeMillis())));
+            }
+            check(target!=null&&SystemClock.uptimeMillis()<deadline,"one stable focused actual restore dialog button within original 5s");
+            result.put("target",target).put("stableSinceUptime",stableSince).put("stableForMillis",SystemClock.uptimeMillis()-stableSince).put("beforePackage",activePackage());
+            dump(stem+"-before");
+            JSONObject immediatelyBefore=restoreButton(resource,id,label);check(immediatelyBefore!=null&&target.getString("geometry").equals(immediatelyBefore.getString("geometry")),"restore decision still matches immediately before its only tap");
+            result.put("immediatelyBefore",immediatelyBefore).put("immediatelyBeforeUptime",SystemClock.uptimeMillis());
+            check(SystemClock.uptimeMillis()<deadline,"restore decision input remains within original 5s budget");
+            x=(float)target.getDouble("tapX");y=(float)target.getDouble("tapY");down=SystemClock.uptimeMillis();released=false;
+            documentFinger(down,MotionEvent.ACTION_DOWN,x,y,events);SystemClock.sleep(35);documentFinger(down,MotionEvent.ACTION_UP,x,y,events);released=true;
+            while(SystemClock.uptimeMillis()<deadline&&restoreTitleVisible())SystemClock.sleep(Math.min(50,Math.max(1,deadline-SystemClock.uptimeMillis())));
+            check(!restoreTitleVisible(),"actual restore dialog dismissed after one decision tap");
+        }catch(Exception|Error error){failure=error;throw error;}
+        finally{
+            if(!released)try{documentFinger(down,MotionEvent.ACTION_CANCEL,x,y,events);}catch(Exception|Error cancel){if(failure!=null)failure.addSuppressed(cancel);else failure=cancel;}
+            try{D408IntegrationInstrumentation.write(new File(t.evidence,stem+"-input.json"),result.toString(2));JSONArray visible=new JSONArray();collect(t.getUiAutomation().getRootInActiveWindow(),visible);result.put("afterPackage",activePackage()).put("afterUptime",SystemClock.uptimeMillis()).put("dialogStillVisible",restoreTitleVisible()).put("afterVisibleTree",visible).put("failure",failure==null?JSONObject.NULL:failure.toString());dump(stem+"-after");D408IntegrationInstrumentation.write(new File(t.evidence,stem+"-result.json"),result.toString(2));}catch(Exception|Error diagnostic){if(failure!=null)failure.addSuppressed(diagnostic);else throw diagnostic;}
+        }
+    }
+    boolean restoreTitleVisible(){return find(n->t.target.getPackageName().contentEquals(n.getPackageName()==null?"":n.getPackageName())&&"android:id/alertTitle".equals(n.getViewIdResourceName())&&"替换当前优化意见？".contentEquals(n.getText()==null?"":n.getText()))!=null;}
+    JSONObject restoreButton(int resource,String id,String label)throws Exception{
+        if(!t.target.getPackageName().equals(activePackage())||count(t.getUiAutomation().getRootInActiveWindow(),n->t.target.getPackageName().contentEquals(n.getPackageName()==null?"":n.getPackageName())&&"android:id/alertTitle".equals(n.getViewIdResourceName())&&"替换当前优化意见？".contentEquals(n.getText()==null?"":n.getText()))!=1)return null;
+        Predicate<AccessibilityNodeInfo> exact=n->t.target.getPackageName().contentEquals(n.getPackageName()==null?"":n.getPackageName())&&id.equals(n.getViewIdResourceName())&&label.contentEquals(n.getText()==null?"":n.getText())&&"android.widget.Button".contentEquals(n.getClassName()==null?"":n.getClassName())&&n.isEnabled()&&n.isClickable();
+        AccessibilityNodeInfo accessibilityRoot=t.getUiAutomation().getRootInActiveWindow();if(count(accessibilityRoot,exact)!=1)return null;AccessibilityNodeInfo accessible=find(accessibilityRoot,exact);if(accessible==null)return null;
+        Rect accessibleBounds=new Rect();accessible.getBoundsInScreen(accessibleBounds);int windowId=accessible.getWindowId();boolean focused=false;
+        for(AccessibilityWindowInfo window:t.getUiAutomation().getWindows())if(window.getId()==windowId&&window.isActive()&&window.isFocused())focused=true;
+        if(!focused||accessibleBounds.isEmpty())return null;
+        final Rect[][] nativeRects={null};final int[] matches={0};
+        t.runOnMainSync(()->{for(View root:WindowInspector.getGlobalWindowViews()){
+            if(!root.isShown()||!root.hasWindowFocus()||!nativeRestoreTitle(root))continue;
+            View button=root.findViewById(resource);if(!(button instanceof android.widget.Button)||!ownedByTools(button)||!button.isShown()||!button.isEnabled()||!button.isClickable()||!label.contentEquals(((TextView)button).getText()))continue;
+            int[] point=new int[2];button.getLocationOnScreen(point);Rect bounds=new Rect(point[0],point[1],point[0]+button.getWidth(),point[1]+button.getHeight()),local=new Rect();if(!button.getLocalVisibleRect(local))continue;local.offset(point[0],point[1]);
+            root.getLocationOnScreen(point);Rect window=new Rect(point[0],point[1],point[0]+root.getWidth(),point[1]+root.getHeight());
+            if(!local.equals(bounds)||!window.contains(bounds))continue;matches[0]++;nativeRects[0]=new Rect[]{bounds,local,window};
+        }});
+        if(matches[0]!=1||!accessibleBounds.equals(nativeRects[0][0]))return null;
+        Rect[] r=nativeRects[0];return new JSONObject().put("package",activePackage()).put("windowId",windowId).put("activeAndFocused",true).put("nativeOwner","exact FeedbackToolsActivity instance").put("nativeRootCount",matches[0])
+            .put("nativeBounds",r[0].toShortString()).put("nativeVisibleBounds",r[1].toShortString()).put("nativeWindowBounds",r[2].toShortString()).put("accessibleBounds",accessibleBounds.toShortString())
+            .put("tapX",r[0].exactCenterX()).put("tapY",r[0].exactCenterY()).put("geometry",windowId+":"+r[0].toShortString()+":"+r[1].toShortString()+":"+r[2].toShortString());
+    }
+    boolean ownedByTools(View view){android.content.Context context=view.getContext();for(int depth=0;context!=null&&depth<12;depth++){if(context instanceof Activity)return context==tools;if(!(context instanceof android.content.ContextWrapper))return false;android.content.Context next=((android.content.ContextWrapper)context).getBaseContext();if(next==context)return false;context=next;}return false;}
+    boolean nativeRestoreTitle(View view){if(view instanceof TextView&&view.isShown()&&"替换当前优化意见？".contentEquals(((TextView)view).getText()))return true;if(view instanceof android.view.ViewGroup){android.view.ViewGroup group=(android.view.ViewGroup)view;for(int i=0;i<group.getChildCount();i++)if(nativeRestoreTitle(group.getChildAt(i)))return true;}return false;}
     Rect[] previewRects(){
         final Rect[] result={null,null,null,null};t.runOnMainSync(()->{for(View root:WindowInspector.getGlobalWindowViews()){
             View button=root.findViewWithTag("feedback_close_image");if(button==null||!button.isShown()||!ownedByPage(button))continue;WindowInsets insets=root.getRootWindowInsets();if(insets==null)continue;
@@ -239,7 +298,7 @@ final class D408FeedbackUiChecks {
         MotionEvent.PointerCoords coordinates=new MotionEvent.PointerCoords();coordinates.x=x;coordinates.y=y;coordinates.size=1f;coordinates.pressure=action==MotionEvent.ACTION_UP||action==MotionEvent.ACTION_CANCEL?0f:1f;
         MotionEvent event=MotionEvent.obtain(down,SystemClock.uptimeMillis(),action,1,new MotionEvent.PointerProperties[]{pointer},new MotionEvent.PointerCoords[]{coordinates},0,0,1f,1f,0,0,InputDevice.SOURCE_TOUCHSCREEN,0);
         JSONObject observed=new JSONObject().put("action",action).put("downTime",event.getDownTime()).put("eventTime",event.getEventTime()).put("source",event.getSource()).put("pointerCount",event.getPointerCount()).put("pointerId",event.getPointerId(0)).put("toolType",event.getToolType(0)).put("x",event.getX()).put("y",event.getY());events.put(observed);
-        try{check(event.getToolType(0)==MotionEvent.TOOL_TYPE_FINGER&&event.getPointerCount()==1&&event.getSource()==InputDevice.SOURCE_TOUCHSCREEN,"one actual finger touchscreen pointer");boolean accepted=t.getUiAutomation().injectInputEvent(event,true);observed.put("accepted",accepted).put("dispatchReturnedAt",SystemClock.uptimeMillis());check(accepted,"actual DocumentsUI filename finger event accepted");}finally{event.recycle();}
+        try{check(event.getToolType(0)==MotionEvent.TOOL_TYPE_FINGER&&event.getPointerCount()==1&&event.getSource()==InputDevice.SOURCE_TOUCHSCREEN,"one actual finger touchscreen pointer");boolean accepted=t.getUiAutomation().injectInputEvent(event,true);observed.put("accepted",accepted).put("dispatchReturnedAt",SystemClock.uptimeMillis());check(accepted,"actual finger touchscreen event accepted");}finally{event.recycle();}
     }
     int count(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate){if(n==null)return 0;int result=n.isVisibleToUser()&&predicate.test(n)?1:0;for(int i=0;i<n.getChildCount();i++)result+=count(n.getChild(i),predicate);return result;}
     JSONObject documentsState()throws Exception{

@@ -44,8 +44,8 @@
     },
     {
       "path": "android/d408/README.md",
-      "bytes": 13019,
-      "sha256": "8c8f92d66f87527df4da8f723bf60642373a44b0eea9d22c691796d36acc89d3",
+      "bytes": 14566,
+      "sha256": "2bfee0a035fc55d66dbb6d1d6d971a1a5c60815b713b09455164babda02156fe",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -110,8 +110,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 17213,
-      "sha256": "426099abb592a39ae7071b4a100860281c29a1e57bddab21e5b687385d2bc948",
+      "bytes": 19316,
+      "sha256": "4ddc67d2c87f377b477183015985460e09fc847efc38ac1a551ab3d57c36efea",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -266,8 +266,8 @@
     },
     {
       "path": "tests/d4-08/android/native/D408FeedbackUiChecks.java",
-      "bytes": 39428,
-      "sha256": "ca2df2e2982ea1391f6b3ebc6baa6290f5718f7eeadf8747cd8bf632f21fa5c5",
+      "bytes": 47590,
+      "sha256": "d499e56d423b1751a4627205c4d7f8508e54fc29edc81cba2da2a9a79bd8da08",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
