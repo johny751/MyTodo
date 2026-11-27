@@ -8,8 +8,8 @@
   "files": [
     {
       "path": ".github/workflows/d4-08-baseline.yml",
-      "bytes": 8228,
-      "sha256": "659c6fd3dc6a304a6a9dc78fe5e2d2faf9f9258c441a93e0e84529885d4685be",
+      "bytes": 9443,
+      "sha256": "3513485a96c2855795e1fb49893adde43531ff2e0e7077e900d242fce7876eba",
       "reason": "Independent candidate branch cloud build/regression/source packaging; production branches unchanged."
     },
     {
@@ -20,14 +20,14 @@
     },
     {
       "path": ".github/workflows/d4-08-candidate.yml",
-      "bytes": 19697,
-      "sha256": "ac8551b6c7cff56f60dddf600dad3cb1bc59fa91bd1a73bfb201fb06c6a90b98",
+      "bytes": 20955,
+      "sha256": "fa97271304cb6740aa963bb4d893461a77f40b8778476460d2051a6edf871185",
       "reason": "Independent candidate branch cloud build/regression/source packaging; production branches unchanged."
     },
     {
       "path": ".github/workflows/d4-08-development.yml",
-      "bytes": 9273,
-      "sha256": "2a6829ce39b192aece1847c8910c1823c92aee48ee5d1170ceec692370f06508",
+      "bytes": 10531,
+      "sha256": "e2c068d0e6c2aad0a2d42e605cc8343e7978235c3be1b7c7bbe88c338de7cce5",
       "reason": "Independent candidate branch cloud build/regression/source packaging; production branches unchanged."
     },
     {
@@ -158,8 +158,8 @@
     },
     {
       "path": "prototypes/d4-01/mobile-controls.js",
-      "bytes": 9023,
-      "sha256": "07818d2fff4af988351f508560b400a01afa401b14950f9bccde9797d7bce279",
+      "bytes": 9427,
+      "sha256": "d777de3f3178caec172faa45569becb2d78cf75ffaf82cd2fa5c47d76b11d9cc",
       "reason": "Restore complete shared candidate UI behavior and feedback durability, preserve task/work model and production source."
     },
     {
@@ -172,6 +172,12 @@
       "path": "prototypes/d4-01/styles.css",
       "bytes": 35941,
       "sha256": "2468747e7e4c326ec0921d110e916984e4431bf2fc892fe9f0c18ae9048ba64b",
+      "reason": "Restore complete shared candidate UI behavior and feedback durability, preserve task/work model and production source."
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "bytes": 81626,
+      "sha256": "4aca2e2972d98a4738dc3f40948f55722dd95cb7b681638fba7643ed28233742",
       "reason": "Restore complete shared candidate UI behavior and feedback durability, preserve task/work model and production source."
     },
     {
@@ -188,14 +194,14 @@
     },
     {
       "path": "tests/d4-08/WEB-README.md",
-      "bytes": 7094,
-      "sha256": "6b25cb4d66ed378ad119b378f296698cd038140eedde75d6a93192a0ebb1b3da",
+      "bytes": 8370,
+      "sha256": "153f824feab2cfddad581eef5e876b95afe43a6cb5971804b7ae85599a32963e",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
       "path": "tests/d4-08/WEB-SERVICE-README.md",
-      "bytes": 3253,
-      "sha256": "d3f0ac80daaf9bf563440d90b342a51244966d5b2958da3bbfbff97d8940f7c4",
+      "bytes": 3513,
+      "sha256": "f0cf84c44b98be7903e322d13793ea567770ce32c9662ecad33125d4be851338",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -289,6 +295,12 @@
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
+      "path": "tests/d4-08/web-baseline-verify.mjs",
+      "bytes": 2933,
+      "sha256": "fcb821abff5410d9318e3e62400cae826c98390c5bc04d6571aba2541e0f1e50",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
       "path": "tests/d4-08/web-build.mjs",
       "bytes": 4216,
       "sha256": "5f2c4268b3299be960e8725de92ae6d64142dcddbf4774387a5a43e463034460",
@@ -314,14 +326,14 @@
     },
     {
       "path": "tests/d4-08/web-package.mjs",
-      "bytes": 10472,
-      "sha256": "66a4db4335b199d9be43efe3a3a72e9cfd944ab3125879fbeaa15cea8aec8c34",
+      "bytes": 11093,
+      "sha256": "1cd1e95188dced0af2766bca238746bf2b76c7dcc225b359987d9193e20bcc61",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
       "path": "tests/d4-08/web-run.mjs",
-      "bytes": 15367,
-      "sha256": "2dca2c98ab15d529bfe84313bb23fc53e148c61f4b4e28d8d84ec742fa3316ab",
+      "bytes": 15633,
+      "sha256": "3e2ef5ed3533fabce0b901707d1ee41961cb9ac67cb7f869a76e451abaf64431",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -340,6 +352,18 @@
       "path": "tests/d4-08/web-timer-keyboard-cases.mjs",
       "bytes": 20285,
       "sha256": "ba00607493412ba8306e127a9f7aeb573e17e411cfe0fbdc2646aaeeb00d10a7",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
+      "path": "tests/d4-08/web-work-cases.mjs",
+      "bytes": 8320,
+      "sha256": "4c65cd942cdbd817f28db435da215cf778c249ea5354dc22e52e88bb6ee994e7",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
+      "path": "tests/d4-08/web-work-run.mjs",
+      "bytes": 230,
+      "sha256": "640a61d4e1473dbaa5c85620ac0099f6f82f7bf7839cf74ac32a8a1b6227ce7c",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {

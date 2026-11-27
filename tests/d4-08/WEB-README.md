@@ -16,7 +16,7 @@ node tests/d4-08/web-run.mjs <RUNNER_TEMP/d4-app/mytodo-d4-01-demo.html> <RUNNER
 
 The result directory must not exist. The runner compares the HTML hash and app source with `build-receipt.json`, verifies its own Git checkout against `GITHUB_SHA`, and records both `suiteSourceSHA` and `appSourceSHA`. It never conflates a baseline application with the new test source.
 
-For baseline reproduction, root's workflow checks out frozen `04c525c55fc136ad1b960b5d727dab3c5e3165fd` into a separate cloud checkout and builds with that SHA scoped to the **build step only**. The runner stays in the new suite checkout and uses `D408_APP_SOURCE_SHA=04c525c55fc136ad1b960b5d727dab3c5e3165fd`. For candidate validation, `D408_APP_SOURCE_SHA` equals the candidate SHA. Do not edit a failed baseline expectation to obtain a passing baseline.
+For baseline reproduction, root's workflow downloads the retained original frozen Actions artifact from run 45743320346 and verifies its source and hash with `baseline-input.mjs`. The application stays at frozen `04c525c55fc136ad1b960b5d727dab3c5e3165fd`; the runner stays in the new suite checkout and uses `D408_APP_SOURCE_SHA=04c525c55fc136ad1b960b5d727dab3c5e3165fd`. For candidate validation, `D408_APP_SOURCE_SHA` equals the candidate SHA. Do not edit a failed baseline expectation to obtain a passing baseline.
 
 Exit 0 means all 21 executed cases passed and no infrastructure failure occurred. Exit 1 retains a complete failure report. The baseline workflow may explicitly expect failure while always uploading its raw artifacts, but candidate validation must require exit 0. Windows and Ubuntu executions are separate suites/results; do not add them to Android, Win32, C0, or old browser counts.
 
@@ -46,3 +46,9 @@ New fields and controls expected by the regression have stable semantic attribut
 - Navigation supports a reasonable x=32 start on all main routes, slow-long and short-fast intentional horizontal movement, without taking editable or horizontally scrollable content gestures. Concrete distance/velocity rules are candidate interaction choices to document, not production protocol changes.
 
 All test data are synthetic. No real user database, remote endpoint, task-sync protocol change, stable signing or production admission is involved.
+
+## Independent work preservation suite
+
+`node tests/d4-08/web-work-run.mjs <HTML> <fresh-results-directory>` executes W01 and W02 separately from the original 164, restored-feature 21 and mounted-service 3 suites. W01 checks unchanged template version, complete step extensions/null/missing fields, stable IDs when repeated names reorder, and immutable instance snapshots. W02 edits records whose historical project/process/work-item references are missing, verifies original reference IDs and full second/offset or unknown date values survive, and explicitly unlinks with the previous IDs retained in history. Fixtures are synthetic and created via the existing repository; saving/reloading uses the real UI and browser persistence.
+
+Both ordinary and composed HTML run this suite on Windows and Ubuntu. Frozen baseline runs retain its failures independently. The final composed package requires W01/W02 and every other suite to pass on the same HTML hash/source/run/attempt, copies the work report and lists its count separately. The shared page also ships in Android, but browser results do not establish Android work UI interaction coverage. New cases remain unverified until their actual cloud run completes.

@@ -77,6 +77,11 @@ jobs:
         env:
           D408_APP_SOURCE_SHA: ${{ github.sha }}
         run: node tests/d4-08/web-run.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-web-results"
+      - name: Independent work relationship and template preservation suite
+        if: ${{ always() && steps.webbuild.outcome == 'success' }}
+        env:
+          D408_APP_SOURCE_SHA: ${{ github.sha }}
+        run: node tests/d4-08/web-work-run.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-web-work-results"
       - name: Package verified experience
         run: node tests/d4-ui/package-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
       - name: Observe actual packaged Windows launcher in a headed session
@@ -102,6 +107,11 @@ jobs:
             ${{ runner.temp }}/d408-web-results/*.txt
             ${{ runner.temp }}/d408-web-results/screenshots/
             ${{ runner.temp }}/d408-web-results/snapshots/
+            ${{ runner.temp }}/d408-web-work-results/*.json
+            ${{ runner.temp }}/d408-web-work-results/*.jsonl
+            ${{ runner.temp }}/d408-web-work-results/*.txt
+            ${{ runner.temp }}/d408-web-work-results/screenshots/
+            ${{ runner.temp }}/d408-web-work-results/snapshots/
           if-no-files-found: error
 
   android-d408:
@@ -181,8 +191,11 @@ jobs:
       - name: Independent mounted V2 service suite
         if: ${{ always() && steps.build.outcome == 'success' }}
         run: node tests/d4-08/web-service-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-results"
+      - name: Independent work preservation on the same composed HTML
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        run: node tests/d4-08/web-work-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-work"
       - name: Package only the verified same-HTML Web candidate
-        run: node tests/d4-08/web-package.mjs "$RUNNER_TEMP/d4-08-service-app" "$RUNNER_TEMP/d4-08-service-features" "$RUNNER_TEMP/d4-08-service-results" "$RUNNER_TEMP/d4-08-web-package"
+        run: node tests/d4-08/web-package.mjs "$RUNNER_TEMP/d4-08-service-app" "$RUNNER_TEMP/d4-08-service-features" "$RUNNER_TEMP/d4-08-service-results" "$RUNNER_TEMP/d4-08-service-work" "$RUNNER_TEMP/d4-08-web-package"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -202,5 +215,10 @@ jobs:
             ${{ runner.temp }}/d4-08-service-results/*.txt
             ${{ runner.temp }}/d4-08-service-results/screenshots/
             ${{ runner.temp }}/d4-08-service-results/snapshots/
+            ${{ runner.temp }}/d4-08-service-work/*.json
+            ${{ runner.temp }}/d4-08-service-work/*.jsonl
+            ${{ runner.temp }}/d4-08-service-work/*.txt
+            ${{ runner.temp }}/d4-08-service-work/screenshots/
+            ${{ runner.temp }}/d4-08-service-work/snapshots/
             ${{ runner.temp }}/d4-08-web-package/
           if-no-files-found: error

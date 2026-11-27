@@ -51,9 +51,18 @@ jobs:
         id: gap
         continue-on-error: true
         run: node tests/d4-08/web-run.mjs "$D408_BASELINE_ARTIFACT" "$RUNNER_TEMP/d408-baseline-web-results"
+      - name: Reproduce work preservation against the unchanged frozen product
+        id: workgap
+        continue-on-error: true
+        run: node tests/d4-08/web-work-run.mjs "$D408_BASELINE_ARTIFACT" "$RUNNER_TEMP/d408-baseline-web-work-results"
       - name: Record the actual test step outcome
         if: always()
-        run: echo '${{ steps.gap.outcome }}' > "$RUNNER_TEMP/d408-baseline-web-step-outcome.txt"
+        run: |
+          echo '${{ steps.gap.outcome }}' > "$RUNNER_TEMP/d408-baseline-web-step-outcome.txt"
+          echo '${{ steps.workgap.outcome }}' > "$RUNNER_TEMP/d408-baseline-web-work-step-outcome.txt"
+      - name: Require complete independently counted frozen browser execution
+        if: always()
+        run: node tests/d4-08/web-baseline-verify.mjs "$D408_BASELINE_ARTIFACT" "$RUNNER_TEMP/d408-baseline-web-results/d408-web-results.json" "$RUNNER_TEMP/d408-baseline-web-work-results/d408-web-results.json" "$RUNNER_TEMP/d408-baseline-web-collection.json"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -65,6 +74,13 @@ jobs:
             ${{ runner.temp }}/d408-baseline-web-results/screenshots/
             ${{ runner.temp }}/d408-baseline-web-results/snapshots/
             ${{ runner.temp }}/d408-baseline-web-step-outcome.txt
+            ${{ runner.temp }}/d408-baseline-web-work-step-outcome.txt
+            ${{ runner.temp }}/d408-baseline-web-collection.json
+            ${{ runner.temp }}/d408-baseline-web-work-results/*.json
+            ${{ runner.temp }}/d408-baseline-web-work-results/*.jsonl
+            ${{ runner.temp }}/d408-baseline-web-work-results/*.txt
+            ${{ runner.temp }}/d408-baseline-web-work-results/screenshots/
+            ${{ runner.temp }}/d408-baseline-web-work-results/snapshots/
             ${{ runner.temp }}/d408-frozen-web/D408-FROZEN-INPUT.json
           if-no-files-found: error
   windows:

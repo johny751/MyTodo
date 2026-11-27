@@ -8,6 +8,7 @@ import {feedbackCases} from './web-feedback-cases.mjs';
 import {navigationCases} from './web-navigation-cases.mjs';
 import {timerKeyboardCases} from './web-timer-keyboard-cases.mjs';
 import {serviceCases} from './web-service-cases.mjs';
+import {workCases} from './web-work-cases.mjs';
 
 // New independent suite: all legacy tests remain byte-for-byte unchanged.
 const env=process.env, html=resolve(process.argv[2]||''), out=resolve(process.argv[3]||''), root=resolve(dirname(fileURLToPath(import.meta.url)),'../..');
@@ -25,8 +26,10 @@ if(!browser)throw Error('Hosted Chromium unavailable; no download fallback');
 const pause=ms=>new Promise(r=>setTimeout(r,ms)), serialError=e=>({name:e?.name||'Error',message:String(e?.message||e),stack:e?.stack});
 const report={kind:'d408-web-independent-real-browser',suiteSourceSHA:suiteSHA,appSourceSHA:appSHA,runId:env.GITHUB_RUN_ID,attempt:Number(env.GITHUB_RUN_ATTEMPT),platform:process.platform,runnerOS:env.RUNNER_OS,htmlSha256:build.artifact.sha256,startedAt:new Date().toISOString(),cases:[],infrastructureErrors:[],scope:'Isolated browser only; not Android system gestures, native lifecycle, Win32, SQLite, or production admission'};
 const serviceMode=env.D408_WEB_SUITE==='service';
-const specs=serviceMode?serviceCases:[...timerKeyboardCases.filter(x=>x.id.startsWith('T')),...feedbackCases,...navigationCases,...timerKeyboardCases.filter(x=>x.id.startsWith('K'))];
-const planned=serviceMode?3:21;assert.equal(specs.length,planned);assert.equal(new Set(specs.map(x=>x.id)).size,planned);report.kind=serviceMode?'d408-mounted-v2-service-independent-browser':report.kind;
+const workMode=env.D408_WEB_SUITE==='work';
+if(env.D408_WEB_SUITE&&!serviceMode&&!workMode)throw Error('Unknown D408 browser suite');
+const specs=serviceMode?serviceCases:workMode?workCases:[...timerKeyboardCases.filter(x=>x.id.startsWith('T')),...feedbackCases,...navigationCases,...timerKeyboardCases.filter(x=>x.id.startsWith('K'))];
+const planned=serviceMode?3:workMode?2:21;assert.equal(specs.length,planned);assert.equal(new Set(specs.map(x=>x.id)).size,planned);report.kind=serviceMode?'d408-mounted-v2-service-independent-browser':workMode?'d408-work-preservation-independent-browser':report.kind;
 let chrome, ws, seq=0, stderr='', processError=null;const pending=new Map(), sessions=new Map();
 const write=()=>writeFileSync(join(out,'d408-web-results.json'),JSON.stringify(report,null,2)+'\n');
 const trace=entry=>appendFileSync(join(out,'d408-web-input-trace.jsonl'),JSON.stringify({at:new Date().toISOString(),...entry})+'\n');
