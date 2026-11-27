@@ -1,6 +1,42 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.10006",
+    "versionCode": 418006,
+    "sourceSHA": "6c9b1ee90d1fb1ae87d0a4ea6638bac65ace8b2b",
+    "buildTimeUTC": "2026-11-27T12:47:10.668Z",
+    "runId": "46001335064",
+    "runAttempt": "1",
+    "runNumber": "6",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_VALIDATION_FAILED",
+    "statusText": "候选APK构建成功，云端覆盖完整但反馈恢复UI仍失败；未发布、未验收。保留15/15、功能7/7、反馈UI5/7、工作数据保留4/4、导航20/20、权限3/3、重启后重开2/2；原始2项失败完整保留。",
+    "changes": [
+      "原反馈图片全屏预览关闭按钮已完整避开系统栏，真实中心触摸关闭、移除、重新选择及草稿保留通过",
+      "实际SAF取消只发送一次返回并保留宿主，随后真实导出ZIP内容通过；U01和U04修复已由本次云端验证",
+      "U05/U06打开时已处于Downloads，测试驱动重复打开根目录抽屉后等待关闭超时；保留真实失败树、截图和原始报告，恢复及损坏重试尚未通过",
+      "导航20/20通过，42像素短快手势原生与可信DOM实际为40至41毫秒；权限拒绝后同会话真实一分钟完成和通知匹配通过"
+    ],
+    "provenance": {
+      "artifactId": "15198753146",
+      "artifactName": "d408-android-46001335064-1",
+      "archiveSha256": "08ca5a1c6df5f66824cf46487af87999e0d168b8983df99bc957aded512326a7",
+      "apkMember": "d408-native-46001335064-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "090523cb100f486db9e71487136828c5dedf404b829791599e3a4f2bf3e348c2",
+      "identityMember": "d408-native-46001335064-1/d408-build-identity.json",
+      "identitySha256": "5fdaac84523e9a9f65921fef47c899523f17997f7b8ebe7a10ad472bbac503ee",
+      "signerSha256": "4effc4f125497124f720c23f9264321d991aab8a2fb7dcd79434a857fc8a7848"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionName": "0.8.10005",
     "versionCode": 418005,
     "sourceSHA": "1b8dac0a9e856300fb7dfb285dae5f4b3851b390",

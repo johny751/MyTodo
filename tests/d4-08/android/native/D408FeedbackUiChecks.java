@@ -48,7 +48,7 @@ final class D408FeedbackUiChecks {
     String assetId,imageHash,noteId,backupHash;
     JSONObject exported;
     long exportedGeneration;
-    int dumpSequence;
+    int dumpSequence,documentsSequence;
     Uri imageUri;
     D408FeedbackUiChecks(D408IntegrationInstrumentation t){this.t=t;storage=new DefaultFeedbackStorage(t.target);android.accessibilityservice.AccessibilityServiceInfo info=t.getUiAutomation().getServiceInfo();info.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS|android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;t.getUiAutomation().setServiceInfo(info);}
     static void run(D408IntegrationInstrumentation t){
@@ -163,7 +163,10 @@ final class D408FeedbackUiChecks {
         return new JSONObject().put("emptySaveRejected",true).put("correctedSaveBody",corrected).put("operation","local note save; no network submission claimed");
     }
     void chooseRestore(String filename)throws Exception{
-        t.current=tools;t.awaitForeground(tools);D408FeatureChecks.nativeText(t,tools,"从备份恢复");downloads();touch(waitNode("actual SAF backup row "+filename,n->filename.contentEquals(n.getText()==null?"":n.getText()),10000));t.until("original host replacement confirmation",10000,()->D408FeatureChecks.windowContains(t,"替换当前优化意见"));
+        t.current=tools;t.awaitForeground(tools);D408FeatureChecks.nativeText(t,tools,"从备份恢复");downloads();
+        t.until("unique actual SAF backup row "+filename,10000,()->count(t.getUiAutomation().getRootInActiveWindow(),n->documentRow(n,filename))==1);
+        AccessibilityNodeInfo row=waitNode("actual SAF directory backup row "+filename,n->documentRow(n,filename),5000);dump("feedback-documents-file-selected-before");touch(documentClickTarget(row));
+        t.until("original host replacement confirmation",10000,()->D408FeatureChecks.windowContains(t,"替换当前优化意见"));
     }
     void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
     Rect[] previewRects(){
@@ -193,11 +196,44 @@ final class D408FeedbackUiChecks {
             D408IntegrationInstrumentation.write(new File(t.evidence,"feedback-saf-cancel-interaction.json"),result.toString(2));return result;
         }finally{t.removeMonitor(monitor);}
     }
+    boolean documentsDrawerVisible(){return find(n->{String id=String.valueOf(n.getViewIdResourceName());return id.endsWith(":id/roots_list")||id.endsWith(":id/drawer_roots");})!=null;}
+    boolean inDownloadsDirectory(){return activePackage().contains("documentsui")&&!documentsDrawerVisible()
+        &&count(t.getUiAutomation().getRootInActiveWindow(),n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/breadcrumb_text"))==1
+        &&find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/breadcrumb_text")&&String.valueOf(n.getText()).matches("(?i)downloads|下载"))!=null
+        &&find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/dir_list"))!=null;}
+    AccessibilityNodeInfo documentClickTarget(AccessibilityNodeInfo node){
+        if(!withinId(node,":id/dir_list"))return null;
+        for(int depth=0;node!=null&&depth<12;depth++,node=node.getParent()){
+            if(String.valueOf(node.getViewIdResourceName()).endsWith(":id/dir_list"))return null;
+            if(node.isVisibleToUser()&&node.isEnabled()&&node.isClickable())return node;
+        }
+        return null;
+    }
+    boolean documentRow(AccessibilityNodeInfo n,String filename){return String.valueOf(n.getPackageName()).contains("documentsui")&&filename.contentEquals(n.getText()==null?"":n.getText())&&withinId(n,":id/dir_list")&&!withinId(n,":id/roots_list")&&documentClickTarget(n)!=null;}
+    int count(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate){if(n==null)return 0;int result=n.isVisibleToUser()&&predicate.test(n)?1:0;for(int i=0;i<n.getChildCount();i++)result+=count(n.getChild(i),predicate);return result;}
+    JSONObject documentsState()throws Exception{
+        AccessibilityNodeInfo breadcrumb=find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/breadcrumb_text"));
+        return new JSONObject().put("activePackage",activePackage()).put("breadcrumbText",breadcrumb==null?JSONObject.NULL:String.valueOf(breadcrumb.getText()))
+            .put("breadcrumbCount",count(t.getUiAutomation().getRootInActiveWindow(),n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/breadcrumb_text")))
+            .put("directoryListVisible",find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/dir_list"))!=null).put("rootsDrawerVisible",documentsDrawerVisible()).put("downloadsDirectoryObserved",inDownloadsDirectory());
+    }
     void downloads()throws Exception{
-        waitDocuments();dump("feedback-documents-before");AccessibilityNodeInfo roots=find(n->{String desc=String.valueOf(n.getContentDescription());return desc.matches("(?i)show roots|show navigation drawer|open navigation drawer|显示根目录|显示导航栏|打开导航栏|打开导航抽屉|显示根目录菜单");});
-        if(roots!=null){touch(roots);touch(waitNode("Downloads root inside actual navigation drawer",n->String.valueOf(n.getText()).matches("(?i)downloads|下载")&&withinId(n,":id/roots_list")&&clickTarget(n)!=null,5000));t.until("actual DocumentsUI roots drawer closes",5000,()->find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/roots_list"))==null);}
-        else check(find(n->String.valueOf(n.getText()).matches("(?i)downloads|下载"))!=null,"observed DocumentsUI Downloads location");
-        SystemClock.sleep(300);dump("feedback-documents-downloads");
+        waitDocuments();t.getUiAutomation().waitForIdle(500,10000);dump("feedback-documents-before");JSONObject before=documentsState();boolean alreadyDownloads=inDownloadsDirectory();
+        // OPEN_DOCUMENT can already resume Downloads. Reopening its drawer is
+        // redundant; the actual file selection and confirmation still follow.
+        if(!alreadyDownloads){
+            if(!documentsDrawerVisible()){
+                touch(waitNode("actual DocumentsUI roots control",n->String.valueOf(n.getContentDescription()).matches("(?i)show roots|show navigation drawer|open navigation drawer|显示根目录|显示导航栏|打开导航栏|打开导航抽屉|显示根目录菜单"),5000));
+            }
+            t.getUiAutomation().waitForIdle(500,10000);dump("feedback-documents-roots-open");
+            touch(waitNode("Downloads root inside actual navigation drawer",n->String.valueOf(n.getText()).matches("(?i)downloads|下载")&&withinId(n,":id/roots_list")&&clickTarget(n)!=null,5000));
+            t.until("actual DocumentsUI roots drawer closes",5000,()->!documentsDrawerVisible());
+        }
+        t.until("actual unobscured Downloads directory",10000,this::inDownloadsDirectory);dump("feedback-documents-downloads");
+        JSONObject navigation=new JSONObject().put("sourceSHA",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT)
+            .put("sequence",++documentsSequence).put("before",before).put("after",documentsState()).put("redundantDirectorySwitchSkipped",alreadyDownloads)
+            .put("decision",alreadyDownloads?"Observed Downloads breadcrumb and directory with no drawer; continue actual file operation":"Selected actual Downloads root and observed drawer closure");
+        D408IntegrationInstrumentation.write(new File(t.evidence,String.format(java.util.Locale.ROOT,"feedback-documents-navigation-%02d.json",documentsSequence)),navigation.toString(2));
     }
     void systemKey(int code,int modifiers){long now=SystemClock.uptimeMillis();check(t.getUiAutomation().injectInputEvent(new KeyEvent(now,now,KeyEvent.ACTION_DOWN,code,0,modifiers,KeyCharacterMap.VIRTUAL_KEYBOARD,0,0,InputDevice.SOURCE_KEYBOARD),true),"system key down accepted");check(t.getUiAutomation().injectInputEvent(new KeyEvent(now,SystemClock.uptimeMillis(),KeyEvent.ACTION_UP,code,0,modifiers,KeyCharacterMap.VIRTUAL_KEYBOARD,0,0,InputDevice.SOURCE_KEYBOARD),true),"system key up accepted");}
     void systemText(String value){KeyEvent[] events=KeyCharacterMap.load(KeyCharacterMap.VIRTUAL_KEYBOARD).getEvents(value.toCharArray());check(events!=null,"system filename has real key events");for(KeyEvent event:events)check(t.getUiAutomation().injectInputEvent(KeyEvent.changeTimeRepeat(event,SystemClock.uptimeMillis(),0),true),"system filename key accepted");}

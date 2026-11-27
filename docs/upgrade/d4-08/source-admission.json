@@ -44,8 +44,8 @@
     },
     {
       "path": "android/d408/README.md",
-      "bytes": 9881,
-      "sha256": "c51ac083e35367bd6168b1eb295585a9233216e1260c5e7f32df1fcf26fb37d0",
+      "bytes": 11437,
+      "sha256": "3f83c85617e9cc333bdede84824553598796585bbb99ad7b94400198ad1c5466",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -110,8 +110,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 13079,
-      "sha256": "1a2a6b440205d6a873ba86959bda881db60a0c3fd9d0afbcef77b8b4c7abbf65",
+      "bytes": 15225,
+      "sha256": "f1dd27da596507c56bd69cd7844747d9cfd04dd0dd8ddda7ca23e6cf5ff9b449",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -229,6 +229,24 @@
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
+      "path": "tests/d4-08/android/diagnostics/D408FlowInputDiagnostics.java",
+      "bytes": 8538,
+      "sha256": "852a0308569c703d38c941c58b4d67e83c1884937c04f0a0676d2297e5ab36bc",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
+      "path": "tests/d4-08/android/diagnostics/flow-input-observer.js",
+      "bytes": 4934,
+      "sha256": "3edf7c84d38a68cfb2cb9c8084d4d2ce7ee8b6b70a3f07844974e991763cb14d",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
+      "path": "tests/d4-08/android/diagnostics/prepare-flow-diagnostics.mjs",
+      "bytes": 5148,
+      "sha256": "cd0b215288917aecb85900cd8d6a443f4054296ef79452316f073a85e83aa234",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
       "path": "tests/d4-08/android/local/gxtodo/d408probe/BaselineProbe.java",
       "bytes": 20532,
       "sha256": "16c30947e35e47b62d630e83d7132c0d6480ec6e7a8f885f02aad8365a18c0a2",
@@ -248,8 +266,8 @@
     },
     {
       "path": "tests/d4-08/android/native/D408FeedbackUiChecks.java",
-      "bytes": 30656,
-      "sha256": "83d859ee5070df6ba017b5aab63d51b6c30209b9fee45baea3efbea245b7322d",
+      "bytes": 34341,
+      "sha256": "d126fe2508340d419c176f6cd15e0e708e43bc83b2ccba1fa92d279ac413d958",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -296,8 +314,8 @@
     },
     {
       "path": "tests/d4-08/legacy-android-build.mjs",
-      "bytes": 4959,
-      "sha256": "e5164a321f9b89f9898469798f19b4a655871ad6d3248ee9a760565c7233210b",
+      "bytes": 5125,
+      "sha256": "e9648e8daa2f08d3901727985585a3405c90b763fb72ddca5b3f23aa113f9a75",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {

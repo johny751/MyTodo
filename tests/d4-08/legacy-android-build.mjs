@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {execFileSync,spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {prepareFlowDiagnostics} from './android/diagnostics/prepare-flow-diagnostics.mjs';
 const e=process.env,root=process.cwd(),[kind,input,output]=process.argv.slice(2);
 if(e.GITHUB_ACTIONS!=='true'||e.GITHUB_REF!=='refs/heads/d4/d4-08-candidate-1'||e.EXPECTED_SOURCE_SHA!==e.GITHUB_SHA||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==e.GITHUB_SHA)throw Error('D408 exact Actions identity required');
 if(!['d403','d405'].includes(kind)||!input||!output)throw Error('Usage: legacy-android-build.mjs d403|d405 HTML OUTPUT');
@@ -31,7 +32,9 @@ if(kind==='d403'){
 const generated=path.join(work,'prepare.mjs');await fs.writeFile(generated,prepare);
 const call='node '+originalPrepare+' "$demo" "$out"';if(build.split(call).length!==2)throw Error('Frozen build invocation changed');
 const quote=s=>"'"+s.replace(/'/g,"'\\''")+"'";
-build=build.replace(call,'node '+quote(generated)+' "$demo" "$out"');const shell=path.join(work,'build.sh');await fs.writeFile(shell,build);
+build=build.replace(call,'node '+quote(generated)+' "$demo" "$out"');
+if(kind==='d403')({build}=await prepareFlowDiagnostics(root,work,build));
+const shell=path.join(work,'build.sh');await fs.writeFile(shell,build);
 await fs.writeFile(path.join(work,'adapter-receipt.json'),JSON.stringify({sourceSHA:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:e.GITHUB_RUN_ATTEMPT,actualRunNumber:e.GITHUB_RUN_NUMBER,regressionOnly:true,kind,edits,originalPrepare:{path:originalPrepare,sha256:hash(await fs.readFile(originalPrepare))},originalBuild:{path:originalBuild,sha256:hash(await fs.readFile(originalBuild))},generatedPrepareSHA256:hash(prepare),generatedBuildSHA256:hash(build),priorVerifiedBuild:prior,productionSigning:false,originalFilesModified:false},null,2)+'\n');
 const code=await new Promise((resolve,reject)=>{const child=spawn('bash',[shell,input,output],{cwd:root,env:e,stdio:'inherit'});child.on('error',reject);child.on('exit',resolve);});
 if(code!==0)process.exitCode=code||1;
