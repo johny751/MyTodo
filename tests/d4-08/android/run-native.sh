@@ -48,6 +48,13 @@ phase() {
 phase main
 phase features
 phase feedback-ui
+for width in 360 412;do
+  adb shell wm density 160
+  adb shell wm size "${width}x900"
+  adb shell wm size > "$evidence/wm-size-work-preservation-$width.txt"
+  adb shell wm density > "$evidence/wm-density-work-preservation-$width.txt"
+  phase "work-preservation-$width"
+done
 adb shell cmd overlay list > "$evidence/navigation-overlays-before.txt"
 for mode in gestural threebutton;do
   overlay="$(awk -v suffix=".navbar.$mode" 'index($NF,suffix)==length($NF)-length(suffix)+1 {print $NF}' "$evidence/navigation-overlays-before.txt")"
@@ -102,8 +109,8 @@ phase boot-recover
 collect
 node --input-type=module - "$evidence" <<'NODE'
 import fs from 'node:fs/promises';
-const root=process.argv[2],groups={retained:['main','visual-360','visual-412','process-prepare','process-recover'],features:['features'],feedbackUi:['feedback-ui'],navigation:['navigation-360-gestural','navigation-412-gestural','navigation-360-threebutton','navigation-412-threebutton'],permissions:['notification-denied','notification-restored','exact-denied'],reboot:['boot-prepare','boot-recover']},results={};
-const expectedCounts={retained:15,features:7,feedbackUi:7,navigation:20,permissions:3,reboot:2};
+const root=process.argv[2],groups={retained:['main','visual-360','visual-412','process-prepare','process-recover'],features:['features'],feedbackUi:['feedback-ui'],workPreservation:['work-preservation-360','work-preservation-412'],navigation:['navigation-360-gestural','navigation-412-gestural','navigation-360-threebutton','navigation-412-threebutton'],permissions:['notification-denied','notification-restored','exact-denied'],reboot:['boot-prepare','boot-recover']},results={};
+const expectedCounts={retained:15,features:7,feedbackUi:7,workPreservation:4,navigation:20,permissions:3,reboot:2};
 const identity=JSON.parse(await fs.readFile(root+'/../d408-build-identity.json','utf8'));
 const expectedIds={
  main:['01 exact-permission-and-component-policy','02 accepted-page-native-bridge-and-feedback-entry','03 single-authority-foreground-service','04-native-notification-pause-resume','05-background-keeps-session','06-lockscreen-keeps-private-timer-notification','07-activity-recreation-preserves-timer-and-draft','08-real-deadline-completion-once','09-formal-reminder-alarm-delivery-and-snooze','10-native-feedbackkit-real-editor-save','11-accepted-work-page-selection-readonly-trace'],
@@ -115,6 +122,7 @@ const expectedIds={
  'boot-prepare':['B01-prepare-real-device-reboot'],'boot-recover':['B02-real-device-reboot-recovers-session']
 };
 for(const phase of groups.navigation)expectedIds[phase]=['N01-thirteen-routes-real-wider-edge','N02-edges-distance-velocity-and-direction','N03-task-note-input-and-real-keyboard','N04-horizontal-scroll-retains-touch','N05-work-note-native-selection-and-system-back'].map(id=>phase+'-'+id);
+for(const phase of groups.workPreservation)expectedIds[phase]=['W01-template-noop-rich-steps-and-instance-snapshot','W02-missing-relations-unknown-fields-and-exact-time'].map(id=>phase+'-'+id);
 for(const phase of Object.keys(expectedIds))expectedIds[phase]=expectedIds[phase].map(id=>'D408-'+id).sort();
 const coverageErrors=[];
 let failed=false;
@@ -131,6 +139,7 @@ for(const [name,phases] of Object.entries(groups)){
     const names=p.cases.map(c=>c?.name),failures=p.cases.filter(c=>c?.passed!==true).length;
     if(JSON.stringify([...names].sort())!==JSON.stringify(expectedIds[phase])||new Set(names).size!==names.length)coverageErrors.push(`${phase}: missing, duplicated or unexpected case IDs`);
     if(p.caseCount!==p.cases.length||p.failureCount!==failures||p.passed!==(failures===0)||p.cases.some(c=>typeof c?.passed!=='boolean'))coverageErrors.push(`${phase}: inconsistent result counters or passed flags`);
+    if(name==='workPreservation'&&p.cases.some(c=>c.phase!==phase||c.width!==Number(phase.split('-').at(-1))||(c.passed&&c.observedWidth!==c.width)||c.sourceSHA!==p.sourceSHA||c.runId!==p.runId||c.runAttempt!==p.runAttempt))coverageErrors.push(`${phase}: work-preservation case identity or width mismatch`);
   }
   const cases=reports.flatMap(r=>Array.isArray(r.cases)?r.cases:[]),failures=cases.filter(c=>c?.passed!==true).length;
   results[name]={caseCount:cases.length,passed:cases.filter(c=>c?.passed===true).length,failed:failures,missingReports,reports};

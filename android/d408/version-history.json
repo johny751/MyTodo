@@ -1,6 +1,42 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.10002",
+    "versionCode": 418002,
+    "sourceSHA": "6f94c892efd3103e772530541658e364b6ce4577",
+    "buildTimeUTC": "2026-11-27T10:44:14.491Z",
+    "runId": "45984370785",
+    "runAttempt": "1",
+    "runNumber": "2",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_VALIDATION_FAILED",
+    "statusText": "候选构建成功，报告覆盖完整但反馈UI验证失败；未发布、未验收。保留15/15、功能7/7、导航20/20、权限3/3、重启后重开恢复2/2通过；反馈UI 1/7，保留真实图片选择器确认等待失败及后续依赖失败。",
+    "changes": [
+      "实际任务选择、完整历史与统计、反馈图片草稿和备份数据操作通过云端功能组验证",
+      "修复跨应用输入和备份内容URI，真实图片已在系统选择器选中；确认按钮异步出现仍导致本轮U01失败",
+      "实际360/412宽度、手势/三键导航20例和原有保留、权限、重启后重开恢复组通过",
+      "使用候选工作流独立版本范围和真实运行编号，不宣称稳定签名或旧版本覆盖升级"
+    ],
+    "provenance": {
+      "artifactId": "15191453921",
+      "artifactName": "d408-android-45984370785-1",
+      "archiveSha256": "5addae04628b215f83e251a1b124cd10720d4d70066550afca0e7038969c08d0",
+      "apkMember": "d408-native-45984370785-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "c2e89537246bbdf15730ff9898d0c10b3c0a18d350baa67d4465d0f69ec3ab43",
+      "identityMember": "d408-native-45984370785-1/d408-build-identity.json",
+      "identitySha256": "17358a454a177fc3d9d3ac20ea65b7034582ff0d6c7f043fd2c93d0591643f23",
+      "signerSha256": "1f074d0eda592ea69b7745ce8f90ca6eb6df9f4e1b1cf4004607c42483f80c1c"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionName": "0.8.2",
     "versionCode": 408002,
     "sourceSHA": "f7a680559d7d23643f56c1a100402245187b982c",

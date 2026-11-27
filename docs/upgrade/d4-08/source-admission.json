@@ -44,8 +44,8 @@
     },
     {
       "path": "android/d408/README.md",
-      "bytes": 6182,
-      "sha256": "27a12391616cfea8d4732e49682bca53082f2d2431f6cc3eb2a60c1fdd12b33b",
+      "bytes": 7686,
+      "sha256": "aeacc13b79613e4b0747f1618770662e6b8901ceae4518bf4081b8d0480e7436",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -104,8 +104,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 3606,
-      "sha256": "d22a1b60546d22839c43a9aa8869f32c2eb822fc0553c73023f3b1ae7b4037b8",
+      "bytes": 5633,
+      "sha256": "a25c9cd98634b7e8c2ecad5eff2c6077b0e61da54f93b055a0d711f16d45e504",
       "reason": "Separate Android candidate identity and generated adapters for complete timer/feedback/navigation; original components preserved."
     },
     {
@@ -242,14 +242,14 @@
     },
     {
       "path": "tests/d4-08/android/native/D408FeedbackUiChecks.java",
-      "bytes": 24547,
-      "sha256": "5fd1b6bf5afdaddc8478fb5a8c480ae9b2a565ebb8544ff04c24d6025b109156",
+      "bytes": 25132,
+      "sha256": "190b521b7a5f12c0c43bad3a2d0d3409832f5dd42a46ffdd961342ae1034ff4c",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
       "path": "tests/d4-08/android/native/D408IntegrationInstrumentation.java",
-      "bytes": 35475,
-      "sha256": "ecf3fd6320040b00cf483fa6646ce02bedea50b3fb9a4a5914e7798d0190ae28",
+      "bytes": 35590,
+      "sha256": "f9578a724c885483f420300b09818e4121a24dcdf774fb642cce959269e612e8",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -259,9 +259,15 @@
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
+      "path": "tests/d4-08/android/native/D408WorkPreservationChecks.java",
+      "bytes": 12177,
+      "sha256": "8be9c67e0462c6cdd3c6b72a5e6471402fbf3b16904a5f08e04f652e8369b3eb",
+      "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
+    },
+    {
       "path": "tests/d4-08/android/run-native.sh",
-      "bytes": 11805,
-      "sha256": "c2ebae81c1c7494bcfdb7f68640021418d2b0999bba99ac1f13e7417a28a1c4a",
+      "bytes": 12667,
+      "sha256": "2cd4046cde7c7069400b5bbe64a0f723e87b7e9a98b3d1df61e3c2f02ef10c97",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -380,8 +386,8 @@
     },
     {
       "path": "tests/d4-08/windows/expected-checks.json",
-      "bytes": 5953,
-      "sha256": "d1cddf7bdef10d004c5ebaf51b43a808a425498bf90cfa1d74e7fcd18f9a96e7",
+      "bytes": 8050,
+      "sha256": "7c754380a619c2df6b2cfeef592e6aea9f064e830b0903f8c628b598d372a655",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -398,8 +404,8 @@
     },
     {
       "path": "tests/d4-08/windows/reproduce-ui.ps1",
-      "bytes": 25204,
-      "sha256": "d6df3c5bab0b50eeeca5cd886984d5f50dce7b22d8986fb0bf816eab85f7b820",
+      "bytes": 25861,
+      "sha256": "59f2e395c3c2087eeae48d166ca5446c90a5bb68c644512b5637ae23cd72cc11",
       "reason": "Independent Actions-only D408 behavior, identity and admission harness; original suites preserved."
     },
     {
@@ -446,14 +452,32 @@
     },
     {
       "path": "windows/d408-timer.c",
-      "bytes": 30921,
-      "sha256": "ec23fd86eaedb461d263ee6fcbac8491a63e2ea5017ce1d2eece8b2d2c4d6683",
+      "bytes": 31796,
+      "sha256": "e5d0b7c6918ee394a1ab98a5af2b9ade8e79d374ab4a02ade8b473d4fec02b1f",
+      "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
+    },
+    {
+      "path": "windows/d408-work-backup.inc",
+      "bytes": 5804,
+      "sha256": "94bbab0233d40658c535b031b857fc56ed576f3f1ad6e26ffd5db1014200c324",
+      "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
+    },
+    {
+      "path": "windows/d408-work-domain.inc",
+      "bytes": 15978,
+      "sha256": "77b850e7341d0384fcfcf1fd5b60deaad6e607d7b2bf9733edc687af2a61444a",
+      "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
+    },
+    {
+      "path": "windows/d408-work-tests.inc",
+      "bytes": 16461,
+      "sha256": "68d497cd438eca58ef2b6ec195703b13a06d7f5d05e24dfaefc74dae2c9b29ff",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {
       "path": "windows/d408-work.c",
-      "bytes": 34272,
-      "sha256": "b1c964644bdda70cf31461cf652841749327072ed0395e539e82d8f8f74c9810",
+      "bytes": 35520,
+      "sha256": "544570309a01941babf5534aafb5f6bb060124057263f205e733d7c31b03b052",
       "reason": "Win32 candidate-only native controls and independent sidecar persistence; no production schema or sync changes."
     },
     {

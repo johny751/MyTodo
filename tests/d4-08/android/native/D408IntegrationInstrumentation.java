@@ -40,6 +40,7 @@ public final class D408IntegrationInstrumentation extends Instrumentation {
             else if ("process-recover".equals(phase)) recoverDeath();
             else if ("features".equals(phase)) { foreground(); D408FeatureChecks.run(this); }
             else if ("feedback-ui".equals(phase)) { D408FeedbackUiChecks.run(this); }
+            else if (phase.matches("work-preservation-(360|412)")) { D408WorkPreservationChecks.run(this,phase); }
             else if (phase.startsWith("navigation-")) { D408NavigationChecks.run(this,phase); }
             else if ("boot-prepare".equals(phase)) { foreground(); D408FeatureChecks.prepareBoot(this); }
             else if ("boot-recover".equals(phase)) { foreground(); D408FeatureChecks.recoverBoot(this); }

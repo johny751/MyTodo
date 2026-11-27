@@ -173,16 +173,28 @@ function Scenario([string]$Id, [string]$Expected, [scriptblock]$Body) {
 }
 function Find-TemplateObject($Value, [string]$Name) {
     if ($null -eq $Value -or $Value -is [string] -or $Value -is [ValueType]) { return }
-    if ($Value -is [Collections.IEnumerable] -and $Value -isnot [pscustomobject]) {
+    if ($Value -is [Collections.IDictionary]) {
+        $matchesName=($Value.Contains('name') -and $Value['name'] -ceq $Name)
+        $matchesTitle=($Value.Contains('title') -and $Value['title'] -ceq $Name)
+        if (($matchesName -or $matchesTitle) -and $Value.Contains('steps')) { $Value }
+        foreach($entry in $Value.Values) { Find-TemplateObject $entry $Name }
+        return
+    }
+    if ($Value -is [Collections.IEnumerable] -and $Value -isnot [Management.Automation.PSCustomObject]) {
         foreach($entry in $Value) { Find-TemplateObject $entry $Name }
         return
     }
+    if ($Value -isnot [Management.Automation.PSCustomObject]) { return }
     $nameProperty=$Value.PSObject.Properties['name']; $titleProperty=$Value.PSObject.Properties['title']
     $stepsProperty=$Value.PSObject.Properties['steps']
-    if (($nameProperty -and $nameProperty.Value -ceq $Name -or $titleProperty -and $titleProperty.Value -ceq $Name) -and $stepsProperty) {
+    $matchesName=($null -ne $nameProperty -and $nameProperty.Value -ceq $Name)
+    $matchesTitle=($null -ne $titleProperty -and $titleProperty.Value -ceq $Name)
+    if (($matchesName -or $matchesTitle) -and $null -ne $stepsProperty) {
         $Value
     }
-    foreach($property in $Value.PSObject.Properties) { Find-TemplateObject $property.Value $Name }
+    foreach($property in $Value.PSObject.Properties) {
+        if($property -is [Management.Automation.PSPropertyInfo]) { Find-TemplateObject $property.Value $Name }
+    }
 }
 
 try {

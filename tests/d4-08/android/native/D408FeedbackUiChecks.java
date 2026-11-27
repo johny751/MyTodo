@@ -102,11 +102,15 @@ final class D408FeedbackUiChecks {
     void pickImage()throws Exception{
         tapTag(page,"feedback_add_image");t.until("real system image picker",10000,()->find(n->{String p=String.valueOf(n.getPackageName());return !p.equals(t.target.getPackageName())&&(p.contains("photopicker")||p.contains("providers.media")||p.contains("documentsui"));})!=null);dump("feedback-system-picker-before");
         AccessibilityNodeInfo thumbnail=waitNode("seeded image in system picker",n->{String id=String.valueOf(n.getViewIdResourceName());return id.endsWith(":id/icon_thumbnail")||id.endsWith(":id/icon_photo")||id.endsWith(":id/image_view");},10000);
-        touch(thumbnail);SystemClock.sleep(300);
-        AccessibilityNodeInfo add=find(n->{String value=String.valueOf(n.getText());return value.matches("(?i)add(?: \\(.*\\))?")||value.matches("添加(?:[（(].*[）)])?");});
-        if(add!=null)touch(add);
+        touch(thumbnail);
+        // Photo Picker populates its selected-count bottom bar asynchronously.
+        // A one-shot lookup can miss Add (1) even though the photo was selected.
+        t.until("actual picker confirmation or direct return",10000,()->(page.hasWindowFocus()&&tag(page,"feedback_image_0")!=null)||pickerAdd()!=null);
+        dump("feedback-system-picker-selected");
+        AccessibilityNodeInfo add=pickerAdd();if(add!=null)touch(add);
         t.until("system picker returned actual image",15000,()->page.hasWindowFocus()&&tag(page,"feedback_image_0")!=null);dump("feedback-system-picker-after");
     }
+    AccessibilityNodeInfo pickerAdd(){return find(n->{String value=String.valueOf(n.getText()),id=String.valueOf(n.getViewIdResourceName()),pkg=String.valueOf(n.getPackageName());return !pkg.equals(t.target.getPackageName())&&n.isEnabled()&&clickTarget(n)!=null&&(id.endsWith(":id/button_add")||value.matches("(?i)add(?: \\(.*\\))?")||value.matches("添加(?:[（(].*[）)])?"));});}
     JSONObject resumeDraft()throws Exception{
         check(assetId!=null,"prior actual image draft exists");open("查看优化意见");tapTag(page,"feedback_resume_draft");waitTag(page,"feedback_body");
         check(body.equals(((EditText)tag(page,"feedback_body")).getText().toString()),"actual draft banner restores body");check(tag(page,"feedback_image_0")!=null,"actual draft banner restores image");
