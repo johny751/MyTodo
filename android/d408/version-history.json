@@ -1,6 +1,41 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionName": "0.8.10007",
+    "versionCode": 418007,
+    "sourceSHA": "7e872329b0154d922ffe22b3da55468f93841545",
+    "buildTimeUTC": "2026-11-27T13:32:56.389Z",
+    "runId": "46007808935",
+    "runAttempt": "1",
+    "runNumber": "7",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "stableSigning": false,
+    "syntheticOnly": true,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_VALIDATION_FAILED",
+    "statusText": "候选APK构建成功，云端覆盖完整但反馈恢复UI仍失败；未发布、未验收。保留15/15、功能7/7、反馈UI5/7、工作数据保留4/4、导航20/20、权限3/3、重启后重开2/2；原始2项失败完整保留。",
+    "changes": [
+      "真实Downloads目录识别和唯一文件行检查通过；保留3次本轮实际目录决策回执，未重复打开已关闭的根目录抽屉",
+      "U01图片预览、移除和重新选择及U04真实SAF导出继续通过；U05/U06在文件卡片中心触摸后未返回宿主确认，原始前后树相同且真实失败保留",
+      "恢复文件选择尚未通过，不能以其他存储API测试或后续修复替代本轮失败；其余六组全部通过"
+    ],
+    "provenance": {
+      "artifactId": "15204385888",
+      "artifactName": "d408-android-46007808935-1",
+      "archiveSha256": "435094a09c80784e06baa715156fab8aba53cc3de5451d4920883173478ceff9",
+      "apkMember": "d408-native-46007808935-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "8901f873164bd032f1b832a6a75de39e9c95bc28d6dd905d04ba0a71aa425503",
+      "identityMember": "d408-native-46007808935-1/d408-build-identity.json",
+      "identitySha256": "bca0ae2b12e746d474eba3d2b91fd43f9863e90ff3cd59084b08caff35ff0764",
+      "signerSha256": "7e002393d62c9fd2093822a39554aa7ced6dfc5fe57e6d2b16a3dcad757df2b1"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionName": "0.8.10006",
     "versionCode": 418006,
     "sourceSHA": "6c9b1ee90d1fb1ae87d0a4ea6638bac65ace8b2b",

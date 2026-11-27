@@ -48,7 +48,7 @@ final class D408FeedbackUiChecks {
     String assetId,imageHash,noteId,backupHash;
     JSONObject exported;
     long exportedGeneration;
-    int dumpSequence,documentsSequence;
+    int dumpSequence,documentsSequence,documentTapSequence;
     Uri imageUri;
     D408FeedbackUiChecks(D408IntegrationInstrumentation t){this.t=t;storage=new DefaultFeedbackStorage(t.target);android.accessibilityservice.AccessibilityServiceInfo info=t.getUiAutomation().getServiceInfo();info.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS|android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;t.getUiAutomation().setServiceInfo(info);}
     static void run(D408IntegrationInstrumentation t){
@@ -165,8 +165,11 @@ final class D408FeedbackUiChecks {
     void chooseRestore(String filename)throws Exception{
         t.current=tools;t.awaitForeground(tools);D408FeatureChecks.nativeText(t,tools,"从备份恢复");downloads();
         t.until("unique actual SAF backup row "+filename,10000,()->count(t.getUiAutomation().getRootInActiveWindow(),n->documentRow(n,filename))==1);
-        AccessibilityNodeInfo row=waitNode("actual SAF directory backup row "+filename,n->documentRow(n,filename),5000);dump("feedback-documents-file-selected-before");touch(documentClickTarget(row));
-        t.until("original host replacement confirmation",10000,()->D408FeatureChecks.windowContains(t,"替换当前优化意见"));
+        AccessibilityNodeInfo row=waitNode("actual SAF directory backup row "+filename,n->documentRow(n,filename),5000);dump("feedback-documents-file-selected-before");JSONObject selection=touchDocumentTitle(row,filename);
+        Throwable failure=null;
+        try{t.until("original host replacement confirmation",10000,()->D408FeatureChecks.windowContains(t,"替换当前优化意见"));selection.put("hostConfirmationObserved",true);}
+        catch(Exception|Error error){failure=error;throw error;}
+        finally{try{selection.put("afterWaitPackage",activePackage()).put("afterWaitUptime",SystemClock.uptimeMillis());dump("feedback-documents-file-selected-after");D408IntegrationInstrumentation.write(new File(t.evidence,String.format(java.util.Locale.ROOT,"feedback-documents-selection-%02d-result.json",documentTapSequence)),selection.toString(2));}catch(Exception|Error diagnostic){if(failure!=null)failure.addSuppressed(diagnostic);else throw diagnostic;}}
     }
     void waitDocuments()throws Exception{t.until("actual system DocumentsUI",10000,()->find(n->String.valueOf(n.getPackageName()).contains("documentsui"))!=null);}
     Rect[] previewRects(){
@@ -205,11 +208,39 @@ final class D408FeedbackUiChecks {
         if(!withinId(node,":id/dir_list"))return null;
         for(int depth=0;node!=null&&depth<12;depth++,node=node.getParent()){
             if(String.valueOf(node.getViewIdResourceName()).endsWith(":id/dir_list"))return null;
-            if(node.isVisibleToUser()&&node.isEnabled()&&node.isClickable())return node;
+            if(String.valueOf(node.getViewIdResourceName()).endsWith(":id/item_root")&&node.isVisibleToUser()&&node.isEnabled()&&node.isClickable())return node;
         }
         return null;
     }
-    boolean documentRow(AccessibilityNodeInfo n,String filename){return String.valueOf(n.getPackageName()).contains("documentsui")&&filename.contentEquals(n.getText()==null?"":n.getText())&&withinId(n,":id/dir_list")&&!withinId(n,":id/roots_list")&&documentClickTarget(n)!=null;}
+    boolean documentRow(AccessibilityNodeInfo n,String filename){return n.isVisibleToUser()&&n.isEnabled()&&String.valueOf(n.getPackageName()).contains("documentsui")&&filename.contentEquals(n.getText()==null?"":n.getText())&&withinId(n,":id/dir_list")&&!withinId(n,":id/roots_list")&&documentClickTarget(n)!=null;}
+    JSONObject touchDocumentTitle(AccessibilityNodeInfo title,String filename)throws Exception{
+        check(inDownloadsDirectory()&&documentRow(title,filename),"actual unique Downloads file title remains active");
+        check(count(t.getUiAutomation().getRootInActiveWindow(),n->documentRow(n,filename))==1,"one exact file title before touch");
+        AccessibilityNodeInfo item=documentClickTarget(title),directory=find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/dir_list"));
+        Rect label=new Rect(),owner=new Rect(),list=new Rect();title.getBoundsInScreen(label);item.getBoundsInScreen(owner);directory.getBoundsInScreen(list);
+        check(!label.isEmpty()&&owner.contains(label)&&list.contains(label),"visible exact title is inside its clickable item and directory");
+        float x=label.exactCenterX(),y=label.exactCenterY();AccessibilityNodeInfo preview=find(item,n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/preview_icon"));Rect previewBounds=new Rect();if(preview!=null)preview.getBoundsInScreen(previewBounds);
+        check(preview==null||!previewBounds.contains((int)x,(int)y),"filename touch is outside the file preview control");
+        JSONObject result=new JSONObject().put("sourceSHA",BuildInfo.SOURCE_SHA).put("runId",BuildInfo.RUN_ID).put("runAttempt",BuildInfo.RUN_ATTEMPT).put("sequence",++documentTapSequence)
+            .put("filename",filename).put("beforePackage",activePackage()).put("titleBounds",label.toShortString()).put("itemBounds",owner.toShortString()).put("directoryBounds",list.toShortString())
+            .put("previewBounds",preview==null?JSONObject.NULL:previewBounds.toShortString()).put("tapX",x).put("tapY",y).put("hostConfirmationObserved",false);
+        JSONArray events=new JSONArray();result.put("events",events);long down=SystemClock.uptimeMillis();boolean released=false;Throwable failure=null;
+        try{documentFinger(down,MotionEvent.ACTION_DOWN,x,y,events);SystemClock.sleep(35);documentFinger(down,MotionEvent.ACTION_UP,x,y,events);released=true;}
+        catch(Exception|Error error){failure=error;throw error;}
+        finally{
+            if(!released)try{documentFinger(down,MotionEvent.ACTION_CANCEL,x,y,events);}catch(Exception|Error cancel){if(failure!=null)failure.addSuppressed(cancel);else throw cancel;}
+            try{result.put("afterTapPackage",activePackage()).put("afterTapUptime",SystemClock.uptimeMillis());D408IntegrationInstrumentation.write(new File(t.evidence,String.format(java.util.Locale.ROOT,"feedback-documents-selection-%02d-input.json",documentTapSequence)),result.toString(2));}catch(Exception|Error diagnostic){if(failure!=null)failure.addSuppressed(diagnostic);else throw diagnostic;}
+        }
+        return result;
+    }
+    void documentFinger(long down,int action,float x,float y,JSONArray events)throws Exception{
+        // Keep the established real DocumentsUI finger-event representation.
+        MotionEvent.PointerProperties pointer=new MotionEvent.PointerProperties();pointer.id=0;pointer.toolType=MotionEvent.TOOL_TYPE_FINGER;
+        MotionEvent.PointerCoords coordinates=new MotionEvent.PointerCoords();coordinates.x=x;coordinates.y=y;coordinates.size=1f;coordinates.pressure=action==MotionEvent.ACTION_UP||action==MotionEvent.ACTION_CANCEL?0f:1f;
+        MotionEvent event=MotionEvent.obtain(down,SystemClock.uptimeMillis(),action,1,new MotionEvent.PointerProperties[]{pointer},new MotionEvent.PointerCoords[]{coordinates},0,0,1f,1f,0,0,InputDevice.SOURCE_TOUCHSCREEN,0);
+        JSONObject observed=new JSONObject().put("action",action).put("downTime",event.getDownTime()).put("eventTime",event.getEventTime()).put("source",event.getSource()).put("pointerCount",event.getPointerCount()).put("pointerId",event.getPointerId(0)).put("toolType",event.getToolType(0)).put("x",event.getX()).put("y",event.getY());events.put(observed);
+        try{check(event.getToolType(0)==MotionEvent.TOOL_TYPE_FINGER&&event.getPointerCount()==1&&event.getSource()==InputDevice.SOURCE_TOUCHSCREEN,"one actual finger touchscreen pointer");boolean accepted=t.getUiAutomation().injectInputEvent(event,true);observed.put("accepted",accepted).put("dispatchReturnedAt",SystemClock.uptimeMillis());check(accepted,"actual DocumentsUI filename finger event accepted");}finally{event.recycle();}
+    }
     int count(AccessibilityNodeInfo n,Predicate<AccessibilityNodeInfo> predicate){if(n==null)return 0;int result=n.isVisibleToUser()&&predicate.test(n)?1:0;for(int i=0;i<n.getChildCount();i++)result+=count(n.getChild(i),predicate);return result;}
     JSONObject documentsState()throws Exception{
         AccessibilityNodeInfo breadcrumb=find(n->String.valueOf(n.getViewIdResourceName()).endsWith(":id/breadcrumb_text"));
