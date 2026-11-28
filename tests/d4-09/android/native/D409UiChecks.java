@@ -102,7 +102,7 @@ final class D409UiChecks {
             t.webTap(web, ".side-nav [data-action=go][data-id='" + route + "']");
             t.until("actual menu route " + route, 5000, () -> JSONObject.quote(route).equals(t.js(web, "D4Prototype.getRoute()")));
             check("false".equals(t.js(web, "document.querySelector('.app-shell').classList.contains('nav-open')")), "choosing route closes drawer");
-            if (route.equals("pomodoro") || route.equals("work-items") || route.equals("dashboard")) t.shot("route-" + route);
+            t.shot("route-" + route);
             rows.put(route);
         }
         return new JSONObject().put("routes", rows).put("method", "real native touches on menu and route controls; no JS navigation for the assertions");

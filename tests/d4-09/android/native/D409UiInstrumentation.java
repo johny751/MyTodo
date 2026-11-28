@@ -40,7 +40,9 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -170,7 +172,16 @@ public final class D409UiInstrumentation extends Instrumentation {
     void nativeReveal(int id) throws Exception { View view=findId(id);check(view!=null,"native screenshot target "+id);runOnMainSync(()->view.requestRectangleOnScreen(new Rect(0,0,view.getWidth(),view.getHeight()),true));waitForIdleSync();SystemClock.sleep(160); }
     void tap(View view) throws Exception {
         runOnMainSync(() -> { check(view.isEnabled(), "enabled target"); view.requestRectangleOnScreen(new Rect(0, 0, view.getWidth(), view.getHeight()), true); });
-        waitForIdleSync(); SystemClock.sleep(160); Rect box = new Rect(); runOnMainSync(() -> check(view.getGlobalVisibleRect(box), "visible native touch target"));
+        waitForIdleSync(); SystemClock.sleep(160); Rect visible = new Rect(); Rect box = new Rect(); int[] location = new int[2];
+        runOnMainSync(() -> {
+            check(view.getLocalVisibleRect(visible), "visible native touch target");
+            view.getLocationOnScreen(location); box.set(visible); box.offset(location[0], location[1]);
+        });
+        // Dialog roots have their own screen origin; a root-relative rectangle is not an input coordinate.
+        write(new File(evidence, String.format(Locale.ROOT, "%s-native-target-%04d.json", phase, inputSequence + 1)),
+            identity().put("phase", phase).put("case", caseId).put("id", view.getId()).put("tag", String.valueOf(view.getTag()))
+                .put("localVisible", visible.toShortString()).put("locationOnScreen", new JSONArray().put(location[0]).put(location[1]))
+                .put("screenVisible", box.toShortString()).toString(2));
         gesture(box.exactCenterX(), box.exactCenterY(), box.exactCenterX(), box.exactCenterY(), 60, "native-tap");
     }
     void replaceText(EditText field, String value) throws Exception {
@@ -214,13 +225,43 @@ public final class D409UiInstrumentation extends Instrumentation {
     }
     Point screenSize(){Point result=new Point();((WindowManager)target.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealSize(result);return result;}
     void physicalHome()throws Exception{Point screen=screenSize();if(mode.equals("gestural"))gesture(screen.x*.5f,screen.y-2,screen.x*.5f,screen.y*.50f,260,"system-bottom-home");else systemButton("home");}
-    void systemButton(String control)throws Exception{Rect bounds=new Rect();boolean found=false;for(AccessibilityWindowInfo window:getUiAutomation().getWindows()){AccessibilityNodeInfo node=systemButtonNode(window.getRoot(),control);if(node!=null){node.getBoundsInScreen(bounds);found=true;break;}}check(found&&!bounds.isEmpty(),"observed SystemUI "+control+" button; no keyevent fallback");gesture(bounds.exactCenterX(),bounds.exactCenterY(),bounds.exactCenterX(),bounds.exactCenterY(),60,"system-threebutton-"+control);}
-    AccessibilityNodeInfo systemButtonNode(AccessibilityNodeInfo node,String control) {
-        if (node == null) return null;
-        String pkg = String.valueOf(node.getPackageName()), id = String.valueOf(node.getViewIdResourceName()), description = String.valueOf(node.getContentDescription());
-        boolean label=control.equals("back")?(description.equals("Back")||description.equals("返回")):(description.equals("Home")||description.equals("主屏幕"));
-        if (node.isVisibleToUser() && pkg.equals("com.android.systemui") && (id.equals("com.android.systemui:id/"+control)||label)) return node;
-        for (int i = 0; i < node.getChildCount(); i++) { AccessibilityNodeInfo found = systemButtonNode(node.getChild(i),control); if (found != null) return found; } return null;
+    void systemButton(String control)throws Exception {
+        check(control.equals("back")||control.equals("home"),"explicit system navigation control");
+        Point screen=screenSize();final int[] bottom={0};
+        runOnMainSync(()->{WindowInsets insets=current.getWindow().getDecorView().getRootWindowInsets();check(insets!=null,"actual navigation insets");bottom[0]=insets.getInsets(WindowInsets.Type.navigationBars()).bottom;});
+        check(bottom[0]>0&&bottom[0]<screen.y/3,"observed bottom navigation bar");
+        Rect navigation=new Rect(0,screen.y-bottom[0],screen.x,screen.y),bounds=new Rect();
+        JSONObject observed=null;JSONArray windows=new JSONArray();Map<String,JSONObject> matches=new LinkedHashMap<>();long deadline=SystemClock.elapsedRealtime()+3000;
+        while(matches.isEmpty()&&SystemClock.elapsedRealtime()<deadline){
+            windows=new JSONArray();matches=new LinkedHashMap<>();
+            for(AccessibilityWindowInfo window:getUiAutomation().getWindows()){
+                Rect frame=new Rect();window.getBoundsInScreen(frame);JSONArray nodes=new JSONArray();
+                JSONObject windowRow=new JSONObject().put("windowId",window.getId()).put("type",window.getType()).put("bounds",frame.toShortString()).put("nodes",nodes);windows.put(windowRow);
+                if(window.getType()!=AccessibilityWindowInfo.TYPE_SYSTEM||!Rect.intersects(frame,navigation))continue;
+                systemButtonNodes(window.getRoot(),control,navigation,nodes,matches,window,frame);
+            }
+            if(matches.isEmpty())SystemClock.sleep(100);
+        }
+        JSONArray targets=new JSONArray();for(JSONObject match:matches.values())targets.put(match);
+        if(targets.length()==1){observed=targets.getJSONObject(0);bounds.set(observed.getInt("left"),observed.getInt("top"),observed.getInt("right"),observed.getInt("bottom"));}
+        String label=String.format(Locale.ROOT,"system-threebutton-%s-%04d",control,inputSequence+1);
+        write(new File(evidence,phase+"-"+label+"-target.json"),identity().put("phase",phase).put("case",caseId).put("navigationArea",navigation.toShortString())
+            .put("navigationBottomInset",bottom[0]).put("target",observed==null?JSONObject.NULL:observed).put("uniqueTargetCount",targets.length()).put("candidates",targets).put("windows",windows).put("keyeventFallback",false).toString(2));
+        check(targets.length()==1&&observed!=null&&!bounds.isEmpty(),"one unambiguous observed system navigation "+control+" button inside actual navigation bar; no keyevent fallback");
+        shot(label+"-before");gesture(bounds.exactCenterX(),bounds.exactCenterY(),bounds.exactCenterX(),bounds.exactCenterY(),60,"system-threebutton-"+control);shot(label+"-after");
+    }
+    void systemButtonNodes(AccessibilityNodeInfo node,String control,Rect navigation,JSONArray observed,Map<String,JSONObject> matches,AccessibilityWindowInfo window,Rect frame) throws Exception {
+        if(node==null)return;
+        String pkg=String.valueOf(node.getPackageName()),id=String.valueOf(node.getViewIdResourceName()),description=String.valueOf(node.getContentDescription());
+        Rect bounds=new Rect();node.getBoundsInScreen(bounds);
+        boolean owner=pkg.equals("com.android.systemui")||pkg.equals("com.google.android.apps.nexuslauncher");
+        JSONObject details=new JSONObject().put("windowId",window.getId()).put("windowType",window.getType()).put("windowBounds",frame.toShortString())
+            .put("owner",pkg).put("resourceId",id).put("description",description).put("nodeBounds",bounds.toShortString()).put("left",bounds.left).put("top",bounds.top).put("right",bounds.right).put("bottom",bounds.bottom)
+            .put("visible",node.isVisibleToUser()).put("enabled",node.isEnabled()).put("clickable",node.isClickable());
+        if(observed.length()<200&&(node.isClickable()||!description.equals("null")||!id.equals("null")))observed.put(details);
+        boolean label=control.equals("back")?(description.equals("Back")||description.equals("返回")||description.equals("Hide keyboard")||description.equals("隐藏键盘")):(description.equals("Home")||description.equals("主屏幕"));
+        if(node.isVisibleToUser()&&node.isEnabled()&&node.isClickable()&&owner&&!bounds.isEmpty()&&navigation.contains(bounds)&&(id.endsWith(":id/"+control)||label))matches.putIfAbsent(window.getId()+":"+bounds.toShortString(),details);
+        for(int i=0;i<node.getChildCount();i++)systemButtonNodes(node.getChild(i),control,navigation,observed,matches,window,frame);
     }
     void shot(String label) throws Exception {
         check(label.matches("[A-Za-z0-9_-]+"), "safe screenshot name"); Bitmap bitmap = getUiAutomation().takeScreenshot(); check(bitmap != null, "actual emulator screenshot");

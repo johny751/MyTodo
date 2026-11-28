@@ -51,6 +51,12 @@ if(action==='build-input'){
    assert.equal(report.caseCount,contract.caseCountPerPhase);assert.equal(report.failureCount,report.cases.filter(row=>row.passed!==true).length);assert.equal(report.passed,report.failureCount===0);
    assert.ok(report.cases.every(row=>typeof row.passed==='boolean'));assert.ok(report.screenshots.length>0,'native screenshots required');
    for(const shot of report.screenshots){assert.match(shot.file,/^[A-Za-z0-9_-]+\.png$/);const filename=path.join(evidenceDir,'files/d409-evidence',shot.file);assert.equal(sha(filename),shot.sha256);assert.equal(fs.statSync(filename).size,shot.bytes);assert.equal(shot.width,report.width);assert.equal(shot.height,900);}
+   const routeCase='U04-thirteen-routes-through-real-menu',routes=['tasks','notes','pomodoro','feedback','analytics','dashboard','work-items','projects','templates','processes','contacts','archive','settings'];
+   const routeResult=report.cases.find(row=>row.name==='D409-'+phase+'-'+routeCase);
+   assert.ok(routeResult?.passed===true,'all route visits and screenshots actually completed');
+   assert.deepEqual(routeResult.evidence?.routes,routes,'all 13 visited destinations');
+   const routeShots=report.screenshots.filter(shot=>shot.file.startsWith(phase+'-route-'));
+   assert.deepEqual(routeShots.map(shot=>shot.file).sort(),routes.map(route=>phase+'-route-'+route+'.png').sort(),'all 13 unique actual route screenshots');assert.ok(routeShots.every(shot=>shot.case===routeCase),'each route screenshot belongs to U04');
    const modeText=fs.readFileSync(path.join(evidenceDir,'navigation-mode-'+phase+'.txt'),'utf8').trim();assert.equal(modeText,report.navigationMode==='gestural'?'2':'0');
    const sizeText=fs.readFileSync(path.join(evidenceDir,'wm-size-'+phase+'.txt'),'utf8');assert.ok(sizeText.includes(`${report.width}x900`),'actual requested device size recorded');
   }catch(error){errors.push(phase+': '+error.message);}

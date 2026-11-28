@@ -1,6 +1,41 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionCode": 428002,
+    "versionName": "0.8.20002",
+    "sourceSHA": "41edb503eddb4ec4a9c2598a1f8a80ff693a3a47",
+    "buildTimeUTC": "2026-11-28T01:58:03.036Z",
+    "runId": "46095574522",
+    "runAttempt": "1",
+    "runNumber": "2",
+    "workflowName": "D4-09 candidate UI and preserved regression",
+    "versionTrack": "ui-candidate-d409",
+    "versionBase": 428000,
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "UI_CANDIDATE_VALIDATION_FAILED",
+    "statusText": "D409第二轮候选APK构建成功；保留D408七组58/58，新UI四组合32项执行20通过12失败。仅模拟器隔离证据，未发布、未验收。",
+    "changes": [
+      "原D408七组计时、通知、反馈、备份、导航、权限和重启回归均通过；保留首轮通知失败记录。",
+      "新任务层级用例四组合均在展开子任务断言超时；三按钮两宽度的四个用例未定位到系统返回按钮，原失败保留。",
+      "同源D403原58/58及JVM73断言通过；草稿极边缘导航恢复。后续修复必须完整云端重新验证。"
+    ],
+    "provenance": {
+      "artifactId": "15244680234",
+      "artifactName": "d409-android-46095574522-1",
+      "archiveSha256": "e14edf6863fb76399763647ab812bf3f0dfc269c0b9a2450065601ae9e1cc64b",
+      "apkMember": "d408-native-46095574522-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "b3a20aab5528cc3bb7041355917ac8fdbbb7f578fb1a7c7c8cd851df399078d8",
+      "identityMember": "d408-native-46095574522-1/d408-build-identity.json",
+      "identitySha256": "9a402edfc57aa57c77f59fb312cb4bbe7e2edcc4fb6576b10ad1960639ad3103",
+      "signerSha256": "e846eea9b070cee6fdaedb195f8370f05bd89cfe53728555889110ed7987342e"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionCode": 428001,
     "versionName": "0.8.20001",
     "sourceSHA": "f7a2b97d6bff08440fea83af16e914a1e6d1ce46",

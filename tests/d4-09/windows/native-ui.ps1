@@ -9,6 +9,7 @@ param(
 # Runtime, compilation, UI input, fixture execution and screenshot capture are CI-only.
 if ($env:GITHUB_ACTIONS -cne 'true' -or -not $IsWindows) { throw 'D409 native UI may run only on GitHub Actions Windows.' }
 $ErrorActionPreference='Stop'
+if (-not (Get-Command ConvertFrom-Json).Parameters.ContainsKey('DateKind')) { throw 'PowerShell 7.5+ DateKind String is required for lossless synthetic JSON fixtures.' }
 Set-StrictMode -Version Latest
 [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
 if ($env:GITHUB_RUN_ID -notmatch '^\d+$' -or $env:GITHUB_RUN_ATTEMPT -notmatch '^\d+$') { throw 'Exact run and attempt required.' }
@@ -69,7 +70,10 @@ function All-Dates {
     Click (Control $script:main 123 'Button')
     Wait-Until {@(Windows|Where-Object {$_.ClassName -ceq '#32768' -and $_.Visible}).Count -eq 1} 'native toolbar popup'
     Write-Json (Join-Path $evidenceRoot "scenarios/$script:activeCase.period-menu.windows.json") (Windows)
-    Key 0 36;for($i=0;$i -lt 3;$i++){Key 0 40};Key 0 13
+    # The first Down selects the first row of a newly opened native popup.
+    for($i=0;$i -lt 4;$i++){Key 0 40}
+    Capture ('period-menu-'+$script:activeCase+'-before-enter') (Window '#32768') -ObserveOnly
+    Key 0 13
     Wait-Until {([D409.NativeUiDriver]::ReadNumber((Control $script:main 105 'ComboBox'),0x147,0) -eq 3) -and ((Read-Text (Control $script:main 106 'Button')) -ceq '全部日期')} 'all-date selection through real menu'
 }
 function List-Lines([long]$Handle){$count=[D409.NativeUiDriver]::ReadNumber($Handle,0x18B,0);for($i=0;$i -lt $count;$i++){[D409.NativeUiDriver]::ListText($Handle,$i)}}
@@ -140,7 +144,7 @@ function File-Dialog([string]$Path){
 }
 function Read-Store([string]$Name){
     $file=Join-Path $dataRoot "d408/$Name.json";Assert (Test-Path -LiteralPath $file) "No durable $Name sidecar"
-    $raw=[IO.File]::ReadAllText($file,[Text.Encoding]::UTF8);$value=$raw|ConvertFrom-Json -Depth 90
+    $raw=[IO.File]::ReadAllText($file,[Text.Encoding]::UTF8);$value=$raw|ConvertFrom-Json -DateKind String -Depth 90
     Assert ($null -ne $value.payload -and $value.generation -ge 1 -and $value.sha256 -match '^[a-f0-9]{64}$') 'Invalid durable envelope shape'
     $script:readIndex++;$name=('readback/{0:D4}-{1}.json' -f $script:readIndex,$Name);[IO.File]::WriteAllText((Join-Path $evidenceRoot $name),$raw,[Text.UTF8Encoding]::new($false))
     $readbacks.Add([ordered]@{caseId=$script:activeCase;file=$name;source=$file;sha256=(Get-FileHash -LiteralPath (Join-Path $evidenceRoot $name) -Algorithm SHA256).Hash.ToLowerInvariant();generation=$value.generation;payloadChecksumAsStored=$value.sha256;method='read-only exact durable envelope; product validates checksum on open'})
@@ -149,8 +153,8 @@ function Read-Store([string]$Name){
 function Read-Tasks {$script:readIndex++;$name='task-export-'+$script:readIndex;$file=Join-Path $evidenceRoot ($name+'.json');Invoke-Native $name @('--data-dir',$dataRoot,'--export',$file);return Get-Content -LiteralPath $file -Raw -Encoding utf8 | ConvertFrom-Json -Depth 80}
 function All-Tasks($Tasks){foreach($task in @($Tasks)){$task;if($task.PSObject.Properties['subtasks']){All-Tasks $task.subtasks}}}
 function Record-ByName([string]$Kind,[string]$Name){$state=Read-Store 'work';$matches=@($state.$Kind|Where-Object {$_.name -ceq $Name});Assert ($matches.Count -eq 1) "[blocked] Need one $Kind record '$Name', found $($matches.Count)";return $matches[0]}
-function Capture([string]$Name,[long]$Handle){
-    [D409.NativeUiDriver]::Activate($Handle);Flush-Trace;$w=[D409.NativeUiDriver]::Describe($Handle);$client=[D409.NativeUiDriver]::Client($Handle);$desktop=[D409.NativeUiDriver]::Desktop()
+function Capture([string]$Name,[long]$Handle,[switch]$ObserveOnly){
+    if(-not $ObserveOnly){[D409.NativeUiDriver]::Activate($Handle);Flush-Trace};$w=[D409.NativeUiDriver]::Describe($Handle);$client=[D409.NativeUiDriver]::Client($Handle);$desktop=[D409.NativeUiDriver]::Desktop()
     Assert ($client.Left -ge $desktop.Left -and $client.Top -ge $desktop.Top -and $client.Right -le $desktop.Left+$desktop.Width -and $client.Bottom -le $desktop.Top+$desktop.Height) 'Native client exceeds actual desktop; screen evidence would omit controls'
     $left=[Math]::Max($desktop.Left,$w.Left);$top=[Math]::Max($desktop.Top,$w.Top);$right=[Math]::Min($desktop.Left+$desktop.Width,$w.Right);$bottom=[Math]::Min($desktop.Top+$desktop.Height,$w.Bottom)
     $width=$right-$left;$height=$bottom-$top;Assert ($width -gt 0 -and $height -gt 0) 'Screenshot has no visible area'
@@ -288,23 +292,33 @@ try {
         @{contact=$contact;followup=$followup;archiveId=$record.id;ownerAcceptance='not claimed'}
     }
     Scenario 'N409-12' 'Original backup import exposes exact historical time and full selectable long notes; unchanged edit preserves raw values' {
-        $item=Record-ByName 'items' 'D409 Primary Item';$history=($item|ConvertTo-Json -Depth 80)|ConvertFrom-Json -AsHashtable -Depth 80
+        $item=Record-ByName 'items' 'D409 Primary Item';$history=($item|ConvertTo-Json -Depth 80)|ConvertFrom-Json -AsHashtable -DateKind String -Depth 80
         $history.id='d409-external-historical';$history.name='D409 Historical Precision';$history.plannedStart='2026-10-01T12:34:56.789+08:00';$history.dueDate='2026-12-31T23:59:58.987+08:00';$history.status='legacy-custom-state';$history.priority=$null;$history.history=@();$history.attachments=@();$history.extension=@{opaque=@(1,$null,'kept')};$history.notes=((1..42|ForEach-Object {"Long readable note line $_ / 中文备注完整保留"}) -join "`r`n")+"`r`nEND-D409-LONG-NOTE"
-        $state=Read-Store 'work';$state.items=@($state.items)+@($history);$backup=@{format='mytodo.d408.work-backup';version=1;scope='windows-isolated-candidate';state=$state;files=@{}}
+        $state=Read-Store 'work';$existingRecords=@{};$existingCounts=@{}
+        foreach($kind in @('items','projects','templates','instances','contacts','followups')){$existingCounts[$kind]=@($state.$kind).Count;foreach($record in @($state.$kind)){$existingRecords[$kind+'/'+$record.id]=ConvertTo-Json -InputObject $record -Depth 80 -Compress}}
+        $state.items=@($state.items)+@($history);$backup=@{format='mytodo.d408.work-backup';version=1;scope='windows-isolated-candidate';state=$state;files=@{}}
         $path=Join-Path $evidenceRoot 'synthetic-historical-work-backup.json';Write-Json $path $backup;Page 1;Click (Control $script:work 4934 'Button');File-Dialog $path;Dismiss-Message
+        $imported=Read-Store 'work';$seenImported=@{}
+        foreach($kind in @('items','projects','templates','instances','contacts','followups')){
+            $expectedCount=$existingCounts[$kind]+$(if($kind -ceq 'items'){1}else{0});Assert (@($imported.$kind).Count -eq $expectedCount) "Synthetic historical import added unexpected $kind copies"
+            foreach($record in @($imported.$kind)){$recordKey=$kind+'/'+$record.id;Assert (-not $seenImported.ContainsKey($recordKey)) "Synthetic historical import duplicated ID $recordKey";$seenImported[$recordKey]=$true;if($kind -ceq 'items' -and $record.id -ceq $history.id){continue};Assert ($existingRecords.ContainsKey($recordKey) -and (ConvertTo-Json -InputObject $record -Depth 80 -Compress) -ceq $existingRecords[$recordKey]) "Synthetic historical import changed original record $recordKey"}
+        }
+        Assert ($seenImported.ContainsKey('items/'+$history.id)) 'Synthetic historical import omitted the added record'
+        foreach($recordKey in $existingRecords.Keys){Assert ($seenImported.ContainsKey($recordKey)) "Synthetic historical import omitted original record $recordKey"}
         Select-Record 1 $history.name;$details=Control $script:work 5203 'Edit';$text=Read-Text $details;Assert ($text.Contains($history.plannedStart) -and $text.Contains($history.dueDate) -and $text.Contains('END-D409-LONG-NOTE')) 'Historical text clipped or normalized in detail readback'
         Focus $details;Key $details 65 $true;$selected=[D409.NativeUiDriver]::Selection($details);Assert ($selected[0] -eq 0 -and $selected[1] -eq $text.Length) 'Full native note selection failed';Capture 'selected-note' $script:work;Key $details 35 $true
         Assert ([D409.NativeUiDriver]::ReadNumber($details,0xCE,0) -gt 0) 'Long native detail did not scroll to end'
         Click (Control $script:work 4925 'Button');$form=Modal;Focus (Control $form 4809 'Edit');Capture 'historical-time-footer' $form;Save-Modal $form
         $after=Record-ByName 'items' $history.name;Assert ($after.plannedStart -ceq $history.plannedStart -and $after.dueDate -ceq $history.dueDate -and $after.status -ceq $history.status -and $null -eq $after.priority -and $after.notes -ceq $history.notes -and $after.extension.opaque[2] -ceq 'kept') 'Unchanged historical record lost raw fields'
-        @{fixturePath=$path;fixtureSha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant();selectedRange=$selected;record=$after;inputMethod='synthetic backup via original native file dialog and restore command'}
+        @{fixturePath=$path;fixtureSha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant();selectedRange=$selected;record=$after;inputMethod='synthetic backup via original native file dialog and restore command';jsonDateKind='String';unchangedExistingRecords=$existingRecords.Count;unexpectedImportCopies=0}
     }
     Scenario 'N409-13' 'Native modal footer remains reachable while Tab/ShiftTab reveal fields and owner modal state is restored' {
         Select-Record 1 'D409 Primary Item';Click (Control $script:work 4925 'Button');$form=Modal;Assert (-not [D409.NativeUiDriver]::Describe($script:work).Enabled) 'Modal owner was not disabled'
         [D409.NativeUiDriver]::Resize($form,[int](640*$scale),[int](450*$scale));Focus (Control $form 4800 'Edit')
         $visited=@();for($i=0;$i -lt 12;$i++){$focus=[D409.NativeUiDriver]::Focused($form);$visited+=[D409.NativeUiDriver]::Describe($focus).ControlId;Key $focus 9}
+        Write-Json (Join-Path $evidenceRoot 'scenarios/N409-13.tab-order.json') $visited
         Assert ($visited -contains 4809 -and $visited -contains 1 -and $visited -contains 2) 'Tab traversal failed to reach last field and fixed footer'
-        Focus (Control $form 4809 'Edit');$null=Reachable (Control $form 4809 'Edit');$null=Reachable (Control $form 1 'Button');$null=Reachable (Control $form 2 'Button');Key (Control $form 4809 'Edit') 9 $false $true;Capture 'modal-footer' $form
+        Focus (Control $form 4809 'Edit');$null=Reachable (Control $form 4809 'Edit');$null=Reachable (Control $form 1 'Button');$null=Reachable (Control $form 2 'Button');Key (Control $form 4809 'Edit') 9 $false $true;Assert ([D409.NativeUiDriver]::Describe([D409.NativeUiDriver]::Focused($form)).ControlId -eq 4808) 'ShiftTab did not return to the previous field';Capture 'modal-footer' $form
         Click (Control $form 2 'Button');Wait-Until {[D409.NativeUiDriver]::Describe($script:work).Enabled} 'modal owner restored';@{visited=$visited;modalHandle=$form;closed=$true}
     }
     Scenario 'N409-14' 'Actual native task title, multiline note and quick subtask keyboard inputs persist through the original export path' {

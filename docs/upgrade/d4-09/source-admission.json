@@ -51,8 +51,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 22919,
-      "sha256": "8c7629718208fa8a76aa2a93a5a11a573c57a110c765de219184b4cdea5953c1",
+      "bytes": 24784,
+      "sha256": "b0086828a8842de751675f902ec71826b3fae20a0aa86d34080b6a84fabcd088",
       "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
     },
     {
@@ -113,6 +113,24 @@
       "path": "docs/upgrade/d4-09/D409-08-首轮候选验证与修复.md",
       "bytes": 5217,
       "sha256": "48587dd343c7dd5a089c9d28eaf8a939a93737261fdcc8768f3ce23178ca7890",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-09-第二轮候选验证与修复.md",
+      "bytes": 4779,
+      "sha256": "6c60820b00f3c24f934a86491e418c33e517a2626497e15c99e49bc0a1f15b22",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-10-设计Token与实际呈现映射.md",
+      "bytes": 3955,
+      "sha256": "e380582b1180e9c836839ebb1bdacdf668e37305a97a60a61a8eab884089baca",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-11-页面实施与验收索引.md",
+      "bytes": 5737,
+      "sha256": "e3aa172253cbb7898ce4943a690e309a5b77a499d09d425356f2df74dbe60dbc",
       "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
     },
     {
@@ -315,8 +333,8 @@
     },
     {
       "path": "tests/d4-09/android/README-native.md",
-      "bytes": 6454,
-      "sha256": "1c7f91b010db3d57d2a27eb729f60eed4be54fe1ec9e5befe095e297a5871b4e",
+      "bytes": 7178,
+      "sha256": "159c4a9667020b91ca65cc38243e9eebdc925c8dfc4ab3b7b690c6a34bed27e6",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -339,14 +357,14 @@
     },
     {
       "path": "tests/d4-09/android/native/D409UiChecks.java",
-      "bytes": 19724,
-      "sha256": "a3677f2b76da98eca9a29cf56a4814e2ca0ef15574d801ebb0701f6b7b248b45",
+      "bytes": 19635,
+      "sha256": "0f8ed233f73180fcaa82fa9532ebaf7626f7463f53da59b9735a1804ea4b4c62",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
       "path": "tests/d4-09/android/native/D409UiInstrumentation.java",
-      "bytes": 19161,
-      "sha256": "4849b80e0fdc10a40e78e25e945b42d02f5a169d06e0aa88ec7dfaf3e6ed3672",
+      "bytes": 23216,
+      "sha256": "b42ff5d76c16c8ffc6d1de9dd9daad659dd0f22a0ff4bf5990394ffe7668fe03",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -369,8 +387,8 @@
     },
     {
       "path": "tests/d4-09/android/verify-native.mjs",
-      "bytes": 7737,
-      "sha256": "bfe2c460b25ad27742cb4eaccf9489b090012599253cd6c8d37912199b30c5bb",
+      "bytes": 8562,
+      "sha256": "badd73024f731fec3d927266a532faaa74b8dd60b7e589bf823d12062f647e85",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -453,8 +471,8 @@
     },
     {
       "path": "tests/d4-09/windows/native-ui.ps1",
-      "bytes": 59367,
-      "sha256": "77a3c6760a906d1ab8e13d954065a169e9c96baee3ae5cb7dbd90258b8946314",
+      "bytes": 61579,
+      "sha256": "b499b49e81fa97112d07d72086725d2bce0d00b64bdb5562425b3e992771c121",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -477,8 +495,8 @@
     },
     {
       "path": "windows/d408-form.c",
-      "bytes": 6237,
-      "sha256": "82b6894d885becf04e1b4019409096493ac57fd2aa3d013d9c48ee4d87d0f96b",
+      "bytes": 7060,
+      "sha256": "0f36806d972881d4ee1f3a5472d975eaefcf799b1239599c6d9f3011228614dc",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {

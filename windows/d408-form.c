@@ -2,6 +2,17 @@
 #include "d409-ui.h"
 #ifdef GX_D408_CANDIDATE
 typedef struct {HWND window,owner,inputs[24],labels[24],save,cancel;const D408Field *fields;int count,accepted,height,offset;J *record,*result;} Form;
+#ifdef GX_D409_UI
+/* Multiline fields keep Return for text; Tab/Shift+Tab use the form's dialog navigation. */
+static LRESULT CALLBACK form_input_proc(HWND h,UINT message,WPARAM w,LPARAM l,UINT_PTR id,DWORD_PTR ref){
+ if(message==WM_IME_STARTCOMPOSITION)SetPropW(h,L"GxComposing",(HANDLE)1);
+ if(message==WM_IME_ENDCOMPOSITION)RemovePropW(h,L"GxComposing");
+ if(message==WM_GETDLGCODE&&w==VK_TAB&&!GetPropW(h,L"GxComposing")&&!(GetKeyState(VK_CONTROL)&0x8000)&&!(GetKeyState(VK_MENU)&0x8000))
+   return DefSubclassProc(h,message,w,l)&~(DLGC_WANTTAB|DLGC_WANTALLKEYS);
+ if(message==WM_NCDESTROY){RemovePropW(h,L"GxComposing");RemoveWindowSubclass(h,form_input_proc,id);}
+ return DefSubclassProc(h,message,w,l);
+}
+#endif
 static void layout(Form *f){RECT r;GetClientRect(f->window,&r);int y=U(18)-f->offset,width=max(U(160),r.right-U(54));for(int i=0;i<f->count;i++){const D408Field *field=&f->fields[i];ui_move(f->labels[i],U(18),y,width,U(20));y+=U(24);int height=field->multiline?max(52,field->lines*22):30;ui_move(f->inputs[i],U(18),y,width,U(field->options?220:height));y+=U(height+16);}
 #ifdef GX_D409_UI
  for(int i=0;i<f->count;i++){d409_clip_control(f->labels[i],f->window,U(12),r.bottom-U(72));d409_clip_control(f->inputs[i],f->window,U(12),r.bottom-U(72));}
@@ -17,6 +28,9 @@ static LRESULT CALLBACK procedure(HWND h,UINT message,WPARAM w,LPARAM l){
  if(message==WM_CREATE){form=((CREATESTRUCTW*)l)->lpCreateParams;form->window=h;SetWindowLongPtrW(h,GWLP_USERDATA,(LONG_PTR)form);
    for(int i=0;i<form->count;i++){const D408Field *f=&form->fields[i];form->labels[i]=ui_control(h,L"STATIC",f->label,0,0,0,0,0,0);
      form->inputs[i]=ui_control(h,f->options?L"COMBOBOX":L"EDIT",L"",WS_TABSTOP|(f->options?CBS_DROPDOWNLIST:f->multiline?ES_MULTILINE|ES_WANTRETURN|ES_AUTOVSCROLL|WS_VSCROLL:ES_AUTOHSCROLL),4800+i,0,0,0,0);
+#ifdef GX_D409_UI
+     if(f->multiline)SetWindowSubclass(form->inputs[i],form_input_proc,409,0);
+#endif
      if(f->options){char *options=_strdup(f->options),*context=0,*token=strtok_s(options,"|",&context);int index=0,selected=0;while(token){wchar_t *label=wide(token);SendMessageW(form->inputs[i],CB_ADDSTRING,0,(LPARAM)label);free(label);if(!strcmp(token,str(form->record,f->key)))selected=index;index++;token=strtok_s(0,"|",&context);}free(options);SendMessageW(form->inputs[i],CB_SETCURSEL,selected,0);}else ui_set(form->inputs[i],str(form->record,f->key));}
    form->save=ui_control(h,L"BUTTON",L"保存",WS_TABSTOP,IDOK,0,0,0,0);form->cancel=ui_control(h,L"BUTTON",L"取消",WS_TABSTOP,IDCANCEL,0,0,0,0);
 #ifdef GX_D409_UI
