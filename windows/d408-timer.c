@@ -204,7 +204,7 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    for(int i=T_MODE;i<=T_CLOSE;i++){const wchar_t *cls=i==T_MODE||i==T_TASK?L"COMBOBOX":i==T_FOCUS||i==T_BREAK?L"EDIT":i==T_HISTORY?L"LISTBOX":i==T_SUMMARY||i==T_CLOCK||i==T_STATUS?L"STATIC":L"BUTTON";
      DWORD style=i==T_MODE||i==T_TASK?CBS_DROPDOWNLIST:i==T_FOCUS||i==T_BREAK?ES_NUMBER|ES_AUTOHSCROLL|WS_BORDER:i==T_HISTORY?WS_VSCROLL|LBS_NOINTEGRALHEIGHT:0;
 #ifdef GX_D409_UI
-    if(i==T_HISTORY)style|=LBS_NOTIFY|LBS_OWNERDRAWFIXED|LBS_HASSTRINGS;
+    if(i==T_HISTORY)style|=WS_HSCROLL|LBS_NOTIFY|LBS_OWNERDRAWFIXED|LBS_HASSTRINGS;
 #endif
      timerControls[i-T_MODE]=ui_control(h,cls,labels[i-T_MODE],style|WS_TABSTOP,i,0,0,0,0);if(i==T_FOCUS||i==T_BREAK){HWND edit=control(i);/* The cloud-created EDIT lacked the requested WS_BORDER. Apply the actual native frame after creation. */SetWindowLongPtrW(edit,GWL_STYLE,GetWindowLongPtrW(edit,GWL_STYLE)|WS_BORDER);SetWindowPos(edit,0,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);}}
    SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"倒计时");SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"正计时");

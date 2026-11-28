@@ -549,8 +549,8 @@
     },
     {
       "path": "windows/d408-timer.c",
-      "bytes": 39896,
-      "sha256": "de76e6532b3783eb0c649cee935bd1c1298a594290234cf7188e92086082593a",
+      "bytes": 39907,
+      "sha256": "00eb171e014e95e3842fe572d6536c79ad4be726ce709700f8c000570b070a1c",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
