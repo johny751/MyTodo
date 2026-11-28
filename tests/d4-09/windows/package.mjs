@@ -39,11 +39,26 @@ for(const dpi of [96,144]){
   assert.ok(r.results.every(x=>x.executed===true&&x.passed===true&&x.error===null));
   reports.push({file,report:r});
 }
+const timerReports=[];
+for(const dpi of [96,144]){
+  const directory=path.join(temp,'d4-09-timer-history-'+dpi),file=path.join(directory,'timer-history-ui-report.json');
+  assert.ok(fs.existsSync(file),`missing timer history report ${dpi}`);
+  const r=read(file);
+  assert.equal(r.sourceSha,e.GITHUB_SHA);assert.equal(r.runId,e.GITHUB_RUN_ID);assert.equal(r.runAttempt,e.GITHUB_RUN_ATTEMPT);
+  assert.equal(r.harnessSourceSha,e.GITHUB_SHA);assert.equal(r.productionAdmission,false);assert.equal(r.dpi,dpi);
+  assert.equal(r.passed,true);assert.equal(r.fatalError,null);assert.equal(r.executed,10);assert.equal(r.passedCount,10);assert.equal(r.failedCount,0);
+  assert.ok(r.results.every(x=>x.executed===true&&x.passed===true&&x.error===null));
+  timerReports.push({dpi,directory,file,report:r});
+}
 const destination=path.join(build,'MyTodo-D409-Windows-Candidate');assert.ok(!fs.existsSync(destination));fs.mkdirSync(destination);
 fs.copyFileSync(exe,path.join(destination,'MyTodo-D409-Candidate.exe'));
 fs.copyFileSync(exe+'.build.json',path.join(destination,'build-receipt.json'));
 fs.copyFileSync(path.join(build,'package-receipt.json'),path.join(destination,'frozen-regression-package-receipt.json'));
 for(const value of reports)fs.copyFileSync(value.file,path.join(destination,'ui-report-'+value.report.dpi+'.json'));
+for(const value of timerReports){
+  fs.copyFileSync(value.file,path.join(destination,'timer-history-ui-report-'+value.dpi+'.json'));
+  fs.cpSync(path.join(value.directory,'screenshots'),path.join(destination,'timer-history-'+value.dpi+'-screenshots'),{recursive:true});
+}
 fs.copyFileSync(path.join(temp,'d4-08-native-evidence','native-report.json'),path.join(destination,'retained-d408-native-report.json'));
 fs.copyFileSync(path.join(temp,'d4-08-retained-evidence','native-regression.json'),path.join(destination,'retained-d404-native-report.json'));
 fs.writeFileSync(path.join(destination,'Start-D409-Candidate.cmd'),'@echo off\r\nsetlocal\r\ncd /d "%~dp0"\r\n"%~dp0MyTodo-D409-Candidate.exe" --data-dir "%~dp0D409-Candidate-Data"\r\nif errorlevel 1 pause\r\n','ascii');
@@ -57,5 +72,5 @@ const members=execFileSync('tar',['-tf',zip],{encoding:'utf8',windowsHide:true})
 assert.equal(new Set(members).size,members.length);assert.deepEqual(members.filter(x=>!x.endsWith('/')).sort(),expectedMembers);
 const readback=path.join(temp,'d4-09-package-readback');fs.mkdirSync(readback);execFileSync('tar',['-xf',zip,'-C',readback],{windowsHide:true,stdio:'pipe'});
 for(const member of expectedMembers){const actual=path.join(readback,...member.split('/'));assert.ok(fs.lstatSync(actual).isFile());assert.equal(hash(fs.readFileSync(actual)),hash(fs.readFileSync(path.join(build,...member.split('/')))),member);}
-fs.writeFileSync(path.join(build,'d409-package-receipt.json'),JSON.stringify({...identity,passed:true,archive:{file:path.basename(zip),bytes:fs.statSync(zip).size,sha256:hash(fs.readFileSync(zip))},entries,readback:{passed:true,members:expectedMembers},newUiCasesPerDpi:expectedIds.length,retainedPackageSha256:hash(fs.readFileSync(path.join(build,'package-receipt.json')))},null,2)+'\n');
+fs.writeFileSync(path.join(build,'d409-package-receipt.json'),JSON.stringify({...identity,passed:true,archive:{file:path.basename(zip),bytes:fs.statSync(zip).size,sha256:hash(fs.readFileSync(zip))},entries,readback:{passed:true,members:expectedMembers},newUiCasesPerDpi:expectedIds.length,timerHistoryCasesPerDpi:10,timerHistoryReports:timerReports.map(x=>({dpi:x.dpi,sha256:hash(fs.readFileSync(x.file))})),retainedPackageSha256:hash(fs.readFileSync(path.join(build,'package-receipt.json')))},null,2)+'\n');
 console.log(JSON.stringify({passed:true,archive:zip,sourceSha:e.GITHUB_SHA,newUiCasesPerDpi:expectedIds.length}));

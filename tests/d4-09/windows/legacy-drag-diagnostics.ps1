@@ -327,7 +327,7 @@ finally {
     try { $manifest.finalDumpInventory = @(Snapshot-Dumps) } catch { $errors.Add('Final dump inventory: ' + $_.Exception.Message) }
     Write-Json (Join-Path $output 'registry-restore-receipt.json') @{ restored = $manifest.registryRestored; errors = $restoreErrors.ToArray(); atUtc = [DateTime]::UtcNow.ToString('o'); newImageKeyCreated = $imageCreated; newLocalDumpsParentCreated = $localDumpsCreated }
     Write-Json (Join-Path $output 'diagnostic-manifest.json') $manifest
-    $files = @(Get-ChildItem -LiteralPath $output -File -Recurse | Where-Object { $_.Name -ne 'SHA256SUMS.txt' })
+    $files = @(Get-ChildItem -LiteralPath $output -Force -File -Recurse | Where-Object { $_.Name -ne 'SHA256SUMS.txt' })
     $lines = foreach ($file in $files) { try { (Hash $file.FullName) + '  ' + [IO.Path]::GetRelativePath($output, $file.FullName).Replace('\', '/') } catch { '# UNHASHED ' + [IO.Path]::GetRelativePath($output, $file.FullName) + ' : ' + $_.Exception.Message } }
     [IO.File]::WriteAllLines((Join-Path $output 'SHA256SUMS.txt'), [string[]]$lines, $utf8)
 }

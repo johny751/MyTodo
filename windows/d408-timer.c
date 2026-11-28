@@ -162,6 +162,7 @@ static void timer_layout(void){
   ui_move(GetDlgItem(timerWindow,5225),U(18),U(434),width,U(24));
   ui_move(control(T_SUMMARY),U(18),U(466),width,U(68));ui_move(control(T_HISTORY),U(18),U(542),width,max(U(40),r.bottom-U(608)));
  }
+ ui_move(GetDlgItem(timerWindow,5226),U(18),r.bottom-U(48),U(160),U(32));
  ui_move(control(T_CLOSE),r.right-U(132),r.bottom-U(48),U(108),U(32));RedrawWindow(timerWindow,0,0,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN);return;
 #else
  RECT r;GetClientRect(timerWindow,&r);int width=r.right-U(36);
@@ -175,6 +176,7 @@ static void timer_layout(void){
 #endif
 }
 #ifdef GX_D409_UI
+#include "d409-timer-history.h"
 /* Render a clone only: the existing timer refresh, clock, commands and commits are unchanged. */
 static void d409_timer_progress(void){
  if(!timerWindow)return;J *state=d408_timer_snapshot();if(!state)return;
@@ -201,6 +203,9 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    const wchar_t *labels[]={L"倒计时",L"25",L"5",L"",L"保存设置",L"开始",L"暂停",L"继续",L"提前结束",L"完成正计时",L"开始休息",L"重置",L"确认完成",L"历史记录",L"历史与统计",L"25:00",L"",L"关闭窗口"};
    for(int i=T_MODE;i<=T_CLOSE;i++){const wchar_t *cls=i==T_MODE||i==T_TASK?L"COMBOBOX":i==T_FOCUS||i==T_BREAK?L"EDIT":i==T_HISTORY?L"LISTBOX":i==T_SUMMARY||i==T_CLOCK||i==T_STATUS?L"STATIC":L"BUTTON";
      DWORD style=i==T_MODE||i==T_TASK?CBS_DROPDOWNLIST:i==T_FOCUS||i==T_BREAK?ES_NUMBER|ES_AUTOHSCROLL|WS_BORDER:i==T_HISTORY?WS_VSCROLL|LBS_NOINTEGRALHEIGHT:0;
+#ifdef GX_D409_UI
+     if(i==T_HISTORY)style|=WS_HSCROLL|LBS_NOTIFY;
+#endif
      timerControls[i-T_MODE]=ui_control(h,cls,labels[i-T_MODE],style|WS_TABSTOP,i,0,0,0,0);if(i==T_FOCUS||i==T_BREAK){HWND edit=control(i);/* The cloud-created EDIT lacked the requested WS_BORDER. Apply the actual native frame after creation. */SetWindowLongPtrW(edit,GWL_STYLE,GetWindowLongPtrW(edit,GWL_STYLE)|WS_BORDER);SetWindowPos(edit,0,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);}}
    SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"倒计时");SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"正计时");
    SendMessageW(control(T_CLOCK),WM_SETFONT,(WPARAM)app.title,TRUE);
@@ -213,10 +218,16 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    d409_label(h,5224,L"",0);ui_control(h,L"EDIT",L"关联项目：未关联任务",ES_READONLY|ES_AUTOHSCROLL|WS_TABSTOP,5225,0,0,0,0);d409_timer_progress();
    D409Visual *visual=d409_visual(h);if(visual)SendMessageW(control(T_CLOCK),WM_SETFONT,(WPARAM)visual->number,TRUE);
    for(int i=T_SAVE;i<=T_ACK;i++)d409_role(control(i),i==T_START||i==T_RESUME||i==T_ACK?1:i==T_END?3:4);d409_role(control(T_CLOSE),4);
+   d409_role(ui_control(h,L"BUTTON",L"查看完整记录",WS_TABSTOP,5226,0,0,0,0),4);
+   d409_history_attach();
 #endif
    refresh_timer(1);SetTimer(h,1,500,0);return 0;
  }
  if(message==WM_COMMAND){int id=LOWORD(w);const char *action=id==T_START?"start":id==T_PAUSE?"pause":id==T_RESUME?"resume":id==T_END?"end":id==T_FINISH?"finish":id==T_REST?"break":id==T_RESET?"reset":id==T_ACK?"claim-completion":0;
+#ifdef GX_D409_UI
+   if(id==5226||(id==T_HISTORY&&HIWORD(w)==LBN_DBLCLK)){d409_history_open();return 0;}
+   if(id==T_HISTORY&&HIWORD(w)==LBN_SELCHANGE){d409_history_remember();return 0;}
+#endif
    if(id==T_CLOSE){ShowWindow(h,SW_HIDE);return 0;}
    if(id==T_SAVE){J *config=dup(get(timerStore.data,"configuration"));char *focus=ui_text(control(T_FOCUS)),*rest=ui_text(control(T_BREAK));sn(config,"durationMinutes",atof(focus));sn(config,"breakMinutes",atof(rest));free(focus);free(rest);ss(config,"mode",SendMessageW(control(T_MODE),CB_GETCURSEL,0,0)==1?"countup":"countdown");int selected=(int)SendMessageW(control(T_TASK),CB_GETCURSEL,0,0);J *choice=cJSON_GetArrayItem(taskChoices,selected);ss(config,"accountId",str(app.registry,"activeId"));ss(config,"taskId",str(choice,"id"));ss(config,"taskTitle",str(choice,"title"));char command[80];uuid(command);if(!d408_timer_command("configure",config,command,-1))d408_error(h,timerError);cJSON_Delete(config);refresh_timer(0);return 0;}
    if(action){if((id==T_END||id==T_RESET)&&active(timerStore.data)&&MessageBoxW(h,L"结束当前阶段并保留已计时时长？",L"番茄钟",MB_OKCANCEL|MB_ICONQUESTION)!=IDOK)return 0;char command[80];uuid(command);if(!d408_timer_command(action,0,command,-1))d408_error(h,timerError);refresh_timer(0);return 0;}
@@ -237,6 +248,7 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
  if(message==WM_CLOSE){ShowWindow(h,SW_HIDE);return 0;}
  if(message==WM_DESTROY){KillTimer(h,1);
 #ifdef GX_D409_UI
+ d409_history_shutdown();
  d409_visual_free(h);
 #endif
  timerWindow=0;return 0;}

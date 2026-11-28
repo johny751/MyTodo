@@ -213,7 +213,23 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Actual Win32 controls and unchanged mature native regressions
         shell: pwsh
-        run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" "$env:RUNNER_TEMP/d4-04-evidence"
+        run: |
+          $exe = "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe"
+          $node = (Get-Command node -CommandType Application | Select-Object -First 1).Source
+          $digest = (Get-FileHash -LiteralPath $exe -Algorithm SHA256).Hash.ToLowerInvariant()
+          ./tests/d4-09/windows/original-suite-wer.ps1 -ExePath $exe -ExpectedExeSha256 $digest -SourceRoot $env:GITHUB_WORKSPACE -NodePath $node -OriginalEvidenceDirectory "$env:RUNNER_TEMP/d4-04-evidence" -OutputDirectory "$env:RUNNER_TEMP/d4-original-suite-diag-d404-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          exit $LASTEXITCODE
+      - name: Original D404 diagnostic evidence integrity
+        if: ${{ always() && !cancelled() }}
+        shell: pwsh
+        run: ./tests/d4-09/windows/original-suite-wer-integrity.ps1 -OutputDirectory "$env:RUNNER_TEMP/d4-original-suite-diag-d404-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-original-suite-diagnostics-d404-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d4-original-suite-diag-d404-*/
+          include-hidden-files: true
+          if-no-files-found: error
       - name: Supplementary five fixed legacy drag executions with crash evidence
         if: ${{ always() && !cancelled() }}
         timeout-minutes: 18
@@ -240,6 +256,7 @@ jobs:
           path: |
             ${{ runner.temp }}/d4-04-build/
             ${{ runner.temp }}/d4-04-evidence/
+          include-hidden-files: true
           if-no-files-found: error
 
   android-services:
@@ -315,7 +332,23 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Unchanged nine-suite legacy regression on the actual D408 executable
         id: retained
-        run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" "$env:RUNNER_TEMP/d4-08-retained-evidence"
+        run: |
+          $exe = "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          $node = (Get-Command node -CommandType Application | Select-Object -First 1).Source
+          $digest = (Get-FileHash -LiteralPath $exe -Algorithm SHA256).Hash.ToLowerInvariant()
+          ./tests/d4-09/windows/original-suite-wer.ps1 -ExePath $exe -ExpectedExeSha256 $digest -SourceRoot $env:GITHUB_WORKSPACE -NodePath $node -OriginalEvidenceDirectory "$env:RUNNER_TEMP/d4-08-retained-evidence" -OutputDirectory "$env:RUNNER_TEMP/d4-original-suite-diag-d409-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          exit $LASTEXITCODE
+      - name: Original D409 diagnostic evidence integrity
+        if: ${{ always() && !cancelled() }}
+        shell: pwsh
+        run: ./tests/d4-09/windows/original-suite-wer-integrity.ps1 -OutputDirectory "$env:RUNNER_TEMP/d4-original-suite-diag-d409-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-original-suite-diagnostics-d409-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d4-original-suite-diag-d409-*/
+          include-hidden-files: true
+          if-no-files-found: error
       - name: Actual timer feedback work and persistence regression
         id: native
         if: ${{ always() && steps.nativebuild.outcome == 'success' }}
@@ -350,6 +383,22 @@ jobs:
           -ProductSourceSha "${{ github.sha }}"
           -ExpectedExecutableSha256 ((Get-FileHash -LiteralPath "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" -Algorithm SHA256).Hash.ToLowerInvariant())
           -OutputDirectory "$env:RUNNER_TEMP/d4-09-ui-144" -Dpi 144
+      - name: D409 complete timer history presentation at 96 DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-09/windows/timer-history-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -ExpectedExecutableSha256 ((Get-FileHash -LiteralPath "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" -Algorithm SHA256).Hash.ToLowerInvariant())
+          -OutputDirectory "$env:RUNNER_TEMP/d4-09-timer-history-96" -Dpi 96
+      - name: D409 complete timer history presentation at 144 application DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-09/windows/timer-history-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -ExpectedExecutableSha256 ((Get-FileHash -LiteralPath "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" -Algorithm SHA256).Hash.ToLowerInvariant())
+          -OutputDirectory "$env:RUNNER_TEMP/d4-09-timer-history-144" -Dpi 144
       - name: Package verified native candidate
         run: node tests/d4-08/windows/package.mjs "$env:RUNNER_TEMP/d4-08-build" "$env:RUNNER_TEMP/d4-08-native-evidence"
       - name: Package D409 UI candidate with original and added native reports
@@ -366,6 +415,9 @@ jobs:
             ${{ runner.temp }}/d4-08-ui-144/
             ${{ runner.temp }}/d4-09-ui-96/
             ${{ runner.temp }}/d4-09-ui-144/
+            ${{ runner.temp }}/d4-09-timer-history-96/
+            ${{ runner.temp }}/d4-09-timer-history-144/
+          include-hidden-files: true
           if-no-files-found: error
 
   android-d409:

@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/d4-09-candidate.yml",
-      "bytes": 26107,
-      "sha256": "3195d8b3951b8dc5fdfd49b8a82106d03a41f51d8f3e20c5be7314f9b303283a",
+      "bytes": 29627,
+      "sha256": "999885379c0519efe42cb93f617176ba59d3b7cef6855313e8a4bef5f6270f8d",
       "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
     },
     {
@@ -51,8 +51,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 26532,
-      "sha256": "137d955dc0d9afe32c4e57735e37ddb7edef8f63ffc29d0e18e6fee5ee6f13cf",
+      "bytes": 28280,
+      "sha256": "94df19ffdb57f6c82d2653902d41cd0ecac8f9959871b31ff0a4baf323b4f4a7",
       "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
     },
     {
@@ -137,6 +137,12 @@
       "path": "docs/upgrade/d4-09/D409-12-第三轮原件与补充诊断.md",
       "bytes": 6593,
       "sha256": "8de00082ee07c5adc3bf9726c733fe8581679b4f89f9b51b1b7fd020eee3a625",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-13-详情生命周期防护与第五轮回归.md",
+      "bytes": 1647,
+      "sha256": "c9c9b44b20eb17078aa1d31bc2864c709db22a7bf74d962f1181c0b3a164f340",
       "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
     },
     {
@@ -470,9 +476,15 @@
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
+      "path": "tests/d4-09/windows/TimerHistoryProbe.cs",
+      "bytes": 5828,
+      "sha256": "6f3b4022551d9aac82f34ae7db0c9e8342ce0164c4270a9ba520082738f5f9c0",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
       "path": "tests/d4-09/windows/legacy-drag-diagnostics.ps1",
-      "bytes": 26362,
-      "sha256": "3b2cbd56908cc5f0533b4d9c36f2d82bef3ff1eae758176791736374c1a1736b",
+      "bytes": 26369,
+      "sha256": "dedd0e0e7250bce81e3887f21802558eabe9919d1343f287e950e49576f6993a",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -488,15 +500,33 @@
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
+      "path": "tests/d4-09/windows/original-suite-wer-integrity.ps1",
+      "bytes": 5780,
+      "sha256": "ea070ad82b903433ceec329d1058cfb459109de7abdd9f4c139c734d10be7a70",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/original-suite-wer.ps1",
+      "bytes": 24348,
+      "sha256": "03c9032d52c216fc0cd20ca19583dd2ea73ed9ca9cad30844ffe36d34449cb02",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
       "path": "tests/d4-09/windows/package.mjs",
-      "bytes": 7335,
-      "sha256": "564adc78972dedf7835e30ca7c8946656ad962127412e3b7de2e0cd226ecca18",
+      "bytes": 8524,
+      "sha256": "33afb94cff40538a5bb83fe7afc240c5fe1849754b2154747ab6d661ac48a876",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
       "path": "tests/d4-09/windows/prototype-cases.mjs",
       "bytes": 30917,
       "sha256": "e8ddf13b6ef2399ebf9e6ea0973ffb5718c4e30ab09b3e24e08bcd16bea82dc2",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/timer-history-ui.ps1",
+      "bytes": 33748,
+      "sha256": "fa28d4adf7b152cb4538126443f0b9bab5cdaf289e3c3048e3a875fa5ff46611",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -519,14 +549,20 @@
     },
     {
       "path": "windows/d408-timer.c",
-      "bytes": 38957,
-      "sha256": "269baed10534248d59889dee0545c1a4dfdc2bde26b53b4975c6f88f3a4e41dc",
+      "bytes": 39472,
+      "sha256": "d122c87cff0a75ef9177dbc410a1a871ae1071c61aecdaec7cd2a33ebd7fe2bb",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
       "path": "windows/d408-work.c",
       "bytes": 41076,
       "sha256": "951bec2c2cdabc8498b15692a42508842b114aae4d2b339b1ce8691a1cf57a54",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d409-timer-history.h",
+      "bytes": 7300,
+      "sha256": "bfa033e35cf8793dffec897a529d4c19480d12f4eed80df5b5c1ccf5eafb22c4",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -539,6 +575,12 @@
       "path": "windows/d409-work-ui.inc",
       "bytes": 12288,
       "sha256": "af85c6eb877d9e33cb0639bca8436c74295c2ce1b99afdeda61d2ae6ba26b82e",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/detail.c",
+      "bytes": 50424,
+      "sha256": "6cccd0d6cbc6dad6e383cb959297d2b082dfbcc15792e37384296c5d59648073",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
