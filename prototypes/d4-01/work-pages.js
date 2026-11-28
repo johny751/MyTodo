@@ -305,8 +305,13 @@
   }
   function workItemsPage(ctx) {
     var s = state(ctx), list = filtered(s, 'workItems', 'work-items', ctx);
-    var rows = list.map(function (w) { var tasks = workTasks(s, w.id); return '<tr><td>' + button(ctx, w.title, 'work-work-detail', w.id, 'text') + previewButton(ctx, 'work-items', w.id) + '<small>' + esc(ctx, w.owner || '未设置负责人') + ' · ' + esc(ctx,priorityLabels[w.priority] || '普通') + '</small></td><td>' + esc(ctx, projectName(s, w.projectId)) + '</td><td>' + pill(ctx, w.status) + '</td><td>' + esc(ctx, timeLabel(w.plannedStart) || '—') + ' → ' + esc(ctx, timeLabel(w.dueDate) || '—') + '</td><td>' + tasks.filter(done).length + ' / ' + tasks.length + '</td><td class="row-actions">' + button(ctx, '编辑', 'work-edit-work-item', w.id) + button(ctx, '归档', 'work-archive-workItems', w.id, 'text') + button(ctx, '删除', 'work-delete-workItems', w.id, 'text danger') + '</td></tr>'; });
-    return heading(ctx, '工作事项', '记录需要推进的工作，关联项目与执行任务。', button(ctx, '新建工作事项', 'work-new-work-item', '', 'primary')) + toolbar(ctx, s, 'work-items', ['planned','doing','waiting','done'], true) + workLayout(ctx, 'work-items', list, '<section class="panel">' + (rows.length ? table(['工作事项 / 负责人','项目','状态','计划 / 截止时间','任务完成','操作'], rows) : empty(ctx, '没有符合条件的工作事项', '调整筛选，或记录下一件需要推进的工作。', 'work-new-work-item', '新建工作事项')) + '</section>');
+    function scheduleLabel(value) {
+      var text = timeLabel(value) || '—', match = /^(\d{4}-\d{2}-\d{2})(.*)$/.exec(text);
+      if (!match) return esc(ctx, text);
+      return '<span class="d409-date-token">' + esc(ctx, match[1]) + '</span><span class="' + (match[2] === '（仅日期）' ? 'd409-date-token' : 'd409-time-context') + '">' + esc(ctx, match[2]) + '</span>';
+    }
+    var rows = list.map(function (w) { var tasks = workTasks(s, w.id); return '<tr><td>' + button(ctx, w.title, 'work-work-detail', w.id, 'text') + previewButton(ctx, 'work-items', w.id) + '<small>' + esc(ctx, w.owner || '未设置负责人') + ' · ' + esc(ctx,priorityLabels[w.priority] || '普通') + '</small></td><td>' + esc(ctx, projectName(s, w.projectId)) + '</td><td>' + pill(ctx, w.status) + '</td><td><span class="d409-schedule-line">' + scheduleLabel(w.plannedStart) + ' → </span><span class="d409-schedule-line">' + scheduleLabel(w.dueDate) + '</span></td><td>' + tasks.filter(done).length + ' / ' + tasks.length + '</td><td class="row-actions">' + button(ctx, '编辑', 'work-edit-work-item', w.id) + button(ctx, '归档', 'work-archive-workItems', w.id, 'text') + button(ctx, '删除', 'work-delete-workItems', w.id, 'text danger') + '</td></tr>'; });
+    return heading(ctx, '工作事项', '记录需要推进的工作，关联项目与执行任务。', button(ctx, '新建工作事项', 'work-new-work-item', '', 'primary')) + toolbar(ctx, s, 'work-items', ['planned','doing','waiting','done'], true) + workLayout(ctx, 'work-items', list, '<section class="panel d409-work-item-table">' + (rows.length ? table(['工作事项 / 负责人','项目','状态','计划 / 截止时间','任务完成','操作'], rows) : empty(ctx, '没有符合条件的工作事项', '调整筛选，或记录下一件需要推进的工作。', 'work-new-work-item', '新建工作事项')) + '</section>');
   }
   function workDetail(ctx, id) {
     var s = state(ctx), w = find(s, 'workItems', id);

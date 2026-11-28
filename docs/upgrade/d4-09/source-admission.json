@@ -51,8 +51,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 21079,
-      "sha256": "6f8a626f17306ebad099b0ec3c1ab6a880147d82ad0c2a32a6cfb87d16fd2b8a",
+      "bytes": 22919,
+      "sha256": "8c7629718208fa8a76aa2a93a5a11a573c57a110c765de219184b4cdea5953c1",
       "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
     },
     {
@@ -105,8 +105,14 @@
     },
     {
       "path": "docs/upgrade/d4-09/D409-07-候选集成与验证边界.md",
-      "bytes": 4746,
-      "sha256": "700c1046890c4fea1295db125877086a58d46881a71451e838dde38193b1b0f2",
+      "bytes": 4913,
+      "sha256": "02f6f3e39db0c89b1add2e94bbe07deef3d75e08e60a53c3c2e1363597d5f05e",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-08-首轮候选验证与修复.md",
+      "bytes": 5217,
+      "sha256": "48587dd343c7dd5a089c9d28eaf8a939a93737261fdcc8768f3ce23178ca7890",
       "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
     },
     {
@@ -141,8 +147,8 @@
     },
     {
       "path": "docs/upgrade/d4-09/WINDOWS-EXTERNAL-UI-IMPLEMENTATION.md",
-      "bytes": 6740,
-      "sha256": "bb083a0d9578e2d24390c6cfc46e0890e445d91736a014ac1c6de386fc42ec6f",
+      "bytes": 9319,
+      "sha256": "bf8b3c3caba0da8c7eec5ddb2048dc8c1087f13acb095db21d6cf1a8610a2e4e",
       "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
     },
     {
@@ -202,7 +208,7 @@
     {
       "path": "prototypes/d4-01/mobile-controls.js",
       "bytes": 9656,
-      "sha256": "3ebd6f16b07fa93e2b64ec6ac9600c77d498c90ffa0c2b3358f98d6317029e03",
+      "sha256": "2cfd4426352f67e0655fff47b6945825b56c9cf6064e02b996529a073b5ca515",
       "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
     },
     {
@@ -213,14 +219,14 @@
     },
     {
       "path": "prototypes/d4-01/styles.css",
-      "bytes": 55479,
-      "sha256": "5e01e5eef03af938db9f29c46105e8bcf9183b324b47708cbbc22e89019edd50",
+      "bytes": 56168,
+      "sha256": "12c58128711b866f723286b508a4957dd2fe45f6a90b03575f6a59401b8977eb",
       "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
     },
     {
       "path": "prototypes/d4-01/work-pages.js",
-      "bytes": 92459,
-      "sha256": "6c6259fb47363a574c6bb6ef190ae4ca878abfada70428d1e0433c13cf6fdf9b",
+      "bytes": 92915,
+      "sha256": "0b5a2831aa98191dd21f25462d8fb384905fd3068462517850acdd5321f75d27",
       "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
     },
     {
@@ -233,73 +239,73 @@
       "path": "prototypes/d4-09/android.css",
       "bytes": 21434,
       "sha256": "69b635b99dae687314486901f041a37e1576d730a53fe528682a0b9a63d03a46",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/android.html",
       "bytes": 5055,
       "sha256": "2171bd279eb52d85ed98af3d8ae83680d867e59965cb09aa1463eda6a52d86cc",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/android.js",
       "bytes": 74977,
       "sha256": "93254f120fa6f912d1f3a1b2bb973fb87055c566c7297266e2339cd243c89ac5",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/index.html",
       "bytes": 2996,
       "sha256": "70febfee324373cd2fb82713fb6ab11b1ef1be2ee45d93e8671a30f11ce7c324",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/tokens.css",
       "bytes": 1139,
       "sha256": "d674777059b9675e97b751ecf89f15863f3401e755e628067c10d3d4c87b5371",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/tokens.json",
       "bytes": 542,
       "sha256": "de2e9e8ce334672f2de796d90fb4dc445625e17e16aa18e32e9c702d5b0b2c89",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/web.css",
       "bytes": 21633,
       "sha256": "54822f0800c1a78ee4bd6f2a2314cf4522fcdddbe1306c4760684e02c8d267ce",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/web.html",
       "bytes": 995,
       "sha256": "f1c4aa70ea7dc6bdf32ae5e82f15b4fab447cc092daf4585af71612211dfc2d3",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/web.js",
       "bytes": 69122,
       "sha256": "b1fac5a432f8d2867472cfc308ee14aaeb6e4416e2963fb7a118a58e94d978ce",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/windows.css",
       "bytes": 34850,
       "sha256": "1fd95bd5611d8c9bb9aa8093619b2cec04280ef4c0b11a20f1017dcbf5461f9e",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/windows.html",
       "bytes": 4262,
       "sha256": "3c9c2dd16a96cff4e14d47bea8b956de710f612d1b2fe5c3ed6cf5c8d6151d69",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "prototypes/d4-09/windows.js",
       "bytes": 90826,
       "sha256": "e858db31cbdc8b211c4f9cae83ff9bdc779f7b7ee77bc9b54b88280be067dd01",
-      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+      "reason": "Owner-authorized interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
     },
     {
       "path": "scripts/build-windows.mjs",
@@ -309,8 +315,8 @@
     },
     {
       "path": "tests/d4-09/android/README-native.md",
-      "bytes": 6168,
-      "sha256": "7fe557051cb9840cea610474cdcff9a82134a36c0a6032d6e5c054b5da5c88c8",
+      "bytes": 6454,
+      "sha256": "1c7f91b010db3d57d2a27eb729f60eed4be54fe1ec9e5befe095e297a5871b4e",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -333,8 +339,8 @@
     },
     {
       "path": "tests/d4-09/android/native/D409UiChecks.java",
-      "bytes": 19519,
-      "sha256": "32a7409d0a1fcff415603414721b349906a08a3585b45f2dd05326981c880a84",
+      "bytes": 19724,
+      "sha256": "a3677f2b76da98eca9a29cf56a4814e2ca0ef15574d801ebb0701f6b7b248b45",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -357,8 +363,8 @@
     },
     {
       "path": "tests/d4-09/android/run-native.sh",
-      "bytes": 3806,
-      "sha256": "c7677a6642c45b7de1356bae856ffbb9b03fbbe9f012969ff56b94dd642b0724",
+      "bytes": 5343,
+      "sha256": "08f2f609ce11316d370177adc5fd916831126cec6762ae44ce45a7c70aa33f87",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -447,8 +453,8 @@
     },
     {
       "path": "tests/d4-09/windows/native-ui.ps1",
-      "bytes": 56067,
-      "sha256": "cee8f26c12c5a3f866054304a6d33f270a35ef0a9334adcf7e80821e4d33eaa3",
+      "bytes": 59367,
+      "sha256": "77a3c6760a906d1ab8e13d954065a169e9c96baee3ae5cb7dbd90258b8946314",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -465,14 +471,14 @@
     },
     {
       "path": "windows/d408-feedback.c",
-      "bytes": 56634,
-      "sha256": "4227b2ac927a510714eb6996f4531cfbe21f0948e721b6807fac4a85d8d6b367",
+      "bytes": 56708,
+      "sha256": "396aad1b9eb3481965e60c8fc7d15b0eeef100169c8e5e67189977208e6a504f",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
       "path": "windows/d408-form.c",
-      "bytes": 6166,
-      "sha256": "817b253c4e6b5846bb3c15578346b04b6b673c1c932ca322f5914e4d3fd9e6ad",
+      "bytes": 6237,
+      "sha256": "82b6894d885becf04e1b4019409096493ac57fd2aa3d013d9c48ee4d87d0f96b",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -483,8 +489,8 @@
     },
     {
       "path": "windows/d408-timer.c",
-      "bytes": 38886,
-      "sha256": "ae030c599dbea9140147c224e1c2de0d5af4e5ae91e45e43280c344067b55908",
+      "bytes": 38957,
+      "sha256": "269baed10534248d59889dee0545c1a4dfdc2bde26b53b4975c6f88f3a4e41dc",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -501,8 +507,8 @@
     },
     {
       "path": "windows/d409-work-ui.inc",
-      "bytes": 12216,
-      "sha256": "fbb02d260fa41fdd5721105d2235d39969bc72963bb57eead69bfb6526edf7c3",
+      "bytes": 12288,
+      "sha256": "af85c6eb877d9e33cb0639bca8436c74295c2ce1b99afdeda61d2ae6ba26b82e",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -513,8 +519,8 @@
     },
     {
       "path": "windows/theme.c",
-      "bytes": 21336,
-      "sha256": "a36a1dd3b81e1a612efccd6c41942f45c18565ae390a464b5d3aab73ba394c5b",
+      "bytes": 21588,
+      "sha256": "ba8b65b6aff8d33821f93f2f3049c8acb4147be2dd75d4408033e8f3a616733d",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -1169,8 +1175,8 @@
         },
         {
           "op": "replaceExact",
-          "text": "x<=navigationEdge&&!drawer&&!modal&&",
-          "replacement": "x<=navigationEdge&&!drawer&&"
+          "text": "x<=22||!modal&&!target.closest(",
+          "replacement": "x<=22||!target.closest("
         }
       ]
     }

@@ -6,6 +6,7 @@ static void layout(Form *f){RECT r;GetClientRect(f->window,&r);int y=U(18)-f->of
 #ifdef GX_D409_UI
  for(int i=0;i<f->count;i++){d409_clip_control(f->labels[i],f->window,U(12),r.bottom-U(72));d409_clip_control(f->inputs[i],f->window,U(12),r.bottom-U(72));}
  ui_move(f->save,max(U(18),r.right-U(238)),r.bottom-U(53),U(102),U(34));ui_move(f->cancel,max(U(130),r.right-U(126)),r.bottom-U(53),U(100),U(34));f->height=y+f->offset+U(90);
+ RedrawWindow(f->window,0,0,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN);
 #else
  ui_move(f->save,max(U(18),r.right-U(238)),y,U(102),U(34));ui_move(f->cancel,max(U(130),r.right-U(126)),y,U(100),U(34));f->height=y+f->offset+U(54);
 #endif

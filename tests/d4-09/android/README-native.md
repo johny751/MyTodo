@@ -28,7 +28,7 @@ Each case runs at 360×900 and 412×900 pixels, density 160, with the actual ins
 | U04 | All 13 workspace destinations reached by actual menu-button and route-button touches |
 | U05 | Actual IME then physical system Back; editor draft retained when IME closes, existing save-on-leave contract on next Back, drawer Back leaves repository unchanged |
 | U06 | Actual workspace-to-native timer entry, physical system Back closes picker before Activity, running session survives return to workspace |
-| U07 | Actual x32, x56 and x63 content-edge starts, trusted DOM input observation, vertical rejection, x100 rejection and modal priority; physical Back closes navigation |
+| U07 | Actual x32, x56 and x63 content-edge starts, trusted DOM input observation, vertical rejection, x100 rejection and modal priority at x56 in the added 48..64 band; physical Back closes navigation |
 | U08 | Actual bounded native exclusion rectangle, system Back outside that rectangle, mandatory bottom inset and actual system Home |
 
 The frozen original matrix remains separately recorded: retained 15, features 7, feedback UI 7, work preservation 4, navigation 20, permissions 3 and reboot 2 = 58 cases in seven groups. New reports cannot replace missing original groups or original raw failures.
@@ -43,7 +43,7 @@ The task picker exposes stable native View tags: `d409-task-select:<taskId>`, `d
 
 ## Gesture boundaries
 
-The shared app's content activation band is 64 CSS pixels. Its original direction, distance, velocity, editable-control and horizontal-scroll arbitration remain in place; an open modal prevents edge navigation takeover without blocking modal subtask gestures. The original Android exclusion rectangle remains at most 48dp wide and 200dp high in its existing local segment. CSS content activation and native system exclusion are separate controls. The extra 48..64 CSS pixels do not enlarge the OS exclusion. Mandatory bottom gestures are not excluded.
+The shared app's content activation band is 64 CSS pixels. Its original direction, distance, velocity, editable-control and horizontal-scroll arbitration remain in place. An open modal blocks the outer content band at x>22 while the original x<=22 edge navigation remains available, including navigation away from and back to a held task-edit draft. U07 checks modal priority at x56, inside the added 48..64 band; the unchanged D403 draft case checks the original x3 edge. Modal subtask gestures remain available. The original Android exclusion rectangle remains at most 48dp wide and 200dp high in its existing local segment. CSS content activation and native system exclusion are separate controls. The extra 48..64 CSS pixels do not enlarge the OS exclusion. Mandatory bottom gestures are not excluded.
 
 ## Evidence and limits
 

@@ -94,6 +94,12 @@ static void combo_paint(HWND h,HDC dc){
 static void check_paint(HWND h,HDC dc){RECT r;GetClientRect(h,&r);int checked=SendMessageW(h,BM_GETCHECK,0,0)==BST_CHECKED,hover=GetPropW(h,L"GxHover")!=0;fill(dc,r,RGB(255,255,255));RECT circle={U(2),(r.bottom-U(17))/2,U(19),(r.bottom+U(17))/2};ui_round(dc,circle,checked?RGB(53,184,217):RGB(255,255,255),checked?RGB(53,184,217):hover?RGB(139,197,216):RGB(190,207,216),5);if(checked){HPEN p=CreatePen(PS_SOLID,U(2),RGB(255,255,255));HGDIOBJ old=SelectObject(dc,p);MoveToEx(dc,circle.left+U(4),circle.top+U(8),0);LineTo(dc,circle.left+U(7),circle.top+U(11));LineTo(dc,circle.left+U(13),circle.top+U(5));SelectObject(dc,old);DeleteObject(p);}wchar_t text[200];GetWindowTextW(h,text,200);RECT tr=r;tr.left=U(27);text_rect(dc,text,tr,app.font,RGB(121,145,159),DT_SINGLELINE|DT_VCENTER);if(GetFocus()==h){RECT f=r;InflateRect(&f,-1,-1);DrawFocusRect(dc,&f);}}
 static LRESULT CALLBACK control_proc(HWND h,UINT m,WPARAM w,LPARAM l,UINT_PTR id,DWORD_PTR ref){
  wchar_t cls[30];GetClassNameW(h,cls,30);int combo=!wcscmp(cls,L"ComboBox"),check=!wcscmp(cls,L"Button")&&((GetWindowLongPtrW(h,GWL_STYLE)&BS_TYPEMASK)==BS_AUTOCHECKBOX);
+#ifdef GX_D409_UI
+ if(!wcscmp(cls,L"Edit")&&!GetPropW(h,L"GxComposing")&&!(GetKeyState(VK_MENU)&0x8000)){
+  if(m==WM_KEYDOWN&&w=='A'&&(GetKeyState(VK_CONTROL)&0x8000)){SendMessageW(h,EM_SETSEL,0,-1);return 0;}
+  if(m==WM_CHAR&&w==1)return 0;
+ }
+#endif
  if(m==WM_MOUSEMOVE&&!GetPropW(h,L"GxHover")){SetPropW(h,L"GxHover",(HANDLE)1);TRACKMOUSEEVENT tr={sizeof(tr),TME_LEAVE,h,0};TrackMouseEvent(&tr);InvalidateRect(h,0,FALSE);}
  if(m==WM_MOUSELEAVE){RemovePropW(h,L"GxHover");InvalidateRect(h,0,FALSE);}
  if(m==WM_SETFOCUS||m==WM_KILLFOCUS){InvalidateRect(h,0,FALSE);InvalidateRect(GetParent(h),0,FALSE);}

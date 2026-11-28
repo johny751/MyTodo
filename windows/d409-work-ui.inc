@@ -65,6 +65,7 @@ static void d409_work_layout(void){
  int dx=x+listWidth+U(16);ui_move(GetDlgItem(workWindow,D409_W_DETAIL_TITLE),dx,top-U(27),detailWidth,U(21));ui_move(GetDlgItem(workWindow,D409_W_DETAIL),dx,top,detailWidth,max(U(110),bottom-top));
  int ids[]={W_EDIT,W_ACTION,W_ARCHIVE,W_DELETE,W_RELATED,W_ATTACH,W_FILES,W_HISTORY};for(int i=0;i<8;i++)ui_move(wc(ids[i]),x+(i%4)*((width+U(8))/4),r.bottom-U(172)+(i/4)*U(40),(width-U(24))/4,U(34));
  ui_move(wc(W_EXPORT),x,r.bottom-U(87),U(190),U(30));ui_move(wc(W_IMPORT),x+U(202),r.bottom-U(87),U(190),U(30));ui_move(wc(W_NOTICE),x,r.bottom-U(48),width,U(45));
+ RedrawWindow(workWindow,0,0,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN);
 }
 static void d409_work_draw(DRAWITEMSTRUCT *d){
  if(d->itemID==(UINT)-1)return;HDC dc=d->hDC;int saved=SaveDC(dc);RECT r=d->rcItem;HBRUSH bg=CreateSolidBrush(d->itemState&ODS_SELECTED?D409_SELECTED:RGB(255,255,255));FillRect(dc,&r,bg);DeleteObject(bg);

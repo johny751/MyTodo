@@ -162,7 +162,7 @@ static void timer_layout(void){
   ui_move(GetDlgItem(timerWindow,5225),U(18),U(434),width,U(24));
   ui_move(control(T_SUMMARY),U(18),U(466),width,U(68));ui_move(control(T_HISTORY),U(18),U(542),width,max(U(40),r.bottom-U(608)));
  }
- ui_move(control(T_CLOSE),r.right-U(132),r.bottom-U(48),U(108),U(32));return;
+ ui_move(control(T_CLOSE),r.right-U(132),r.bottom-U(48),U(108),U(32));RedrawWindow(timerWindow,0,0,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN);return;
 #else
  RECT r;GetClientRect(timerWindow,&r);int width=r.right-U(36);
  ui_move(control(T_CLOCK),U(18),U(18),width,U(52));ui_move(control(T_STATUS),U(18),U(78),width,U(95));

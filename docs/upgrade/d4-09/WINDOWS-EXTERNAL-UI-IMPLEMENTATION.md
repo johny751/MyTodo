@@ -1,6 +1,6 @@
 # D409 independent Windows external UI harness
 
-2026-11-28, Asia/Shanghai. Source preparation only. The new C# driver, PowerShell runner and expected-case JSON have not been compiled, parsed by a runtime, or executed locally. All application, test, SQLite and packaging execution is restricted to GitHub Actions. Frozen D408/D404 test files are unchanged.
+2026-11-28, Asia/Shanghai. No C# compilation, PowerShell parsing or native application execution has been performed locally. All application, test, SQLite and packaging execution is restricted to GitHub Actions. Frozen D408/D404 test files are unchanged. First full candidate `f7a2b97d6bff08440fea83af16e914a1e6d1ce46`, Actions `46092613090` attempt 1, executed the new external suite and preserved failures; the current repair is awaiting its own cloud run.
 
 ## Files and integration
 
@@ -52,3 +52,17 @@ Screenshots use actual foreground `CopyFromScreen`, retain the original PNG, and
 144 means `--visual-dpi 144` application scaling. The runner first records the actual desktop, requests a supported temporary 1920x1080-or-larger mode only if needed, and continues on the actual current desktop when no larger mode exists. Original display mode is restored in `finally`. Product-native 680-logical-pixel minimum heights and workarea clamping are tested without assuming an unavailable 2304px display. Per-window actual DPI and awareness are recorded separately.
 
 The one-minute countdown uses actual OS clocks and up to 75 seconds of bounded polling; no new product fake-clock/test acceleration switch exists. Unicode SendInput is explicitly distinguished from Chinese IME composition. All data is synthetic under a newly created, guarded RUNNER_TEMP child; production data, remote configuration, protocol semantics and signing remain untouched.
+
+## First-run evidence and driver corrections
+
+Both first-run scale reports recorded 6 passing cases out of 24, with failures and one blocked dependency preserved in the original artifact `15242143028-d409-win32-46092613090-1.zip`. These are failed results, not waived or relabelled coverage. The unchanged older native suites passed in the same job.
+
+The original N409-01/N409-15 snapshots show control 105 is a hidden period-state ComboBox. The corrected runner clicks visible toolbar button 123, records the actual `#32768` popup, sends Home/Down/Enter through SendInput to its fourth item, and verifies both the read-only period state and visible `全部日期` label. It never mutates the hidden control.
+
+The N409-07/N409-09 window snapshots show a sole visible button captioned `OK` with native ID 2. Message dismissal now requires exactly one visible/enabled button matching the intended affirmative or cancellation caption, records its actual ID/rectangle, and clicks that handle. Negative choices never fall back to an affirmative button. Failed-scenario cleanup cancels an enabled message dialog before re-enumerating the underlying form, retaining any cleanup errors alongside the original failure.
+
+The preview ratio now passes a floating-point `1.0` to `Math.Min`, correcting PowerShell overload selection that produced unscaled first-run preview JPEGs. Original screenshots remain unchanged. Ctrl+A/full selection assertions and exact field readbacks remain in place; the separately prepared product EDIT keyboard fix must satisfy them in Actions. No frozen test assertion has changed.
+
+N409-23 additionally checks every visible native Button, Edit, ComboBox and ListBox against the root client bounds and, when enabled, the actual hit target at minimum, maximized and restored size. The work statistics page is also visited at minimum size so date inputs 4938/4939 (Edit), Apply/Reset actions 4940/4941 (Button), and its other visible controls are checked and captured. Original mandatory action checks remain. This verifies geometry and hit testing; separate screenshot inspection is still required to detect paint artifacts.
+
+N409-24 serializes sorted ID collections with explicit JSON arrays and enumerates record IDs individually, preserving strict before/after comparison when a valid collection is empty. Missing IDs on actual records still fail under StrictMode; timer-history equality remains unchanged.

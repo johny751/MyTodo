@@ -194,7 +194,7 @@ static void layout_feedback(void){
  ui_move(GetDlgItem(feedbackWindow,5234),right,r.bottom-U(314),width,U(20));ui_move(fc(F_IMAGES),right,r.bottom-U(288),width,U(72));
  int images[]={F_ADDIMAGE,F_PREVIEW,F_REMOVEIMAGE};for(int i=0;i<3;i++)ui_move(fc(images[i]),right+i*(width/3),r.bottom-U(204),width/3-U(6),U(32));
  int actions[]={F_NEW,F_DRAFT,F_SUBMIT,F_DELETE,F_UNDO,F_EXPORT,F_IMPORT,F_CLOSE};for(int i=0;i<8;i++)ui_move(fc(actions[i]),left+(i%4)*((r.right-U(48))/4),r.bottom-U(156)+(i/4)*U(40),(r.right-U(48))/4-U(8),U(34));
- ui_move(fc(F_NOTICE),left,r.bottom-U(62),r.right-U(48),U(54));return;}
+ ui_move(fc(F_NOTICE),left,r.bottom-U(62),r.right-U(48),U(54));RedrawWindow(feedbackWindow,0,0,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN);return;}
 #endif
  RECT r;GetClientRect(feedbackWindow,&r);int left=U(18),listWidth=U(268),right=U(306),width=r.right-right-U(18);
  ui_move(fc(F_QUERY),left,U(18),listWidth,U(30));ui_move(fc(F_LIST),left,U(60),listWidth,max(U(180),r.bottom-U(235)));ui_move(fc(F_HISTORY),left,r.bottom-U(215),listWidth/2-U(3),U(30));ui_move(fc(F_COPY),left+listWidth/2+U(3),r.bottom-U(215),listWidth/2-U(3),U(30));

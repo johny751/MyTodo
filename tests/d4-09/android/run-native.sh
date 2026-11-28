@@ -14,8 +14,21 @@ collect() {
   adb shell dumpsys window > "$evidence/window.raw.txt" 2>&1 || true
   adb shell dumpsys activity services "$pkg" > "$evidence/services.raw.txt" 2>&1 || true
   adb shell cmd overlay list > "$evidence/overlays-final.txt" 2>&1 || true
-  adb exec-out run-as "$pkg" tar -cf - files/d409-evidence > "$evidence/device-evidence.tar" 2> "$evidence/pull-error.txt" || true
-  if [[ -s "$evidence/device-evidence.tar" ]]; then tar -xf "$evidence/device-evidence.tar" -C "$evidence" || true; fi
+  # Setup can stop before instrumentation creates any report directory. Preserve
+  # that absence explicitly instead of treating remote diagnostic text as a TAR.
+  if adb shell run-as "$pkg" test -d files/d409-evidence > "$evidence/device-evidence-directory.txt" 2>&1; then
+    if adb exec-out run-as "$pkg" tar -cf - files/d409-evidence > "$evidence/device-evidence.tar" 2> "$evidence/pull-error.txt"; then
+      if tar -tf "$evidence/device-evidence.tar" > "$evidence/device-evidence-members.txt" 2> "$evidence/tar-validation-error.txt"; then
+        tar -xf "$evidence/device-evidence.tar" -C "$evidence" > "$evidence/tar-extract.txt" 2>&1 || true
+      else
+        printf '%s\n' 'Collected device bytes are not a valid TAR; raw bytes retained.' > "$evidence/collection-status.txt"
+      fi
+    else
+      printf '%s\n' 'Device evidence collection failed; raw stdout and stderr retained.' > "$evidence/collection-status.txt"
+    fi
+  else
+    printf '%s\n' 'No D409 device evidence directory exists; instrumentation did not create reports. No cases are inferred as passed.' > "$evidence/collection-status.txt"
+  fi
 }
 cleanup() {
   collect
@@ -40,12 +53,23 @@ for mode in gestural threebutton; do
   overlay="com.android.internal.systemui.navbar.$mode"
   grep -F "$overlay" "$evidence/overlays-before.txt" >/dev/null || { echo "Missing installed $overlay" >&2; exit 2; }
   adb shell cmd overlay enable-exclusive --category "$overlay" > "$evidence/overlay-$mode-change.txt"
-  adb shell cmd overlay list > "$evidence/overlay-$mode-after.txt"
-  grep -F "[x] $overlay" "$evidence/overlay-$mode-after.txt" >/dev/null || { echo 'Navigation overlay not active' >&2; exit 2; }
   expected_mode=0
   [[ "$mode" != gestural ]] || expected_mode=2
-  observed_mode="$(adb shell settings get secure navigation_mode | tr -d '\r')"
-  [[ "$observed_mode" == "$expected_mode" ]] || { echo 'Observed navigation setting differs' >&2; exit 2; }
+  # Overlay-manager completion precedes SystemUI's asynchronous mode update.
+  # Observe both actual signals under one deadline; never write navigation_mode
+  # or reissue the activation to manufacture a successful configuration.
+  mode_started=$SECONDS
+  mode_deadline=$((mode_started+15))
+  while :; do
+    adb shell cmd overlay list > "$evidence/overlay-$mode-after.txt"
+    observed_mode="$(adb shell settings get secure navigation_mode | tr -d '\r')"
+    overlay_active=false
+    if grep -F "[x] $overlay" "$evidence/overlay-$mode-after.txt" >/dev/null; then overlay_active=true; fi
+    printf 'elapsedSeconds=%s requested=%s expected=%s observed=%s overlayActive=%s\n' "$((SECONDS-mode_started))" "$mode" "$expected_mode" "$observed_mode" "$overlay_active" >> "$evidence/navigation-$mode-readiness.txt"
+    [[ $SECONDS -lt $mode_deadline ]] || { echo 'Actual navigation mode did not become ready within 15 seconds' >&2; exit 2; }
+    if [[ "$overlay_active" == true && "$observed_mode" == "$expected_mode" ]]; then break; fi
+    sleep 0.2
+  done
   for width in 360 412; do
     phase="ui-$width-$mode"
     adb shell wm density 160

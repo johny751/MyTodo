@@ -155,9 +155,10 @@ final class D409UiChecks {
         check("false".equals(t.js(web,"document.querySelector('.app-shell').classList.contains('nav-open')")),"x100 still belongs to content");
         t.route(web,"tasks");t.webTap(web,"[data-action=task-new]");t.dismissIme();
         JSONArray modalPoint=new JSONArray(t.js(web,"(()=>{for(let y=80;y<innerHeight-100;y+=8){const e=document.elementFromPoint(56,y);if(e?.closest('#modal-root .modal')&&!e.closest('button,a,input,textarea,select,summary,[contenteditable=true],.task-row'))return [56,y];}throw Error('No actual modal content');})()"));
+        check(modalPoint.getDouble(0)>48&&modalPoint.getDouble(0)<=64,"modal priority is observed in the added content band; original edge navigation remains available");
         t.webGesture(web,56,modalPoint.getDouble(1),110,1,300,"expanded-edge-modal-priority");
         check("true".equals(t.js(web,"!!document.querySelector('#modal-root .modal')")),"modal remains after content edge swipe");
-        check("false".equals(t.js(web,"document.querySelector('.app-shell').classList.contains('nav-open')")),"modal prevents drawer takeover");t.shot("edge-modal-priority");
+        check("false".equals(t.js(web,"document.querySelector('.app-shell').classList.contains('nav-open')")),"modal prevents expanded content band from taking over the drawer");t.shot("edge-modal-priority");
         t.physicalBack();t.until("blank editor dismissed",5000,()->"false".equals(t.js(web,"!!document.querySelector('#modal-root .modal')")));
         JSONArray trusted = new JSONArray(t.js(web, "window.__d409Touch")); check(trusted.length() > 0, "observed DOM touch events");
         for (int i = 0; i < trusted.length(); i++) check(trusted.getJSONObject(i).getBoolean("trusted"), "all observed events are trusted");

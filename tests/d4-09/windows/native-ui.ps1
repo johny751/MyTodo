@@ -37,7 +37,7 @@ $captures=[Collections.Generic.List[object]]::new()
 $commands=[Collections.Generic.List[object]]::new()
 $readbacks=[Collections.Generic.List[object]]::new()
 $script:gui=$null;$script:main=$null;$script:work=$null;$script:timer=$null;$script:feedback=$null
-$script:outTask=$null;$script:errTask=$null;$script:readIndex=0;$script:processIndex=0
+$script:outTask=$null;$script:errTask=$null;$script:readIndex=0;$script:processIndex=0;$script:dialogIndex=0
 $script:desktopBefore=$null;$script:desktopAfter=$null;$script:desktopRestored=$null
 $fatalError=$null;$startedAtUtc=[DateTime]::UtcNow.ToString('o');$script:activeCase='startup'
 $scale=$Dpi/96.0
@@ -64,6 +64,14 @@ function Focus([long]$Handle){[D409.NativeUiDriver]::Focus($Handle);Flush-Trace}
 function Fill([long]$Handle,[string]$Text){Focus $Handle;Click $Handle;Key $Handle 65 $true;Key $Handle 8;[D409.NativeUiDriver]::TypeText($Handle,$Text);Flush-Trace;Wait-Until {(Read-Text $Handle) -ceq $Text} 'typed native field readback'}
 function Combo([long]$Handle,[int]$Index){Focus $Handle;Key $Handle 36;for($i=0;$i -lt $Index;$i++){Key $Handle 40};Wait-Until {[D409.NativeUiDriver]::ReadNumber($Handle,0x147,0) -eq $Index} 'native combo selection'}
 function Combo-Match([long]$Handle,[string]$Needle){$count=[D409.NativeUiDriver]::ReadNumber($Handle,0x146,0);for($i=0;$i -lt $count;$i++){if([D409.NativeUiDriver]::ComboText($Handle,$i).Contains($Needle)){Combo $Handle $i;return}};throw "Combo item missing: $Needle"}
+function All-Dates {
+    # The period ComboBox is an intentionally hidden state holder. Use the real toolbar menu.
+    Click (Control $script:main 123 'Button')
+    Wait-Until {@(Windows|Where-Object {$_.ClassName -ceq '#32768' -and $_.Visible}).Count -eq 1} 'native toolbar popup'
+    Write-Json (Join-Path $evidenceRoot "scenarios/$script:activeCase.period-menu.windows.json") (Windows)
+    Key 0 36;for($i=0;$i -lt 3;$i++){Key 0 40};Key 0 13
+    Wait-Until {([D409.NativeUiDriver]::ReadNumber((Control $script:main 105 'ComboBox'),0x147,0) -eq 3) -and ((Read-Text (Control $script:main 106 'Button')) -ceq '全部日期')} 'all-date selection through real menu'
+}
 function List-Lines([long]$Handle){$count=[D409.NativeUiDriver]::ReadNumber($Handle,0x18B,0);for($i=0;$i -lt $count;$i++){[D409.NativeUiDriver]::ListText($Handle,$i)}}
 function List-Select([long]$Handle,[string]$Needle,[bool]$Double=$false){
     $lines=@(List-Lines $Handle);$index=-1;for($i=0;$i -lt $lines.Count;$i++){if($lines[$i].Contains($Needle)){$index=$i;break}}
@@ -112,7 +120,17 @@ function Hide-Window([long]$Handle){[D409.NativeUiDriver]::Activate($Handle);Key
 function Page([int]$Index){if(-not $script:work -or -not [D409.NativeUiDriver]::Describe($script:work).Visible){$null=Open-Module 'work'};Click (Control $script:work (4900+$Index) 'Button');Wait-Until {(Read-Text (Control $script:work 5200 'Static')) -ceq @('工作台','工作事项','项目管理','流程模板','流程实例','往来管理','跟进管理','工作归档','统计分析','系统设置')[$Index]} 'work page title'}
 function Modal {Wait-Until {@(Windows|Where-Object {$_.ClassName -ceq 'GxD408Form' -and $_.Visible}).Count -eq 1} 'native modal';return Window 'GxD408Form'}
 function Save-Modal([long]$Handle){Click (Control $Handle 1 'Button');Wait-Until {@(Windows|Where-Object {$_.Handle -eq $Handle}).Count -eq 0} 'modal closed after native Save'}
-function Dismiss-Message([bool]$Accept=$true){Wait-Until {@(Windows|Where-Object {$_.ClassName -ceq '#32770' -and $_.Visible}).Count -eq 1} 'native message dialog';$h=Window '#32770';Click (Control $h $(if($Accept){1}else{2}) 'Button');Wait-Until {@(Windows|Where-Object {$_.Handle -eq $h}).Count -eq 0} 'message dialog closes'}
+function Dismiss-Message([bool]$Accept=$true){
+    Wait-Until {@(Windows|Where-Object {$_.ClassName -ceq '#32770' -and $_.Visible}).Count -eq 1} 'native message dialog';$h=Window '#32770'
+    $buttons=@(Windows|Where-Object {$_.Root -eq $h -and $_.ClassName -ieq 'Button' -and $_.Visible -and $_.Enabled})
+    # Hosted MessageBox has been observed with a sole OK button whose native ID is 2.
+    # Bind the action to the visible caption, and retain its actual ID/rectangle in evidence.
+    $labels=if($Accept){@('OK','Yes','确定','是')}else{@('Cancel','No','取消','否')}
+    $matches=@($buttons|Where-Object {$labels -contains $_.Text.Replace('&','').Trim()})
+    Assert ($matches.Count -eq 1) 'Native message action is missing or ambiguous by visible caption'
+    $script:dialogIndex++;Write-Json (Join-Path $evidenceRoot ("scenarios/$script:activeCase.message-"+$script:dialogIndex+'.json')) @{accept=$Accept;dialog=[D409.NativeUiDriver]::Describe($h);buttons=$buttons;chosen=$matches[0]}
+    Click $matches[0].Handle;Wait-Until {@(Windows|Where-Object {$_.Handle -eq $h}).Count -eq 0} 'message dialog closes'
+}
 function File-Dialog([string]$Path){
     Wait-Until {@(Windows|Where-Object {$_.ClassName -ceq '#32770' -and $_.Visible}).Count -eq 1} 'native file dialog';$dialog=Window '#32770'
     $fields=@(Windows|Where-Object {$_.Root -eq $dialog -and $_.ClassName -ieq 'Edit' -and $_.Visible -and $_.Enabled})
@@ -141,16 +159,37 @@ function Capture([string]$Name,[long]$Handle){
     $image=[Drawing.Bitmap]::new($width,$height);$g=[Drawing.Graphics]::FromImage($image)
     try{$g.CopyFromScreen($left,$top,0,0,[Drawing.Size]::new($width,$height))}finally{$g.Dispose()}
     $stem="native-$Dpi-$Name";$original=Join-Path $evidenceRoot "screenshots/$stem.png";$preview=Join-Path $evidenceRoot "screenshots/$stem.preview.jpg"
-    try{$image.Save($original,[Drawing.Imaging.ImageFormat]::Png);$ratio=[Math]::Min(1,960.0/[Math]::Max($width,$height));$pw=[Math]::Max(1,[int]($width*$ratio));$ph=[Math]::Max(1,[int]($height*$ratio));$thumb=[Drawing.Bitmap]::new($pw,$ph);$draw=[Drawing.Graphics]::FromImage($thumb);try{$draw.DrawImage($image,0,0,$pw,$ph);$thumb.Save($preview,[Drawing.Imaging.ImageFormat]::Jpeg)}finally{$draw.Dispose();$thumb.Dispose()}}finally{$image.Dispose()}
+    try{$image.Save($original,[Drawing.Imaging.ImageFormat]::Png);$ratio=[Math]::Min(1.0,960.0/[Math]::Max($width,$height));$pw=[Math]::Max(1,[int]($width*$ratio));$ph=[Math]::Max(1,[int]($height*$ratio));$thumb=[Drawing.Bitmap]::new($pw,$ph);$draw=[Drawing.Graphics]::FromImage($thumb);try{$draw.DrawImage($image,0,0,$pw,$ph);$thumb.Save($preview,[Drawing.Imaging.ImageFormat]::Jpeg)}finally{$draw.Dispose();$thumb.Dispose()}}finally{$image.Dispose()}
     $captures.Add([ordered]@{name=$Name;caseId=$script:activeCase;original="screenshots/$stem.png";preview="screenshots/$stem.preview.jpg";captureMethod='CopyFromScreen actual foreground pixels';window=$w;client=$client;desktop=$desktop;crop=@{left=$left;top=$top;width=$width;height=$height};width=$width;height=$height;previewWidth=$pw;previewHeight=$ph;previewToOriginalX=$width/[double]$pw;previewToOriginalY=$height/[double]$ph;sha256=(Get-FileHash -LiteralPath $original -Algorithm SHA256).Hash.ToLowerInvariant();previewSha256=(Get-FileHash -LiteralPath $preview -Algorithm SHA256).Hash.ToLowerInvariant()})
     Write-Json (Join-Path $evidenceRoot "screenshots/$stem.windows.json") (Windows)
 }
 function Reachable([long]$Handle){$w=[D409.NativeUiDriver]::Describe($Handle);Assert ($w.Visible) "Hidden required control $($w.ControlId)";$client=[D409.NativeUiDriver]::Client($w.Root);Assert ($w.Left -ge $client.Left -and $w.Top -ge $client.Top -and $w.Right -le $client.Right -and $w.Bottom -le $client.Bottom) "Control $($w.ControlId) outside client";if($w.Enabled){$target=if($w.ClassName -in @('Static','msctls_progress32')){$w.Root}else{$Handle};$null=[D409.NativeUiDriver]::CheckPoint($target,[int](($w.Left+$w.Right)/2),[int](($w.Top+$w.Bottom)/2))};return $w}
+function Reachable-Children([long]$Root){
+    $controls=@(Windows|Where-Object {$_.Root -eq $Root -and $_.Visible -and $_.ClassName -in @('Button','Edit','ComboBox','ListBox')})
+    Assert ($controls.Count -gt 0) 'Native layout has no visible interactive controls'
+    foreach($control in $controls){Reachable $control.Handle}
+}
 function Scenario([string]$Id,[string]$Expected,[scriptblock]$Body){
-    $script:activeCase=$Id;$begin=[DateTime]::UtcNow;$observed=$null;$errorText=$null;$status='pass'
-    try{$observed=& $Body}catch{$errorText=$_.Exception.Message;$status=if($errorText.StartsWith('[blocked]')){'blocked'}else{'fail'};try{Write-Json (Join-Path $evidenceRoot "scenarios/$Id.failure-windows.json") (Windows)}catch{};try{$root=@(Windows|Where-Object {$_.Visible -and $_.Handle -eq $_.Root -and $_.Enabled}|Select-Object -First 1);if($root.Count){Capture ($Id+'-failure') $root[0].Handle}}catch{};try{foreach($dialog in @(Windows|Where-Object {$_.Visible -and $_.ClassName -in @('GxD408Form','#32770')})){[D409.NativeUiDriver]::Activate($dialog.Handle);Key 0 27}}catch{}}
+    $script:activeCase=$Id;$begin=[DateTime]::UtcNow;$observed=$null;$errorText=$null;$status='pass';$cleanupErrors=@()
+    try{$observed=& $Body}catch{
+        $errorText=$_.Exception.Message;$status=if($errorText.StartsWith('[blocked]')){'blocked'}else{'fail'}
+        try{Write-Json (Join-Path $evidenceRoot "scenarios/$Id.failure-windows.json") (Windows)}catch{$cleanupErrors+=('window evidence: '+$_.Exception.Message)}
+        try{$root=@(Windows|Where-Object {$_.Visible -and $_.Handle -eq $_.Root -and $_.Enabled}|Select-Object -First 1);if($root.Count){Capture ($Id+'-failure') $root[0].Handle}}catch{$cleanupErrors+=('screen evidence: '+$_.Exception.Message)}
+        # A validation MessageBox can cover its still-open form. Cancel the top dialog
+        # first, then re-enumerate; never send Escape to its disabled owner.
+        try{
+            for($round=0;$round -lt 6;$round++){
+                $dialogs=@(Windows|Where-Object {$_.Visible -and $_.Enabled -and $_.ClassName -in @('GxD408Form','#32770')})
+                if(-not $dialogs.Count){break}
+                $top=@($dialogs|Where-Object {$_.ClassName -ceq '#32770'}|Select-Object -First 1)
+                if(-not $top.Count){$top=@($dialogs|Select-Object -First 1)}
+                $closing=$top[0].Handle;[D409.NativeUiDriver]::Activate($closing);Key 0 27
+                Wait-Until {@(Windows|Where-Object {$_.Handle -eq $closing -and $_.Visible}).Count -eq 0} 'failed-scenario dialog cancellation'
+            }
+        }catch{$cleanupErrors+=('dialog cleanup: '+$_.Exception.Message)}
+    }
     finally{Flush-Trace}
-    $record=[ordered]@{id=$Id;expected=$Expected;executed=($status -ne 'blocked');passed=($status -eq 'pass');status=$status;observed=$observed;error=$errorText;failureKind=$(if($status -eq 'pass'){$null}else{'unclassified-see-raw-evidence'});startedAtUtc=$begin.ToString('o');endedAtUtc=[DateTime]::UtcNow.ToString('o')}
+    $record=[ordered]@{id=$Id;expected=$Expected;executed=($status -ne 'blocked');passed=($status -eq 'pass');status=$status;observed=$observed;error=$errorText;cleanupErrors=$cleanupErrors;failureKind=$(if($status -eq 'pass'){$null}else{'unclassified-see-raw-evidence'});startedAtUtc=$begin.ToString('o');endedAtUtc=[DateTime]::UtcNow.ToString('o')}
     $results.Add($record);Write-Json (Join-Path $evidenceRoot "scenarios/$Id.json") $record;Write-Output "$status $Id $Expected"
 }
 function Select-Record([int]$PageIndex,[string]$Name){Page $PageIndex;Fill (Control $script:work 4920 'Edit') '';Combo (Control $script:work 4921 'ComboBox') 0;Combo (Control $script:work 4922 'ComboBox') 0;List-Select (Control $script:work 4923 'ListBox') $Name}
@@ -175,7 +214,7 @@ try {
     Scenario 'N409-01' 'Same-source EXE opens an actual native window in a newly marked isolated synthetic directory' {
         Assert (Test-Path -LiteralPath (Join-Path $dataRoot '.mytodo-d404-candidate-v1')) 'Original candidate guard marker was not created'
         $window=[D409.NativeUiDriver]::Describe($script:main);Assert ($window.Visible -and $window.ProcessId -eq $script:gui.Id) 'Invalid native main HWND'
-        Combo (Control $script:main 105 'ComboBox') 3;Combo (Control $script:main 104 'ComboBox') 2
+        All-Dates;Combo (Control $script:main 104 'ComboBox') 2
         Capture 'quadrants' $script:main
         @{window=$window;awareness=[D409.NativeUiDriver]::Awareness($script:main);driverCoordinateMethod=$coordinateMethod;applicationDpi=$Dpi;actualDpi=$window.ActualWindowDpi;sourceSha=$head;executableSha256=$exeHash;dataRoot=$dataRoot}
     }
@@ -279,7 +318,7 @@ try {
         Click (Control $script:main 552 'Button');@{parent=$parents[0];child=$children[0];inputMethod='SendInput, not IME composition'}
     }
     Scenario 'N409-15' 'Actual cross-quadrant mouse drag changes exactly one durable task quadrant without changing its parent' {
-        Main-Only;Combo (Control $script:main 105 'ComboBox') 3;Combo (Control $script:main 104 'ComboBox') 2;Combo (Control $script:main 120 'ComboBox') 0
+        Main-Only;All-Dates;Combo (Control $script:main 104 'ComboBox') 2;Combo (Control $script:main 120 'ComboBox') 0
         $before=Read-Tasks;$source=Control $script:main 1000 'SysListView32';$target=Control $script:main 1001 'SysListView32'
         Assert ([D409.NativeUiDriver]::ReadNumber($source,0x1004,0) -gt 0) 'No actual source row for drag';$a=[D409.NativeUiDriver]::Client($source);$b=[D409.NativeUiDriver]::Client($target)
         [D409.NativeUiDriver]::Drag($source,[int]($a.Left+7*$scale),[int]($a.Top+23*$scale),$target,[int]($b.Left+90*$scale),[int]($b.Top+75*$scale));Flush-Trace
@@ -351,15 +390,16 @@ try {
     }
     Scenario 'N409-23' 'Native minimum, maximize and restore layouts retain required actions inside the actual desktop at requested application scaling' {
         $matrix=@();foreach($name in @('work','timer','feedback')){$handle=Open-Module $name;$minWidth=@{work=1060;timer=650;feedback=980}[$name];[D409.NativeUiDriver]::Resize($handle,[int]($minWidth*$scale),[int](680*$scale));$buttons=@{work=@(4924,4925,4926,4933,4934);timer=@(4604,4605,4608,4612,4617);feedback=@(4707,4709,4710,4717)}[$name]
-            $geometry=@();foreach($id in $buttons){$geometry+=Reachable (Control $handle $id 'Button')};Capture $(if($name -eq 'work'){'minimum-layout'}else{'minimum-'+$name}) $handle
-            [D409.NativeUiDriver]::WindowState($handle,3);foreach($id in $buttons){$null=Reachable (Control $handle $id 'Button')};Capture ('maximized-'+$name) $handle;[D409.NativeUiDriver]::WindowState($handle,9);$matrix+=@{name=$name;applicationDpi=$Dpi;actualWindowDpi=[D409.NativeUiDriver]::Describe($handle).ActualWindowDpi;minimumControls=$geometry;restored=[D409.NativeUiDriver]::Describe($handle)}
+            foreach($id in $buttons){$null=Reachable (Control $handle $id 'Button')};$geometry=@(Reachable-Children $handle);Capture $(if($name -eq 'work'){'minimum-layout'}else{'minimum-'+$name}) $handle
+            $statistics=@();if($name -eq 'work'){Page 8;foreach($id in @(4938,4939)){$null=Reachable (Control $handle $id 'Edit')};foreach($id in @(4940,4941)){$null=Reachable (Control $handle $id 'Button')};$statistics=@(Reachable-Children $handle);Capture 'minimum-statistics-dates' $handle;Page 1}
+            [D409.NativeUiDriver]::WindowState($handle,3);foreach($id in $buttons){$null=Reachable (Control $handle $id 'Button')};$maximized=@(Reachable-Children $handle);Capture ('maximized-'+$name) $handle;[D409.NativeUiDriver]::WindowState($handle,9);$restoredControls=@(Reachable-Children $handle);$matrix+=@{name=$name;applicationDpi=$Dpi;actualWindowDpi=[D409.NativeUiDriver]::Describe($handle).ActualWindowDpi;minimumControls=$geometry;minimumStatisticsControls=$statistics;maximizedControls=$maximized;restoredControls=$restoredControls;restored=[D409.NativeUiDriver]::Describe($handle)}
         };$matrix
     }
     Scenario 'N409-24' 'Normal main close and reopen preserve work IDs, timer history and feedback records through original lifecycle paths' {
         $workBefore=Read-Store 'work';$timerBefore=Read-Store 'timer';$feedbackBefore=Read-Store 'feedback';Main-Only;Stop-Gui;Start-Gui;$null=Open-Module 'work';$workAfter=Read-Store 'work';$null=Open-Module 'timer';$timerAfter=Read-Store 'timer';$null=Open-Module 'feedback';$feedbackAfter=Read-Store 'feedback'
-        foreach($kind in @('items','projects','templates','instances','contacts','followups')){Assert ((@($workBefore.$kind.id)|Sort-Object|ConvertTo-Json -Compress) -ceq (@($workAfter.$kind.id)|Sort-Object|ConvertTo-Json -Compress)) "Reopen changed $kind IDs"}
+        foreach($kind in @('items','projects','templates','instances','contacts','followups')){Assert ((ConvertTo-Json -InputObject @($workBefore.$kind|ForEach-Object {$_.id}|Sort-Object) -Compress) -ceq (ConvertTo-Json -InputObject @($workAfter.$kind|ForEach-Object {$_.id}|Sort-Object) -Compress)) "Reopen changed $kind IDs"}
         Assert (($timerBefore.history|ConvertTo-Json -Depth 80 -Compress) -ceq ($timerAfter.history|ConvertTo-Json -Depth 80 -Compress)) 'Reopen changed completed timer history'
-        Assert ((@($feedbackBefore.ideas.id)|Sort-Object|ConvertTo-Json -Compress) -ceq (@($feedbackAfter.ideas.id)|Sort-Object|ConvertTo-Json -Compress)) 'Reopen changed feedback IDs'
+        Assert ((ConvertTo-Json -InputObject @($feedbackBefore.ideas|ForEach-Object {$_.id}|Sort-Object) -Compress) -ceq (ConvertTo-Json -InputObject @($feedbackAfter.ideas|ForEach-Object {$_.id}|Sort-Object) -Compress)) 'Reopen changed feedback IDs'
         @{work=$workAfter;timer=$timerAfter;feedback=$feedbackAfter;saveFailureCoverage='frozen original suites; no external injection claimed'}
     }
 } catch {$fatalError=$_.ToString();Write-Output "FATAL $fatalError"}

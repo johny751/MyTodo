@@ -1,6 +1,41 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionCode": 428001,
+    "versionName": "0.8.20001",
+    "sourceSHA": "f7a2b97d6bff08440fea83af16e914a1e6d1ce46",
+    "buildTimeUTC": "2026-11-28T01:22:13.971Z",
+    "runId": "46092613090",
+    "runAttempt": "1",
+    "runNumber": "1",
+    "workflowName": "D4-09 candidate UI and preserved regression",
+    "versionTrack": "ui-candidate-d409",
+    "versionBase": 428000,
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "UI_CANDIDATE_VALIDATION_FAILED",
+    "statusText": "D409首轮原生候选APK构建成功；保留D408七组58项实际执行57通过1失败，新UI计划32项因导航模式预检退出实际0执行。模拟器证据，未发布、未验收。",
+    "changes": [
+      "原生番茄钟呈现、任务搜索与父子折叠已编译；不以构建成功代替UI验证通过。",
+      "原D408通知动作读取命中启动占位通知；原服务和原测试逐字节保持，失败原件保留。",
+      "新UI runner在SystemUI异步更新前立即断言导航模式，已记录首因，后续修复须重新云测。"
+    ],
+    "provenance": {
+      "artifactId": "15242740857",
+      "artifactName": "d409-android-46092613090-1",
+      "archiveSha256": "7453e15abbb54693e73bf88526ce5f66d89ed910f0c3faaaaabaf1a5f2c2a7c5",
+      "apkMember": "d408-native-46092613090-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "ae1f0e347ca2e5d67376beb1b18bd222ad2913f6291d38473e25a44ccc312d9f",
+      "identityMember": "d408-native-46092613090-1/d408-build-identity.json",
+      "identitySha256": "bf4ae3995cc548016580335be611d99a4167fa0f71ec9b26afa66d992c3802cb",
+      "signerSha256": "7ea0b35407b69265b63375a072a51ec0d548702940ace4cab2b49d4628bf0e9d"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionCode": 418009,
     "versionName": "0.8.10009",
     "sourceSHA": "7c217d8779ccf21e13733b28868e015e9cfd693a",
