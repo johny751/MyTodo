@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/d4-09-candidate.yml",
-      "bytes": 25088,
-      "sha256": "1c52b6887674ea308d637a0d3a21b18c193bf8a3ae193411ba2937ffeaffcefc",
+      "bytes": 26107,
+      "sha256": "3195d8b3951b8dc5fdfd49b8a82106d03a41f51d8f3e20c5be7314f9b303283a",
       "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
     },
     {
@@ -45,14 +45,14 @@
     },
     {
       "path": "android/d408/src/local/gxtodo/replica/D409TimerViews.java",
-      "bytes": 6935,
-      "sha256": "8ad3deb45dd48e8804e83973ce5f4646df9774baef1cb96845cdfccdaccdd7c6",
+      "bytes": 6964,
+      "sha256": "2ede32dac338ef29a6af492070e59e6bf7605e18b47b6f8faaeec74f5379dcbd",
       "reason": "Authorized Android native timer presentation and bounded task picker; original state service and persistence protected"
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 24784,
-      "sha256": "b0086828a8842de751675f902ec71826b3fae20a0aa86d34080b6a84fabcd088",
+      "bytes": 26532,
+      "sha256": "137d955dc0d9afe32c4e57735e37ddb7edef8f63ffc29d0e18e6fee5ee6f13cf",
       "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
     },
     {
@@ -131,6 +131,12 @@
       "path": "docs/upgrade/d4-09/D409-11-页面实施与验收索引.md",
       "bytes": 5737,
       "sha256": "e3aa172253cbb7898ce4943a690e309a5b77a499d09d425356f2df74dbe60dbc",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-12-第三轮原件与补充诊断.md",
+      "bytes": 6593,
+      "sha256": "8de00082ee07c5adc3bf9726c733fe8581679b4f89f9b51b1b7fd020eee3a625",
       "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
     },
     {
@@ -333,8 +339,8 @@
     },
     {
       "path": "tests/d4-09/android/README-native.md",
-      "bytes": 7178,
-      "sha256": "159c4a9667020b91ca65cc38243e9eebdc925c8dfc4ab3b7b690c6a34bed27e6",
+      "bytes": 8399,
+      "sha256": "3c0fd9c25fc83c972b2966b4b7a488d89f7b0377700778e89f6a24a4ffc1af14",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -357,14 +363,14 @@
     },
     {
       "path": "tests/d4-09/android/native/D409UiChecks.java",
-      "bytes": 19635,
-      "sha256": "0f8ed233f73180fcaa82fa9532ebaf7626f7463f53da59b9735a1804ea4b4c62",
+      "bytes": 20134,
+      "sha256": "494f8cdb2897230383a441807962dc315e0f1c15cbd95d9f56970d71eba7268a",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
       "path": "tests/d4-09/android/native/D409UiInstrumentation.java",
-      "bytes": 23216,
-      "sha256": "b42ff5d76c16c8ffc6d1de9dd9daad659dd0f22a0ff4bf5990394ffe7668fe03",
+      "bytes": 29789,
+      "sha256": "182edd8dd4926edfb114d339c84f294d178798b2a79383cb65924672fbd3adf4",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -464,6 +470,12 @@
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
+      "path": "tests/d4-09/windows/legacy-drag-diagnostics.ps1",
+      "bytes": 26362,
+      "sha256": "3b2cbd56908cc5f0533b4d9c36f2d82bef3ff1eae758176791736374c1a1736b",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
       "path": "tests/d4-09/windows/native-expected.json",
       "bytes": 1134,
       "sha256": "91edec03fcdd1bd86e804e2d2f7129d9db7ad8e59c4fe2326efc30d45feb15dc",
@@ -471,8 +483,8 @@
     },
     {
       "path": "tests/d4-09/windows/native-ui.ps1",
-      "bytes": 61579,
-      "sha256": "b499b49e81fa97112d07d72086725d2bce0d00b64bdb5562425b3e992771c121",
+      "bytes": 64586,
+      "sha256": "0f3d9f78e0fab5e6af323497961bfb0d8da545944b87fc4da7385eb43eecf36e",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {

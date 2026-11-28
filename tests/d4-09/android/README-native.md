@@ -22,7 +22,7 @@ Each case runs at 360×900 and 412×900 pixels, density 160, with the actual ins
 
 | Case | Main observations |
 | --- | --- |
-| U01 | Actual native start/pause/resume/finish controls, 48dp targets, same session in history, screenshots of the native timer |
+| U01 | Actual native start/pause/resume/finish controls, 48dp measured and fully visible targets after revealing each control, same session in history, screenshots of the native timer |
 | U02 | Real Activity recreation, unsaved duration draft, same session, elapsed time while backgrounded, return to the same Activity |
 | U03 | Three-level task hierarchy, explicit collapse, same-title tasks with different parents, search/clear expansion restoration, draft-only selection then durable save of the intended ID |
 | U04 | All 13 workspace destinations reached by actual menu-button and route-button touches, with a separate route screenshot after each successful visit; screenshots do not add test cases |
@@ -36,6 +36,10 @@ The frozen original matrix remains separately recorded: retained 15, features 7,
 ## Input and setup boundaries
 
 All controls under assertion receive real `UiAutomation.injectInputEvent` MotionEvents. Each gesture receipt includes coordinates, action, monotonic down/event/dispatch times and whether Android accepted each event. Native fields receive real key input. Native taps combine the target's local visible rectangle and actual screen location, including a Dialog's window origin, and record that geometry. Gestural Back uses the physical right edge; three-button Back/Home uses observed accessibility bounds from a system window inside the actual navigation-bar inset. The Android 15 emulator may host that bar in SystemUI or NexusLauncher Taskbar; the observed owner, node ID/description/bounds, window type/bounds and before/after screenshots are retained. No hard-coded button coordinate or key-event fallback is used in these system-navigation assertions. IME dismissal used only to prepare another assertion may use a Back key event and is not reported as physical system-navigation evidence.
+
+Native text replacement uses one real tap and read-only bounded observations of field/window focus, the active input connection, visible IME and stable field/inset geometry. One Ctrl+A must produce an observed full selection before one DEL; the actual empty text must be observed before one real string input. The requested text must then be observed. Each stage, selection, text, geometry and key-dispatch time is retained even on failure. No `setText`, `setSelection`, injected success flag or repeated input is used to make the check pass.
+
+Gestural Home is one bottom-center swipe to 22% of screen height with 18 MOVE events. Each MOVE waits at least 16ms after the preceding actual dispatch returns, so late dispatch cannot cause same-millisecond catch-up events. The receipt includes the complete actual path, acceptance/return times, observed tail velocity, and system window dumps before and after input. The existing app-focus-loss and foreground-system-window assertions still decide success; there is no second swipe, Home key event or launcher-intent fallback. These timings describe the driver and do not assert a universal Android gesture threshold.
 
 Existing repository APIs create explicitly named synthetic task fixtures. Existing timer commands establish/reset a case's synthetic session. Web JavaScript supplies setup routes, geometry, hit tests and state observations. It does not dispatch tested navigation/selection events or implement a second timer. Programmatic scroll-to-visible is used to reveal an actual native target and frame screenshots; the following button action is still a device touch.
 

@@ -42,7 +42,11 @@ final class D409UiChecks {
             int[] size = new int[2]; t.runOnMainSync(() -> { size[0] = view.getWidth(); size[1] = view.getHeight(); });
             float density = t.target.getResources().getDisplayMetrics().density;
             check(size[0] / density >= 48 && size[1] / density >= 48, "48dp touch target: " + id);
-            targets.put(new JSONObject().put("id", id).put("widthDp", size[0] / density).put("heightDp", size[1] / density));
+            t.nativeReveal(id); Rect visible = new Rect(); boolean[] shown = {false};
+            t.runOnMainSync(() -> shown[0] = view.getLocalVisibleRect(visible));
+            check(shown[0] && visible.left == 0 && visible.top == 0 && visible.right == size[0] && visible.bottom == size[1], "entire native control visible after reveal: " + id);
+            check(visible.height() / density >= 48, "visible 48dp target, including lower border: " + id);
+            targets.put(new JSONObject().put("id", id).put("widthDp", size[0] / density).put("heightDp", size[1] / density).put("localVisible", visible.toShortString()));
         }
         t.nativeTap(40302); t.until("actual start", 5000, () -> t.state().optBoolean("running")); JSONObject started = t.state();
         t.nativeReveal(40301); t.shot("timer-running"); t.nativeTap(40304); t.until("actual pause", 5000, () -> "paused".equals(t.state().optString("status")));

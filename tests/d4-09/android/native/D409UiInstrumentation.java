@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityWindowInfo;
 import android.view.inspector.WindowInspector;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -185,10 +186,64 @@ public final class D409UiInstrumentation extends Instrumentation {
         gesture(box.exactCenterX(), box.exactCenterY(), box.exactCenterX(), box.exactCenterY(), 60, "native-tap");
     }
     void replaceText(EditText field, String value) throws Exception {
-        tap(field); long now = SystemClock.uptimeMillis();
-        sendKeySync(new KeyEvent(now, now, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_A, 0, KeyEvent.META_CTRL_ON));
-        sendKeySync(new KeyEvent(now, SystemClock.uptimeMillis(), KeyEvent.ACTION_UP, KeyEvent.KEYCODE_A, 0, KeyEvent.META_CTRL_ON));
-        sendKeyDownUpSync(KeyEvent.KEYCODE_DEL); if (!value.isEmpty()) sendStringSync(value); waitForIdleSync(); check(value.equals(text(field)), "real native key input");
+        check(field != null, "native editable target");
+        JSONArray observations = new JSONArray(), keys = new JSONArray();
+        int sequence = inputSequence + 1;
+        try {
+            observations.put(inputObservation(field).put("stage", "before-tap"));
+            tap(field);
+            awaitInput(field, observations, "focused-ime-ready", 8000, 250, row ->
+                row.getBoolean("focused") && row.getBoolean("windowFocused") && row.getBoolean("shown")
+                    && row.getBoolean("imeVisible") && row.getBoolean("inputActive") && row.getBoolean("acceptingText"));
+            long now = SystemClock.uptimeMillis();
+            sendKeySync(new KeyEvent(now, now, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_A, 0, KeyEvent.META_CTRL_ON));
+            sendKeySync(new KeyEvent(now, SystemClock.uptimeMillis(), KeyEvent.ACTION_UP, KeyEvent.KEYCODE_A, 0, KeyEvent.META_CTRL_ON));
+            keys.put(new JSONObject().put("key", "CTRL+A").put("startedAt", now).put("returnedAt", SystemClock.uptimeMillis()));
+            awaitInput(field, observations, "all-text-selected", 5000, 0, row ->
+                row.getBoolean("focused") && Math.min(row.getInt("selectionStart"), row.getInt("selectionEnd")) == 0
+                    && Math.max(row.getInt("selectionStart"), row.getInt("selectionEnd")) == row.getString("text").length());
+            now = SystemClock.uptimeMillis(); sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);
+            keys.put(new JSONObject().put("key", "DEL").put("startedAt", now).put("returnedAt", SystemClock.uptimeMillis()));
+            awaitInput(field, observations, "text-cleared", 5000, 0, row -> row.getBoolean("focused") && row.getString("text").isEmpty());
+            if (!value.isEmpty()) {
+                now = SystemClock.uptimeMillis(); sendStringSync(value);
+                keys.put(new JSONObject().put("key", "sendStringSync").put("value", value).put("startedAt", now).put("returnedAt", SystemClock.uptimeMillis()));
+            }
+            awaitInput(field, observations, "requested-text-observed", 5000, 0, row -> value.equals(row.getString("text")));
+        } finally {
+            write(new File(evidence, String.format(Locale.ROOT, "%s-text-input-%04d.json", phase, sequence)),
+                identity().put("phase", phase).put("case", caseId).put("fieldId", field.getId()).put("requestedText", value)
+                    .put("observations", observations).put("keys", keys).put("inputAttempts", 1).put("programmaticTextOrSelection", false).toString(2));
+        }
+    }
+    interface InputCondition { boolean ready(JSONObject observation) throws Exception; }
+    void awaitInput(EditText field, JSONArray observations, String stage, long timeout, long stableMs, InputCondition condition) throws Exception {
+        long deadline = SystemClock.elapsedRealtime() + timeout, stableSince = -1; String geometry = null;
+        while (SystemClock.elapsedRealtime() < deadline) {
+            JSONObject row = inputObservation(field).put("stage", stage); observations.put(row);
+            String nextGeometry = row.getString("screenLocation") + ":" + row.getInt("imeBottom");
+            if (condition.ready(row)) {
+                if (stableSince < 0 || !nextGeometry.equals(geometry)) stableSince = SystemClock.elapsedRealtime();
+                if (SystemClock.elapsedRealtime() - stableSince >= stableMs) return;
+            } else stableSince = -1;
+            geometry = nextGeometry; SystemClock.sleep(50);
+        }
+        throw new AssertionError("timeout: actual native input stage " + stage);
+    }
+    JSONObject inputObservation(EditText field) throws Exception {
+        String[] value = {null}; boolean[] flags = new boolean[6]; int[] numbers = new int[5];
+        runOnMainSync(() -> {
+            value[0] = field.getText().toString(); numbers[0] = field.getSelectionStart(); numbers[1] = field.getSelectionEnd();
+            int[] location = new int[2]; field.getLocationOnScreen(location); numbers[2] = location[0]; numbers[3] = location[1];
+            flags[0] = field.hasFocus(); flags[1] = field.hasWindowFocus(); flags[2] = field.isShown();
+            WindowInsets insets = field.getRootWindowInsets(); flags[3] = insets != null && insets.isVisible(WindowInsets.Type.ime());
+            numbers[4] = insets == null ? -1 : insets.getInsets(WindowInsets.Type.ime()).bottom;
+            InputMethodManager input = (InputMethodManager) target.getSystemService(Context.INPUT_METHOD_SERVICE);
+            flags[4] = input != null && input.isActive(field); flags[5] = input != null && input.isAcceptingText();
+        });
+        return new JSONObject().put("observedAt", SystemClock.uptimeMillis()).put("text", value[0])
+            .put("selectionStart", numbers[0]).put("selectionEnd", numbers[1]).put("screenLocation", numbers[2] + "," + numbers[3]).put("imeBottom", numbers[4])
+            .put("focused", flags[0]).put("windowFocused", flags[1]).put("shown", flags[2]).put("imeVisible", flags[3]).put("inputActive", flags[4]).put("acceptingText", flags[5]);
     }
     boolean imeVisible() {
         boolean[] value = {false}; runOnMainSync(() -> { for (View root : WindowInspector.getGlobalWindowViews()) { WindowInsets insets = root.getRootWindowInsets(); if (root.isShown() && insets != null && insets.isVisible(WindowInsets.Type.ime())) value[0] = true; } }); return value[0];
@@ -224,7 +279,34 @@ public final class D409UiInstrumentation extends Instrumentation {
         }
     }
     Point screenSize(){Point result=new Point();((WindowManager)target.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealSize(result);return result;}
-    void physicalHome()throws Exception{Point screen=screenSize();if(mode.equals("gestural"))gesture(screen.x*.5f,screen.y-2,screen.x*.5f,screen.y*.50f,260,"system-bottom-home");else systemButton("home");}
+    void physicalHome() throws Exception {
+        if (!mode.equals("gestural")) { systemButton("home"); return; }
+        Point screen = screenSize(); int sequence = ++inputSequence; JSONArray events = new JSONArray();
+        float x = screen.x * .5f, startY = screen.y - 2, endY = screen.y * .22f;
+        final int steps = 18; final long interval = 16; long down = SystemClock.uptimeMillis();
+        String name = String.format(Locale.ROOT, "%s-system-home-%04d", phase, sequence);
+        write(new File(evidence, name + "-before-window.txt"), shell("dumpsys window"));
+        try {
+            down = SystemClock.uptimeMillis(); inject(down, MotionEvent.ACTION_DOWN, x, startY, events);
+            // Space from the actual preceding dispatch: do not bunch overdue MOVE events into one millisecond.
+            for (int i = 1; i <= steps; i++) {
+                SystemClock.sleep(interval);
+                inject(down, MotionEvent.ACTION_MOVE, x, startY + (endY - startY) * i / steps, events);
+            }
+            inject(down, MotionEvent.ACTION_UP, x, endY, events); waitForIdleSync();
+        } finally {
+            JSONObject receipt = identity().put("phase", phase).put("case", caseId).put("label", "system-bottom-home")
+                .put("requestedDurationMs", steps * interval).put("minimumMoveSpacingMs", interval).put("catchUp", false)
+                .put("inputAttempts", 1).put("keyeventFallback", false).put("events", events);
+            if (events.length() >= 4) {
+                JSONObject first = events.getJSONObject(events.length() - 4), last = events.getJSONObject(events.length() - 2);
+                long elapsed = last.getLong("eventTime") - first.getLong("eventTime");
+                receipt.put("tailObservedDurationMs", elapsed).put("tailUpwardPixelsPerSecond", elapsed > 0 ? (first.getDouble("y") - last.getDouble("y")) * 1000 / elapsed : JSONObject.NULL);
+            }
+            write(new File(evidence, String.format(Locale.ROOT, "%s-input-%04d.json", phase, sequence)), receipt.toString(2));
+            write(new File(evidence, name + "-after-window.txt"), shell("dumpsys window"));
+        }
+    }
     void systemButton(String control)throws Exception {
         check(control.equals("back")||control.equals("home"),"explicit system navigation control");
         Point screen=screenSize();final int[] bottom={0};

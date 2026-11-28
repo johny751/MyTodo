@@ -150,8 +150,28 @@ function Read-Store([string]$Name){
     $readbacks.Add([ordered]@{caseId=$script:activeCase;file=$name;source=$file;sha256=(Get-FileHash -LiteralPath (Join-Path $evidenceRoot $name) -Algorithm SHA256).Hash.ToLowerInvariant();generation=$value.generation;payloadChecksumAsStored=$value.sha256;method='read-only exact durable envelope; product validates checksum on open'})
     return $value.payload
 }
-function Read-Tasks {$script:readIndex++;$name='task-export-'+$script:readIndex;$file=Join-Path $evidenceRoot ($name+'.json');Invoke-Native $name @('--data-dir',$dataRoot,'--export',$file);return Get-Content -LiteralPath $file -Raw -Encoding utf8 | ConvertFrom-Json -Depth 80}
+function Read-Tasks {$script:readIndex++;$name='task-export-'+$script:readIndex;$file=Join-Path $evidenceRoot ($name+'.json');Invoke-Native $name @('--data-dir',$dataRoot,'--export',$file);return Get-Content -LiteralPath $file -Raw -Encoding utf8 | ConvertFrom-Json -DateKind String -Depth 80}
 function All-Tasks($Tasks){foreach($task in @($Tasks)){$task;if($task.PSObject.Properties['subtasks']){All-Tasks $task.subtasks}}}
+function Task-TreeRows($Tasks,[string[]]$Ancestors=@()){
+    # The original export deliberately replaces parentId with the subtasks tree.
+    # Keep the raw task untouched and derive every ancestor from that actual tree.
+    Assert ($Tasks -is [array]) 'Exported task children must be an array'
+    foreach($task in $Tasks){
+        Assert ($null -ne $task -and $null -ne $task.PSObject.Properties['id'] -and $task.id -is [string] -and -not [string]::IsNullOrWhiteSpace($task.id)) 'Exported task needs a nonempty string ID'
+        Assert ($null -ne $task.PSObject.Properties['subtasks'] -and $task.subtasks -is [array]) 'Exported task must preserve its subtasks array'
+        Assert ($Ancestors.Count -le 64 -and $Ancestors -cnotcontains $task.id) 'Invalid exported task ancestry'
+        $parent=$null;if($Ancestors.Count){$parent=$Ancestors[-1]}
+        [pscustomobject]@{id=$task.id;parentId=$parent;ancestorIds=@($Ancestors);task=$task}
+        Task-TreeRows $task.subtasks (@($Ancestors)+$task.id)
+    }
+}
+function Task-FieldsJson($Task,[string[]]$Except=@()){
+    $fields=[ordered]@{}
+    foreach($property in @($Task.PSObject.Properties|Sort-Object Name)){
+        if($property.Name -cne 'subtasks' -and $Except -cnotcontains $property.Name){$fields[$property.Name]=$property.Value}
+    }
+    return ConvertTo-Json -InputObject $fields -Depth 80 -Compress
+}
 function Record-ByName([string]$Kind,[string]$Name){$state=Read-Store 'work';$matches=@($state.$Kind|Where-Object {$_.name -ceq $Name});Assert ($matches.Count -eq 1) "[blocked] Need one $Kind record '$Name', found $($matches.Count)";return $matches[0]}
 function Capture([string]$Name,[long]$Handle,[switch]$ObserveOnly){
     if(-not $ObserveOnly){[D409.NativeUiDriver]::Activate($Handle);Flush-Trace};$w=[D409.NativeUiDriver]::Describe($Handle);$client=[D409.NativeUiDriver]::Client($Handle);$desktop=[D409.NativeUiDriver]::Desktop()
@@ -336,10 +356,25 @@ try {
         $before=Read-Tasks;$source=Control $script:main 1000 'SysListView32';$target=Control $script:main 1001 'SysListView32'
         Assert ([D409.NativeUiDriver]::ReadNumber($source,0x1004,0) -gt 0) 'No actual source row for drag';$a=[D409.NativeUiDriver]::Client($source);$b=[D409.NativeUiDriver]::Client($target)
         [D409.NativeUiDriver]::Drag($source,[int]($a.Left+7*$scale),[int]($a.Top+23*$scale),$target,[int]($b.Left+90*$scale),[int]($b.Top+75*$scale));Flush-Trace
-        $after=Read-Tasks;$old=@(All-Tasks $before.tasks);$new=@(All-Tasks $after.tasks);$changes=@()
-        foreach($task in $new){$prior=@($old|Where-Object {$_.id -ceq $task.id});if($prior.Count -eq 1 -and $prior[0].quadrant -ne $task.quadrant){$changes+=@{before=$prior[0];after=$task}}}
-        Assert ($changes.Count -eq 1 -and $changes[0].before.quadrant -eq 0 -and $changes[0].after.quadrant -eq 1 -and $changes[0].before.parentId -ceq $changes[0].after.parentId) 'Real drag did not move exactly one task across quadrants'
-        Capture 'quadrants-after-drag' $script:main;@{changes=$changes;sourceClient=$a;targetClient=$b;method='actual SendInput down/move/up with endpoint hit checks'}
+        $after=Read-Tasks;$old=@(Task-TreeRows $before.tasks);$new=@(Task-TreeRows $after.tasks);$changes=@()
+        Write-Json (Join-Path $evidenceRoot 'scenarios/N409-15.task-tree-readback.json') @{before=$old;after=$new;relationSource='Original export tasks/subtasks ancestry; raw internal parentId is not exposed'}
+        $oldById=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::Ordinal)
+        $newById=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::Ordinal)
+        foreach($row in $old){Assert (-not $oldById.ContainsKey($row.id)) 'Duplicate task ID before drag';$oldById.Add($row.id,$row)}
+        foreach($row in $new){Assert (-not $newById.ContainsKey($row.id)) 'Duplicate task ID after drag';$newById.Add($row.id,$row)}
+        Assert ($old.Count -gt 0 -and $old.Count -eq $new.Count) 'Drag added or removed exported tasks'
+        foreach($row in $old){Assert ($newById.ContainsKey($row.id)) 'Drag removed or replaced a task ID'}
+        foreach($row in $new){
+            Assert ($oldById.ContainsKey($row.id)) 'Drag introduced a task ID';$prior=$oldById[$row.id]
+            Assert ($prior.parentId -ceq $row.parentId -and (ConvertTo-Json -InputObject @($prior.ancestorIds) -Compress) -ceq (ConvertTo-Json -InputObject @($row.ancestorIds) -Compress)) 'Drag changed an exported task ancestor chain'
+            if($prior.task.quadrant -ne $row.task.quadrant){$changes+=@{before=$prior.task;after=$row.task;parentId=$row.parentId;ancestorIds=@($row.ancestorIds)}}
+        }
+        Assert ($changes.Count -eq 1 -and $changes[0].before.quadrant -eq 0 -and $changes[0].after.quadrant -eq 1) 'Real drag did not move exactly one task across quadrants'
+        foreach($row in $new){
+            $except=@();if($row.id -ceq $changes[0].after.id){$except=@('quadrant','order')}
+            Assert ((Task-FieldsJson $oldById[$row.id].task $except) -ceq (Task-FieldsJson $row.task $except)) 'Drag changed task fields beyond the moved task quadrant/order'
+        }
+        Capture 'quadrants-after-drag' $script:main;@{changes=$changes;taskCount=$new.Count;allIdsAndAncestorChainsPreserved=$true;allowedChangedFields=@('quadrant','order');sourceClient=$a;targetClient=$b;method='actual SendInput down/move/up with endpoint hit checks; original nested export readback'}
     }
     Scenario 'N409-16' 'Native timer configuration, labels and all original controls remain reachable and real Save persists duration/task' {
         $null=Open-Module 'timer';foreach($id in @(4596,4597,4598,4599,4601,4602,4604,4605,4606,4607,4608,4609,4610,4611,4612,4613,4614,4615,4616,4617,5223,5224,5225)){$null=Reachable (Control $script:timer $id)}

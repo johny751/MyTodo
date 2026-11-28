@@ -214,6 +214,22 @@ jobs:
       - name: Actual Win32 controls and unchanged mature native regressions
         shell: pwsh
         run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" "$env:RUNNER_TEMP/d4-04-evidence"
+      - name: Supplementary five fixed legacy drag executions with crash evidence
+        if: ${{ always() && !cancelled() }}
+        timeout-minutes: 18
+        shell: pwsh
+        run: |
+          $original = "$env:RUNNER_TEMP/d4-04-evidence"
+          $report = Get-Content -LiteralPath "$original/native-regression.json" -Raw | ConvertFrom-Json
+          ./tests/d4-09/windows/legacy-drag-diagnostics.ps1 -ExePath "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" -ExpectedExeSha256 $report.executable.sha256 -SourceRoot $env:GITHUB_WORKSPACE -OriginalEvidenceDirectory $original -OutputDirectory "$env:RUNNER_TEMP/d4-legacy-drag-diag-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          exit $LASTEXITCODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-legacy-drag-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d4-legacy-drag-diag-*/
+          include-hidden-files: true
+          if-no-files-found: error
       - name: Package source-bound native candidate
         shell: pwsh
         run: node tests/d4-native/package-windows.mjs "$env:RUNNER_TEMP/d4-04-build" "$env:RUNNER_TEMP/d4-04-evidence"
