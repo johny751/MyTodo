@@ -501,14 +501,14 @@
     },
     {
       "path": "tests/d4-09/windows/original-suite-wer-integrity.ps1",
-      "bytes": 5780,
-      "sha256": "ea070ad82b903433ceec329d1058cfb459109de7abdd9f4c139c734d10be7a70",
+      "bytes": 5725,
+      "sha256": "6da5de754b54b8250db70509f2831b161c179c859c6ae1ba6e9c278a4ef7dbbc",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
       "path": "tests/d4-09/windows/original-suite-wer.ps1",
-      "bytes": 24348,
-      "sha256": "03c9032d52c216fc0cd20ca19583dd2ea73ed9ca9cad30844ffe36d34449cb02",
+      "bytes": 24039,
+      "sha256": "12bc0d57992fdd2f9ec0d381e5f07df4011e28b8eff8a75e612171a01d5b1cb5",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
@@ -561,8 +561,8 @@
     },
     {
       "path": "windows/d409-timer-history.h",
-      "bytes": 7300,
-      "sha256": "bfa033e35cf8793dffec897a529d4c19480d12f4eed80df5b5c1ccf5eafb22c4",
+      "bytes": 7196,
+      "sha256": "18f6042df6d266ff11f29f7b4aa27824c331cfacada3d2a2e1b929712f7fddf9",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
