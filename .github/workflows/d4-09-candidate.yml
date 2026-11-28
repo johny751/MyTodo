@@ -349,6 +349,27 @@ jobs:
           path: ${{ runner.temp }}/d4-original-suite-diag-d409-*/
           include-hidden-files: true
           if-no-files-found: error
+      - name: Supplementary five fixed legacy drag executions on the D409 executable
+        if: ${{ always() && !cancelled() && steps.nativebuild.outcome == 'success' }}
+        timeout-minutes: 18
+        shell: pwsh
+        run: |
+          $exe = "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          $digest = (Get-FileHash -LiteralPath $exe -Algorithm SHA256).Hash.ToLowerInvariant()
+          ./tests/d4-09/windows/legacy-drag-diagnostics.ps1 `
+            -ExePath $exe `
+            -ExpectedExeSha256 $digest `
+            -SourceRoot $env:GITHUB_WORKSPACE `
+            -OriginalEvidenceDirectory "$env:RUNNER_TEMP/d4-08-retained-evidence" `
+            -OutputDirectory "$env:RUNNER_TEMP/d4-legacy-drag-diag-d409-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          exit $LASTEXITCODE
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && !cancelled() && steps.nativebuild.outcome == 'success' }}
+        with:
+          name: d409-legacy-drag-diagnostics-d409-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d4-legacy-drag-diag-d409-*/
+          include-hidden-files: true
+          if-no-files-found: error
       - name: Actual timer feedback work and persistence regression
         id: native
         if: ${{ always() && steps.nativebuild.outcome == 'success' }}

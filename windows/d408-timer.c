@@ -131,7 +131,7 @@ static void refresh_timer(int configuration){
  EnableWindow(control(T_START),!busy&&!truth(state,"completionPending"));EnableWindow(control(T_REST),!busy&&!truth(state,"completionPending"));EnableWindow(control(T_PAUSE),running);EnableWindow(control(T_RESUME),paused);EnableWindow(control(T_END),busy);EnableWindow(control(T_FINISH),busy&&!strcmp(str(state,"mode"),"countup"));EnableWindow(control(T_ACK),truth(state,"completionPending"));
  SendMessageW(control(T_HISTORY),LB_RESETCONTENT,0,0);J *history=get(state,"history"),*statistics=statistics_history(state);double total=0;int completed=0,ended=0,rounds=0;
  for(int i=cJSON_GetArraySize(history)-1;i>=0;i--){J *entry=cJSON_GetArrayItem(history,i);if(!strcmp(str(entry,"phase"),"focus"))total+=num(entry,"elapsedMillis");completed+=!strcmp(str(entry,"status"),"completed");ended+=!strcmp(str(entry,"status"),"ended");
-   snprintf(text,sizeof(text),"%.19s · %s · %s · %.1f分钟 · %s [%s]",str(entry,"endedAt"),!strcmp(str(entry,"phase"),"break")?"休息":"专注",!strcmp(str(entry,"status"),"completed")?"完成":"提前结束",num(entry,"elapsedMillis")/60000.,str(entry,"taskTitle"),str(entry,"accountId"));wchar_t *w=wide(text);SendMessageW(control(T_HISTORY),LB_ADDSTRING,0,(LPARAM)w);free(w);}
+    snprintf(text,sizeof(text),"%.19s · %s · %s · %.1f分钟\r\n任务：%s · 账号：%s",str(entry,"endedAt"),!strcmp(str(entry,"phase"),"break")?"休息":"专注",!strcmp(str(entry,"status"),"completed")?"完成":"提前结束",num(entry,"elapsedMillis")/60000.,*str(entry,"taskTitle")?str(entry,"taskTitle"):"未关联任务",*str(entry,"accountId")?str(entry,"accountId"):"未记录");wchar_t *w=wide(text);SendMessageW(control(T_HISTORY),LB_ADDSTRING,0,(LPARAM)w);free(w);}
  J *entry;cJSON_ArrayForEach(entry,history)rounds+=focus_round(entry);if(active(state)&&!strcmp(str(state,"phase"),"focus"))total+=num(state,"elapsedMillis");
  int64_t today=(clock_wall()+28800000LL)/86400000LL*86400000LL-28800000LL;
  snprintf(text,sizeof(text),"历史（UTC）%d条 · 已完成阶段%d次 · 提前结束%d次\r\n专注累计%.1f分钟 · 完成番茄%d轮（仅专注倒计时）\r\n北京时间：今日%.1f分钟 / %d轮 · 近7天%.1f分钟 / %d轮",cJSON_GetArraySize(history),completed,ended,total/60000.,rounds,day_elapsed(statistics,today,today+86400000LL)/60000.,day_rounds(history,today,today+86400000LL),day_elapsed(statistics,today-6*86400000LL,today+86400000LL)/60000.,day_rounds(history,today-6*86400000LL,today+86400000LL));ui_set(control(T_SUMMARY),text);timerLoading=0;cJSON_Delete(statistics);cJSON_Delete(state);
@@ -204,7 +204,7 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    for(int i=T_MODE;i<=T_CLOSE;i++){const wchar_t *cls=i==T_MODE||i==T_TASK?L"COMBOBOX":i==T_FOCUS||i==T_BREAK?L"EDIT":i==T_HISTORY?L"LISTBOX":i==T_SUMMARY||i==T_CLOCK||i==T_STATUS?L"STATIC":L"BUTTON";
      DWORD style=i==T_MODE||i==T_TASK?CBS_DROPDOWNLIST:i==T_FOCUS||i==T_BREAK?ES_NUMBER|ES_AUTOHSCROLL|WS_BORDER:i==T_HISTORY?WS_VSCROLL|LBS_NOINTEGRALHEIGHT:0;
 #ifdef GX_D409_UI
-     if(i==T_HISTORY)style|=WS_HSCROLL|LBS_NOTIFY;
+    if(i==T_HISTORY)style|=LBS_NOTIFY|LBS_OWNERDRAWFIXED|LBS_HASSTRINGS;
 #endif
      timerControls[i-T_MODE]=ui_control(h,cls,labels[i-T_MODE],style|WS_TABSTOP,i,0,0,0,0);if(i==T_FOCUS||i==T_BREAK){HWND edit=control(i);/* The cloud-created EDIT lacked the requested WS_BORDER. Apply the actual native frame after creation. */SetWindowLongPtrW(edit,GWL_STYLE,GetWindowLongPtrW(edit,GWL_STYLE)|WS_BORDER);SetWindowPos(edit,0,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);}}
    SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"倒计时");SendMessageW(control(T_MODE),CB_ADDSTRING,0,(LPARAM)L"正计时");
@@ -256,7 +256,12 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
  if(message==WM_PAINT||message==WM_PRINTCLIENT){PAINTSTRUCT ps;HDC dc=message==WM_PAINT?BeginPaint(h,&ps):(HDC)w;d409_surface(h,dc,0);if(message==WM_PAINT)EndPaint(h,&ps);return 0;}
  if(message==WM_CTLCOLORSTATIC||message==WM_CTLCOLOREDIT||message==WM_CTLCOLORLISTBOX)return d409_control_color(h,message,w,l);
 #endif
+#ifdef GX_D409_UI
+ if(message==WM_MEASUREITEM&&d409_history_measure_item((MEASUREITEMSTRUCT*)l))return TRUE;
+ if(message==WM_DRAWITEM){DRAWITEMSTRUCT *item=(DRAWITEMSTRUCT*)l;if(item&&item->CtlID==T_HISTORY){d409_history_draw_item(item);return TRUE;}ui_theme_draw_button(item);return TRUE;}
+#else
  if(message==WM_DRAWITEM){ui_theme_draw_button((DRAWITEMSTRUCT*)l);return TRUE;}
+#endif
  if(message==WM_CTLCOLORSTATIC||message==WM_CTLCOLOREDIT||message==WM_CTLCOLORLISTBOX){SetTextColor((HDC)w,RGB(35,62,51));SetBkColor((HDC)w,RGB(250,252,250));return (LRESULT)app.white;}
  return DefWindowProcW(h,message,w,l);
 }

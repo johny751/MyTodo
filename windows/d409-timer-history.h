@@ -6,6 +6,31 @@ static HWND d409HistoryWindow;
 static char *d409HistorySelectedId;
 static int d409HistoryTop,d409HistoryHorizontal,d409HistoryExtent;
 
+/* The native list keeps the original history strings, but paints a compact
+   two-line summary so long task names and account ids do not disappear past
+   the right edge at 96/144 DPI.  The detail dialog remains the complete
+   record view; this is presentation-only and never changes timerStore. */
+static void d409_history_draw_item(DRAWITEMSTRUCT *item){
+ if(!item||item->itemID==(UINT)-1)return;
+ LRESULT length=SendMessageW(item->hwndItem,LB_GETTEXTLEN,item->itemID,0);
+ if(length<0||length>8192)return;
+ wchar_t *value=calloc((size_t)length+1,sizeof(wchar_t));if(!value)return;
+ if(SendMessageW(item->hwndItem,LB_GETTEXT,item->itemID,(LPARAM)value)==LB_ERR){free(value);return;}
+ wchar_t *second=wcsstr(value,L"\r\n");if(second){*second=0;second+=2;}else second=L"";
+ RECT r=item->rcItem;int selected=(item->itemState&ODS_SELECTED)!=0;
+ HBRUSH brush=CreateSolidBrush(selected?D409_SELECTED:RGB(255,255,255));FillRect(item->hDC,&r,brush);DeleteObject(brush);
+ RECT first=r,detail=r;first.left+=U(12);first.right-=U(12);first.top+=U(3);first.bottom=first.top+U(18);
+ detail.left+=U(12);detail.right-=U(12);detail.top=first.bottom;detail.bottom-=U(3);
+ d409_text(item->hDC,value,first,app.smallFont,selected?D409_ACCENT:D409_MUTED,DT_SINGLELINE|DT_VCENTER|DT_END_ELLIPSIS);
+ d409_text(item->hDC,second,detail,app.font,selected?D409_ACCENT:D409_INK,DT_SINGLELINE|DT_VCENTER|DT_END_ELLIPSIS);
+ if(item->itemState&ODS_FOCUS){RECT focus=r;InflateRect(&focus,-U(2),-U(2));DrawFocusRect(item->hDC,&focus);}
+ free(value);
+}
+static int d409_history_measure_item(MEASUREITEMSTRUCT *item){
+ if(!item||item->CtlID!=T_HISTORY)return 0;
+ item->itemHeight=U(42);return 1;
+}
+
 static J *d409_history_row(int index){
  J *history=get(timerStore.data,"history");int count=cJSON_GetArraySize(history);
  return index>=0&&index<count?cJSON_GetArrayItem(history,count-index-1):0;

@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/d4-09-candidate.yml",
-      "bytes": 29627,
-      "sha256": "999885379c0519efe42cb93f617176ba59d3b7cef6855313e8a4bef5f6270f8d",
+      "bytes": 30811,
+      "sha256": "2e59e3a9dde798f2e7f99c0bbeca5ba16b866d5e72b21eaf80e298750096fb28",
       "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
     },
     {
@@ -549,8 +549,8 @@
     },
     {
       "path": "windows/d408-timer.c",
-      "bytes": 39472,
-      "sha256": "d122c87cff0a75ef9177dbc410a1a871ae1071c61aecdaec7cd2a33ebd7fe2bb",
+      "bytes": 39896,
+      "sha256": "de76e6532b3783eb0c649cee935bd1c1298a594290234cf7188e92086082593a",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -561,8 +561,8 @@
     },
     {
       "path": "windows/d409-timer-history.h",
-      "bytes": 7196,
-      "sha256": "18f6042df6d266ff11f29f7b4aa27824c331cfacada3d2a2e1b929712f7fddf9",
+      "bytes": 8861,
+      "sha256": "e590682d0e54cc35a3cfaca6f3ea9d2627ec2fbe2fe70757b983e2cb751b4c00",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {
@@ -579,8 +579,8 @@
     },
     {
       "path": "windows/detail.c",
-      "bytes": 50424,
-      "sha256": "6cccd0d6cbc6dad6e383cb959297d2b082dfbcc15792e37384296c5d59648073",
+      "bytes": 50744,
+      "sha256": "af52049fea57e51a8eccbdd443bab27fdfe5af042b6fe20c1c62f36d0eb3d7d7",
       "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
     },
     {

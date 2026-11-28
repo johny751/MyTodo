@@ -20,7 +20,13 @@ int detail_save(int close){Detail*d=app.editor;if(!d)return 1;if(d->base){J*r=db
 static HWND category_input(Detail*d,HWND h){int fields[]={F_PROJECT,F_TAGS};for(int i=0;i<2;i++){HWND combo=d->fields[fields[i]];if(h==combo)return combo;COMBOBOXINFO info={sizeof(info)};if(combo&&GetComboBoxInfo(combo,&info)&&h==info.hwndItem)return combo;}return 0;}
 static int multiline_input(HWND h){wchar_t cls[24];GetClassNameW(h,cls,24);return !_wcsicmp(cls,L"EDIT")&&(GetWindowLongPtrW(h,GWL_STYLE)&ES_MULTILINE);}
 static LRESULT CALLBACK input_proc(HWND h,UINT m,WPARAM w,LPARAM l,UINT_PTR id,DWORD_PTR ref){
- Detail*d=(Detail*)ref;if(d&&d->closed)return DefSubclassProc(h,m,w,l);if(m==WM_IME_STARTCOMPOSITION)SetPropW(h,L"GxComposing",(HANDLE)1);if(m==WM_IME_ENDCOMPOSITION)RemovePropW(h,L"GxComposing");
+ Detail*d=(Detail*)ref;
+ /* WM_NCDESTROY must remove the subclass before the closed guard. During
+    detail teardown the owner is marked closed first; returning early here
+    leaves the subclass reference attached to a dead native edit and allows a
+    later callback to dereference freed Detail state. */
+ if(m==WM_NCDESTROY){RemovePropW(h,L"GxComposing");RemoveWindowSubclass(h,input_proc,id);return DefSubclassProc(h,m,w,l);}
+ if(d&&d->closed)return DefSubclassProc(h,m,w,l);if(m==WM_IME_STARTCOMPOSITION)SetPropW(h,L"GxComposing",(HANDLE)1);if(m==WM_IME_ENDCOMPOSITION)RemovePropW(h,L"GxComposing");
  int composing=GetPropW(h,L"GxComposing")!=0;
  if(m==WM_KEYDOWN&&w==VK_RETURN&&!composing&&!(GetKeyState(VK_PROCESSKEY)&0x8000)){
   if(d->note&&(GetKeyState(VK_CONTROL)&0x8000)&&!(GetKeyState(VK_SHIFT)&0x8000)){detail_save(0);return 0;}
@@ -31,7 +37,7 @@ static LRESULT CALLBACK input_proc(HWND h,UINT m,WPARAM w,LPARAM l,UINT_PTR id,D
  if(m==WM_GETDLGCODE){MSG*message=(MSG*)l;int key=(int)w;if(!key&&message)key=(int)message->wParam;if(key==VK_RETURN||key==VK_ESCAPE)return DefSubclassProc(h,m,w,l)|DLGC_WANTALLKEYS;}
  if(m==WM_CHAR&&(w==L'\r'||w==L'\n')){if(d->note&&(GetKeyState(VK_CONTROL)&0x8000)&&!(GetKeyState(VK_SHIFT)&0x8000))return 0;if(composing||category_input(d,h)||!multiline_input(h))return 0;if(w==L'\n'){SendMessageW(h,EM_REPLACESEL,TRUE,(LPARAM)L"\r\n");return 0;}}
  if(m==WM_SETFOCUS){RECT r;GetWindowRect(h,&r);MapWindowPoints(0,d->scroll,(POINT*)&r,2);RECT client;GetClientRect(d->scroll,&client);int delta=r.top<U(12)?r.top-U(12):r.bottom>client.bottom-U(12)?r.bottom-client.bottom+U(12):0;if(delta){int pos=max(0,min(d->offset+MulDiv(delta,96,app.dpi?app.dpi:96),max(0,d->contentHeight-MulDiv(client.bottom,96,app.dpi?app.dpi:96))));d->offset=pos;detail_arrange(d);}}
- if(m==WM_NCDESTROY){RemovePropW(h,L"GxComposing");RemoveWindowSubclass(h,input_proc,id);}return DefSubclassProc(h,m,w,l);
+ return DefSubclassProc(h,m,w,l);
 }
 int detail_translate_message(MSG*message){
  Detail*d=app.editor;if(!d||!IsChild(d->hwnd,message->hwnd))return 0;
