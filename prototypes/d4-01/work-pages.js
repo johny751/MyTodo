@@ -4,6 +4,8 @@
   // Synthetic demo pages. This module has no storage, network or native bridge access.
   var routes = ['projects', 'work-items', 'templates', 'processes', 'contacts', 'archive', 'analytics'];
   var views = {};
+  // Presentation selection only. No repository field or durable write is added.
+  var previewByRoute = Object.create(null);
   var sequence = 0;
   var pendingAttachment = null;
   var labels = {
@@ -232,13 +234,67 @@
     if (type === 'contact') body += field(ctx, '联系人', 'name', x.name, 'text', true) + field(ctx, '单位 / 团队', 'organization', x.organization) + field(ctx, '角色', 'role', x.role) + field(ctx, '邮箱', 'email', x.email, 'email') + field(ctx, '电话', 'phone', x.phone, 'tel') + textarea(ctx, '往来备注', 'notes', x.notes);
     return open(ctx, form(ctx, 'work-' + type, (id ? '编辑' : '新建') + kinds[key][0], body));
   }
+  function previewButton(ctx, route, id) {
+    var selected = previewByRoute[route] && previewByRoute[route].id === id;
+    return button(ctx, '预览', 'work-preview-select', id, 'small d409-preview-button').replace('<button ', '<button aria-pressed="' + !!selected + '" ');
+  }
+  function previewValue(ctx, value) {
+    return esc(ctx, value === undefined ? '未记录' : value === null ? '原值：null' : typeof value === 'object' ? JSON.stringify(value, null, 2) : value === '' ? '未填写' : value);
+  }
+  function previewField(ctx, label, value) {
+    return '<div><dt>' + esc(ctx, label) + '</dt><dd class="work-raw-text">' + previewValue(ctx, value) + '</dd></div>';
+  }
+  function workPreview(ctx, route, row) {
+    if (!row) return '<aside class="panel d409-work-preview d409-preview-empty" data-d409-work-preview><div class="empty-state"><h3>选择一条记录</h3><p>在列表中预览完整内容，再继续编辑或查看关联。</p></div></aside>';
+    var s = state(ctx), key = {'work-items':'workItems',projects:'projects',templates:'templates',processes:'processes',contacts:'contacts'}[route];
+    var title = row.title || row.name || '未命名记录', body = '', notes = row.notes;
+    var meta = previewField(ctx, '状态', labels[row.status] || row.status) + previewField(ctx, '负责人', row.owner);
+    if (key === 'workItems') {
+      var tasks = workTasks(s, row.id), process = find(s, 'processes', row.processId);
+      meta += previewField(ctx, '项目', projectName(s, row.projectId)) + previewField(ctx, '关联流程', process ? process.name : row.processId ? '关联缺失 · ' + row.processId : row.processId);
+      meta += previewField(ctx, '计划开始 · 原始值', row.plannedStart) + previewField(ctx, '截止时间 · 原始值', row.dueDate);
+      body = '<section class="d409-preview-section"><h3>执行任务 · ' + tasks.filter(done).length + ' / ' + tasks.length + '</h3>' + (tasks.length ? '<ul>' + tasks.map(function (task) { return '<li>' + esc(ctx, task.title) + '<span class="muted"> · ' + (done(task) ? '已完成' : '待完成') + '</span></li>'; }).join('') + '</ul>' : '<p class="muted">尚未关联执行任务。</p>') + '<p class="muted">附件 ' + (row.attachments || []).length + ' 个 · 在完整详情中管理关联与原始附件。</p></section>';
+    } else if (key === 'projects') {
+      var linked = projectTasks(s, row);
+      meta += previewField(ctx, '成员', row.members) + previewField(ctx, '截止时间 · 原始值', row.dueDate);
+      body = '<section class="d409-preview-section"><h3>项目进展</h3><p>' + linked.filter(done).length + ' / ' + linked.length + ' 项任务完成</p><ul>' + active(s, 'workItems').filter(function (w) { return w.projectId === row.id; }).map(function (w) { return '<li>' + esc(ctx, w.title) + '</li>'; }).join('') + '</ul></section>';
+    } else if (key === 'templates') {
+      meta += previewField(ctx, '版本', versionLabel(row)) + previewField(ctx, '启用状态', row.enabled === false ? '已停用' : '启用');
+      body = '<section class="d409-preview-section"><h3>完整步骤定义</h3><ol class="d409-preview-steps">' + (row.steps || []).map(function (step) { return '<li><strong>' + esc(ctx, step.title) + '</strong>' + (Object.prototype.hasOwnProperty.call(step, 'description') ? '<p class="work-raw-text">' + previewValue(ctx, step.description) + '</p>' : '') + '<details><summary>步骤原始定义</summary><pre class="work-raw-text">' + previewValue(ctx, step) + '</pre></details></li>'; }).join('') + '</ol></section>';
+    } else if (key === 'processes') {
+      meta += previewField(ctx, '项目', projectName(s, row.projectId)) + previewField(ctx, '创建时模板版本', row.templateVersion);
+      body = '<section class="d409-preview-section"><h3>当前步骤</h3><p>' + (row.status === 'completed' ? '全部步骤已完成' : esc(ctx, row.steps && row.steps[row.currentStep] ? row.steps[row.currentStep].title : '未记录当前步骤')) + '</p>' + stepList(ctx, row).replace('class="process-steps"', 'class="d409-preview-steps"') + (row.templateSnapshot ? '<details><summary>创建时模板快照</summary><pre class="work-raw-text">' + previewValue(ctx, row.templateSnapshot) + '</pre></details>' : '') + '<p class="muted">从列表中的原操作继续、暂停或推进流程。</p></section>';
+    } else if (key === 'contacts') {
+      meta = previewField(ctx, '单位 / 团队', row.organization) + previewField(ctx, '角色', row.role) + previewField(ctx, '电话', row.phone) + previewField(ctx, '邮箱', row.email);
+      body = '<section class="d409-preview-section"><h3>跟进记录 · ' + (row.followups || []).length + '</h3>' + (row.followups || []).map(function (followup) { return '<article class="d409-followup"><h4>' + esc(ctx, followup.title) + '</h4>' + pill(ctx, followup.status || 'pending') + '<p class="work-raw-text">' + previewValue(ctx, followup.notes) + '</p><dl class="d409-preview-meta">' + previewField(ctx, '沟通 · 原始值', followup.occurredOn) + previewField(ctx, '下次跟进 · 原始值', followup.dueDate) + '</dl></article>'; }).join('') + '</section>';
+    }
+    return '<aside class="panel d409-work-preview" data-d409-work-preview data-preview-id="' + esc(ctx, row.id) + '"><header class="panel-head">' + button(ctx, '返回列表', 'work-preview-back', '', 'd409-preview-back') + '<h2>' + kinds[key][0] + '详情</h2></header><div class="panel-body"><h2 class="d409-preview-title">' + esc(ctx, title) + '</h2>' + (row.description !== undefined ? '<p class="work-raw-text muted">' + previewValue(ctx, row.description) + '</p>' : '') + '<dl class="d409-preview-meta">' + meta + '</dl><section class="d409-preview-section"><h3>' + (key === 'contacts' ? '往来备注' : '完整备注') + '</h3><pre class="work-raw-text d409-preview-note" data-d409-preview-notes>' + previewValue(ctx, notes) + '</pre></section>' + body + ((row.history || []).length ? '<details class="d409-preview-section"><summary>完整操作历史 · ' + row.history.length + '</summary><pre class="work-raw-text">' + previewValue(ctx, row.history) + '</pre></details>' : '') + '</div><footer class="d409-preview-actions">' + button(ctx, '编辑', 'work-preview-edit', row.id, 'primary') + (['workItems','projects','contacts'].includes(key) ? button(ctx, '完整详情', 'work-preview-detail', row.id) : '') + '</footer></aside>';
+  }
+  function workLayout(ctx, route, rows, html) {
+    var remembered = previewByRoute[route], row = remembered && rows.find(function (item) { return item.id === remembered.id; });
+    if (!remembered && window.matchMedia('(min-width:961px)').matches) row = rows[0];
+    var explicit = !!(row && remembered && remembered.expanded);
+    return '<div class="d409-work-layout' + (explicit ? ' d409-preview-open' : '') + '" data-d409-work-layout><div class="d409-work-list" data-d409-work-list>' + html + '</div>' + workPreview(ctx, route, row) + '</div>';
+  }
+  function previewAction(action, id, ctx) {
+    var route = document.querySelector('main')?.dataset.route;
+    var key = {'work-items':'workItems',projects:'projects',templates:'templates',processes:'processes',contacts:'contacts'}[route];
+    if (!key || typeof ctx.refreshPresentation !== 'function') return error(ctx, '当前页面无法打开预览');
+    if (action === 'work-preview-back') { previewByRoute[route] = {id:'',expanded:false}; ctx.refreshPresentation(); return true; }
+    var row = find(state(ctx), key, id);
+    if (!row || row.archived) return error(ctx, '记录已归档或不存在');
+    if (action === 'work-preview-select') { previewByRoute[route] = {id:id,expanded:true}; ctx.refreshPresentation(); return true; }
+    if (action === 'work-preview-edit') return key === 'processes' ? processForm(ctx, '', id) : entityForm(ctx, {'workItems':'work-item',projects:'project',templates:'template',contacts:'contact'}[key], id);
+    if (action === 'work-preview-detail') return key === 'workItems' ? workDetail(ctx, id) : key === 'projects' ? projectDetail(ctx, id) : key === 'contacts' ? contactDetail(ctx, id) : false;
+    return false;
+  }
   function projectsPage(ctx) {
     var s = state(ctx), list = filtered(s, 'projects', 'projects', ctx);
     var cards = list.map(function (p) {
       var tasks = projectTasks(s, p), count = tasks.filter(done).length, percent = tasks.length ? Math.round(count / tasks.length * 100) : 0;
-      return '<article class="panel project-card ' + (/^q[0-3]$/.test(p.color) ? p.color : 'q1') + '"><header><h2>' + button(ctx, p.name, 'work-project-detail', p.id, 'text') + '</h2>' + pill(ctx, p.status || 'active') + '</header><p>' + esc(ctx, p.description || '添加说明，记录项目的目标与范围。') + '</p><p class="muted">负责人：' + esc(ctx,p.owner || '未设置') + ' · 成员 ' + (p.members || []).length + '</p><div class="project-progress"><strong>' + count + ' / ' + tasks.length + ' 项任务完成</strong><span>' + percent + '%</span><progress max="100" value="' + percent + '" aria-label="项目任务完成率"></progress></div><p class="muted">截止：' + esc(ctx, timeLabel(p.dueDate) || '未设置') + ' · 工作事项 ' + active(s, 'workItems').filter(function (w) { return w.projectId === p.id; }).length + '</p><footer class="row-actions">' + button(ctx, '查看任务', 'work-project-detail', p.id) + button(ctx, '编辑', 'work-edit-project', p.id) + button(ctx, '归档', 'work-archive-projects', p.id, 'text') + button(ctx, '删除', 'work-delete-projects', p.id, 'text danger') + '</footer></article>';
+      return '<article class="panel project-card ' + (/^q[0-3]$/.test(p.color) ? p.color : 'q1') + '"><header><h2>' + button(ctx, p.name, 'work-project-detail', p.id, 'text') + '</h2>' + pill(ctx, p.status || 'active') + '</header><p>' + esc(ctx, p.description || '添加说明，记录项目的目标与范围。') + '</p><p class="muted">负责人：' + esc(ctx,p.owner || '未设置') + ' · 成员 ' + (p.members || []).length + '</p><div class="project-progress"><strong>' + count + ' / ' + tasks.length + ' 项任务完成</strong><span>' + percent + '%</span><progress max="100" value="' + percent + '" aria-label="项目任务完成率"></progress></div><p class="muted">截止：' + esc(ctx, timeLabel(p.dueDate) || '未设置') + ' · 工作事项 ' + active(s, 'workItems').filter(function (w) { return w.projectId === p.id; }).length + '</p><footer class="row-actions">' + previewButton(ctx, 'projects', p.id) + button(ctx, '查看任务', 'work-project-detail', p.id) + button(ctx, '编辑', 'work-edit-project', p.id) + button(ctx, '归档', 'work-archive-projects', p.id, 'text') + button(ctx, '删除', 'work-delete-projects', p.id, 'text danger') + '</footer></article>';
     }).join('');
-    return heading(ctx, '项目', '把任务、工作事项和流程放到同一个项目里。', button(ctx, '新建项目', 'work-new-project', '', 'primary')) + toolbar(ctx, s, 'projects', ['active','paused','completed']) + '<div class="project-grid">' + (cards || empty(ctx, '没有符合条件的项目', '调整筛选，或创建一个新项目。', 'work-new-project', '新建项目')) + '</div>';
+    return heading(ctx, '项目', '把任务、工作事项和流程放到同一个项目里。', button(ctx, '新建项目', 'work-new-project', '', 'primary')) + toolbar(ctx, s, 'projects', ['active','paused','completed']) + workLayout(ctx, 'projects', list, '<div class="project-grid">' + (cards || empty(ctx, '没有符合条件的项目', '调整筛选，或创建一个新项目。', 'work-new-project', '新建项目')) + '</div>');
   }
   function projectDetail(ctx, id) {
     var s = state(ctx), p = find(s, 'projects', id);
@@ -249,8 +305,8 @@
   }
   function workItemsPage(ctx) {
     var s = state(ctx), list = filtered(s, 'workItems', 'work-items', ctx);
-    var rows = list.map(function (w) { var tasks = workTasks(s, w.id); return '<tr><td>' + button(ctx, w.title, 'work-work-detail', w.id, 'text') + '<small>' + esc(ctx, w.owner || '未设置负责人') + ' · ' + esc(ctx,priorityLabels[w.priority] || '普通') + '</small></td><td>' + esc(ctx, projectName(s, w.projectId)) + '</td><td>' + pill(ctx, w.status) + '</td><td>' + esc(ctx, timeLabel(w.plannedStart) || '—') + ' → ' + esc(ctx, timeLabel(w.dueDate) || '—') + '</td><td>' + tasks.filter(done).length + ' / ' + tasks.length + '</td><td class="row-actions">' + button(ctx, '编辑', 'work-edit-work-item', w.id) + button(ctx, '归档', 'work-archive-workItems', w.id, 'text') + button(ctx, '删除', 'work-delete-workItems', w.id, 'text danger') + '</td></tr>'; });
-    return heading(ctx, '工作事项', '记录需要推进的工作，关联项目与执行任务。', button(ctx, '新建工作事项', 'work-new-work-item', '', 'primary')) + toolbar(ctx, s, 'work-items', ['planned','doing','waiting','done'], true) + '<section class="panel">' + (rows.length ? table(['工作事项 / 负责人','项目','状态','计划 / 截止时间','任务完成','操作'], rows) : empty(ctx, '没有符合条件的工作事项', '调整筛选，或记录下一件需要推进的工作。', 'work-new-work-item', '新建工作事项')) + '</section>';
+    var rows = list.map(function (w) { var tasks = workTasks(s, w.id); return '<tr><td>' + button(ctx, w.title, 'work-work-detail', w.id, 'text') + previewButton(ctx, 'work-items', w.id) + '<small>' + esc(ctx, w.owner || '未设置负责人') + ' · ' + esc(ctx,priorityLabels[w.priority] || '普通') + '</small></td><td>' + esc(ctx, projectName(s, w.projectId)) + '</td><td>' + pill(ctx, w.status) + '</td><td>' + esc(ctx, timeLabel(w.plannedStart) || '—') + ' → ' + esc(ctx, timeLabel(w.dueDate) || '—') + '</td><td>' + tasks.filter(done).length + ' / ' + tasks.length + '</td><td class="row-actions">' + button(ctx, '编辑', 'work-edit-work-item', w.id) + button(ctx, '归档', 'work-archive-workItems', w.id, 'text') + button(ctx, '删除', 'work-delete-workItems', w.id, 'text danger') + '</td></tr>'; });
+    return heading(ctx, '工作事项', '记录需要推进的工作，关联项目与执行任务。', button(ctx, '新建工作事项', 'work-new-work-item', '', 'primary')) + toolbar(ctx, s, 'work-items', ['planned','doing','waiting','done'], true) + workLayout(ctx, 'work-items', list, '<section class="panel">' + (rows.length ? table(['工作事项 / 负责人','项目','状态','计划 / 截止时间','任务完成','操作'], rows) : empty(ctx, '没有符合条件的工作事项', '调整筛选，或记录下一件需要推进的工作。', 'work-new-work-item', '新建工作事项')) + '</section>');
   }
   function workDetail(ctx, id) {
     var s = state(ctx), w = find(s, 'workItems', id);
@@ -261,7 +317,7 @@
   }
   function templatesPage(ctx) {
     var s = state(ctx), list = filtered(s, 'templates', 'templates', ctx);
-    return heading(ctx, '流程模板', '把重复开展的工作整理成可调整的步骤。', button(ctx, '新建模板', 'work-new-template', '', 'primary')) + toolbar(ctx, s, 'templates') + '<div class="project-grid">' + (list.map(function (t) { return '<article class="panel"><header><h2>' + esc(ctx, t.name) + '</h2><span class="pill">v' + versionLabel(t) + ' · ' + (t.steps || []).length + ' 步 · ' + (t.enabled === false ? '已停用' : '启用') + '</span></header><p>' + esc(ctx, t.description || '未填写适用说明') + '</p><ol class="process-steps">' + (t.steps || []).map(function (step) { return '<li>' + esc(ctx, step.title) + '</li>'; }).join('') + '</ol>' + historyHtml(ctx,t) + '<footer class="row-actions">' + button(ctx, '创建流程', 'work-process-from-template', t.id, 'primary' + (t.enabled === false ? ' disabled' : '')) + button(ctx, '编辑步骤', 'work-edit-template', t.id) + button(ctx,'复制','work-copy-template',t.id) + button(ctx,t.enabled === false ? '启用' : '停用','work-template-toggle',t.id) + button(ctx, '归档', 'work-archive-templates', t.id, 'text') + button(ctx, '删除', 'work-delete-templates', t.id, 'text danger') + '</footer></article>'; }).join('') || empty(ctx, '还没有流程模板', '例如将“资料准备、审核、执行、复盘”保存为一个模板。', 'work-new-template', '新建模板')) + '</div>';
+    return heading(ctx, '流程模板', '把重复开展的工作整理成可调整的步骤。', button(ctx, '新建模板', 'work-new-template', '', 'primary')) + toolbar(ctx, s, 'templates') + workLayout(ctx, 'templates', list, '<div class="project-grid">' + (list.map(function (t) { return '<article class="panel"><header><h2>' + esc(ctx, t.name) + '</h2><span class="pill">v' + versionLabel(t) + ' · ' + (t.steps || []).length + ' 步 · ' + (t.enabled === false ? '已停用' : '启用') + '</span></header><p>' + esc(ctx, t.description || '未填写适用说明') + '</p><ol class="process-steps">' + (t.steps || []).map(function (step) { return '<li>' + esc(ctx, step.title) + '</li>'; }).join('') + '</ol>' + historyHtml(ctx,t) + '<footer class="row-actions">' + previewButton(ctx, 'templates', t.id) + button(ctx, '创建流程', 'work-process-from-template', t.id, 'primary' + (t.enabled === false ? ' disabled' : '')) + button(ctx, '编辑步骤', 'work-edit-template', t.id) + button(ctx,'复制','work-copy-template',t.id) + button(ctx,t.enabled === false ? '启用' : '停用','work-template-toggle',t.id) + button(ctx, '归档', 'work-archive-templates', t.id, 'text') + button(ctx, '删除', 'work-delete-templates', t.id, 'text danger') + '</footer></article>'; }).join('') || empty(ctx, '还没有流程模板', '例如将“资料准备、审核、执行、复盘”保存为一个模板。', 'work-new-template', '新建模板')) + '</div>');
   }
   function processForm(ctx, templateId, id) {
     var s = state(ctx), p = find(s, 'processes', id) || {}, template = find(s, 'templates', templateId || p.templateId);
@@ -275,7 +331,7 @@
   function processControls(ctx, p) { return (p.status !== 'completed' ? button(ctx, p.currentStep === p.steps.length - 1 ? '完成最后一步' : '完成当前步', 'work-process-advance', p.id, 'primary' + (p.status === 'paused' ? ' disabled' : '')) + button(ctx, p.status === 'paused' ? '继续流程' : '暂停流程', 'work-process-toggle', p.id) : '<span class="pill status-completed">全部步骤已完成</span>') + button(ctx, '编辑', 'work-edit-process', p.id) + button(ctx, '归档', 'work-archive-processes', p.id, 'text') + button(ctx, '删除', 'work-delete-processes', p.id, 'text danger'); }
   function processesPage(ctx) {
     var s = state(ctx), list = filtered(s, 'processes', 'processes', ctx);
-    return heading(ctx, '流程实例', '按当前步骤推进工作，随时暂停与继续。', button(ctx, '选择模板创建', 'work-go', 'templates', 'primary')) + toolbar(ctx, s, 'processes', ['running','paused','completed'], true) + '<div class="project-grid">' + (list.map(function (p) { var steps = p.steps || [], count = steps.filter(function (x) { return x.completed; }).length; return '<article class="panel process-card"><header><h2>' + esc(ctx, p.name) + '</h2>' + pill(ctx, p.status) + '</header><p class="muted">' + esc(ctx, projectName(s, p.projectId)) + ' · 已完成 ' + count + ' / ' + steps.length + ' 步 · 模板版本 ' + (p.templateVersion || '未记录') + '</p>' + (p.templateSnapshot ? '<details><summary>创建时模板快照</summary><pre>' + esc(ctx,JSON.stringify(p.templateSnapshot,null,2)) + '</pre></details>' : '<p class="form-help">旧体验数据没有显式版本证据；现有步骤仍保留，不反推历史模板版本。</p>') + '<progress max="' + (steps.length || 1) + '" value="' + count + '" aria-label="流程步骤进度"></progress>' + stepList(ctx, p) + historyHtml(ctx,p) + '<footer class="row-actions">' + processControls(ctx, p) + '</footer></article>'; }).join('') || empty(ctx, '没有符合条件的流程实例', '先选择一个模板，再开始执行它。', 'work-go', '打开流程模板')) + '</div>';
+    return heading(ctx, '流程实例', '按当前步骤推进工作，随时暂停与继续。', button(ctx, '选择模板创建', 'work-go', 'templates', 'primary')) + toolbar(ctx, s, 'processes', ['running','paused','completed'], true) + workLayout(ctx, 'processes', list, '<div class="project-grid">' + (list.map(function (p) { var steps = p.steps || [], count = steps.filter(function (x) { return x.completed; }).length; return '<article class="panel process-card"><header><h2>' + esc(ctx, p.name) + '</h2>' + pill(ctx, p.status) + '</header><p class="muted">' + esc(ctx, projectName(s, p.projectId)) + ' · 已完成 ' + count + ' / ' + steps.length + ' 步 · 模板版本 ' + (p.templateVersion || '未记录') + '</p>' + (p.templateSnapshot ? '<details><summary>创建时模板快照</summary><pre>' + esc(ctx,JSON.stringify(p.templateSnapshot,null,2)) + '</pre></details>' : '<p class="form-help">旧体验数据没有显式版本证据；现有步骤仍保留，不反推历史模板版本。</p>') + '<progress max="' + (steps.length || 1) + '" value="' + count + '" aria-label="流程步骤进度"></progress>' + stepList(ctx, p) + historyHtml(ctx,p) + '<footer class="row-actions">' + previewButton(ctx, 'processes', p.id) + processControls(ctx, p) + '</footer></article>'; }).join('') || empty(ctx, '没有符合条件的流程实例', '先选择一个模板，再开始执行它。', 'work-go', '打开流程模板')) + '</div>');
   }
   function followupSummary(ctx, contact) {
     var pending = (contact.followups || []).filter(function (f) { return f.status !== 'done'; }).sort(function (a, b) { return timeOrder(a.dueDate,b.dueDate); });
@@ -284,8 +340,8 @@
   }
   function contactsPage(ctx) {
     var s = state(ctx), list = filtered(s, 'contacts', 'contacts', ctx);
-    var rows = list.map(function (c) { return '<tr><td>' + button(ctx, c.name, 'work-contact-detail', c.id, 'text') + '<small>' + esc(ctx, c.role || '') + '</small></td><td>' + esc(ctx, c.organization || '—') + '</td><td>' + esc(ctx, c.phone || c.email || '未填写') + '</td><td>' + followupSummary(ctx, c) + '</td><td class="row-actions">' + button(ctx, '记录跟进', 'work-new-followup', c.id) + button(ctx, '编辑', 'work-edit-contact', c.id) + button(ctx, '归档', 'work-archive-contacts', c.id, 'text') + button(ctx, '删除', 'work-delete-contacts', c.id, 'text danger') + '</td></tr>'; });
-    return heading(ctx, '往来', '记录联系人与待跟进事项。', button(ctx, '新建联系人', 'work-new-contact', '', 'primary')) + toolbar(ctx, s, 'contacts') + '<section class="panel">' + (rows.length ? table(['联系人','单位 / 团队','联系方式','下一次跟进','操作'], rows) : empty(ctx, '没有符合条件的联系人', '记录一位联系人，再添加需要跟进的事项。', 'work-new-contact', '新建联系人')) + '</section>';
+    var rows = list.map(function (c) { return '<tr><td>' + button(ctx, c.name, 'work-contact-detail', c.id, 'text') + previewButton(ctx, 'contacts', c.id) + '<small>' + esc(ctx, c.role || '') + '</small></td><td>' + esc(ctx, c.organization || '—') + '</td><td>' + esc(ctx, c.phone || c.email || '未填写') + '</td><td>' + followupSummary(ctx, c) + '</td><td class="row-actions">' + button(ctx, '记录跟进', 'work-new-followup', c.id) + button(ctx, '编辑', 'work-edit-contact', c.id) + button(ctx, '归档', 'work-archive-contacts', c.id, 'text') + button(ctx, '删除', 'work-delete-contacts', c.id, 'text danger') + '</td></tr>'; });
+    return heading(ctx, '往来', '记录联系人与待跟进事项。', button(ctx, '新建联系人', 'work-new-contact', '', 'primary')) + toolbar(ctx, s, 'contacts') + workLayout(ctx, 'contacts', list, '<section class="panel">' + (rows.length ? table(['联系人','单位 / 团队','联系方式','下一次跟进','操作'], rows) : empty(ctx, '没有符合条件的联系人', '记录一位联系人，再添加需要跟进的事项。', 'work-new-contact', '新建联系人')) + '</section>');
   }
   function contactDetail(ctx, id) {
     var s=state(ctx), c = find(s, 'contacts', id); if (!c) return error(ctx, '联系人已不存在');
@@ -350,6 +406,7 @@
   function act(action, id, ctx) {
     if (!action.startsWith('work-')) return false;
     if (pendingAttachment) throw new Error('正在校验并保存附件，请等待完成');
+    if (action.startsWith('work-preview-')) return previewAction(action, id, ctx);
     var s = state(ctx), key, x, pair;
     if (action === 'work-close') return close(ctx);
     if (action === 'work-go') { close(ctx); ctx.navigate(id || 'templates'); return true; }

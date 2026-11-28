@@ -35,8 +35,13 @@ jobs:
       - name: Install official distro CJK fonts for Linux screenshot text
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
-      - name: Verify design-only source and retained baseline bytes
-        run: node tests/d4-09/design-scope.mjs
+      - name: Verify phase-specific source admission and retained baseline bytes
+        run: |
+          if test -f docs/upgrade/d4-09/source-admission.json; then
+            node tests/d4-09/scope.mjs
+          else
+            node tests/d4-09/design-scope.mjs
+          fi
       - name: Parse prototype and runner JavaScript on hosted runtime
         if: ${{ !cancelled() }}
         run: |
@@ -59,6 +64,7 @@ jobs:
           name: d409-design-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             ${{ runner.temp }}/d409-design-scope.json
+            ${{ runner.temp }}/d409-scope.json
             ${{ runner.temp }}/d409-design-package/
             ${{ runner.temp }}/d409-prototype-*/report.json
             ${{ runner.temp }}/d409-prototype-*/*.jsonl

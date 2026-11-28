@@ -1,4 +1,5 @@
 #include "d408.h"
+#include "d409-ui.h"
 #ifdef GX_D408_CANDIDATE
 enum {W_NAV=4900,W_SEARCH=4920,W_STATUS,W_PROJECT,W_LIST,W_NEW,W_EDIT,W_DELETE,W_ARCHIVE,W_ACTION,W_RELATED,W_ATTACH,W_FILES,W_HISTORY,W_EXPORT,W_IMPORT,W_NOTICE,W_OVERVIEW,W_EMPTY,W_DATE_FROM,W_DATE_TO,W_DATE_APPLY,W_DATE_RESET,W_DATE_NOTE};
 static D408Store workStore;static HWND workWindow,workControls[48];static J *workRows,*workProjectIds;static int workReady,workPage,workLoading;static wchar_t workImages[32768];static char workStatsFrom[11],workStatsTo[11];
@@ -27,7 +28,11 @@ static void work_layout(void);
 static const char *work_project_filter(void){int index=(int)SendMessageW(wc(W_PROJECT),CB_GETCURSEL,0,0);J *id=cJSON_GetArrayItem(workProjectIds,index);return index>0&&cJSON_IsString(id)?id->valuestring:0;}
 static void work_list_text(const char *text){wchar_t *label=wide(text);SendMessageW(wc(W_LIST),LB_ADDSTRING,0,(LPARAM)label);free(label);}
 static void work_stats_line(const char *name,WorkStats stats){char text[1800];snprintf(text,sizeof(text),"%s：事项%d · 已完成%d · 完成率%.1f%% · 已逾期%d · 等待%d · 已取消%d",name,stats.total,stats.completed,stats.rate,stats.overdue,stats.waiting,stats.cancelled);work_list_text(text);}
+#include "d409-work-ui.inc"
 static void work_refresh(void){
+#ifdef GX_D409_UI
+ if(workWindow)d409_work_selection();
+#endif
  if(!workWindow)return;workLoading=1;SendMessageW(wc(W_LIST),LB_RESETCONTENT,0,0);cJSON_Delete(workRows);workRows=cJSON_CreateArray();char *query=ui_text(wc(W_SEARCH)),*status=ui_text(wc(W_STATUS));const char *projectId=work_project_filter();int count=0,archived=0,completed=0;char text[1800];
  for(int k=0;k<6;k++){J *r;cJSON_ArrayForEach(r,get(workStore.data,kinds[k])){if(!own(r))continue;count++;archived+=truth(r,"archived");completed+=!strcmp(str(r,"status"),"completed");if(workPage>=1&&workPage<=6&&strcmp(kinds[k],page_kind()))continue;if(workPage==7?!truth(r,"archived"):truth(r,"archived"))continue;if(workPage==8||workPage==9)continue;
    if(!work_search(r,query))continue;if(strcmp(status,"全部状态")&&strcmp(status,str(r,"status")))continue;if(projectId&&strcmp(projectId,str(r,k==1?"id":"projectId")))continue;J *p=d408_find(get(workStore.data,"projects"),str(r,"projectId"));if(p&&!own(p))p=0;
@@ -48,6 +53,9 @@ static void work_refresh(void){
  snprintf(text,sizeof(text),"D4-08 本机隔离候选 · 当前账号 %s · 记录%d / 完成%d / 归档%d\r\n双击编辑。项目、流程、往来及跟进以稳定ID关联；原任务通过显式关联打开。",account(),count,completed,archived);ui_set(wc(W_NOTICE),text);
  const wchar_t *label=workPage==3?L"新建模板":workPage==4?L"从模板建立实例":workPage==9?L"原系统设置":L"新建";SetWindowTextW(wc(W_NEW),label);SetWindowTextW(wc(W_ACTION),workPage==4?L"推进 / 暂停 / 继续":workPage==3?L"模板启停 / 复制 / 实例":L"标记完成 / 待处理");SetWindowTextW(wc(W_ARCHIVE),workPage==7?L"恢复归档":L"归档");
  for(int id=W_EDIT;id<=W_HISTORY;id++)EnableWindow(wc(id),workPage!=8&&workPage!=9);EnableWindow(wc(W_NEW),workPage!=7&&workPage!=8);workLoading=0;work_layout();
+#ifdef GX_D409_UI
+ d409_work_after_refresh();
+#endif
 }
 static void refresh_projects(void){const char *selected=work_project_filter();char *keep=selected?_strdup(selected):0;cJSON_Delete(workProjectIds);workProjectIds=cJSON_CreateArray();cJSON_AddItemToArray(workProjectIds,cJSON_CreateString(""));SendMessageW(wc(W_PROJECT),CB_RESETCONTENT,0,0);SendMessageW(wc(W_PROJECT),CB_ADDSTRING,0,(LPARAM)L"全部项目");int selectedIndex=0,index=0;J *r;cJSON_ArrayForEach(r,get(workStore.data,"projects"))if(own(r)&&!truth(r,"archived")){wchar_t *name=wide(str(r,"name"));SendMessageW(wc(W_PROJECT),CB_ADDSTRING,0,(LPARAM)name);free(name);cJSON_AddItemToArray(workProjectIds,cJSON_CreateString(str(r,"id")));index++;if(keep&&!strcmp(keep,str(r,"id")))selectedIndex=index;}SendMessageW(wc(W_PROJECT),CB_SETCURSEL,selectedIndex,0);free(keep);}
 static int work_stats_apply(void){char *from=ui_text(wc(W_DATE_FROM)),*to=ui_text(wc(W_DATE_TO));int valid=work_stats_range(from,to);if(valid){snprintf(workStatsFrom,sizeof(workStatsFrom),"%s",from);snprintf(workStatsTo,sizeof(workStatsTo),"%s",to);work_refresh();}free(from);free(to);return valid;}
@@ -92,11 +100,61 @@ static void attach_file(void){const char *kind;J *old=selected_record(&kind);if(
 static void export_attachment(void){const char *kind;J *r=selected_record(&kind);if(!r)return;J *files=get(r,"attachments");int count=cJSON_GetArraySize(files);if(!count){d408_error(workWindow,"当前记录没有工作附件。");return;}size_t size=1;J *f;cJSON_ArrayForEach(f,files)size+=strlen(str(f,"name"))+40;char *options=calloc(size,1);for(int i=0;i<count;i++){char line[700];snprintf(line,sizeof(line),"%s%d · %s",i?"|":"",i+1,str(cJSON_GetArrayItem(files,i),"name"));strcat(options,line);}J *draft=cJSON_CreateObject();D408Field field={L"选择导出附件（校验实际字节）","file",0,0,options};J *choice=d408_form(workWindow,L"工作附件",draft,&field,1);if(choice){int index=atoi(str(choice,"file"))-1;f=cJSON_GetArrayItem(files,index);BYTE *bytes=0;DWORD length=0;if(!f||!file_read(f,&bytes,&length))d408_error(workWindow,"附件缺失或校验失败。");else{wchar_t *path=calloc(32768,sizeof(wchar_t)),*name=wide(str(f,"name"));wcsncpy(path,name,32767);free(name);OPENFILENAMEW of={sizeof(of)};of.hwndOwner=workWindow;of.lpstrFile=path;of.nMaxFile=32768;of.Flags=OFN_OVERWRITEPROMPT|OFN_NOCHANGEDIR;if(GetSaveFileNameW(&of)&&!d408_file_write(path,bytes,length))d408_error(workWindow,"附件导出失败。");free(path);free(bytes);}cJSON_Delete(choice);}free(options);cJSON_Delete(draft);}
 #include "d408-work-backup.inc"
 static void history_record(void){const char *kind;J *r=selected_record(&kind);if(!r)return;char *text=cJSON_Print(get(r,"history"));wchar_t *w=wide(text?text:"[]");MessageBoxW(workWindow,w,L"操作历史（UTC）",MB_OK);free(w);free(text);}
-static void work_layout(void){RECT r;GetClientRect(workWindow,&r);for(int i=0;i<10;i++)ui_move(wc(W_NAV+i),U(12),U(18+i*43),U(132),U(34));int x=U(162),width=r.right-x-U(18),top=U(workPage==0||workPage==8?154:62);ui_move(wc(W_SEARCH),x,U(18),width/2-U(8),U(30));ui_move(wc(W_STATUS),x+width/2,U(18),width/4-U(6),U(200));ui_move(wc(W_PROJECT),x+width*3/4,U(18),width/4,U(240));ui_move(wc(W_OVERVIEW),x,U(62),width,U(80));ui_move(wc(W_DATE_FROM),x,U(62),U(170),U(30));ui_move(wc(W_DATE_TO),x+U(182),U(62),U(170),U(30));ui_move(wc(W_DATE_APPLY),x+U(364),U(62),U(120),U(30));ui_move(wc(W_DATE_RESET),x+U(496),U(62),U(120),U(30));ui_move(wc(W_DATE_NOTE),x,U(104),width,U(42));ui_move(wc(W_LIST),x,top,width,max(U(100),r.bottom-top-U(188)));ui_move(wc(W_EMPTY),x+U(18),top+U(18),width-U(36),U(106));int buttons[]={W_NEW,W_EDIT,W_DELETE,W_ARCHIVE,W_ACTION,W_RELATED,W_ATTACH,W_FILES,W_HISTORY,W_EXPORT,W_IMPORT};for(int i=0;i<11;i++)ui_move(wc(buttons[i]),x+(i%4)*(width/4),r.bottom-U(172)+(i/4)*U(36),width/4-U(6),U(30));ui_move(wc(W_NOTICE),x,r.bottom-U(58),width,U(54));}
-static LRESULT CALLBACK work_proc(HWND h,UINT m,WPARAM w,LPARAM l){if(m==WM_CREATE){workWindow=h;for(int i=0;i<10;i++)workControls[i]=ui_control(h,L"BUTTON",pages[i],WS_TABSTOP,W_NAV+i,0,0,0,0);for(int id=W_SEARCH;id<=W_DATE_NOTE;id++){int edit=id==W_SEARCH||id==W_DATE_FROM||id==W_DATE_TO;const wchar_t *cls=edit?L"EDIT":id==W_STATUS||id==W_PROJECT?L"COMBOBOX":id==W_LIST?L"LISTBOX":(id>=W_NOTICE&&id<=W_EMPTY)||id==W_DATE_NOTE?L"STATIC":L"BUTTON";DWORD style=edit?ES_AUTOHSCROLL:id==W_STATUS||id==W_PROJECT?CBS_DROPDOWNLIST:id==W_LIST?LBS_NOTIFY|WS_VSCROLL|WS_HSCROLL|LBS_NOINTEGRALHEIGHT:0;workControls[id-W_NAV]=ui_control(h,cls,L"",style|WS_TABSTOP,id,0,0,0,0);}const wchar_t *labels[]={L"新建",L"编辑",L"删除",L"归档",L"操作",L"关联 / 打开任务",L"添加工作附件",L"查看 / 导出附件",L"操作历史",L"导出工作备份",L"恢复工作备份"};for(int i=0;i<11;i++)SetWindowTextW(wc(W_NEW+i),labels[i]);const wchar_t *statuses[]={L"全部状态",L"pending",L"running",L"paused",L"waiting",L"completed",L"cancelled"};for(int i=0;i<7;i++)SendMessageW(wc(W_STATUS),CB_ADDSTRING,0,(LPARAM)statuses[i]);SendMessageW(wc(W_STATUS),CB_SETCURSEL,0,0);SendMessageW(wc(W_SEARCH),EM_SETCUEBANNER,TRUE,(LPARAM)L"搜索名称、负责人、描述、联系方式或步骤");SendMessageW(wc(W_DATE_FROM),EM_SETCUEBANNER,TRUE,(LPARAM)L"到期起日 YYYY-MM-DD");SendMessageW(wc(W_DATE_TO),EM_SETCUEBANNER,TRUE,(LPARAM)L"到期止日 YYYY-MM-DD");SetWindowTextW(wc(W_DATE_APPLY),L"应用日期");SetWindowTextW(wc(W_DATE_RESET),L"清除日期");SetWindowTextW(wc(W_DATE_NOTE),L"筛选未归档工作事项；日期按到期日（北京时间），含起止两日。\r\n完成率不含已取消事项；没有有效到期日的事项不进入日期区间。");ui_set(wc(W_DATE_FROM),workStatsFrom);ui_set(wc(W_DATE_TO),workStatsTo);refresh_projects();work_refresh();return 0;}
- if(m==WM_COMMAND){int id=LOWORD(w),event=HIWORD(w);if(workLoading)return 0;if(id>=W_NAV&&id<W_NAV+10){workPage=id-W_NAV;work_refresh();return 0;}if(id==W_SEARCH&&event==EN_CHANGE||(id==W_STATUS||id==W_PROJECT)&&event==CBN_SELCHANGE){work_refresh();return 0;}if(id==W_DATE_APPLY){if(!work_stats_apply())d408_error(workWindow,"请输入有效日期 YYYY-MM-DD，起日不得晚于止日。原筛选与输入保留。");return 0;}if(id==W_DATE_RESET){workStatsFrom[0]=workStatsTo[0]=0;ui_set(wc(W_DATE_FROM),"");ui_set(wc(W_DATE_TO),"");work_refresh();return 0;}if(id==W_NEW){edit_record(1);return 0;}if(id==W_EDIT||id==W_LIST&&event==LBN_DBLCLK){edit_record(0);return 0;}if(id==W_ACTION){action_record();return 0;}if(id==W_DELETE){delete_record();return 0;}if(id==W_ARCHIVE){archive_record();return 0;}if(id==W_RELATED){related_record();return 0;}if(id==W_ATTACH){attach_file();return 0;}if(id==W_FILES){export_attachment();return 0;}if(id==W_HISTORY){history_record();return 0;}if(id==W_EXPORT||id==W_IMPORT){backup_work(id==W_IMPORT);return 0;}}
- if(m==WM_ACTIVATE&&LOWORD(w)!=WA_INACTIVE){refresh_projects();work_refresh();return 0;} if(m==WM_SIZE){work_layout();return 0;}if(m==WM_CLOSE){ShowWindow(h,SW_HIDE);return 0;}if(m==WM_GETMINMAXINFO){((MINMAXINFO*)l)->ptMinTrackSize.x=U(1060);((MINMAXINFO*)l)->ptMinTrackSize.y=U(700);return 0;}if(m==WM_DESTROY){workWindow=0;return 0;}if(m==WM_DRAWITEM){ui_theme_draw_button((DRAWITEMSTRUCT*)l);return TRUE;}return DefWindowProcW(h,m,w,l);}
-void d408_work_open(void){if(!work_open_store())return;if(!workWindow){WNDCLASSW cls={0};cls.lpfnWndProc=work_proc;cls.hInstance=app.instance;cls.hCursor=LoadCursorW(0,IDC_ARROW);cls.hbrBackground=app.white;cls.lpszClassName=L"GxD408Work";RegisterClassW(&cls);workWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 工作管理（本机隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,U(1180),U(780),app.window,0,app.instance,0);}refresh_projects();work_refresh();ShowWindow(workWindow,SW_RESTORE);SetForegroundWindow(workWindow);}
+static void work_layout(void){
+#ifdef GX_D409_UI
+ d409_work_layout();return;
+#endif
+ RECT r;GetClientRect(workWindow,&r);for(int i=0;i<10;i++)ui_move(wc(W_NAV+i),U(12),U(18+i*43),U(132),U(34));int x=U(162),width=r.right-x-U(18),top=U(workPage==0||workPage==8?154:62);ui_move(wc(W_SEARCH),x,U(18),width/2-U(8),U(30));ui_move(wc(W_STATUS),x+width/2,U(18),width/4-U(6),U(200));ui_move(wc(W_PROJECT),x+width*3/4,U(18),width/4,U(240));ui_move(wc(W_OVERVIEW),x,U(62),width,U(80));ui_move(wc(W_DATE_FROM),x,U(62),U(170),U(30));ui_move(wc(W_DATE_TO),x+U(182),U(62),U(170),U(30));ui_move(wc(W_DATE_APPLY),x+U(364),U(62),U(120),U(30));ui_move(wc(W_DATE_RESET),x+U(496),U(62),U(120),U(30));ui_move(wc(W_DATE_NOTE),x,U(104),width,U(42));ui_move(wc(W_LIST),x,top,width,max(U(100),r.bottom-top-U(188)));ui_move(wc(W_EMPTY),x+U(18),top+U(18),width-U(36),U(106));int buttons[]={W_NEW,W_EDIT,W_DELETE,W_ARCHIVE,W_ACTION,W_RELATED,W_ATTACH,W_FILES,W_HISTORY,W_EXPORT,W_IMPORT};for(int i=0;i<11;i++)ui_move(wc(buttons[i]),x+(i%4)*(width/4),r.bottom-U(172)+(i/4)*U(36),width/4-U(6),U(30));ui_move(wc(W_NOTICE),x,r.bottom-U(58),width,U(54));}
+static LRESULT CALLBACK work_proc(HWND h,UINT m,WPARAM w,LPARAM l){if(m==WM_CREATE){workWindow=h;for(int i=0;i<10;i++)workControls[i]=ui_control(h,L"BUTTON",pages[i],WS_TABSTOP,W_NAV+i,0,0,0,0);for(int id=W_SEARCH;id<=W_DATE_NOTE;id++){int edit=id==W_SEARCH||id==W_DATE_FROM||id==W_DATE_TO;const wchar_t *cls=edit?L"EDIT":id==W_STATUS||id==W_PROJECT?L"COMBOBOX":id==W_LIST?L"LISTBOX":(id>=W_NOTICE&&id<=W_EMPTY)||id==W_DATE_NOTE?L"STATIC":L"BUTTON";DWORD style=edit?ES_AUTOHSCROLL:id==W_STATUS||id==W_PROJECT?CBS_DROPDOWNLIST:id==W_LIST?LBS_NOTIFY|WS_VSCROLL|WS_HSCROLL|LBS_NOINTEGRALHEIGHT:0;
+#ifdef GX_D409_UI
+ if(id==W_LIST)style|=LBS_OWNERDRAWFIXED|LBS_HASSTRINGS;
+#endif
+ workControls[id-W_NAV]=ui_control(h,cls,L"",style|WS_TABSTOP,id,0,0,0,0);}const wchar_t *labels[]={L"新建",L"编辑",L"删除",L"归档",L"操作",L"关联 / 打开任务",L"添加工作附件",L"查看 / 导出附件",L"操作历史",L"导出工作备份",L"恢复工作备份"};for(int i=0;i<11;i++)SetWindowTextW(wc(W_NEW+i),labels[i]);const wchar_t *statuses[]={L"全部状态",L"pending",L"running",L"paused",L"waiting",L"completed",L"cancelled"};for(int i=0;i<7;i++)SendMessageW(wc(W_STATUS),CB_ADDSTRING,0,(LPARAM)statuses[i]);SendMessageW(wc(W_STATUS),CB_SETCURSEL,0,0);SendMessageW(wc(W_SEARCH),EM_SETCUEBANNER,TRUE,(LPARAM)L"搜索名称、负责人、描述、联系方式或步骤");SendMessageW(wc(W_DATE_FROM),EM_SETCUEBANNER,TRUE,(LPARAM)L"到期起日 YYYY-MM-DD");SendMessageW(wc(W_DATE_TO),EM_SETCUEBANNER,TRUE,(LPARAM)L"到期止日 YYYY-MM-DD");SetWindowTextW(wc(W_DATE_APPLY),L"应用日期");SetWindowTextW(wc(W_DATE_RESET),L"清除日期");SetWindowTextW(wc(W_DATE_NOTE),L"筛选未归档工作事项；日期按到期日（北京时间），含起止两日。\r\n完成率不含已取消事项；没有有效到期日的事项不进入日期区间。");ui_set(wc(W_DATE_FROM),workStatsFrom);ui_set(wc(W_DATE_TO),workStatsTo);
+#ifdef GX_D409_UI
+ d409_work_init();
+#endif
+ refresh_projects();work_refresh();return 0;}
+ if(m==WM_COMMAND){int id=LOWORD(w),event=HIWORD(w);if(workLoading)return 0;
+#ifdef GX_D409_UI
+ if(id==D409_W_HOME){ShowWindow(app.window,SW_RESTORE);SetForegroundWindow(app.window);ui_navigate(0);return 0;}if(id==D409_W_TIMER){d408_timer_open();return 0;}if(id==D409_W_FEEDBACK){d408_feedback_open();return 0;}
+ if(id==W_LIST&&event==LBN_SELCHANGE){d409_work_selection();d409_work_detail();return 0;}
+#endif
+ if(id>=W_NAV&&id<W_NAV+10){
+#ifdef GX_D409_UI
+ d409_work_switch(id-W_NAV);
+#else
+ workPage=id-W_NAV;
+#endif
+ work_refresh();return 0;}if(id==W_SEARCH&&event==EN_CHANGE||(id==W_STATUS||id==W_PROJECT)&&event==CBN_SELCHANGE){work_refresh();return 0;}if(id==W_DATE_APPLY){if(!work_stats_apply())d408_error(workWindow,"请输入有效日期 YYYY-MM-DD，起日不得晚于止日。原筛选与输入保留。");return 0;}if(id==W_DATE_RESET){workStatsFrom[0]=workStatsTo[0]=0;ui_set(wc(W_DATE_FROM),"");ui_set(wc(W_DATE_TO),"");work_refresh();return 0;}if(id==W_NEW){edit_record(1);return 0;}if(id==W_EDIT||id==W_LIST&&event==LBN_DBLCLK){edit_record(0);return 0;}if(id==W_ACTION){action_record();return 0;}if(id==W_DELETE){delete_record();return 0;}if(id==W_ARCHIVE){archive_record();return 0;}if(id==W_RELATED){related_record();return 0;}if(id==W_ATTACH){attach_file();return 0;}if(id==W_FILES){export_attachment();return 0;}if(id==W_HISTORY){history_record();return 0;}if(id==W_EXPORT||id==W_IMPORT){backup_work(id==W_IMPORT);return 0;}}
+ if(m==WM_ACTIVATE&&LOWORD(w)!=WA_INACTIVE){refresh_projects();work_refresh();return 0;} if(m==WM_SIZE){work_layout();return 0;}if(m==WM_CLOSE){ShowWindow(h,SW_HIDE);return 0;}if(m==WM_GETMINMAXINFO){((MINMAXINFO*)l)->ptMinTrackSize.x=U(1060);((MINMAXINFO*)l)->ptMinTrackSize.y=U(
+#ifdef GX_D409_UI
+680
+#else
+700
+#endif
+);return 0;}if(m==WM_DESTROY){
+#ifdef GX_D409_UI
+ d409_visual_free(h);d409_work_reset_views();
+#endif
+ workWindow=0;return 0;}
+#ifdef GX_D409_UI
+ if(m==WM_MEASUREITEM&&((MEASUREITEMSTRUCT*)l)->CtlID==W_LIST){((MEASUREITEMSTRUCT*)l)->itemHeight=U(60);return TRUE;}
+ if(m==WM_PAINT||m==WM_PRINTCLIENT){PAINTSTRUCT ps;HDC dc=m==WM_PAINT?BeginPaint(h,&ps):(HDC)w;d409_surface(h,dc,U(196));if(m==WM_PAINT)EndPaint(h,&ps);return 0;}
+ if(m==WM_CTLCOLORSTATIC||m==WM_CTLCOLOREDIT||m==WM_CTLCOLORLISTBOX)return d409_control_color(h,m,w,l);
+ if(m==WM_DRAWITEM&&((DRAWITEMSTRUCT*)l)->CtlID==W_LIST){d409_work_draw((DRAWITEMSTRUCT*)l);return TRUE;}
+#endif
+ if(m==WM_DRAWITEM){ui_theme_draw_button((DRAWITEMSTRUCT*)l);return TRUE;}return DefWindowProcW(h,m,w,l);}
+void d408_work_open(void){if(!work_open_store())return;if(!workWindow){WNDCLASSW cls={0};cls.lpfnWndProc=work_proc;cls.hInstance=app.instance;cls.hCursor=LoadCursorW(0,IDC_ARROW);cls.hbrBackground=app.white;cls.lpszClassName=L"GxD408Work";RegisterClassW(&cls);workWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 工作管理（本机隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,
+#ifdef GX_D409_UI
+U(1280),U(860),
+#else
+U(1180),U(780),
+#endif
+app.window,0,app.instance,0);
+#ifdef GX_D409_UI
+d409_fit_window(workWindow);
+#endif
+}refresh_projects();work_refresh();ShowWindow(workWindow,SW_RESTORE);SetForegroundWindow(workWindow);}
 void d408_work_close(void){if(workWindow)DestroyWindow(workWindow);cJSON_Delete(workRows);workRows=0;cJSON_Delete(workProjectIds);workProjectIds=0;d408_store_close(&workStore);workReady=0;}
 #include "d408-work-tests.inc"
 int d408_work_regression(const wchar_t *render){

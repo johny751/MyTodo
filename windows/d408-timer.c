@@ -1,4 +1,5 @@
 #include "d408.h"
+#include "d409-ui.h"
 #ifdef GX_D408_CANDIDATE
 
 enum {T_MODE=4600,T_FOCUS,T_BREAK,T_TASK,T_SAVE,T_START,T_PAUSE,T_RESUME,T_END,T_FINISH,T_REST,T_RESET,T_ACK,T_HISTORY,T_SUMMARY,T_CLOCK,T_STATUS,T_CLOSE};
@@ -136,6 +137,33 @@ static void refresh_timer(int configuration){
  snprintf(text,sizeof(text),"历史（UTC）%d条 · 已完成阶段%d次 · 提前结束%d次\r\n专注累计%.1f分钟 · 完成番茄%d轮（仅专注倒计时）\r\n北京时间：今日%.1f分钟 / %d轮 · 近7天%.1f分钟 / %d轮",cJSON_GetArraySize(history),completed,ended,total/60000.,rounds,day_elapsed(statistics,today,today+86400000LL)/60000.,day_rounds(history,today,today+86400000LL),day_elapsed(statistics,today-6*86400000LL,today+86400000LL)/60000.,day_rounds(history,today-6*86400000LL,today+86400000LL));ui_set(control(T_SUMMARY),text);timerLoading=0;cJSON_Delete(statistics);cJSON_Delete(state);
 }
 static void timer_layout(void){
+#ifdef GX_D409_UI
+ RECT r;GetClientRect(timerWindow,&r);int wide=r.right>=U(1000),pad=U(24),full=r.right-pad*2;
+ ShowWindow(GetDlgItem(timerWindow,5220),wide?SW_SHOW:SW_HIDE);ShowWindow(GetDlgItem(timerWindow,5221),wide?SW_SHOW:SW_HIDE);
+ ShowWindow(GetDlgItem(timerWindow,5222),wide?SW_SHOW:SW_HIDE);
+ if(wide){
+  int left=(full-U(32))*55/100,right=full-left-U(32),rx=pad+left+U(32);
+  ui_move(GetDlgItem(timerWindow,5220),pad,U(24),full,U(38));ui_move(GetDlgItem(timerWindow,5221),pad,U(66),full,U(24));
+  ui_move(control(T_CLOCK),pad,U(104),left,U(76));ui_move(GetDlgItem(timerWindow,5223),pad,U(184),left,U(8));
+  ui_move(GetDlgItem(timerWindow,5224),pad,U(198),left,U(22));ui_move(control(T_STATUS),pad,U(226),left,U(96));
+  ui_move(GetDlgItem(timerWindow,5225),pad,U(584),left,U(24));
+  int cw=(left-U(24))/3;for(int i=0;i<3;i++)ui_move(GetDlgItem(timerWindow,4596+i),pad+i*(cw+U(12)),U(334),cw,U(22));
+  ui_move(control(T_MODE),pad,U(360),cw,U(180));ui_move(control(T_FOCUS),pad+cw+U(12),U(360),cw,U(34));ui_move(control(T_BREAK),pad+2*(cw+U(12)),U(360),cw,U(34));
+  ui_move(GetDlgItem(timerWindow,4599),pad,U(410),left,U(22));ui_move(control(T_TASK),pad,U(438),left-U(120),U(260));ui_move(control(T_SAVE),pad+left-U(108),U(438),U(108),U(34));
+  int ids[]={T_START,T_PAUSE,T_RESUME,T_END,T_FINISH,T_REST,T_RESET,T_ACK};for(int i=0;i<8;i++)ui_move(control(ids[i]),pad+(i%4)*((left+U(8))/4),U(492+(i/4)*44),(left-U(24))/4,U(36));
+  ui_move(GetDlgItem(timerWindow,5222),rx,U(108),right,U(24));ui_move(control(T_SUMMARY),rx,U(146),right,U(114));ui_move(control(T_HISTORY),rx,U(276),right,max(U(120),r.bottom-U(342)));
+ }else{
+  int width=r.right-U(36);ui_move(control(T_CLOCK),U(18),U(12),width,U(70));
+  ui_move(GetDlgItem(timerWindow,5223),U(18),U(86),width,U(8));ui_move(GetDlgItem(timerWindow,5224),U(18),U(100),width,U(22));
+  ui_move(control(T_STATUS),U(18),U(126),width,U(76));
+  ui_move(GetDlgItem(timerWindow,4596),U(18),U(208),U(148),U(20));ui_move(GetDlgItem(timerWindow,4597),U(184),U(208),U(86),U(20));ui_move(GetDlgItem(timerWindow,4598),U(286),U(208),U(86),U(20));
+  ui_move(control(T_MODE),U(18),U(234),U(148),U(180));ui_move(control(T_FOCUS),U(184),U(234),U(86),U(30));ui_move(control(T_BREAK),U(286),U(234),U(86),U(30));ui_move(control(T_SAVE),U(390),U(234),width-U(372),U(30));
+  ui_move(GetDlgItem(timerWindow,4599),U(18),U(276),width,U(20));ui_move(control(T_TASK),U(18),U(300),width,U(260));int ids[]={T_START,T_PAUSE,T_RESUME,T_END,T_FINISH,T_REST,T_RESET,T_ACK};for(int i=0;i<8;i++)ui_move(control(ids[i]),U(18)+(i%4)*(width/4),U(344+(i/4)*42),width/4-U(8),U(34));
+  ui_move(GetDlgItem(timerWindow,5225),U(18),U(434),width,U(24));
+  ui_move(control(T_SUMMARY),U(18),U(466),width,U(68));ui_move(control(T_HISTORY),U(18),U(542),width,max(U(40),r.bottom-U(608)));
+ }
+ ui_move(control(T_CLOSE),r.right-U(132),r.bottom-U(48),U(108),U(32));return;
+#else
  RECT r;GetClientRect(timerWindow,&r);int width=r.right-U(36);
  ui_move(control(T_CLOCK),U(18),U(18),width,U(52));ui_move(control(T_STATUS),U(18),U(78),width,U(95));
  ui_move(GetDlgItem(timerWindow,4596),U(18),U(184),U(148),U(20));ui_move(GetDlgItem(timerWindow,4597),U(184),U(184),U(86),U(20));ui_move(GetDlgItem(timerWindow,4598),U(286),U(184),U(86),U(20));
@@ -144,7 +172,30 @@ static void timer_layout(void){
  int ids[]={T_START,T_PAUSE,T_RESUME,T_END,T_FINISH,T_REST,T_RESET,T_ACK};
  for(int i=0;i<8;i++)ui_move(control(ids[i]),U(18)+(i%4)*(width/4),U(320+(i/4)*42),width/4-U(8),U(34));
  ui_move(control(T_SUMMARY),U(18),U(412),width,U(68));ui_move(control(T_HISTORY),U(18),U(488),width,max(U(90),r.bottom-U(554)));ui_move(control(T_CLOSE),r.right-U(120),r.bottom-U(48),U(102),U(30));
+#endif
 }
+#ifdef GX_D409_UI
+/* Render a clone only: the existing timer refresh, clock, commands and commits are unchanged. */
+static void d409_timer_progress(void){
+ if(!timerWindow)return;J *state=d408_timer_snapshot();if(!state)return;
+ J *config=get(state,"configuration");int idle=!strcmp(str(state,"status"),"idle");
+ const char *mode=idle?str(config,"mode"):str(state,"mode");double elapsed=idle?0:num(state,"elapsedMillis"),target=idle?num(config,"durationMinutes")*60000:num(state,"targetMillis");
+ int countup=!strcmp(mode,"countup");int progress=!countup&&target>0?(int)(fmin(1,fmax(0,elapsed/target))*10000):0;
+ HWND bar=GetDlgItem(timerWindow,5223);ShowWindow(bar,countup?SW_HIDE:SW_SHOW);SendMessageW(bar,PBM_SETPOS,progress,0);
+ char text[160];int64_t seconds=(int64_t)(elapsed/1000),total=(int64_t)(target/1000);
+ if(countup)snprintf(text,sizeof(text),"正计时 · 已累计 %02lld:%02lld:%02lld · 无固定终点",seconds/3600,seconds/60%60,seconds%60);
+ else snprintf(text,sizeof(text),"进度 %.1f%% · 已用 %02lld:%02lld:%02lld / %02lld:%02lld:%02lld",progress/100.,seconds/3600,seconds/60%60,seconds%60,total/3600,total/60%60,total%60);
+ ui_set(GetDlgItem(timerWindow,5224),text);
+ const char *taskId=idle?str(config,"taskId"):str(state,"taskId"),*accountId=idle?str(config,"accountId"):str(state,"accountId");
+ const char *project="未关联任务";J *row=0;
+ if(*taskId){
+  if(strcmp(accountId,str(app.registry,"activeId")))project="任务属于其他账号，未读取当前账号项目";
+  else {char error[sizeof(app.db.error)];memcpy(error,app.db.error,sizeof(error));char *key=make_key("tasks",taskId);row=db_row(&app.db,key);free(key);int failed=*app.db.error!=0;memcpy(app.db.error,error,sizeof(error));J *task=get(row,"data");project=failed?"项目暂不可读取":!row||truth(row,"deleted")||truth(task,"_deleted")?"关联任务已不可用":*str(task,"project")?str(task,"project"):"未设置项目";}
+ }
+ size_t length=strlen(project)+32;char *description=malloc(length);if(description){snprintf(description,length,"关联项目：%s",project);HWND field=GetDlgItem(timerWindow,5225);char *old=ui_text(field);if(strcmp(old,description))ui_set(field,description);free(old);free(description);}
+ cJSON_Delete(row);cJSON_Delete(state);
+}
+#endif
 static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
  if(message==WM_CREATE){timerWindow=h;
    const wchar_t *labels[]={L"倒计时",L"25",L"5",L"",L"保存设置",L"开始",L"暂停",L"继续",L"提前结束",L"完成正计时",L"开始休息",L"重置",L"确认完成",L"历史记录",L"历史与统计",L"25:00",L"",L"关闭窗口"};
@@ -155,6 +206,14 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    SendMessageW(control(T_CLOCK),WM_SETFONT,(WPARAM)app.title,TRUE);
    ui_control(h,L"STATIC",L"专注模式",0,4596,0,0,0,0);ui_control(h,L"STATIC",L"专注分钟",0,4597,0,0,0,0);ui_control(h,L"STATIC",L"休息分钟",0,4598,0,0,0,0);
    ui_control(h,L"STATIC",L"关联任务（保存将修改本轮归属） · 分钟范围1–180",0,4599,0,0,0,0);
+#ifdef GX_D409_UI
+   d409_visual_init(h);d409_label(h,5220,L"番茄专注",1);d409_label(h,5221,L"把注意力放在当前工作上，回顾每次专注与休息。",0);d409_label(h,5222,L"历史与专注概览",0);
+   INITCOMMONCONTROLSEX progressControls={sizeof(progressControls),ICC_PROGRESS_CLASS};InitCommonControlsEx(&progressControls);
+   HWND progress=ui_control(h,PROGRESS_CLASSW,L"计时进度",PBS_SMOOTH,5223,0,0,0,0);SendMessageW(progress,PBM_SETRANGE32,0,10000);SendMessageW(progress,PBM_SETBARCOLOR,0,D409_ACCENT);
+   d409_label(h,5224,L"",0);ui_control(h,L"EDIT",L"关联项目：未关联任务",ES_READONLY|ES_AUTOHSCROLL|WS_TABSTOP,5225,0,0,0,0);d409_timer_progress();
+   D409Visual *visual=d409_visual(h);if(visual)SendMessageW(control(T_CLOCK),WM_SETFONT,(WPARAM)visual->number,TRUE);
+   for(int i=T_SAVE;i<=T_ACK;i++)d409_role(control(i),i==T_START||i==T_RESUME||i==T_ACK?1:i==T_END?3:4);d409_role(control(T_CLOSE),4);
+#endif
    refresh_timer(1);SetTimer(h,1,500,0);return 0;
  }
  if(message==WM_COMMAND){int id=LOWORD(w);const char *action=id==T_START?"start":id==T_PAUSE?"pause":id==T_RESUME?"resume":id==T_END?"end":id==T_FINISH?"finish":id==T_REST?"break":id==T_RESET?"reset":id==T_ACK?"claim-completion":0;
@@ -162,11 +221,29 @@ static LRESULT CALLBACK timer_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    if(id==T_SAVE){J *config=dup(get(timerStore.data,"configuration"));char *focus=ui_text(control(T_FOCUS)),*rest=ui_text(control(T_BREAK));sn(config,"durationMinutes",atof(focus));sn(config,"breakMinutes",atof(rest));free(focus);free(rest);ss(config,"mode",SendMessageW(control(T_MODE),CB_GETCURSEL,0,0)==1?"countup":"countdown");int selected=(int)SendMessageW(control(T_TASK),CB_GETCURSEL,0,0);J *choice=cJSON_GetArrayItem(taskChoices,selected);ss(config,"accountId",str(app.registry,"activeId"));ss(config,"taskId",str(choice,"id"));ss(config,"taskTitle",str(choice,"title"));char command[80];uuid(command);if(!d408_timer_command("configure",config,command,-1))d408_error(h,timerError);cJSON_Delete(config);refresh_timer(0);return 0;}
    if(action){if((id==T_END||id==T_RESET)&&active(timerStore.data)&&MessageBoxW(h,L"结束当前阶段并保留已计时时长？",L"番茄钟",MB_OKCANCEL|MB_ICONQUESTION)!=IDOK)return 0;char command[80];uuid(command);if(!d408_timer_command(action,0,command,-1))d408_error(h,timerError);refresh_timer(0);return 0;}
  }
- if(message==WM_TIMER){d408_timer_tick();refresh_timer(0);return 0;}
+ if(message==WM_TIMER){d408_timer_tick();refresh_timer(0);
+#ifdef GX_D409_UI
+ d409_timer_progress();
+#endif
+ return 0;}
  if(message==WM_SIZE){timer_layout();return 0;}
- if(message==WM_GETMINMAXINFO){((MINMAXINFO*)l)->ptMinTrackSize.x=U(650);((MINMAXINFO*)l)->ptMinTrackSize.y=U(720);return 0;}
+ if(message==WM_GETMINMAXINFO){((MINMAXINFO*)l)->ptMinTrackSize.x=U(650);((MINMAXINFO*)l)->ptMinTrackSize.y=U(
+#ifdef GX_D409_UI
+680
+#else
+720
+#endif
+);return 0;}
  if(message==WM_CLOSE){ShowWindow(h,SW_HIDE);return 0;}
- if(message==WM_DESTROY){KillTimer(h,1);timerWindow=0;return 0;}
+ if(message==WM_DESTROY){KillTimer(h,1);
+#ifdef GX_D409_UI
+ d409_visual_free(h);
+#endif
+ timerWindow=0;return 0;}
+#ifdef GX_D409_UI
+ if(message==WM_PAINT||message==WM_PRINTCLIENT){PAINTSTRUCT ps;HDC dc=message==WM_PAINT?BeginPaint(h,&ps):(HDC)w;d409_surface(h,dc,0);if(message==WM_PAINT)EndPaint(h,&ps);return 0;}
+ if(message==WM_CTLCOLORSTATIC||message==WM_CTLCOLOREDIT||message==WM_CTLCOLORLISTBOX)return d409_control_color(h,message,w,l);
+#endif
  if(message==WM_DRAWITEM){ui_theme_draw_button((DRAWITEMSTRUCT*)l);return TRUE;}
  if(message==WM_CTLCOLORSTATIC||message==WM_CTLCOLOREDIT||message==WM_CTLCOLORLISTBOX){SetTextColor((HDC)w,RGB(35,62,51));SetBkColor((HDC)w,RGB(250,252,250));return (LRESULT)app.white;}
  return DefWindowProcW(h,message,w,l);
@@ -175,8 +252,22 @@ void d408_timer_open(void){
  if(!timerReady&&timerTried){d408_store_close(&timerStore);timerTried=0;}
  if(!ready()){d408_error(app.window,timerError);return;}if(!ui_catalog_commit()||!detail_save(0))return;
  if(!timerWindow){WNDCLASSW cls={0};cls.lpfnWndProc=timer_proc;cls.hInstance=app.instance;cls.hCursor=LoadCursorW(0,IDC_ARROW);cls.hbrBackground=app.white;cls.lpszClassName=L"GxD408PomodoroTimer";RegisterClassW(&cls);
-   timerWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 番茄钟（隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,U(760),U(820),app.window,0,app.instance,0);}
- refresh_timer(1);ShowWindow(timerWindow,SW_RESTORE);timer_layout();RedrawWindow(timerWindow,0,0,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);SetForegroundWindow(timerWindow);
+   timerWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 番茄钟（隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,
+#ifdef GX_D409_UI
+   U(1180),U(820),
+#else
+   U(760),U(820),
+#endif
+   app.window,0,app.instance,0);
+#ifdef GX_D409_UI
+   d409_fit_window(timerWindow);
+#endif
+ }
+ refresh_timer(1);
+#ifdef GX_D409_UI
+ d409_timer_progress();
+#endif
+ ShowWindow(timerWindow,SW_RESTORE);timer_layout();RedrawWindow(timerWindow,0,0,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);SetForegroundWindow(timerWindow);
 }
 int d408_timer_shutdown(void){
  if(timerReady){J *next=dup(timerStore.data);advance(next);int ok=commit(next);cJSON_Delete(next);if(!ok)return 0;}

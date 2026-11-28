@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "kind": "d409-native-ui-contract",
+  "caseIds": ["N409-01", "N409-02", "N409-03", "N409-04", "N409-05", "N409-06", "N409-07", "N409-08", "N409-09", "N409-10", "N409-11", "N409-12", "N409-13", "N409-14", "N409-15", "N409-16", "N409-17", "N409-18", "N409-19", "N409-20", "N409-21", "N409-22", "N409-23", "N409-24"],
+  "requiredScreenshots": ["quadrants", "dashboard", "items", "projects", "templates", "instances", "contacts", "followups", "archive", "statistics", "settings", "timer-history", "feedback", "selected-note", "historical-time-footer", "validation-kept-draft", "timer-paused", "keyboard-focus", "minimum-layout"],
+  "allCasesMandatory": true,
+  "skipsAllowed": false,
+  "productIdentity": "D4-08",
+  "uiDesignStage": "D4-09",
+  "dpiMeaning": "Requested application scaling via --visual-dpi; OS window DPI and desktop are measured separately",
+  "limits": ["Not real Chinese IME composition", "Not physical multi-monitor DPI transition", "No production admission", "Account switching and injected write failures remain in frozen regression coverage; new external suite makes no duplicate claim"]
+}

@@ -20,7 +20,11 @@
 #define GX_TASK_TEXT_LEFT 47
 #define GX_MENU_WIDTH 30
 #define IDI_GXTODO 101
+#ifdef GX_D409_UI
+#define GX_SIDE 196
+#else
 #define GX_SIDE 90
+#endif
 #define GX_DRAWER 410
 #define GX_TOP 45
 #define GX_FOOT 34

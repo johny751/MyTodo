@@ -5,5 +5,7 @@ fs.writeFileSync(path.join(out,'build-identity.json'),JSON.stringify({kind:'inte
 const fileList=execFileSync('git',['ls-tree','-r','--name-only','-z',e.GITHUB_SHA,'prototypes/d4-09','docs/upgrade/d4-09'],{encoding:'utf8'}).split('\0').filter(Boolean);
 const members=fileList.map(file=>({path:file,sha256:createHash('sha256').update(fs.readFileSync(file)).digest('hex'),bytes:fs.statSync(file).size}));fs.writeFileSync(path.join(out,'FILE-SHA256.json'),JSON.stringify({sourceSHA:e.GITHUB_SHA,files:members},null,2)+'\n');
 execFileSync('git',['archive','--format=zip','--output='+path.join(out,'MyTodo-D409-design-prototypes.zip'),'--add-file='+path.join(out,'build-identity.json'),'--add-file='+path.join(out,'FILE-SHA256.json'),e.GITHUB_SHA,'prototypes/d4-09','docs/upgrade/d4-09'],{stdio:'inherit'});
-execFileSync('git',['archive','--format=zip','--output='+path.join(out,'MyTodo-D409-source.zip'),e.GITHUB_SHA],{stdio:'inherit'});
+if(fs.existsSync('docs/upgrade/d4-09/source-admission.json')){
+  fs.writeFileSync(path.join(out,'SOURCE-PACKAGE-LOCATION.json'),JSON.stringify({sourceSHA:e.GITHUB_SHA,packagedBy:'D4-09 candidate UI and preserved regression',artifact:'d409-source-<runId>-<attempt>',note:'The integration workflow packages the full exact source once. This artifact contains the interactive prototype bundle.'},null,2)+'\n');
+}else execFileSync('git',['archive','--format=zip','--output='+path.join(out,'MyTodo-D409-source.zip'),e.GITHUB_SHA],{stdio:'inherit'});
 const hashes=fs.readdirSync(out).sort().map(file=>createHash('sha256').update(fs.readFileSync(path.join(out,file))).digest('hex')+'  '+file);fs.writeFileSync(path.join(out,'SHA256SUMS.txt'),hashes.join('\n')+'\n');

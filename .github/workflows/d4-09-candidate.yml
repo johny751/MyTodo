@@ -1,0 +1,509 @@
+name: D4-09 candidate UI and preserved regression
+on:
+  push:
+    branches: [d4/d4-09-design-candidate-1]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  domain:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Authorized native diff and immutable accepted evidence guard
+        shell: bash
+        run: |
+          node tests/d4-09/scope.mjs
+          node tests/d4-ui/provenance.mjs
+          node --test tests/d4-03-platforms/scope.test.mjs tests/d4-05/scope.test.mjs
+      - name: Mature pure domain tests
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-reporter=tap tests/d4-ui/domain.test.mjs tests/d4-03-platforms/native-timer-adapter.test.mjs tests/d4-ui/web-service.test.mjs 2>&1 | tee "$RUNNER_TEMP/d4-domain-${{ matrix.os }}.tap"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d4-domain-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-domain-${{ matrix.os }}.tap
+            ${{ runner.temp }}/d403-source-provenance.json
+            ${{ runner.temp }}/d409-scope.json
+            ${{ runner.temp }}/d4-web-v2-*/
+          if-no-files-found: error
+  browser:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    needs: domain
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 20
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install official distro CJK fonts for readable cloud screenshots
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - name: Build offline Windows and Web demo
+        id: webbuild
+        run: node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Real DOM interactions and responsive screenshots
+        run: node tests/d4-ui/run-browser.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: D4-08 independent browser behavior regression
+        if: ${{ always() && steps.webbuild.outcome == 'success' }}
+        env:
+          D408_APP_SOURCE_SHA: ${{ github.sha }}
+        run: node tests/d4-08/web-run.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-web-results"
+      - name: Independent work relationship and template preservation suite
+        if: ${{ always() && steps.webbuild.outcome == 'success' }}
+        env:
+          D408_APP_SOURCE_SHA: ${{ github.sha }}
+        run: node tests/d4-08/web-work-run.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-web-work-results"
+      - name: D409 actual candidate presentation interactions and state retention
+        if: ${{ always() && steps.webbuild.outcome == 'success' }}
+        env:
+          D409_WEB_VARIANT: demo
+          D409_APP_SOURCE_SHA: ${{ github.sha }}
+        run: node tests/d4-09/web/candidate-run.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d409-web-demo"
+      - name: Package verified experience
+        run: node tests/d4-ui/package-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - name: Observe actual packaged Windows launcher in a headed session
+        if: runner.os == 'Windows'
+        env:
+          D4_PREVIEW_CI_INSPECT: '1'
+        run: node tests/d4-ui/run-windows-launcher.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d403-ui-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/mytodo-d4-01-demo.html
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.json
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.md
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.bat
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.cmd
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.txt
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/*.zip
+            ${{ runner.temp }}/d4-ui-${{ github.run_id }}/screenshots
+            ${{ runner.temp }}/d408-web-results/*.json
+            ${{ runner.temp }}/d408-web-results/*.jsonl
+            ${{ runner.temp }}/d408-web-results/*.txt
+            ${{ runner.temp }}/d408-web-results/screenshots/
+            ${{ runner.temp }}/d408-web-results/snapshots/
+            ${{ runner.temp }}/d408-web-work-results/*.json
+            ${{ runner.temp }}/d408-web-work-results/*.jsonl
+            ${{ runner.temp }}/d408-web-work-results/*.txt
+            ${{ runner.temp }}/d408-web-work-results/screenshots/
+            ${{ runner.temp }}/d408-web-work-results/snapshots/
+            ${{ runner.temp }}/d409-web-demo/*.json
+            ${{ runner.temp }}/d409-web-demo/*.jsonl
+            ${{ runner.temp }}/d409-web-demo/*.txt
+            ${{ runner.temp }}/d409-web-demo/screenshots/
+            ${{ runner.temp }}/d409-web-demo/snapshots/
+          if-no-files-found: error
+
+  android:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - name: Preserve exact Git blob bytes on hosted checkout
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Frozen native clock regression
+        run: bash tests/d4-03-platforms/run-jvm.sh
+      - name: Prepare official compile SDK
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35"'
+      - name: Build independent Android preview and tests
+        run: |
+          node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID"
+          node tests/d4-09/legacy-android-build.mjs d403 "$RUNNER_TEMP/d4-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-platform-$GITHUB_RUN_ID"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Native touchscreen and background regression
+        run: bash tests/d4-03-platforms/run-instrumentation.sh "$RUNNER_TEMP/d4-platform-$GITHUB_RUN_ID" "$RUNNER_TEMP/d4-native-evidence-$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d403-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/mytodo-d4-03-isolated-preview.apk
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/mytodo-d4-03-isolated-tests.apk
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/*.json
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/*.txt
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/*.cmd
+            ${{ runner.temp }}/d4-platform-${{ github.run_id }}/mytodo-d4-03-demo.html
+            ${{ runner.temp }}/d4-native-evidence-${{ github.run_id }}/
+            ${{ runner.temp }}/d4-jvm-*/
+            ${{ runner.temp }}/d403-emulator-boot.log
+            ${{ runner.temp }}/d403-emulator-environment.log
+            ${{ runner.temp }}/d403-emulator-poll.log
+            ${{ runner.temp }}/d409-d403-build-adapter/
+          if-no-files-found: error
+
+  windows-native:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    runs-on: windows-latest
+    timeout-minutes: 25
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Preserve exact Git blob bytes
+        shell: bash
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify admitted source before native build
+        run: node tests/d4-09/scope.mjs
+      - name: Build actual candidate Win32 executable with isolated entry guard
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path "$env:RUNNER_TEMP/d4-04-build" | Out-Null
+          node scripts/build-windows.mjs "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" --d404-candidate 2>&1 | Tee-Object "$env:RUNNER_TEMP/d4-04-build/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Actual Win32 controls and unchanged mature native regressions
+        shell: pwsh
+        run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d4-04-build/MyTodo-Native-Candidate.exe" "$env:RUNNER_TEMP/d4-04-evidence"
+      - name: Package source-bound native candidate
+        shell: pwsh
+        run: node tests/d4-native/package-windows.mjs "$env:RUNNER_TEMP/d4-04-build" "$env:RUNNER_TEMP/d4-04-evidence"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d404-win32-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-04-build/
+            ${{ runner.temp }}/d4-04-evidence/
+          if-no-files-found: error
+
+  android-services:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - name: Preserve exact Git blob bytes
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Protect old Android identities and test sources
+        run: node --test tests/d4-05/scope.test.mjs
+      - name: Prepare official compile SDK and build tools
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Compile separate formal-component service candidate
+        run: |
+          node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-service-ui-$GITHUB_RUN_ID"
+          node tests/d4-09/legacy-android-build.mjs d405 "$RUNNER_TEMP/d4-service-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Native lifecycle, notification, FeedbackKit and process recovery
+        run: bash tests/d4-05/run-native.sh "$RUNNER_TEMP/d405-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d405-services-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d405-native-*/*.apk
+            ${{ runner.temp }}/d405-native-*/*.json
+            ${{ runner.temp }}/d405-native-*/*.txt
+            ${{ runner.temp }}/d405-native-*/native-evidence/
+            ${{ runner.temp }}/d409-d405-build-adapter/
+            ${{ runner.temp }}/d403-emulator-*.log
+          if-no-files-found: error
+
+
+  windows-d409:
+    needs: domain
+    runs-on: windows-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build actual D409 UI in the preserved Win32 candidate container
+        id: nativebuild
+        run: |
+          New-Item -ItemType Directory -Path "$env:RUNNER_TEMP/d4-08-build" | Out-Null
+          node scripts/build-windows.mjs "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" --d408-candidate 2>&1 | Tee-Object "$env:RUNNER_TEMP/d4-08-build/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Unchanged nine-suite legacy regression on the actual D408 executable
+        id: retained
+        run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" "$env:RUNNER_TEMP/d4-08-retained-evidence"
+      - name: Actual timer feedback work and persistence regression
+        id: native
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: node tests/d4-08/windows/run-native.mjs "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" "$env:RUNNER_TEMP/d4-08-native-evidence"
+      - name: External HWND and keyboard requirements at 96 DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-08/windows/reproduce-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -OutputDirectory "$env:RUNNER_TEMP/d4-08-ui-96" -Dpi 96
+      - name: External HWND and keyboard requirements at 144 DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-08/windows/reproduce-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -OutputDirectory "$env:RUNNER_TEMP/d4-08-ui-144" -Dpi 144
+      - name: D409 real mouse keyboard and UI layout at 96 DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-09/windows/native-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -ExpectedExecutableSha256 ((Get-FileHash -LiteralPath "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" -Algorithm SHA256).Hash.ToLowerInvariant())
+          -OutputDirectory "$env:RUNNER_TEMP/d4-09-ui-96" -Dpi 96
+      - name: D409 real mouse keyboard and UI layout at 144 application DPI
+        if: ${{ always() && steps.nativebuild.outcome == 'success' }}
+        run: >-
+          ./tests/d4-09/windows/native-ui.ps1
+          -Executable "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe"
+          -ProductSourceSha "${{ github.sha }}"
+          -ExpectedExecutableSha256 ((Get-FileHash -LiteralPath "$env:RUNNER_TEMP/d4-08-build/MyTodo-D408-Candidate.exe" -Algorithm SHA256).Hash.ToLowerInvariant())
+          -OutputDirectory "$env:RUNNER_TEMP/d4-09-ui-144" -Dpi 144
+      - name: Package verified native candidate
+        run: node tests/d4-08/windows/package.mjs "$env:RUNNER_TEMP/d4-08-build" "$env:RUNNER_TEMP/d4-08-native-evidence"
+      - name: Package D409 UI candidate with original and added native reports
+        run: node tests/d4-09/windows/package.mjs "$env:RUNNER_TEMP/d4-08-build"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-win32-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-08-build/
+            ${{ runner.temp }}/d4-08-native-evidence/
+            ${{ runner.temp }}/d4-08-retained-evidence/
+            ${{ runner.temp }}/d4-08-ui-96/
+            ${{ runner.temp }}/d4-08-ui-144/
+            ${{ runner.temp }}/d4-09-ui-96/
+            ${{ runner.temp }}/d4-09-ui-144/
+          if-no-files-found: error
+
+  android-d409:
+    needs: domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      ANDROID_SERIAL: emulator-5554
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare official SDK and build tools
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Compile D408 isolated application and instrumentation
+        run: |
+          node tests/d4-ui/build-demo.mjs "$RUNNER_TEMP/d4-d408-ui-$GITHUB_RUN_ID"
+          bash android/d408/build-android-d408.sh "$RUNNER_TEMP/d4-d408-ui-$GITHUB_RUN_ID/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d408-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Prepare official Ubuntu emulator host dependency
+        run: |
+          if ! ldconfig -p | grep -q 'libpulse.so.0'; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends libpulse0
+          fi
+      - name: Boot official isolated emulator
+        run: bash tests/d4-03-platforms/start-emulator.sh
+      - name: Build independent D409 instrumentation with same-run candidate signer
+        run: bash tests/d4-09/android/build-tests.sh "$RUNNER_TEMP/d408-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Real native D408 UI service and recovery regression
+        run: bash tests/d4-08/android/run-native.sh "$RUNNER_TEMP/d408-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: D409 native UI search hierarchy and real system navigation in four configurations
+        if: ${{ !cancelled() }}
+        run: bash tests/d4-09/android/run-native.sh "$RUNNER_TEMP/d408-native-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d408-native-*/*.apk
+            ${{ runner.temp }}/d408-native-*/*.json
+            ${{ runner.temp }}/d408-native-*/*.txt
+            ${{ runner.temp }}/d408-native-*/*.log
+            ${{ runner.temp }}/d408-native-*/native-evidence/
+            ${{ runner.temp }}/d408-native-*/d409-native-ui-evidence/
+            ${{ runner.temp }}/d408-native-*/d409-ui-test-build/*.txt
+            ${{ runner.temp }}/d403-emulator-*.log
+          if-no-files-found: error
+
+  source:
+    needs: domain
+    runs-on: ubuntu-latest
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Package the exact source on GitHub Actions
+        run: |
+          mkdir "$RUNNER_TEMP/d409-source"
+          git archive --format=zip --output="$RUNNER_TEMP/d409-source/MyTodo-D409-source.zip" "$GITHUB_SHA"
+          git diff --binary 7c217d8779ccf21e13733b28868e015e9cfd693a "$GITHUB_SHA" > "$RUNNER_TEMP/d409-source/frozen-to-candidate.patch"
+          git ls-tree -r "$GITHUB_SHA" > "$RUNNER_TEMP/d409-source/git-tree.txt"
+          cp docs/upgrade/d4-09/source-admission.json "$RUNNER_TEMP/d409-source/source-admission.json"
+          cd "$RUNNER_TEMP/d409-source"
+          sha256sum MyTodo-D409-source.zip frozen-to-candidate.patch git-tree.txt source-admission.json > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d409-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/d409-source/
+          if-no-files-found: error
+
+  web-service:
+    needs: domain
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      D408_APP_SOURCE_SHA: ${{ github.sha }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install official distro CJK fonts for readable cloud screenshots
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - name: Build candidate UI and existing V2 service composition
+        id: build
+        run: node tests/d4-08/web-build.mjs "$RUNNER_TEMP/d4-08-service-app"
+      - name: Unchanged original 164-case browser suite on the composed HTML
+        run: node tests/d4-08/web-legacy-run.mjs "$RUNNER_TEMP/d4-08-service-app"
+      - name: Independent 21-case restored feature suite
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        run: node tests/d4-08/web-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-features"
+      - name: Independent mounted V2 service suite
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        run: node tests/d4-08/web-service-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-results"
+      - name: Independent work preservation on the same composed HTML
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        run: node tests/d4-08/web-work-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d4-08-service-work"
+      - name: D409 presentation and original V2 service composition
+        if: ${{ always() && steps.build.outcome == 'success' }}
+        env:
+          D409_WEB_VARIANT: service
+          D409_APP_SOURCE_SHA: ${{ github.sha }}
+        run: node tests/d4-09/web/candidate-run.mjs "$RUNNER_TEMP/d4-08-service-app/mytodo-d4-01-demo.html" "$RUNNER_TEMP/d409-web-service"
+      - name: Package only the verified same-HTML Web candidate
+        run: node tests/d4-08/web-package.mjs "$RUNNER_TEMP/d4-08-service-app" "$RUNNER_TEMP/d4-08-service-features" "$RUNNER_TEMP/d4-08-service-results" "$RUNNER_TEMP/d4-08-service-work" "$RUNNER_TEMP/d4-08-web-package"
+      - name: Package the same HTML with all five original and D409 suites
+        run: node tests/d4-09/web/package.mjs "$RUNNER_TEMP/d4-08-service-app" "$RUNNER_TEMP/d4-08-service-features" "$RUNNER_TEMP/d4-08-service-results" "$RUNNER_TEMP/d4-08-service-work" "$RUNNER_TEMP/d4-09-web-package" "$RUNNER_TEMP/d409-web-service"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d409-web-service-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d4-08-service-app/*.json
+            ${{ runner.temp }}/d4-08-service-app/*.txt
+            ${{ runner.temp }}/d4-08-service-app/*.html
+            ${{ runner.temp }}/d4-08-service-app/screenshots/
+            ${{ runner.temp }}/d4-08-service-features/*.json
+            ${{ runner.temp }}/d4-08-service-features/*.jsonl
+            ${{ runner.temp }}/d4-08-service-features/*.txt
+            ${{ runner.temp }}/d4-08-service-features/screenshots/
+            ${{ runner.temp }}/d4-08-service-features/snapshots/
+            ${{ runner.temp }}/d4-08-service-results/*.json
+            ${{ runner.temp }}/d4-08-service-results/*.jsonl
+            ${{ runner.temp }}/d4-08-service-results/*.txt
+            ${{ runner.temp }}/d4-08-service-results/screenshots/
+            ${{ runner.temp }}/d4-08-service-results/snapshots/
+            ${{ runner.temp }}/d4-08-service-work/*.json
+            ${{ runner.temp }}/d4-08-service-work/*.jsonl
+            ${{ runner.temp }}/d4-08-service-work/*.txt
+            ${{ runner.temp }}/d4-08-service-work/screenshots/
+            ${{ runner.temp }}/d4-08-service-work/snapshots/
+            ${{ runner.temp }}/d4-08-web-package/
+            ${{ runner.temp }}/d4-09-web-package/
+            ${{ runner.temp }}/d409-web-service/*.json
+            ${{ runner.temp }}/d409-web-service/*.jsonl
+            ${{ runner.temp }}/d409-web-service/*.txt
+            ${{ runner.temp }}/d409-web-service/screenshots/
+            ${{ runner.temp }}/d409-web-service/snapshots/
+          if-no-files-found: error

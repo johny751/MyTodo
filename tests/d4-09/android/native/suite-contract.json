@@ -1,0 +1,23 @@
+{
+  "kind": "d409-native-ui-contract",
+  "status": "native-ui-source-prepared-awaiting-cloud-execution",
+  "targetPackage": "local.gxtodo.d408candidate",
+  "testPackage": "local.gxtodo.d408candidate.d409uitests",
+  "instrumentation": "local.gxtodo.replica.D409UiInstrumentation",
+  "phases": ["ui-360-gestural", "ui-412-gestural", "ui-360-threebutton", "ui-412-threebutton"],
+  "cases": [
+    "U01-native-timer-controls-and-layout",
+    "U02-activity-draft-and-background-recovery",
+    "U03-task-hierarchy-duplicate-search-and-collapse",
+    "U04-thirteen-routes-through-real-menu",
+    "U05-keyboard-drawer-modal-priority",
+    "U06-physical-system-back-picker-and-activity",
+    "U07-edge-input-and-physical-back-arbitration",
+    "U08-bottom-system-home-and-outside-exclusion"
+  ],
+  "caseCountPerPhase": 8,
+  "totalCaseCount": 32,
+  "legacyGroups": {"retained": 15, "features": 7, "feedbackUi": 7, "workPreservation": 4, "navigation": 20, "permissions": 3, "reboot": 2},
+  "uiTags": ["d409-task-select:<taskId>", "d409-task-toggle:<taskId>", "d409-task-context:<taskId>"],
+  "scope": "Official isolated emulator, real input and native Activities, synthetic candidate data only; no physical-device, stable-signing or production admission claim"
+}

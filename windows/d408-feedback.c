@@ -1,4 +1,5 @@
 #include "d408.h"
+#include "d409-ui.h"
 #ifdef GX_D408_CANDIDATE
 
 typedef struct {UINT version;void *callback;BOOL suppressThread,suppressCodecs;} GpStartup;
@@ -182,6 +183,19 @@ static void backup_file(int importing){
  cJSON_Delete(next);cJSON_Delete(backup);if(ok){fill_feedback(0);feedback_list();ui_set(fc(F_NOTICE),"恢复完成，已保留恢复前备份和删除批次；没有连接任何远程服务。");}else d408_error(feedbackWindow,"反馈恢复未完成。原状态、恢复前备份和图片均保留，请检查文件后重试。");
 }
 static void layout_feedback(void){
+#ifdef GX_D409_UI
+ {RECT r;GetClientRect(feedbackWindow,&r);int left=U(24),listWidth=U(292),right=U(340),width=r.right-right-U(24);
+ ui_move(GetDlgItem(feedbackWindow,5230),left,U(22),r.right-U(48),U(38));ui_move(GetDlgItem(feedbackWindow,5231),left,U(64),r.right-U(48),U(24));
+ ui_move(fc(F_QUERY),left,U(104),listWidth,U(34));ui_move(fc(F_LIST),left,U(151),listWidth,max(U(180),r.bottom-U(391)));
+ ui_move(fc(F_HISTORY),left,r.bottom-U(228),listWidth/2-U(5),U(34));ui_move(fc(F_COPY),left+listWidth/2+U(5),r.bottom-U(228),listWidth/2-U(5),U(34));
+ ui_move(GetDlgItem(feedbackWindow,5232),right,U(101),width,U(20));ui_move(fc(F_TITLE),right,U(127),width,U(34));
+ ui_move(fc(F_CATEGORY),right,U(174),width/2-U(6),U(170));ui_move(fc(F_STATUS),right+width/2+U(6),U(174),width/2-U(6),U(170));
+ ui_move(GetDlgItem(feedbackWindow,5233),right,U(218),width,U(20));ui_move(fc(F_BODY),right,U(244),width,max(U(80),r.bottom-U(570)));
+ ui_move(GetDlgItem(feedbackWindow,5234),right,r.bottom-U(314),width,U(20));ui_move(fc(F_IMAGES),right,r.bottom-U(288),width,U(72));
+ int images[]={F_ADDIMAGE,F_PREVIEW,F_REMOVEIMAGE};for(int i=0;i<3;i++)ui_move(fc(images[i]),right+i*(width/3),r.bottom-U(204),width/3-U(6),U(32));
+ int actions[]={F_NEW,F_DRAFT,F_SUBMIT,F_DELETE,F_UNDO,F_EXPORT,F_IMPORT,F_CLOSE};for(int i=0;i<8;i++)ui_move(fc(actions[i]),left+(i%4)*((r.right-U(48))/4),r.bottom-U(156)+(i/4)*U(40),(r.right-U(48))/4-U(8),U(34));
+ ui_move(fc(F_NOTICE),left,r.bottom-U(62),r.right-U(48),U(54));return;}
+#endif
  RECT r;GetClientRect(feedbackWindow,&r);int left=U(18),listWidth=U(268),right=U(306),width=r.right-right-U(18);
  ui_move(fc(F_QUERY),left,U(18),listWidth,U(30));ui_move(fc(F_LIST),left,U(60),listWidth,max(U(180),r.bottom-U(235)));ui_move(fc(F_HISTORY),left,r.bottom-U(215),listWidth/2-U(3),U(30));ui_move(fc(F_COPY),left+listWidth/2+U(3),r.bottom-U(215),listWidth/2-U(3),U(30));
  ui_move(fc(F_TITLE),right,U(18),width,U(32));ui_move(fc(F_CATEGORY),right,U(62),width/2-U(6),U(170));ui_move(fc(F_STATUS),right+width/2+U(6),U(62),width/2-U(6),U(170));
@@ -197,6 +211,11 @@ static LRESULT CALLBACK feedback_proc(HWND h,UINT message,WPARAM w,LPARAM l){
      DWORD style=id==F_LIST||id==F_IMAGES?LBS_NOTIFY|WS_VSCROLL|LBS_NOINTEGRALHEIGHT:id==F_BODY?ES_MULTILINE|ES_WANTRETURN|ES_AUTOVSCROLL|WS_VSCROLL:id==F_QUERY||id==F_TITLE?ES_AUTOHSCROLL:id==F_CATEGORY||id==F_STATUS?CBS_DROPDOWNLIST:0;feedbackControls[id-F_LIST]=ui_control(h,cls,labels[id-F_LIST],style|WS_TABSTOP,id,0,0,0,0);}
    feedbackControls[F_HISTORY-F_LIST]=ui_control(h,L"BUTTON",L"操作历史",WS_TABSTOP,F_HISTORY,0,0,0,0);feedbackControls[F_COPY-F_LIST]=ui_control(h,L"BUTTON",L"复制内容",WS_TABSTOP,F_COPY,0,0,0,0);
    const wchar_t *categories[]={L"功能建议",L"问题反馈",L"体验优化",L"其他"};for(int i=0;i<4;i++)SendMessageW(fc(F_CATEGORY),CB_ADDSTRING,0,(LPARAM)categories[i]);SendMessageW(fc(F_STATUS),CB_ADDSTRING,0,(LPARAM)L"待处理");SendMessageW(fc(F_STATUS),CB_ADDSTRING,0,(LPARAM)L"已处理");SendMessageW(fc(F_QUERY),EM_SETCUEBANNER,TRUE,(LPARAM)L"搜索历史和草稿");SendMessageW(fc(F_TITLE),EM_SETCUEBANNER,TRUE,(LPARAM)L"反馈标题");
+#ifdef GX_D409_UI
+   d409_visual_init(h);d409_label(h,5230,L"优化反馈",1);d409_label(h,5231,L"记录想法与问题。草稿自动保存，支持图片附件与历史回顾。",0);
+   d409_label(h,5232,L"反馈标题",0);d409_label(h,5233,L"详细内容",0);d409_label(h,5234,L"图片附件",0);
+   for(int id=F_NEW;id<=F_CLOSE;id++)d409_role(fc(id),id==F_SUBMIT?1:id==F_DELETE?3:4);d409_role(fc(F_HISTORY),4);d409_role(fc(F_COPY),4);
+#endif
    fill_feedback(0);feedback_list();return 0;
  }
  if(message==WM_COMMAND){int id=LOWORD(w),event=HIWORD(w);if(feedbackLoading)return 0;
@@ -211,11 +230,30 @@ static LRESULT CALLBACK feedback_proc(HWND h,UINT message,WPARAM w,LPARAM l){
    if(id==F_EXPORT||id==F_IMPORT){backup_file(id==F_IMPORT);return 0;}if(id==F_CLOSE){SendMessageW(h,WM_CLOSE,0,0);return 0;}
  }
  if(message==WM_TIMER&&w==1){KillTimer(h,1);if(feedbackDirty)save_feedback(0);return 0;}if(message==WM_SIZE){layout_feedback();return 0;}
- if(message==WM_CLOSE){if(save_feedback(0))ShowWindow(h,SW_HIDE);return 0;}if(message==WM_GETMINMAXINFO){((MINMAXINFO*)l)->ptMinTrackSize.x=U(980);((MINMAXINFO*)l)->ptMinTrackSize.y=U(750);return 0;}
- if(message==WM_DESTROY){KillTimer(h,1);feedbackWindow=0;return 0;}if(message==WM_DRAWITEM){ui_theme_draw_button((DRAWITEMSTRUCT*)l);return TRUE;}
+ if(message==WM_CLOSE){if(save_feedback(0))ShowWindow(h,SW_HIDE);return 0;}if(message==WM_GETMINMAXINFO){((MINMAXINFO*)l)->ptMinTrackSize.x=U(980);((MINMAXINFO*)l)->ptMinTrackSize.y=U(
+#ifdef GX_D409_UI
+680
+#else
+750
+#endif
+);return 0;}
+ if(message==WM_DESTROY){KillTimer(h,1);
+#ifdef GX_D409_UI
+ d409_visual_free(h);
+#endif
+ feedbackWindow=0;return 0;}
+#ifdef GX_D409_UI
+ if(message==WM_PAINT||message==WM_PRINTCLIENT){PAINTSTRUCT ps;HDC dc=message==WM_PAINT?BeginPaint(h,&ps):(HDC)w;d409_surface(h,dc,0);ui_fields_paint(h,dc);if(message==WM_PAINT)EndPaint(h,&ps);return 0;}
+ if(message==WM_CTLCOLORSTATIC||message==WM_CTLCOLOREDIT||message==WM_CTLCOLORLISTBOX)return d409_control_color(h,message,w,l);
+#endif
+if(message==WM_DRAWITEM){ui_theme_draw_button((DRAWITEMSTRUCT*)l);return TRUE;}
  return DefWindowProcW(h,message,w,l);
 }
-void d408_feedback_open(void){if(!open_feedback())return;if(!feedbackWindow){WNDCLASSW cls={0};cls.lpfnWndProc=feedback_proc;cls.hInstance=app.instance;cls.hCursor=LoadCursorW(0,IDC_ARROW);cls.hbrBackground=app.white;cls.lpszClassName=L"GxD408Feedback";RegisterClassW(&cls);feedbackWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 优化反馈（本机隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,U(1080),U(820),app.window,0,app.instance,0);}ShowWindow(feedbackWindow,SW_RESTORE);SetForegroundWindow(feedbackWindow);}
+void d408_feedback_open(void){if(!open_feedback())return;if(!feedbackWindow){WNDCLASSW cls={0};cls.lpfnWndProc=feedback_proc;cls.hInstance=app.instance;cls.hCursor=LoadCursorW(0,IDC_ARROW);cls.hbrBackground=app.white;cls.lpszClassName=L"GxD408Feedback";RegisterClassW(&cls);feedbackWindow=CreateWindowExW(WS_EX_CONTROLPARENT,cls.lpszClassName,L"MyTodo · 优化反馈（本机隔离候选）",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,CW_USEDEFAULT,CW_USEDEFAULT,U(1080),U(820),app.window,0,app.instance,0);
+#ifdef GX_D409_UI
+d409_fit_window(feedbackWindow);
+#endif
+}ShowWindow(feedbackWindow,SW_RESTORE);SetForegroundWindow(feedbackWindow);}
 void d408_feedback_close(void){if(feedbackWindow){save_feedback(0);DestroyWindow(feedbackWindow);}cJSON_Delete(feedbackEditing);feedbackEditing=0;cJSON_Delete(feedbackRows);feedbackRows=0;d408_store_close(&feedbackStore);feedbackReady=0;}
 int d408_feedback_flush(void){if(save_feedback(0))return 1;d408_error(feedbackWindow,"反馈草稿尚未保存，请重试后退出。");return 0;}
 

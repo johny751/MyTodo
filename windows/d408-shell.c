@@ -1,4 +1,5 @@
 #include "d408.h"
+#include "d409-ui.h"
 #ifdef GX_D408_CANDIDATE
 static HWND workEntry,timerEntry,feedbackEntry;
 static int closing;
@@ -8,7 +9,11 @@ void d408_layout(void){
  /* Keep the established ten navigation buttons and task toolbar intact.
   * The additional primary entries occupy one reserved row above the footer. */
  int side=r.right<U(750)&&!app.sidebarOpen?0:U(GX_SIDE),y=r.bottom-U(38);
+#ifdef GX_D409_UI
+ ui_move(workEntry,side+U(18),y,U(132),U(30));ui_move(timerEntry,side+U(160),y,U(116),U(30));ui_move(feedbackEntry,side+U(286),y,U(116),U(30));
+#else
  ui_move(workEntry,side+U(12),y,U(104),U(30));ui_move(timerEntry,side+U(124),y,U(94),U(30));ui_move(feedbackEntry,side+U(226),y,U(94),U(30));
+#endif
  SetWindowPos(workEntry,HWND_TOP,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
  SetWindowPos(timerEntry,HWND_TOP,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
  SetWindowPos(feedbackEntry,HWND_TOP,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
@@ -37,7 +42,13 @@ void d408_attach(void){
  workEntry=ui_control(app.window,L"BUTTON",L"工作管理",WS_TABSTOP,4500,0,0,0,0);
  timerEntry=ui_control(app.window,L"BUTTON",L"番茄钟",WS_TABSTOP,4501,0,0,0,0);
  feedbackEntry=ui_control(app.window,L"BUTTON",L"优化反馈",WS_TABSTOP,4502,0,0,0,0);
- SetWindowTextW(app.window,L"MyTodo D4-08 · 原生隔离候选");SetTimer(app.window,4508,1000,0);d408_layout();
+#ifdef GX_D409_UI
+ SetWindowLongPtrW(app.sidebar,GWL_EXSTYLE,GetWindowLongPtrW(app.sidebar,GWL_EXSTYLE)|WS_EX_CONTROLPARENT);SetWindowLongPtrW(app.topbar,GWL_EXSTYLE,GetWindowLongPtrW(app.topbar,GWL_EXSTYLE)|WS_EX_CONTROLPARENT);d409_fit_window(app.window);d409_role(workEntry,1);d409_role(timerEntry,4);d409_role(feedbackEntry,4);for(int i=0;i<10;i++){d409_role(app.nav[i],2);SetWindowLongPtrW(app.nav[i],GWL_STYLE,GetWindowLongPtrW(app.nav[i],GWL_STYLE)|WS_TABSTOP);}
+ SetWindowTextW(app.window,L"MyTodo D4-09 · Windows 原生界面候选");
+#else
+ SetWindowTextW(app.window,L"MyTodo D4-08 · 原生隔离候选");
+#endif
+ SetTimer(app.window,4508,1000,0);d408_layout();
 }
 void d408_shutdown(void){KillTimer(app.window,4508);d408_work_close();d408_feedback_close();if(!closing)d408_timer_shutdown();}
 int d408_translate_message(MSG *message){

@@ -12,8 +12,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -39,44 +41,54 @@ public final class D408TimerActivity extends Activity {
     private JSONObject state;
     private boolean resumed, reading, writing, dirty, binding, taskLoading;
     private String draftMode="countdown", draftTask="", pendingRequest="", taskTitle="", lastTitleId="";
-    private TextView clock, status, task, summary, error;
+    private TextView clock, status, task, summary, error, draftNotice;
+    private D409TimerViews.ProgressRing progress;
     private EditText focusMinutes, breakMinutes;
     private Button mode, retry;
     private final List<Button> mutationControls=new ArrayList<>();
-    private long taskReadGeneration;
     private final Runnable poll=new Runnable(){@Override public void run(){if(resumed){refresh();main.postDelayed(this,1000);}}};
 
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
         if(!"local.gxtodo.d408candidate".equals(getPackageName()))throw new SecurityException("Isolated D408 identity required");
-        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);scroll.setBackgroundColor(Color.rgb(245,248,246));
-        LinearLayout root=column();root.setPadding(dp(20),dp(24),dp(20),dp(24));scroll.addView(root);
-        text(root,"MYTODO · 专注",13,Color.rgb(68,105,87));text(root,"番茄钟",30,Color.rgb(26,50,39));
-        text(root,"把注意力留给当前这一件事",15,Color.rgb(91,110,100));
+        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);scroll.setBackgroundColor(D409TimerViews.CANVAS);
+        LinearLayout root=column();root.setPadding(dp(16),dp(16),dp(16),dp(24));scroll.addView(root);
+        text(root,"MYTODO · 个人效率",11,D409TimerViews.ACCENT);text(root,"番茄钟",28,D409TimerViews.INK);
+        text(root,"一次专注，推进一件事",14,D409TimerViews.MUTED);
         LinearLayout session=card(root);
-        clock=text(session,"25:00",52,Color.rgb(32,97,65));clock.setId(40301);clock.setContentDescription("当前计时时间");
-        status=text(session,"正在恢复计时状态",16,Color.rgb(50,72,61));status.setId(40801);
-        task=text(session,"未关联任务",16,Color.rgb(50,72,61));task.setId(40802);
+        status=text(session,"正在恢复计时状态",14,D409TimerViews.FOCUS);status.setId(40801);status.setGravity(Gravity.CENTER);
+        FrameLayout orbit=new FrameLayout(this);int orbitSize=dp(224);LinearLayout.LayoutParams orbitLayout=new LinearLayout.LayoutParams(orbitSize,orbitSize);orbitLayout.gravity=Gravity.CENTER_HORIZONTAL;orbitLayout.topMargin=dp(8);orbitLayout.bottomMargin=dp(12);session.addView(orbit,orbitLayout);
+        progress=new D409TimerViews.ProgressRing(this);orbit.addView(progress,new FrameLayout.LayoutParams(-1,-1));
+        LinearLayout readout=column();readout.setGravity(Gravity.CENTER);FrameLayout.LayoutParams readoutLayout=new FrameLayout.LayoutParams(-1,-1);readoutLayout.setMargins(dp(18),dp(18),dp(18),dp(18));orbit.addView(readout,readoutLayout);
+        text(readout,"当前计时",12,D409TimerViews.MUTED).setGravity(Gravity.CENTER);
+        clock=text(readout,"25:00",48,D409TimerViews.INK);clock.setId(40301);clock.setGravity(Gravity.CENTER);clock.setTypeface(android.graphics.Typeface.create("sans-serif-light",android.graphics.Typeface.NORMAL));clock.setContentDescription("当前计时时间");
+        task=text(session,"未关联任务",15,D409TimerViews.INK);task.setId(40802);task.setPadding(dp(12),dp(10),dp(12),dp(10));task.setBackground(D409TimerViews.surface(this,D409TimerViews.CANVAS,0,10));
         button(session,40302,"开始专注",()->send("start",new JSONObject(),false),true);
         LinearLayout actions=row(session);
         button(actions,40304,"暂停",()->send("pause",new JSONObject(),false),true);
         button(actions,40305,"继续",()->send("resume",new JSONObject(),false),true);
-        button(session,40307,"提前结束（保留耗时）",()->confirm("提前结束当前计时？","已投入的时间和关联任务会保留在历史中。",()->send("end",new JSONObject(),false)),true);
-        button(session,40308,"完成正计时",()->send("finish",new JSONObject(),false),true);
-        button(session,40309,"开始休息",()->send("break",new JSONObject(),false),true);
-        button(session,40306,"重置计时",()->confirm("重置当前计时？","活动会话会作为提前结束记录保存，已结束历史不会删除。",()->send("reset",new JSONObject(),false)),true);
-        error=text(root,"",14,Color.rgb(156,54,43));error.setId(40803);error.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+        text(session,"其他计时操作",12,D409TimerViews.MUTED);
+        LinearLayout finishActions=row(session);
+        button(finishActions,40307,"提前结束（保留耗时）",()->confirm("提前结束当前计时？","已投入的时间和关联任务会保留在历史中。",()->send("end",new JSONObject(),false)),true);
+        button(finishActions,40308,"完成正计时",()->send("finish",new JSONObject(),false),true);
+        LinearLayout restActions=row(session);
+        button(restActions,40309,"开始休息",()->send("break",new JSONObject(),false),true);
+        button(restActions,40306,"重置计时",()->confirm("重置当前计时？","活动会话会作为提前结束记录保存，已结束历史不会删除。",()->send("reset",new JSONObject(),false)),true);
+        error=text(root,"",14,D409TimerViews.DANGER);error.setId(40803);error.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
         retry=button(root,40804,"重试未确认操作",this::retryPending,false);retry.setVisibility(View.GONE);
         button(root,40805,"刷新状态",()->{pendingRequest="";retry.setVisibility(View.GONE);refresh();},false);
 
-        LinearLayout config=card(root);text(config,"计时设置",21,Color.rgb(26,50,39));
+        LinearLayout config=card(root);text(config,"计时设置",21,D409TimerViews.INK);
+        draftNotice=text(config,"选择或修改后，点击保存生效",13,D409TimerViews.MUTED);draftNotice.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
         mode=button(config,40311,"专注模式：倒计时",()->{draftMode="countup".equals(draftMode)?"countdown":"countup";dirty=true;showDraft();},true);
-        text(config,"专注分钟（1–180）",14,Color.DKGRAY);focusMinutes=number(config,40312);
-        text(config,"休息分钟（1–180）",14,Color.DKGRAY);breakMinutes=number(config,40313);
-        TextWatcher watcher=new TextWatcher(){public void beforeTextChanged(CharSequence s,int start,int count,int after){}public void onTextChanged(CharSequence s,int start,int before,int count){if(!binding)dirty=true;}public void afterTextChanged(Editable value){}};
+        LinearLayout durations=row(config),focusColumn=column(),breakColumn=column();LinearLayout.LayoutParams focusLayout=new LinearLayout.LayoutParams(0,-2,1),breakLayout=new LinearLayout.LayoutParams(0,-2,1);focusLayout.rightMargin=dp(6);breakLayout.leftMargin=dp(6);durations.addView(focusColumn,focusLayout);durations.addView(breakColumn,breakLayout);
+        text(focusColumn,"专注分钟（1–180）",12,D409TimerViews.MUTED);focusMinutes=number(focusColumn,40312);
+        text(breakColumn,"休息分钟（1–180）",12,D409TimerViews.MUTED);breakMinutes=number(breakColumn,40313);
+        TextWatcher watcher=new TextWatcher(){public void beforeTextChanged(CharSequence s,int start,int count,int after){}public void onTextChanged(CharSequence s,int start,int before,int count){if(!binding){dirty=true;showDraftNotice();}}public void afterTextChanged(Editable value){}};
         focusMinutes.addTextChangedListener(watcher);breakMinutes.addTextChangedListener(watcher);
-        button(config,40810,"选择关联任务",this::chooseTask,true);
-        button(config,40811,"清除关联任务",()->{draftTask="";taskTitle="";dirty=true;showTask();},true);
+        LinearLayout taskActions=row(config);
+        button(taskActions,40810,"选择关联任务",this::chooseTask,true);
+        button(taskActions,40811,"清除关联任务",()->{draftTask="";taskTitle="";dirty=true;showTask();},true);
         button(config,40310,"保存计时设置",this::saveConfiguration,true);
         text(config,"任务选择来自本候选的隔离任务仓库。保存设置会更新当前会话关联；正在计时时不能切换正计时/倒计时模式，已结束历史保持原关联。",13,Color.GRAY);
 
@@ -90,7 +102,7 @@ public final class D408TimerActivity extends Activity {
         button(help,40830,"通知与准时提醒设置",()->{startActivity(new android.content.Intent(this,D408Activity.class).putExtra("nativeRoute","settings").addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP|android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP));finish();},false);
         button(root,40315,"返回工作空间",this::finish,false);
         button(root,40831,"版本信息与历史",this::showVersion,false);
-        setContentView(scroll);
+        D409TimerViews.install(this,scroll);
         if(saved!=null){dirty=saved.getBoolean("dirty");draftMode=saved.getString("mode","countdown");draftTask=saved.getString("task","");taskTitle=saved.getString("taskTitle","");pendingRequest=saved.getString("pending","");binding=true;focusMinutes.setText(saved.getString("focus","25"));breakMinutes.setText(saved.getString("break","5"));binding=false;showDraft();showTask();retry.setVisibility(pendingRequest.isEmpty()?View.GONE:View.VISIBLE);}
         controls();
     }
@@ -104,14 +116,16 @@ public final class D408TimerActivity extends Activity {
     private void accept(JSONObject next){
         if(state!=null&&next.optLong("revision")<state.optLong("revision")){error.setText("读到较旧状态，请刷新后再操作。");return;}
         state=next;String phase="break".equals(next.optString("phase"))?"休息":"专注";
+        progress.snapshot(next);
         clock.setText(clockText(next.optLong("countup".equals(next.optString("mode"))?"elapsedMillis":"remainingMillis")));
         status.setText(phase+" · "+("countup".equals(next.optString("mode"))?"正计时":"倒计时")+" · "+statusLabel(next.optString("status")));
         JSONArray rows=next.optJSONArray("history");summary.setText(String.format(Locale.ROOT,"今日专注 %.1f 分钟 · 完成 %d 轮\n已记录 %d 次计时",next.optLong("focusedMillisToday")/60000d,next.optInt("completedSessionsToday"),rows==null?0:rows.length()));
         if(!dirty){binding=true;draftMode=next.optString("focusMode","countdown");draftTask=next.optString("taskId","");focusMinutes.setText(String.valueOf(next.optInt("durationMinutes",25)));breakMinutes.setText(String.valueOf(next.optInt("breakMinutes",5)));binding=false;showDraft();}
         showTask();resolveTaskTitle();
     }
-    private void showDraft(){mode.setText("专注模式："+("countup".equals(draftMode)?"正计时":"倒计时"));}
-    private void showTask(){task.setText(draftTask.isEmpty()?"未关联任务":(dirty?"待保存关联：":"关联任务：")+(taskTitle.isEmpty()?draftTask:taskTitle));}
+    private void showDraft(){mode.setText("专注模式："+("countup".equals(draftMode)?"正计时":"倒计时"));showDraftNotice();}
+    private void showTask(){task.setText(draftTask.isEmpty()?"未关联任务":(dirty?"待保存关联：":"关联任务：")+(taskTitle.isEmpty()?draftTask:taskTitle));showDraftNotice();}
+    private void showDraftNotice(){if(draftNotice!=null){draftNotice.setText(dirty?"有未保存的设置 · 保存后更新当前关联":"选择或修改后，点击保存生效");draftNotice.setTextColor(dirty?D409TimerViews.ACCENT:D409TimerViews.MUTED);}}
     private void resolveTaskTitle(){
         String id=draftTask;if(id.isEmpty()||id.equals(lastTitleId)||taskLoading)return;taskLoading=true;lastTitleId=id;
         try{D408Bridge.IO.execute(()->{String title;try{AccountStore accounts=AccountStore.get(this);JSONObject found=PomodoroTasks.resolve(this,accounts.active(),id);title=found==null?"关联任务已删除（历史保留）":found.optString("title",id);}catch(Exception failure){title="任务名称暂不可用 · "+id;}String text=title;runOnUiThread(()->{taskLoading=false;if(!isDestroyed()&&id.equals(draftTask)){taskTitle=text;showTask();}});});}catch(RuntimeException busy){taskLoading=false;lastTitleId="";}
@@ -135,18 +149,11 @@ public final class D408TimerActivity extends Activity {
                 send("configure",values,true);});}catch(Exception failure){runOnUiThread(()->error.setText("任务校验未完成，设置未保存："+failure.getMessage()));}});
         }catch(Exception invalid){error.setText("设置未保存：专注和休息分钟均需为 1–180 的整数。");}
     }
-    private void controls(){boolean ready=state!=null&&!writing&&pendingRequest.isEmpty();for(Button b:mutationControls)b.setEnabled(ready);focusMinutes.setEnabled(ready);breakMinutes.setEnabled(ready);retry.setEnabled(!writing);if(!ready)return;String phase=state.optString("status");boolean active=phase.equals("running")||phase.equals("paused");mode.setEnabled(!active);findViewById(40302).setEnabled(!active);findViewById(40304).setEnabled(phase.equals("running"));findViewById(40305).setEnabled(phase.equals("paused"));findViewById(40307).setEnabled(active);findViewById(40308).setEnabled(active&&"countup".equals(state.optString("mode")));findViewById(40309).setEnabled(!active);}
+    private void controls(){boolean ready=state!=null&&!writing&&pendingRequest.isEmpty();for(Button b:mutationControls)b.setEnabled(ready);focusMinutes.setEnabled(ready);breakMinutes.setEnabled(ready);retry.setEnabled(!writing);if(!ready){styleControls();return;}String phase=state.optString("status");boolean active=phase.equals("running")||phase.equals("paused");mode.setEnabled(!active);findViewById(40302).setEnabled(!active);findViewById(40304).setEnabled(phase.equals("running"));findViewById(40305).setEnabled(phase.equals("paused"));findViewById(40307).setEnabled(active);findViewById(40308).setEnabled(active&&"countup".equals(state.optString("mode")));findViewById(40309).setEnabled(!active);styleControls();}
+    private void styleControls(){String phase=state==null?"":state.optString("status");int primary="running".equals(phase)?40304:"paused".equals(phase)?40305:40302;for(Button button:mutationControls)D409TimerViews.styleButton(button,button.getId()==primary||button.getId()==40310,button.getId()==40307||button.getId()==40306);}
 
     private void chooseTask(){
-        LinearLayout root=column();root.setPadding(dp(20),dp(8),dp(20),dp(8));EditText search=new EditText(this);search.setSingleLine(true);search.setHint("搜索任务标题");search.setId(40812);root.addView(search);
-        TextView notice=text(root,"正在读取隔离任务",14,Color.GRAY);ScrollView scroll=new ScrollView(this);LinearLayout list=column();scroll.addView(list);root.addView(scroll,new LinearLayout.LayoutParams(-1,dp(340)));
-        AlertDialog dialog=new AlertDialog.Builder(this).setTitle("选择关联任务").setView(root).setNegativeButton("取消",null).create();
-        Runnable query=()->{
-            final long generation=++taskReadGeneration;String value=search.getText().toString();
-            try{D408Bridge.IO.execute(()->{try{JSONObject found=PomodoroTasks.search(this,value,100);runOnUiThread(()->{if(isDestroyed()||!dialog.isShowing()||generation!=taskReadGeneration)return;list.removeAllViews();JSONArray rows=found.optJSONArray("tasks");notice.setText(rows==null||rows.length()==0?"没有匹配任务":found.optBoolean("hasMore")?"结果超过100条，请缩小搜索范围":"点击关联任务；保存计时设置后生效");if(rows!=null)for(int i=0;i<rows.length();i++){JSONObject t=rows.optJSONObject(i);if(t==null)continue;button(list,View.NO_ID,(t.optBoolean("done")?"已完成 · ":"")+t.optString("title"),()->{draftTask=t.optString("id");taskTitle=t.optString("title");lastTitleId=draftTask;dirty=true;showTask();dialog.dismiss();},false);}});}catch(Exception failure){runOnUiThread(()->notice.setText("读取失败，可重新输入重试："+failure.getMessage()));}});}catch(RuntimeException full){notice.setText("读取队列忙，请稍后重试。");}
-        };
-        search.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int a,int c,int f){}public void onTextChanged(CharSequence s,int a,int b,int c){query.run();}public void afterTextChanged(Editable e){}});
-        dialog.setOnShowListener(d->query.run());dialog.setOnDismissListener(d->taskReadGeneration++);dialog.show();
+        D409TaskPicker.show(this,draftTask,(id,title)->{draftTask=id;taskTitle=title;lastTitleId=draftTask;dirty=true;showTask();});
     }
     private void showHistory(){
         if(state==null){refresh();return;}JSONArray rows=state.optJSONArray("history");LinearLayout root=column();root.setPadding(dp(18),dp(12),dp(18),dp(12));
@@ -169,10 +176,10 @@ public final class D408TimerActivity extends Activity {
     private static String clockText(long millis){long seconds=Math.max(0,millis)/1000;return String.format(Locale.ROOT,"%02d:%02d",seconds/60,seconds%60);}
     private static String formatTime(String value){try{return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.of("Asia/Shanghai")).format(Instant.parse(value));}catch(Exception invalid){return value;}}
     private int dp(int n){return Math.round(n*getResources().getDisplayMetrics().density);}
-    private LinearLayout column(){LinearLayout l=new LinearLayout(this);l.setOrientation(LinearLayout.VERTICAL);return l;}
-    private LinearLayout row(LinearLayout parent){LinearLayout l=new LinearLayout(this);l.setOrientation(LinearLayout.HORIZONTAL);parent.addView(l);return l;}
-    private LinearLayout card(LinearLayout parent){LinearLayout l=column();l.setPadding(dp(16),dp(16),dp(16),dp(16));l.setBackgroundColor(Color.WHITE);LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.topMargin=dp(16);parent.addView(l,p);return l;}
-    private TextView text(LinearLayout parent,String value,int size,int color){TextView t=new TextView(this);t.setText(value);t.setTextSize(size);t.setTextColor(color);t.setPadding(0,dp(4),0,dp(8));parent.addView(t,new LinearLayout.LayoutParams(-1,-2));return t;}
-    private Button button(LinearLayout parent,int id,String label,Runnable action,boolean mutation){Button b=new Button(this);b.setId(id);b.setText(label);b.setAllCaps(false);b.setOnClickListener(v->action.run());parent.addView(b,new LinearLayout.LayoutParams(parent.getOrientation()==LinearLayout.HORIZONTAL?0:-1,-2,parent.getOrientation()==LinearLayout.HORIZONTAL?1:0));if(mutation)mutationControls.add(b);return b;}
-    private EditText number(LinearLayout parent,int id){EditText e=new EditText(this);e.setId(id);e.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);e.setSingleLine(true);parent.addView(e,new LinearLayout.LayoutParams(-1,-2));return e;}
+    private LinearLayout column(){return D409TimerViews.column(this);}
+    private LinearLayout row(LinearLayout parent){return D409TimerViews.row(parent);}
+    private LinearLayout card(LinearLayout parent){return D409TimerViews.card(parent);}
+    private TextView text(LinearLayout parent,String value,int size,int color){return D409TimerViews.text(parent,value,size,color);}
+    private Button button(LinearLayout parent,int id,String label,Runnable action,boolean mutation){Button b=D409TimerViews.button(parent,id,label,action);if(mutation)mutationControls.add(b);return b;}
+    private EditText number(LinearLayout parent,int id){return D409TimerViews.number(parent,id);}
 }

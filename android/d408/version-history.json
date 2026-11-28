@@ -1,6 +1,40 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionCode": 418009,
+    "versionName": "0.8.10009",
+    "sourceSHA": "7c217d8779ccf21e13733b28868e015e9cfd693a",
+    "buildTimeUTC": "2026-11-27T14:42:14.529Z",
+    "runId": "46018074859",
+    "runAttempt": "1",
+    "runNumber": "9",
+    "workflowName": "D4-08 candidate and preserved regression",
+    "versionTrack": "candidate",
+    "versionBase": 418000,
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "CANDIDATE_TESTED_OWNER_BUSINESS_ACCEPTED",
+    "statusText": "D408隔离候选云端七组全部通过；负责人已接受所列业务功能。联系人、跟进、归档人工状态未明确；生产、稳定签名与覆盖升级未批准。",
+    "changes": [
+      "原生番茄钟、应用切换计时、反馈图片选择预览删除、备份导出恢复及损坏文件处理通过本轮既有范围验证。",
+      "保留七组结果15/15、7/7、7/7、4/4、20/20、3/3、2/2以及原始失败历史；不将模拟器结果作为真机验收。"
+    ],
+    "provenance": {
+      "artifactId": "15206894156",
+      "artifactName": "d408-android-46018074859-1",
+      "archiveSha256": "8a2f19f7220431bc8d17df8df1d2964825befa1be80daad1f1943e6bb71569d1",
+      "apkMember": "d408-native-46018074859-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "7d7f9a9de9f15dfb25fb2502b232203e8186644f6f5ab2da35f30e5e28975125",
+      "identityMember": "d408-native-46018074859-1/d408-build-identity.json",
+      "identitySha256": "e310e00e901668f260c5390d2c26c83c8dc2a36be395f2819fe15380d6a361d5",
+      "signerSha256": "814b18b0e6807439b074ca4b9f507dfc7f3b804f07a23abdbacaaba391adc513"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionName": "0.8.10008",
     "versionCode": 418008,
     "sourceSHA": "4f8c54fc4d708eebee04e47d939f5ac9f8e8b18f",

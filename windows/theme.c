@@ -1,5 +1,6 @@
 
 #include "ui.h"
+#include "d409-ui.h"
 App app;
 static COLORREF accents[]={RGB(231,118,85),RGB(216,180,81),RGB(99,179,202),RGB(158,186,104)};
 static COLORREF pale[]={RGB(255,238,232),RGB(255,241,206),RGB(217,243,251),RGB(240,255,218)};
@@ -123,6 +124,10 @@ void ui_fields_paint(HWND h,HDC dc){
  }
 }
 void ui_theme_draw_button(DRAWITEMSTRUCT*d){
+#ifdef GX_D409_UI
+ if(d409_button(d))return;
+#endif
+
  int id=d->CtlID;RECT r=d->rcItem;HDC dc=d->hDC;int nav=id>=700&&id<710,header=id>=2000&&id<2004,hover=GetPropW(d->hwndItem,L"GxHover")!=0,pressed=d->itemState&ODS_SELECTED;
  wchar_t label[500];GetWindowTextW(d->hwndItem,label,500);
  COLORREF bg=RGB(255,255,255),fg=RGB(104,119,127);

@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.gxtodo.d408candidate.d409uitests">
+  <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="35"/>
+  <instrumentation android:name="local.gxtodo.replica.D409UiInstrumentation" android:targetPackage="local.gxtodo.d408candidate" android:label="D4-09 isolated native UI regression"/>
+  <application android:debuggable="true" android:allowBackup="false" android:label="D4-09 isolated UI tests"/>
+</manifest>

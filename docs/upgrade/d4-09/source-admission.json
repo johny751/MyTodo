@@ -1,0 +1,1178 @@
+{
+  "baseline": "7c217d8779ccf21e13733b28868e015e9cfd693a",
+  "ownerAuthorizedImplementation": true,
+  "productionAdmission": false,
+  "realDataAccess": false,
+  "productionSync": false,
+  "schemaChanges": false,
+  "signingIdentityChanges": false,
+  "files": [
+    {
+      "path": ".github/workflows/d4-09-c0.yml",
+      "bytes": 11707,
+      "sha256": "dcb693d255dfb51d048a7e8d0f7e7647029c4656ebcb9bc96d6474953120c9b4",
+      "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
+    },
+    {
+      "path": ".github/workflows/d4-09-candidate.yml",
+      "bytes": 25088,
+      "sha256": "1c52b6887674ea308d637a0d3a21b18c193bf8a3ae193411ba2937ffeaffcefc",
+      "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
+    },
+    {
+      "path": ".github/workflows/d4-09-design.yml",
+      "bytes": 2923,
+      "sha256": "060adb6bbd2c949fbec06349c06ff7210f38a8a2a9065031f0b807712fa43b3f",
+      "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
+    },
+    {
+      "path": "android/d408/prepare.mjs",
+      "bytes": 10989,
+      "sha256": "2866ffa9659dcd9a21a9a652dd317e37c6789db39941b4f6d4e5e4bb2f72b93b",
+      "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "bytes": 22606,
+      "sha256": "c8cb43111a3c08434df76a6d15cda03085221f37cffa06a3e7804294f8fafb74",
+      "reason": "Authorized Android native timer presentation and bounded task picker; original state service and persistence protected"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D409TaskPicker.java",
+      "bytes": 12973,
+      "sha256": "faad17f8773ca0921292174b852eaef01e2c3a25f6dedc13f9f5f64ebb086a79",
+      "reason": "Authorized Android native timer presentation and bounded task picker; original state service and persistence protected"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D409TimerViews.java",
+      "bytes": 6935,
+      "sha256": "8ad3deb45dd48e8804e83973ce5f4646df9774baef1cb96845cdfccdaccdd7c6",
+      "reason": "Authorized Android native timer presentation and bounded task picker; original state service and persistence protected"
+    },
+    {
+      "path": "android/d408/version-history.json",
+      "bytes": 21079,
+      "sha256": "6f8a626f17306ebad099b0ec3c1ab6a880147d82ad0c2a32a6cfb87d16fd2b8a",
+      "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
+    },
+    {
+      "path": "docs/upgrade/d4-09/ANDROID-PROTOTYPE-FIRST-CI-REPAIR.md",
+      "bytes": 6011,
+      "sha256": "5a8829c6ae6a60036cce302b9faf79796e0873e0cf7cb95754555df4c4ddae3e",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/ANDROID-PROTOTYPE-INTERACTIONS.md",
+      "bytes": 11520,
+      "sha256": "c0bd38543d9b9cdcc6b6f014e3b9eadf80e158b09e1bb388ee61b59ce314732d",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-01-UI现状审计.md",
+      "bytes": 3210,
+      "sha256": "ab2075165bde4949c723d2b57e43fe399eda606e899376143b68d3eec13c36a2",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-02-页面清单与问题矩阵.md",
+      "bytes": 2829,
+      "sha256": "f3ce72f3605e13de1785f574ed39a7e1e7d9daafabc20f3280cb892e6e331b6c",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-03-统一设计系统.md",
+      "bytes": 5608,
+      "sha256": "3f46e433c2e28f4fbf0bb287fa646061cd07ca04fc08b2616360a68dac736cf2",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-04-三端组件规范.md",
+      "bytes": 3160,
+      "sha256": "afa5e02bb3665fb266b73520f313a3d0e75b371580822ac14e53a2b04538a8b0",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-05-交互原型说明.md",
+      "bytes": 2848,
+      "sha256": "0441131744bcf8f97c8ef3634b3d23beb8168c3283ce4c7e7ecb8c703d47d8ba",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-06-原型验证与实施决策.md",
+      "bytes": 3878,
+      "sha256": "05168f375b31b305327617753009c5fdc2e66e2c752dec9d43cc2e115032ed7b",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/D409-07-候选集成与验证边界.md",
+      "bytes": 4746,
+      "sha256": "700c1046890c4fea1295db125877086a58d46881a71451e838dde38193b1b0f2",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/PROTOTYPE-FIRST-CI-GATE-REPAIR.md",
+      "bytes": 940,
+      "sha256": "f286010f275ea03ccca06e0143b2c3adba8d0622f632b2df34a3bcafe3f2bf22",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WEB-CANDIDATE-IMPLEMENTATION.md",
+      "bytes": 7814,
+      "sha256": "321299a3d6aedf04752856b388c87c40856f5850d7b6891bf956a85d05d1bffc",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WEB-PROTOTYPE-FIRST-CI-REPAIR.md",
+      "bytes": 5291,
+      "sha256": "671dce8317c8c8d5d46026f243c33931b9a4f1045fbabc4aabe9bd0d5ead910a",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WEB-PROTOTYPE-TIMER-VISUAL-REPAIR.md",
+      "bytes": 2368,
+      "sha256": "c62896c6168aa508b7d423b37b0bfbeb65194ec27a09095490633299cdc6a563",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WEB-PROTOTYPE-操作与选择器.md",
+      "bytes": 10088,
+      "sha256": "cc75f4668dd004f3bd1467174cb5ba0e4a313c75280a2b13e774d99f00126c95",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WINDOWS-EXTERNAL-UI-IMPLEMENTATION.md",
+      "bytes": 6740,
+      "sha256": "bb083a0d9578e2d24390c6cfc46e0890e445d91736a014ac1c6de386fc42ec6f",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WINDOWS-PROTOTYPE-FIRST-CI-REPAIR.md",
+      "bytes": 4167,
+      "sha256": "45d39f2256ca10336e27af2f568140b38aab967c0b8b66afaf4185d2bb77e6a7",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WINDOWS-PROTOTYPE-SECOND-CI-REPAIR.md",
+      "bytes": 5677,
+      "sha256": "363e6363fe4a2399a10ef7904d25a6eb10612ddfa585e6488af2c46a79cbecbb",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/WINDOWS-PROTOTYPE-交互与选择器.md",
+      "bytes": 14779,
+      "sha256": "f8b88ab091512457834843107dea02fadca3adf8d96709b99df77b2678caf3d7",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/audits/android-current.md",
+      "bytes": 21150,
+      "sha256": "d04a68306d7aa61d2303a24b5ba67b4a4f228bb8263988a62790e63a49e09bb8",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/audits/web-current.md",
+      "bytes": 14369,
+      "sha256": "f023d952be321f8175eb9d2441508c6bd8bc94e5a968d6eea48525eb6ee8ca68",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/audits/web-native-test-plan.md",
+      "bytes": 13973,
+      "sha256": "93f9454571797c31d87b0b6023a5171a1eaea6db4fa9cf6c82cc52b579f9e13a",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "docs/upgrade/d4-09/audits/windows-current.md",
+      "bytes": 18646,
+      "sha256": "e69b6e33c6ff9e64fc17d00b3d8eec9a1fcfa13dde31d4faff1a133d52e11c44",
+      "reason": "D4-09 owner authorization, implementation decisions, coverage and candidate evidence documentation"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "bytes": 66611,
+      "sha256": "97c53f74028cad171e3d3950b36cce59c0f5717ec80601d2b72fa265af614b0d",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-01/index.html",
+      "bytes": 1086,
+      "sha256": "330a6999a96b220954d798183d1e52b46bcb39d34220b59dd4f225399dfe4404",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-01/mobile-controls.js",
+      "bytes": 9656,
+      "sha256": "3ebd6f16b07fa93e2b64ec6ac9600c77d498c90ffa0c2b3358f98d6317029e03",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-01/personal-pages.js",
+      "bytes": 92004,
+      "sha256": "386e40862985abf94aa61678587d5327c593a5f05c50e52b6d0cc320180ac412",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-01/styles.css",
+      "bytes": 55479,
+      "sha256": "5e01e5eef03af938db9f29c46105e8bcf9183b324b47708cbbc22e89019edd50",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "bytes": 92459,
+      "sha256": "6c6259fb47363a574c6bb6ef190ae4ca878abfada70428d1e0433c13cf6fdf9b",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-08/v2-candidate-app.js",
+      "bytes": 8583,
+      "sha256": "625792de4fc959e13f479aac4aaf2397df4011c9e9f3523d1f2fb970660d7ea5",
+      "reason": "Authorized shared Web presentation or content navigation band; original model storage and business remainder protected"
+    },
+    {
+      "path": "prototypes/d4-09/android.css",
+      "bytes": 21434,
+      "sha256": "69b635b99dae687314486901f041a37e1576d730a53fe528682a0b9a63d03a46",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/android.html",
+      "bytes": 5055,
+      "sha256": "2171bd279eb52d85ed98af3d8ae83680d867e59965cb09aa1463eda6a52d86cc",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/android.js",
+      "bytes": 74977,
+      "sha256": "93254f120fa6f912d1f3a1b2bb973fb87055c566c7297266e2339cd243c89ac5",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/index.html",
+      "bytes": 2996,
+      "sha256": "70febfee324373cd2fb82713fb6ab11b1ef1be2ee45d93e8671a30f11ce7c324",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/tokens.css",
+      "bytes": 1139,
+      "sha256": "d674777059b9675e97b751ecf89f15863f3401e755e628067c10d3d4c87b5371",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/tokens.json",
+      "bytes": 542,
+      "sha256": "de2e9e8ce334672f2de796d90fb4dc445625e17e16aa18e32e9c702d5b0b2c89",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/web.css",
+      "bytes": 21633,
+      "sha256": "54822f0800c1a78ee4bd6f2a2314cf4522fcdddbe1306c4760684e02c8d267ce",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/web.html",
+      "bytes": 995,
+      "sha256": "f1c4aa70ea7dc6bdf32ae5e82f15b4fab447cc092daf4585af71612211dfc2d3",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/web.js",
+      "bytes": 69122,
+      "sha256": "b1fac5a432f8d2867472cfc308ee14aaeb6e4416e2963fb7a118a58e94d978ce",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/windows.css",
+      "bytes": 34850,
+      "sha256": "1fd95bd5611d8c9bb9aa8093619b2cec04280ef4c0b11a20f1017dcbf5461f9e",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/windows.html",
+      "bytes": 4262,
+      "sha256": "3c9c2dd16a96cff4e14d47bea8b956de710f612d1b2fe5c3ed6cf5c8d6151d69",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "prototypes/d4-09/windows.js",
+      "bytes": 90826,
+      "sha256": "e858db31cbdc8b211c4f9cae83ff9bdc779f7b7ee77bc9b54b88280be067dd01",
+      "reason": "Owner-reviewed interactive UI prototype and shared visual tokens for the isolated D4-09 candidate"
+    },
+    {
+      "path": "scripts/build-windows.mjs",
+      "bytes": 6837,
+      "sha256": "9d74dde12d9b046e8b91a3bd5811185e80fa8a0c15888fb64044f81457050055",
+      "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
+    },
+    {
+      "path": "tests/d4-09/android/README-native.md",
+      "bytes": 6168,
+      "sha256": "7fe557051cb9840cea610474cdcff9a82134a36c0a6032d6e5c054b5da5c88c8",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/README.md",
+      "bytes": 3886,
+      "sha256": "ba60b03e506d6b74d5bd76c2b940803ef64dd2ce3f1919e68aa9c55ae23bc878",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/build-tests.sh",
+      "bytes": 2172,
+      "sha256": "2d7608a60abca983af389fdbee5a7835620137966ee58130d26419de67a7a67d",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/native/AndroidManifest.xml",
+      "bytes": 495,
+      "sha256": "2cca6f16f7d234034b7b53a2f96e6bd876b86b8f253ec556da0821c17ac66d6a",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/native/D409UiChecks.java",
+      "bytes": 19519,
+      "sha256": "32a7409d0a1fcff415603414721b349906a08a3585b45f2dd05326981c880a84",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/native/D409UiInstrumentation.java",
+      "bytes": 19161,
+      "sha256": "4849b80e0fdc10a40e78e25e945b42d02f5a169d06e0aa88ec7dfaf3e6ed3672",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/native/suite-contract.json",
+      "bytes": 1251,
+      "sha256": "bd1fc4b165084e5890e750465e5b736f548567657cc07647a47459395cc91a1f",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/prototype-cases.mjs",
+      "bytes": 30145,
+      "sha256": "f145270535e6c641a72740d43bef75df0acb853d20f3d68e2bc8828549195703",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/run-native.sh",
+      "bytes": 3806,
+      "sha256": "c7677a6642c45b7de1356bae856ffbb9b03fbbe9f012969ff56b94dd642b0724",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/android/verify-native.mjs",
+      "bytes": 7737,
+      "sha256": "bfe2c460b25ad27742cb4eaccf9489b090012599253cd6c8d37912199b30c5bb",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/design-scope.mjs",
+      "bytes": 1347,
+      "sha256": "97f072e4167a16fa5e5cef070e061b102ef46d26543f0bda931543b5bb0925f1",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/legacy-android-build.mjs",
+      "bytes": 6047,
+      "sha256": "f6a89e9e1007035e0149b4b6ca201d7590b044c9e2d428cd53190c6d31c0a1c6",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/prototype-package.mjs",
+      "bytes": 2258,
+      "sha256": "f4064be6fe51d1ddd5bc242f8256dfd1f7a97a87d8c4df455e45ed25665b75a5",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/prototype-run.mjs",
+      "bytes": 11357,
+      "sha256": "c8b9b14753534526d1901aa397e2832b481c72513667b4d2dcca0ff5edd894e2",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/scope.mjs",
+      "bytes": 8698,
+      "sha256": "eb46689a3750466a3a453d8208e730b804b3dd8d1ff07ef691b0d5be1b9f710e",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/web/candidate-cases.mjs",
+      "bytes": 27148,
+      "sha256": "96c07346b604d5ad8140b9e69b54709d234319575fb2ee319c304dde97d84f68",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/web/candidate-driver.mjs",
+      "bytes": 11272,
+      "sha256": "225ed233707fda2a05e251abdf8c16d20be44285fffbabc5e40248f35cfdb793",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/web/candidate-run.mjs",
+      "bytes": 10979,
+      "sha256": "404a4843903a0c3308f5de366f5c819fd86190eacf691de184c25f642411cbff",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/web/package.mjs",
+      "bytes": 12226,
+      "sha256": "2cbd5bf7006a0e6acbc16b3fa480ff58400c31b25ec97aa972cf75d77de3f211",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/web/prototype-cases.mjs",
+      "bytes": 34763,
+      "sha256": "b7cf1f633a5eb9f055ed595905b35444b3149645de564436ea8392ffe1f3b452",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/NativeUiDriver.cs",
+      "bytes": 21586,
+      "sha256": "138dfda2e473c690cb4eb9f0fb556425009cdc90e7cdc06bd4293ea1be2d1694",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/README.md",
+      "bytes": 3375,
+      "sha256": "527aa9308224e39b83d1bba42f487e6ab06dda147e725a313e837ea81b7c41f2",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/native-expected.json",
+      "bytes": 1134,
+      "sha256": "91edec03fcdd1bd86e804e2d2f7129d9db7ad8e59c4fe2326efc30d45feb15dc",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/native-ui.ps1",
+      "bytes": 56067,
+      "sha256": "cee8f26c12c5a3f866054304a6d33f270a35ef0a9334adcf7e80821e4d33eaa3",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/package.mjs",
+      "bytes": 7335,
+      "sha256": "564adc78972dedf7835e30ca7c8946656ad962127412e3b7de2e0cd226ecca18",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/prototype-cases.mjs",
+      "bytes": 30917,
+      "sha256": "e8ddf13b6ef2399ebf9e6ea0973ffb5718c4e30ab09b3e24e08bcd16bea82dc2",
+      "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "windows/d408-feedback.c",
+      "bytes": 56634,
+      "sha256": "4227b2ac927a510714eb6996f4531cfbe21f0948e721b6807fac4a85d8d6b367",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d408-form.c",
+      "bytes": 6166,
+      "sha256": "817b253c4e6b5846bb3c15578346b04b6b673c1c932ca322f5914e4d3fd9e6ad",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d408-shell.c",
+      "bytes": 3550,
+      "sha256": "8da4faf5631cd304aaf7fecc1bf2fb23a779632fe7f31801fc1326f8d38a069a",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d408-timer.c",
+      "bytes": 38886,
+      "sha256": "ae030c599dbea9140147c224e1c2de0d5af4e5ae91e45e43280c344067b55908",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d408-work.c",
+      "bytes": 41076,
+      "sha256": "951bec2c2cdabc8498b15692a42508842b114aae4d2b339b1ce8691a1cf57a54",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d409-ui.h",
+      "bytes": 5586,
+      "sha256": "b395240f028281a272e781deba5391581c4d91480f4a5f3b410a341d98ebc45c",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/d409-work-ui.inc",
+      "bytes": 12216,
+      "sha256": "fbb02d260fa41fdd5721105d2235d39969bc72963bb57eead69bfb6526edf7c3",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/gui.c",
+      "bytes": 55110,
+      "sha256": "746d7821a1b79cbe7e89c9dee181c974a463d0e0ebaea794cddc1919c54aaaa6",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/theme.c",
+      "bytes": 21336,
+      "sha256": "a36a1dd3b81e1a612efccd6c41942f45c18565ae390a464b5d3aab73ba394c5b",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    },
+    {
+      "path": "windows/ui.h",
+      "bytes": 6313,
+      "sha256": "1c5c7f380bce3c20889a26fe707f1af63351d19f97428fba341e93656c8e69c0",
+      "reason": "Authorized Win32 native layout and visual presentation; original business operations and embedded regressions protected"
+    }
+  ],
+  "protectedSpans": [
+    {
+      "path": "windows/d408-work.c",
+      "start": "static const char *account(void)",
+      "end": "static void work_stats_line",
+      "sha256": "d8972d5d666cf3579999c603a95c3195e0a1a8295e76f3df17e0da2fa401151f",
+      "bytes": 4679,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-work.c",
+      "start": " if(!workWindow)return;workLoading=1;",
+      "end": "workLoading=0;work_layout();",
+      "sha256": "1f2df4a80576ee849cd932370c67bad1bb26cb556eb8d956d371c0fc3ce2ba8f",
+      "bytes": 5032,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-work.c",
+      "start": "static void refresh_projects(void)",
+      "end": "static void work_layout(void){",
+      "sha256": "0c50467b5079ea474c9455c9a76465e9139ec8e87b1eedd20a9a0ce7c2519149",
+      "bytes": 19290,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-work.c",
+      "start": "#include \"d408-work-tests.inc\"",
+      "end": null,
+      "sha256": "716f9ffd9b7542e82805d8aa403dc16228bd8c6aa4dd1854196b2682742a69d6",
+      "bytes": 4150,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-timer.c",
+      "start": "static int64_t clock_wall(void)",
+      "end": "static void timer_layout(void){",
+      "sha256": "007d36bacc089515a7cc309824d42f6e126fb2a62af9c59011515bf0ba80732c",
+      "bytes": 16830,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-timer.c",
+      "start": "int d408_timer_shutdown(void)",
+      "end": null,
+      "sha256": "563d995b79be55f581512883a83336ce88e24dc4901c207029d714f94fe08dde",
+      "bytes": 9195,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-feedback.c",
+      "start": "typedef struct {UINT version;",
+      "end": "static void layout_feedback(void){",
+      "sha256": "0c55df814b13e80ea35ca333bd52efeb304f24a05f942b3bfad71d13d8e93025",
+      "bytes": 28398,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-feedback.c",
+      "start": "void d408_feedback_close(void)",
+      "end": null,
+      "sha256": "ac8838402ca0c2864507b07456738e7c374aba50802783911da446961d63f050",
+      "bytes": 19621,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-shell.c",
+      "start": "static LRESULT CALLBACK shell_proc(",
+      "end": "void d408_attach(void){",
+      "sha256": "5d12441eba24c6c2b0bd2cfa416af3afb0783b36391886f294a8c1c34f506f93",
+      "bytes": 846,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-shell.c",
+      "start": "void d408_shutdown(void)",
+      "end": null,
+      "sha256": "2cafae599e58c37b84c7f67bb2c130959d357a222cfe4e0f42b8e1eff21aaac5",
+      "bytes": 678,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-form.c",
+      "start": "J *d408_form(HWND owner,",
+      "end": null,
+      "sha256": "a2b6153ee2b2be91728c6e0020488555e778f252cc3bd655d3cd9eb282dec3d3",
+      "bytes": 1141,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-form.c",
+      "start": "   if(LOWORD(w)==IDOK&&event==BN_CLICKED)",
+      "end": " if(message==WM_CLOSE)",
+      "sha256": "b3eb7e1e65ef6ca3320cf790f1d462928845fd365352f6fc93a9159c90bd0c34",
+      "bytes": 313,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/gui.c",
+      "start": "static void create(HWND h)",
+      "end": "int gui_main(HINSTANCE h",
+      "sha256": "42692676785b3d1868bfae5699798e302078d0245325bd0662fa30c80142ff66",
+      "bytes": 10985,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/gui.c",
+      "start": "int navigation_regression(void)",
+      "end": null,
+      "sha256": "13598ed3233193d27d5b4d8cfca329443d058fec1d57c29c6c40784d7e37b00f",
+      "bytes": 1068,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/theme.c",
+      "start": " int id=d->CtlID;RECT r=d->rcItem;",
+      "end": null,
+      "sha256": "1a953aa95dd28d3000eb6029c0056ce4f103bf09e1607be7c4c8ef72371863c6",
+      "bytes": 10410,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    @Override protected void onResume(",
+      "end": "    @Override protected void onPause(",
+      "sha256": "f042a61a3c9c24bd05fff6b912af76b8165cb657b7b7618d546a01deaf1c4e48",
+      "bytes": 126,
+      "reason": "Frozen Android original method: onResume"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    @Override protected void onPause(",
+      "end": "    @Override protected void onSaveInstanceState(",
+      "sha256": "466fa42d05cce1f15d91042480618299ef303d4ea8a0166e8c50e912b21a219c",
+      "bytes": 98,
+      "reason": "Frozen Android original method: onPause"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    @Override protected void onSaveInstanceState(",
+      "end": "    private void refresh(",
+      "sha256": "a4deb4aacaee210b55f59b82930023d099ddf7f865bfde08b436cb08690fae43",
+      "bytes": 379,
+      "reason": "Frozen Android original method: onSaveInstanceState"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void refresh(",
+      "end": "    private void accept(",
+      "sha256": "f1d21eeac3d982f55036744b1326f8c18d043f2a5254878054a3ee52ee6951b3",
+      "bytes": 368,
+      "reason": "Frozen Android original method: refresh"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void resolveTaskTitle(",
+      "end": "    private void send(",
+      "sha256": "ff0a97dba0a148f804fdf89c573fb0489a91b27a3e5d87033fac7679f0058683",
+      "bytes": 680,
+      "reason": "Frozen Android original method: resolveTaskTitle"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void send(",
+      "end": "    private void retryPending(",
+      "sha256": "41c172d02aac3c1339cf804a74d875e009d3268ddcdc8e0d2e33c2ab76e004b5",
+      "bytes": 473,
+      "reason": "Frozen Android original method: send"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void retryPending(",
+      "end": "    private void executePending(",
+      "sha256": "0290dfee959c5571dbc3cb0e3da4559dfebdf764792e9eee5ac2dff96d3bffc9",
+      "bytes": 95,
+      "reason": "Frozen Android original method: retryPending"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void executePending(",
+      "end": "    private void saveConfiguration(",
+      "sha256": "50ec1bd25ffb8b7036010ce2cb1c1b732f6ed1586cdaf71b65e617e93c5358dd",
+      "bytes": 612,
+      "reason": "Frozen Android original method: executePending"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void saveConfiguration(",
+      "end": "    private void controls(",
+      "sha256": "1f76dafc03b1dabcc42f689ee53ccae26c82b61fae5f0a403baaa7fe28370a10",
+      "bytes": 1527,
+      "reason": "Frozen Android original method: saveConfiguration"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void showHistory(",
+      "end": "    private void showStatistics(",
+      "sha256": "a0849826988e4dc260c5e461c06da973a6bcb0222ece3fbbdf69c7764a7a8e63",
+      "bytes": 1940,
+      "reason": "Frozen Android original method: showHistory"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void showStatistics(",
+      "end": "    private void showVersion(",
+      "sha256": "dbf6a54cf0009595a4acf5e5ad8b4c7307b032c0876b64c3f6f462afba43f1b5",
+      "bytes": 1539,
+      "reason": "Frozen Android original method: showStatistics"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void showVersion(",
+      "end": "    private void confirm(",
+      "sha256": "8b28c88c62b0fc04ad0d4ec27aa63bfe5067362c41be033112d613cc8fe5ef7c",
+      "bytes": 955,
+      "reason": "Frozen Android original method: showVersion"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void confirm(",
+      "end": "    private static String statusLabel(",
+      "sha256": "5646670963e85e1980d381b7972a0f5629be4613bc670b443888991741c1ee0e",
+      "bytes": 220,
+      "reason": "Frozen Android original method: confirm"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private static String statusLabel(",
+      "end": "    private static String clockText(",
+      "sha256": "8ca0d005896baa66f60ceccde6a103cf49244e91a4320f8d66ca69cbfab895cc",
+      "bytes": 242,
+      "reason": "Frozen Android original method: statusLabel"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private static String clockText(",
+      "end": "    private static String formatTime(",
+      "sha256": "7cb9804f33ce4545428ac4f49e6a1008c366df0f490cecce237b0d2ad2d5f1b4",
+      "bytes": 156,
+      "reason": "Frozen Android original method: clockText"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private static String formatTime(",
+      "end": "    private int dp(",
+      "sha256": "a7d80a33df37f073e783329803186f7cd3516ff9c5ae861e93beb70cb1e1a218",
+      "bytes": 221,
+      "reason": "Frozen Android original method: formatTime"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private int dp(",
+      "end": "    private LinearLayout column(",
+      "sha256": "382653995c14396dfa7a9dd3fcbb58081b7db25a1331bdfee84932dda904fc63",
+      "bytes": 92,
+      "reason": "Frozen Android original method: dp"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private final Runnable poll=",
+      "end": "    @Override public void onCreate(",
+      "sha256": "aade67080111a3f05e878d8e0f4e95db21e9e00ef1154487db20e33b6482b228",
+      "bytes": 131,
+      "reason": "Original poll lifecycle unchanged"
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "        if(saved!=null){dirty=saved.getBoolean",
+      "end": "    @Override protected void onResume(",
+      "sha256": "62592f3c622202c20a987d330bbae24694936ac42e87a8d4b72ec2a3890a7cd1",
+      "bytes": 476,
+      "reason": "Original saved-state restoration and initial enable controls unchanged"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "start": "(function () {\n 'use strict';\n const D=window.De",
+      "end": " function context(){return {get state(){return c",
+      "sha256": "3c40dca76d61408a7cdc293f831f2aab9646bfa9141fac6741201e086ab2e13d",
+      "bytes": 10398,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "start": " function openTaskGroup(group){if(busy())return;",
+      "end": " function modal(html,drawer=false,skipTaskSave=f",
+      "sha256": "a1aab9b332d64154deef93bc14100f74cafa214d30522244b1701e6e179a539a",
+      "bytes": 3318,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "start": " function navigate(next,selection={}){if(busy())",
+      "end": " function dashboard(){\n  const s=composite(),all",
+      "sha256": "061400ec6502a144d1c0de30e9dd667bb06a0a179e467756052bb92a838be917",
+      "bytes": 2151,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "start": " function options(items,value,blank=''){return (",
+      "end": null,
+      "sha256": "42b5fa1d9e0d1ae602b3b654a7c3ad941aeed84801543d104cd5f7c99a2d16bc",
+      "bytes": 44918,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "(function () {\n  'use strict';\n\n  // Synthetic d",
+      "end": "  var views = {};\n",
+      "sha256": "0ab388886c198e1fea274782f241404d8d907213d1182881c7672e8e340a11e5",
+      "bytes": 225,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "  var sequence = 0;\n  var pendingAttachment = nu",
+      "end": "    return open(ctx, form(ctx, 'work-' + type, (id ? '编辑' : '新建') + kinds[key][0], body));\n",
+      "sha256": "0786e5c9651e79902f3ed26c4c8494bf51b1ac7394ba25452d98571f24017c88",
+      "bytes": 25376,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "  function projectDetail(ctx, id) {\n    var s = ",
+      "end": "  function workItemsPage(ctx) {\n    var s = stat",
+      "sha256": "85aad537836feabb1945ef07a08feaf347b518cd34fd3d54748b1251430e2ede",
+      "bytes": 1964,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "  function workDetail(ctx, id) {\n    var s = sta",
+      "end": "  function templatesPage(ctx) {\n    var s = stat",
+      "sha256": "e8e14706d4326308b583e8c742a11d2fd8aae50105ef625020c116e239571cbe",
+      "bytes": 1817,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "  function processForm(ctx, templateId, id) {\n  ",
+      "end": "  function processesPage(ctx) {\n    var s = stat",
+      "sha256": "7d993c65f54f4a1d86772a5df5086af306e4d17cb1e9c9aec6252424db8f2a87",
+      "bytes": 2206,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "  function followupSummary(ctx, contact) {\n    v",
+      "end": "  function contactsPage(ctx) {\n    var s = state",
+      "sha256": "fbc61231829d276307194fbfb722cc4b14de687d1fe7c4a73d95563dfeb76e15",
+      "bytes": 538,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "  function contactDetail(ctx, id) {\n    var s=st",
+      "end": "    if (!action.startsWith('work-')) return false;\n",
+      "sha256": "8468a9e43920e26af3763ef9c989e8eadaaf4e2dbe883954b1b8df6406e31d3e",
+      "bytes": 14621,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "start": "    var s = state(ctx), key, x, pair;\n    if (ac",
+      "end": null,
+      "sha256": "755c70da6b0b422f5b63c4e4470713482cc748f2a0b96acf9817ce164720cd48",
+      "bytes": 29248,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/personal-pages.js",
+      "start": "(function () {\n  'use strict';\n  // Isolated UI ",
+      "end": "  function timerBody(ctx, t) {\n    var active = ",
+      "sha256": "25cb6805e79b7c7aeca085b9b70e2c6df9d82e219e54a8ae0df161927f0ddc73",
+      "bytes": 23339,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/personal-pages.js",
+      "start": "  function webPomodoroPage(ctx) {\n    var t = ti",
+      "end": null,
+      "sha256": "bfc56d9a370374dc5626d53f6ff3e8cebf8ea5a902373de6b4d266e20b860c71",
+      "bytes": 63643,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-08/v2-candidate-app.js",
+      "start": "(function () {\n  'use strict';\n  // This explici",
+      "end": "    service=window.D4V2Service.createV2Service({storage});return service;\n",
+      "sha256": "963bdd2d17e2b504804a5608dac611fd80a9b204ef44380630ac80e7622065c7",
+      "bytes": 2228,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-08/v2-candidate-app.js",
+      "start": "  function mount(){\n    const main=document.quer",
+      "end": null,
+      "sha256": "f7a4def2a106b374316a7da1e104b91cd4133e4f48e9a1805cbe2a34c240ee25",
+      "bytes": 3102,
+      "reason": "Unchanged original source outside authorized presentation edits"
+    },
+    {
+      "path": "prototypes/d4-01/mobile-controls.js",
+      "start": " function move(",
+      "end": null,
+      "sha256": "c9c5a0f5319910c68e2ce3911c4e70222144fb906f7799efe3a401eadf8c3201",
+      "bytes": 5328,
+      "reason": "Original gesture distance velocity direction end cancel and installation unchanged"
+    },
+    {
+      "path": "android/d408/prepare.mjs",
+      "start": "import fs from 'node:fs/promises';",
+      "end": "const versionTracks =",
+      "sha256": "1f2998921954e1e4f642519d8315319b1e33a98670eef174c84357906bf5c2d1",
+      "bytes": 1454,
+      "reason": "Original exact source input receipt and pinned library validation unchanged"
+    },
+    {
+      "path": "android/d408/prepare.mjs",
+      "start": "const knownHistory =",
+      "end": "let bundle =",
+      "sha256": "1f182edcb7dde55d34be0b24684b470af7666ad73e852827ec37e8b7b0281bc7",
+      "bytes": 2573,
+      "reason": "Original version history validation and formatting unchanged"
+    },
+    {
+      "path": "android/d408/prepare.mjs",
+      "start": "if (!bundle.includes('</body>'))",
+      "end": null,
+      "sha256": "24fc93ce7aca1f0191c53b413fd717f0314f08285c085e2e2ed7ed014affc6c6",
+      "bytes": 4615,
+      "reason": "Original native integration generated business seam and package output unchanged"
+    }
+  ],
+  "preservedRemainders": [
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void accept(",
+      "end": "    private void showDraft(",
+      "baselineSha256": "c8789bd692121bdbf9de0626e4cc00b6cfc720d5b88b35ee526df99ca7a2bb3e",
+      "baselineBytes": 1160,
+      "reconstructedSha256": "c8789bd692121bdbf9de0626e4cc00b6cfc720d5b88b35ee526df99ca7a2bb3e",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceExact",
+          "text": "        progress.snapshot(next);\n",
+          "replacement": ""
+        }
+      ]
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408TimerActivity.java",
+      "start": "    private void controls(",
+      "end": "    private void chooseTask(",
+      "baselineSha256": "8bc7588194a79b39fef6dd8e81254ef4e8eaf1e478157421a08ffda0323c5391",
+      "baselineBytes": 688,
+      "reconstructedSha256": "8bc7588194a79b39fef6dd8e81254ef4e8eaf1e478157421a08ffda0323c5391",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceExact",
+          "text": "    private void styleControls(){String phase=state==null?\"\":state.optString(\"status\");int primary=\"running\".equals(phase)?40304:\"paused\".equals(phase)?40305:40302;for(Button button:mutationControls)D409TimerViews.styleButton(button,button.getId()==primary||button.getId()==40310,button.getId()==40307||button.getId()==40306);}\n",
+          "replacement": ""
+        },
+        {
+          "op": "replaceExact",
+          "text": "if(!ready){styleControls();return;}",
+          "replacement": "if(!ready)return;"
+        },
+        {
+          "op": "replaceExact",
+          "text": "styleControls();",
+          "replacement": ""
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/app.js",
+      "baselineSha256": "2b6749981917a8e43e751a9147a2bd563e8d4fc6aa0bf332c18b060d961fd10a",
+      "baselineBytes": 66356,
+      "reconstructedSha256": "2b6749981917a8e43e751a9147a2bd563e8d4fc6aa0bf332c18b060d961fd10a",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": " function context(){",
+          "end": " function openTaskGroup("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": " function modal(",
+          "end": " function navigate("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": " function dashboard(){",
+          "end": " function options("
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/work-pages.js",
+      "baselineSha256": "efcfddbfa95a4df8287131680d0fde46729f583d2e3e01b91faafa61e9ed45f1",
+      "baselineBytes": 83751,
+      "reconstructedSha256": "efcfddbfa95a4df8287131680d0fde46729f583d2e3e01b91faafa61e9ed45f1",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function projectsPage(",
+          "end": "  function projectDetail("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function workItemsPage(",
+          "end": "  function workDetail("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function templatesPage(",
+          "end": "  function processForm("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function processesPage(",
+          "end": "  function followupSummary("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function contactsPage(",
+          "end": "  function contactDetail("
+        },
+        {
+          "op": "removeExact",
+          "text": "  // Presentation selection only. No repository field or durable write is added.\n  var previewByRoute = Object.create(null);\n",
+          "before": "  var sequence = 0;"
+        },
+        {
+          "op": "removeExact",
+          "text": "  function previewButton(ctx, route, id) {\n    var selected = previewByRoute[route] && previewByRoute[route].id === id;\n    return button(ctx, '预览', 'work-preview-select', id, 'small d409-preview-button').replace('<button ', '<button aria-pressed=\"' + !!selected + '\" ');\n  }\n  function previewValue(ctx, value) {\n    return esc(ctx, value === undefined ? '未记录' : value === null ? '原值：null' : typeof value === 'object' ? JSON.stringify(value, null, 2) : value === '' ? '未填写' : value);\n  }\n  function previewField(ctx, label, value) {\n    return '<div><dt>' + esc(ctx, label) + '</dt><dd class=\"work-raw-text\">' + previewValue(ctx, value) + '</dd></div>';\n  }\n  function workPreview(ctx, route, row) {\n    if (!row) return '<aside class=\"panel d409-work-preview d409-preview-empty\" data-d409-work-preview><div class=\"empty-state\"><h3>选择一条记录</h3><p>在列表中预览完整内容，再继续编辑或查看关联。</p></div></aside>';\n    var s = state(ctx), key = {'work-items':'workItems',projects:'projects',templates:'templates',processes:'processes',contacts:'contacts'}[route];\n    var title = row.title || row.name || '未命名记录', body = '', notes = row.notes;\n    var meta = previewField(ctx, '状态', labels[row.status] || row.status) + previewField(ctx, '负责人', row.owner);\n    if (key === 'workItems') {\n      var tasks = workTasks(s, row.id), process = find(s, 'processes', row.processId);\n      meta += previewField(ctx, '项目', projectName(s, row.projectId)) + previewField(ctx, '关联流程', process ? process.name : row.processId ? '关联缺失 · ' + row.processId : row.processId);\n      meta += previewField(ctx, '计划开始 · 原始值', row.plannedStart) + previewField(ctx, '截止时间 · 原始值', row.dueDate);\n      body = '<section class=\"d409-preview-section\"><h3>执行任务 · ' + tasks.filter(done).length + ' / ' + tasks.length + '</h3>' + (tasks.length ? '<ul>' + tasks.map(function (task) { return '<li>' + esc(ctx, task.title) + '<span class=\"muted\"> · ' + (done(task) ? '已完成' : '待完成') + '</span></li>'; }).join('') + '</ul>' : '<p class=\"muted\">尚未关联执行任务。</p>') + '<p class=\"muted\">附件 ' + (row.attachments || []).length + ' 个 · 在完整详情中管理关联与原始附件。</p></section>';\n    } else if (key === 'projects') {\n      var linked = projectTasks(s, row);\n      meta += previewField(ctx, '成员', row.members) + previewField(ctx, '截止时间 · 原始值', row.dueDate);\n      body = '<section class=\"d409-preview-section\"><h3>项目进展</h3><p>' + linked.filter(done).length + ' / ' + linked.length + ' 项任务完成</p><ul>' + active(s, 'workItems').filter(function (w) { return w.projectId === row.id; }).map(function (w) { return '<li>' + esc(ctx, w.title) + '</li>'; }).join('') + '</ul></section>';\n    } else if (key === 'templates') {\n      meta += previewField(ctx, '版本', versionLabel(row)) + previewField(ctx, '启用状态', row.enabled === false ? '已停用' : '启用');\n      body = '<section class=\"d409-preview-section\"><h3>完整步骤定义</h3><ol class=\"d409-preview-steps\">' + (row.steps || []).map(function (step) { return '<li><strong>' + esc(ctx, step.title) + '</strong>' + (Object.prototype.hasOwnProperty.call(step, 'description') ? '<p class=\"work-raw-text\">' + previewValue(ctx, step.description) + '</p>' : '') + '<details><summary>步骤原始定义</summary><pre class=\"work-raw-text\">' + previewValue(ctx, step) + '</pre></details></li>'; }).join('') + '</ol></section>';\n    } else if (key === 'processes') {\n      meta += previewField(ctx, '项目', projectName(s, row.projectId)) + previewField(ctx, '创建时模板版本', row.templateVersion);\n      body = '<section class=\"d409-preview-section\"><h3>当前步骤</h3><p>' + (row.status === 'completed' ? '全部步骤已完成' : esc(ctx, row.steps && row.steps[row.currentStep] ? row.steps[row.currentStep].title : '未记录当前步骤')) + '</p>' + stepList(ctx, row).replace('class=\"process-steps\"', 'class=\"d409-preview-steps\"') + (row.templateSnapshot ? '<details><summary>创建时模板快照</summary><pre class=\"work-raw-text\">' + previewValue(ctx, row.templateSnapshot) + '</pre></details>' : '') + '<p class=\"muted\">从列表中的原操作继续、暂停或推进流程。</p></section>';\n    } else if (key === 'contacts') {\n      meta = previewField(ctx, '单位 / 团队', row.organization) + previewField(ctx, '角色', row.role) + previewField(ctx, '电话', row.phone) + previewField(ctx, '邮箱', row.email);\n      body = '<section class=\"d409-preview-section\"><h3>跟进记录 · ' + (row.followups || []).length + '</h3>' + (row.followups || []).map(function (followup) { return '<article class=\"d409-followup\"><h4>' + esc(ctx, followup.title) + '</h4>' + pill(ctx, followup.status || 'pending') + '<p class=\"work-raw-text\">' + previewValue(ctx, followup.notes) + '</p><dl class=\"d409-preview-meta\">' + previewField(ctx, '沟通 · 原始值', followup.occurredOn) + previewField(ctx, '下次跟进 · 原始值', followup.dueDate) + '</dl></article>'; }).join('') + '</section>';\n    }\n    return '<aside class=\"panel d409-work-preview\" data-d409-work-preview data-preview-id=\"' + esc(ctx, row.id) + '\"><header class=\"panel-head\">' + button(ctx, '返回列表', 'work-preview-back', '', 'd409-preview-back') + '<h2>' + kinds[key][0] + '详情</h2></header><div class=\"panel-body\"><h2 class=\"d409-preview-title\">' + esc(ctx, title) + '</h2>' + (row.description !== undefined ? '<p class=\"work-raw-text muted\">' + previewValue(ctx, row.description) + '</p>' : '') + '<dl class=\"d409-preview-meta\">' + meta + '</dl><section class=\"d409-preview-section\"><h3>' + (key === 'contacts' ? '往来备注' : '完整备注') + '</h3><pre class=\"work-raw-text d409-preview-note\" data-d409-preview-notes>' + previewValue(ctx, notes) + '</pre></section>' + body + ((row.history || []).length ? '<details class=\"d409-preview-section\"><summary>完整操作历史 · ' + row.history.length + '</summary><pre class=\"work-raw-text\">' + previewValue(ctx, row.history) + '</pre></details>' : '') + '</div><footer class=\"d409-preview-actions\">' + button(ctx, '编辑', 'work-preview-edit', row.id, 'primary') + (['workItems','projects','contacts'].includes(key) ? button(ctx, '完整详情', 'work-preview-detail', row.id) : '') + '</footer></aside>';\n  }\n  function workLayout(ctx, route, rows, html) {\n    var remembered = previewByRoute[route], row = remembered && rows.find(function (item) { return item.id === remembered.id; });\n    if (!remembered && window.matchMedia('(min-width:961px)').matches) row = rows[0];\n    var explicit = !!(row && remembered && remembered.expanded);\n    return '<div class=\"d409-work-layout' + (explicit ? ' d409-preview-open' : '') + '\" data-d409-work-layout><div class=\"d409-work-list\" data-d409-work-list>' + html + '</div>' + workPreview(ctx, route, row) + '</div>';\n  }\n  function previewAction(action, id, ctx) {\n    var route = document.querySelector('main')?.dataset.route;\n    var key = {'work-items':'workItems',projects:'projects',templates:'templates',processes:'processes',contacts:'contacts'}[route];\n    if (!key || typeof ctx.refreshPresentation !== 'function') return error(ctx, '当前页面无法打开预览');\n    if (action === 'work-preview-back') { previewByRoute[route] = {id:'',expanded:false}; ctx.refreshPresentation(); return true; }\n    var row = find(state(ctx), key, id);\n    if (!row || row.archived) return error(ctx, '记录已归档或不存在');\n    if (action === 'work-preview-select') { previewByRoute[route] = {id:id,expanded:true}; ctx.refreshPresentation(); return true; }\n    if (action === 'work-preview-edit') return key === 'processes' ? processForm(ctx, '', id) : entityForm(ctx, {'workItems':'work-item',projects:'project',templates:'template',contacts:'contact'}[key], id);\n    if (action === 'work-preview-detail') return key === 'workItems' ? workDetail(ctx, id) : key === 'projects' ? projectDetail(ctx, id) : key === 'contacts' ? contactDetail(ctx, id) : false;\n    return false;\n  }\n",
+          "before": "  function projectsPage("
+        },
+        {
+          "op": "removeExact",
+          "text": "    if (action.startsWith('work-preview-')) return previewAction(action, id, ctx);\n",
+          "before": "    var s = state(ctx), key, x, pair;"
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/personal-pages.js",
+      "baselineSha256": "466639f31cadac8885ccfb6064b4bcb3bb93a918ca46b92a6f706b191b3c1832",
+      "baselineBytes": 91902,
+      "reconstructedSha256": "466639f31cadac8885ccfb6064b4bcb3bb93a918ca46b92a6f706b191b3c1832",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function timerBody(",
+          "end": "  function timerHistory("
+        },
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function timerHistory(",
+          "end": "  function webPomodoroPage("
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-08/v2-candidate-app.js",
+      "baselineSha256": "19b8613343b5e2a0974a51d88c61f2dfe0e4da328ffdf3a9d2e1832486e99c1b",
+      "baselineBytes": 8062,
+      "reconstructedSha256": "19b8613343b5e2a0974a51d88c61f2dfe0e4da328ffdf3a9d2e1832486e99c1b",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceRangeFromBaseline",
+          "start": "  function content(){",
+          "end": "  function mount(){"
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/index.html",
+      "baselineSha256": "bf7db5e6c45aff957f9a42af2dc317a3a7c73cf184ef58d4d3475132c8b1f0d3",
+      "baselineBytes": 1073,
+      "reconstructedSha256": "bf7db5e6c45aff957f9a42af2dc317a3a7c73cf184ef58d4d3475132c8b1f0d3",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceExact",
+          "text": "<body data-d409-ui>",
+          "replacement": "<body>"
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/styles.css",
+      "baselineSha256": "2468747e7e4c326ec0921d110e916984e4431bf2fc892fe9f0c18ae9048ba64b",
+      "baselineBytes": 35941,
+      "reconstructedSha256": "2468747e7e4c326ec0921d110e916984e4431bf2fc892fe9f0c18ae9048ba64b",
+      "exact": true,
+      "operations": [
+        {
+          "op": "retainBaselinePrefix",
+          "marker": "/* D409 presentation theme."
+        }
+      ]
+    },
+    {
+      "path": "prototypes/d4-01/legacy-pages.js",
+      "baselineSha256": "20dec4900a5b5bd340490624d1babbd58e9013fb66ce455dd6ccb449ac81e62b",
+      "baselineBytes": 15576,
+      "reconstructedSha256": "20dec4900a5b5bd340490624d1babbd58e9013fb66ce455dd6ccb449ac81e62b",
+      "exact": true,
+      "operations": []
+    },
+    {
+      "path": "android/d408/src/local/gxtodo/replica/D408Activity.java",
+      "baselineSha256": "2644d617bfc21794198cdd204d89981dd29e477b23ea55fac4ac3ce3bc86d47e",
+      "baselineBytes": 21679,
+      "reconstructedSha256": "2644d617bfc21794198cdd204d89981dd29e477b23ea55fac4ac3ce3bc86d47e",
+      "exact": true,
+      "operations": []
+    },
+    {
+      "path": "prototypes/d4-01/mobile-controls.js",
+      "baselineSha256": "d777de3f3178caec172faa45569becb2d78cf75ffaf82cd2fa5c47d76b11d9cc",
+      "baselineBytes": 9427,
+      "reconstructedSha256": "d777de3f3178caec172faa45569becb2d78cf75ffaf82cd2fa5c47d76b11d9cc",
+      "exact": true,
+      "operations": [
+        {
+          "op": "replaceExact",
+          "text": " // The content activation band is independent of Android's small, bounded\n // system-gesture exclusion rectangle. The extra 48..64px is ordinary content.\n const navigationEdge=64;",
+          "replacement": " const navigationEdge=48;"
+        },
+        {
+          "op": "replaceExact",
+          "text": ",modal=!!document.querySelector('#modal-root .modal,dialog[open]')",
+          "replacement": ""
+        },
+        {
+          "op": "replaceExact",
+          "text": "x<=navigationEdge&&!drawer&&!modal&&",
+          "replacement": "x<=navigationEdge&&!drawer&&"
+        }
+      ]
+    }
+  ]
+}
