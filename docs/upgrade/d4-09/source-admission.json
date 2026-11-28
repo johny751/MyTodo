@@ -638,9 +638,17 @@
     {
       "path": "windows/d408-timer.c",
       "start": "static int64_t clock_wall(void)",
+      "end": "\n SendMessageW(control(T_HISTORY),LB_RESETCONTENT",
+      "sha256": "eba82ef52caa42d333f75c82aa9d95a7a59a3a1ef8659423bcb902b7ed461870",
+      "bytes": 15157,
+      "reason": "Imported Windows owner protection for original business and regression code"
+    },
+    {
+      "path": "windows/d408-timer.c",
+      "start": "\n J *entry;cJSON_ArrayForEach(entry,history)",
       "end": "static void timer_layout(void){",
-      "sha256": "007d36bacc089515a7cc309824d42f6e126fb2a62af9c59011515bf0ba80732c",
-      "bytes": 16830,
+      "sha256": "5b52a182beb2f3db21d1d9c97c0704953de8058c0bb0c6dcf4f180393d4e9197",
+      "bytes": 854,
       "reason": "Imported Windows owner protection for original business and regression code"
     },
     {
