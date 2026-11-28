@@ -429,8 +429,8 @@
     },
     {
       "path": "tests/d4-09/scope.mjs",
-      "bytes": 8698,
-      "sha256": "eb46689a3750466a3a453d8208e730b804b3dd8d1ff07ef691b0d5be1b9f710e",
+      "bytes": 8717,
+      "sha256": "284f635e06b7ad0a59465e5d4eb0191f24cfdf0f642e0d3063ffa63957f7c449",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {

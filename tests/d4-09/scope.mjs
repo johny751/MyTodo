@@ -32,7 +32,7 @@ try {
   const editable=new Set([
     'scripts/build-windows.mjs','windows/gui.c','windows/ui.h','windows/theme.c',
     'windows/d408-work.c','windows/d408-timer.c','windows/d408-shell.c',
-    'windows/d408-form.c','windows/d408-feedback.c',
+    'windows/d408-form.c','windows/detail.c','windows/d408-feedback.c',
     'android/d408/prepare.mjs','android/d408/version-history.json',
     'android/d408/src/local/gxtodo/replica/D408TimerActivity.java',
     'android/d408/src/local/gxtodo/replica/D408Activity.java',
