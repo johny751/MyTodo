@@ -69,6 +69,16 @@ async function layout(a) {
   assert.ok(geometry.pageLeft>=-1 && geometry.pageRight<=geometry.width+1,'Main page fits viewport');
   await a.observe({layout:geometry,units:'CSS pixels'});
 }
+async function timerHistoryHeader(a) {
+  const g=await a.eval(`(()=>{const select=document.querySelector('[data-filter="history"]'),head=select.closest('.panel-head'),title=head.querySelector('h2'),range=document.createRange();range.selectNodeContents(title);const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};return {viewport:innerWidth,head:rect(head),title:rect(title),select:rect(select),text:title.textContent,lineHeight:parseFloat(getComputedStyle(title).lineHeight),textLines:[...range.getClientRects()].filter(r=>r.width>0).map(r=>({left:r.left,top:r.top,width:r.width,height:r.height}))};})()`);
+  await a.observe({timerHistoryHeader:g,regression:'46086386919/a1 screenshot had a four-line title'});
+  assert.equal(g.text,'专注记录');
+  assert.equal(g.textLines.length,1,'History title stays on one line');
+  assert.ok(g.title.height<=g.lineHeight+1,'History title is not a vertical text column');
+  assert.ok(g.select.width>=100&&g.select.width<=180,'History selector has useful bounded width');
+  assert.ok(g.select.left>=g.title.right+10,'History title and selector do not overlap');
+  assert.ok(g.select.right<=g.head.right-10,'History selector stays inside its panel');
+}
 async function closedMobileNavigation(a,label) {
   // Check immediately after the normal two-frame layout settle. Do not retry or
   // wait for the old transform animation, which used to block the first click.
@@ -337,7 +347,11 @@ export const cases = [
       assert.equal(paused.running,false);assert.ok(paused.remaining<120 && paused.remaining>0);
       await route(a,'notes');await route(a,'pomodoro');
       assert.equal(await a.eval('window.D409WebPrototype.inspect().timer.remaining'),paused.remaining);
-      await top(a);await a.screenshot('web-desktop-timer-paused-history');
+      for(const width of [1440,1024,360,412]){
+        await a.configure(width,960,width<768);await top(a);await timerHistoryHeader(a);await layout(a);
+        await a.screenshot('web-timer-header-'+width);
+      }
+      await a.configure(1440,960,false);await top(a);await a.screenshot('web-desktop-timer-paused-history');
       await tap(a,'[data-action="timer-toggle"]');
       await a.until(`window.D409WebPrototype.inspect().timer.remaining < ${paused.remaining}`,'Resumed real elapsed second',5000);
       await tap(a,'[data-action="timer-end"]');await confirm(a);

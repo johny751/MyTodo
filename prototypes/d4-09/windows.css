@@ -6,3 +6,32 @@ body{height:100vh;overflow:hidden}button{border:0;background:none;color:inherit}
 @media(max-width:760px){:root{--sidebar:64px}.app-sidebar{padding:18px 8px 0}.brand{padding:0 5px 18px}.brand>span:last-child{display:none}.nav-group{font-size:0;padding:12px 0 3px;border-top:1px solid var(--line);margin-top:8px}.nav-button{justify-content:center;padding:9px;min-height:40px}.nav-button .nav-label,.nav-count,.sidebar-bottom>div,.sidebar-bottom>.icon-button{display:none}.nav-icon{width:20px;height:20px}.sidebar-bottom{margin:0 -8px;padding:14px 16px}.workspace-bar{height:44px;padding:0 14px;font-size:10px}.workspace-tools{gap:3px}.workspace-tools .quiet-button{font-size:10px}.page-heading h1{font-size:24px}.page-heading{flex-wrap:wrap;gap:10px;margin-bottom:17px}.page-actions{width:100%;justify-content:flex-end}.page-subtitle{font-size:11px}#workspace{padding:18px 14px}.quadrant-board{grid-template-columns:1fr}.quadrant{min-height:220px}.toolbar{gap:8px}.search-field{max-width:none;flex-basis:100%}.toolbar label{font-size:10px}.toolbar select{max-width:150px;font-size:11px}.toolbar-spacer{display:none}.toolbar .segmented-control{margin-left:auto}.status-bar{padding:0 10px;font-size:9px}.status-bar .status-button{display:none}.feedback-layout{grid-template-columns:1fr}.feedback-list{border:0;padding:0;display:flex;gap:8px;overflow:auto}.feedback-card{min-width:195px;margin:0}.overview-strip{grid-template-columns:1fr 1fr;gap:18px}.overview-metric:nth-child(3){border:0;padding-left:0}.overview-metric strong{font-size:25px}.detail-panel{padding:18px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.dialog-header,.dialog-body,.dialog-footer{padding-left:18px;padding-right:18px}.dialog-footer>span{display:none}.toast{left:50%}.settings-layout{padding:0 16px}.setting-row{gap:14px}.timer-visual{padding:27px 0}.timer-digits{font-size:62px}.focus-panel{padding:18px}.timer-config{gap:12px}.work-table th.date-col{width:77px}.work-table th.status-col{width:79px}.work-table td,.work-table th{padding-left:8px;padding-right:8px}.work-table td:first-child,.work-table th:first-child{padding-left:12px}.work-table td.more-cell{padding:0 2px}.work-table th.more-col{width:30px}.work-table .icon-button{min-width:25px;width:25px}.donut-wrap{gap:18px}}
 @media(max-width:420px){:root{--sidebar:54px}.app-sidebar{padding-left:5px;padding-right:5px}.brand{padding-left:4px}.brand-mark{width:32px}.sidebar-bottom{margin:0 -5px;padding-left:11px}.workspace-bar{padding:0 10px}.workspace-breadcrumb{gap:4px}.workspace-tools .quiet-button{padding:4px 5px}.workspace-tools .icon-button{min-width:25px;width:25px}#workspace{padding:17px 10px}.page-actions{justify-content:flex-start}.primary-button,.secondary-button{font-size:12px;padding:7px 11px}.toolbar label{width:100%;justify-content:space-between}.toolbar label select{max-width:none;flex:1}.toolbar .segmented-control{margin-left:0}.work-table th.date-col,.work-table td.date-cell{display:none}.timer-digits{font-size:54px}.timer-actions{gap:7px}.timer-config{grid-template-columns:1fr}.timer-layout{grid-template-columns:minmax(0,1fr)}.focus-context strong{font-size:12px}.focus-context .quiet-button{padding:4px}.timer-totals{gap:10px}.timer-totals strong{font-size:24px}.timer-history .segmented-control button{padding:4px 7px}.chart-section{padding:16px}.donut{width:112px;height:112px}.donut-wrap{gap:12px}.legend{font-size:10px}.bar-chart{gap:10px}.setting-row{align-items:flex-start}.version-actions{flex-wrap:wrap}.feedback-footer>div{flex-wrap:wrap}.status-bar{font-size:8px}}
 @media(max-width:420px){.chart-column{min-width:16px}.timer-digits{font-size:clamp(36px,12vw,50px)}}
+
+/* A compact table row must account for both text lines and cell padding. */
+.is-compact .work-table td{padding-top:4px;padding-bottom:4px}
+.is-compact .work-table .record-name{line-height:16px}
+.is-compact .work-table .record-meta{line-height:13px;margin-top:2px}
+
+/* Grid children must be allowed to shrink before text chooses its line breaks. */
+.dashboard-layout>*,.timer-layout>*,.chart-layout>*,.feedback-layout>*{min-width:0}
+.page-actions{flex-wrap:wrap}
+.setting-row>div{min-width:0}
+.version-block{overflow-wrap:anywhere}
+@media(max-width:1000px){
+  .dashboard-layout,.timer-layout,.chart-layout{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:760px){
+  .feedback-layout,.form-grid{grid-template-columns:minmax(0,1fr)}
+  .section-heading{flex-wrap:wrap}
+  .section-heading h2{min-width:0}
+  .dashboard-layout .queue-row{display:grid;grid-template-columns:7px minmax(0,1fr) auto;gap:8px 10px;padding:12px}
+  .dashboard-layout .queue-row>.project-dot{grid-column:1;grid-row:1;align-self:start;margin-top:6px}
+  .dashboard-layout .queue-row>.row-main{grid-column:2/-1;grid-row:1}
+  .dashboard-layout .queue-row>.row-main:first-child{grid-column:1/-1}
+  .dashboard-layout .queue-row>.status-pill{grid-column:2;grid-row:2;justify-self:start}
+  .dashboard-layout .queue-row>.text-button{grid-column:3;grid-row:2;justify-self:end}
+  .dashboard-layout .queue-row .record-name,.dashboard-layout .queue-row .record-meta{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+  .dashboard-layout .queue-row .record-meta{display:block}
+  .project-summary-title .text-button,.project-summary p,.activity-list li>span{min-width:0;overflow-wrap:anywhere}
+  .progress-caption{flex-wrap:wrap;gap:4px 10px}
+}
