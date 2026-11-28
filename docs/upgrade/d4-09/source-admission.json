@@ -26,6 +26,12 @@
       "reason": "Authorized hosted-only D4-09 source binding, build, regression and artifact orchestration"
     },
     {
+      "path": ".github/workflows/d4-09-native-diagnostics.yml",
+      "reason": "Cloud-only external exception diagnostics and matching symbols; original regression and product business code preserved",
+      "bytes": 3730,
+      "sha256": "e61bc16b34c88fa4318e9510573d6fb8babf747a166bb33a1400f5117b3a9597"
+    },
+    {
       "path": "android/d408/prepare.mjs",
       "bytes": 10989,
       "sha256": "2866ffa9659dcd9a21a9a652dd317e37c6789db39941b4f6d4e5e4bb2f72b93b",
@@ -51,8 +57,8 @@
     },
     {
       "path": "android/d408/version-history.json",
-      "bytes": 28280,
-      "sha256": "94df19ffdb57f6c82d2653902d41cd0ecac8f9959871b31ff0a4baf323b4f4a7",
+      "bytes": 31802,
+      "sha256": "dd6bcb0e472f35782a4afb48826251e6f3864b95166eb7253fcda6441ba96daf",
       "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
     },
     {
@@ -339,8 +345,8 @@
     },
     {
       "path": "scripts/build-windows.mjs",
-      "bytes": 6837,
-      "sha256": "9d74dde12d9b046e8b91a3bd5811185e80fa8a0c15888fb64044f81457050055",
+      "bytes": 7439,
+      "sha256": "4620fcb99b6ebd2fd5cf3735ff6081edfdec2113448c77a2c4c034b4b66f48d9",
       "reason": "Candidate version identity, historical metadata or UI compilation wiring; original business seams protected"
     },
     {
@@ -482,6 +488,18 @@
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
     },
     {
+      "path": "tests/d4-09/windows/build-debugger.mjs",
+      "reason": "Cloud-only external exception diagnostics and matching symbols; original regression and product business code preserved",
+      "bytes": 3173,
+      "sha256": "d1a037f300a023261284b606e0a75cb7e299ead90fb2458c6df6f536928d946a"
+    },
+    {
+      "path": "tests/d4-09/windows/legacy-debugger.c",
+      "reason": "Cloud-only external exception diagnostics and matching symbols; original regression and product business code preserved",
+      "bytes": 15991,
+      "sha256": "f5bcc1d73c77d544702677bb870b29dbcc178f1e4f34ab47b6ea88a8a60b7321"
+    },
+    {
       "path": "tests/d4-09/windows/legacy-drag-diagnostics.ps1",
       "bytes": 26369,
       "sha256": "dedd0e0e7250bce81e3887f21802558eabe9919d1343f287e950e49576f6993a",
@@ -522,6 +540,12 @@
       "bytes": 30917,
       "sha256": "e8ddf13b6ef2399ebf9e6ea0973ffb5718c4e30ab09b3e24e08bcd16bea82dc2",
       "reason": "Separate D4-09 candidate validation or artifact receipts; original baseline tests remain frozen"
+    },
+    {
+      "path": "tests/d4-09/windows/run-debugger.mjs",
+      "reason": "Cloud-only external exception diagnostics and matching symbols; original regression and product business code preserved",
+      "bytes": 7374,
+      "sha256": "96abc5cc5df4e1403c54083991c139456c0c7948e4b6ad0618cac39d510938d7"
     },
     {
       "path": "tests/d4-09/windows/timer-history-ui.ps1",

@@ -1,0 +1,78 @@
+name: D4-09 candidate UI crash diagnostics
+on:
+  push:
+    branches: [d4/d4-09-design-candidate-1]
+    paths:
+      - .github/workflows/d4-09-native-diagnostics.yml
+      - tests/d4-09/windows/legacy-debugger.c
+      - tests/d4-09/windows/build-debugger.mjs
+      - tests/d4-09/windows/run-debugger.mjs
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: d409-native-diagnostics-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  win32-exception-capture:
+    if: github.ref == 'refs/heads/d4/d4-09-design-candidate-1'
+    runs-on: windows-latest
+    timeout-minutes: 50
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.sha }}
+      GX_D409_DEBUG_SYMBOLS: '1'
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Exact source and preserved baseline admission
+        run: node tests/d4-09/scope.mjs
+      - name: Build the actual candidate with matching source symbols
+        id: product
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path "$env:RUNNER_TEMP/d409-debug-product" | Out-Null
+          node scripts/build-windows.mjs "$env:RUNNER_TEMP/d409-debug-product/MyTodo-D408-Candidate.exe" --d408-candidate 2>&1 | Tee-Object "$env:RUNNER_TEMP/d409-debug-product/build.log"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build the external exception observer using the existing MSVC toolchain
+        id: observer
+        if: ${{ success() }}
+        run: node tests/d4-09/windows/build-debugger.mjs "$env:RUNNER_TEMP/d409-debug-observer"
+      - name: Unchanged original nine suites on this exact executable
+        id: original
+        if: ${{ success() }}
+        continue-on-error: true
+        run: node scripts/d4-04-native-regression.mjs "$env:RUNNER_TEMP/d409-debug-product/MyTodo-D408-Candidate.exe" "$env:RUNNER_TEMP/d4-09-debug-original"
+      - name: Twenty fixed original legacy drag executions with external exception capture
+        id: diagnostic
+        if: ${{ !cancelled() && steps.product.outcome == 'success' && steps.observer.outcome == 'success' }}
+        continue-on-error: true
+        timeout-minutes: 40
+        run: >-
+          node tests/d4-09/windows/run-debugger.mjs
+          "$env:RUNNER_TEMP/d409-debug-product/MyTodo-D408-Candidate.exe"
+          "$env:RUNNER_TEMP/d409-debug-observer/legacy-debugger.exe"
+          "$env:RUNNER_TEMP/d4-09-debug-original/native-regression.json"
+          "$env:RUNNER_TEMP/d409-debugger-evidence-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+      - name: Preserve the original executable, matching PDB, stacks, dumps and every failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: d409-win32-exception-capture-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/d409-debug-product/
+            ${{ runner.temp }}/d409-debug-observer/
+            ${{ runner.temp }}/d4-09-debug-original/
+            ${{ runner.temp }}/d409-debugger-evidence-*/
+            ${{ runner.temp }}/d409-scope.json
+          include-hidden-files: true
+          if-no-files-found: error
+      - name: Retain original and diagnostic failure outcomes
+        if: always()
+        shell: pwsh
+        run: |
+          if ('${{ steps.product.outcome }}' -ne 'success' -or '${{ steps.observer.outcome }}' -ne 'success' -or '${{ steps.original.outcome }}' -ne 'success' -or '${{ steps.diagnostic.outcome }}' -ne 'success') { throw 'Native original regression or supplementary exception diagnostics did not pass; retain all original evidence.' }

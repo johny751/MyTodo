@@ -1,6 +1,76 @@
 [
   {
     "packageName": "local.gxtodo.d408candidate",
+    "versionCode": 428009,
+    "versionName": "0.8.20009",
+    "sourceSHA": "0f64e9a84ac6cbc5972e8a53cc5fcc23af778102",
+    "buildTimeUTC": "2026-11-28T07:54:22.416Z",
+    "runId": "46123193733",
+    "runAttempt": "1",
+    "runNumber": "9",
+    "workflowName": "D4-09 candidate UI and preserved regression",
+    "versionTrack": "ui-candidate-d409",
+    "versionBase": 428000,
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "UI_CANDIDATE_CLOUD_RECORDED",
+    "statusText": "D409已记录第9次构建候选APK构建成功；保留D408七组58/58，新UI四组合31/32。仅模拟器隔离证据，整轮状态另见CI原报告，未发布、未人工验收。",
+    "changes": [
+      "原D408七组共执行58项，失败0项；保留之前所有失败记录。",
+      "新UI四组合共实际执行32项，通过31项、失败1项；没有真机验收结论。",
+      "后续源码变更仍须云端重新构建与回归，不以历史结果替代新SHA验证。"
+    ],
+    "provenance": {
+      "artifactId": "15255183647",
+      "artifactName": "d409-android-46123193733-1",
+      "archiveSha256": "fa5fab05fb0468a03a8458e2be42ed50045dc9abaa39229b547103612302467e",
+      "apkMember": "d408-native-46123193733-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "c2b3f13029185e5adf29189d83d8b499c661631b86cacd0a96c9feabea04abd6",
+      "identityMember": "d408-native-46123193733-1/d408-build-identity.json",
+      "identitySha256": "e80a3f0f3ba084a419a13ed94e58e684b3f75def169e849103996465bbadd4d4",
+      "signerSha256": "d77581ea2c6fdb03f39031fc7c648cc0e8a75685c7b8b88b42729762fda8979d"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
+    "versionCode": 428007,
+    "versionName": "0.8.20007",
+    "sourceSHA": "6dec8e623368b18a9ee88fbc635c5c7aefa66e07",
+    "buildTimeUTC": "2026-11-28T05:13:35.413Z",
+    "runId": "46111019391",
+    "runAttempt": "1",
+    "runNumber": "7",
+    "workflowName": "D4-09 candidate UI and preserved regression",
+    "versionTrack": "ui-candidate-d409",
+    "versionBase": 428000,
+    "syntheticOnly": true,
+    "stableSigning": false,
+    "productionSync": false,
+    "released": false,
+    "accepted": false,
+    "status": "UI_CANDIDATE_CLOUD_RECORDED",
+    "statusText": "D409已记录第7次构建候选APK构建成功；保留D408七组58/58，新UI四组合32/32。仅模拟器隔离证据，整轮状态另见CI原报告，未发布、未人工验收。",
+    "changes": [
+      "原D408七组共执行58项，失败0项；保留之前所有失败记录。",
+      "新UI四组合共实际执行32项，通过32项、失败0项；没有真机验收结论。",
+      "后续源码变更仍须云端重新构建与回归，不以历史结果替代新SHA验证。"
+    ],
+    "provenance": {
+      "artifactId": "15250377411",
+      "artifactName": "d409-android-46111019391-1",
+      "archiveSha256": "9049e8d0f86ba43d306a118f83521c093ec208a4242da8a03eaa5e90ae53c5cf",
+      "apkMember": "d408-native-46111019391-1/mytodo-d4-08-native-candidate.apk",
+      "apkSha256": "610f10e3f1844c22be7690c78e3b0b6c66cf028f2df0f88769897d3b24af5aec",
+      "identityMember": "d408-native-46111019391-1/d408-build-identity.json",
+      "identitySha256": "35d8a2dff6e50037a165e921f265c8d4ffcc187ac0e454e53b3b86df6c2e3d86",
+      "signerSha256": "dc631b23044638b0e38b9e6ba6ebc47f15095a5e4a32e0ef29dfd7f3922cae7c"
+    }
+  },
+  {
+    "packageName": "local.gxtodo.d408candidate",
     "versionCode": 428004,
     "versionName": "0.8.20004",
     "sourceSHA": "5a594f9e74f78325bc38c474b894e6ba4cf87590",
