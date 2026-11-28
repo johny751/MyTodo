@@ -278,7 +278,11 @@
   function beginNew(kind, quadrant=0) {
     if(kind==='instance'){
       const templates=records.filter(record=>record.kind==='template'&&!record.archived&&record.enabled);
-      showInfo('从模板建立流程实例',templates.length?`<p class="muted">实例保留建立时的步骤副本。选择一个可用模板开始。</p>${templates.map(record=>`<div class="queue-row"><div class="row-main"><strong class="record-name">${esc(record.name)}</strong><span class="record-meta">${record.steps.length} 个步骤 · 第 ${record.revision||1} 版</span></div>${recordButton('create-instance','建立实例',record,'text-button')}</div>`).join(''):`<p>目前没有可用模板。先建立并启用一个流程模板。</p>${action('goto-from-info','前往流程模板','data-target="templates"','primary-button')}`);
+      const templateOptions=templates.map(record=>`<div class="queue-row"><div class="row-main"><strong class="record-name">${esc(record.name)}</strong><span class="record-meta">${record.steps.length} 个步骤 · 第 ${record.revision||1} 版</span></div>${recordButton('create-instance','建立实例',record,'text-button')}</div>`).join('');
+      const templateContent=templates.length
+        ? `<p class="muted">实例保留建立时的步骤副本。选择一个可用模板开始。</p>${templateOptions}`
+        : `<p>目前没有可用模板。先建立并启用一个流程模板。</p>${action('goto-from-info','前往流程模板','data-target="templates"','primary-button')}`;
+      showInfo('从模板建立流程实例',templateContent);
       return;
     }
     openEditor(null,kind,quadrant);

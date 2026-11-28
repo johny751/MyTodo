@@ -169,6 +169,9 @@ export const cases = [
     id:'A409-P07',name:'Task picker unfolds parent/child rows and identifies duplicate-title search results',
     async run(a){
       await ready(a);await route(a,'timer');await tap(a,'#page-content [data-action="choose-task"]');
+      assert.equal(await a.eval(text('#task-picker .sheet-actions [data-action="close-picker"]')),'取消','Footer keeps its cancellation label');
+      assert.equal(await a.eval(count('#task-picker .sheet-actions [data-action="close-picker"] svg')),0,'Only the header close control is an icon');
+      assert.equal(await a.eval(count('#task-picker .sheet-heading [data-action="close-picker"] svg')),1);
       assert.equal(await a.eval(count('#task-tree [data-tree-id="timer-review"]')),0,'Child hidden while parent collapsed');
       await tap(a,'#task-tree [data-action="toggle-tree"][data-id="release"]');
       await tap(a,'#task-tree [data-action="toggle-tree"][data-id="timer-review"]');
@@ -187,6 +190,9 @@ export const cases = [
       await settings(a);await tap(a,'#timer-settings [data-action="save-timer-config"]');assert.equal(await a.eval(count('#timer-draft-notice')),0);
       await tap(a,'#page-content [data-action="choose-task"]');await a.fill('#task-search','整理会议纪要');
       assert.equal(await a.eval(`${query('#task-tree [data-action="select-task"][data-id="agenda"]')}.getAttribute('aria-pressed')`),'true');
+      await tap(a,'#task-picker .sheet-actions [data-action="close-picker"]');
+      assert.equal(await a.eval(`${query('#task-picker')}.open`),false);await expectText(a,'#linked-task-title','整理会议纪要');
+      assert.equal(await a.eval(count('#timer-draft-notice')),0,'Cancel leaves the saved association unchanged');
     }
   },
   {
@@ -225,9 +231,20 @@ export const cases = [
     async run(a){
       await ready(a,360);await route(a,'notes');await assertLayout(a);
       await expectText(a,'.note-paper','2026-11-28T10:32:18.427\\+08:00');await expectText(a,'.note-paper','末尾应保持可读');
-      const selection=await a.eval(`(()=>{const el=document.querySelector('.note-paper > div'),range=document.createRange();range.selectNodeContents(el);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);return {selected:selection.toString(),userSelect:getComputedStyle(el).userSelect,length:selection.toString().length}})()`);
+      const selection=await a.eval(`(()=>{const el=document.querySelector('.note-paper > div'),scroller=document.querySelector('#page-content'),range=document.createRange();range.selectNodeContents(el);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);const css=getComputedStyle(el),rect=el.getBoundingClientRect();return {selected:selection.toString(),expected:el.textContent,userSelect:css.userSelect,whiteSpace:css.whiteSpace,overflowWrap:css.overflowWrap,length:selection.toString().length,expectedLength:el.textContent.length,rangeCount:selection.rangeCount,isCollapsed:selection.isCollapsed,noteRect:{top:rect.top,bottom:rect.bottom,height:rect.height},scroll:{top:scroller.scrollTop,height:scroller.scrollHeight,clientHeight:scroller.clientHeight}}})()`);
+      await a.observe({selectionMethod:'DOM Range',androidNativeSelectionTest:false,selection});
       assert.ok(selection.length>250,'Long note is selectable');assert.match(selection.selected,/时区、秒或毫秒/);
-      await a.screenshot('android-360-notes-dom-selection');await a.observe({selectionMethod:'DOM Range',androidNativeSelectionTest:false});
+      assert.equal(selection.selected,selection.expected,'The selection includes every character, including offscreen paragraphs');
+      assert.equal(selection.rangeCount,1);assert.equal(selection.isCollapsed,false);assert.notEqual(selection.userSelect,'none');
+      assert.ok(selection.noteRect.height>selection.scroll.clientHeight,'The long-note fixture spans more than one content viewport');
+      await a.screenshot('android-360-notes-dom-selection');
+      await a.eval(`document.querySelector('#page-content').scrollTop=document.querySelector('#page-content').scrollHeight`);await a.settle();
+      const afterScroll=await a.eval(`(()=>{const el=document.querySelector('.note-paper > div'),scroller=document.querySelector('#page-content'),rect=el.getBoundingClientRect(),viewport=scroller.getBoundingClientRect();return {selected:getSelection().toString(),text:el.textContent,rangeCount:getSelection().rangeCount,scrollTop:scroller.scrollTop,noteBottom:rect.bottom,viewportTop:viewport.top,viewportBottom:viewport.bottom,horizontalOverflow:scroller.scrollWidth>scroller.clientWidth}})()`);
+      await a.observe({selectionAfterScroll:afterScroll});
+      assert.equal(afterScroll.selected,selection.expected,'Scrolling retains the complete selection');assert.equal(afterScroll.text,selection.expected,'Scrolling leaves the note unchanged');
+      assert.equal(afterScroll.rangeCount,1);assert.ok(afterScroll.scrollTop>0);assert.equal(afterScroll.horizontalOverflow,false);
+      assert.ok(afterScroll.noteBottom>afterScroll.viewportTop&&afterScroll.noteBottom<=afterScroll.viewportBottom,'The final paragraph remains in the unobscured content viewport');
+      await a.screenshot('android-360-notes-dom-selection-tail');
       await a.eval('getSelection().removeAllRanges()');await tap(a,'#page-content [data-action="edit-note"]');
       const note='云端备注草稿\n时区保留 2026-11-28T10:32:18.427+08:00\n末尾仍可见。';await a.fill('#note-editor',note);
       await tap(a,'#nav-trigger');await tap(a,'#drawer-links [data-route="stats"]');await confirm(a,0);await tap(a,'#nav-drawer [data-action="close-drawer"]');

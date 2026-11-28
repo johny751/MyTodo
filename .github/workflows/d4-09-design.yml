@@ -38,6 +38,7 @@ jobs:
       - name: Verify design-only source and retained baseline bytes
         run: node tests/d4-09/design-scope.mjs
       - name: Parse prototype and runner JavaScript on hosted runtime
+        if: ${{ !cancelled() }}
         run: |
           for file in prototypes/d4-09/*.js tests/d4-09/*.mjs tests/d4-09/*/prototype-cases.mjs; do node --check "$file" || exit 1; done
       - name: Windows design real browser interaction and screenshots

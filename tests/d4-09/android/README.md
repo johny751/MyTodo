@@ -1,6 +1,6 @@
 # Android 浏览器原型云端回归
 
-`prototype-cases.mjs` 导出16个独立case，每个case由root的Actions harness新建context并载入 `prototypes/d4-09/android.html`。导入Node内置assert，无第三方新增测试依赖。本地只写源码和静态检查；尚未运行，不声明通过。
+`prototype-cases.mjs` 导出16个独立case，每个case由root的Actions harness新建context并载入 `prototypes/d4-09/android.html`。导入Node内置assert，无第三方新增测试依赖。本地只写源码和静态检查。首轮提交 `57a0438`、Actions `46084728532/a1` 的 Linux/Windows 均为15/16，P10原备注仅222字符却要求选区超过250，修复为548字符跨屏样例并补全文/滚动验证；本修复版等待云端运行，不声明通过。
 
 Harness约定：`eval(expr)`、`until(expr,message,timeout)`、`configure(width,height,mobile)`、真实CDP鼠标`click(selector)`、DOM input/change的`fill(selector,value)`、`key(selector,key,modifiers)`（Ctrl=2）、`screenshot(label)`、`settle()`、CDP touch `swipe(from,to,{duration})`、`observe(value)`。
 
@@ -14,10 +14,10 @@ Harness约定：`eval(expr)`、`until(expr,message,timeout)`、`configure(width,
 | A409-P04 | 任务query/filter跨页保留、同名ID、象限移动与删除取消 |
 | A409-P05 | 倒计时idle/running/pause/resume、结束取消与历史 |
 | A409-P06 | 正计时完成、休息、重置保留记录/统计口径 |
-| A409-P07 | 父子/第三层展开、同名关键词及祖先链、空态、待保存关联 |
+| A409-P07 | 父子/第三层展开、同名关键词及祖先链、空态、待保存关联、页脚取消文字与行为 |
 | A409-P08 | 分钟校验、dirty继续/丢弃/保存并离开 |
 | A409-P09 | 明示演示失败、禁用写入、一次重试/一条会话历史 |
-| A409-P10 | 360宽完整长备注/DOM选区、草稿保留/Ctrl+Enter |
+| A409-P10 | 360宽跨屏长备注/完整DOM选区、滚动后全文与选区不变/末段可见、草稿保留/Ctrl+Enter |
 | A409-P11 | 工作事项长详情、独立实例/步骤、创建独立合成实例 |
 | A409-P12 | 合成SVG加载/预览、删除取消/确认、空内容纠正 |
 | A409-P13 | 反馈快照丢弃恢复、明确标记的备份/恢复/坏包状态 |
@@ -28,5 +28,7 @@ Harness约定：`eval(expr)`、`until(expr,message,timeout)`、`configure(width,
 截图包含360/412番茄idle、running、paused、countup、break、未确认，任务层级/同名搜索，抽屉、工作台、工作事项/实例、备注DOM选区、反馈图片/删除确认/错误、版本历史。原图/缩略图/映射由root的Actions收集及交付流程统一处理。
 
 编写用例时静态审阅发现并修正仅浏览器原型的返回历史：返回旧页不再将离开页压回历史，避免循环；dirty取消仍保留原历史。没有改正式Android、shared mobile-controls.js、原D4-08测试、存储、计时内核、服务或FeedbackKit。
+
+首轮P10的原失败报告/图均保留在本聊天 `work/d4-09/evidence-readbacks/46084728532-a1/`。原图显示完整高亮，修复的是样例长度与断言冲突，不声称修复了真实选区丢失。原 `selection.length>250` 不变，新增逐字符全等和滚动后复查；computed样式与长度在断言之前写入观察，后续失败也可诊断。另将关闭SVG注入限定为 `.icon-button`，避免覆盖任务选择器页脚的“取消”。
 
 所有成功仍仅限原型设计：不声称生产数据、真实磁盘失败、幂等回执落盘、PhotoPicker/SAF、后台服务、原生通知、实体机、签名覆盖或生产准入已证明。联系人、跟进、归档没有被升级为人工通过。

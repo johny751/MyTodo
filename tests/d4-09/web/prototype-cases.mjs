@@ -19,6 +19,8 @@ const names = {
   archive:'工作归档',sync:'同步中心',devices:'设备管理','data-system':'数据与系统',
   settings:'系统设置',about:'关于与版本'
 };
+// Navigation names identify destinations; editorial page headings may differ.
+const pageTitles = {...names,dashboard:'今天，把重要的事往前推进',about:'关于 MyTodo'};
 
 async function tap(a, selector) {
   assert.equal(await a.eval(count(selector)),1,`Unique click target: ${selector}`);
@@ -30,7 +32,9 @@ async function route(a,id) {
   }
   await tap(a,`.nav-link[data-action="go"][data-id="${id}"]`);
   await a.until(`${q('#page')}.dataset.route === ${js(id)}`,`Reached ${id}`);
-  assert.equal(await a.eval(text('#page h1')),names[id]);
+  assert.equal(await a.eval(text('.nav-link[aria-current="page"] span')),names[id]);
+  assert.equal(await a.eval(text('.breadcrumb strong')),names[id]);
+  assert.equal(await a.eval(text('#page h1')),pageTitles[id]);
 }
 async function ready(a) {
   assert.equal(await a.eval(`${q('#page')}.dataset.route`),'dashboard','Fresh browser context');
@@ -64,6 +68,17 @@ async function layout(a) {
   assert.ok(geometry.pageScrollWidth<=geometry.pageWidth+1,'No page horizontal overflow');
   assert.ok(geometry.pageLeft>=-1 && geometry.pageRight<=geometry.width+1,'Main page fits viewport');
   await a.observe({layout:geometry,units:'CSS pixels'});
+}
+async function closedMobileNavigation(a,label) {
+  // Check immediately after the normal two-frame layout settle. Do not retry or
+  // wait for the old transform animation, which used to block the first click.
+  const geometry=await a.eval(`(()=>{const b=document.querySelector('[data-action="nav-toggle"]'),s=document.querySelector('.sidebar'),shade=document.querySelector('.nav-shade'),r=b.getBoundingClientRect(),h=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2),style=getComputedStyle(s),sr=s.getBoundingClientRect();return {width:innerWidth,open:document.querySelector('.app').classList.contains('nav-open'),button:{left:r.left,top:r.top,width:r.width,height:r.height},hit:h?.closest('[data-action]')?.dataset.action||h?.tagName,hitInsideButton:h===b||b.contains(h),sidebar:{left:sr.left,right:sr.right,visibility:style.visibility,pointerEvents:style.pointerEvents,transition:style.transitionProperty},shadeDisplay:getComputedStyle(shade).display}})()`);
+  await a.observe({navigationAfterResize:label,geometry});
+  assert.equal(geometry.open,false,'Navigation starts closed');
+  assert.equal(geometry.sidebar.visibility,'hidden','Closed narrow navigation does not paint over content');
+  assert.equal(geometry.sidebar.pointerEvents,'none','Closed narrow navigation cannot intercept input');
+  assert.equal(geometry.shadeDisplay,'none','Closed navigation has no active shade');
+  assert.equal(geometry.hitInsideButton,true,'First menu click is unobscured immediately after resize');
 }
 async function newEntity(a,kind,title,extra={}) {
   await tap(a,`#page .page-actions [data-action="new"][data-id="${kind}"]`);
@@ -428,7 +443,9 @@ export const cases = [
     async run(a) {
       await ready(a);
       for (const width of [360,412]) {
+        await a.configure(1440,960,false);
         await a.configure(width,900,true);
+        await closedMobileNavigation(a,`desktop-to-${width}`);
         for (const id of ['dashboard','tasks','notes','pomodoro','settings']) {
           await route(a,id);await layout(a);
           if (id==='dashboard' || id==='pomodoro') {await top(a);await a.screenshot(`web-${width}-${id}`);}

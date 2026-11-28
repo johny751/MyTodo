@@ -51,7 +51,7 @@
     config:{mode:'countdown',durationMinutes:25,breakMinutes:5,taskId:'timer-review'},draft:{mode:'countdown',durationMinutes:25,breakMinutes:5,taskId:'timer-review'},
     timer:{status:'idle',phase:'focus',mode:'countdown',elapsed:0,anchor:null,session:0},history:initialHistory,
     pending:null,failNext:false,error:'',notification:false,exactReminder:false,feedbackImages:[],feedbackText:'建议把番茄钟的暂停和继续放在同一个位置，便于专注时快速操作。',feedbackCategory:'交互体验',feedbackStatus:'待处理',feedbackSaved:false,
-    note:'今天核对番茄钟的完整操作流程。\n\n开始、暂停、继续、提前结束、完成正计时、休息与重置都需要保留。选择任务后先显示待保存关联，保存设置后才生效。\n\n长备注可以直接选择与复制。这里保留原始记录：2026-11-28T10:32:18.427+08:00；不要在视觉整理时丢弃时区、秒或毫秒。\n\n同名步骤应根据其任务标识和父级上下文区分。流程实例继续引用创建时的模板快照。\n\n这段说明用于检查窄屏下的长文本换行、固定标题与底部操作区，末尾应保持可读。',
+    note:'今天核对番茄钟的完整操作流程。\n\n开始、暂停、继续、提前结束、完成正计时、休息与重置都需要保留。选择任务后先显示待保存关联，保存设置后才生效。\n\n长备注可以直接选择与复制。这里保留原始记录：2026-11-28T10:32:18.427+08:00；不要在视觉整理时丢弃时区、秒或毫秒。\n\n同名步骤应根据其任务标识和父级上下文区分。流程实例继续引用创建时的模板快照。\n\n补充阅读检查：先从首段选择正文，再滚动到最后一段。屏幕外的文字仍属于同一条备注，选区和复制内容都应包含完整记录；顶部标题、底部快捷入口与保存提示不应改变正文或吞掉末行。这里故意使用跨屏内容，便于同时检查滚动前后的文字和高亮。\n\n编辑检查：修改这条备注后打开导航，继续编辑应保留已经输入的内容；确认保存后再切换页面，重新打开应看到本次演示内存中的更新。取消编辑则恢复原始记录。键盘出现时，编辑区域、错误提示和保存操作仍需要可以滚动到达。\n\n记录核对：旧时间说明、任务标识和关联父级不能被美化时自动简写。长段落需要自然换行，读者可以按句选择，也可以连续选择多个段落。这里的合成内容只用于网页设计检查，不代表原生选区、系统剪贴板或真实数据库已经通过验证。\n\n这段说明用于检查窄屏下的长文本换行、固定标题与底部操作区，末尾应保持可读。',
     editingNote:false,extraProjects:[],extraContacts:[],extraInstances:[],completedSteps:new Set(['step-a','step-b']),returnFocus:new Map(),onConfirm:null,toastTimeout:null,activeImage:null,gesture:null
   };
   const getTask = id => tasks.find(task=>task.id===id);
@@ -258,7 +258,7 @@
   content.addEventListener('touchmove',event=>{const g=state.gesture;if(!g||event.touches.length!==1){state.gesture=null;return;}const touch=event.touches[0],dx=touch.clientX-g.x,dy=touch.clientY-g.y;if(Math.abs(dy)>18&&Math.abs(dy)>Math.abs(dx)){state.gesture=null;return;}if(dx>18&&dx>Math.abs(dy)*1.6&&event.cancelable)event.preventDefault();},{passive:false});
   content.addEventListener('touchend',event=>{const g=state.gesture;state.gesture=null;if(!g||event.changedTouches.length!==1)return;const touch=event.changedTouches[0],dx=touch.clientX-g.x,dy=touch.clientY-g.y,elapsed=Math.max(1,event.timeStamp-g.time);if((dx>=55||dx>=32&&dx/elapsed>=.45)&&dx>Math.abs(dy)*1.6){openDialog('nav-drawer');toast('已打开导航 · 浏览器手势设计模拟');}},{passive:true});
   content.addEventListener('touchcancel',()=>state.gesture=null,{passive:true});
-  $('#nav-trigger').innerHTML=icon('menu');$('#page-menu-trigger').innerHTML=icon('more');document.querySelectorAll('[data-action=close-drawer],[data-action=close-sheet],[data-action=close-picker],[data-action=close-image]').forEach(button=>button.innerHTML=icon('close'));$('.search-icon').innerHTML=icon('search');
+  $('#nav-trigger').innerHTML=icon('menu');$('#page-menu-trigger').innerHTML=icon('more');document.querySelectorAll('.icon-button[data-action=close-drawer],.icon-button[data-action=close-sheet],.icon-button[data-action=close-picker],.icon-button[data-action=close-image]').forEach(button=>button.innerHTML=icon('close'));$('.search-icon').innerHTML=icon('search');
   window.D409AndroidPrototype=Object.freeze({back,navigate:routeTo,routeNames:Object.freeze(routes.map(route=>route[0])),scope:'memory-only browser design; not Android system validation'});
   render();setInterval(updateTimerDisplay,250);
 })();

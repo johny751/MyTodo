@@ -2,7 +2,7 @@ import fs from 'node:fs';import path from 'node:path';import {execFileSync} from
 const e=process.env;assert.equal(e.GITHUB_ACTIONS,'true');assert.equal(e.EXPECTED_SOURCE_SHA,e.GITHUB_SHA);assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),e.GITHUB_SHA);
 const out=path.resolve(e.RUNNER_TEMP,'d409-design-package');assert.ok(!fs.existsSync(out));fs.mkdirSync(out);
 fs.writeFileSync(path.join(out,'build-identity.json'),JSON.stringify({kind:'interactive-browser-design-prototypes',sourceSHA:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,attempt:e.GITHUB_RUN_ATTEMPT,builtAtUtc:new Date().toISOString(),nativeBuild:false,productionAdmission:false},null,2)+'\n');
-const fileList=execFileSync('git',['ls-tree','-r','--name-only',e.GITHUB_SHA,'prototypes/d4-09','docs/upgrade/d4-09'],{encoding:'utf8'}).trim().split('\n');
+const fileList=execFileSync('git',['ls-tree','-r','--name-only','-z',e.GITHUB_SHA,'prototypes/d4-09','docs/upgrade/d4-09'],{encoding:'utf8'}).split('\0').filter(Boolean);
 const members=fileList.map(file=>({path:file,sha256:createHash('sha256').update(fs.readFileSync(file)).digest('hex'),bytes:fs.statSync(file).size}));fs.writeFileSync(path.join(out,'FILE-SHA256.json'),JSON.stringify({sourceSHA:e.GITHUB_SHA,files:members},null,2)+'\n');
 execFileSync('git',['archive','--format=zip','--output='+path.join(out,'MyTodo-D409-design-prototypes.zip'),'--add-file='+path.join(out,'build-identity.json'),'--add-file='+path.join(out,'FILE-SHA256.json'),e.GITHUB_SHA,'prototypes/d4-09','docs/upgrade/d4-09'],{stdio:'inherit'});
 execFileSync('git',['archive','--format=zip','--output='+path.join(out,'MyTodo-D409-source.zip'),e.GITHUB_SHA],{stdio:'inherit'});
